@@ -17,3 +17,12 @@ TOPICS.md 是本仓选题的**唯一真相源**。以下三条每次运行都适
 
 ## 3. 英文页中文泄漏自查
 生成 `*.en.html` 后、publish 前，对它 grep 中文指纹（命中=模板槽把中文漏进了英文页），尤其 **SVG 里的中文标签**：`>[一-鿿]` 出现在 `.en.html` 里就逐个核。命中就修掉（删中文节点或译成英文）再 publish。**正常情况不算泄漏**：term(中文) 括注、语言切换标签『中文』、主题本身含中文的专有名。
+
+
+## index 维护：roadmap-first（写时把非链接灰色占位转成链接 + 每次对齐）
+
+本仓 `index.html` / `index.en.html` 是「路线图先出」：TOPICS.md 里**还没写**的条目已作为**非链接**灰色占位行 `<div class="entry">…</div>`（无 href）预先列出，靠 CSS 里 `a.entry` 比 `.entry` 亮自动显灰。
+
+**写编号 N 时**：在**两个** index 里找到该 N 的非链接 `<div class="entry">` 占位行，**原地改成** `<a class="entry" href="{本期文件名}">…</a>`（照本仓已写条目的样式，如有 `live`/上线徽章就一并加上），内部结构不变。`index.html` 用中文页文件名、`index.en.html` 用 `.en.html`。**绝不要**在末尾另 append 一行——否则和占位行重复。
+
+**每次运行先「对齐」**：运行开头先扫 `TOPICS.md`，凡是**没写**（无对应页）**且** index 里**没有对应行**的编号，按编号顺序补一条非链接 `<div class="entry">` 占位（`index.en.html` 翻成 house-style 英文、**勿泄漏中文**；`index.html` 用 TOPICS 中文裁成本仓 zh 风格）。**两个 index 都补。** 这样 BigCat / deep-research 往 TOPICS 加的新主题，下次运行会自动作为灰色条目出现；等真正写它时再原地转成链接。
