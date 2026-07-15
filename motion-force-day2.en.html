@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: Motion, Force &amp; Determinism · Day 2</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;line-height:1.85;overflow-wrap:break-word;word-break:break-word}
+  .wrap{max-width:760px;margin:0 auto;padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue);padding-bottom:22px;margin-bottom:30px}
+  .kicker{font-size:.82rem;letter-spacing:.14em;color:var(--blue);font-weight:600;text-transform:uppercase}
+  h1{font-size:2rem;line-height:1.3;margin:.35em 0 .3em;color:var(--head)}
+  .meta{font-size:.86rem;color:var(--muted);margin-bottom:.9em}
+  .tagline{font-size:1.02rem;color:#c3cbe0;font-style:italic}
+  .intro{background:var(--panel2);border-left:4px solid var(--amber);padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:34px;font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:22px 24px;margin-bottom:26px;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem;margin:0 0 2px;color:var(--head)}
+  .en{font-size:.9rem;color:var(--muted);font-weight:400}
+  .pill{display:inline-block;font-size:.72rem;background:var(--panel2);color:var(--blue);border:1px solid #2b3a5e;padding:2px 10px;border-radius:20px;margin-top:8px;letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif;font-weight:700;color:var(--amber);font-size:.9rem;letter-spacing:.02em;display:block;margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07);border:1px dashed #6a5326;border-radius:8px;padding:11px 15px;font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px;padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line);margin-top:16px;padding-top:13px}
+  .punch .one{font-weight:600;color:var(--head)}
+  .punch .q{font-size:.93rem;color:var(--muted);margin-top:5px}
+  .punch .q b{color:var(--amber);font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif;font-style:italic;color:#eaeefb}
+  .eq{text-align:center;font-family:Georgia,"Noto Serif SC",serif;font-size:1.35rem;color:var(--head);margin:16px 0}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .15em}
+  .frac .fnum{display:block;padding:0 7px;border-bottom:1.6px solid var(--ink);line-height:1.4}
+  .frac .fden{display:block;padding:0 7px;line-height:1.4}
+  .eq .zero{font-weight:700;color:var(--blue)}
+  .gloss{font-size:.9rem;color:#c3cbe0;background:var(--panel2);border-radius:8px;padding:10px 14px;margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px;text-align:center}
+  figcaption{font-size:.82rem;color:var(--muted);margin-top:7px}
+  svg{max-width:100%;height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem;color:var(--head);border-bottom:1px solid var(--line);padding-bottom:8px}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:2px 18px;margin:11px 0}
+  summary{cursor:pointer;font-weight:600;color:var(--head);padding:12px 0;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px;font-size:.95rem;color:#c3cbe0;border-top:1px dashed var(--line)}
+  .read{margin-top:40px;background:var(--panel2);border-radius:10px;padding:20px 24px}
+  .read h2{font-size:1.15rem;margin:.2em 0 .5em;color:var(--head)}
+  .read ul{margin:0;padding-left:20px;font-size:.92rem;color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px;font-size:.8rem;color:#5b6480;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>Motion, Force &amp; Determinism</h1>
+  <div class="meta">Day 2 · 2026 · Phase A — the Skeleton of Classical Mechanics</div>
+  <div class="tagline">A force is not what <em>keeps</em> a thing moving — it is what <em>changes</em> the motion. Getting that backwards cost humanity two thousand years.</div>
+</header>
+
+<div class="intro">
+Aristotle said: to keep a thing moving, keep pushing it. It matches daily life — and it was <b>wrong for two thousand years</b>. Galileo and Newton's fix changed one word: a force changes not <b>motion</b> but the <b>change of motion</b>. That one edit stitched "the heavens" and "the earth" into a single set of laws — a falling apple and an orbiting Moon become the same thing. Pushed to its limit, it conjures a ghost: if everything is fixed by forces and initial states, <b>is the future already written?</b> Four cards: inertia, the real meaning of <var>F</var>=<var>m</var><var>a</var>, universal gravitation, and Laplace's demon.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Inertia: Uniform Motion Needs No Force <span class="en">The First Law</span></h2>
+  <span class="pill">Classical mechanics · 1638 / 1687</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Push a box, let go, it stops — so "motion needs a force to sustain it," right? <strong>Wrong.</strong> It stops not because "motion wants to stop" but because <strong>friction</strong> quietly drags it. Remove the friction: a curling stone glides far across ice; a spacecraft with its engine off keeps flying for decades. <strong>With no force, motion doesn't stop — it just keeps doing what it was doing.</strong></div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  This is <strong>Newton's first law (the law of inertia)</strong>: with <strong>no net external force</strong>, a body stays at rest or in <strong>uniform straight-line motion</strong>. The key word is "net" — many forces may act at once; as long as they cancel (net force zero), the state of motion <strong>does not change</strong>. So "at rest" and "moving uniformly" are physically the <strong>same state</strong> — they differ only by which frame you stand in.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 210" role="img" aria-label="frictionless uniform motion vs friction slowing down">
+    <g font-family="-apple-system,sans-serif" font-size="13.5">
+      <text x="20" y="34" fill="#7db0ff" font-weight="700">No friction</text>
+      <text x="130" y="34" fill="#96a0ba">net force zero → uniform (equal spacing)</text>
+      <circle cx="60" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <circle cx="160" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <circle cx="260" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <circle cx="360" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <circle cx="460" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <circle cx="560" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <line x1="500" y1="98" x2="588" y2="98" stroke="#5b9bff" stroke-width="2.5"/>
+      <polygon points="588,92 604,98 588,104" fill="#5b9bff"/>
+      <text x="500" y="120" fill="#96a0ba" font-size="12">speed unchanged</text>
+      <text x="20" y="158" fill="#f0ad5a" font-weight="700">Friction</text>
+      <text x="130" y="158" fill="#96a0ba">friction backward → slowing (spacing shrinks)</text>
+      <circle cx="60" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <circle cx="180" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <circle cx="280" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <circle cx="360" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <circle cx="420" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <circle cx="460" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <line x1="500" y1="188" x2="524" y2="188" stroke="#f0ad5a" stroke-width="2.5"/>
+      <polygon points="500,182 484,188 500,194" fill="#f0ad5a"/>
+      <text x="534" y="192" fill="#96a0ba" font-size="12">friction</text>
+    </g>
+  </svg>
+  <figcaption>Same launch: with no friction each step covers the same distance (uniform); with friction each step shortens until it stops — stopping is the work of a force, not motion "wanting" to stop.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Daily experience fooled us for two thousand years: because Earth is full of friction and air drag, we have <strong>never seen</strong> force-free motion, so we mistook "stops when you don't push" for the nature of motion. Newton's genius was <strong>subtraction</strong> — imagine friction gone entirely, and what remains is the pure law. <strong>Physical truth often hides in the "ideal case," not on the messy surface of the everyday.</strong></div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Cognition / AI</span>
+  This is a textbook <strong>naive-physics illusion</strong>: the human brain ships with a "to move, keep exerting" prior that contradicts the real law. It's a warning for AI too — <strong>intuitions trained on mountains of everyday data can systematically diverge from the underlying rule</strong>; surface correlation (let go and it stops) is not mechanism (friction stops it). To see the mechanism, both physics and models must learn to <strong>strip the noise and subtract</strong>.</div>
+
+  <div class="punch">
+    <div class="one">In one line: motion doesn't need a force — a <strong>change</strong> in motion does.</div>
+    <div class="q"><b>Think:</b> if "at rest" and "uniform motion" are physically the same, does "absolute rest" even mean anything?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>The Meaning of <var>F</var>=<var>m</var><var>a</var> <span class="en">Newton's Second Law</span></h2>
+  <span class="pill">Second law · 1687</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  If a force changes the "change of motion," how exactly? The answer is startlingly plain: <strong>the bigger the force, the faster it changes; the heavier the thing, the harder to change.</strong> Push a shopping cart and a truck with the same force — the cart shoots off, the truck barely stirs. The whole difference is <strong>mass</strong>. Mass is a body's <strong>stubbornness</strong> against being changed.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Newton's second law nails this down as an equation:
+  <div class="eq"><var>F</var> = <var>m</var><var>a</var></div>
+  <div class="gloss"><var>F</var> is the <strong>net force</strong> (the combined effect of all forces), <var>m</var> is <strong>mass</strong> (the measure of inertia — larger means harder to push), and <var>a</var> is <strong>acceleration</strong> — note, acceleration, <strong>not velocity</strong>. Acceleration means "how fast velocity <strong>changes</strong>": hitting the gas, braking, turning are all acceleration (the size or direction of velocity is changing). Rearranged, <span class="nowrap"><var>a</var> = <var>F</var>/<var>m</var></span>: same force, double the mass, half the acceleration.</div>
+  When the net force is zero, <span class="nowrap"><var>a</var> = <span class="zero">0</span></span> (the number 0, zero), velocity holds — which is exactly the <strong>first law again</strong>, revealing it as a special case of the second.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 200" role="img" aria-label="same force on different masses">
+    <g font-family="-apple-system,sans-serif" font-size="13.5">
+      <rect x="60" y="44" width="34" height="34" rx="4" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <text x="77" y="66" text-anchor="middle" fill="#dbe2f2" font-size="12">m</text>
+      <line x1="20" y1="61" x2="52" y2="61" stroke="#f0ad5a" stroke-width="3"/>
+      <polygon points="52,55 66,61 52,67" fill="#f0ad5a"/>
+      <text x="30" y="34" fill="#f0ad5a" font-size="12">force F</text>
+      <line x1="102" y1="61" x2="250" y2="61" stroke="#5b9bff" stroke-width="3"/>
+      <polygon points="250,54 268,61 250,68" fill="#5b9bff"/>
+      <text x="150" y="34" fill="#7db0ff" font-size="12.5">large a (light → easy)</text>
+
+      <rect x="60" y="128" width="60" height="60" rx="5" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
+      <text x="90" y="163" text-anchor="middle" fill="#dbe2f2" font-size="12">2m</text>
+      <line x1="20" y1="158" x2="52" y2="158" stroke="#f0ad5a" stroke-width="3"/>
+      <polygon points="52,152 66,158 52,164" fill="#f0ad5a"/>
+      <text x="30" y="120" fill="#f0ad5a" font-size="12">same force F</text>
+      <line x1="128" y1="158" x2="202" y2="158" stroke="#5b9bff" stroke-width="3"/>
+      <polygon points="202,151 220,158 202,165" fill="#5b9bff"/>
+      <text x="150" y="120" fill="#7db0ff" font-size="12.5">small a (heavy → hard)</text>
+    </g>
+  </svg>
+  <figcaption>The same force <var>F</var>: double the mass, half the acceleration. Mass is the measure of "resistance to being changed."</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Many memorize <var>F</var>=<var>m</var><var>a</var> as "force = mass × acceleration" and miss what it actually says: <strong>force is proportional to acceleration, and velocity does not enter the equation.</strong> A car cruising at 100 km/h feels a net force of <strong>zero</strong> — even though it's fast. Speed is irrelevant; <strong>whether velocity is changing</strong> is what involves force. <var>F</var>=<var>m</var><var>a</var> is half <strong>definition</strong> (it defines how we measure force and mass) and half <strong>empirical claim</strong> (the real world happens to obey the proportion) — only together do they make a law.</div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Control / Optimization</span>
+  "Output proportional to what you apply, dragged by an inertia factor" is a wildly general template. In <strong>control theory</strong>, a system's response is set by its mass/inertia, which engineers exploit to design brakes and stabilizers. In <strong>machine learning</strong>, gradient descent updates parameters ≈ learning rate × gradient, and <strong>momentum methods</strong> borrow physical inertia outright — letting updates "carry momentum" through noise and shallow pits. <strong>Inertia is both the stubbornness of physics and the smoother of optimization.</strong></div>
+
+  <div class="punch">
+    <div class="one">In one line: force governs acceleration, not velocity; mass is the measure of "hard to change."</div>
+    <div class="q"><b>Think:</b> in an elevator you feel heavier the instant it starts, but nothing while it rises steadily — why? Which phase has acceleration?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>Universal Gravitation <span class="en">One Law for Heaven and Earth</span></h2>
+  <span class="pill">Newton · 1687</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  An apple falls, yet the Moon does not — so the ancients naturally figured "the heavens" and "the earth" were two worlds with separate rules. Newton asked a crazy question: <strong>what if the Moon is falling too?</strong> It plunges toward Earth continually, but its huge <strong>sideways velocity</strong> makes it "miss" Earth every time — so it falls around forever, and that is an orbit. <strong>To circle is to keep falling and keep missing.</strong></div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Newton claimed: any two masses <strong>attract each other</strong>, with a force of magnitude
+  <div class="eq"><var>F</var> = <var>G</var> <span class="frac"><span class="fnum"><var>m</var><sub>1</sub> <var>m</var><sub>2</sub></span><span class="fden"><var>r</var><sup>2</sup></span></span></div>
+  <div class="gloss"><var>m</var><sub>1</sub>, <var>m</var><sub>2</sub> are the two masses, <var>r</var> is the distance between them, and <var>G</var> is the <strong>gravitational constant</strong> (a tiny fixed number, read "big G"). The <var>r</var><sup>2</sup> in the denominator means: double the distance and gravity drops to <strong>one quarter</strong> — the <strong>inverse-square law</strong>. The same equation gives both the apple's fall and the Moon's orbit.</div></div>
+
+  <figure>
+  <svg viewBox="0 0 480 250" role="img" aria-label="the Moon orbits: always falling, always missing">
+    <g font-family="-apple-system,sans-serif" font-size="13">
+      <circle cx="180" cy="150" r="96" fill="none" stroke="#31406a" stroke-width="1.4" stroke-dasharray="5 6"/>
+      <circle cx="180" cy="150" r="30" fill="#16304f" stroke="#5b9bff" stroke-width="2"/>
+      <text x="180" y="155" text-anchor="middle" fill="#9fc2ff" font-size="12.5">Earth</text>
+      <circle cx="180" cy="54" r="13" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
+      <text x="180" y="34" text-anchor="middle" fill="#f0ad5a" font-size="12">Moon</text>
+      <line x1="197" y1="54" x2="285" y2="54" stroke="#5b9bff" stroke-width="2.5"/>
+      <polygon points="285,48 301,54 285,60" fill="#5b9bff"/>
+      <text x="243" y="46" text-anchor="middle" fill="#7db0ff" font-size="12">sideways velocity v</text>
+      <line x1="180" y1="70" x2="180" y2="112" stroke="#f0ad5a" stroke-width="2.5"/>
+      <polygon points="174,112 186,112 180,128" fill="#f0ad5a"/>
+      <text x="214" y="96" text-anchor="middle" fill="#f0ad5a" font-size="12">gravity F</text>
+      <line x1="197" y1="54" x2="360" y2="54" stroke="#4a5678" stroke-width="1.4" stroke-dasharray="3 5"/>
+      <text x="360" y="72" text-anchor="middle" fill="#96a0ba" font-size="11.5">no gravity → straight line</text>
+    </g>
+  </svg>
+  <figcaption>The Moon's sideways velocity would fly it off in a straight line; gravity keeps bending it back — the two in balance are the orbit. Orbit = perpetual falling + perpetual missing.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This was physics's first great <strong>unification</strong>: "motion in the heavens" and "falling on the earth" merged into <strong>one law</strong>. Its power isn't just explanation — it's <strong>prediction</strong>: astronomers later used gravity-computed discrepancies to "calculate" the planet Neptune at the predicted spot — a pen finding a planet before a telescope did. <strong>Unify → predict → verify</strong> became the engine of all physics thereafter — electromagnetism, the electroweak, even the reunderstanding of gravity itself all replay it.</div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Scientific method / AI</span>
+  "One clean rule explaining a whole swath of seemingly unrelated phenomena" is the power of <strong>unification</strong>, and the gold standard of a good theory: <strong>the wider the coverage and the fewer the assumptions, the likelier you've touched a real mechanism.</strong> It's isomorphic to machine learning's aim — a model that <strong>generalizes</strong> across many tasks beats patching each task separately; generalization is to a model what unification is to physics. Yet be honest: Newtonian gravity is superbly accurate, but cracks under <strong>very strong gravity</strong> and is ultimately replaced by the picture of curved spacetime (the "gravity = curved spacetime" issue works this out). <strong>Even a triumphant unification may be only the approximation of a deeper one.</strong></div>
+
+  <div class="punch">
+    <div class="one">In one line: an orbit isn't "not falling" — it's "always falling, always missing."</div>
+    <div class="q"><b>Think:</b> astronauts float "weightless" on the space station — is that because there's no gravity up there? (Hint: they're falling <em>with</em> the station.)</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>Laplace's Demon <span class="en">Determinism</span></h2>
+  <span class="pill">Determinism · 1814</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Newton's laws have a startling property: know each particle's <strong>position</strong> and <strong>velocity</strong> right now, plus the rules of force, and you can compute the next instant, and the next… <strong>all the way down</strong>. In 1814 Laplace took this to the limit, imagining an all-knowing intellect (later dubbed <strong>Laplace's demon</strong>): if it knew the state of every atom in the universe right now, then <strong>the entire past and the whole future would be as plain to it as the present</strong>.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  This is <strong>determinism</strong>. Its mathematical root: Newton's laws are a set of <strong>differential equations</strong> (rules for how a state changes over time), and given the <strong>initial conditions</strong> (this moment's positions and velocities), the equations' solution is <strong>uniquely fixed</strong> — the future has no second option. The world is like a wound-up clock: <strong>initial state + laws = one predetermined trajectory</strong>.</div>
+
+  <div class="field"><span class="lab">The counterintuitive point (an honest distinction)</span>
+  "Determined" is not "<strong>predictable</strong>" — the point most easily mystified, so keep it straight:
+  <ul style="margin:8px 0 4px;padding-left:20px;font-size:.95rem;color:#c3cbe0">
+    <li><strong>Chaos</strong>: many systems (weather, the three-body problem) are <strong>extremely sensitive</strong> to initial conditions — a hair's difference at the start, wildly different endings. The equations are still deterministic, but you can never measure "infinitely precise" initial values, so it is <strong>fixed in principle, uncomputable in practice</strong> (the "chaos &amp; nonlinearity" issue is devoted to this).</li>
+    <li><strong>Quantum mechanics</strong>: deeper down, the microscopic laws are <strong>probabilistic</strong> — the same initial conditions give only <strong>probabilities</strong> of various outcomes, not a single future. The demon's classical dream is shaken at the root (the quantum issues handle this head-on).</li>
+  </ul>
+  So don't take determinism as science's endorsement of fatalism: <strong>even if the world is deterministic, it is neither predictable nor does it dissolve questions like "why did I choose thus."</strong></div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Computation / AI</span>
+  Laplace's demon is essentially a <strong>perfect simulator</strong>: feed in the initial state, run the laws, output the future. That's the very program of <strong>numerical simulation</strong> (weather forecasting, molecular dynamics, cosmology) — except a real "demon" hits two walls: <strong>initial values can't be measured exactly</strong> (chaos) and <strong>compute is finite</strong> (there is no computer larger than the universe to simulate the universe). It also mirrors AI's limits: how accurately a model can <strong>extrapolate</strong> is locked by data precision and the system's degree of chaos — <strong>deterministic isn't computable, and computable isn't predictable.</strong></div>
+
+  <div class="punch">
+    <div class="one">In one line: fixed ≠ predictable; Newton's clock is precise, yet chaos and the quantum still block it.</div>
+    <div class="q"><b>Think:</b> if simulating the universe needs a computer bigger than the universe, does "predictable in principle" still mean anything in practice?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>Aren't the first and second laws the same statement twice? Since F=ma gives uniform motion at F=0, why list the first law separately?</summary>
+  <div class="body">Mathematically the first law is indeed the special case of the second at <var>F</var>=0 — but it is <strong>not logically redundant</strong>. Its real job is to <strong>assert the existence of inertial frames</strong>: only in the class of frames where a force-free body moves uniformly does <var>F</var>=<var>m</var><var>a</var> hold. In an accelerating or rotating frame (say a sharply braking bus) you'll "see" things lurch forward for no reason, as if forced — but that's the frame deceiving you. So the first law isn't filler; it <strong>sets the stage</strong> for the second: fix "where you're watching from" first, and only then does the second law mean anything.</div></details>
+
+  <details><summary>Inertial mass (how hard to push) and gravitational mass (how much gravity you feel) — why are they the same m? Might they just coincide numerically?</summary>
+  <div class="body">A question deep enough to stump Newton himself. The <var>m</var> in <var>F</var>=<var>m</var><var>a</var> measures "stubbornness against change" (inertial mass); the <var>m</var> in the gravity law measures "how strongly you feel gravity" (gravitational mass) — conceptually unrelated, yet experimentally <strong>exactly equal</strong> (verified to extreme precision). Galileo's "heavy and light land together" is a direct consequence of this equivalence. Newton used it as a coincidence; Einstein elevated the "coincidence" into the <strong>equivalence principle</strong> — gravity and acceleration are indistinguishable — and rebuilt the whole theory of gravity from it (the "gravity = curved spacetime" issue starts right here). <strong>An overlooked coincidence is often the crack where the next revolution begins.</strong></div></details>
+
+  <details><summary>If an orbit is "always falling," why don't planets actually spiral into the Sun, instead staying in orbit for billions of years?</summary>
+  <div class="body">Because "falling in" and "rushing sideways" are in <strong>dynamic balance</strong>: gravity pulls the planet inward, the sideways velocity flings it outward, and the two trade off along the ellipse while their <strong>totals stay conserved</strong> (both energy and angular momentum are conserved — the "energy &amp; momentum" issue covers why that conservation runs so deep). As long as nothing steadily steals energy, this balance holds on astronomical timescales. To make it fall in, you need dissipation — friction with dense gas, or gravitational waves bleeding energy away ever so slowly. So a stable orbit isn't "not falling"; it's <strong>the tendency to fall and the tendency to escape locked into a loop by conservation laws.</strong></div></details>
+
+  <details><summary>Since Newtonian gravity was superseded by relativity, is it still "right"? Are we learning an outdated error?</summary>
+  <div class="body">Newtonian gravity wasn't "overthrown" — it was <strong>located</strong>. It's an <strong>excellent approximation</strong> of a deeper theory across the vast regime of "weak gravity, low speed," with errors small enough to launch probes and predict tides with room to spare (exactly the point of "effective theory": each scale has its good-enough law). Relativity shows a difference only in extremes (Mercury's tiny perihelion precession, GPS timing, near a black hole). So learning Newton is not learning an error — it's learning <strong>a truth with clearly drawn boundaries</strong>. Knowing where a law <em>holds</em> and where it <em>fails</em> matters more than the law itself.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Isaac Newton, <em>Principia (Mathematical Principles of Natural Philosophy)</em>, 1687 — the origin of the three laws and universal gravitation</li>
+    <li>Galileo Galilei, <em>Dialogues Concerning Two New Sciences</em>, 1638 — the forerunner of inertia (inclined planes and idealized experiments)</li>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, Ch. 7 &amp; 9 "The Theory of Gravitation" / "Newton's Laws of Dynamics" — the intuitive telling</li>
+    <li>P.-S. Laplace, <em>A Philosophical Essay on Probabilities</em>, 1814 — the original "Laplace's demon" passage</li>
+    <li>Sean Carroll, <em>The Biggest Ideas in the Universe: Space, Time, and Motion</em> — dynamics and determinism, a modern view</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
