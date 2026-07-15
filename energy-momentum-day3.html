@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理：能量与动量 · Day 3</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>能量与动量</h1>
+  <div class="meta">Day 3 · 2026 · Phase A 经典力学的骨架</div>
+  <div class="tagline">与其追每一刻的力怎么变，不如盯住那几个「怎么折腾都不变」的数——它们是全物理最省力、也最深的一层结构。</div>
+</header>
+
+<div class="intro">
+力与运动讲完，冒出一个更聪明的问法：别再逐帧追力怎么变，只盯住那些<b>怎么折腾都纹丝不动</b>的量。抛球、碰撞、行星绕日，过程千变万化，可总有几个数字一动不动——<b>动量</b>和<b>能量</b>。这不是碰巧省事，而是物理最深的一层骨架：守恒量是<b>对称性投下的影子</b>（前面「物理定律是什么」埋下的种子，这一期让它落地）。四张卡：动量守恒、能量的形态、碰撞里能量去哪了、以及为什么守恒比力更根本。
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>动量：运动的「量」<span class="en">Momentum &amp; Its Conservation</span></h2>
+  <span class="pill">经典力学 · 守恒</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  开枪时枪会往后<strong>踹</strong>你一下；跳水前你用力蹬板，板也把你往上送；在太空里用力扔出一个扳手，你自己会朝反方向飘走。这些是<strong>同一件事</strong>：你把「运动的量」推给一边，自己就<strong>等量地</strong>朝反方向得到运动。这个「运动的量」= 质量 × 速度，叫<strong>动量</strong>。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  动量 <var>p</var> = <var>m</var><var>v</var>（质量乘速度，<strong>带方向</strong>）。牛顿第二定律的原版其实不是 <span class="nowrap"><var>F</var>=<var>m</var><var>a</var></span>，而是
+  <div class="eq"><var>F</var> = <span class="frac"><span class="fnum">d<var>p</var></span><span class="fden">d<var>t</var></span></span></div>
+  <div class="gloss">读作「力等于<strong>动量的变化率</strong>」。<strong>d</strong> 是「微小变化」：<span class="nowrap">d<var>p</var></span> 是动量的一点点改变、<span class="nowrap">d<var>t</var></span> 是一小段时间，相除就是「动量随时间变多快」。对一个<strong>孤立系统</strong>（没有外力），内部你推我、我推你，牛顿第三定律保证每一对力<strong>等大反向</strong>，加起来净变化为零 → 总动量守恒：总 <span class="nowrap">Δ<var>p</var> = <span class="zero">0</span></span>（这个 0 是<strong>数字零</strong>）。</div>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 620 200" role="img" aria-label="开炮的后坐力：发射前后总动量都是零">
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="14">
+      <!-- before -->
+      <text x="30" y="55" fill="#96a0ba">发射前</text>
+      <rect x="270" y="38" width="64" height="28" rx="4" fill="#172038" stroke="#2b3a5e"/>
+      <circle cx="345" cy="52" r="8" fill="#f0ad5a" stroke="#7a5320"/>
+      <text x="590" y="57" text-anchor="end" fill="#f0f3fb" font-weight="600">总动量 = 0</text>
+      <!-- divider -->
+      <line x1="30" y1="100" x2="590" y2="100" stroke="#26314c" stroke-width="1" stroke-dasharray="5 5"/>
+      <!-- after -->
+      <text x="30" y="158" fill="#96a0ba">发射后</text>
+      <rect x="232" y="140" width="64" height="28" rx="4" fill="#172038" stroke="#2b3a5e"/>
+      <line x1="228" y1="154" x2="192" y2="154" stroke="#5b9bff" stroke-width="3"/>
+      <polygon points="192,154 204,148 204,160" fill="#5b9bff"/>
+      <text x="205" y="132" text-anchor="middle" fill="#5b9bff">−M v</text>
+      <circle cx="372" cy="154" r="8" fill="#f0ad5a" stroke="#7a5320"/>
+      <line x1="388" y1="154" x2="440" y2="154" stroke="#f0ad5a" stroke-width="3"/>
+      <polygon points="440,154 428,148 428,160" fill="#f0ad5a"/>
+      <text x="414" y="132" text-anchor="middle" fill="#f0ad5a">+m v</text>
+      <text x="590" y="158" text-anchor="end" fill="#f0f3fb" font-weight="600">总动量 = 0（不变）</text>
+    </g>
+  </svg>
+  <figcaption>后坐力不是意外——子弹带走多少动量，枪就反向拿回多少，总账始终为零。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  后坐力不是「枪的毛病」或多余的副作用，它是守恒律的<strong>强制结果</strong>：子弹带走多少动量，枪就必须反向补回多少。火箭在真空里没有空气可蹬也能飞，靠的正是这条——把燃气往后猛喷，自己就往前推。<strong>动量守恒是火箭唯一的推进原理</strong>，不是「喷气推开了后面的空气」。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  深度学习的<strong>「动量法」（SGD with Momentum）</strong>直接借了这个词和这份直觉：让参数更新像一颗<strong>有质量的球</strong>那样带上惯性，不被每一步的噪声梯度左右乱晃，而是顺着累积下来的方向冲过小坑。物理的动量让运动<strong>记住方向</strong>，优化里的动量让下降<strong>记住方向</strong>——同一个念头，两处发力。</div>
+
+  <div class="punch">
+    <div class="one">一句话：你不能凭空得到运动，只能和别人交换。</div>
+    <div class="q"><b>思考：</b>你蹬墙让自己后退，墙也获得了等量的动量，为什么墙看起来纹丝不动？</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>能量：同一笔账的不同形态 <span class="en">Energy: One Ledger, Many Forms</span></h2>
+  <span class="pill">经典力学 · 动能 / 势能</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  过山车爬到最高点几乎不动，俯冲到谷底时最快；单摆荡到两端的一瞬静止，过最低点时最急。<strong>高度换来速度，速度又换回高度</strong>。像一笔钱在两个口袋间来回倒——左袋少多少，右袋就多多少，<strong>总额始终不变</strong>。这个总额，就是能量。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  能量藏在两处：藏在<strong>速度</strong>里的叫<strong>动能</strong>，藏在<strong>高度/位形</strong>里的叫<strong>势能</strong>。
+  <div class="eq"><var>E</var><sub>k</sub> = <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span><var>m</var><var>v</var><sup>2</sup> <span style="color:#6a7699;margin:0 .5em">，</span> <var>E</var><sub>p</sub> = <var>m</var><var>g</var><var>h</var></div>
+  <div class="gloss"><var>E</var><sub>k</sub> 是动能：<span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> 是二分之一，<var>v</var><sup>2</sup> 是速度的<strong>平方</strong>（所以速度翻倍，动能变<strong>四</strong>倍）。<var>E</var><sub>p</sub> 是重力势能：<var>g</var> 是重力加速度（地面上约每秒每秒 9.8 米）、<var>h</var> 是高度。无摩擦时两者之和恒定：<span class="nowrap"><var>E</var><sub>k</sub> + <var>E</var><sub>p</sub> = 常数</span>。球下落，<var>h</var> 变小、<var>v</var> 变大，一分不多一分不少地对换。</div>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="动能与势能此消彼长，总能量恒定">
+    <!-- total-energy dashed line -->
+    <line x1="90" y1="70" x2="560" y2="70" stroke="#5b6480" stroke-width="1.4" stroke-dasharray="6 5"/>
+    <text x="325" y="60" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#c3cbe0">总能量 E 恒定（顶线不动）</text>
+    <!-- baseline -->
+    <line x1="80" y1="200" x2="565" y2="200" stroke="#56607e" stroke-width="1.5"/>
+    <!-- group 1: highest -->
+    <rect x="128" y="190" width="64" height="10" fill="#f0ad5a" opacity=".9"/>
+    <rect x="128" y="70" width="64" height="120" fill="#5b9bff" opacity=".55"/>
+    <!-- group 2: midway -->
+    <rect x="298" y="135" width="64" height="65" fill="#f0ad5a" opacity=".9"/>
+    <rect x="298" y="70" width="64" height="65" fill="#5b9bff" opacity=".55"/>
+    <!-- group 3: lowest -->
+    <rect x="468" y="80" width="64" height="120" fill="#f0ad5a" opacity=".9"/>
+    <rect x="468" y="70" width="64" height="10" fill="#5b9bff" opacity=".55"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#96a0ba" text-anchor="middle">
+      <text x="160" y="220">最高点</text>
+      <text x="330" y="220">中途</text>
+      <text x="500" y="220">最低点</text>
+    </g>
+    <!-- legend -->
+    <rect x="150" y="234" width="13" height="13" fill="#5b9bff" opacity=".55"/>
+    <text x="170" y="245" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#c3cbe0">势能</text>
+    <rect x="360" y="234" width="13" height="13" fill="#f0ad5a" opacity=".9"/>
+    <text x="380" y="245" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#c3cbe0">动能</text>
+  </svg>
+  <figcaption>下落过程中势能（蓝）不断变成动能（橙），但两截叠起来的顶总卡在同一条线上——总能量一动不动。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  能量不是一种「东西」，你切不出一块能量放手里。它是一个<strong>记账数字</strong>。费曼有个著名比喻：能量像小孩的积木块，你数来数去总数不变，但你永远看不到「积木本身」，只看到它换了形态——动能、热、光、化学键。<strong>守恒的是那个数，不是某种实体</strong>。所谓「摩擦耗散了能量」，只是能量从你在记的账，溜进了你没在记的那本（热）。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  训练神经网络，就是在一片<strong>「势能地形」（损失曲面）</strong>上让参数往低处滚：损失 = 势能，梯度 = 坡度，梯度下降 = 重力。带动量的优化器甚至会像真球一样<strong>冲过小坑、在谷里来回震荡</strong>。物理的「滚到谷底」和训练的「收敛到极小」，是<strong>同一幅几何图像</strong>——难怪优化里满是「landscape」「basin」这些地形词。</div>
+
+  <div class="punch">
+    <div class="one">一句话：能量不生不灭，只改头换面。</div>
+    <div class="q"><b>思考：</b>摩擦让能量「消失」了吗？还是它去了一本你没在记的账上？</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>碰撞：能量去哪了 <span class="en">Collisions: Where the Energy Goes</span></h2>
+  <span class="pill">经典力学 · 弹性 / 非弹性</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  牛顿摆（桌上一排钢球）拉起一颗撞下去，另一端弹起一颗，几乎不停地来回；可两团橡皮泥迎面撞上，「啪」地黏在一起就不动了。同样是撞，一个几乎不损失，一个「动能」凭空少了大半——<strong>守恒律被违反了吗？</strong></div>
+
+  <div class="field"><span class="lab">机制</span>
+  没有。要点是：<strong>动量永远守恒</strong>（只要没外力），<strong>动能却看情况</strong>。<strong>弹性碰撞</strong>——动量和动能都守恒（钢球、台球很接近）；<strong>非弹性碰撞</strong>——动量照样守恒，但一部分动能变成了<strong>热、声、形变</strong>（橡皮泥撞完会微微发热）；极端是<strong>完全非弹性</strong>：两物黏成一体一起走。混淆「能量守恒」与「动能守恒」，是这里最常见的坑。</div>
+
+  <figure>
+  <svg viewBox="0 0 620 235" role="img" aria-label="弹性碰撞与非弹性碰撞的对比">
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+      <!-- vertical divider before/after -->
+      <line x1="312" y1="20" x2="312" y2="215" stroke="#26314c" stroke-width="1" stroke-dasharray="5 5"/>
+      <text x="150" y="26" text-anchor="middle" fill="#7a86a6" font-size="12">撞前</text>
+      <text x="470" y="26" text-anchor="middle" fill="#7a86a6" font-size="12">撞后</text>
+
+      <!-- Row 1: elastic -->
+      <text x="30" y="66" fill="#5b9bff" font-weight="600">弹性</text>
+      <circle cx="120" cy="62" r="13" fill="#f0ad5a" stroke="#7a5320"/>
+      <line x1="136" y1="62" x2="176" y2="62" stroke="#f0ad5a" stroke-width="3"/>
+      <polygon points="176,62 164,56 164,68" fill="#f0ad5a"/>
+      <circle cx="250" cy="62" r="13" fill="#39435f" stroke="#56607e"/>
+      <!-- after -->
+      <circle cx="372" cy="62" r="13" fill="#f0ad5a" stroke="#5a4326" opacity=".55"/>
+      <circle cx="502" cy="62" r="13" fill="#39435f" stroke="#56607e"/>
+      <line x1="518" y1="62" x2="558" y2="62" stroke="#8aa0c8" stroke-width="3"/>
+      <polygon points="558,62 546,56 546,68" fill="#8aa0c8"/>
+      <text x="325" y="98" text-anchor="middle" fill="#9fb4d8">动量守恒 ✓　动能守恒 ✓</text>
+
+      <!-- horizontal divider -->
+      <line x1="30" y1="120" x2="565" y2="120" stroke="#26314c" stroke-width="1" stroke-dasharray="4 5"/>
+
+      <!-- Row 2: inelastic -->
+      <text x="30" y="168" fill="#f0ad5a" font-weight="600">非弹性</text>
+      <circle cx="120" cy="164" r="13" fill="#f0ad5a" stroke="#7a5320"/>
+      <line x1="136" y1="164" x2="176" y2="164" stroke="#f0ad5a" stroke-width="3"/>
+      <polygon points="176,164 164,158 164,170" fill="#f0ad5a"/>
+      <circle cx="250" cy="164" r="13" fill="#39435f" stroke="#56607e"/>
+      <!-- after: stuck together, slow -->
+      <circle cx="454" cy="164" r="13" fill="#f0ad5a" stroke="#7a5320"/>
+      <circle cx="478" cy="164" r="13" fill="#39435f" stroke="#56607e"/>
+      <line x1="500" y1="164" x2="524" y2="164" stroke="#8aa0c8" stroke-width="3"/>
+      <polygon points="524,164 514,159 514,169" fill="#8aa0c8"/>
+      <text x="405" y="146" text-anchor="middle" fill="#e0663f" font-size="12">热 / 形变</text>
+      <text x="325" y="200" text-anchor="middle" fill="#e6a066">动量守恒 ✓　动能 ↓（变热）</text>
+    </g>
+  </svg>
+  <figcaption>两种碰撞里动量都守恒；区别在动能——弹性碰撞留住，非弹性碰撞把一部分动能变成了热和形变。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  开车相撞时，你其实<strong>希望动能尽量别守恒</strong>——最好它全变成揉皱车头的形变和热，而不是原样留在乘客身上。这正是<strong>溃缩区（crumple zone）</strong>的物理：故意把车头做「软」，用一段可控的非弹性形变把动能吃掉，延长碰撞时间、削掉传给人的冲击。一辆越「结实」到撞了不变形的车，反而越危险。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 工程</span>
+  安全设计里到处是<strong>「故意的非弹性」</strong>：头盔里的泡沫、高速公路的防撞护栏、快递箱里的缓冲泡沫，全靠<strong>形变</strong>把冲击的动能转成不伤人的热和塑性变形。工程师算的往往不是「怎么别撞上」，而是「一旦撞上，动能该往哪里引」。</div>
+
+  <div class="punch">
+    <div class="one">一句话：动量总守恒，动能看情况。</div>
+    <div class="q"><b>思考：</b>完全非弹性碰撞损失的动能最多，为什么它的动量却一点没少？</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>守恒为什么比力更根本 <span class="en">Why Conservation Runs Deeper Than Force</span></h2>
+  <span class="pill">对称性 · Noether 落地</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  要算清一次真实碰撞里<strong>每一刻</strong>的力，几乎不可能——接触面的形变、微观相互作用错综复杂。可你根本不必去解：只要写下「撞前总动量 = 撞后总动量」，答案就被<strong>钉死了</strong>。守恒律让你<strong>跳过中间那团乱麻</strong>，直接把两头连起来。</div>
+
+  <figure>
+  <svg viewBox="0 0 620 180" role="img" aria-label="守恒律让你跳过复杂的中间过程：进等于出">
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif">
+      <rect x="212" y="42" width="196" height="96" rx="10" fill="#0f1626" stroke="#42517a" stroke-dasharray="6 5"/>
+      <text x="310" y="78" text-anchor="middle" font-size="13" fill="#96a0ba">复杂内部</text>
+      <text x="310" y="98" text-anchor="middle" font-size="12" fill="#7a86a6">形变 · 摩擦 · 未知力</text>
+      <text x="310" y="120" text-anchor="middle" font-size="26" fill="#5b6480" font-family="Georgia,serif">?</text>
+      <!-- in arrow -->
+      <line x1="60" y1="90" x2="206" y2="90" stroke="#5b9bff" stroke-width="3"/>
+      <polygon points="206,90 194,84 194,96" fill="#5b9bff"/>
+      <text x="128" y="78" text-anchor="middle" font-size="13" fill="#5b9bff">总动量（进）</text>
+      <!-- out arrow -->
+      <line x1="414" y1="90" x2="558" y2="90" stroke="#f0ad5a" stroke-width="3"/>
+      <polygon points="558,90 546,84 546,96" fill="#f0ad5a"/>
+      <text x="486" y="78" text-anchor="middle" font-size="13" fill="#f0ad5a">总动量（出）</text>
+      <text x="310" y="166" text-anchor="middle" font-size="14" fill="#f0f3fb" font-weight="600">进 = 出　·　不必解开中间那团乱麻</text>
+    </g>
+  </svg>
+  <figcaption>守恒律是横在过程之上的约束：无论盒子里发生什么，进去的总动量必然等于出来的。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">机制</span>
+  这些守恒不是各自独立的经验规律，而<strong>全都源于对称性</strong>（前面「物理定律是什么」给过定理，这里落地）：<strong>时间平移对称</strong>（今天做和明天做规律一样）→ <strong>能量</strong>守恒；<strong>空间平移对称</strong>（在这儿做和在那儿做一样）→ <strong>动量</strong>守恒；<strong>旋转对称</strong>（朝哪个方向摆都一样）→ <strong>角动量</strong>守恒。这正是 Noether 定理最著名的三个落点（严格证明见数学页「Noether 定理」）。</div>
+
+  <div class="field"><span class="lab">为什么重要</span>
+  守恒律的力量，恰恰在于它<strong>不在乎细节</strong>：不管碰撞内部多脏、力多复杂，只要空间是均匀的，总动量就<strong>必然</strong>守恒。所以守恒律常常比动力学方程更可靠、更好用——它是由对称性担保、横在一切过程之上的<strong>约束</strong>。物理学家攻一个陌生系统，第一件事往往不是列力的方程，而是问：<strong>这里有哪些对称，于是有哪些量守恒？</strong></div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  守恒量 = 系统的<strong>不变量</strong>，是读懂任何动力系统的第一把钥匙——这份直觉也焊进了 AI：<strong>哈密顿神经网络（Hamiltonian Neural Network）</strong>刻意让模型学出一个守恒的「能量」，于是它预测的长期轨迹自动<strong>不漏气、不发散</strong>。把物理的守恒约束嵌进网络，比让它硬从数据里死记规律更省、更稳、更准。</div>
+
+  <div class="punch">
+    <div class="one">一句话：先问对称，再问守恒，最后才问力。</div>
+    <div class="q"><b>思考：</b>如果哪天真发现某个量在宇宙尺度上悄悄不守恒了，你第一个该怀疑的是哪条对称被打破了？</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>深入思考</h2>
+
+  <details><summary>动量和动能都带着速度，一个是 <var>mv</var>、一个是 ½<var>mv</var>²，为什么要两个量？一个不够吗？</summary>
+  <div class="body">因为它们守恒的<strong>条件</strong>和管的<strong>事</strong>不同。动量是<strong>矢量</strong>（带方向），在<strong>任何</strong>碰撞里（弹性或不弹性）都按矢量相加守恒，它管的是「运动怎么在物体间分配」；动能是<strong>标量</strong>（只有大小），只在<strong>弹性/无耗散</strong>时才守恒，它管的是「运动有多剧烈、能做多少功」。矢量 vs 标量、一次方 vs 平方，让它们在不同问题里各当各的家：算后坐、算爆炸碎片飞向用动量；算能爬多高、能撞多狠用能量。两者独立，缺一不可。</div></details>
+
+  <details><summary>「能量守恒」在膨胀的宇宙里还成立吗？</summary>
+  <div class="body">一个诚实的坑。在实验室里、局域地，能量守恒精确到无可挑剔。但推到<strong>整个宇宙</strong>，答案变微妙：能量守恒对应「时间平移对称」，而<strong>膨胀的宇宙背景本身随时间在变</strong>，并不具备这种对称。于是宇宙学尺度上「总能量」没有一个干净、守恒的定义——比如光在穿越膨胀的宇宙时波长被拉长（红移）、能量看似「丢了」，却找不到它去了哪。这不是定律出错，而是它在提醒你：<strong>守恒律绑定的是对称性</strong>，对称一旦不在，守恒就不再理所当然。</div></details>
+
+  <details><summary>势能到底存在哪儿？举高一块石头，多出来的能量藏在石头里吗？</summary>
+  <div class="body">不在石头里——这是「势能是储存的能量」这句话最容易骗过人的地方。举高石头多出的引力势能，属于<strong>石头和地球组成的整个系统</strong>（存在它们之间的引力场/相对位形里），不是石头单独拥有的。弹簧势能存在被压缩弹簧内部的电磁相互作用里。所以<strong>势能永远是「一对相互作用的东西之间」的能量</strong>，谈单个物体的势能没有意义，必须指定「相对于谁」「零点设在哪」。这也是为什么势能可以是负的——它衡量的是相对关系，不是某处囤着的实物。</div></details>
+
+  <details><summary>永动机为什么造不出来？哪条守恒律挡住了它？</summary>
+  <div class="body">这里说的是<strong>第一类永动机</strong>：不消耗能量却能持续对外做功的机器。它直接撞上<strong>能量守恒</strong>——对外输出的功必须有能量来源，凭空产出功，等于让那个守恒的记账数字自己变大。历史上无数精巧设计都栽在同一处：总有一环在偷偷消耗你<strong>没算进账</strong>的能量（某处的高度、弹性、磁体，或干脆是启动它的那只手）。能量守恒并不禁止某种巧妙机械，它只禁止一件事——<strong>总账凭空变多</strong>。（另有「第二类永动机」不违反能量守恒却仍造不出，那牵涉熵，后面「熵与时间之箭」再谈。）</div></details>
+
+  <details><summary>如果一切都守恒，宇宙岂不是「什么也没发生」？为什么还会有变化？</summary>
+  <div class="body">守恒的是<strong>总量</strong>，不是<strong>分布</strong>。总能量不变，但它可以从势能变动能、从有序的机械能变成弥散的热——<strong>形态和分布一直在变</strong>，恰恰是这些重新分配，构成了我们看到的所有「发生」。守恒律不说「什么都别动」，它说的是「怎么动都得平账」。真正规定变化<strong>朝哪个方向</strong>走（为什么热总从热流向冷、破镜为何不重圆）的，不是守恒律，而是另一条更微妙的定律——熵增。这留给后面「熵与时间之箭」一期。</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>延伸阅读</h2>
+  <ul>
+    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 4 章「能量守恒」&amp; 第 10 章「动量守恒」——积木块比喻的原始出处</li>
+    <li>Emmy Noether，1918 定理——对称性 ↔ 守恒律的源头（严格证明见本 Hub 数学页「Noether 定理」）</li>
+    <li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>——能量/动量的现代直觉</li>
+    <li>3Blue1Brown，"The most unexpected answer to a counting puzzle"——用碰撞守恒算出 π 的可视化</li>
+    <li>Greydanus et al.，<em>"Hamiltonian Neural Networks"</em>，NeurIPS 2019（arXiv:1906.01563）——把守恒焊进网络</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
