@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: What Is a Physical Law · Day 1</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;line-height:1.85;overflow-wrap:break-word;word-break:break-word}
+  .wrap{max-width:760px;margin:0 auto;padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue);padding-bottom:22px;margin-bottom:30px}
+  .kicker{font-size:.82rem;letter-spacing:.14em;color:var(--blue);font-weight:600;text-transform:uppercase}
+  h1{font-size:2rem;line-height:1.3;margin:.35em 0 .3em;color:var(--head)}
+  .meta{font-size:.86rem;color:var(--muted);margin-bottom:.9em}
+  .tagline{font-size:1.02rem;color:#c3cbe0;font-style:italic}
+  .intro{background:var(--panel2);border-left:4px solid var(--amber);padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:34px;font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:22px 24px;margin-bottom:26px;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem;margin:0 0 2px;color:var(--head)}
+  .en{font-size:.9rem;color:var(--muted);font-weight:400}
+  .pill{display:inline-block;font-size:.72rem;background:var(--panel2);color:var(--blue);border:1px solid #2b3a5e;padding:2px 10px;border-radius:20px;margin-top:8px;letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif;font-weight:700;color:var(--amber);font-size:.9rem;letter-spacing:.02em;display:block;margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07);border:1px dashed #6a5326;border-radius:8px;padding:11px 15px;font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px;padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line);margin-top:16px;padding-top:13px}
+  .punch .one{font-weight:600;color:var(--head)}
+  .punch .q{font-size:.93rem;color:var(--muted);margin-top:5px}
+  .punch .q b{color:var(--amber);font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif;font-style:italic;color:#eaeefb}
+  .eq{text-align:center;font-family:Georgia,"Noto Serif SC",serif;font-size:1.35rem;color:var(--head);margin:16px 0}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .15em}
+  .frac .fnum{display:block;padding:0 7px;border-bottom:1.6px solid var(--ink);line-height:1.4}
+  .frac .fden{display:block;padding:0 7px;line-height:1.4}
+  .eq .zero{font-weight:700;color:var(--blue)}
+  .gloss{font-size:.9rem;color:#c3cbe0;background:var(--panel2);border-radius:8px;padding:10px 14px;margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px;text-align:center}
+  figcaption{font-size:.82rem;color:var(--muted);margin-top:7px}
+  svg{max-width:100%;height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem;color:var(--head);border-bottom:1px solid var(--line);padding-bottom:8px}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:2px 18px;margin:11px 0}
+  summary{cursor:pointer;font-weight:600;color:var(--head);padding:12px 0;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px;font-size:.95rem;color:#c3cbe0;border-top:1px dashed var(--line)}
+  .read{margin-top:40px;background:var(--panel2);border-radius:10px;padding:20px 24px}
+  .read h2{font-size:1.15rem;margin:.2em 0 .5em;color:var(--head)}
+  .read ul{margin:0;padding-left:20px;font-size:.92rem;color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px;font-size:.8rem;color:#5b6480;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>What Is a Physical Law</h1>
+  <div class="meta">Day 1 · 2026 · Phase A — the Skeleton of Classical Mechanics</div>
+  <div class="tagline">Before learning any specific physics, get clear on what the word "law" even means — and why <strong>symmetry</strong> is the deepest single idea in all of physics.</div>
+</header>
+
+<div class="intro">
+Most people think physics is <b>a pile of formulas</b>. The deepest physicists see it completely differently: a law is a <b>compression</b> of regularity, it holds <b>scale by scale</b>, it often <b>grows out of symmetry</b>, and whether it is "the law of the universe" or "a map we drew" is still an open question. This issue teaches no specific phenomenon — it just installs a <b>lens</b>. From force to the quantum to the cosmos, you'll look through it. Four cards: symmetry→conservation, effective theory & scale, reduction vs emergence, and what a "law" really is.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Symmetry → Conservation <span class="en">Noether, 1918</span></h2>
+  <span class="pill">Symmetry · 1918</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Run the same experiment today and tomorrow — same result. This is <strong>time-translation symmetry</strong>: shift "when" and the physics is unchanged. In 1918 the mathematician Emmy Noether found something astonishing: <strong>behind every "shift-it-and-nothing-changes" hides a quantity that never changes</strong>. Shift in time → energy is conserved. Shift in space → momentum is conserved. Not a coincidence — a theorem.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Noether's theorem: every <strong>continuous symmetry</strong> of a system corresponds to a <strong>conserved quantity</strong> <var>Q</var> (energy, say), satisfying
+  <div class="eq"><span class="frac"><span class="fnum">d<var>Q</var></span><span class="fden">d<var>t</var></span></span> = <span class="zero">0</span></div>
+  <div class="gloss">Read as "the <strong>rate of change of <var>Q</var> is exactly zero</strong>." Here <strong>d</strong> means "a tiny change": <span class="nowrap">d<var>Q</var></span> is a tiny change in <var>Q</var>, <span class="nowrap">d<var>t</var></span> is a short slice of time, and their ratio <span class="nowrap">d<var>Q</var>/d<var>t</var></span> is "how fast <var>Q</var> changes over time" (its derivative). Setting it to the <strong>number 0 (zero)</strong> means <var>Q</var> <strong>does not change with time at all</strong>.</div>
+  The correspondence is exact:</div>
+
+  <figure>
+  <svg viewBox="0 0 620 168" role="img" aria-label="symmetry to conservation correspondence">
+    <g font-family="Georgia, serif" font-size="15">
+      <text x="150" y="26" text-anchor="middle" fill="#cdd6ea" font-weight="700">Continuous symmetry</text>
+      <text x="470" y="26" text-anchor="middle" fill="#cdd6ea" font-weight="700">Conserved quantity</text>
+    </g>
+    <g font-size="13.5" font-family="-apple-system,sans-serif">
+      <rect x="20" y="42" width="260" height="30" rx="6" fill="#172038" stroke="#2b3a5e"/>
+      <text x="150" y="62" text-anchor="middle" fill="#dbe2f2">Time translation (any when)</text>
+      <rect x="360" y="42" width="240" height="30" rx="6" fill="#2a2214" stroke="#6a5326"/>
+      <text x="480" y="62" text-anchor="middle" fill="#f0ad5a">Energy E</text>
+      <polygon points="300,50 300,64 322,57" fill="#5b9bff"/>
+      <line x1="284" y1="57" x2="304" y2="57" stroke="#5b9bff" stroke-width="2"/>
+      <rect x="20" y="82" width="260" height="30" rx="6" fill="#172038" stroke="#2b3a5e"/>
+      <text x="150" y="102" text-anchor="middle" fill="#dbe2f2">Space translation (any where)</text>
+      <rect x="360" y="82" width="240" height="30" rx="6" fill="#2a2214" stroke="#6a5326"/>
+      <text x="480" y="102" text-anchor="middle" fill="#f0ad5a">Momentum p</text>
+      <polygon points="300,90 300,104 322,97" fill="#5b9bff"/>
+      <line x1="284" y1="97" x2="304" y2="97" stroke="#5b9bff" stroke-width="2"/>
+      <rect x="20" y="122" width="260" height="30" rx="6" fill="#172038" stroke="#2b3a5e"/>
+      <text x="150" y="142" text-anchor="middle" fill="#dbe2f2">Rotation (any direction)</text>
+      <rect x="360" y="122" width="240" height="30" rx="6" fill="#2a2214" stroke="#6a5326"/>
+      <text x="480" y="142" text-anchor="middle" fill="#f0ad5a">Angular momentum L</text>
+      <polygon points="300,130 300,144 322,137" fill="#5b9bff"/>
+      <line x1="284" y1="137" x2="304" y2="137" stroke="#5b9bff" stroke-width="2"/>
+    </g>
+  </svg>
+  <figcaption>Each "change-it-and-nothing-changes" corresponds to one quantity that is "conserved."</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  We usually assume we first <strong>observe</strong> energy conservation and then explain it. Noether flips the causation: <strong>energy is conserved because the laws of physics do not change over time</strong>. A conservation law is not an extra "rule" the universe decrees — it is the <strong>shadow</strong> a symmetry casts. That upgrades "why is energy conserved" from an empirical regularity to a near-geometric necessity.</div>
+
+  <div class="field xref"><span class="lab">Cross-domain · AI</span>
+  <strong>Inductive bias / equivariance</strong> in machine learning is the same wisdom: CNNs are translation-equivariant, equivariant nets are rotation-equivariant — the physics intuition "symmetry → fewer parameters" baked into architecture. <strong>Symmetry = a free prior</strong>; physics and deep learning both use it to shrink the search space.</div>
+
+  <div class="punch">
+    <div class="one">In one line: a conservation law is the shadow of a symmetry.</div>
+    <div class="q"><b>Think:</b> if some quantity stopped being conserved in the very early universe, which symmetry would you go looking for as broken?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>Effective Theory &amp; Scale <span class="en">Effective Theory</span></h2>
+  <span class="pill">Scale · Effective theory</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  A bridge engineer <strong>never uses quark equations</strong>. Newtonian mechanics is actually "wrong" (relativity and quantum are more accurate), yet it builds bridges and launches rockets just fine. How can a wrong theory still work? Because <strong>each scale has its own good-enough laws</strong> — you can get things right at one layer without knowing the layer below.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  This is the idea of an <strong>effective theory</strong>: at a given length/energy scale, the finer microscopic detail is "averaged out," leaving only that scale's <strong>effective degrees of freedom</strong> and effective laws. Nature is <strong>layer-wise approximable</strong> — each layer is insensitive enough to the one below, and that is exactly what makes science possible.</div>
+
+  <figure>
+  <svg viewBox="0 0 640 220" role="img" aria-label="scale ladder and effective theories">
+    <g font-family="-apple-system,sans-serif" font-size="13">
+      <line x1="60" y1="20" x2="60" y2="196" stroke="#56607e" stroke-width="1.5"/>
+      <polygon points="60,12 55,26 65,26" fill="#56607e"/>
+      <text x="52" y="20" text-anchor="end" font-size="11" fill="#96a0ba">small</text>
+      <text x="52" y="196" text-anchor="end" font-size="11" fill="#96a0ba">large</text>
+      <text x="28" y="112" text-anchor="middle" font-size="11" fill="#96a0ba" transform="rotate(-90 28 112)">scale</text>
+      <g>
+        <rect x="82" y="26" width="196" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="92" y="43" fill="#dbe2f2">quarks / particles</text>
+        <text x="300" y="43" fill="#7db0ff">QFT · Standard Model</text>
+      </g>
+      <g>
+        <rect x="82" y="60" width="196" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="92" y="77" fill="#dbe2f2">atoms / molecules</text>
+        <text x="300" y="77" fill="#7db0ff">quantum mechanics · chemistry</text>
+      </g>
+      <g>
+        <rect x="82" y="94" width="196" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="92" y="111" fill="#dbe2f2">materials / fluids</text>
+        <text x="300" y="111" fill="#7db0ff">condensed matter · thermo</text>
+      </g>
+      <g>
+        <rect x="82" y="128" width="196" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="92" y="145" fill="#dbe2f2">bridges / planets</text>
+        <text x="300" y="145" fill="#f0ad5a">Newtonian ← good enough</text>
+      </g>
+      <g>
+        <rect x="82" y="162" width="196" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="92" y="179" fill="#dbe2f2">galaxies / cosmos</text>
+        <text x="300" y="179" fill="#7db0ff">general relativity · cosmology</text>
+      </g>
+    </g>
+  </svg>
+  <figcaption>One universe, ruled by different "effective laws" at different scales — Newton never fails inside his own box.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This explains why physics is even <strong>possible</strong>: if you had to understand quarks before computing a planet's orbit, science couldn't move. It also clarifies what "wrong" means — Newton isn't wrong, he's <strong>valid</strong> within his scale and fails beyond it. No law claims to apply at all scales.</div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Engineering</span>
+  You write Python without minding transistors, use distributed systems without minding every TCP byte — <strong>layered abstraction</strong> is the lifeblood of software. Physics's "effective theory" and engineering's "abstraction layer" are the same organizing principle: <strong>each layer exposes a good-enough interface and hides the details below</strong>.</div>
+
+  <div class="punch">
+    <div class="one">In one line: there is no "universal law," only "the right law at the right scale."</div>
+    <div class="q"><b>Think:</b> is a large model's scaling law a kind of "effective theory"? What detail has it averaged out?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>Reduction vs Emergence <span class="en">More is Different</span></h2>
+  <span class="pill">Emergence · More is Different</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Solve the equations of water molecules all the way down — can you "read off" whirlpools, wetness, even life? No. In 1972 the physicist P. W. Anderson wrote four words — <strong>"More is Different"</strong>: pile up many parts and wholly new levels and laws appear, ones you can't simply deduce from the rule for a single part.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  This is <strong>emergence</strong>. Temperature, phase transitions, superconductivity, consciousness — all <strong>collective phenomena</strong>, appearing only in the "many," and often <strong>insensitive</strong> to microscopic detail (that's universality — the "Phase Transitions &amp; Criticality" issue works it out via the renormalization group). The key distinction: <strong>reductionism</strong> (everything decomposes to basic particles) is true — but <strong>"constructionism"</strong> (rebuild everything from particles and predict all higher phenomena) often fails.</div>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  "Knowing all the basic laws = understanding everything" is an <strong>illusion</strong>. The second half of physics (condensed matter, complex systems) is precisely about emergence. It is the core of this site's "Condensed Matter &amp; Emergence" theme, and the <strong>philosophical bedrock</strong> of complexity science and consciousness research.</div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Physics / Neuro / AI / Society</span>
+  The same thing recurs in four fields — <strong>a property absent in the parts appears once there are enough of them</strong>:
+  <ul>
+    <li><strong>Physics</strong>: a single water molecule has no "wetness" or "whirlpool"; "liquid" and "freezing" exist only for trillions together;</li>
+    <li><strong>Neuro</strong>: a single neuron just fires — no "seeing red"; perception and consciousness emerge from ~86 billion neurons acting together;</li>
+    <li><strong>AI</strong>: a single weight has no "language understanding"; multi-step reasoning and in-context learning appear "suddenly" once model scale crosses a threshold (the "emergent abilities" debate);</li>
+    <li><strong>Society</strong>: no single car is "in a traffic jam" — congestion is a <strong>phase transition</strong> of the flow (individuals unchanged, the collective state flips); prices, language, fashion the same.</li>
+  </ul>
+  So <strong>"More is Different"</strong> is <strong>one and the same proposition</strong> across physics, neuroscience, AI, and society.</div>
+
+  <div class="punch">
+    <div class="one">In one line: reductionism holding does not mean constructionism holds.</div>
+    <div class="q"><b>Think:</b> is an LLM's "emergent ability" the same kind of emergence as a physical phase transition — or just an artifact of how we measure?</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>What a "Law" Really Is <span class="en">The Ontology of a Law</span></h2>
+  <span class="pill">Philosophy of science · Ontology</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Is a law a rule the universe "obeys," or our <strong>compressed description</strong> of regularity? A planet doesn't first "read" Newton's equations and then decide where to go. So is a law an <strong>external decree</strong>, or a <strong>map we drew</strong>?</div>
+
+  <div class="field"><span class="lab">Mechanism · two views</span>
+  ① <strong>Descriptivism (Humean)</strong>: a law is just the simplest compression of existing regularities, with no "compulsion" of its own — the best summary of the universe's patterns.<br>
+  ② <strong>Nomic realism</strong>: laws are real, governing structures; the universe "is thus because of them."<br>
+  Above both hovers Wigner's puzzle of <strong>"the unreasonable effectiveness of mathematics"</strong>: why does abstract math describe physics so precisely?</div>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This is no idle metaphysics — it shapes what you mean by "why." When you ask "why is energy conserved," do you want decree-style compulsion, or a symmetry-style compression? The deeper physics goes, the more our "laws" look like <strong>highly compressed maps</strong> rather than the universe's statute book.</div>
+
+  <div class="field xref"><span class="lab">Cross-domain · Philosophy / AI</span>
+  This is the old question in the philosophy of science — are laws discovered or invented; it echoes the adage "the map is not the territory." It is also isomorphic to an ML creed: <strong>a model is not truth, it is a useful compression</strong> — all laws and models are compressions, differing only in how well they compress and where they fail.</div>
+
+  <div class="punch">
+    <div class="one">In one line: a law is a compression, not a decree.</div>
+    <div class="q"><b>Think:</b> if a "law" could never be violated and never be checked outside observation, does it differ from a definition?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>Could symmetry be something we "impose" on nature? We love symmetry — is nature really symmetric, or do we just look at the symmetric bits?</summary>
+  <div class="body">A healthy doubt — but physics answers the opposite way. Nature is full of <strong>spontaneous symmetry breaking</strong>: a magnet is equivalent in all directions when hot (symmetric), yet on cooling "chooses" one magnetization direction (broken). Precisely because we can name "which symmetry broke, and what order it produced," symmetry is a real <strong>starting point</strong>, not after-the-fact prettification. The existence of breaking is the strongest evidence that symmetry was real (the "Symmetry Breaking &amp; Order" issue goes into this).</div></details>
+
+  <details><summary>If "More is Different," then even a found "Theory of Everything (TOE)" — what could it deliver, and what not?</summary>
+  <div class="body"><strong>First, what a TOE is</strong>: a Theory of Everything is the ultimate theory that would unify all of nature's <strong>four fundamental forces</strong> (gravity, electromagnetism, the strong and weak nuclear forces) and every basic particle into one framework. The Standard Model already unifies the latter three; only <strong>gravity</strong> has resisted merging with quantum mechanics — string theory and loop quantum gravity are attempts, none experimentally confirmed.<br>
+  Even if a TOE were found, it would give the deepest "alphabet" — a great reductionist victory; but it would <strong>not</strong> automatically tell you how turbulence flows, how proteins fold, or how consciousness arises. Those are emergent-level questions; the answers live in how the "many" are organized, not in the particle list. A TOE is both an ending and a beginning: it settles "what is at the bottom," yet barely touches half of physics (emergence).</div></details>
+
+  <details><summary>If each scale has its own laws, does a "bottom layer" really exist — or is it turtles all the way down?</summary>
+  <div class="body">An open question. One possibility: a fundamental scale exists (e.g. the Planck scale), below which there is no "more microscopic." Another: effective theories nest forever, always a next layer, and "fundamental" just means "the deepest we've probed." Intriguingly, <strong>the effective-theory framework doesn't need the answer</strong> — it's designed so that "whatever is below, this layer stays self-consistent," which is both its power and its humility.</div></details>
+
+  <details><summary>Wigner's puzzle: is math's effectiveness a property of the universe, or an adaptation our brains evolved?</summary>
+  <div class="body">Both camps have defenders. <strong>Universe side</strong>: the world has mathematical structure and we're discovering it (mathematical Platonism). <strong>Brain side</strong>: our math grew out of experience with this world, so of course it "happens" to fit — like a shoe fits because it was made to the foot. Perhaps the truth is in between: math is a human tool, but it works because the universe really does have compressible regularity. No consensus — but worth chewing on as you learn each law.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, Ch. 52 "Symmetry and Physical Laws" — the intuitive starting point</li>
+    <li>Emmy Noether, 1918 theorem — the origin of symmetry ↔ conservation</li>
+    <li>P. W. Anderson, <em>"More is Different"</em>, <em>Science</em> 1972 — the classic emergence manifesto</li>
+    <li>E. Wigner, <em>"The Unreasonable Effectiveness of Mathematics in the Natural Sciences"</em>, 1960</li>
+    <li>Sean Carroll, <em>The Biggest Ideas in the Universe</em> / 3Blue1Brown — visual intuition</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

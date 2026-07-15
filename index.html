@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理 · Physics</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;line-height:1.7}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 22px 90px}
+  .kicker{font-size:.82rem;letter-spacing:.14em;color:var(--blue);font-weight:600;text-transform:uppercase}
+  h1{font-family:Georgia,"Noto Serif SC",serif;font-size:2.3rem;margin:.3em 0 .2em;color:var(--head)}
+  .tagline{color:#c3cbe0;font-size:1.03rem;font-style:italic;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:.92rem;border-bottom:2px solid var(--blue);padding-bottom:20px;margin-bottom:28px}
+  h2.phase{font-family:Georgia,"Noto Serif SC",serif;font-size:1.15rem;color:var(--amber);margin:30px 0 10px;letter-spacing:.02em}
+  .entry{display:flex;align-items:center;gap:14px;padding:11px 16px;margin:7px 0;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:8px;text-decoration:none;color:var(--muted)}
+  a.entry.live{border-left-color:var(--blue);color:var(--ink)}
+  a.entry.live:hover{background:#182136;border-left-color:var(--amber)}
+  .dnum{font-family:Georgia,serif;font-size:.85rem;color:var(--blue);min-width:52px}
+  .entry:not(.live) .dnum{color:#4a5678}
+  .dtitle{flex:1;font-size:.97rem}
+  .badge{font-size:.7rem;padding:2px 9px;border-radius:20px;background:rgba(91,155,255,.15);color:var(--blue);border:1px solid #2b3a5e}
+  .badge.soon{background:transparent;color:#4a5678;border-color:#232d45}
+  footer{margin-top:44px;color:#5b6480;font-size:.8rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">物理 · Physics</div>
+  <h1>物理</h1>
+  <div class="tagline">物理世界怎么运作，从经典力学到量子到涌现的一条深路。</div>
+  <div class="sub">直觉优先、少公式，每期挂一条 AI / 复杂系统对读线。</div>
+
+  <h2 class="phase">Phase A · 经典力学：世界的骨架</h2>
+  <a class="entry live" href="physical-laws-day1.html"><span class="dnum">Day 1</span><span class="dtitle">物理定律是什么</span><span class="badge">上线</span></a>
+  <div class="entry"><span class="dnum">Day 2</span><span class="dtitle">运动、力与决定论</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 3</span><span class="dtitle">能量与动量</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 4</span><span class="dtitle">最小作用量</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 5</span><span class="dtitle">混沌与非线性</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase B · 热、熵与统计力学</h2>
+  <div class="entry"><span class="dnum">Day 6</span><span class="dtitle">热与温度</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 7</span><span class="dtitle">熵与时间之箭</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 8</span><span class="dtitle">统计力学</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 9</span><span class="dtitle">信息的物理</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase C · 波、光与电磁</h2>
+  <div class="entry"><span class="dnum">Day 10</span><span class="dtitle">振动与波</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 11</span><span class="dtitle">波动现象</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 12</span><span class="dtitle">电磁的统一</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 13</span><span class="dtitle">光是什么</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase D · 相对论</h2>
+  <div class="entry"><span class="dnum">Day 14</span><span class="dtitle">狭义相对论</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 15</span><span class="dtitle">时空</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 16</span><span class="dtitle">广义相对论</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 17</span><span class="dtitle">黑洞与引力波</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase E · 量子力学</h2>
+  <div class="entry"><span class="dnum">Day 18</span><span class="dtitle">量子革命</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 19</span><span class="dtitle">波函数与叠加</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 20</span><span class="dtitle">不确定性原理</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 21</span><span class="dtitle">纠缠与非定域</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 22</span><span class="dtitle">测量问题与诠释</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 23</span><span class="dtitle">量子场论入门</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 24</span><span class="dtitle">量子技术</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase F · 粒子与标准模型</h2>
+  <div class="entry"><span class="dnum">Day 25</span><span class="dtitle">标准模型</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 26</span><span class="dtitle">对称性与质量的起源</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 27</span><span class="dtitle">超越标准模型</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase G · 宇宙学</h2>
+  <div class="entry"><span class="dnum">Day 28</span><span class="dtitle">大爆炸</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 29</span><span class="dtitle">暗物质与暗能量</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 30</span><span class="dtitle">宇宙的历史与命运</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 31</span><span class="dtitle">精细调节与多重宇宙</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase H · 凝聚态与涌现</h2>
+  <div class="entry"><span class="dnum">Day 32</span><span class="dtitle">更多即不同</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 33</span><span class="dtitle">相变与临界</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 34</span><span class="dtitle">凝聚态的奇迹</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 35</span><span class="dtitle">对称性破缺与秩序</span><span class="badge soon">待写</span></div>
+
+  <h2 class="phase">Phase I · 收尾</h2>
+  <div class="entry"><span class="dnum">Day 36</span><span class="dtitle">物理学的未解之谜</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 37</span><span class="dtitle">物理学家的思维方式</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 38</span><span class="dtitle">物理如何变成技术</span><span class="badge soon">待写</span></div>
+  <div class="entry"><span class="dnum">Day 39</span><span class="dtitle">物理与哲学</span><span class="badge soon">待写</span></div>
+
+  <footer>BigCat Learning Hub · 物理</footer>
+</div>
+</body>
+</html>

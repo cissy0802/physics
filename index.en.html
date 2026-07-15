@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;line-height:1.7}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 22px 90px}
+  .kicker{font-size:.82rem;letter-spacing:.14em;color:var(--blue);font-weight:600;text-transform:uppercase}
+  h1{font-family:Georgia,"Noto Serif SC",serif;font-size:2.3rem;margin:.3em 0 .2em;color:var(--head)}
+  .tagline{color:#c3cbe0;font-size:1.03rem;font-style:italic;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:.92rem;border-bottom:2px solid var(--blue);padding-bottom:20px;margin-bottom:28px}
+  h2.phase{font-family:Georgia,"Noto Serif SC",serif;font-size:1.15rem;color:var(--amber);margin:30px 0 10px;letter-spacing:.02em}
+  .entry{display:flex;align-items:center;gap:14px;padding:11px 16px;margin:7px 0;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:8px;text-decoration:none;color:var(--muted)}
+  a.entry.live{border-left-color:var(--blue);color:var(--ink)}
+  a.entry.live:hover{background:#182136;border-left-color:var(--amber)}
+  .dnum{font-family:Georgia,serif;font-size:.85rem;color:var(--blue);min-width:52px}
+  .entry:not(.live) .dnum{color:#4a5678}
+  .dtitle{flex:1;font-size:.97rem}
+  .badge{font-size:.7rem;padding:2px 9px;border-radius:20px;background:rgba(91,155,255,.15);color:var(--blue);border:1px solid #2b3a5e}
+  .badge.soon{background:transparent;color:#4a5678;border-color:#232d45}
+  footer{margin-top:44px;color:#5b6480;font-size:.8rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">物理 · Physics</div>
+  <h1>Physics</h1>
+  <div class="tagline">How the physical world works — one deep path from classical mechanics to the quantum to emergence.</div>
+  <div class="sub">Intuition first, few formulas, each issue carrying one line to AI / complex systems.</div>
+
+  <h2 class="phase">Phase A · Classical Mechanics: the Skeleton</h2>
+  <a class="entry live" href="physical-laws-day1.en.html"><span class="dnum">Day 1</span><span class="dtitle">What Is a Physical Law</span><span class="badge">live</span></a>
+  <div class="entry"><span class="dnum">Day 2</span><span class="dtitle">Motion, Force &amp; Determinism</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 3</span><span class="dtitle">Energy &amp; Momentum</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 4</span><span class="dtitle">Least Action</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 5</span><span class="dtitle">Chaos &amp; Nonlinearity</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase B · Heat, Entropy &amp; Statistical Mechanics</h2>
+  <div class="entry"><span class="dnum">Day 6</span><span class="dtitle">Heat &amp; Temperature</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 7</span><span class="dtitle">Entropy &amp; the Arrow of Time</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 8</span><span class="dtitle">Statistical Mechanics</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 9</span><span class="dtitle">The Physics of Information</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase C · Waves, Light &amp; Electromagnetism</h2>
+  <div class="entry"><span class="dnum">Day 10</span><span class="dtitle">Oscillations &amp; Waves</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 11</span><span class="dtitle">Wave Phenomena</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 12</span><span class="dtitle">The Unification of Electromagnetism</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 13</span><span class="dtitle">What Is Light</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase D · Relativity</h2>
+  <div class="entry"><span class="dnum">Day 14</span><span class="dtitle">Special Relativity</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 15</span><span class="dtitle">Spacetime</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 16</span><span class="dtitle">General Relativity</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 17</span><span class="dtitle">Black Holes &amp; Gravitational Waves</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase E · Quantum Mechanics</h2>
+  <div class="entry"><span class="dnum">Day 18</span><span class="dtitle">The Quantum Revolution</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 19</span><span class="dtitle">Wavefunction &amp; Superposition</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 20</span><span class="dtitle">The Uncertainty Principle</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 21</span><span class="dtitle">Entanglement &amp; Nonlocality</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 22</span><span class="dtitle">Measurement &amp; Interpretations</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 23</span><span class="dtitle">Intro to Quantum Field Theory</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 24</span><span class="dtitle">Quantum Technology</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase F · Particles &amp; the Standard Model</h2>
+  <div class="entry"><span class="dnum">Day 25</span><span class="dtitle">The Standard Model</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 26</span><span class="dtitle">Symmetry &amp; the Origin of Mass</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 27</span><span class="dtitle">Beyond the Standard Model</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase G · Cosmology</h2>
+  <div class="entry"><span class="dnum">Day 28</span><span class="dtitle">The Big Bang</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 29</span><span class="dtitle">Dark Matter &amp; Dark Energy</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 30</span><span class="dtitle">The History &amp; Fate of the Universe</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 31</span><span class="dtitle">Fine-Tuning &amp; the Multiverse</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase H · Condensed Matter &amp; Emergence</h2>
+  <div class="entry"><span class="dnum">Day 32</span><span class="dtitle">More Is Different</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 33</span><span class="dtitle">Phase Transitions &amp; Criticality</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 34</span><span class="dtitle">The Wonders of Condensed Matter</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 35</span><span class="dtitle">Symmetry Breaking &amp; Order</span><span class="badge soon">soon</span></div>
+
+  <h2 class="phase">Phase I · Closing</h2>
+  <div class="entry"><span class="dnum">Day 36</span><span class="dtitle">The Open Problems of Physics</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 37</span><span class="dtitle">How Physicists Think</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 38</span><span class="dtitle">How Physics Becomes Technology</span><span class="badge soon">soon</span></div>
+  <div class="entry"><span class="dnum">Day 39</span><span class="dtitle">Physics &amp; Philosophy</span><span class="badge soon">soon</span></div>
+
+  <footer>BigCat Learning Hub · Physics</footer>
+</div>
+</body>
+</html>

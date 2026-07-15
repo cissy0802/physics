@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理：物理定律是什么 · Day 1</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>物理定律是什么</h1>
+  <div class="meta">Day 1 · 2026 · Phase A 经典力学的骨架</div>
+  <div class="tagline">在学任何具体物理之前，先搞清「定律」这个词到底在说什么——以及为什么<strong>对称性</strong>是全物理最深的一个念头。</div>
+</header>
+
+<div class="intro">
+大多数人以为物理学是<b>一堆公式</b>。但最深的物理学家看它完全不同：定律是对规律的<b>压缩</b>，它<b>分尺度</b>生效，它常常从<b>对称性</b>里长出来，而它究竟是"宇宙的律令"还是"我们画的地图"至今仍是活问题。这一期不教任何具体现象，只装上一副<b>透镜</b>——之后从力到量子到宇宙，你都会透过它去看。四张卡：对称→守恒、有效理论与尺度、还原 vs 涌现、以及"定律"到底是什么。
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>对称性 → 守恒律 <span class="en">Symmetry → Conservation（Noether）</span></h2>
+  <span class="pill">对称性 · 1918</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  同一个实验，今天做和明天做，结果一样——这叫<strong>时间平移对称</strong>：把"什么时候"挪一挪，物理不变。1918 年数学家 Emmy Noether 发现了一件惊人的事：<strong>每一个"挪了也一样"，背后都藏着一个"永远不变的量"</strong>。时间挪不变 → 能量守恒；空间挪不变 → 动量守恒。这不是巧合，是一条定理。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  Noether 定理：系统的每一个<strong>连续对称性</strong>，对应一个<strong>守恒量</strong> <var>Q</var>（比如能量）。这个量满足
+  <div class="eq"><span class="frac"><span class="fnum">d<var>Q</var></span><span class="fden">d<var>t</var></span></span> = <span class="zero">0</span></div>
+  <div class="gloss">读作「<var>Q</var> 的<strong>变化率恒为零</strong>」。这里 <strong>d</strong> 表示"微小变化"：<span class="nowrap">d<var>Q</var></span> 是 <var>Q</var> 的一点点变化、<span class="nowrap">d<var>t</var></span> 是一小段时间，两者相除 <span class="nowrap">d<var>Q</var>/d<var>t</var></span> 就是"<var>Q</var> 随时间变多快"（即导数、变化率）；它<strong>等于数字 0（零）</strong>，意思就是 <var>Q</var> <strong>根本不随时间变</strong>。</div>
+  对应关系是精确的：</div>
+
+  <figure>
+  <svg viewBox="0 0 620 168" role="img" aria-label="对称性到守恒律的对应">
+    <g font-family="Georgia, 'Noto Serif SC', serif" font-size="15">
+      <text x="150" y="26" text-anchor="middle" fill="#cdd6ea" font-weight="700">连续对称性</text>
+      <text x="470" y="26" text-anchor="middle" fill="#cdd6ea" font-weight="700">守恒量</text>
+    </g>
+    <g font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">
+      <!-- row1 -->
+      <rect x="20" y="42" width="260" height="30" rx="6" fill="#172038" stroke="#2b3a5e"/>
+      <text x="150" y="62" text-anchor="middle" fill="#dbe2f2">时间平移（何时都一样）</text>
+      <rect x="360" y="42" width="240" height="30" rx="6" fill="#2a2214" stroke="#6a5326"/>
+      <text x="480" y="62" text-anchor="middle" fill="#f0ad5a">能量 E</text>
+      <polygon points="300,50 300,64 322,57" fill="#5b9bff"/>
+      <line x1="284" y1="57" x2="304" y2="57" stroke="#5b9bff" stroke-width="2"/>
+      <!-- row2 -->
+      <rect x="20" y="82" width="260" height="30" rx="6" fill="#172038" stroke="#2b3a5e"/>
+      <text x="150" y="102" text-anchor="middle" fill="#dbe2f2">空间平移（在哪都一样）</text>
+      <rect x="360" y="82" width="240" height="30" rx="6" fill="#2a2214" stroke="#6a5326"/>
+      <text x="480" y="102" text-anchor="middle" fill="#f0ad5a">动量 p</text>
+      <polygon points="300,90 300,104 322,97" fill="#5b9bff"/>
+      <line x1="284" y1="97" x2="304" y2="97" stroke="#5b9bff" stroke-width="2"/>
+      <!-- row3 -->
+      <rect x="20" y="122" width="260" height="30" rx="6" fill="#172038" stroke="#2b3a5e"/>
+      <text x="150" y="142" text-anchor="middle" fill="#dbe2f2">旋转（朝哪转都一样）</text>
+      <rect x="360" y="122" width="240" height="30" rx="6" fill="#2a2214" stroke="#6a5326"/>
+      <text x="480" y="142" text-anchor="middle" fill="#f0ad5a">角动量 L</text>
+      <polygon points="300,130 300,144 322,137" fill="#5b9bff"/>
+      <line x1="284" y1="137" x2="304" y2="137" stroke="#5b9bff" stroke-width="2"/>
+    </g>
+  </svg>
+  <figcaption>每一种"换了也一样"，都对应一个"守恒下来"的量。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  我们通常以为是先<strong>观测到</strong>能量守恒，再去解释它。Noether 把因果倒了过来：<strong>能量之所以守恒，是因为物理定律不随时间改变</strong>。守恒律不是宇宙额外颁布的"规定"，而是对称性投下的<strong>影子</strong>。这一步把"能量为什么守恒"从一条经验规律，升级成一条近乎几何的必然。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  机器学习里的 <strong>inductive bias / 等变性（equivariance）</strong>正是同一智慧：CNN 对平移等变、等变网络对旋转等变——把"对称 → 省参数"这条物理直觉搬进了网络架构。<strong>对称性 = 免费的先验</strong>，物理和深度学习都靠它把搜索空间砍小。</div>
+
+  <div class="punch">
+    <div class="one">一句话：守恒律是对称性的影子。</div>
+    <div class="q"><b>思考：</b>如果某个量在极早期宇宙里"不守恒"了，你该去找哪个对称性被打破了？</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>有效理论与尺度 <span class="en">Effective Theory &amp; Scale</span></h2>
+  <span class="pill">尺度 · 有效理论</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  造桥的工程师<strong>从不用夸克方程</strong>。牛顿力学其实"错"了（相对论和量子更准），可造桥、发火箭照用不误。一个错的理论凭什么还能用？因为<strong>每个尺度有它自己够用的定律</strong>——你不需要知道下一层的细节，就能在这一层把事算对。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  这就是<strong>有效理论（effective theory）</strong>的思想：在某个长度/能量尺度上，更微观的细节被"平均掉"，只留下该尺度的<strong>有效自由度</strong>和有效定律。自然是<strong>分层可近似</strong>的——每一层都对下层不敏感到一定程度，才使得科学成为可能。</div>
+
+  <figure>
+  <svg viewBox="0 0 640 220" role="img" aria-label="尺度阶梯与各层的有效理论">
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+      <line x1="60" y1="20" x2="60" y2="196" stroke="#56607e" stroke-width="1.5"/>
+      <polygon points="60,12 55,26 65,26" fill="#56607e"/>
+      <text x="52" y="20" text-anchor="end" font-size="11.5" fill="#96a0ba">小</text>
+      <text x="52" y="196" text-anchor="end" font-size="11.5" fill="#96a0ba">大</text>
+      <text x="30" y="112" text-anchor="middle" font-size="11.5" fill="#96a0ba" transform="rotate(-90 30 112)">尺度</text>
+      <g>
+        <rect x="80" y="26" width="200" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="90" y="43" fill="#dbe2f2">夸克 / 基本粒子</text>
+        <text x="300" y="43" fill="#7db0ff">量子场论 · 标准模型</text>
+      </g>
+      <g>
+        <rect x="80" y="60" width="200" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="90" y="77" fill="#dbe2f2">原子 / 分子</text>
+        <text x="300" y="77" fill="#7db0ff">量子力学 · 化学</text>
+      </g>
+      <g>
+        <rect x="80" y="94" width="200" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="90" y="111" fill="#dbe2f2">材料 / 流体</text>
+        <text x="300" y="111" fill="#7db0ff">凝聚态 · 热力学</text>
+      </g>
+      <g>
+        <rect x="80" y="128" width="200" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="90" y="145" fill="#dbe2f2">桥梁 / 行星</text>
+        <text x="300" y="145" fill="#f0ad5a">牛顿力学 ← 够用</text>
+      </g>
+      <g>
+        <rect x="80" y="162" width="200" height="26" rx="5" fill="#172038" stroke="#2b3a5e"/>
+        <text x="90" y="179" fill="#dbe2f2">星系 / 宇宙</text>
+        <text x="300" y="179" fill="#7db0ff">广义相对论 · 宇宙学</text>
+      </g>
+    </g>
+  </svg>
+  <figcaption>同一个宇宙，不同尺度上由不同的"有效定律"统治——牛顿在它的那格里从不失手。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">为什么重要</span>
+  这解释了物理学<strong>为何可能</strong>：要是非得先懂夸克才能算行星轨道，科学寸步难行。它也讲清了"错"的真正含义——牛顿不是错，是在它的尺度内<strong>有效</strong>、超出就失效。没有哪条定律号称适用于所有尺度。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 工程</span>
+  你写 Python 不用管晶体管，用分布式系统不用管 TCP 每个字节——<strong>分层抽象</strong>是软件工程的命根子。物理的"有效理论"和工程的"抽象层"是同一条组织原则：<strong>每层暴露够用的接口，隐藏下层细节</strong>。</div>
+
+  <div class="punch">
+    <div class="one">一句话：没有"万能定律"，只有"对的尺度上对的定律"。</div>
+    <div class="q"><b>思考：</b>大模型的 scaling law 算不算一种"有效理论"？它把什么细节平均掉了？</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>还原论 vs 涌现 <span class="en">Reductionism vs Emergence</span></h2>
+  <span class="pill">涌现 · More is Different</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  把水分子的方程解到底，你能从里面"读出"漩涡、湿润、乃至生命吗？答案是<strong>不能</strong>。1972 年物理学家 P. W. Anderson 写下四个字——<strong>"More is Different"（多了就不同）</strong>：把很多个体凑到一起，会冒出全新的、无法从单个个体规律简单推出的层次和规律。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  这叫<strong>涌现（emergence）</strong>。温度、相变、超导、意识……都是<strong>集体现象</strong>，只在"很多"时出现，而且常常对微观细节<strong>不敏感</strong>（这就是普适性——后面「相变与临界」一期会用重整化群讲透）。关键区分：<strong>还原论</strong>（万物可拆解到基本粒子）为真——但<strong>"构成论"</strong>（从基本粒子拼回万物、并预测出所有高层现象）常常失败。</div>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  "知道了所有基本定律 = 理解了一切"是一个<strong>错觉</strong>。物理学的后半程（凝聚态、复杂系统）恰恰是关于涌现的学问。这也是本站「凝聚态与涌现」主题的核心，更是复杂性科学与意识研究的<strong>哲学地基</strong>。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 物理 / 神经 / AI / 社会</span>
+  同一件事在四个领域反复上演——<strong>部件里没有的性质，凑多了就冒出来</strong>：
+  <ul>
+    <li><strong>物理</strong>：单个水分子无所谓"湿"或"漩涡"，"液态"与"结冰"这类性质只在亿万分子集体时才存在；</li>
+    <li><strong>神经</strong>：单个神经元只会放电，谈不上"看见红色"——感知与意识是约 860 亿神经元协同的涌现；</li>
+    <li><strong>AI</strong>：单个权重毫无"语言理解"，多步推理、in-context learning 是模型规模跨过某尺度后"突然"冒出来的（这正是大模型"涌现能力"之辩）；</li>
+    <li><strong>社会</strong>：没有哪一辆车自己在"堵车"——交通拥堵是车流的一次<strong>相变</strong>（个体没变、集体态突变）；价格、语言、时尚同理。</li>
+  </ul>
+  所以<strong>"更多即不同"</strong>是横跨物理、神经、AI、社会的<strong>同一条命题</strong>。</div>
+
+  <div class="punch">
+    <div class="one">一句话：还原论成立，不代表构成论成立。</div>
+    <div class="q"><b>思考：</b>LLM 的"涌现能力"和物理的相变涌现，是同一种涌现吗？还是只是度量方式造出的假象？</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>"定律"到底是什么 <span class="en">The Ontology of a Law</span></h2>
+  <span class="pill">科学哲学 · 本体论</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  定律是宇宙"遵守"的规则，还是我们对规律的<strong>压缩描述</strong>？行星并不会先"读"一遍牛顿方程，再决定往哪走。那么定律究竟是一道<strong>外在的律令</strong>，还是一张<strong>人画的地图</strong>？</div>
+
+  <div class="field"><span class="lab">机制 · 两种看法</span>
+  ① <strong>描述论（Humean）</strong>：定律只是对既有规律的最简压缩，本身没有"强制力"，是宇宙规律性的最佳总结。<br>
+  ② <strong>规律实在论</strong>：定律是真实存在、具有支配性的结构，宇宙"因它而如此"。<br>
+  两派之上还悬着 Wigner 的<strong>"数学不合理的有效性"</strong>之谜：为什么抽象数学能如此精准地描述物理？</div>
+
+  <div class="field"><span class="lab">为什么重要</span>
+  这不是玄谈——它决定你怎么理解"为什么"。当你问"能量为什么守恒"，你要的是律令式的强制，还是对称性式的压缩解释？物理钻得越深，越发现我们手里的"定律"更像<strong>高度压缩的地图</strong>，而不是宇宙的法典。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 哲学 / AI</span>
+  这正是科学哲学里的老问题——定律是发现还是发明；也呼应"地图不是疆域"那句老话。它还和 ML 的信条同构：<strong>模型不是真理，是有用的压缩</strong>——所有定律与模型都是压缩，区别只在压得多好、在哪失效。</div>
+
+  <div class="punch">
+    <div class="one">一句话：定律是压缩，不是律令。</div>
+    <div class="q"><b>思考：</b>如果一条"定律"永远无法被违反、也无法在观测之外被验证，它和一个"定义"还有区别吗？</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>深入思考</h2>
+
+  <details><summary>对称性会不会是我们"强加"给自然的？我们偏爱对称，是自然真的对称，还是我们只挑对称的看？</summary>
+  <div class="body">这个怀疑很健康，但物理给出的回答恰恰相反。自然界充满<strong>自发对称破缺</strong>——一块磁铁在高温下各方向等价（对称），降温后却"自己选"了一个磁化方向（破缺）。正因为我们能清楚地指认"哪个对称被打破了、破缺出了什么序"，说明对称是真实的<strong>出发点</strong>，而非事后美化。破缺的存在，反而是对称为真的最强证据（后面「对称性破缺与秩序」一期会专讲）。</div></details>
+
+  <details><summary>如果"更多即不同"，那就算找到"万物理论（TOE）"，它能带来什么、又不能带来什么？</summary>
+  <div class="body"><strong>先说 TOE 是什么</strong>：万物理论（Theory of Everything）指一套能把自然界<strong>四种基本力</strong>（引力、电磁力、强核力、弱核力）和所有基本粒子统一进同一框架的终极理论。如今标准模型已统一了后三种，唯独<strong>引力</strong>还没能和量子力学融合——弦论、圈量子引力都是尝试，但都未被实验证实。<br>
+  就算 TOE 真被找到，它会给出最底层的"字母表"，是了不起的还原论胜利；但它<strong>不会</strong>自动告诉你湍流怎么走、蛋白质怎么折叠、意识怎么产生——这些是涌现层的问题，答案在"很多"的组织方式里，不在基本粒子清单里。TOE 是终点也是起点：它结束了"最底层是什么"的追问，却几乎不触及物理学一大半（涌现）的内容。</div></details>
+
+  <details><summary>有效理论说每个尺度有自己的定律——那"最底层"真的存在吗？还是无限层的乌龟叠乌龟？</summary>
+  <div class="body">这是开放问题。一种可能：存在一个基础尺度（如普朗克尺度），下面没有"更微观"了。另一种可能：有效理论一层套一层，永远有下一层，"基本"只是"我们目前探到的最深处"。有趣的是，<strong>有效理论框架本身并不需要知道答案</strong>——它专门设计成"不管下层是什么，本层照样自洽"，这正是它强大也是它谦逊的地方。</div></details>
+
+  <details><summary>Wigner 之谜：数学的有效性，是宇宙本身的性质，还是人脑进化出来的适配？</summary>
+  <div class="body">两种立场都有人守。<strong>宇宙侧</strong>：世界本就有数学结构，我们是在发现它（这是数学柏拉图主义的立场）。<strong>人脑侧</strong>：我们的数学是从对这个世界的经验里长出来的，当然"恰好"适配——就像鞋合脚是因为照脚做的。也许真相在中间：数学是人造工具，但能有效，是因为宇宙确实有可被压缩的规律性。这个问题没有共识，但值得你在学每一条定律时回头咂摸。</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>延伸阅读</h2>
+  <ul>
+    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 52 章「对称性与物理定律」——直觉起点</li>
+    <li>Emmy Noether，1918 定理——对称性 ↔ 守恒律的原始来源</li>
+    <li>P. W. Anderson，<em>"More is Different"</em>，<em>Science</em> 1972——涌现的经典宣言</li>
+    <li>E. Wigner，<em>"The Unreasonable Effectiveness of Mathematics in the Natural Sciences"</em>，1960</li>
+    <li>Sean Carroll，<em>The Biggest Ideas in the Universe</em> / 3Blue1Brown——可视化直觉</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
