@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理：最小作用量 · Day 4</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>最小作用量</h1>
+  <div class="meta">Day 4 · 2026 · Phase A 经典力学的骨架</div>
+  <div class="tagline">自然像早有打算——在无穷多条可能的路里，它总"挑"出让某个叫「作用量」的数取极值的那一条。这不是宿命论，是全物理最深的一条统一线索。</div>
+</header>
+
+<div class="intro">
+前几期都在逐力、逐守恒地看世界。现在换一个惊人的视角：给定起点和终点，自然仿佛在<b>所有可能路径</b>里"比较"了一遍，然后走了让一个叫<b>作用量</b>的量取极小（严格说是驻定）的那一条。光走最省时的路、行星走该走的轨道，连相对论和量子场都能从同一句话推出来。这一期讲这条把整个物理拧成一股的主线——从费马、拉格朗日到费曼的路径积分——以及它为什么和机器学习的"优化"是同一个念头。四张卡：自然挑路径、拉格朗日的记账、一句话统一物理、以及量子如何解释"它凭什么知道要挑"。
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>自然"挑"出一条路 <span class="en">Nature Picks a Path — Fermat</span></h2>
+  <span class="pill">变分原理 · 费马 1662</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  沙滩上的救生员要救水里的人：<strong>笔直冲过去并不是最快的</strong>，因为在水里游得慢。聪明的做法是在沙滩上多跑几步、少游一点，走一条<strong>折线</strong>。光正是这么干的——从空气射进玻璃会拐弯（折射），拐的角度恰好让<strong>总用时最短</strong>。费马 1662 年一句话说穿：光走的是<strong>用时驻定（通常最短）</strong>的那条路。不是光"想"省时间，而是整个物理都能这么描述。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  把"总用时"——更一般地叫<strong>作用量</strong>——写成沿路径累加的一个数，自然选的那条让它取极值。折射里这个数就是时间 <var>T</var> = ∫ d<var>s</var>/<var>v</var>（在慢介质里速度 <var>v</var> 小，就该少走那段）。你中学背的<strong>斯涅尔定律</strong> <span class="nowrap"><var>n</var><sub>1</sub> sin θ<sub>1</sub> = <var>n</var><sub>2</sub> sin θ<sub>2</sub></span> 根本不用背——它就是"总用时最短"自动吐出来的结论。</div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="折射：光走用时最短的折线而非最短的直线">
+    <!-- media tint -->
+    <rect x="40" y="30" width="540" height="95" fill="#111a2e" opacity=".5"/>
+    <rect x="40" y="125" width="540" height="95" fill="#16233d" opacity=".7"/>
+    <!-- interface -->
+    <line x1="40" y1="125" x2="580" y2="125" stroke="#56607e" stroke-width="1.5"/>
+    <!-- normal at P -->
+    <line x1="360" y1="60" x2="360" y2="190" stroke="#3a4666" stroke-width="1" stroke-dasharray="4 4"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+      <text x="440" y="52" fill="#7db0ff">快介质（空气）</text>
+      <text x="55" y="212" fill="#e6a066">慢介质（玻璃）</text>
+      <!-- points -->
+      <circle cx="110" cy="60" r="6" fill="#5b9bff"/>
+      <text x="96" y="52" text-anchor="end" fill="#dbe2f2">A</text>
+      <circle cx="500" cy="200" r="6" fill="#f0ad5a"/>
+      <text x="512" y="205" fill="#dbe2f2">B</text>
+      <circle cx="360" cy="125" r="4.5" fill="#f0f3fb"/>
+      <!-- straight (naive shortest) path -->
+      <line x1="110" y1="60" x2="500" y2="200" stroke="#5b6480" stroke-width="1.6" stroke-dasharray="6 5"/>
+      <text x="238" y="150" fill="#8189a6" font-size="12.5">直线：更短，却更慢</text>
+      <!-- true refracted path -->
+      <line x1="110" y1="60" x2="360" y2="125" stroke="#f0ad5a" stroke-width="2.6"/>
+      <line x1="360" y1="125" x2="500" y2="200" stroke="#f0ad5a" stroke-width="2.6"/>
+      <text x="352" y="108" text-anchor="end" fill="#f0ad5a" font-size="12.5">θ₁</text>
+      <text x="372" y="150" fill="#f0ad5a" font-size="12.5">θ₂</text>
+      <text x="300" y="238" text-anchor="middle" fill="#f0f3fb" font-weight="600">真实路径：总用时最短</text>
+    </g>
+  </svg>
+  <figcaption>笔直的路最短，却因为在慢介质里泡太久而更慢；光拐一下，在快介质多走、慢介质少走，反而总用时最短。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  <strong>最短距离</strong>和<strong>最短时间</strong>是两码事。在均匀介质里它们碰巧重合，可一旦介质不均匀（光速变了），二者立刻分家——自然认的是<strong>时间（作用量）</strong>，不是距离。这一步把"力推着光走"换成了"光在比较所有路"，看世界的视角天翻地覆：不再问"每一刻受什么力"，而问"整条路让哪个量取了极值"。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 工程 / 生物</span>
+  透镜、光纤的设计全建立在费马原理上——把玻璃形状调到让所有光线"同时到达"，就聚成一个焦点。自然界也反复用这一招：蚂蚁觅食踩出的近似最短路、河流改道、闪电劈下的锯齿路径，都能读成某种<strong>"代价最小"的路径选择</strong>。"走代价最省的路"是自然一再复用的同一个模板。</div>
+
+  <div class="punch">
+    <div class="one">一句话：自然不走最短的路，走"代价"最省的路。</div>
+    <div class="q"><b>思考：</b>如果水里游得和沙滩上跑得一样快，救生员的折线还会拐吗？</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>拉格朗日的记账：作用量是什么 <span class="en">Lagrangian: the Ledger of Action</span></h2>
+  <span class="pill">分析力学 · 拉格朗日 1788</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  牛顿让你<strong>逐点算力</strong>：这一刻受多大力、往哪加速，一步步推。拉格朗日换了个记账法：只盯两样东西——运动的"劲"（<strong>动能 <var>T</var></strong>）和位置的"势"（<strong>势能 <var>V</var></strong>），把它们的<strong>差 <var>T</var>−<var>V</var></strong> 沿整个过程从头累加到尾，得到一个总数，叫<strong>作用量 <var>S</var></strong>。自然真正走的那条轨迹，让这个总数<strong>驻定</strong>（通常取最小）。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  定义<strong>拉格朗日量</strong> <var>L</var> = <var>T</var> − <var>V</var>（动能<strong>减</strong>势能，注意是减不是加）。作用量是它沿时间的累加：
+  <div class="eq"><var>S</var> = ∫ <var>L</var> d<var>t</var> = ∫ (<var>T</var> − <var>V</var>) d<var>t</var></div>
+  <div class="gloss">∫ 是"累加/积分"号（把每一小段 <var>L</var>·d<var>t</var> 加起来），<var>T</var> 是动能、<var>V</var> 是势能，d<var>t</var> 是一小段时间。真实路径满足 <span class="nowrap">δ<var>S</var> = <span class="zero">0</span></span>（读作"作用量的<strong>一阶变化</strong>为零"，这个 0 是<strong>数字零</strong>）：把路径稍微挪一点点（<strong>δ</strong> 表示对整条路径的微小变形），<var>S</var> 几乎不变——就像在谷底，往哪个方向偏一点，高度都基本不动。从 δ<var>S</var>=0 能推出<strong>欧拉–拉格朗日方程</strong>，它和 <span class="nowrap"><var>F</var>=<var>m</var><var>a</var></span> 完全等价，却不必先把力一个个分解出来。</div>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 620 230" role="img" aria-label="真实路径让作用量驻定：邻近的变形路径作用量都更大">
+    <!-- endpoints -->
+    <circle cx="70" cy="175" r="6" fill="#5b9bff"/>
+    <text x="60" y="197" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">起点</text>
+    <circle cx="555" cy="80" r="6" fill="#f0ad5a"/>
+    <text x="555" y="70" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">终点</text>
+    <!-- varied paths (grey dashed) -->
+    <path d="M70,175 C230,60 360,70 555,80" fill="none" stroke="#5b6480" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <path d="M70,175 C240,175 400,150 555,80" fill="none" stroke="#5b6480" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <!-- true path (amber solid) -->
+    <path d="M70,175 C250,120 380,105 555,80" fill="none" stroke="#f0ad5a" stroke-width="2.8"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+      <text x="250" y="95" fill="#8189a6" font-size="12.5">变形路径（S 更大）</text>
+      <text x="300" y="190" fill="#8189a6" font-size="12.5">变形路径（S 更大）</text>
+      <text x="300" y="132" fill="#f0ad5a" font-weight="600">真实路径　δS = 0</text>
+    </g>
+  </svg>
+  <figcaption>起点终点固定，任你怎么把中间那条路捏来捏去，作用量都会变大；唯独真实轨迹处在"谷底"，微小变形一阶不变。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  为什么是 <var>T</var> <strong>减</strong> <var>V</var>，不是加（加起来那是总能量）？这是最卡人的一步。直觉上：自然既想让<strong>动能别太剧烈</strong>（<var>T</var> 尽量小），又想让物体<strong>尽快"下坡"释放势能</strong>（<var>V</var> 尽量早点变小）。<var>T</var>−<var>V</var> 的累加取最小，正是这两个愿望的<strong>最佳折中</strong>。真实轨迹，是"能量账本"在时间上摊得最平顺的那一条。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  这套数学叫<strong>变分法（calculus of variations）</strong>——在"所有可能的函数/路径"里，挑出让某个积分（泛函）取极值的那一个。机器学习的整个训练就是同一件事：在<strong>所有可能的参数配置</strong>里，找让<strong>损失函数</strong>最小的那组。物理的 δ<var>S</var>=0 和深度学习的 ∇Loss=0 是<strong>同一个数学动作</strong>，只是一个发生在路径空间、一个发生在参数空间。</div>
+
+  <div class="punch">
+    <div class="one">一句话：自然是个极简主义会计，只让 T−V 的总账驻定。</div>
+    <div class="q"><b>思考：</b>F=ma 和 δS=0 完全等价，为什么物理学家越往后越偏爱后者？</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>一句话统一整个物理 <span class="en">One Sentence for All of Physics</span></h2>
+  <span class="pill">作用量原理 · 统一</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  最小作用量最惊人的地方，不在力学本身，而在于——<strong>几乎每一条基本物理定律，都能写成"某个作用量驻定"</strong>。你只要换一个 <var>L</var> 的具体形式，同一句 δ<var>S</var>=0 就分别吐出光学、牛顿力学、电磁场、广义相对论、甚至量子场论。现代物理学家找新理论，往往不再猜"力是什么"，而是猜"<strong>作用量长什么样</strong>"。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  每个领域有它自己的拉格朗日量，可<strong>语法完全一样</strong>：写下 <span class="nowrap"><var>S</var>=∫<var>L</var> d<var>t</var></span>，令 δ<var>S</var>=0，就得到该领域的运动方程。换 <var>L</var>，不换那套动作。</div>
+
+  <figure>
+  <svg viewBox="0 0 640 250" role="img" aria-label="同一句作用量原理，换不同的拉格朗日量，导出各领域的定律">
+    <!-- root -->
+    <rect x="228" y="18" width="184" height="42" rx="9" fill="#2a2214" stroke="#6a5326"/>
+    <text x="320" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#f0ad5a">作用量原理</text>
+    <text x="320" y="54" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#e6a066">δS = 0</text>
+    <!-- trunk down -->
+    <line x1="320" y1="60" x2="320" y2="92" stroke="#56607e" stroke-width="1.6"/>
+    <!-- horizontal bus -->
+    <line x1="95" y1="92" x2="545" y2="92" stroke="#56607e" stroke-width="1.6"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+      <!-- five branches -->
+      <g>
+        <line x1="95" y1="92" x2="95" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="35" y="120" width="120" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="95" y="141" text-anchor="middle" fill="#dbe2f2">光学</text>
+        <text x="95" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">费马 · 最短时间</text>
+      </g>
+      <g>
+        <line x1="207" y1="92" x2="207" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="168" y="120" width="118" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="227" y="141" text-anchor="middle" fill="#dbe2f2">牛顿力学</text>
+        <text x="227" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">L = T − V</text>
+      </g>
+      <g>
+        <line x1="320" y1="92" x2="320" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="299" y="120" width="118" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="358" y="141" text-anchor="middle" fill="#dbe2f2">电磁场</text>
+        <text x="358" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">麦克斯韦</text>
+      </g>
+      <g>
+        <line x1="433" y1="92" x2="433" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="430" y="120" width="118" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="489" y="141" text-anchor="middle" fill="#dbe2f2">广义相对论</text>
+        <text x="489" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">时空弯曲</text>
+      </g>
+      <g>
+        <line x1="545" y1="92" x2="545" y2="188" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="500" y="188" width="120" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="560" y="209" text-anchor="middle" fill="#dbe2f2">量子场论</text>
+        <text x="560" y="228" text-anchor="middle" fill="#7db0ff" font-size="11.5">路径积分</text>
+      </g>
+    </g>
+  </svg>
+  <figcaption>同一句"δS=0"，配上不同的拉格朗日量，就分别长成光学、力学、电磁、引力与量子场——一套语法，整座物理。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">为什么重要</span>
+  这是物理学"美"与"统一"的核心来源。它还<strong>天然兼容相对论</strong>：作用量是个<strong>标量</strong>（换参考系时数值不变），所以用它写出的理论自动满足相对论要求；而力、加速度这些<strong>矢量</strong>语言，在接近光速或强引力下会互相打架。这就是为什么粒子物理、弦论几乎全用作用量语言写成——<strong>报一个新理论，往往就是报它的一行拉格朗日量</strong>。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 哲学</span>
+  "自然在优化某个量"这幅图像，历史上一再被塞进<strong>目的论</strong>（自然仿佛有"目的"）甚至神学。诚实地说：驻定原理只是和逐力描述<strong>严格等价</strong>的另一种记法，并没有多给"自然知道终点"或"心怀意图"的任何证据。别把<strong>数学的优雅</strong>误读成<strong>宇宙的意志</strong>——下一张卡的量子解释，会把这层浪漫彻底祛魅。</div>
+
+  <div class="punch">
+    <div class="one">一句话：报一个物理理论，就是报它的作用量。</div>
+    <div class="q"><b>思考：</b>如果两套不同的 L 给出完全相同的运动方程，它们算"同一个理论"吗？</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>量子如何解释"它凭什么挑" <span class="en">Why Nature "Knows" — the Path Integral</span></h2>
+  <span class="pill">路径积分 · 费曼 1948</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  经典最小作用量有个尴尬的漏洞：一个球怎么<strong>"知道"</strong>要先比较所有路径、再挑最省的那条？它又没长眼睛，也没预演。费曼 1948 年给了石破天惊的答案：粒子确实<strong>"同时走了所有路径"</strong>。每条路径带一个像<strong>小时钟指针</strong>的相位，把无穷多条路径的指针加起来——绝大多数路径彼此指向乱七八糟、<strong>相互抵消</strong>，唯独在经典路径（δ<var>S</var>=0）附近，相邻路径的相位几乎一致、指针<strong>同向叠加</strong>，活了下来。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  每条路径的贡献是 <span class="nowrap">e<sup>i<var>S</var>/ℏ</sup></span>（一个长度为 1 的复数<strong>指针</strong>，转角由该路径的作用量 <var>S</var> 决定；ℏ 是<strong>普朗克常数</strong>，一个极小的数）。总振幅 = 所有路径的指针求和。
+  <div class="gloss">因为 ℏ 极小，<var>S</var> 只要稍微变一点，指针就转好几圈。于是绝大多数地方，相邻路径的指针<strong>方向乱转、彼此抵消</strong>；只有在 <var>S</var> <strong>驻定</strong>（δ<var>S</var>=0、相邻路径相位几乎不变）的地方，指针才<strong>不打架、叠加不为零</strong>。宏观世界里，我们于是只看得到那一条经典路径。</div>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 620 240" role="img" aria-label="路径积分：非经典路径的相位指针互相抵消，只有经典路径附近同向叠加">
+    <!-- endpoints -->
+    <circle cx="60" cy="150" r="6" fill="#5b9bff"/>
+    <text x="60" y="172" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">A</text>
+    <circle cx="470" cy="150" r="6" fill="#f0ad5a"/>
+    <text x="470" y="172" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">B</text>
+    <!-- many faint paths -->
+    <path d="M60,150 C180,40 350,40 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,70 350,70 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,105 350,105 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,215 350,215 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,190 350,190 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <!-- classical path -->
+    <path d="M60,150 C180,150 350,150 470,150" fill="none" stroke="#f0ad5a" stroke-width="2.8"/>
+    <text x="265" y="143" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#f0ad5a" font-weight="600">经典路径 δS=0</text>
+    <!-- phasor insets -->
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5">
+      <!-- scattered (cancel) -->
+      <circle cx="545" cy="66" r="30" fill="#0f1626" stroke="#2b3a5e"/>
+      <line x1="545" y1="66" x2="545" y2="42" stroke="#8189a6" stroke-width="1.6"/>
+      <line x1="545" y1="66" x2="566" y2="78" stroke="#8189a6" stroke-width="1.6"/>
+      <line x1="545" y1="66" x2="524" y2="80" stroke="#8189a6" stroke-width="1.6"/>
+      <line x1="545" y1="66" x2="568" y2="56" stroke="#8189a6" stroke-width="1.6"/>
+      <text x="545" y="112" text-anchor="middle" fill="#8189a6">乱转 → 抵消</text>
+      <!-- aligned (add) -->
+      <circle cx="545" cy="180" r="30" fill="#0f1626" stroke="#6a5326"/>
+      <line x1="545" y1="180" x2="571" y2="172" stroke="#f0ad5a" stroke-width="1.8"/>
+      <line x1="545" y1="180" x2="570" y2="176" stroke="#f0ad5a" stroke-width="1.8"/>
+      <line x1="545" y1="180" x2="572" y2="180" stroke="#f0ad5a" stroke-width="1.8"/>
+      <text x="545" y="226" text-anchor="middle" fill="#e6a066">同向 → 叠加</text>
+    </g>
+  </svg>
+  <figcaption>粒子"走遍"所有路径；离经典路径远的那些，相位指针乱转、成对抵消，只有经典路径附近同向相加——它才是我们唯一看得见的那条。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  最小作用量<strong>不是一条额外的神秘定律</strong>，它是<strong>量子叠加在宏观尺度上的残影</strong>。经典力学"选最优路径"的表象，底下是量子"走遍所有路径、让不最优的那些自己抵消"。当 ℏ→0，除经典路径外的一切贡献全被干涉湮灭——这才是最小作用量真正的出处。所谓"自然在优化"，其实是<strong>"自然在干涉"</strong>。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  路径积分 = 对所有可能配置按 e<sup>i<var>S</var>/ℏ</sup> 加权求和；这和统计里的<strong>配分函数</strong>、能量模型/扩散模型里"对所有可能样本按 e<sup>−<var>E</var></sup> 加权"，是<strong>同构的数学骨架</strong>（把 i<var>S</var>/ℏ 换成 −<var>E</var> 就从量子跨到统计）。采样、变分推断、乃至扩散式生成，骨子里都在做"路径积分"式的加权求和——物理与现代生成式 AI 在这里握了手。</div>
+
+  <div class="punch">
+    <div class="one">一句话：不是自然挑了最优路径，是所有路径里只有它没被抵消。</div>
+    <div class="q"><b>思考：</b>如果 ℏ 不是极小、而是很大，我们还会看到"确定的经典轨迹"吗？</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>深入思考</h2>
+
+  <details><summary>都叫"最小"作用量，可为什么严谨的说法是"驻定"？两者差在哪？</summary>
+  <div class="body">严格的名字叫<strong>稳定作用量原理</strong>（stationary action）。<strong>驻定</strong>指一阶变分为零（δ<var>S</var>=0），它可能是极<strong>小</strong>、极<strong>大</strong>或<strong>鞍点</strong>。多数日常情形真实路径确实对应极小（所以历史上叫"最小"），但也有真实路径落在鞍点的例子（比如光经过焦点之后的某些路径）。要害不在"最小"，而在<strong>"对微小变形不敏感"</strong>——谷底、山脊顶、马鞍中心都满足：往任何方向偏一点，一阶高度都不变。费曼路径积分给出的正是"<strong>相位驻定</strong>"这个条件，和是否全局最小无关。</div></details>
+
+  <details><summary>δS=0 和牛顿的 F=ma 真的完全等价吗？有没有哪一方更根本？</summary>
+  <div class="body">对经典系统，两者<strong>数学上严格等价</strong>：从 δ<var>S</var>=0 经欧拉–拉格朗日方程能推出 <var>F</var>=<var>ma</var>，反过来也行。但"更根本"有几层意思：<strong>(1) 适用面</strong>——作用量语言能直接写场论、相对论、量子，<var>F</var>=<var>ma</var> 不能；<strong>(2) 约束处理</strong>——带约束的系统（摆、纯滚动）用拉格朗日法优雅得多，不用去解未知的约束力；<strong>(3) 物理来源</strong>——路径积分说明作用量原理有更深的<strong>量子出处</strong>，而 <var>F</var>=<var>ma</var> 没有类似的"下层解释"。所以：数学等价，地位不等价——作用量是更深的那句话。</div></details>
+
+  <details><summary>为什么偏偏是 T−V？这个减号是硬凑出来的吗？</summary>
+  <div class="body">不是硬凑，但也<strong>无法从更基本处"推导"出来</strong>——它是被"必须给出正确运动方程"这个要求<strong>反推</strong>定下来的。真正的逻辑是：我们已知正确答案（牛顿方程），再问"什么样的 <var>L</var> 能让 δ∫<var>L</var> d<var>t</var>=0 恰好复现它"，答案就是 <var>L</var>=<var>T</var>−<var>V</var>。所以 <var>T</var>−<var>V</var> 的地位像一个<strong>极其成功的定义/猜测</strong>：它的正当性来自结果，而非先验。有趣的是，这个形式换到相对论、场论时会改写（相对论自由粒子的 <var>L</var> 是 <span class="nowrap">−<var>mc</var>²√(1−<var>v</var>²/<var>c</var>²)</span>），但"写个 <var>L</var>、令 δ<var>S</var>=0"这套语法一路不变。</div></details>
+
+  <details><summary>既然粒子"走所有路径"，为什么我们从没见过一个电子同时出现在两个地方？</summary>
+  <div class="body">其实<strong>见过</strong>——双缝实验里，单个电子正是"同时走两条缝"才产生干涉条纹（后面「波函数与叠加」一期会专讲）。你"没见过"宏观物体这样，是因为它的作用量 <var>S</var> 远远大于 ℏ，非经典路径的相位转得飞快、彼此抵消得干干净净，只剩一条经典轨迹可被观测。电子质量小、作用量小，量子性才露得出来。<strong>区别只是尺度，不是原理</strong>：万物都在走所有路径，只不过大物件的"其他路径"被干涉杀得片甲不留。</div></details>
+
+  <details><summary>"自然在优化"会不会诱人相信宇宙有目的、有设计？</summary>
+  <div class="body">这是历史上真实发生过的误读——莫佩尔蒂当年就把最小作用量当作"上帝节俭"的证据。但要诚实：驻定原理和逐力描述<strong>严格等价</strong>，并不多给任何"目的"信息；而路径积分更进一步，把"优化"还原成<strong>无意识的相位干涉</strong>——没有谁在"选"，只是不最优的路径自己抵消掉了。数学上呈现出的优化形式，<strong>不蕴含任何目的论</strong>。把一种优雅的记法误当成宇宙的意图，是物理学里最常见的浪漫化陷阱之一（这也呼应「物理定律是什么」那一期：定律是压缩，不是律令）。</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>延伸阅读</h2>
+  <ul>
+    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. II 第 19 章「The Principle of Least Action」——最好的直觉入门</li>
+    <li>R. Feynman &amp; A. Hibbs，<em>Quantum Mechanics and Path Integrals</em>——路径积分的原始教材</li>
+    <li>Landau &amp; Lifshitz，<em>Mechanics</em>（理论物理教程 Vol. 1）——拉格朗日 / 哈密顿力学的经典底本</li>
+    <li>Pierre de Maupertuis（1744）&amp; Pierre de Fermat（1662）——最小作用量与最短时间的历史源头</li>
+    <li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>——作用量的现代直觉</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: The Principle of Least Action · Day 4</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>The Principle of Least Action</h1>
+  <div class="meta">Day 4 · 2026 · Phase A — The Skeleton of Classical Mechanics</div>
+  <div class="tagline">Nature seems to have made up its mind in advance — out of infinitely many possible paths it always "picks" the one that makes a number called the action take an extreme value. This isn't fatalism; it's the single deepest unifying thread in all of physics.</div>
+</header>
+
+<div class="intro">
+So far we've read the world force by force, conservation law by conservation law. Now switch to a startling viewpoint: given a start and an end, nature acts as if it <b>compared every possible path</b> and then took the one that makes a quantity called the <b>action</b> a minimum (strictly, stationary). Light takes the quickest route, a planet takes the orbit it "should," and even relativity and quantum field theory drop out of the very same sentence. This installment traces the thread that winds all of physics into one strand — from Fermat and Lagrange to Feynman's path integral — and why it is the same idea as "optimization" in machine learning. Four cards: nature picks a path, Lagrange's ledger, one sentence for all of physics, and how the quantum explains why nature "knows" to pick at all.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Nature "Picks" a Path <span class="en">Nature Picks a Path — Fermat</span></h2>
+  <span class="pill">Variational principle · Fermat 1662</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  A lifeguard on the beach has to reach someone in the water: <strong>sprinting there in a straight line isn't the fastest</strong>, because swimming is slow. The smart move is to run a bit farther on sand and swim a bit less — a <strong>bent path</strong>. Light does exactly this: passing from air into glass it bends (refraction), and the bend angle is precisely the one that makes the <strong>total travel time shortest</strong>. Fermat nailed it in 1662: light takes the path of <strong>stationary (usually least) time</strong>. Not because light "wants" to save time — but because all of physics can be described this way.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Write "total travel time" — more generally, the <strong>action</strong> — as a number accumulated along the path; nature takes the path that makes it extreme. For refraction that number is the time <var>T</var> = ∫ d<var>s</var>/<var>v</var> (in the slow medium <var>v</var> is small, so you should traverse less of it). The <strong>Snell's law</strong> you memorized, <span class="nowrap"><var>n</var><sub>1</sub> sin θ<sub>1</sub> = <var>n</var><sub>2</sub> sin θ<sub>2</sub></span>, needs no memorizing — it falls out automatically from "least total time."</div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="Refraction: light takes the least-time bent path, not the shortest straight one">
+    <rect x="40" y="30" width="540" height="95" fill="#111a2e" opacity=".5"/>
+    <rect x="40" y="125" width="540" height="95" fill="#16233d" opacity=".7"/>
+    <line x1="40" y1="125" x2="580" y2="125" stroke="#56607e" stroke-width="1.5"/>
+    <line x1="360" y1="60" x2="360" y2="190" stroke="#3a4666" stroke-width="1" stroke-dasharray="4 4"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+      <text x="440" y="52" fill="#7db0ff">Fast medium (air)</text>
+      <text x="55" y="212" fill="#e6a066">Slow medium (glass)</text>
+      <circle cx="110" cy="60" r="6" fill="#5b9bff"/>
+      <text x="96" y="52" text-anchor="end" fill="#dbe2f2">A</text>
+      <circle cx="500" cy="200" r="6" fill="#f0ad5a"/>
+      <text x="512" y="205" fill="#dbe2f2">B</text>
+      <circle cx="360" cy="125" r="4.5" fill="#f0f3fb"/>
+      <line x1="110" y1="60" x2="500" y2="200" stroke="#5b6480" stroke-width="1.6" stroke-dasharray="6 5"/>
+      <text x="95" y="180" fill="#8189a6" font-size="12">Straight: shorter, yet slower</text>
+      <line x1="110" y1="60" x2="360" y2="125" stroke="#f0ad5a" stroke-width="2.6"/>
+      <line x1="360" y1="125" x2="500" y2="200" stroke="#f0ad5a" stroke-width="2.6"/>
+      <text x="352" y="108" text-anchor="end" fill="#f0ad5a" font-size="12.5">θ₁</text>
+      <text x="372" y="150" fill="#f0ad5a" font-size="12.5">θ₂</text>
+      <text x="300" y="238" text-anchor="middle" fill="#f0f3fb" font-weight="600">True path: least total time</text>
+    </g>
+  </svg>
+  <figcaption>The straight route is shortest, yet slow because it lingers too long in the slow medium; by bending — more travel in the fast medium, less in the slow — light minimizes the total time.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  <strong>Shortest distance</strong> and <strong>shortest time</strong> are two different things. In a uniform medium they happen to coincide, but the moment the medium is non-uniform (the speed of light changes) they split — and nature honors <strong>time (the action)</strong>, not distance. That single step swaps "a force pushing the light along" for "the light comparing every path," and it turns your whole way of seeing upside down: stop asking "what force acts at each instant" and start asking "which quantity does the whole path make extreme."</div>
+
+  <div class="field xref"><span class="lab">Cross-read · Engineering / Biology</span>
+  Lenses and optical fibers are designed entirely on Fermat's principle — shape the glass so all rays "arrive at the same time," and they focus to a point. Nature reuses the trick everywhere: the near-shortest trails ants beat out foraging, a river re-routing its course, the jagged path of a lightning strike — all readable as some kind of <strong>least-cost path selection</strong>. "Take the cheapest route" is a template nature runs again and again.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: nature doesn't take the shortest path — it takes the cheapest one.</div>
+    <div class="q"><b>Ponder:</b> If swimming were exactly as fast as running on sand, would the lifeguard's path still bend?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>Lagrange's Ledger: What the Action Is <span class="en">Lagrangian: the Ledger of Action</span></h2>
+  <span class="pill">Analytical mechanics · Lagrange 1788</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Newton makes you <strong>compute forces point by point</strong>: how much force right now, which way the acceleration, step after step. Lagrange switched the bookkeeping. Watch just two things — the "vigor" of the motion (<strong>kinetic energy <var>T</var></strong>) and the "potential" of the position (<strong>potential energy <var>V</var></strong>) — take their <strong>difference <var>T</var>−<var>V</var></strong>, and add it up along the whole process from start to finish. That total is the <strong>action <var>S</var></strong>. The trajectory nature actually follows makes this total <strong>stationary</strong> (usually a minimum).</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Define the <strong>Lagrangian</strong> <var>L</var> = <var>T</var> − <var>V</var> (kinetic <strong>minus</strong> potential — note it's a minus, not a plus). The action is its accumulation over time:
+  <div class="eq"><var>S</var> = ∫ <var>L</var> d<var>t</var> = ∫ (<var>T</var> − <var>V</var>) d<var>t</var></div>
+  <div class="gloss">∫ is the "accumulate / integrate" sign (sum up each little <var>L</var>·d<var>t</var>), <var>T</var> is kinetic energy, <var>V</var> potential energy, d<var>t</var> a short slice of time. The true path satisfies <span class="nowrap">δ<var>S</var> = <span class="zero">0</span></span> (read: "the <strong>first-order change</strong> of the action is zero"; that 0 is the <strong>number zero</strong>): nudge the path a tiny bit (<strong>δ</strong> means a small deformation of the whole path) and <var>S</var> barely changes — just as at the bottom of a valley, wobble in any direction and the height is nearly unchanged. From δ<var>S</var>=0 you derive the <strong>Euler–Lagrange equation</strong>, fully equivalent to <span class="nowrap"><var>F</var>=<var>m</var><var>a</var></span> — yet without ever resolving the forces one by one.</div>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 620 230" role="img" aria-label="The true path makes the action stationary: nearby deformed paths all have larger action">
+    <circle cx="70" cy="175" r="6" fill="#5b9bff"/>
+    <text x="60" y="197" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">Start</text>
+    <circle cx="555" cy="80" r="6" fill="#f0ad5a"/>
+    <text x="555" y="70" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">End</text>
+    <path d="M70,175 C230,60 360,70 555,80" fill="none" stroke="#5b6480" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <path d="M70,175 C240,175 400,150 555,80" fill="none" stroke="#5b6480" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <path d="M70,175 C250,120 380,105 555,80" fill="none" stroke="#f0ad5a" stroke-width="2.8"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+      <text x="250" y="95" fill="#8189a6" font-size="12.5">Deformed path (larger S)</text>
+      <text x="300" y="190" fill="#8189a6" font-size="12.5">Deformed path (larger S)</text>
+      <text x="300" y="132" fill="#f0ad5a" font-weight="600">True path　δS = 0</text>
+    </g>
+  </svg>
+  <figcaption>With the endpoints pinned, twist the middle of the path however you like and the action grows; only the true trajectory sits at the "valley floor," first-order-unchanged under a small deformation.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Why <var>T</var> <strong>minus</strong> <var>V</var>, not plus (their sum is total energy)? This is the step that trips everyone. Intuitively: nature wants the <strong>motion not to be too violent</strong> (<var>T</var> small) and the object to <strong>"go downhill" and release potential energy sooner</strong> (<var>V</var> small early). Minimizing the accumulated <var>T</var>−<var>V</var> is exactly the <strong>best compromise</strong> between those two wishes. The true trajectory is the one that spreads the "energy ledger" most smoothly across time.</div>
+
+  <div class="field xref"><span class="lab">Cross-read · AI</span>
+  This math is the <strong>calculus of variations</strong> — out of "all possible functions/paths," pick the one that makes some integral (functional) extreme. The entire training of a machine-learning model is the same act: out of <strong>all possible parameter settings</strong>, find the one that minimizes the <strong>loss function</strong>. Physics' δ<var>S</var>=0 and deep learning's ∇Loss=0 are the <strong>same mathematical move</strong> — one over path space, the other over parameter space.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: nature is a minimalist accountant — it only makes the T−V ledger stationary.</div>
+    <div class="q"><b>Ponder:</b> F=ma and δS=0 are exactly equivalent — so why do physicists lean harder on the latter the further they go?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>One Sentence for All of Physics <span class="en">One Sentence for All of Physics</span></h2>
+  <span class="pill">Action principle · unification</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  The most astonishing thing about least action isn't mechanics itself — it's that <strong>nearly every fundamental law of physics can be written as "some action is stationary."</strong> Swap in a different concrete form of <var>L</var>, and the very same sentence δ<var>S</var>=0 spits out, in turn, optics, Newtonian mechanics, the electromagnetic field, general relativity, even quantum field theory. Modern physicists hunting for a new theory rarely guess "what is the force" anymore — they guess "<strong>what does the action look like</strong>."</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Each domain has its own Lagrangian, but the <strong>grammar is identical</strong>: write <span class="nowrap"><var>S</var>=∫<var>L</var> d<var>t</var></span>, set δ<var>S</var>=0, and out come that domain's equations of motion. Change <var>L</var>, not the move.</div>
+
+  <figure>
+  <svg viewBox="0 0 640 250" role="img" aria-label="One action principle; swap the Lagrangian and derive each domain's laws">
+    <rect x="228" y="18" width="184" height="42" rx="9" fill="#2a2214" stroke="#6a5326"/>
+    <text x="320" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#f0ad5a">Action principle</text>
+    <text x="320" y="54" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#e6a066">δS = 0</text>
+    <line x1="320" y1="60" x2="320" y2="92" stroke="#56607e" stroke-width="1.6"/>
+    <line x1="95" y1="92" x2="545" y2="92" stroke="#56607e" stroke-width="1.6"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+      <g>
+        <line x1="95" y1="92" x2="95" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="35" y="120" width="120" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="95" y="141" text-anchor="middle" fill="#dbe2f2">Optics</text>
+        <text x="95" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">Fermat · least time</text>
+      </g>
+      <g>
+        <line x1="207" y1="92" x2="207" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="168" y="120" width="118" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="227" y="141" text-anchor="middle" fill="#dbe2f2">Newton's laws</text>
+        <text x="227" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">L = T − V</text>
+      </g>
+      <g>
+        <line x1="320" y1="92" x2="320" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="299" y="120" width="118" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="358" y="141" text-anchor="middle" fill="#dbe2f2">EM field</text>
+        <text x="358" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">Maxwell</text>
+      </g>
+      <g>
+        <line x1="433" y1="92" x2="433" y2="120" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="430" y="120" width="118" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="489" y="141" text-anchor="middle" fill="#dbe2f2">Gen. relativity</text>
+        <text x="489" y="160" text-anchor="middle" fill="#7db0ff" font-size="11.5">curved spacetime</text>
+      </g>
+      <g>
+        <line x1="545" y1="92" x2="545" y2="188" stroke="#56607e" stroke-width="1.4"/>
+        <rect x="500" y="188" width="120" height="52" rx="7" fill="#172038" stroke="#2b3a5e"/>
+        <text x="560" y="209" text-anchor="middle" fill="#dbe2f2">Quantum fields</text>
+        <text x="560" y="228" text-anchor="middle" fill="#7db0ff" font-size="11.5">path integral</text>
+      </g>
+    </g>
+  </svg>
+  <figcaption>The same "δS=0," fitted with a different Lagrangian, grows into optics, mechanics, electromagnetism, gravity, and quantum fields — one grammar, an entire physics.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This is the wellspring of physics' "beauty" and "unity." It is also <strong>natively compatible with relativity</strong>: the action is a <strong>scalar</strong> (its value doesn't change when you switch reference frames), so any theory written with it automatically meets relativity's demands — whereas the <strong>vector</strong> language of force and acceleration starts fighting itself near light speed or strong gravity. That's why particle physics and string theory are written almost entirely in the language of the action — <strong>to state a new theory is often just to state its one-line Lagrangian</strong>.</div>
+
+  <div class="field xref"><span class="lab">Cross-read · Philosophy</span>
+  The picture of "nature optimizing some quantity" has been repeatedly pressed into <strong>teleology</strong> (nature as if it had a "purpose") and even theology. Honestly: the stationary principle is merely another notation, <strong>strictly equivalent</strong> to the force-by-force description, and gives no evidence that nature "knows the endpoint" or "harbors intent." Don't misread <strong>mathematical elegance</strong> as <strong>cosmic will</strong> — the quantum account in the next card strips that romance away for good.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: to state a physical theory is to state its action.</div>
+    <div class="q"><b>Ponder:</b> If two different Lagrangians give exactly the same equations of motion, are they "the same theory"?</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>How the Quantum Explains Why Nature "Knows" <span class="en">Why Nature "Knows" — the Path Integral</span></h2>
+  <span class="pill">Path integral · Feynman 1948</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Classical least action has an awkward hole: how does a ball <strong>"know"</strong> to compare all paths first and then pick the cheapest? It has no eyes and runs no rehearsal. In 1948 Feynman gave a jaw-dropping answer: the particle really does <strong>"take every path at once."</strong> Each path carries a phase like a <strong>little clock hand</strong>, and you add up the hands of infinitely many paths — the vast majority point every which way and <strong>cancel out</strong>, while only near the classical path (δ<var>S</var>=0) do neighboring paths share nearly the same phase, so their hands <strong>line up and add</strong>. That one survives.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Each path contributes <span class="nowrap">e<sup>i<var>S</var>/ℏ</sup></span> (a unit-length complex <strong>hand</strong> whose turn angle is set by that path's action <var>S</var>; ℏ is <strong>Planck's constant</strong>, a tiny number). The total amplitude is the sum of all the hands.
+  <div class="gloss">Because ℏ is tiny, a slight change in <var>S</var> spins the hand around many turns. So almost everywhere neighboring paths' hands <strong>whirl in all directions and cancel</strong>; only where <var>S</var> is <strong>stationary</strong> (δ<var>S</var>=0, so neighboring phases barely differ) do the hands <strong>stop fighting and add up to nonzero</strong>. In the macroscopic world we therefore see only that one classical path.</div>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 620 240" role="img" aria-label="Path integral: off-classical paths' phase hands cancel, only near the classical path do they add">
+    <circle cx="60" cy="150" r="6" fill="#5b9bff"/>
+    <text x="60" y="172" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">A</text>
+    <circle cx="470" cy="150" r="6" fill="#f0ad5a"/>
+    <text x="470" y="172" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" fill="#dbe2f2">B</text>
+    <path d="M60,150 C180,40 350,40 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,70 350,70 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,105 350,105 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,215 350,215 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,190 350,190 470,150" fill="none" stroke="#39435f" stroke-width="1.2"/>
+    <path d="M60,150 C180,150 350,150 470,150" fill="none" stroke="#f0ad5a" stroke-width="2.8"/>
+    <text x="265" y="143" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#f0ad5a" font-weight="600">Classical path δS=0</text>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5">
+      <circle cx="545" cy="66" r="30" fill="#0f1626" stroke="#2b3a5e"/>
+      <line x1="545" y1="66" x2="545" y2="42" stroke="#8189a6" stroke-width="1.6"/>
+      <line x1="545" y1="66" x2="566" y2="78" stroke="#8189a6" stroke-width="1.6"/>
+      <line x1="545" y1="66" x2="524" y2="80" stroke="#8189a6" stroke-width="1.6"/>
+      <line x1="545" y1="66" x2="568" y2="56" stroke="#8189a6" stroke-width="1.6"/>
+      <text x="545" y="112" text-anchor="middle" fill="#8189a6">Scramble → cancel</text>
+      <circle cx="545" cy="180" r="30" fill="#0f1626" stroke="#6a5326"/>
+      <line x1="545" y1="180" x2="571" y2="172" stroke="#f0ad5a" stroke-width="1.8"/>
+      <line x1="545" y1="180" x2="570" y2="176" stroke="#f0ad5a" stroke-width="1.8"/>
+      <line x1="545" y1="180" x2="572" y2="180" stroke="#f0ad5a" stroke-width="1.8"/>
+      <text x="545" y="226" text-anchor="middle" fill="#e6a066">Aligned → add</text>
+    </g>
+  </svg>
+  <figcaption>The particle "sweeps" every path; those far from the classical one have phase hands that whirl and cancel in pairs, and only near the classical path do they add in step — which is why it's the only one we ever see.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Least action is <strong>not an extra mysterious law</strong> — it is the <strong>afterimage of quantum superposition at macroscopic scale</strong>. Beneath classical mechanics' appearance of "picking the optimal path" is the quantum reality of "sweeping every path and letting the non-optimal ones cancel themselves." As ℏ→0, every contribution but the classical path is annihilated by interference — and that is the true origin of least action. "Nature is optimizing" is really <strong>"nature is interfering."</strong></div>
+
+  <div class="field xref"><span class="lab">Cross-read · AI</span>
+  A path integral is a sum over all possible configurations weighted by e<sup>i<var>S</var>/ℏ</sup>; that is the <strong>same skeletal math</strong> as the <strong>partition function</strong> in statistics and the "weight all possible samples by e<sup>−<var>E</var></sup>" of energy-based and diffusion models (swap i<var>S</var>/ℏ for −<var>E</var> and you cross from the quantum to the statistical). Sampling, variational inference, even diffusion generation are all, at bottom, doing a "path-integral"-style weighted sum — where physics and modern generative AI shake hands.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: nature didn't pick the optimal path — it's just the only one that wasn't cancelled out.</div>
+    <div class="q"><b>Ponder:</b> If ℏ were not tiny but large, would we still see a "definite classical trajectory"?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>It's called "least" action — so why is the rigorous statement "stationary"? What's the difference?</summary>
+  <div class="body">The precise name is the <strong>principle of stationary action</strong>. <strong>Stationary</strong> means the first-order variation vanishes (δ<var>S</var>=0); it can be a <strong>minimum</strong>, a <strong>maximum</strong>, or a <strong>saddle</strong>. In most everyday cases the true path really is a minimum (hence the historical "least"), but there are cases where the true path is a saddle (e.g. certain paths past an optical focus). What matters is not "minimum" but <strong>"insensitivity to small deformations"</strong> — a valley floor, a ridge top, and a saddle center all qualify: nudge in any direction and the height is first-order-unchanged. Feynman's path integral delivers exactly this "<strong>stationary phase</strong>" condition, with no reference to being a global minimum.</div></details>
+
+  <details><summary>Are δS=0 and Newton's F=ma really fully equivalent? Is either one more fundamental?</summary>
+  <div class="body">For a classical system they are <strong>strictly mathematically equivalent</strong>: from δ<var>S</var>=0, via the Euler–Lagrange equation, you get <var>F</var>=<var>ma</var>, and vice versa. But "more fundamental" has several senses: <strong>(1) reach</strong> — the action language directly writes field theory, relativity, and the quantum; <var>F</var>=<var>ma</var> cannot; <strong>(2) constraints</strong> — for constrained systems (a pendulum, pure rolling) the Lagrangian method is far more elegant, sparing you the unknown constraint forces; <strong>(3) physical origin</strong> — the path integral shows the action principle has a deeper <strong>quantum origin</strong>, while <var>F</var>=<var>ma</var> has no comparable "underlying explanation." So: mathematically equivalent, but not equal in status — the action is the deeper sentence.</div></details>
+
+  <details><summary>Why exactly T−V? Is the minus sign just cobbled together?</summary>
+  <div class="body">It isn't cobbled together, but it also <strong>can't be "derived" from anything more basic</strong> — it's <strong>reverse-engineered</strong> from the demand that it "produce the correct equations of motion." The real logic: we already know the right answer (Newton's equations), and we ask "what <var>L</var> makes δ∫<var>L</var> d<var>t</var>=0 reproduce it exactly," and the answer is <var>L</var>=<var>T</var>−<var>V</var>. So <var>T</var>−<var>V</var> has the status of an <strong>extremely successful definition/guess</strong>: its legitimacy comes from the result, not from a priori reasoning. Intriguingly, this form gets rewritten in relativity and field theory (the relativistic free particle's <var>L</var> is <span class="nowrap">−<var>mc</var>²√(1−<var>v</var>²/<var>c</var>²)</span>), yet the grammar "write an <var>L</var>, set δ<var>S</var>=0" never changes.</div></details>
+
+  <details><summary>If a particle "takes every path," why have we never seen an electron in two places at once?</summary>
+  <div class="body">We actually <strong>have</strong> — in the double-slit experiment a single electron "goes through both slits at once," which is exactly what produces the interference fringes (a later installment, "Wavefunction & Superposition," is devoted to it). What you've never seen is a <strong>macroscopic</strong> object do this, because its action <var>S</var> is enormously larger than ℏ, so the phases of non-classical paths spin madly and cancel cleanly, leaving one observable classical trajectory. An electron is light, its action small, so the quantum nature shows through. <strong>The difference is scale, not principle</strong>: everything takes every path — it's just that for big objects the "other paths" are wiped out by interference.</div></details>
+
+  <details><summary>Doesn't "nature is optimizing" tempt us to believe the universe has purpose or design?</summary>
+  <div class="body">This misreading really has happened in history — Maupertuis took least action as evidence of a "thrifty God." But be honest: the stationary principle is <strong>strictly equivalent</strong> to the force-by-force description and adds no "purpose" information; and the path integral goes further, reducing "optimization" to <strong>mindless phase interference</strong> — no one is "choosing," the non-optimal paths simply cancel themselves. The optimization form it displays mathematically <strong>implies no teleology</strong>. Mistaking an elegant notation for cosmic intent is one of the most common romanticizing traps in physics (echoing the "What Is a Physical Law" installment: laws are compression, not decree).</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. II, Ch. 19, "The Principle of Least Action" — the best intuitive entry point</li>
+    <li>R. Feynman &amp; A. Hibbs, <em>Quantum Mechanics and Path Integrals</em> — the original path-integral text</li>
+    <li>Landau &amp; Lifshitz, <em>Mechanics</em> (Course of Theoretical Physics, Vol. 1) — the classic on Lagrangian / Hamiltonian mechanics</li>
+    <li>Pierre de Maupertuis (1744) &amp; Pierre de Fermat (1662) — the historical roots of least action and least time</li>
+    <li>Sean Carroll, <em>The Biggest Ideas in the Universe: Space, Time, and Motion</em> — a modern intuition for the action</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
