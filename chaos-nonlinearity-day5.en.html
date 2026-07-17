@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: Chaos &amp; Nonlinearity · Day 5</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.3rem; color:var(--head); margin:16px 0}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>Chaos &amp; Nonlinearity</h1>
+  <div class="meta">Day 5 · 2026 · Phase A The Skeleton of Classical Mechanics</div>
+  <div class="tagline">Newton's equations are perfectly determined, yet they can't compute next week's weather — "determined" and "predictable" were never the same thing.</div>
+</header>
+
+<div class="intro">
+Laplace held a famous belief: given the exact position and velocity of every particle right now, one could in principle unroll the entire future. In principle he was right; in practice it shatters. A whole class of systems will diverge beyond recognition within days if their initial state differs by the width of an atom — and yet they obey <b>perfectly deterministic</b> equations. What makes long-term prediction impossible here isn't imprecise measurement or slow computers; it's the <b>nature</b> of these systems. Chaos is unpredictability born <i>inside</i> a deterministic universe. Four cards: determinism ≠ predictability, the butterfly effect and Lyapunov, the three-body problem and orbital chaos, and the universal road to chaos.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Determinism ≠ Predictability <span class="en">Determinism ≠ Predictability</span></h2>
+  <span class="pill">Nonlinear dynamics · Poincaré 1890</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  A well-wound clock, its gears meshing exactly, is fully determined about where it points next second — that's <strong>determinism</strong>. Naturally you'd think: if every step is fixed, then compute carefully enough and even the far future should follow. Chaos severs that equation: <strong>the equations are perfectly determined, yet the long-term behavior is unpredictable</strong>. Between these two sits a crack that went ignored for two centuries.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  The key word is <strong>nonlinear</strong>. In a linear system a small change in input makes only a small, proportional change in output — errors propagate obediently. In a nonlinear system the parts couple and feed back, and a tiny initial error gets <strong>amplified exponentially</strong>. Poincaré first hit this in 1890 studying the three-body problem: some orbits are so sensitive to their starting point they "can't be drawn at all." <strong>Deterministic rules + nonlinear feedback = intrinsic unpredictability</strong> — the uncertainty isn't smuggled in from outside; the system grows it itself.</div>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Unpredictable <strong>does not mean</strong> "random." We call a coin flip random because we don't know all the rules; in a chaotic system we <strong>know the rules completely</strong>, and every step of the computation is exact — yet the moment the initial value has the slightest uncertainty (in reality it always does), that speck gets exponentially blown up and drowns out all long-term information. <strong>Randomness is ignorance; chaos is sensitivity</strong> — two kinds of unpredictability with utterly different origins.</div>
+
+  <div class="field xref"><span class="lab">Cross-read · Philosophy / Engineering</span>
+  This hands Laplace's demon a suspended death sentence. Even if that hypothetical omniscient intellect truly grasped the entire present state of the universe, so long as its data has any <strong>finite</strong> precision, chaos makes its prophecy fail after a finite time. <strong>A deterministic universe need not be a predictable one</strong> — two things conflated for two hundred years, finally pulled apart. That is why "deterministic chaos," seemingly a contradiction, is actually a precise phrase.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: determined equations don't guarantee a predictable future.</div>
+    <div class="q"><b>Ponder:</b> If the initial value really could be specified with infinite precision, would a chaotic system still be "chaotic"? Why does that assumption never hold in reality?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>The Butterfly Effect &amp; Lyapunov <span class="en">The Butterfly Effect &amp; Lyapunov</span></h2>
+  <span class="pill">Lorenz 1963 · Sensitive dependence</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  In 1961 the meteorologist Lorenz, wanting to save time, restarted a "weather" run by typing an intermediate value <span class="nowrap">0.506</span> instead of the full <span class="nowrap">0.506127</span>. He'd only chopped off the fourth decimal — yet weeks of simulated weather came out <strong>completely different</strong>. This is the origin of the line "a butterfly flapping in Brazil may set off a tornado in Texas": <strong>a negligible difference in the initial conditions gets amplified by the system itself into a macroscopic fork.</strong></div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Sensitive dependence can be quantified. Take two orbits initially <var>δ</var><sub>0</sub> apart; their separation grows roughly exponentially:
+  <div class="eq"><var>δ</var>(<var>t</var>) ≈ <var>δ</var><sub>0</sub> · e<sup><var>λt</var></sup></div>
+  <div class="gloss">e is the natural constant (≈2.718), <var>t</var> is time, and <var>λ</var> (lambda) is the <strong>Lyapunov exponent</strong>, measuring how fast two orbits pull apart. The criterion is blunt: <span class="nowrap"><var>λ</var> &gt; <span class="zero">0</span></span> (this 0 is the <strong>number zero</strong>) means chaos — errors grow exponentially; the larger <var>λ</var>, the less predictable the long run.</div>
+  From this falls an iron rule — the <strong>prediction horizon</strong>: to <strong>double</strong> the span over which you can predict reliably, you must improve the initial precision not by a factor of two but <strong>exponentially</strong> (each extra e-folding of time costs you one more significant digit). That is why weather forecasts break down at around two weeks, and why <strong>no supercomputer, however mighty, can move that wall</strong> — it isn't a compute problem, it's <var>λ</var>&gt;0 itself.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 240" role="img" aria-label="Two orbits from nearly identical starts diverge exponentially over time">
+    <!-- axes -->
+    <line x1="60" y1="205" x2="588" y2="205" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="588,205 574,199 574,211" fill="#56607e"/>
+    <line x1="60" y1="30" x2="60" y2="205" stroke="#56607e" stroke-width="1.5"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#96a0ba">
+      <text x="548" y="224">time t →</text>
+      <text x="30" y="120" text-anchor="middle" transform="rotate(-90 30 120)">state</text>
+    </g>
+    <!-- prediction horizon -->
+    <line x1="398" y1="40" x2="398" y2="205" stroke="#3a4666" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="398" y="34" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" fill="#8189a6">prediction horizon</text>
+    <!-- two trajectories -->
+    <path d="M70,120 C160,95 250,142 330,116 C420,90 500,120 575,66" fill="none" stroke="#f0ad5a" stroke-width="2.6"/>
+    <path d="M70,125 C160,100 250,147 330,124 C420,106 500,152 575,162" fill="none" stroke="#5b9bff" stroke-width="2.6"/>
+    <!-- start marker -->
+    <circle cx="70" cy="122" r="5" fill="#f0f3fb"/>
+    <text x="80" y="112" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#dbe2f2">δ₀ tiny initial gap (nearly coincident)</text>
+    <!-- final gap arrow (axis-aligned vertical) -->
+    <line x1="583" y1="66" x2="583" y2="162" stroke="#cdd6ea" stroke-width="1.4"/>
+    <polygon points="583,66 578,78 588,78" fill="#cdd6ea"/>
+    <polygon points="583,162 578,150 588,150" fill="#cdd6ea"/>
+    <text x="600" y="114" font-family="Georgia,serif" font-size="13" fill="#cdd6ea" transform="rotate(90 600 114)">δ(t) blown up</text>
+  </svg>
+  <figcaption>The two orbits nearly touch at the start and obey the same determined equations; their gap widens as e<sup>λt</sup>, and past the "prediction horizon" you can no longer tell which is which.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  The butterfly effect is often sugared into "small things decide everything" or "your every choice changes the world." The physics version is far cooler: it isn't a drama of "small cause, big effect," but a statement that <strong>long-term predictive information leaks away exponentially</strong>. The butterfly did not "make" the tornado — the tornado's energy comes from the atmosphere itself; the flap merely renders details like "which day, and where" impossible to foresee in the long run. Don't read a quantitative claim about the <strong>limits of prediction</strong> as a romantic parable about destiny.</div>
+
+  <div class="field xref"><span class="lab">Cross-read · AI</span>
+  The <strong>exploding gradient</strong> in RNN training is exactly this. A recurrent network is a discrete-time dynamical system, and backpropagating the gradient through time multiplies Jacobian matrices step after step — if the system's Lyapunov exponent <var>λ</var>&gt;0 the gradient explodes as e<sup><var>λt</var></sup> (and vanishes if <var>λ</var>&lt;0). The standard fixes (gradient clipping, orthogonal initialization, pushing the spectral radius toward 1) read in dynamical language as <strong>tuning the network to the "edge of chaos," λ≈0</strong>: neither blowing up nor dying out, so information travels farthest.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: chaos doesn't magnify small things — it evaporates long-term predictive information exponentially.</div>
+    <div class="q"><b>Ponder:</b> If the weather is unpredictable beyond two weeks, why is the climate — trends over decades — predictable at all?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>The Three-Body Problem &amp; Orbital Chaos <span class="en">The Three-Body Problem &amp; Orbital Chaos</span></h2>
+  <span class="pill">Celestial mechanics · Poincaré</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Two bodies orbiting each other trace a closed ellipse — writable as a formula, its position a thousand years hence predictable exactly. This is Kepler's world, clockwork-neat. Add a <strong>third</strong> body and intuition says "just one more term, a bit more arithmetic." Poincaré proved something that stunned the whole 19th century: <strong>the three-body problem has no general closed-form solution</strong>, and many of its orbits are chaotic — starts that differ slightly are worlds apart a few loops later.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  The two-body problem is <strong>integrable</strong>: enough conserved quantities (energy, angular momentum) lock the motion into a regular orbit. The three-body problem generally is <strong>not</strong> — too few conserved quantities, so in phase space regular and chaotic orbits are <strong>interleaved like jagged teeth</strong>. The KAM theorem (Kolmogorov–Arnold–Moser) gives the fine picture: under small perturbation some regular orbits (KAM tori) survive while others shatter into a "chaotic sea." The Solar System is not a clock but a <strong>mixed system</strong> where order and chaos coexist.</div>
+
+  <figure>
+  <svg viewBox="0 0 640 240" role="img" aria-label="A regular two-body ellipse versus a chaotic three-body tangle">
+    <line x1="320" y1="24" x2="320" y2="216" stroke="#26314c" stroke-width="1.2" stroke-dasharray="5 5"/>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+      <text x="160" y="34" text-anchor="middle" fill="#7db0ff" font-weight="700">Two bodies: regular ellipse</text>
+      <text x="475" y="34" text-anchor="middle" fill="#e6a066" font-weight="700">Three bodies: chaotic tangle</text>
+    </g>
+    <!-- two-body -->
+    <ellipse cx="165" cy="128" rx="92" ry="56" fill="none" stroke="#5b9bff" stroke-width="2"/>
+    <circle cx="165" cy="128" r="9" fill="#f0ad5a"/>
+    <circle cx="257" cy="128" r="5.5" fill="#5b9bff"/>
+    <text x="165" y="215" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" fill="#8189a6">closed, predictable</text>
+    <!-- three-body tangle -->
+    <path d="M405,95 C500,55 520,150 455,175 C395,198 385,120 470,110 C545,102 520,205 445,190 C380,177 430,70 500,130 C545,168 470,205 425,155"
+          fill="none" stroke="#f0ad5a" stroke-width="1.9"/>
+    <circle cx="430" cy="88" r="7" fill="#f0ad5a"/>
+    <circle cx="512" cy="118" r="6" fill="#5b9bff"/>
+    <circle cx="452" cy="188" r="6" fill="#e6a066"/>
+    <text x="475" y="215" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" fill="#8189a6">tangled, no long-term forecast (schematic)</text>
+  </svg>
+  <figcaption>Two bodies trace an obedient ellipse; add a third and the same law of gravity weaves a never-repeating snarl — determinism unchanged, predictability gone.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  The Solar System looks steady as a clock, but that steadiness is only "approximately regular over a finite time." The planetary orbits have a <strong>positive</strong> Lyapunov exponent, with a prediction horizon of some tens of millions of years — far shorter than the Sun's lifetime. The <strong>Kirkwood gaps</strong> in the asteroid belt are fossils of orbital chaos: every orbit resonant with Jupiter has been swept clean, leaving visible slots. Beneath the appearance of stability lies order pruned again and again by chaos.</div>
+
+  <div class="field xref"><span class="lab">Cross-read · Aerospace engineering</span>
+  Chaos can also be <strong>used</strong>. By riding the <strong>unstable manifolds</strong> of a three-body gravity field, a spacecraft can transfer between orbits at almost no fuel cost — vividly dubbed the "interplanetary superhighway" (low-energy transfer). NASA's Genesis mission actually flew it. The same sensitivity is both the enemy of prediction and the friend of fuel budgets: <strong>at a chaotic crossroads, the tiniest nudge redirects an enormous orbit</strong>.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: add one more body and Newton's clock becomes a sea of chaos.</div>
+    <div class="q"><b>Ponder:</b> If the Solar System is essentially chaotic, how should we even phrase the question "why hasn't it flown apart"?</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>The Universal Road to Chaos <span class="en">The Universal Road to Chaos</span></h2>
+  <span class="pill">Logistic map · Feigenbaum 1978</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Chaos sounds like something only fiendishly complex equations deserve. Yet the plainest one-line iteration — <strong><var>x</var> → <var>r</var>·<var>x</var>·(1−<var>x</var>)</strong> (often used for the fraction of a maximum population a generation reaches) — is enough to breed full chaos. Slowly raise the parameter <var>r</var> and the system's long-term behavior passes in turn through: <strong>a steady fixed point → bouncing between two values (period 2) → 4, 8, 16… the period keeps doubling → and finally a plunge into chaos.</strong></div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  This <strong>period-doubling</strong> road into chaos hides a startling regularity: the spacing of successive bifurcations in the parameter has a ratio that tends to a fixed constant <var>δ</var> ≈ <strong>4.669</strong> — the <strong>Feigenbaum constant</strong>.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="Schematic period-doubling cascade into chaos">
+    <!-- axis -->
+    <line x1="55" y1="212" x2="588" y2="212" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="588,212 574,206 574,218" fill="#56607e"/>
+    <text x="540" y="232" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#96a0ba">parameter r →</text>
+    <line x1="55" y1="40" x2="55" y2="212" stroke="#56607e" stroke-width="1.5"/>
+    <text x="30" y="126" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" fill="#96a0ba" transform="rotate(-90 30 126)">long-term x</text>
+    <!-- chaotic band -->
+    <rect x="382" y="58" width="192" height="120" fill="#5b9bff" opacity=".12"/>
+    <g stroke="#5b9bff" stroke-width="1" opacity=".35">
+      <line x1="398" y1="60" x2="398" y2="176"/>
+      <line x1="418" y1="62" x2="418" y2="174"/>
+      <line x1="452" y1="58" x2="452" y2="178"/>
+      <line x1="470" y1="64" x2="470" y2="172"/>
+      <line x1="505" y1="60" x2="505" y2="176"/>
+      <line x1="525" y1="62" x2="525" y2="174"/>
+      <line x1="558" y1="60" x2="558" y2="176"/>
+    </g>
+    <rect x="482" y="58" width="10" height="120" fill="#0a0e1a"/>
+    <text x="487" y="52" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="10.5" fill="#8189a6">periodic window</text>
+    <!-- bifurcation tree -->
+    <g fill="none" stroke="#f0ad5a" stroke-width="2.2">
+      <path d="M60,118 C120,118 155,118 180,118"/>
+      <path d="M180,118 C215,104 245,94 300,90"/>
+      <path d="M180,118 C215,132 245,144 300,148"/>
+      <path d="M300,90 C340,84 362,80 382,79"/>
+      <path d="M300,90 C340,94 362,98 382,100"/>
+      <path d="M300,148 C340,142 362,138 382,137"/>
+      <path d="M300,148 C340,154 362,159 382,161"/>
+    </g>
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" fill="#cdd6ea">
+      <text x="115" y="108" text-anchor="middle">stable</text>
+      <text x="238" y="82" text-anchor="middle">period 2</text>
+      <text x="345" y="72" text-anchor="middle">period 4</text>
+      <text x="470" y="200" text-anchor="middle" fill="#7db0ff">chaos</text>
+    </g>
+  </svg>
+  <figcaption>As the parameter grows, a single orbit splits in two again and again — periods 2, 4, 8… ever denser — until at a finite parameter it floods into the chaos band, which still holds slivers of "periodic windows." (Schematic)</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  The most astonishing part: that 4.669 is <strong>independent of the specific equation</strong>. Whether you iterate an insect population, a dripping faucet, or a certain circuit, any "single-hump map" going to chaos by period-doubling converges to the same constant. This is <strong>universality</strong>: the details are wiped away, only a shared skeleton remains — the very same deep phenomenon as "critical exponents independent of material" in <strong>phase transitions</strong>, and behind both stands the renormalization group (the theme of phase transitions and criticality treats this in full). <strong>Chaos needs no complexity: a minimal deterministic rule suffices to generate endless, never-repeating, seemingly random behavior — and inside the chaos hides precise, predictable order.</strong></div>
+
+  <div class="field xref"><span class="lab">Cross-read · Complex systems / AI</span>
+  "Simple rules generate complex behavior" is a creed of complex-systems science, reused from cellular automata to the sandpile model to deep networks. Part of a neural network's expressive power comes from its dynamics sitting near the <strong>edge of chaos</strong>: too regular and it can't remember, too chaotic and it's unstable — memory and computation peak right at criticality (the heart of reservoir computing). And universality hints that structurally different systems may fall into the same "universality class" at their critical point — a line of thought now used to understand why wildly different network architectures behave alike.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: one line of determined iteration breeds both chaos and a universal kind of order.</div>
+    <div class="q"><b>Ponder:</b> If the universal constant inside chaos is independent of the system's details, then what exactly are we understanding when we "understand" a chaotic system?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>How do you actually tell chaos from true randomness, when both "look messy"?</summary>
+  <div class="body">You can, and the tell is <strong>low-dimensional deterministic structure</strong>. A truly random process has none; chaos, though it looks random, is embedded in a <strong>low-dimensional phase space</strong>, and from a single stream of data you can reconstruct its <strong>strange attractor</strong> (a fractal object) via time-delay embedding. Three tests: the <strong>largest Lyapunov exponent</strong> (positive for chaos), the attractor's <strong>correlation dimension</strong> (finite for chaos, and often fractional), and the power spectrum. A random signal's attractor "fills the whole space," while chaos is confined to a thin fractal. So "it looks messy" is nowhere near enough — ask whether a low-dimensional deterministic skeleton lies underneath.</div></details>
+
+  <details><summary>Does the butterfly effect mean "any tiny intervention can change the big outcome"?</summary>
+  <div class="body">No. Sensitive dependence says that <strong>within one system</strong>, two orbits from nearly identical starts pull apart; it does not promise you can <strong>steer</strong> where it goes. Quite the opposite — in a chaotic system you can't pin down the final landing point; that <em>is</em> unpredictability. Intriguingly, chaos is nonetheless <strong>controllable</strong> (the OGY method): precisely because it's so sensitive, a tiny, well-timed nudge can stabilize the system onto a periodic orbit you want. Sensitivity makes "prediction" hard but "control" both subtle and cheap — two conclusions pointing opposite ways; don't blur them together.</div></details>
+
+  <details><summary>If the long term is unpredictable, what can the science of chaotic systems even study?</summary>
+  <div class="body">It studies <strong>statistics and geometry</strong>, not point-by-point trajectories. Give up "where is it at time t" and ask instead about "the long-run probability distribution over phase space," "the attractor's shape and dimension," "the Lyapunov spectrum." These quantities are stable, reproducible, predictable. That answers the previous card's puzzle: the <strong>weather</strong> (one point on one trajectory) is not predictable long-term, but the <strong>climate</strong> (decades of statistics) is — because the latter asks about the attractor's overall shape, not a specific point on an orbit. Chaos didn't abolish science; it swapped the question from "trajectory" to "distribution."</div></details>
+
+  <details><summary>Is there chaos in quantum mechanics?</summary>
+  <div class="body">A lovely paradox. The Schrödinger equation is <strong>linear</strong>, so strictly there's no classical-style "exponential sensitive dependence" — "quantum chaos" can't just copy the definition. Research pivoted: for systems whose <strong>classical counterpart is chaotic</strong>, what does the quantum <strong>energy spectrum</strong> look like? The answer is striking — such systems' energy-level spacings follow <strong>random-matrix statistics</strong> (levels "repel" one another), whereas classically integrable systems give Poisson-distributed levels. That criterion became the cornerstone of "quantum chaology." The interface between classical chaos and quantum mechanics remains an active frontier.</div></details>
+
+  <details><summary>If the three-body problem has no general solution, how does celestial mechanics still predict eclipses and fly probes?</summary>
+  <div class="body">On two legs. First, <strong>numerical integration</strong>: over the short-to-medium term (eclipses within centuries, probe trajectories within years) the accuracy is superb, because those mission spans are <strong>far shorter</strong> than the prediction horizon. Second, <strong>perturbation theory</strong>: treat the dominant two-body motion as a baseline and add the other bodies' influence as small corrections, order by order. The crux is <strong>scale separation</strong> — chaos is a <strong>tens-of-millions-of-years</strong> long-term fate that in no way spoils <strong>short-to-medium-term</strong> high precision. The concept of a "prediction horizon" is precisely the key to knowing when to trust a forecast and when not to.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>E. Lorenz, <em>"Deterministic Nonperiodic Flow,"</em> <em>J. Atmos. Sci.</em> 1963 — the original butterfly-effect paper</li>
+    <li>James Gleick, <em>Chaos: Making a New Science</em> — the best popular history</li>
+    <li>Steven Strogatz, <em>Nonlinear Dynamics and Chaos</em> — a classic text balancing intuition and math</li>
+    <li>H. Poincaré, <em>Les méthodes nouvelles de la mécanique céleste</em> (1892) &amp; M. Feigenbaum (1978) — historical sources of the three-body problem and universality</li>
+    <li>Veritasium, <em>"This equation will change how you see the world"</em> (the logistic map) / 3Blue1Brown — visual intuition</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
