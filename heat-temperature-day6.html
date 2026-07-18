@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理：热与温度 · Day 6</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>热与温度</h1>
+  <div class="meta">Day 6 · 2026 · Phase B 热、熵与统计力学</div>
+  <div class="tagline">你摸到的「烫」，其实是亿万个分子在替你撞击皮肤——温度不是一种物质，而是<strong>运动的剧烈程度</strong>。</div>
+</header>
+
+<div class="intro">
+在有原子概念之前，人们以为热是一种能流动的<b>液体</b>（叫「热质」caloric），会从热物体倒进冷物体。这个图像错得很彻底，却出奇地好用——直到有人意识到：热根本不是一种东西，而是<b>分子乱撞的动能</b>。这一步转变，把热从化学里的神秘流体，变成了力学的直接推论。这一期我们装上三个透镜：温度到底量的是什么、热力学那几条<b>谁也绕不过</b>的定律、以及为什么<b>永动机</b>不是工程难题，而是被宇宙从原理上封死的死路。
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>温度就是分子的平均动能 <span class="en">Temperature = Mean Kinetic Energy</span></h2>
+  <span class="pill">分子运动论 · 微观图像</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  一杯热水和一杯冷水，分子完全一样，区别只在<strong>它们跑得多快</strong>。热水里的分子平均速度更高、撞得更凶；你手指感到的「烫」，就是这些高速分子密集地砸在你皮肤上传来的动能。<strong>温度不是一种储存在物体里的物质，而是分子平均动能的一个量度</strong>——冷，只是「动得慢」；热，只是「动得快」。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  对理想气体，绝对温度 <var>T</var> 与单个分子的<strong>平均平动动能</strong>成正比：
+  <div class="eq"><span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> <var>m</var><span style="font-style:italic">&#x27E8;v&sup2;&#x27E9;</span> = <span class="frac"><span class="fnum">3</span><span class="fden">2</span></span> <var>k</var><var>T</var></div>
+  <div class="gloss"><var>m</var> 是分子质量；<span class="nowrap">&#x27E8;<var>v</var>&sup2;&#x27E9;</span> 读作「速度平方的<strong>平均</strong>」（尖括号 &#x27E8; &#x27E9; 就是「取平均」），所以左边 <span class="nowrap">½<var>m</var>&#x27E8;<var>v</var>&sup2;&#x27E9;</span> 是分子的平均动能；<var>k</var> 是<strong>玻尔兹曼常数</strong>（把温度这个宏观量翻译成能量的兑换汇率，约 1.38×10⁻²³ 焦耳每开尔文）；<var>T</var> 是<strong>绝对温度</strong>，单位开尔文（K）。系数 3 来自空间的三个方向（前后、左右、上下）各分一份能量。</div>
+  这条式子把「温度」这个你能用手感到的量，和「分子跑多快」这个看不见的量，钉死成了正比。</div>
+
+  <figure>
+  <svg viewBox="0 0 620 200" role="img" aria-label="冷气体与热气体的分子速度对比">
+    <defs>
+      <marker id="varr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#7db0ff"/>
+      </marker>
+      <marker id="varrH" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#f0ad5a"/>
+      </marker>
+    </defs>
+    <!-- cold box -->
+    <rect x="24" y="30" width="250" height="150" rx="8" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.5"/>
+    <text x="149" y="20" text-anchor="middle" fill="#7db0ff" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">冷 · 低温（分子慢）</text>
+    <!-- cold molecules: short velocity vectors -->
+    <g stroke="#7db0ff" stroke-width="2">
+      <line x1="70" y1="70" x2="88" y2="64" marker-end="url(#varr)"/>
+      <line x1="150" y1="105" x2="166" y2="114" marker-end="url(#varr)"/>
+      <line x1="210" y1="60" x2="196" y2="72" marker-end="url(#varr)"/>
+      <line x1="95" y1="150" x2="110" y2="142" marker-end="url(#varr)"/>
+      <line x1="220" y1="140" x2="205" y2="150" marker-end="url(#varr)"/>
+    </g>
+    <g fill="#cdd6ea">
+      <circle cx="70" cy="70" r="5"/><circle cx="150" cy="105" r="5"/><circle cx="210" cy="60" r="5"/>
+      <circle cx="95" cy="150" r="5"/><circle cx="220" cy="140" r="5"/>
+    </g>
+    <!-- hot box -->
+    <rect x="346" y="30" width="250" height="150" rx="8" fill="#0f1626" stroke="#6a5326" stroke-width="1.5"/>
+    <text x="471" y="20" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">热 · 高温（分子快）</text>
+    <!-- hot molecules: long velocity vectors -->
+    <g stroke="#f0ad5a" stroke-width="2">
+      <line x1="392" y1="68" x2="430" y2="52" marker-end="url(#varrH)"/>
+      <line x1="470" y1="110" x2="506" y2="128" marker-end="url(#varrH)"/>
+      <line x1="540" y1="62" x2="506" y2="86" marker-end="url(#varrH)"/>
+      <line x1="410" y1="150" x2="446" y2="132" marker-end="url(#varrH)"/>
+      <line x1="548" y1="150" x2="514" y2="132" marker-end="url(#varrH)"/>
+    </g>
+    <g fill="#f4d9a8">
+      <circle cx="392" cy="68" r="5"/><circle cx="470" cy="110" r="5"/><circle cx="540" cy="62" r="5"/>
+      <circle cx="410" cy="150" r="5"/><circle cx="548" cy="150" r="5"/>
+    </g>
+  </svg>
+  <figcaption>同样的分子，同样的数量——箭头越长代表跑得越快。温度量的就是箭头的平均长度（的平方）。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  温度是<strong>平均</strong>，不是「每个分子都这么快」。哪怕是冰水，里面也有个别分子快得像沸水里的；哪怕是热汤，也有慢吞吞的分子。分子速度服从一条<strong>钟形分布</strong>（麦克斯韦–玻尔兹曼分布），温度只是决定了这口钟的<strong>宽窄和偏移</strong>。这也解释了为什么水在没烧开时就能蒸发——总有几个「超速」分子快到能挣脱液面逃逸。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  大模型采样里的 <strong>temperature（温度）</strong>参数正是借这个物理直觉：温度调高，概率分布被「摊平」，模型像高温气体一样<strong>东跳西窜、更随机</strong>；温度调到接近 0，分布收窄到只挑最可能的词，像被冻住只剩一个方向。<strong>高温 = 高熵 = 更发散</strong>，物理和采样共用同一套隐喻——这不是巧合，softmax 的公式本就是从统计物理的玻尔兹曼分布搬来的。</div>
+
+  <div class="punch">
+    <div class="one">一句话：温度不是一种东西，是分子乱撞的平均剧烈程度。</div>
+    <div class="q"><b>思考：</b>如果只有一个分子在盒子里飞，谈论它的「温度」还有意义吗？</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>热力学的几条铁律 <span class="en">The Laws of Thermodynamics</span></h2>
+  <span class="pill">热力学 · 第零到第三定律</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  热力学有意思的地方在于：它<strong>不管分子长什么样</strong>，照样给出谁也绕不过的规矩。这些定律不是从微观推来的假设，而是几百年里<strong>从没被违反过</strong>的经验总结——蒸汽机、冰箱、发电厂、你的身体，全都老老实实服从。它们被编了号，从第「零」条开始（因为第零条被发现时，第一、二定律已经叫开了，只好往前补一个零）。</div>
+
+  <div class="field"><span class="lab">机制 · 四条定律</span>
+  <strong>第零定律</strong>：如果 A 和 C 一样热、B 和 C 也一样热，那么 A 和 B 必定一样热。听着像废话，但正是它保证了「温度」这个概念<strong>能被定义</strong>——温度计之所以能用，全靠这条传递性。<br>
+  <strong>第一定律</strong>：能量守恒。热是能量的一种形式，你给系统的热 = 内能的增加 + 系统对外做的功。热不会凭空冒出，也不会凭空消失。<br>
+  <strong>第二定律</strong>：热不会自发地从冷物体流向热物体（要逆着来，就得像冰箱那样额外花功）。孤立系统的<strong>熵</strong>只增不减——这是全物理里唯一天然分辨「过去和未来」的定律（后面「熵与时间之箭」一期会专讲）。<br>
+  <strong>第三定律</strong>：绝对零度（<span class="nowrap">0 K</span>，约 −273.15°C）<strong>永远够不着</strong>，只能无限逼近。分子的运动可以越来越弱，但不可能被彻底冻停。</div>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  这几条里，只有第一定律（能量守恒）符合大多数人的直觉。真正把世界「上了发条」的是<strong>第二定律</strong>：它不禁止任何单次碰撞（每次分子相撞都是可逆的、时间反演对称的），却禁止<strong>整体</strong>朝低熵倒流。宇宙的时间之箭，不来自任何一条微观定律，而是从「概率」里涌现出来的——有序的排布太少，无序的排布太多，随机演化几乎必然滑向无序。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 生物 / 工程</span>
+  <strong>生物</strong>：生命看似在「对抗」第二定律（把混乱的养分组装成精密的你），其实没有——你靠向环境<strong>倾倒更多的熵</strong>（散热、排废）来换取体内的局部有序，总账仍在增熵。薛定谔在《生命是什么》里管这叫「以负熵为食」。<br>
+  <strong>工程</strong>：任何发动机、任何芯片都逃不掉「做功必产废热」——数据中心一半的电费花在<strong>散热</strong>上，正是第二定律在收「税」。</div>
+
+  <div class="punch">
+    <div class="one">一句话：能量守恒管「多少」，熵增管「往哪个方向」。</div>
+    <div class="q"><b>思考：</b>第零定律看似最不起眼，但少了它，「温度」这个词会失去意义吗？</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>卡诺极限：效率的天花板 <span class="en">The Carnot Limit</span></h2>
+  <span class="pill">热机 · 1824</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  热机（蒸汽机、内燃机、电厂汽轮机）干的事都一样：让热从<strong>热的地方流向冷的地方</strong>，途中抽走一部分变成有用的功。1824 年，年仅 28 岁的法国工程师卡诺问了个石破天惊的问题：<strong>不管你把机器造得多精巧，效率有没有一个谁也超不过的上限？</strong> 答案是有，而且这个上限只取决于两端的温度，跟你用什么燃料、什么材料<strong>毫无关系</strong>。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  一台工作在高温 <var>T</var><sub>h</sub> 和低温 <var>T</var><sub>c</sub> 之间的热机，效率的绝对上限（卡诺效率）是：
+  <div class="eq">&eta;<sub>max</sub> = 1 &minus; <span class="frac"><span class="fnum"><var>T</var><sub>c</sub></span><span class="fden"><var>T</var><sub>h</sub></span></span></div>
+  <div class="gloss">&eta;（读「eta」）是效率，即「变成功的那部分 ÷ 投进去的热」；<var>T</var><sub>h</sub> 是高温热源、<var>T</var><sub>c</sub> 是低温热源的<strong>绝对温度</strong>（一定用开尔文 K，不能用摄氏度）。注意等号右边这个 1 是<strong>数字 1</strong>（代表 100% 的满效率），你永远只能从它里面<strong>减去</strong>一块。只有当 <var>T</var><sub>c</sub> = 数字 <span class="zero">0</span>（绝对零度）时效率才会等于 1——而第三定律刚说了，那够不着。</div>
+  换句话说，你必须往冷的一端<strong>倒掉一部分热</strong>，这部分热是「买路钱」，不是浪费——不倒掉它，循环就没法重来。</div>
+
+  <figure>
+  <svg viewBox="0 0 560 240" role="img" aria-label="卡诺热机的能量流">
+    <defs>
+      <marker id="fl" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4 L0,8 Z" fill="#e0673f"/>
+      </marker>
+      <marker id="flb" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4 L0,8 Z" fill="#5b9bff"/>
+      </marker>
+      <marker id="flw" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"/>
+      </marker>
+    </defs>
+    <!-- hot reservoir -->
+    <rect x="150" y="18" width="260" height="40" rx="7" fill="#2a1a14" stroke="#8a4a2e"/>
+    <text x="280" y="43" text-anchor="middle" fill="#e0906f" font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">高温热源　T&#8341;（热）</text>
+    <!-- engine -->
+    <circle cx="280" cy="130" r="42" fill="#141b2e" stroke="#5b9bff" stroke-width="1.8"/>
+    <text x="280" y="126" text-anchor="middle" fill="#f0f3fb" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">热机</text>
+    <text x="280" y="145" text-anchor="middle" fill="#96a0ba" font-size="11.5" font-family="-apple-system,'Noto Sans SC',sans-serif">engine</text>
+    <!-- cold reservoir -->
+    <rect x="150" y="202" width="260" height="40" rx="7" fill="#0f1a2e" stroke="#2b5680"/>
+    <text x="280" y="227" text-anchor="middle" fill="#7db0ff" font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">低温热源　T&#8324;（冷）</text>
+    <!-- Qh in -->
+    <line x1="280" y1="60" x2="280" y2="86" stroke="#e0673f" stroke-width="6" marker-end="url(#fl)"/>
+    <text x="298" y="78" fill="#e0906f" font-size="13" font-family="Georgia,serif">Q&#8341;</text>
+    <!-- Qc out -->
+    <line x1="280" y1="174" x2="280" y2="198" stroke="#5b9bff" stroke-width="4" marker-end="url(#flb)"/>
+    <text x="298" y="192" fill="#7db0ff" font-size="13" font-family="Georgia,serif">Q&#8324;</text>
+    <!-- Work out -->
+    <line x1="322" y1="130" x2="452" y2="130" stroke="#f0ad5a" stroke-width="5" marker-end="url(#flw)"/>
+    <text x="388" y="120" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">功 W</text>
+    <text x="388" y="150" text-anchor="middle" fill="#96a0ba" font-size="11.5" font-family="-apple-system,'Noto Sans SC',sans-serif">有用输出</text>
+  </svg>
+  <figcaption>热从上往下流，途中被抽走一块变成功 W；剩下的 Q&#8324; 必须倒进冷端。抽走的比例，卡诺给了它一个铁的上限。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">为什么重要</span>
+  这是物理学里少见的<strong>「你不可能做得更好」</strong>式定理——它不告诉你怎么造机器，而是划死了所有机器的边界。它还有个惊人推论：卡诺效率与<strong>工作物质无关</strong>，用蒸汽、用空气、用任何气体都一样。这个「与细节无关」的味道，正是热力学最深的美——它暗示温度背后有个更根本的量（熵），在「统计力学」那一期会显形。</div>
+
+  <div class="punch">
+    <div class="one">一句话：热机效率的天花板，只由冷热两端的温度写死。</div>
+    <div class="q"><b>思考：</b>为什么电厂宁可用几百度的高温高压蒸汽，也不用温吞的热水来发电？</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>永动机为何是死路 <span class="en">Why Perpetual Motion Is Impossible</span></h2>
+  <span class="pill">不可能定理 · 两类永动机</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  几百年来，无数人想造一台<strong>不用喂能量就永远转下去、还能顺便干活</strong>的机器。专利局收到的这类申请多到今天直接不受理。它们无一例外失败，但败因分两种——而这两种失败，恰好对应热力学的<strong>前两条定律</strong>，堪称定律的「反证广告」。</div>
+
+  <div class="field"><span class="lab">机制 · 两类不可能</span>
+  <strong>第一类永动机</strong>：想<strong>无中生有</strong>造能量（输出的功比投入的能量多）。它违反<strong>第一定律</strong>（能量守恒）——能量的总账必须平，你不可能从空账户里取钱。<br>
+  <strong>第二类永动机</strong>：更狡猾，它<strong>不违反能量守恒</strong>，只想把环境（比如大海）里的热<strong>全部</strong>抽出来变成功、不往冷端倒任何一点。它违反<strong>第二定律</strong>——没有温差，热就没有「往下流」的方向，你抽不出功。哪怕海里有取之不尽的热能，你也没法把它白白变成功。</div>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  第二类永动机的失败最反直觉：<strong>能量并没有「用完」，它只是变得没法用了</strong>。宇宙里的能量总量守恒（第一定律），但能量的<strong>可用性</strong>在持续贬值（第二定律）——热一旦均匀摊开、没了温差，就成了「死能量」，还在那儿，却再也榨不出功。这就是「熵增」的另一副面孔，也是「宇宙热寂」这个终极图景的物理根源。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · AI / 经济</span>
+  <strong>没有免费的午餐</strong>是同一个骨架反复出现：<br>
+  <ul>
+    <li><strong>AI</strong>：机器学习的「No Free Lunch 定理」说，不存在对所有问题都最优的算法——任何优势都是拿别处的劣势换来的，正如任何功都得拿温差换；</li>
+    <li><strong>经济</strong>：市场里「无风险套利」长期不存在，等价于金融版的永动机——白拿收益的机会一出现就被抹平；</li>
+    <li><strong>计算</strong>：擦除一个比特的信息也必须付出最低能量代价（这条底线在「信息的物理」一期会讲透）——连「忘记」都不免费。</li>
+  </ul>
+  凡是宣称「零成本、净收益、可无限重复」的东西，多半藏着一台永动机，值得警惕。</div>
+
+  <div class="punch">
+    <div class="one">一句话：永动机不是造不出，是被宇宙从原理上封了死。</div>
+    <div class="q"><b>思考：</b>你的身体每天消耗能量却「维持不变」，它算不算一种永动机？差别在哪？</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>深入思考</h2>
+
+  <details><summary>负温度真的存在吗？听说有些系统的温度能「低于绝对零度」，那不是比冷还冷？</summary>
+  <div class="body">存在，但它其实<strong>比无穷高温还热</strong>，不是比绝对零度还冷——名字起坏了。诀窍在于温度的严格定义不是「分子多快」，而是「加一点能量、熵变多少」。普通系统你加能量，无序度（熵）就上升；但某些特殊系统（如自旋被外场翻转的一组磁矩）存在能量上限，当大多数粒子被推到高能态后，<strong>再加能量反而让系统更有序</strong>——熵开始下降。这时按定义温度就成了「负」的。这类系统一旦接触普通物体，热总是从它流出，所以它「比任何正温度都热」。负温度只出现在有能量上限的系统里，普通气体做不到。</div></details>
+
+  <details><summary>既然温度是分子平均动能，那真空（没有分子）有温度吗？宇宙深处冷到几度？</summary>
+  <div class="body">纯粹「空无一物」的真空谈不上温度，但宇宙深处的真空并不空——它充满了<strong>宇宙微波背景辐射</strong>（大爆炸的余晖），这是一片<strong>光子气体</strong>。光子也带能量、也有速度分布，同样可以定义温度。测出来是约 <strong>2.7 K</strong>（比绝对零度高不到 3 度）。所以「温度」这个概念不限于分子，任何能装能量、能达到热平衡的自由度——分子、光子、自旋——都能谈温度。宇宙大爆炸和微波背景会在后面专门讲。</div></details>
+
+  <details><summary>热为什么「只朝一个方向流」？每次分子碰撞明明可逆，宏观的不可逆是从哪冒出来的？</summary>
+  <div class="body">这是热力学最深的谜之一，答案是<strong>概率</strong>，不是某条被打破的微观定律。想象一盒气体，左半边热、右半边冷。让分子随机碰撞，你要它们「自己」重新分成整齐的冷热两半——不是被禁止，而是<strong>概率小到近乎为零</strong>：无序（均匀混合）的微观排布多到天文数字，有序（冷热分开）的排布凤毛麟角。系统随机游走，几乎必然从「少见的有序」滑向「常见的无序」。所以时间之箭不是宇宙额外规定的，而是大数定律的宏观投影。这正是「熵与时间之箭」一期的核心。</div></details>
+
+  <details><summary>既然卡诺效率和材料无关，为什么现实中的发动机效率还是差那么多、还在被工程师拼命优化？</summary>
+  <div class="body">卡诺效率是<strong>理想上限</strong>，前提是过程「无限慢、完全可逆、无摩擦、无热泄漏」——现实机器一条都做不到。汽车发动机的卡诺上限可能有 60% 以上，但实际热效率常在 30%–40%，差的部分被摩擦、快速膨胀带来的不可逆、以及排气和缸壁散热吃掉了。工程师优化的，正是「离卡诺上限还差多远」这段。所以卡诺定理不是说「优化没用」，而是给优化立了个<strong>永远够不到但值得逼近的靶心</strong>——知道理论极限在哪，你才知道还剩多少油水可榨。</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>延伸阅读</h2>
+  <ul>
+    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 39–45 章「气体动理论 / 热力学原理」——微观图像的直觉起点</li>
+    <li>Sadi Carnot，<em>Réflexions sur la puissance motrice du feu</em>（1824）——卡诺极限的原始来源</li>
+    <li>Erwin Schrödinger，<em>What Is Life?</em>（1944）——「以负熵为食」的经典论述</li>
+    <li>Atkins，<em>The Laws of Thermodynamics: A Very Short Introduction</em>——四条定律的通俗权威梳理</li>
+    <li>Wikipedia：<em>Kinetic theory of gases</em> / <em>Carnot's theorem</em> / <em>Maxwell–Boltzmann distribution</em></li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

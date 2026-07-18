@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: Heat &amp; Temperature · Day 6</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>Heat &amp; Temperature</h1>
+  <div class="meta">Day 6 · 2026 · Phase B — Heat, Entropy &amp; Statistical Mechanics</div>
+  <div class="tagline">The "hot" you feel is billions of molecules pummeling your skin on your behalf — temperature isn't a substance, it's <strong>how violently things are moving</strong>.</div>
+</header>
+
+<div class="intro">
+Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that poured from hot bodies into cold ones. That picture was completely wrong — yet surprisingly useful — until someone realized heat isn't a thing at all, but the <b>kinetic energy of jostling molecules</b>. That single shift turned heat from a mysterious fluid of chemistry into a direct consequence of mechanics. This installment fits three lenses: what temperature actually measures, the handful of thermodynamic laws that <b>nothing gets to bypass</b>, and why a <b>perpetual motion machine</b> isn't an engineering challenge but a dead end the universe forbids in principle.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Temperature Is Mean Kinetic Energy <span class="en">Temperature = Mean Kinetic Energy</span></h2>
+  <span class="pill">kinetic theory · the microscopic picture</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  A cup of hot water and a cup of cold water contain identical molecules; the only difference is <strong>how fast they move</strong>. In hot water the molecules are faster on average and hit harder; the "hot" your finger feels is those fast molecules slamming into your skin and dumping kinetic energy. <strong>Temperature isn't a substance stored in an object — it's a measure of the molecules' average kinetic energy.</strong> Cold just means "moving slowly"; hot just means "moving fast."</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  For an ideal gas, absolute temperature <var>T</var> is proportional to the <strong>average translational kinetic energy</strong> of a single molecule:
+  <div class="eq"><span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> <var>m</var><span style="font-style:italic">&#x27E8;v&sup2;&#x27E9;</span> = <span class="frac"><span class="fnum">3</span><span class="fden">2</span></span> <var>k</var><var>T</var></div>
+  <div class="gloss"><var>m</var> is the molecule's mass; <span class="nowrap">&#x27E8;<var>v</var>&sup2;&#x27E9;</span> reads "the <strong>average</strong> of speed-squared" (the angle brackets &#x27E8; &#x27E9; simply mean "take the average"), so the left side <span class="nowrap">½<var>m</var>&#x27E8;<var>v</var>&sup2;&#x27E9;</span> is the mean kinetic energy; <var>k</var> is <strong>Boltzmann's constant</strong> (the exchange rate that translates the macroscopic quantity "temperature" into energy, about 1.38×10⁻²³ joules per kelvin); <var>T</var> is the <strong>absolute temperature</strong> in kelvin (K). The factor of 3 comes from the three directions of space (front–back, left–right, up–down), each getting a share of the energy.</div>
+  This equation nails "temperature" — something you can feel with your hand — to "how fast the molecules move" — something you can't see — as strict proportionality.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 200" role="img" aria-label="Molecular speeds compared between a cold gas and a hot gas">
+    <defs>
+      <marker id="varr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#7db0ff"/>
+      </marker>
+      <marker id="varrH" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#f0ad5a"/>
+      </marker>
+    </defs>
+    <rect x="24" y="30" width="250" height="150" rx="8" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.5"/>
+    <text x="149" y="20" text-anchor="middle" fill="#7db0ff" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Cold · low T (slow molecules)</text>
+    <g stroke="#7db0ff" stroke-width="2">
+      <line x1="70" y1="70" x2="88" y2="64" marker-end="url(#varr)"/>
+      <line x1="150" y1="105" x2="166" y2="114" marker-end="url(#varr)"/>
+      <line x1="210" y1="60" x2="196" y2="72" marker-end="url(#varr)"/>
+      <line x1="95" y1="150" x2="110" y2="142" marker-end="url(#varr)"/>
+      <line x1="220" y1="140" x2="205" y2="150" marker-end="url(#varr)"/>
+    </g>
+    <g fill="#cdd6ea">
+      <circle cx="70" cy="70" r="5"/><circle cx="150" cy="105" r="5"/><circle cx="210" cy="60" r="5"/>
+      <circle cx="95" cy="150" r="5"/><circle cx="220" cy="140" r="5"/>
+    </g>
+    <rect x="346" y="30" width="250" height="150" rx="8" fill="#0f1626" stroke="#6a5326" stroke-width="1.5"/>
+    <text x="471" y="20" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Hot · high T (fast molecules)</text>
+    <g stroke="#f0ad5a" stroke-width="2">
+      <line x1="392" y1="68" x2="430" y2="52" marker-end="url(#varrH)"/>
+      <line x1="470" y1="110" x2="506" y2="128" marker-end="url(#varrH)"/>
+      <line x1="540" y1="62" x2="506" y2="86" marker-end="url(#varrH)"/>
+      <line x1="410" y1="150" x2="446" y2="132" marker-end="url(#varrH)"/>
+      <line x1="548" y1="150" x2="514" y2="132" marker-end="url(#varrH)"/>
+    </g>
+    <g fill="#f4d9a8">
+      <circle cx="392" cy="68" r="5"/><circle cx="470" cy="110" r="5"/><circle cx="540" cy="62" r="5"/>
+      <circle cx="410" cy="150" r="5"/><circle cx="548" cy="150" r="5"/>
+    </g>
+  </svg>
+  <figcaption>Same molecules, same count — longer arrows mean faster motion. Temperature measures the average arrow length (squared).</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Temperature is an <strong>average</strong>, not "every molecule moves this fast." Even in ice water some individual molecules are as fast as ones in boiling water; even in hot soup some crawl along. Molecular speeds follow a <strong>bell curve</strong> (the Maxwell–Boltzmann distribution), and temperature only sets that bell's <strong>width and shift</strong>. This is also why water evaporates before it boils — there are always a few "speeding" molecules fast enough to break free of the surface.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary read · AI</span>
+  The <strong>temperature</strong> parameter in large-model sampling borrows exactly this physical intuition: turn temperature up and the probability distribution gets "flattened," so the model — like a hot gas — <strong>skitters around, more random</strong>; turn it near 0 and the distribution narrows to just the most likely token, as if frozen into a single direction. <strong>High temperature = high entropy = more spread</strong>. Physics and sampling share the same metaphor — no coincidence, since softmax is lifted straight from the Boltzmann distribution of statistical physics.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: temperature isn't a thing, it's the average violence of molecular jostling.</div>
+    <div class="q"><b>Ponder:</b> If a single molecule is flying around a box, does it even make sense to talk about its "temperature"?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>The Iron Laws of Thermodynamics <span class="en">The Laws of Thermodynamics</span></h2>
+  <span class="pill">thermodynamics · zeroth to third law</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  The fascinating thing about thermodynamics is that it <strong>doesn't care what the molecules look like</strong> and still hands you rules nothing can escape. These laws aren't assumptions derived from the microscopic world — they're summaries of centuries of experience in which they were <strong>never once violated</strong>. Steam engines, refrigerators, power plants, your own body — all obey them dutifully. They're numbered starting from "zero" (the zeroth law was recognized after the first and second were already named, so a zero had to be tacked on in front).</div>
+
+  <div class="field"><span class="lab">Mechanism · four laws</span>
+  <strong>Zeroth law</strong>: if A is as hot as C and B is as hot as C, then A must be as hot as B. It sounds like a triviality, but it's precisely what lets "temperature" <strong>be defined</strong> — a thermometer works only because of this transitivity.<br>
+  <strong>First law</strong>: energy is conserved. Heat is a form of energy, and the heat you add to a system = the increase in its internal energy + the work the system does on its surroundings. Heat neither appears from nowhere nor vanishes into it.<br>
+  <strong>Second law</strong>: heat does not spontaneously flow from a colder body to a hotter one (to run it backward you must spend extra work, as a fridge does). The <strong>entropy</strong> of an isolated system only ever increases — the one law in all of physics that natively distinguishes "past" from "future" (the topic "entropy &amp; the arrow of time" is devoted to this).<br>
+  <strong>Third law</strong>: absolute zero (<span class="nowrap">0 K</span>, about −273.15°C) can <strong>never be reached</strong>, only approached without limit. Molecular motion can grow ever weaker, but can't be frozen entirely still.</div>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  Of these, only the first law (energy conservation) matches most people's intuition. What really "winds up" the world is the <strong>second law</strong>: it forbids no single collision (every molecular collision is reversible, symmetric under time reversal), yet forbids the <strong>whole</strong> from running back toward low entropy. The universe's arrow of time comes from no microscopic law at all — it emerges from <strong>probability</strong>: ordered arrangements are too few, disordered ones too many, so random evolution almost inevitably slides toward disorder.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary read · biology / engineering</span>
+  <strong>Biology</strong>: life seems to "fight" the second law (assembling messy nutrients into a precise you) — but it doesn't. You buy local order inside by <strong>dumping even more entropy</strong> into the environment (radiating heat, excreting waste); the total ledger still rises. Schrödinger called this "feeding on negative entropy" in <em>What Is Life?</em><br>
+  <strong>Engineering</strong>: every engine, every chip is stuck with "doing work must produce waste heat" — half a data center's power bill goes to <strong>cooling</strong>, the second law collecting its "tax."</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: energy conservation governs "how much," entropy governs "which way."</div>
+    <div class="q"><b>Ponder:</b> The zeroth law looks the most trivial — but without it, would the very word "temperature" lose its meaning?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>The Carnot Limit: a Ceiling on Efficiency <span class="en">The Carnot Limit</span></h2>
+  <span class="pill">heat engines · 1824</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Every heat engine (steam engine, internal-combustion engine, power-plant turbine) does the same thing: it lets heat flow <strong>from somewhere hot to somewhere cold</strong> and skims off part of it as useful work along the way. In 1824, a 28-year-old French engineer named Carnot asked an earth-shaking question: <strong>no matter how cleverly you build the machine, is there an upper bound on efficiency that no one can beat?</strong> The answer is yes — and that bound depends only on the two temperatures, with <strong>nothing to do</strong> with your fuel or your materials.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  For an engine working between a hot reservoir <var>T</var><sub>h</sub> and a cold one <var>T</var><sub>c</sub>, the absolute upper bound on efficiency (the Carnot efficiency) is:
+  <div class="eq">&eta;<sub>max</sub> = 1 &minus; <span class="frac"><span class="fnum"><var>T</var><sub>c</sub></span><span class="fden"><var>T</var><sub>h</sub></span></span></div>
+  <div class="gloss">&eta; ("eta") is efficiency, i.e. "the fraction turned into work ÷ the heat put in"; <var>T</var><sub>h</sub> is the hot reservoir and <var>T</var><sub>c</sub> the cold one, both in <strong>absolute temperature</strong> (always kelvin, K — never Celsius). Note the 1 on the right is the <strong>number 1</strong> (standing for 100% full efficiency), and you can only ever <strong>subtract</strong> a chunk from it. Efficiency equals 1 only if <var>T</var><sub>c</sub> = the number <span class="zero">0</span> (absolute zero) — which the third law just told us is out of reach.</div>
+  In other words, you must <strong>dump some heat</strong> into the cold end. That heat is a toll, not waste — without dumping it, the cycle can't run again.</div>
+
+  <figure>
+  <svg viewBox="0 0 560 240" role="img" aria-label="Energy flow through a Carnot heat engine">
+    <defs>
+      <marker id="fl" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4 L0,8 Z" fill="#e0673f"/>
+      </marker>
+      <marker id="flb" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4 L0,8 Z" fill="#5b9bff"/>
+      </marker>
+      <marker id="flw" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"/>
+      </marker>
+    </defs>
+    <rect x="150" y="18" width="260" height="40" rx="7" fill="#2a1a14" stroke="#8a4a2e"/>
+    <text x="280" y="43" text-anchor="middle" fill="#e0906f" font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">Hot reservoir　T&#8341; (hot)</text>
+    <circle cx="280" cy="130" r="42" fill="#141b2e" stroke="#5b9bff" stroke-width="1.8"/>
+    <text x="280" y="126" text-anchor="middle" fill="#f0f3fb" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">engine</text>
+    <text x="280" y="145" text-anchor="middle" fill="#96a0ba" font-size="11.5" font-family="-apple-system,'Noto Sans SC',sans-serif">heat engine</text>
+    <rect x="150" y="202" width="260" height="40" rx="7" fill="#0f1a2e" stroke="#2b5680"/>
+    <text x="280" y="227" text-anchor="middle" fill="#7db0ff" font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">Cold reservoir　T&#8324; (cold)</text>
+    <line x1="280" y1="60" x2="280" y2="86" stroke="#e0673f" stroke-width="6" marker-end="url(#fl)"/>
+    <text x="298" y="78" fill="#e0906f" font-size="13" font-family="Georgia,serif">Q&#8341;</text>
+    <line x1="280" y1="174" x2="280" y2="198" stroke="#5b9bff" stroke-width="4" marker-end="url(#flb)"/>
+    <text x="298" y="192" fill="#7db0ff" font-size="13" font-family="Georgia,serif">Q&#8324;</text>
+    <line x1="322" y1="130" x2="452" y2="130" stroke="#f0ad5a" stroke-width="5" marker-end="url(#flw)"/>
+    <text x="388" y="120" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Work W</text>
+    <text x="388" y="150" text-anchor="middle" fill="#96a0ba" font-size="11.5" font-family="-apple-system,'Noto Sans SC',sans-serif">useful output</text>
+  </svg>
+  <figcaption>Heat flows top to bottom; a slice is skimmed off as work W, and the rest, Q&#8324;, must be dumped into the cold end. Carnot put an iron ceiling on the fraction you can skim.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This is one of physics' rare <strong>"you cannot do better"</strong> theorems — it doesn't tell you how to build a machine, it fences off the boundary of all machines. It has a startling corollary too: Carnot efficiency is <strong>independent of the working substance</strong> — steam, air, any gas gives the same limit. That flavor of "independent of detail" is thermodynamics' deepest beauty; it hints that behind temperature lurks a more fundamental quantity (entropy) that will surface in the "statistical mechanics" installment.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: a heat engine's ceiling is fixed by the hot and cold temperatures alone.</div>
+    <div class="q"><b>Ponder:</b> Why would a power plant rather use several-hundred-degree high-pressure steam than lukewarm hot water to generate electricity?</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>Why Perpetual Motion Is a Dead End <span class="en">Why Perpetual Motion Is Impossible</span></h2>
+  <span class="pill">impossibility theorem · two kinds</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  For centuries, countless people tried to build a machine that <strong>runs forever without being fed energy — and does useful work on the side</strong>. Patent offices received so many such applications that today they simply refuse them. Every one failed, but for two distinct reasons — and those two failures map exactly onto the <strong>first two laws</strong> of thermodynamics, a kind of "advertisement by counterexample" for the laws.</div>
+
+  <div class="field"><span class="lab">Mechanism · two impossibilities</span>
+  <strong>Perpetual motion of the first kind</strong>: it tries to <strong>create energy from nothing</strong> (output more work than the energy put in). It violates the <strong>first law</strong> (energy conservation) — the ledger must balance; you can't withdraw from an empty account.<br>
+  <strong>Perpetual motion of the second kind</strong>: sneakier — it <strong>doesn't violate energy conservation</strong>; it merely wants to pull heat out of the environment (say, the ocean) and turn it <strong>entirely</strong> into work, dumping none into a cold end. It violates the <strong>second law</strong> — with no temperature difference, heat has no "downhill" direction, so you can't extract work. Even with an inexhaustible reservoir of heat in the sea, you can't convert it into work for free.</div>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  The failure of the second kind is the most counterintuitive: <strong>the energy hasn't been "used up" — it has merely become unusable</strong>. The total energy in the universe is conserved (first law), but the <strong>usability</strong> of energy keeps depreciating (second law) — once heat spreads out evenly with no temperature difference left, it becomes "dead energy," still there but impossible to squeeze work from. That's the other face of "rising entropy," and the physical root of the ultimate picture of the "heat death of the universe."</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary read · AI / economics</span>
+  <strong>No free lunch</strong> is the same skeleton showing up again and again:
+  <ul>
+    <li><strong>AI</strong>: machine learning's "No Free Lunch theorem" says no algorithm is optimal across all problems — any advantage is bought with a disadvantage elsewhere, just as any work must be bought with a temperature difference;</li>
+    <li><strong>Economics</strong>: "risk-free arbitrage" cannot persist long-term — the financial version of a perpetual motion machine; any chance to take profit for free gets erased the moment it appears;</li>
+    <li><strong>Computation</strong>: even erasing one bit of information must pay a minimum energy cost (this floor is nailed down in the "physics of information" installment) — even "forgetting" isn't free.</li>
+  </ul>
+  Anything claiming "zero cost, net gain, infinitely repeatable" usually hides a perpetual motion machine — worth your suspicion.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: perpetual motion isn't unbuildable — it's sealed off by the universe in principle.</div>
+    <div class="q"><b>Ponder:</b> Your body burns energy every day yet "stays the same" — is it a perpetual motion machine? Where's the difference?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>Does negative temperature really exist? Some systems can supposedly go "below absolute zero" — isn't that colder than cold?</summary>
+  <div class="body">It exists, but it's actually <strong>hotter than infinitely hot</strong>, not colder than absolute zero — the name is unfortunate. The trick is that the strict definition of temperature isn't "how fast the molecules move" but "add a bit of energy, and how much does entropy change." In ordinary systems, add energy and disorder (entropy) rises; but certain special systems (like a set of magnetic moments flipped by an external field) have an upper energy bound, and once most particles are pushed into the high-energy state, <strong>adding more energy makes the system more ordered</strong> — entropy starts to fall. By definition, temperature then becomes "negative." Such a system, on contact with an ordinary body, always gives up heat to it, so it is "hotter than any positive temperature." Negative temperature only occurs in systems with a bounded energy; an ordinary gas can't do it.</div></details>
+
+  <details><summary>If temperature is mean molecular kinetic energy, does a vacuum (no molecules) have a temperature? How cold is deep space?</summary>
+  <div class="body">A truly "empty" vacuum has no temperature to speak of, but the vacuum of deep space isn't empty — it's filled with the <strong>cosmic microwave background</strong> (the afterglow of the Big Bang), a <strong>photon gas</strong>. Photons carry energy and have a speed distribution too, so a temperature can likewise be defined. It measures about <strong>2.7 K</strong> (less than 3 degrees above absolute zero). So "temperature" isn't limited to molecules — any degree of freedom that can hold energy and reach thermal equilibrium — molecules, photons, spins — can have a temperature. The Big Bang and the microwave background get their own installment later.</div></details>
+
+  <details><summary>Why does heat only flow "one way"? Every molecular collision is reversible — where does macroscopic irreversibility come from?</summary>
+  <div class="body">This is one of thermodynamics' deepest puzzles, and the answer is <strong>probability</strong>, not some broken microscopic law. Picture a box of gas, hot on the left, cold on the right. Let the molecules collide randomly, then ask them to "spontaneously" re-sort into neat hot and cold halves — it isn't forbidden, just <strong>overwhelmingly improbable</strong>: the disordered (evenly mixed) microscopic arrangements outnumber the ordered (hot-and-cold-separated) ones by astronomical factors. Random wandering almost inevitably slides from "rare order" to "common disorder." So the arrow of time isn't an extra rule the universe imposes — it's the macroscopic projection of the law of large numbers. This is the heart of the "entropy &amp; the arrow of time" installment.</div></details>
+
+  <details><summary>If Carnot efficiency is independent of materials, why are real engines still so far off — and why do engineers keep optimizing them?</summary>
+  <div class="body">Carnot efficiency is an <strong>ideal ceiling</strong>, assuming the process is "infinitely slow, fully reversible, frictionless, and leak-free" — real machines meet none of these. A car engine's Carnot ceiling might exceed 60%, but its actual thermal efficiency often sits at 30%–40%; the gap is eaten by friction, the irreversibility of rapid expansion, and heat lost through the exhaust and cylinder walls. What engineers optimize is exactly "how far we still are from the Carnot ceiling." So Carnot's theorem doesn't say "optimizing is pointless" — it sets a <strong>bullseye you can never quite hit but should keep approaching</strong>. Knowing where the theoretical limit lies is how you know how much juice is left to squeeze.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, Ch. 39–45 ("Kinetic Theory of Gases / Principles of Thermodynamics") — the intuitive starting point for the microscopic picture</li>
+    <li>Sadi Carnot, <em>Réflexions sur la puissance motrice du feu</em> (1824) — the original source of the Carnot limit</li>
+    <li>Erwin Schrödinger, <em>What Is Life?</em> (1944) — the classic statement of "feeding on negative entropy"</li>
+    <li>Peter Atkins, <em>The Laws of Thermodynamics: A Very Short Introduction</em> — an accessible, authoritative tour of the four laws</li>
+    <li>Wikipedia: <em>Kinetic theory of gases</em> / <em>Carnot's theorem</em> / <em>Maxwell–Boltzmann distribution</em></li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
