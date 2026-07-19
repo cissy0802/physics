@@ -48,14 +48,9 @@
   .eq .zero{font-weight:700; color:var(--blue)}
   .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
   .nowrap{white-space:nowrap}
-  figure{margin:16px 0 4px; text-align:center; cursor:zoom-in}
-  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px; cursor:auto}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
   svg{max-width:100%; height:auto}
-  .lightbox{position:fixed; inset:0; background:rgba(8,12,18,.96); z-index:9999; display:none; align-items:center; justify-content:center; padding:24px; cursor:grab; backdrop-filter:blur(4px); overflow:hidden}
-  .lightbox.open{display:flex}
-  .lightbox.dragging{cursor:grabbing}
-  .lightbox svg{width:auto; height:auto; max-width:96vw; max-height:92vh; transform-origin:center center; will-change:transform}
-  .lightbox .hint{position:fixed; top:16px; right:20px; font-size:.78rem; color:#7a8590; font-family:"SF Mono",Menlo,monospace; pointer-events:none}
   .deep{margin-top:42px}
   .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
   details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
@@ -101,22 +96,21 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
 
   <figure>
   <svg viewBox="0 0 620 200" role="img" aria-label="Molecular speeds compared between a cold gas and a hot gas">
-    <defs>
-      <marker id="varr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-        <path d="M0,0 L7,3 L0,6 Z" fill="#7db0ff"/>
-      </marker>
-      <marker id="varrH" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-        <path d="M0,0 L7,3 L0,6 Z" fill="#f0ad5a"/>
-      </marker>
-    </defs>
     <rect x="24" y="30" width="250" height="150" rx="8" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.5"/>
     <text x="149" y="20" text-anchor="middle" fill="#7db0ff" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Cold · low T (slow molecules)</text>
     <g stroke="#7db0ff" stroke-width="2">
-      <line x1="70" y1="70" x2="88" y2="64" marker-end="url(#varr)"/>
-      <line x1="150" y1="105" x2="166" y2="114" marker-end="url(#varr)"/>
-      <line x1="210" y1="60" x2="196" y2="72" marker-end="url(#varr)"/>
-      <line x1="95" y1="150" x2="110" y2="142" marker-end="url(#varr)"/>
-      <line x1="220" y1="140" x2="205" y2="150" marker-end="url(#varr)"/>
+      <line x1="70" y1="70" x2="81.4" y2="66.2"/>
+      <line x1="150" y1="105" x2="159.9" y2="110.6"/>
+      <line x1="210" y1="60" x2="201.3" y2="67.4"/>
+      <line x1="95" y1="150" x2="103.8" y2="145.3"/>
+      <line x1="220" y1="140" x2="210.8" y2="146.1"/>
+    </g>
+    <g fill="#7db0ff">
+      <polygon points="88,64 82.3,69.1 80.4,63.4"/>
+      <polygon points="166,114 158.4,113.2 161.4,108"/>
+      <polygon points="196,72 199.4,65.2 203.3,69.7"/>
+      <polygon points="110,142 105.2,147.9 102.4,142.6"/>
+      <polygon points="205,150 209.2,143.6 212.5,148.6"/>
     </g>
     <g fill="#cdd6ea">
       <circle cx="70" cy="70" r="5"/><circle cx="150" cy="105" r="5"/><circle cx="210" cy="60" r="5"/>
@@ -125,11 +119,18 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
     <rect x="346" y="30" width="250" height="150" rx="8" fill="#0f1626" stroke="#6a5326" stroke-width="1.5"/>
     <text x="471" y="20" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Hot · high T (fast molecules)</text>
     <g stroke="#f0ad5a" stroke-width="2">
-      <line x1="392" y1="68" x2="430" y2="52" marker-end="url(#varrH)"/>
-      <line x1="470" y1="110" x2="506" y2="128" marker-end="url(#varrH)"/>
-      <line x1="540" y1="62" x2="506" y2="86" marker-end="url(#varrH)"/>
-      <line x1="410" y1="150" x2="446" y2="132" marker-end="url(#varrH)"/>
-      <line x1="548" y1="150" x2="580" y2="130" marker-end="url(#varrH)"/>
+      <line x1="392" y1="68" x2="423.5" y2="54.7"/>
+      <line x1="470" y1="110" x2="499.7" y2="124.9"/>
+      <line x1="540" y1="62" x2="511.7" y2="82"/>
+      <line x1="410" y1="150" x2="439.7" y2="135.1"/>
+      <line x1="548" y1="150" x2="574.1" y2="133.7"/>
+    </g>
+    <g fill="#f0ad5a">
+      <polygon points="430,52 424.7,57.5 422.4,52"/>
+      <polygon points="506,128 498.4,127.6 501.1,122.2"/>
+      <polygon points="506,86 510,79.5 513.4,84.4"/>
+      <polygon points="446,132 441.1,137.8 438.4,132.4"/>
+      <polygon points="580,130 575.7,136.3 572.5,131.2"/>
     </g>
     <g fill="#f4d9a8">
       <circle cx="392" cy="68" r="5"/><circle cx="470" cy="110" r="5"/><circle cx="540" cy="62" r="5"/>
@@ -284,46 +285,6 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
 </div>
 
 </div>
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const lb=document.createElement('div');lb.className='lightbox';
-  lb.innerHTML='<span class="hint">scroll = zoom · drag = pan · Esc / click bg = close</span>';
-  document.body.appendChild(lb);
-  let scale=1,panX=0,panY=0,dragging=false,moved=false,lx=0,ly=0;
-  const apply=()=>{const s=lb.querySelector('svg');if(s)s.style.transform=`translate(${panX}px,${panY}px) scale(${scale})`};
-  const reset=()=>{scale=1;panX=0;panY=0};
-  const close=()=>{lb.classList.remove('open');const s=lb.querySelector('svg');if(s)s.remove();reset()};
-  document.addEventListener('click',e=>{
-    if(e.target.closest('.lightbox')){if(moved){moved=false;return}close();return}
-    const w=e.target.closest('figure');if(!w)return;
-    const svg=w.querySelector('svg');if(!svg)return;
-    const c=svg.cloneNode(true);c.removeAttribute('style');
-    c.style.maxWidth='96vw';c.style.maxHeight='92vh';
-    lb.appendChild(c);lb.classList.add('open');reset();apply();
-  });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  lb.addEventListener('wheel',e=>{
-    if(!lb.classList.contains('open'))return;
-    e.preventDefault();
-    const svg=lb.querySelector('svg');if(!svg)return;
-    const ns=Math.max(0.3,Math.min(10,scale*(1-e.deltaY*0.002)));
-    const r=svg.getBoundingClientRect();
-    const cx=e.clientX-(r.left+r.width/2),cy=e.clientY-(r.top+r.height/2);
-    const k=ns/scale-1;panX-=cx*k;panY-=cy*k;scale=ns;apply();
-  },{passive:false});
-  lb.addEventListener('mousedown',e=>{
-    if(!lb.classList.contains('open'))return;
-    dragging=true;moved=false;lx=e.clientX;ly=e.clientY;lb.classList.add('dragging');e.preventDefault();
-  });
-  document.addEventListener('mousemove',e=>{
-    if(!dragging)return;
-    const dx=e.clientX-lx,dy=e.clientY-ly;
-    if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
-    panX+=dx;panY+=dy;lx=e.clientX;ly=e.clientY;apply();
-  });
-  document.addEventListener('mouseup',()=>{dragging=false;lb.classList.remove('dragging')});
-});
-</script>
 <script src="https://hub.cissychen.com/comments.js" defer></script>
 <script src="https://hub.cissychen.com/search.js" defer></script>
 <script src="https://hub.cissychen.com/index-button.js" defer></script>

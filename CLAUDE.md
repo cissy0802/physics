@@ -29,13 +29,16 @@ TOPICS.md 是本仓选题的**唯一真相源**。以下三条每次运行都适
 
 ## 新页面必带共享脚本（免触发 inject-comments 机器人提交）
 
-生成任何 `*.html`（含 `.en.html`）时，在 `</body>` 前直接写入这 4 行，勿遗漏：
+生成任何 `*.html`（含 `.en.html`）时，在 `</body>` 前直接写入这 5 行，勿遗漏：
 
 ```html
 <script src="https://hub.cissychen.com/comments.js" defer></script>
 <script src="https://hub.cissychen.com/search.js" defer></script>
 <script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
 <script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
 ```
+
+`lightbox.js` 让 `<figure>` 里的图（`<img>` 或内联 `<svg>`）可点击放大（滚轮缩放 / 拖动平移 / Esc 关闭）。**不要再在页面里内联自己的 lightbox**，否则会和共享脚本叠加、点一次弹两层。某张图不想被放大就给它加 `class="no-zoom"`。
 
 这样 CI 的 inject-comments 不会再对新页面追加自动提交。
