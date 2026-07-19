@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: Entropy &amp; the Arrow of Time · Day 7</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>Entropy &amp; the Arrow of Time</h1>
+  <div class="meta">Day 7 · 2026 · Phase B — Heat, Entropy &amp; Statistical Mechanics</div>
+  <div class="tagline">Every molecular collision is blind to whether it's yesterday or tomorrow — yet you can tell at a glance if a film is running backward. In all of physics, only <strong>one</strong> law knows which way time points.</div>
+</header>
+
+<div class="intro">
+Write out Newton's equations, Maxwell's equations, Schrödinger's equation, and you'll notice something strange: none of them distinguishes a direction of time — swap <var>t</var> for &minus;<var>t</var> and they hold just as well. Yet in the real world cups shatter but never reassemble, ink drops spread but never gather, you age but never un-age. <b>Microscopically symmetric, macroscopically one-way.</b> Where does that gulf come from? Not from any law of force, but from something far humbler — <b>counting</b>. Whoever can count, understands the arrow of time.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Entropy Is "Counting Microstates" <span class="en">Entropy = Counting Microstates</span></h2>
+  <span class="pill">Boltzmann · 1877</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Entropy isn't a fuzzy adjective like "messiness" — it's a number you can actually <strong>count</strong>. Picture a deck of cards: the <strong>perfectly ordered</strong> sequences (spades A–K, hearts A–K…) are vanishingly few; the <strong>messy-looking</strong> ones number in the astronomical. Shuffle with your eyes shut and you'll almost never land back on order — not because "mess" has any magic, but simply because the messy arrangements <strong>outnumber the ordered ones overwhelmingly</strong>. That's exactly what entropy measures: <strong>how many microscopic arrangements are consistent with the macroscopic state you see</strong>. More arrangements, higher entropy.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Boltzmann nailed that sentence into a formula (engraved on his tombstone):
+  <div class="eq"><var>S</var> = <var>k</var> log <var>W</var></div>
+  <div class="gloss"><var>S</var> is the <strong>entropy</strong>; <var>k</var> is <strong>Boltzmann's constant</strong> (the exchange rate that converts "number of arrangements counted" into physical entropy units, about 1.38×10⁻²³ joules per kelvin); <var>W</var> is the <strong>number of microstates</strong> — how many molecule-level arrangements are fully compatible with the current macroscopic state (same temperature, pressure, color…); log is the <strong>logarithm</strong> (it crushes astronomical numbers into a manageable scale, and makes two systems' entropies simply add when combined). The core is one line: <strong>entropy = the log of "how many unseen ways there are to look like this seen state."</strong></div>
+  Because it's a log, every tenfold jump in <var>W</var> nudges <var>S</var> up only one small notch; and <var>W</var> is routinely 10 to the trillions, which is why macroscopic entropy comes out a mild, usable number.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 210" role="img" aria-label="Few ordered arrangements versus many disordered arrangements">
+    <!-- ordered box -->
+    <rect x="24" y="34" width="250" height="150" rx="8" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.5"/>
+    <text x="149" y="24" text-anchor="middle" fill="#7db0ff" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Ordered: bunched in a corner</text>
+    <g fill="#7db0ff">
+      <circle cx="52" cy="62" r="6"/><circle cx="72" cy="62" r="6"/><circle cx="92" cy="62" r="6"/>
+      <circle cx="52" cy="82" r="6"/><circle cx="72" cy="82" r="6"/><circle cx="92" cy="82" r="6"/>
+    </g>
+    <text x="149" y="170" text-anchor="middle" fill="#96a0ba" font-size="12.5" font-family="Georgia,serif">W tiny → low entropy</text>
+    <!-- disordered box -->
+    <rect x="346" y="34" width="250" height="150" rx="8" fill="#0f1626" stroke="#6a5326" stroke-width="1.5"/>
+    <text x="471" y="24" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">Disordered: filling the box</text>
+    <g fill="#f0ad5a">
+      <circle cx="372" cy="60" r="6"/><circle cx="470" cy="72" r="6"/><circle cx="558" cy="58" r="6"/>
+      <circle cx="410" cy="118" r="6"/><circle cx="525" cy="112" r="6"/><circle cx="462" cy="132" r="6"/>
+    </g>
+    <text x="471" y="170" text-anchor="middle" fill="#f4d9a8" font-size="12.5" font-family="Georgia,serif">W huge → high entropy</text>
+  </svg>
+  <figcaption>The same 6 molecules. "All bunched in one corner" has only a handful of arrangements; "spread across the box" has more than you can count. Let them collide at random and they almost inevitably slide left → right — that's entropy increase.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  Entropy is <strong>not a property an object carries</strong> — it depends on how coarsely you look. The same cup of water, if you care only about its temperature and volume, has enormous entropy (countless molecular arrangements share that one temperature); if you could somehow record every molecule's exact position and speed, that cup has exactly <strong>one</strong> microstate and entropy <span class="zero">0</span> (the number 0). Entropy measures <strong>the amount of information you're missing</strong> — it's half physics, half "what you chose to ignore." This is entropy's deepest and most misread face.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: entropy isn't "mess" — it's the log of how many ways there are to look like this.</div>
+    <div class="q"><b>Ponder:</b> If some all-knowing "demon" could track every molecule, would entropy still increase for it?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>The Many Faces of the Second Law <span class="en">The Many Faces of the Second Law</span></h2>
+  <span class="pill">thermodynamics · one law, three statements</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  The second law is the most variously-phrased statement in physics — engineers, chemists, and statisticians each state it their own way, and it sounds like three different rules. It's really <strong>three sides of the same elephant</strong>. They look unrelated yet are provably equivalent: grant any one, and the other two follow.</div>
+
+  <div class="field"><span class="lab">Mechanism · three statements</span>
+  <strong>Clausius (which way heat flows)</strong>: heat never flows spontaneously from a colder body to a hotter one. To force it uphill (a fridge, an air conditioner) you must spend work from outside — the most everyday face.<br>
+  <strong>Kelvin (the limit on work)</strong>: you cannot convert the heat of a single reservoir <strong>entirely</strong> into work with no other change. You always have to dump some into a cold sink (this is the root of the Carnot limit from the heat-and-temperature installment).<br>
+  <strong>Boltzmann (entropy increase)</strong>: the total entropy of an isolated system <strong>never decreases</strong>, <span class="nowrap">Δ<var>S</var> ≥ <span class="zero">0</span></span> (the number 0). Systems always evolve toward the macrostate with more microscopic arrangements. The first two are just concrete consequences of this one.</div>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  The second law is unlike every other law in physics: it's <strong>not an iron rule but a probabilistic one</strong>. It never says entropy <strong>cannot</strong> decrease — only that a decrease is <strong>absurdly improbable</strong>. The molecules in a cup of lukewarm water "happening" to hand all their energy to one half and split spontaneously into hot and cold sides violates no law of mechanics; it's just a probability of roughly "one in 10-to-an-astronomical-power," and waiting for it once would take vastly longer than the age of the universe. So the second law is the only one that <strong>emerges from large numbers</strong> rather than being written into the fundamental equations. With enough molecules, "almost certainly" grows as hard as iron.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary reading · biology / engineering / society</span>
+  The skeleton "order has to be paid for, and the total entropy still rises" is everywhere:<br>
+  <ul>
+    <li><strong>Biology</strong>: your body is an exquisitely ordered structure, sustained by constantly <strong>dumping waste heat and entropy</strong> into its surroundings — to be alive is to keep doing work against entropy; stop, and you rot (Schrödinger's "feeding on negative entropy");</li>
+    <li><strong>Engineering</strong>: a fridge moves heat from its cold interior into the warm kitchen — a direct demonstration of the Clausius statement. It breaks no law; it just buys that "uphill flow" with the electricity bill (external work);</li>
+    <li><strong>Society</strong>: any organization maintaining order (laws, norms, archives) has to keep pouring in energy and attention; let go, and it slides into disorder — not a coincidental metaphor, but the same counting logic.</li>
+  </ul></div>
+
+  <div class="punch">
+    <div class="one">In a sentence: which way heat flows, how much work you can extract, why entropy only rises — three faces of one law.</div>
+    <div class="q"><b>Ponder:</b> If an entropy decrease is "not impossible, just wildly improbable," why have we never seen a glass of water freeze itself and give off heat?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>The Arrow of Time: Why Broken Mirrors Don't Reassemble <span class="en">The Arrow of Time</span></h2>
+  <span class="pill">irreversibility · the past hypothesis</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Watch a clip: a drop of ink disperses through clear water. You instantly know which way is "forward" and which is "reversed" — spreading is normal, gathering back into a single drop is absurd. But here's the eerie part: <strong>every single molecular collision that makes up that process is, on its own, perfectly reversible</strong>. Two little balls collide and bounce apart; run it backward (they fly back in and collide) and it's an equally legal mechanical process — you can't tell forward from reverse. So where does that glaring macroscopic sense of direction come from?</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Again, counting. The arrangements where a thing is shattered (molecules scattered) <strong>overwhelmingly outnumber</strong> those where it's whole (molecules fitted snugly together). Under random evolution a system almost inevitably slides from "rare order" toward "common disorder" — not because reversal is forbidden, but because its probability is effectively zero. <strong>The arrow of time = the direction of increasing entropy.</strong> It isn't a fourth dimension the universe declares a flow for; it's the macroscopic projection of the law of large numbers.
+  <div class="gloss">But there's a crucial catch. "Disordered states are more numerous" alone <strong>can't</strong> give you an arrow — because the microscopic laws are symmetric, so looking toward the past, entropy should increase by the very same logic, leaving you with high-on-both-ends, low-in-the-middle: no direction at all. What actually supplies the arrow is an extra empirical fact: <strong>the universe's past sat in an extraordinarily low-entropy state</strong> (the "past hypothesis"). Given that ultra-low starting point, entropy finally has a single direction to climb. And that starting point ultimately points back to <strong>the Big Bang</strong> — why the universe began with such low entropy remains one of the deepest open puzzles in physics.</div></div>
+
+  <figure>
+  <svg viewBox="0 0 560 250" role="img" aria-label="Entropy rising monotonically with time, arrow pointing to the future">
+    <!-- axes -->
+    <line x1="60" y1="210" x2="520" y2="210" stroke="#5b6b8f" stroke-width="2"/>
+    <polygon points="534,210 520,204 520,216" fill="#5b6b8f"/>
+    <line x1="60" y1="210" x2="60" y2="30" stroke="#5b6b8f" stroke-width="2"/>
+    <polygon points="60,16 54,30 66,30" fill="#5b6b8f"/>
+    <text x="300" y="240" text-anchor="middle" fill="#96a0ba" font-size="13.5" font-family="-apple-system,'Noto Sans SC',sans-serif">time →</text>
+    <text x="34" y="120" text-anchor="middle" fill="#96a0ba" font-size="13.5" font-family="-apple-system,'Noto Sans SC',sans-serif" transform="rotate(-90 34 120)">entropy S</text>
+    <!-- entropy curve rising -->
+    <path d="M60,196 C180,188 300,120 420,72 S500,50 500,48" fill="none" stroke="#f0ad5a" stroke-width="3.5"/>
+    <!-- low-entropy start marker -->
+    <circle cx="60" cy="196" r="5" fill="#7db0ff"/>
+    <text x="74" y="192" fill="#7db0ff" font-size="12.5" font-family="-apple-system,'Noto Sans SC',sans-serif">low-entropy start (Big Bang)</text>
+    <!-- heat death marker -->
+    <circle cx="500" cy="48" r="5" fill="#f0ad5a"/>
+    <text x="490" y="40" text-anchor="end" fill="#f4d9a8" font-size="12.5" font-family="-apple-system,'Noto Sans SC',sans-serif">high-entropy end (heat death)</text>
+  </svg>
+  <figcaption>The whole history of the universe is entropy climbing monotonically along this curve. What we call "the future" is simply the higher-entropy side. Why the low end (the Big Bang's ultra-low entropy) exists is the true source of the arrow.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  We remember the past but not the future; cause precedes effect; we grow old — every one of these "time is flowing" sensations traces down to the <strong>same single arrow</strong>: entropy increase. A memory is itself a low-entropy imprint left in a brain, on paper, on a hard drive, and the very act of "leaving a trace" must increase entropy. <strong>Without entropy increase there is no memory, no causality, no "change" at all.</strong> Time has a direction not because the time dimension itself is oriented, but because we happen to live in a universe that started at ultra-low entropy and is slowly climbing.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: a broken mirror doesn't reassemble not because it's forbidden, but because reassembly's odds are too small to ever wait out.</div>
+    <div class="q"><b>Ponder:</b> If the universe's initial entropy weren't ultra-low but some middling value, would there still be a distinction between "past" and "future"?</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>Disorder, or Missing Information? <span class="en">Disorder, or Missing Information?</span></h2>
+  <span class="pill">Shannon · 1948 · information entropy</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  "Entropy = disorder" is a handy but misleading slogan. The sharper version: <strong>entropy = how much information you still lack before you can say exactly which microstate the system is in</strong>. A shuffled deck has high entropy not because it's "morally messy," but because you'd have to <strong>ask many yes/no questions</strong> to pin down its exact current order; a sorted deck needs almost none. In 1948, studying communication, Shannon independently derived a nearly identical formula to quantify "how much information a message carries" — and was startled to find he'd written down Boltzmann's entropy.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Shannon's information entropy (in bits) is:
+  <div class="eq"><var>H</var> = &minus;&sum; <var>p</var><sub>i</sub> log<sub>2</sub> <var>p</var><sub>i</sub></div>
+  <div class="gloss"><var>H</var> is the <strong>information entropy</strong> of the message (or probability distribution), in bits; <var>p</var><sub>i</sub> is the <strong>probability</strong> of the <var>i</var>-th possible outcome; &sum; (read "sigma") means "sum over all possible outcomes"; log<sub>2</sub> is the <strong>base-2 logarithm</strong>, corresponding exactly to "locating things by yes/no questions (1 bit each)." The leading minus sign just flips the negative logs positive (probabilities are less than 1, so their logs are negative). When all outcomes are <strong>equally likely</strong>, <var>H</var> is maximal — you're most in the dark, needing the most questions; when one outcome is <strong>certain</strong>, <span class="nowrap"><var>H</var> = <span class="zero">0</span></span> (the number 0) and you need no information at all.</div>
+  Set this side by side with Boltzmann's <var>S</var>=<var>k</var> log <var>W</var>: when the <var>W</var> microstates are equally likely, the two differ <strong>only by a conversion constant</strong>. Physical entropy and information entropy are the same number in two sets of clothes.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary reading · AI / communication / computing</span>
+  This bridge holds up the entire information age:<br>
+  <ul>
+    <li><strong>Communication</strong>: Shannon entropy sets the <strong>limit to which any data can be losslessly compressed</strong> — ZIP, H.264, every video clip on your phone is racing toward this entropy floor;</li>
+    <li><strong>AI</strong>: the <strong>cross-entropy loss</strong> at the heart of training a language model measures exactly "how much information the model's predicted distribution is off from the true one"; the more confident and correct the model, the lower the entropy and the smaller the loss — learning is <strong>compression</strong>;</li>
+    <li><strong>Computing</strong>: since information is entropy, erasing information (wiping one bit) means decreasing entropy, so by the second law it must <strong>release a corresponding amount of heat</strong> into the surroundings. This "even forgetting costs electricity" floor (explored fully in the physics-of-information installment) welds abstract bits to scalding physical entropy.</li>
+  </ul></div>
+
+  <div class="punch">
+    <div class="one">In a sentence: physical entropy and information entropy aren't an analogy — they're one quantity: your ignorance about the system.</div>
+    <div class="q"><b>Ponder:</b> If entropy is "the information you lack," is it an objective property of the universe, or a subjective ledger of "how much you know"?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>If the microscopic laws are time-reversible, how did Boltzmann "prove" entropy must increase? Didn't he sneak something in?</summary>
+  <div class="body">Your suspicion is exactly right, and it's a famous historical dispute. Boltzmann's H-theorem tried to derive irreversible entropy increase from reversible molecular collisions, and his contemporaries saw the hole at once: Loschmidt asked "reverse every molecule's velocity, and shouldn't entropy then decrease?" (the reversibility paradox), and Zermelo invoked the Poincaré recurrence theorem to say "wait long enough and the system must return to its initial state." Boltzmann's answer was a crucial retreat: entropy increase is <strong>not certain, but overwhelmingly probable</strong>. He had quietly used an extra assumption (molecular chaos: particles are uncorrelated before colliding), and that assumption itself smuggles in a time direction. The real sense of direction lies not in the dynamics but in the <strong>extremely low-entropy initial conditions</strong> — an insight that only became clear later. So strictly, entropy increase isn't "proven"; it's given jointly by probability plus a low-entropy initial condition.</div></details>
+
+  <details><summary>Poincaré recurrence says a system will eventually return to its initial state — so won't entropy eventually drop back down on its own, breaking the second law?</summary>
+  <div class="body">Mathematically true, physically irrelevant. The Poincaré recurrence theorem guarantees that a finite, closed system will, given enough time, come arbitrarily close to any of its past states — including the initial low-entropy one. But how long is "enough"? For a macroscopic cup of gas (about 10²³ molecules), the recurrence time is on the order of 10-to-the-10²³ years — written out, there aren't enough atoms in the universe to serve as ink. By comparison the universe is only 1.4×10¹⁰ years old. So recurrence holds in principle and <strong>never happens</strong> in practice: the second law is a statement about the timescales we can observe, while recurrence lives in the limit of "after a near-eternity." No contradiction.</div></details>
+
+  <details><summary>Life, Earth, brains all spontaneously grow more ordered — isn't that a flat violation of entropy increase?</summary>
+  <div class="body">No violation — because none of them is an <strong>isolated</strong> system. The second law governs only the <strong>total</strong> entropy of an isolated system. Earth receives a small stream of high-energy photons from the Sun (low-entropy, concentrated) each day and radiates a large flood of low-energy infrared photons (high-entropy, spread out) into the cold black sky. That very spread — "less entropy in, more entropy out" — bankrolls all the local order on Earth: photosynthesis, evolution, your thinking right now. Tally the full account (Earth + Sun + deep space) and entropy is still surging. Life isn't an exception to entropy increase; it's a particularly efficient channel through which the universe <strong>accelerates</strong> its entropy production — ordered life is precisely a tool for flattening energy gradients faster.</div></details>
+
+  <details><summary>If entropy always rises, the universe ends in "heat death" — everything decayed into uniform stillness. Is that a certain fate? Should we be depressed about it?</summary>
+  <div class="body">Heat death (thermodynamic equilibrium, no temperature differences, no usable energy, no structure) is one possible endgame under the standard picture, but far from a done deal. It rests on several unsettled premises: will dark energy keep dominating the expansion? How does gravity (which makes matter <strong>clump</strong> rather than spread — a strange character in the entropy ledger) figure in over the very long run? Does entropy even hold at the quantum-gravity scale? None of this is settled (the fate of the universe gets its own installment later). As for depression — no need. Even if heat death is real, it's some 10¹⁰⁰ years off, dwarfing all scales of life and civilization; and it's precisely this long middle stretch — the present universe, <strong>far from equilibrium with entropy still climbing</strong> — that makes stars, life, and thought possible at all. We live in the most interesting stretch of the arrow of time.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Sean Carroll, <em>From Eternity to Here: The Quest for the Ultimate Theory of Time</em> — the best accessible deep dive on the arrow of time and the low-entropy past</li>
+    <li>Ludwig Boltzmann, <em>Lectures on Gas Theory</em> (1896) — the original source of <var>S</var>=<var>k</var> log <var>W</var> and the statistical interpretation</li>
+    <li>Claude Shannon, <em>A Mathematical Theory of Communication</em> (1948, <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf">full PDF</a>) — the founding paper of information entropy</li>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, Ch. 46 "Ratchet and Pawl" — an intuitive picture of irreversibility</li>
+    <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Entropy_(statistical_thermodynamics)">Entropy (statistical thermodynamics)</a> / <a href="https://en.wikipedia.org/wiki/Arrow_of_time">Arrow of time</a> / <a href="https://en.wikipedia.org/wiki/Loschmidt%27s_paradox">Loschmidt's paradox</a></li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
