@@ -128,7 +128,7 @@
       <line x1="470" y1="110" x2="506" y2="128" marker-end="url(#varrH)"/>
       <line x1="540" y1="62" x2="506" y2="86" marker-end="url(#varrH)"/>
       <line x1="410" y1="150" x2="446" y2="132" marker-end="url(#varrH)"/>
-      <line x1="548" y1="150" x2="514" y2="132" marker-end="url(#varrH)"/>
+      <line x1="548" y1="150" x2="580" y2="130" marker-end="url(#varrH)"/>
     </g>
     <g fill="#f4d9a8">
       <circle cx="392" cy="68" r="5"/><circle cx="470" cy="110" r="5"/><circle cx="540" cy="62" r="5"/>
@@ -193,17 +193,6 @@
 
   <figure>
   <svg viewBox="0 0 560 240" role="img" aria-label="卡诺热机的能量流">
-    <defs>
-      <marker id="fl" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-        <path d="M0,0 L9,4 L0,8 Z" fill="#e0673f"/>
-      </marker>
-      <marker id="flb" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-        <path d="M0,0 L9,4 L0,8 Z" fill="#5b9bff"/>
-      </marker>
-      <marker id="flw" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-        <path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"/>
-      </marker>
-    </defs>
     <!-- hot reservoir -->
     <rect x="150" y="18" width="260" height="40" rx="7" fill="#2a1a14" stroke="#8a4a2e"/>
     <text x="280" y="43" text-anchor="middle" fill="#e0906f" font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">高温热源　T&#8341;（热）</text>
@@ -215,13 +204,16 @@
     <rect x="150" y="202" width="260" height="40" rx="7" fill="#0f1a2e" stroke="#2b5680"/>
     <text x="280" y="227" text-anchor="middle" fill="#7db0ff" font-size="14.5" font-family="-apple-system,'Noto Sans SC',sans-serif">低温热源　T&#8324;（冷）</text>
     <!-- Qh in -->
-    <line x1="280" y1="60" x2="280" y2="86" stroke="#e0673f" stroke-width="6" marker-end="url(#fl)"/>
+    <line x1="280" y1="60" x2="280" y2="74" stroke="#e0673f" stroke-width="6"/>
+    <polygon points="280,86 273.5,74 286.5,74" fill="#e0673f"/>
     <text x="298" y="78" fill="#e0906f" font-size="13" font-family="Georgia,serif">Q&#8341;</text>
     <!-- Qc out -->
-    <line x1="280" y1="174" x2="280" y2="198" stroke="#5b9bff" stroke-width="4" marker-end="url(#flb)"/>
+    <line x1="280" y1="174" x2="280" y2="186" stroke="#5b9bff" stroke-width="4"/>
+    <polygon points="280,198 273.5,186 286.5,186" fill="#5b9bff"/>
     <text x="298" y="192" fill="#7db0ff" font-size="13" font-family="Georgia,serif">Q&#8324;</text>
     <!-- Work out -->
-    <line x1="322" y1="130" x2="452" y2="130" stroke="#f0ad5a" stroke-width="5" marker-end="url(#flw)"/>
+    <line x1="322" y1="130" x2="440" y2="130" stroke="#f0ad5a" stroke-width="5"/>
+    <polygon points="452,130 440,123.5 440,136.5" fill="#f0ad5a"/>
     <text x="388" y="120" text-anchor="middle" fill="#f0ad5a" font-size="14" font-family="-apple-system,'Noto Sans SC',sans-serif">功 W</text>
     <text x="388" y="150" text-anchor="middle" fill="#96a0ba" font-size="11.5" font-family="-apple-system,'Noto Sans SC',sans-serif">有用输出</text>
   </svg>
@@ -297,9 +289,9 @@
 </div>
 
 </div>
-<script src="https://cissy0802.github.io/comments.js" defer></script>
-<script src="https://cissy0802.github.io/search.js" defer></script>
-<script src="https://cissy0802.github.io/index-button.js" defer></script>
-<script src="https://cissy0802.github.io/i18n-tts.js" defer></script>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
 </body>
 </html>
