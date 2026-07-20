@@ -78,8 +78,11 @@ for F in $NEW_FILES; do
   fi
 
   # Forbidden hardcoded scripts (auto-injected by GitHub Action)
+  # Pages now PRE-include the shared hub CDN scripts (per CLAUDE.md) so the
+  # inject-comments Action skips them and stops making noisy auto-commits.
+  # Only flag a script referenced OUTSIDE the sanctioned hub.cissychen.com CDN.
   for s in comments.js search.js index-button.js i18n-tts.js; do
-    grep -q "$s" "$F" && { echo "ERROR: $F hardcodes $s (auto-injected, will duplicate)"; exit 1; }
+    grep "$s" "$F" | grep -qv 'hub.cissychen.com' && { echo "ERROR: $F hardcodes $s outside the shared hub CDN (will duplicate)"; exit 1; }
   done
   grep -q "← Hub" "$F" && echo "WARN: $F hardcodes ← Hub button (will be deduped, consider removing)"
 

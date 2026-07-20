@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: Statistical Mechanics · Day 8</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>Statistical Mechanics</h1>
+  <div class="meta">Day 8 · 2026 · Phase B Heat, Entropy &amp; Statistical Mechanics</div>
+  <div class="tagline">Give up tracking every molecule, and you predict <em>better</em> — physics's deepest "retreat to advance." Temperature, pressure, phase transitions all grow out of one act: counting.</div>
+</header>
+
+<div class="intro">
+A glass of water holds about 10²³ molecules. Even with an infinitely fast computer solving all 10²³ Newtonian equations, you'd stare at the output and <b>understand nothing</b> — it won't tell you the water's temperature, or whether it will freeze. Statistical mechanics turns the problem inside out: <b>precisely because there are so many molecules, we get to ignore the individuals and speak only of the typical</b>. Individual chaos is ground smooth into collective certainty by sheer numbers, and macroscopic notions — "temperature," "pressure," "phase transition" — all emerge from <b>counting microstates</b>. It also handed AI a core tool, the Boltzmann distribution — and the 2024 Nobel Prize in Physics went to the people who carried it into neural networks.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Abandon the Individual, Bet on the Typical <span class="en">From Micro to Macro</span></h2>
+  <span class="pill">the program · law of large numbers</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Picture a hall packed with a billion people, and you must predict what "the crowd" will do. Interviewing each person is both impossible and pointless. But ask only "what's the average height?" or "how many are drifting toward the exit?" and the answers turn out shockingly stable — <strong>the more numerous and random the individuals, the more certain the collective average</strong>. Flip one coin and the result is pure luck; flip a hundred million, and the fraction of heads is all but nailed to 50%. Statistical mechanics simply applies this law of large numbers to molecules: don't track who is where, just ask what the typical case looks like.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Distinguish two levels. A <strong>microstate</strong> is the exact position and velocity of every molecule — an obscenely complete inventory. A <strong>macrostate</strong> is the handful of quantities you can actually measure (temperature, pressure, volume). One macrostate corresponds to a <strong>colossal</strong> number of microstates. The bedrock of statistical mechanics is a humble postulate — the <strong>principle of equal a priori probability</strong>: for an isolated system, every microstate allowed by its energy is <strong>equally likely to occur</strong>. So "which way will the system go?" collapses into a pure <strong>counting problem</strong>: the macrostate backed by the most microstates is overwhelmingly the one you'll see. That reconnects to entropy — <span class="nowrap"><var>S</var> = <var>k</var> log <var>W</var></span>, the line already unpacked in the entropy-and-arrow-of-time installment.</div>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  Newton's equations are strictly <strong>deterministic</strong> — not a shred of "probability" inside them. So where does probability come from? The answer is startling: <strong>it isn't a patch for our ignorance, but a rock-solid conclusion that grows out of determinism itself</strong>. It's not that "we don't know where the molecules are, so we're forced to guess" — it's that the overwhelming majority of microstates <strong>look identical</strong> (uniform, at thermal equilibrium), and the few "tidy" ones are too rare to matter. Probability enters physics not through randomness but through <strong>typicality</strong>: there are simply too many ways to be typical, so the atypical outcome never gets its turn.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: "more molecules, harder to compute" is an illusion — more molecules, simpler the macroscopics.</div>
+    <div class="q"><b>Ponder:</b> With only 5 molecules, do words like "temperature" and "pressure" still mean anything? From how many molecules up does a statistical description start to be trustworthy?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>The Boltzmann Distribution: the Shape of Probability <span class="en">The Boltzmann Distribution</span></h2>
+  <span class="pill">Boltzmann · the exponential law</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Immerse a small system in a big heat bath (say, one molecule inside a whole glass of water). The system can sit in states of different energy — high or low — and which does it prefer? Intuition says "the low ones, of course, like a ball rolling to the valley floor." True, but not absolutely: the bath keeps <strong>shoving</strong> energy into the system. Here's the crux — every unit of energy the system borrows is a unit the bath <strong>loses</strong>, cutting down the bath's own repertoire of microstates. So the price of the system occupying a high-energy state is a drop in the big world's number of arrangements. <strong>Higher energy is rarer — and rarer in an exponential way.</strong></div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  The probability of the system being in a state of energy <var>E</var> is proportional to the <strong>Boltzmann factor</strong>:
+  <div class="eq"><var>P</var>(<var>E</var>) ∝ <var>e</var><sup>−<var>E</var>/<var>k</var><var>T</var></sup></div>
+  <div class="gloss"><var>e</var> is the natural constant (about 2.718), and a negative exponent means it <strong>decays fast as <var>E</var> grows</strong>; <var>E</var> is that state's energy; <var>T</var> is the bath's temperature; <var>k</var> is <strong>Boltzmann's constant</strong> (the "exchange rate" converting temperature into energy units, about 1.38×10⁻²³ joules per kelvin). The combination <span class="nowrap"><var>k</var><var>T</var></span> is a "thermal energy allowance": each time a state's energy <var>E</var> overshoots <var>kT</var>, its probability is knocked down by about a factor of <var>e</var> (≈2.7×). Temperature is <strong>not</strong> energy itself, but the <strong>price of energy</strong> — the higher <var>T</var>, the larger <var>kT</var>, and the more a high-energy state can "afford" to be occupied.</div>
+  To turn "proportional to" into a real probability, divide by the sum of Boltzmann factors over all states — that sum is the star of the next card, the partition function <var>Z</var>.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 240" role="img" aria-label="The higher the level, the exponentially smaller its occupation probability">
+    <line x1="60" y1="200" x2="600" y2="200" stroke="#56607e" stroke-width="1.5"/>
+    <line x1="60" y1="200" x2="60" y2="26" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="60,18 55,32 65,32" fill="#56607e"/>
+    <text x="6" y="30" text-anchor="start" font-size="11.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">energy E</text>
+    <text x="330" y="228" text-anchor="middle" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">occupation probability →  (higher = rarer)</text>
+    <g font-family="Georgia,serif" font-size="12.5">
+      <line x1="52" y1="180" x2="68" y2="180" stroke="#7db0ff" stroke-width="2.5"/>
+      <rect x="72" y="170" width="470" height="20" rx="4" fill="#5b9bff"/>
+      <text x="556" y="184" fill="#dbe2f2" font-size="11.5">E₀</text>
+      <line x1="52" y1="140" x2="68" y2="140" stroke="#7db0ff" stroke-width="2.5"/>
+      <rect x="72" y="130" width="173" height="20" rx="4" fill="#5b9bff" opacity="0.78"/>
+      <text x="258" y="144" fill="#96a0ba" font-size="11.5">E₁</text>
+      <line x1="52" y1="100" x2="68" y2="100" stroke="#7db0ff" stroke-width="2.5"/>
+      <rect x="72" y="90" width="64" height="20" rx="4" fill="#5b9bff" opacity="0.6"/>
+      <text x="150" y="104" fill="#96a0ba" font-size="11.5">E₂</text>
+      <line x1="52" y1="60" x2="68" y2="60" stroke="#7db0ff" stroke-width="2.5"/>
+      <rect x="72" y="50" width="24" height="20" rx="4" fill="#5b9bff" opacity="0.42"/>
+      <text x="110" y="64" fill="#96a0ba" font-size="11.5">E₃</text>
+    </g>
+    <path d="M542,180 C300,150 150,110 96,58" fill="none" stroke="#f0ad5a" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="466" y="70" fill="#f0ad5a" font-size="12.5" font-family="-apple-system,'Noto Sans SC',sans-serif">envelope ∝ e<tspan font-size="9" dy="-5">−E/kT</tspan></text>
+  </svg>
+  <figcaption>The higher the energy, the faster the occupation probability decays along an exponential curve. Raising the temperature (larger kT) "flattens" the curve, handing more probability to high-energy states.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  This exponential law is <strong>universal</strong>: whether the system is gas molecules, spins in a magnet, or atoms in a star's atmosphere, as long as it exchanges energy with a constant-temperature bath, the occupation probability <strong>looks exactly like this</strong>. The system's specific physics is compressed into that <var>E</var>; the rest of the shape is dictated by temperature alone. That's why "temperature" works as such a powerful knob — it doesn't change the energy levels themselves, only the <strong>relative traffic among them</strong>.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary reading · AI (2024 Nobel in Physics)</span>
+  This <span class="nowrap"><var>P</var> ∝ <var>e</var><sup>−<var>E</var>/<var>T</var></sup></span> isn't just physics — it's a foundation stone of modern AI:
+  <ul>
+    <li><strong>Boltzmann machines (Hopfield &amp; Hinton)</strong>: assign each activation pattern of a neural net an "energy," and let the network sample by the Boltzmann factor — lower energy = more probable pattern. The <strong>2024 Nobel Prize in Physics</strong> honored exactly this "do machine learning with the methods of physics" work.</li>
+    <li><strong>Energy-based models (EBMs) and diffusion models</strong>: the backbone of modern generative models is "learn an energy landscape <var>E</var>, then sample from <span class="nowrap"><var>e</var><sup>−<var>E</var></sup></span>" — generating an image is one thermal excursion through the energy valleys.</li>
+    <li><strong>softmax</strong>: the classification layer you use every day, <span class="nowrap"><var>e</var><sup><var>z</var>ᵢ</sup>/Σ<var>e</var><sup><var>z</var>ⱼ</sup></span>, is letter-for-letter a Boltzmann distribution — and its "temperature" parameter tunes exactly the randomness of the output.</li>
+  </ul>
+  A century of physicists counting microstates ended up counted into neural networks.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: temperature isn't energy — it's the price of energy, and high-energy states get exponentially dearer.</div>
+    <div class="q"><b>Ponder:</b> What happens as you drive softmax's "temperature" toward 0 (zero)? Toward infinity? Compare a glass of water cooled to absolute zero versus heated red-hot.</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>The Partition Function: One Function Generates Everything <span class="en">The Partition Function Z</span></h2>
+  <span class="pill">Zustandssumme · generating function</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Add up the Boltzmann factors of every possible state into one grand total, and you get a single number — the <strong>partition function <var>Z</var></strong> (the original German means "sum over states"). It looks like a mere normalizing denominator, but it's really the system's <strong>master ledger</strong>: once you've computed <var>Z</var>, every macroscopic property — mean energy, entropy, pressure, free energy — can be <strong>squeezed out of this one function</strong> just by differentiating it in different ways. One scalar, encoding it all.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  <div class="eq"><var>Z</var> = <span style="font-size:1.5rem">Σ</span> <var>e</var><sup>−<var>E</var>ᵢ/<var>k</var><var>T</var></sup></div>
+  <div class="gloss">For <strong>every</strong> possible state <var>i</var> (energy <var>E</var>ᵢ), compute the Boltzmann factor and sum them all. A large <var>Z</var> means "many accessible states."</div>
+  With <var>Z</var> in hand, the most useful move is the <strong>Helmholtz free energy</strong>:
+  <div class="eq"><var>F</var> = −<var>k</var><var>T</var> ln <var>Z</var></div>
+  <div class="gloss"><var>F</var> (free energy) splits as <span class="nowrap"><var>F</var> = <var>U</var> − <var>T</var><var>S</var></span>: <var>U</var> is mean energy, <var>S</var> is entropy, ln is the natural log. At fixed temperature a system always moves toward the macrostate of <strong>minimum <var>F</var></strong> — a <strong>tug-of-war between energy and entropy</strong>: at low temperature <var>U</var> wins (the system seeks "low energy, order"); at high temperature <span class="nowrap"><var>T</var><var>S</var></span> wins (it seeks "high entropy, disorder"). Water freezing at 0 (zero) °C and boiling at 100 °C are, at heart, the same tug-of-war changing its winner at different temperatures.</div></div>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This is the true <strong>engine</strong> of statistical mechanics: it turns a "physics problem" into a <strong>pure mathematical procedure</strong> — sum one series, take a few derivatives. You never again have to interrogate individual molecules — write down the energies, sum up <var>Z</var>, differentiate, and the macroscopic world surfaces on its own. Phase transitions, magnetism, chemical equilibrium — all of thermodynamics flows out of this one function. In the least-action installment, nature "chose" its path by extremizing the action; here, the equilibrium state "chooses" itself by minimizing the free energy — <strong>physics keeps reusing the same grammar: extremum equals truth</strong>.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: compute the partition function, and all of thermodynamics is just a few of its derivatives.</div>
+    <div class="q"><b>Ponder:</b> What does the "free" in "free energy" refer to? Why not simply "minimum total energy"? (Hint: whose side is that entropy term arguing for?)</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>Fluctuations: Why the Average Can Be Trusted <span class="en">Fluctuations & Ensembles</span></h2>
+  <span class="pill">fluctuations · the √N law</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  A system is forever hopping among microstates, so its energy and density are actually <strong>jittering (fluctuating)</strong> all the time. Then how dare we say a glass of water has one "definite" temperature? Because the <strong>relative size</strong> of the jitter shrinks sharply as the molecule count grows. This is the famous <strong>1/√N law</strong>:</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  <div class="eq"><span class="frac"><span class="fnum">Δ<var>E</var></span><span class="fden">⟨<var>E</var>⟩</span></span> ∼ <span class="frac"><span class="fnum">1</span><span class="fden">√<var>N</var></span></span></div>
+  <div class="gloss">Δ<var>E</var> is the typical size of the energy fluctuation, ⟨<var>E</var>⟩ is the mean energy (angle brackets read "average of"), <var>N</var> is the molecule count. The relative fluctuation decays as <span class="nowrap">1/√<var>N</var></span>: at <var>N</var>=100 the jitter is about 10%, at <var>N</var>=10²³ it's about <span class="nowrap">1/10¹¹·⁵</span> — too small for any instrument to detect. <strong>This is exactly why the macroscopic world looks so definite: the fluctuations haven't vanished, they've just been crushed out of sight by large numbers.</strong></div>
+  This also explains why physics uses the concept of an <strong>ensemble</strong>: rather than track one system jittering over time, imagine <strong>an entire collection of infinitely many identically prepared systems</strong> and average over the collection. An isolated system (fixed energy) uses the <strong>microcanonical ensemble</strong>; a system touching a heat bath (fixed temperature) uses the <strong>canonical ensemble</strong> — and the Boltzmann distribution is precisely the product of the latter.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 210" role="img" aria-label="More molecules, sharper the fluctuation distribution">
+    <line x1="40" y1="175" x2="600" y2="175" stroke="#56607e" stroke-width="1.5"/>
+    <text x="320" y="200" text-anchor="middle" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">measured energy (fluctuating around the mean ⟨E⟩)</text>
+    <line x1="320" y1="175" x2="320" y2="30" stroke="#39456a" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="320" y="24" text-anchor="middle" font-size="11" fill="#96a0ba" font-family="Georgia,serif">⟨E⟩</text>
+    <path d="M60,175 C170,172 240,70 320,70 C400,70 470,172 580,175" fill="none" stroke="#5b9bff" stroke-width="2" opacity="0.55"/>
+    <text x="150" y="110" fill="#7db0ff" font-size="12" font-family="-apple-system,'Noto Sans SC',sans-serif">small N: big jitter</text>
+    <path d="M270,175 C305,175 312,44 320,44 C328,44 335,175 370,175" fill="none" stroke="#f0ad5a" stroke-width="2.4"/>
+    <text x="430" y="70" fill="#f0ad5a" font-size="12" font-family="-apple-system,'Noto Sans SC',sans-serif">large N: almost a needle</text>
+  </svg>
+  <figcaption>Same mean value; the more molecules, the narrower the spread of actual measurements around it. By 10²³ molecules the "distribution" collapses into a sharp needle — that's the origin of thermodynamic "certainty."</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  Those "iron laws" of thermodynamics are in fact <strong>none of them iron</strong> — they're all statistical laws, dressed up as iron only because <var>N</var> is so huge the fluctuations are crushed out of sight. Turn it around: <strong>whenever <var>N</var> isn't large enough, fluctuations become the lead actor again</strong>. Nanomachines and the molecular motors inside a cell live in a sea of fluctuation (Brownian motion is just the visible jitter of water molecules colliding); and at a <strong>critical point</strong> — water and vapor on the verge of parting — fluctuations erupt on all scales at once, large enough to see with the naked eye (critical opalescence). In the phase-transitions-and-criticality installment ahead, the lead role belongs precisely to this fluctuation we usually ignore.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary reading · computing / finance / biology</span>
+  Statistical mechanics's signature trick — "approach a definite average from random sampling" — is everywhere:
+  <ul>
+    <li><strong>Computing</strong>: the <strong>Monte Carlo method</strong> — estimate integrals and expectations by random sampling, with error shrinking as <span class="nowrap">1/√<var>N</var></span>; from nuclear-reactor simulation to the stochastic gradients in AI training, it's the same idea.</li>
+    <li><strong>Finance</strong>: a single stock's daily moves are like molecules bouncing at random, yet a large portfolio's overall volatility is suppressed by <span class="nowrap">1/√<var>N</var></span> — "diversification lowers risk" is this very fluctuation law.</li>
+    <li><strong>Biology</strong>: a cell may hold only a few dozen copies of a given protein, so <var>N</var> is small enough that fluctuations can't be ignored — <strong>gene-expression noise</strong> sends genetically identical cells down different fates.</li>
+  </ul>
+  Anywhere "collective behavior from many random individuals" appears, it's borrowing statistical mechanics's ledger.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: thermodynamic "certainty" is the illusion left when √N has crushed the fluctuations away.</div>
+    <div class="q"><b>Ponder:</b> If you could shrink a glass of water down to just 100 molecules, does "this water is at 25 °C" still hold? How would you restate it?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Deeper Questions</h2>
+
+  <details><summary>Newton's equations are fully deterministic and time-reversible — so where do statistical mechanics's probability and "entropy increase" sneak in from?</summary>
+  <div class="body">This is statistical mechanics's deepest crack, called <strong>Loschmidt's paradox</strong>. The underlying equations really are reversible — reverse every molecule's velocity and the system retraces its steps back to low entropy. So where does the entropy increase come from? On two levels. First, the <strong>initial condition</strong>: the universe started in an extraordinarily low-entropy state and has merely been sliding toward the typical ever since (this ultimately hands the question to cosmology — a thread already laid down in the entropy-and-arrow-of-time installment). Second, <strong>typicality</strong>: the precise initial velocities that would "retrace to low entropy" are negligibly few among all possibilities; grab an initial state at random and it almost surely leads to entropy increase. Probability wasn't stuffed into the equations, but into our <strong>ignorance of initial conditions</strong> and the <strong>extreme rarity of atypical states</strong>.</div></details>
+
+  <details><summary>What justifies the "equal probability" principle? Does a system really visit all microstates uniformly?</summary>
+  <div class="body">Behind it sits the <strong>ergodic hypothesis</strong>: as a system evolves in time it will (nearly uniformly) roam through all microstates its energy allows, so a "time average" equals an "ensemble average." Sounds self-evident, yet it's <strong>extremely hard to prove mathematically</strong>, and for some systems it <strong>simply fails</strong> — glasses, and certain "stuck" quantum systems (many-body localization) get trapped in a small patch of states and never escape, so thermodynamics partly breaks down for them. So the equal-probability principle is more of a working assumption that <strong>performs astonishingly well while its foundation is still under construction</strong>. Physics often works this way: use it correctly first, then slowly supply the proof.</div></details>
+
+  <details><summary>Is probability an "objective" property of the system, or does it only reflect our "subjective" not-knowing where the molecules are?</summary>
+  <div class="body">Two camps have argued for a century. The <strong>objectivists</strong>: fluctuations are real physical events — Brownian motion is visible and tangible, so probability is part of nature. The <strong>subjective/information</strong> camp (led by E. T. Jaynes): entropy measures <strong>the information you lack</strong>, and statistical mechanics is really "the most honest inference given the known macroscopic constraints" — from which he re-derived the Boltzmann distribution as the <strong>maximum-entropy principle</strong> (subject to the known constraints, pick the least arbitrary, least-assuming distribution). Tellingly, both routes yield <strong>exactly the same</strong> formulas. Perhaps that's the point: physical probability and informational probability are two faces of one coin — a thread that fully ignites at the next stop, the physics of information.</div></details>
+
+  <details><summary>Does "negative temperature" exist? Is it colder than absolute zero, or hotter than infinity?</summary>
+  <div class="body">It exists — and <strong>a negative temperature is hotter than any positive one</strong>. That sounds absurd only because everyday intuition treats temperature as energy. Go back to the definition: temperature captures "add a bit of energy, how much does entropy rise?" In an ordinary system, higher energy means more accessible states, so entropy rises with energy. But some systems (say, ones whose spin levels have an <strong>upper bound</strong>), once most particles are pumped into the high-energy state, respond to more energy by having <strong>fewer</strong> states — entropy <em>falls</em> — which by definition corresponds to <strong>negative temperature</strong>. It's not "below absolute zero" but "above positive infinity": the energy scale wraps around like <span class="nowrap">…, +300K, +∞/−∞, …, −300K</span>. A laser's <strong>population inversion</strong> is one such negative-temperature state. The lesson: <strong>temperature is fundamentally the slope of entropy against energy, not the sensory word "hot or cold."</strong></div></details>
+
+  <details><summary>Mix two identical bottles of gas together — did entropy increase? A trap called the "Gibbs paradox."</summary>
+  <div class="body">Pull the partition and let two <strong>different</strong> gases mix, and entropy really does rise (entropy of mixing). But what if the two bottles hold <strong>exactly the same</strong> gas? A naive calculation hands you an absurd entropy increase — yet nothing has really happened; whether the partition is in or out makes no difference. The cure for this <strong>Gibbs paradox</strong> is startlingly deep: you must accept that <strong>identical particles are truly indistinguishable</strong> — swapping two oxygen molecules produces no new microstate. Feed that indistinguishability into the counting, and the paradox dissolves. And its <strong>ultimate justification</strong> only comes clean in quantum mechanics: the indistinguishability of identical particles isn't an approximation but a matter of essence (a seed saved for the quantum-field-theory installment ahead). A classical counting puzzle forced out the ticket to the quantum.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, Ch. 39–40 (kinetic theory of gases / principles of statistical mechanics) — the intuitive starting point</li>
+    <li>James Sethna, <em>Statistical Mechanics: Entropy, Order Parameters, and Complexity</em> (Oxford; <a href="https://sethna.lassp.cornell.edu/StatMech/">free online</a>) — modern and intuition-driven</li>
+    <li>E. T. Jaynes, <em>"Information Theory and Statistical Mechanics,"</em> <em>Phys. Rev.</em> 1957 — the original maximum-entropy paper</li>
+    <li>The Nobel Prize in Physics 2024 (Hopfield &amp; Hinton), <a href="https://www.nobelprize.org/prizes/physics/2024/summary/">official summary</a> — the physics roots of Boltzmann machines and energy-based models</li>
+    <li>Landau &amp; Lifshitz, <em>Statistical Physics</em> (Vol. 5) — the rigorous, deep classic</li>
+  </ul>
+</div>
+
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
