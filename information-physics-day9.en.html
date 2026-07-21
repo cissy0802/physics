@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: The Physics of Information · Day 9</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>The Physics of Information</h1>
+  <div class="meta">Day 9 · 2026 · Phase B Heat, Entropy &amp; Statistical Mechanics</div>
+  <div class="tagline">A bit is not an abstract 0 or 1 — it takes up space, costs energy, gives off heat. Information isn't a ghost hovering above the world; it is thoroughly physical.</div>
+</header>
+
+<div class="intro">
+A century and a half ago, Maxwell imagined a tiny "demon" stationed at a door between two gas chambers. By letting only fast molecules through one way and slow ones the other, it could split a glass of lukewarm water into a hot half and a cold half — <b>doing no work, yet decreasing entropy</b>. That stomps straight on the face of the Second Law. Physics took a full century to pin down the demon's flaw, and the flaw's name turned out to be <b>information</b>. The answer runs shockingly deep: to sort, the demon must <b>know</b> whether each molecule is fast or slow — it must measure and remember. But memory is finite; sooner or later it must be <b>erased</b>, and erasing one bit <b>necessarily</b> dumps at least one packet of heat into the environment. Here information and thermodynamics fuse into one, and for the first time "computation" gets an energy floor no one can sneak under — a floor that lies at the very bottom of today's AI energy problem.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Maxwell's Demon: Can Information Buy Free Work? <span class="en">Maxwell's Demon</span></h2>
+  <span class="pill">Maxwell · 1867</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Picture a box split into a left room and a right room, with a small door between them and a sharp-eyed, quick-handed "demon" sitting at it. The gas molecules come fast and slow (fast = hot, slow = cold). The demon watches the incoming molecules: see a fast one heading in from the left, open the door and let it pass to the right; see a slow one heading in from the right, let it pass to the left. Opening and closing the door costs essentially nothing. Gradually the right side fills with fast molecules (heats up) and the left with slow ones (cools down) — <strong>a uniformly tepid gas has sorted itself into a hot half and a cold half</strong>. But this conjures a temperature difference out of no temperature difference — it makes entropy <strong>decrease</strong>. You could even run a heat engine off that difference: a <strong>perpetual-motion machine that burns no fuel</strong>. Where's the error?</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Maxwell posed this thought experiment in 1867 precisely to argue that the Second Law is no ironclad mechanical theorem but a <strong>statistical</strong> regularity — true for <strong>vast</strong> numbers of molecules, not necessarily for a cheating operation on single ones. In 1929 Szilard boiled the demon down to its skeleton: imagine just <strong>one</strong> molecule in the box, and the demon need only know whether it is in the <strong>left half or the right half</strong> — that is <strong>one bit</strong> of information. On that single bit, the demon inserts a piston, lets the molecule push it, and extracts a definite amount of work from the surrounding heat bath:
+  <div class="eq"><var>W</var> = <var>k</var><var>T</var> ln2</div>
+  <div class="gloss"><var>W</var> is the extracted work; <var>k</var> is Boltzmann's constant (the "exchange rate" converting temperature into energy, ≈ 1.38×10⁻²³ J/K); <var>T</var> is the temperature; ln2 is the natural log of 2 (≈ 0.69), coming from the <strong>two</strong> possibilities "left/right." This line nails, for the first time, <strong>one bit of information</strong> to a <strong>precise amount of energy</strong>: knowing where the molecule is is worth <span class="nowrap"><var>k</var><var>T</var> ln2</span> of work.</div></div>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  Many assume the demon's flaw is that "opening the door costs effort." It isn't. The door can be made arbitrarily light and opened arbitrarily cheaply — that road doesn't trap the demon. The real flaw hides in an act almost nobody notices: to sort, the demon <strong>must first know</strong> whether the molecule is fast or slow, left or right. <strong>It must measure — and remember.</strong> The demon isn't a pure mechanical device; it is a device that <strong>acquires information and has a memory</strong>. The bill, in the end, is charged to that memory — not to the door.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: the demon isn't stealing work, it's stealing information — the question is, is information really free?</div>
+    <div class="q"><b>Ponder:</b> If the demon's memory were infinite, could it cheat forever? What sleight of hand is hidden inside the assumption of "infinite memory"?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>Landauer's Principle: the Minimum Price of Erasing a Bit <span class="en">Landauer's Principle</span></h2>
+  <span class="pill">Landauer · 1961</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Sort logical operations into two kinds. Some are <strong>reversible</strong>: flipping a bit (0↔1), say — afterward you can always deduce the input from the output, no information lost. Others are <strong>irreversible</strong> — the archetype being <strong>erasure</strong>: whatever the bit started as, 0 or 1, after erasure it is uniformly 0. Two distinct inputs (0 and 1) get squeezed into a single output (0) — <strong>run it backward and you can't tell which it was, one bit of information is lost forever</strong>. Landauer's 1961 insight was: <strong>it is exactly this "loss of information" that forces a physical price.</strong></div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Picture the bit living in a "double well": left well = 0, right well = 1, a barrier between them. Erasing means <strong>driving the ball into the 0 well no matter which well it started in</strong>. Two possibilities (left or right) collapse into one — this storage subsystem's number of accessible states is halved, its entropy drops by <span class="nowrap"><var>k</var> ln2</span>. But the Second Law forbids total entropy from dropping: that expelled entropy must be dumped into the environment as <strong>heat</strong>. Hence the <strong>Landauer limit</strong> — erasing one bit releases at least:
+  <div class="eq"><var>Q</var> ≥ <var>k</var><var>T</var> ln2</div>
+  <div class="gloss"><var>Q</var> is the heat that must be dissipated. At room temperature (<var>T</var>≈300 K) this comes to <span class="nowrap">≈ 2.9×10⁻²¹ J</span> — about 0.018 electron-volts, astonishingly small, yet <strong>strictly greater than 0 (the number zero)</strong>. The point is that inequality sign: this is not "current technology can't do better," but a <strong>floor nailed down by physical principle</strong> — no cleverness can ever erase more cheaply.</div>
+  Notice the price hangs on <strong>erasure (logical irreversibility)</strong>, not on "computation" itself. Reversible operations can, in principle, cost <strong>no energy at all</strong> — and that is exactly the key the next card uses to sentence the demon to death.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="Erasing a bit: two wells merge into one, releasing kT ln2 of heat to the environment">
+    <!-- before: double well -->
+    <text x="150" y="26" text-anchor="middle" font-size="12.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">Before: 0 or 1 (2 possibilities)</text>
+    <path d="M40,86 C70,86 82,140 105,140 C128,140 138,96 150,96 C162,96 172,140 195,140 C218,140 230,86 260,86"
+          fill="none" stroke="#5b9bff" stroke-width="2.2"/>
+    <circle cx="105" cy="133" r="7" fill="#f0ad5a"/>
+    <circle cx="195" cy="133" r="7" fill="#f0ad5a" opacity="0.5"/>
+    <text x="105" y="162" text-anchor="middle" font-size="12" fill="#7db0ff" font-family="Georgia,serif">0</text>
+    <text x="195" y="162" text-anchor="middle" font-size="12" fill="#7db0ff" font-family="Georgia,serif">1</text>
+    <!-- arrow -->
+    <line x1="285" y1="110" x2="345" y2="110" stroke="#96a0ba" stroke-width="2" marker-end="url(#ar)"/>
+    <defs>
+      <marker id="ar" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M1,1 L9,5.5 L1,10 Z" fill="#96a0ba"/>
+      </marker>
+    </defs>
+    <text x="315" y="100" text-anchor="middle" font-size="11" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">erase</text>
+    <!-- after: single well -->
+    <text x="470" y="26" text-anchor="middle" font-size="12.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">After: always 0 (1 possibility)</text>
+    <path d="M370,86 C410,86 430,140 470,140 C510,140 530,86 570,86"
+          fill="none" stroke="#5b9bff" stroke-width="2.2"/>
+    <circle cx="470" cy="133" r="7" fill="#f0ad5a"/>
+    <text x="470" y="162" text-anchor="middle" font-size="12" fill="#7db0ff" font-family="Georgia,serif">0</text>
+    <!-- heat released -->
+    <text x="470" y="205" text-anchor="middle" font-size="12.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">↯ heat released ≥ kT ln2</text>
+    <text x="470" y="228" text-anchor="middle" font-size="11" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">entropy kln2 is expelled, becoming heat</text>
+  </svg>
+  <figcaption>Erasure squeezes two possible inputs into one output — this step of losing information forces the system to dump at least kT ln2 of heat into the environment. It's a physical floor no computer can escape.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  A purely logical act ("clear the variable") turns out to carry a <strong>thermodynamic price</strong> — and that price is <strong>independent of what material or circuit you use</strong>. Transistors, gears, DNA, neurons: whatever does a "many-to-one" erasure must pay that <span class="nowrap"><var>k</var><var>T</var> ln2</span>. This is the sharpest cut of <strong>"information is physical"</strong>: an abstract logical operation gets a price tag stamped on it by the laws of physics. Information is no longer a ghost floating above the hardware — it has a mass-like reality: it takes up space, spends energy, obeys thermodynamics.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: computing is free, forgetting is not — erase a bit and you forfeit at least kT ln2 of heat.</div>
+    <div class="q"><b>Ponder:</b> Why can "flip" (0↔1) be free while "clear" (all to 0) charges a fee? What fundamentally different thing does each do to the information?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>Death of the Demon: the Bill Was on the Memory <span class="en">Exorcising the Demon</span></h2>
+  <span class="pill">Bennett · 1982 · information is physical</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Now go back and settle with Maxwell's demon. Using one bit of information (molecule left or right), the demon extracted <span class="nowrap"><var>k</var><var>T</var> ln2</span> of work — on paper, a free lunch. But don't forget: that bit is now <strong>stored in the demon's head</strong>. To handle the next molecule, it must <strong>free up memory</strong> — it must <strong>erase</strong> the previous result. And erasure, by Landauer's principle, costs <strong>exactly <span class="nowrap"><var>k</var><var>T</var> ln2</span> of heat</strong>. What it earned and what it pays <strong>cancel to the last drop</strong>. After all that fuss, the demon's net gain is <strong>0 (the number zero)</strong>. The Second Law wasn't robbed of a cent.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  This settlement was delivered by Charles Bennett in 1982, and the chain runs like this: measurement itself <strong>can</strong> be done reversibly, dissipating no energy (Landauer and Bennett showed <strong>reversible computation</strong> costs zero energy in principle); extracting the work is fine too. <strong>The one unavoidable dissipation is the step where the demon must clear its memory in order to work in a cycle.</strong> In other words, the old belief that the cost lay in "measurement" was wrong — what truly charges a fee is <strong>forgetting</strong>.
+  <div class="eq"><span style="color:#f0ad5a">earn:</span> <var>k</var><var>T</var> ln2 &nbsp;&nbsp;<span style="color:#5b9bff">pay (erase memory):</span> <var>k</var><var>T</var> ln2 &nbsp;&nbsp;⟹&nbsp;&nbsp; net = <span class="zero">0</span></div>
+  <div class="gloss">Every time the demon extracts a packet of work, it takes on a debt — "a bit waiting to be erased"; when it finally erases that bit to complete the cycle, the debt is repaid in full. The Second Law isn't violated but <strong>rescued</strong> by a hidden ledger entry called <strong>information</strong>.</div></div>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  This century-long detective story has a one-line verdict: <strong>information is physical (Landauer's dictum).</strong> A bit is not a mathematical abstraction; it must be <strong>carried on the state of some physical system</strong> — occupying space, carrying energy, taking part in the entropy ledger. The demon can be subdued precisely because we finally admit: the "knowledge" in the demon's head and the "heat" in the gas chambers are two entries in the same thermodynamic ledger, interconvertible and settled together. The entropy-and-arrow-of-time installment cast entropy as "disorder"; here it shows another face — <strong>entropy is the information you lack</strong>; two faces, the same <span class="nowrap"><var>k</var> ln</span>.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary reading · biology / engineering / theory of computation</span>
+  This exchange rate between information and energy traps far more than one demon in a thought experiment:
+  <ul>
+    <li><strong>Biology</strong>: molecular motors inside cells (like kinesin "walking" along microtubules), ion pumps, even the error-correcting copying of DNA have been argued to be <strong>real Maxwell demons</strong> — they rectify Brownian motion by reading molecular information, and the cost is still spent free energy (hydrolyzing ATP), not a cent less.</li>
+    <li><strong>Engineering</strong>: <strong>reversible computing</strong> is a real field — using logic gates that don't erase information (like the Toffoli gate), one can in principle push per-step energy below the Landauer limit, pointing the way to ultra-low-power chips (quantum computing is inherently reversible and lives by the same logic).</li>
+    <li><strong>Theory of computation</strong>: run "information = physical entropy" the other way and you get the whole viewpoint of analyzing algorithmic energy cost with statistical mechanics, of seeing learning as "compressing information" — entropy, information, and energy as three faces of one thing.</li>
+  </ul>
+  Wherever you use information to tame randomness, Landauer's tollbooth is standing there.</div>
+
+  <div class="punch">
+    <div class="one">In a sentence: the demon didn't lose at measuring, it lost at forgetting — the instant it clears its memory, it repays the stolen work in full.</div>
+    <div class="q"><b>Ponder:</b> If a device only records and never erases, could it truly violate the Second Law? And how long could it last? (Hint: is there enough storage in the universe for it to run forever?)</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>The Thermodynamic Floor of Computation: AI's Ultimate Energy Limit <span class="en">The Thermodynamic Limit of Computation</span></h2>
+  <span class="pill">Landauer limit · physics of computation</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Landauer's principle doesn't just try the demon; it draws an energy floor under <strong>every computer</strong>: each erased bit must dissipate at least <span class="nowrap"><var>k</var><var>T</var> ln2</span> of heat. How far are today's chips from that floor? <strong>Terrifyingly far.</strong> A single transistor switch actually spends roughly <strong>ten thousand to a hundred thousand times</strong> the Landauer limit. That means there is physically <strong>four to five orders of magnitude of room left to save energy</strong> — but it also means that however far technology advances, <strong>this floor can never be pierced</strong>: a machine erasing a billion-billion bits per second is destined, just by "forgetting," to give off a heat that cannot go lower.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Translate the floor into intuition: at room temperature, erasing one bit ≈ <span class="nowrap">2.9×10⁻²¹ J</span>. It sounds negligible, but multiply it by the operations per second in today's data centers and the Landauer limit becomes a <strong>theoretical minimum power</strong> you can hold up against a real electricity meter. In the real world, training a large model burns electricity measured in <strong>megawatt-hours</strong>, the vast majority spent not on this physical floor but on <strong>engineering losses far above it</strong> (leakage currents, drive, cooling, moving data around).
+  <div class="gloss">This yields a sober two-part conclusion. First, <strong>AI's energy bottleneck is <em>not</em> a law of physics right now, but engineering</strong> — there's still a ten-thousand-fold margin to the Landauer floor, an enormous room to economize. Second, <strong>the floor really does exist</strong>: reversible computing can approach it but not pass through it, unless the computation <strong>never erases information</strong> (which then demands unbounded storage). Physics gives both hope and a hard limit.</div></div>
+
+  <div class="field"><span class="lab">The counterintuitive part</span>
+  The human brain runs on about 20 watts and finishes cognition that today's supercomputers can only chase, with an energy efficiency many orders of magnitude above top-end chips — it sits <strong>much closer</strong> to the Landauer floor. This hints that <strong>low-power intelligence is entirely allowed by physics; we just haven't learned how to build it</strong>. When someone says "AI's power draw is an insurmountable wall," physics answers calmly: the truly insurmountable wall (the Landauer floor) is still far away; what we've hit is merely the temporary ceiling of our own fabrication. <strong>Making more of our computation reversible and erasure-light is the honest road toward the physical limit.</strong></div>
+
+  <div class="punch">
+    <div class="one">In a sentence: AI's energy ceiling isn't a law of physics but engineering — the real physical floor lies ten thousand times below.</div>
+    <div class="q"><b>Ponder:</b> If a computer could make most of its operations "reversible, erasure-free," could it think at nearly zero energy? Where would that machine's cost get shifted to instead?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>Is entropy "objective disorder" or "the information I lack"? This installment slammed them together.</summary>
+  <div class="body">Two seemingly different entropies are proven, here at Landauer, to be <strong>the same quantity</strong>. Thermodynamic entropy <span class="nowrap"><var>S</var>=<var>k</var> ln<var>W</var></span> counts microstates; Shannon information entropy counts "the bits you don't know." Settling Maxwell's demon works only if you accept "erasing one bit = losing one packet of physical entropy <span class="nowrap"><var>k</var> ln2</span>" — which nails the two into <strong>two sides of one coin</strong>, the exchange rate being exactly Boltzmann's constant <var>k</var>. The statistical-mechanics installment already planted this line with Jaynes's maximum-entropy view: entropy measures "your most honest ignorance given the macroscopic constraints." Here it fully ignites — <strong>disorder and ignorance are the same thing</strong>.</div></details>
+
+  <details><summary>Can reversible computing really cost zero energy? Then why is my laptop still hot?</summary>
+  <div class="body">In principle, <strong>as long as you never erase information</strong>, computation owes no thermodynamic debt — using <strong>reversible logic gates</strong> like Toffoli or Fredkin (input and output in one-to-one correspondence, always run-backward-able), per-step energy can approach 0 without limit. Your laptop is hot because it is <strong>erasing constantly</strong>: every register overwrite, cache clear, discarded intermediate result is a "many-to-one" operation Landauer charges for — and actual energy runs ten thousand times above the floor anyway (leakage, drive losses). Reversible computing's cost lands elsewhere: either keep all the intermediate garbage (eats storage) or "uncompute" to clear it reversibly (eats time). <strong>Energy, space, time — the three are traded against each other; there is no true free lunch.</strong></div></details>
+
+  <details><summary>Why exactly ln2, and not some other number? Where does the "2" come from?</summary>
+  <div class="body">That 2 is simply <strong>the two possibilities of one bit</strong>: 0 or 1, left or right. Erasure squeezes 2 equally likely states into 1, dropping the accessible-state count from <var>W</var>=2 to <var>W</var>=1, an entropy change of <span class="nowrap">Δ<var>S</var> = <var>k</var> ln1 − <var>k</var> ln2 = −<var>k</var> ln2</span>. If you erase a storage cell holding <var>d</var> states (say an octal digit, <var>d</var>=8), the cost is <span class="nowrap"><var>k</var><var>T</var> ln<var>d</var></span>. Inside the ln is always "the number of possibilities you annihilated." This also explains why information is measured in <strong>log</strong>: turning a count of possibilities into additive bits requires a logarithm — the same log runs from entropy <span class="nowrap"><var>S</var>=<var>k</var> ln<var>W</var></span> straight through to Shannon information, one shared skeleton.</div></details>
+
+  <details><summary>Has anyone actually "seen" the Landauer limit in a lab, or is it pure theory?</summary>
+  <div class="body">Seen. In 2012 a French group used <strong>optical tweezers</strong> to trap a single colloidal particle in a tunable "double well," treating it as one physical bit, and measured that <strong>erasing it dissipates heat approaching <span class="nowrap"><var>k</var><var>T</var> ln2</span></strong>, beautifully confirming Landauer's principle (<em>Nature</em>, 2012). It has since been verified in nanomagnets, single-electron devices, and even quantum systems. This 1961 principle walked off the page into measurable experimental fact — <strong>"information is physical" is no longer a slogan but a number you can read off a thermometer</strong>.</div></details>
+
+  <details><summary>How much information can the universe itself store, how many operations can it run? Is there an ultimate limit on information?</summary>
+  <div class="body">There is, and it runs frighteningly deep. Put Landauer, quantum mechanics, and gravity together and you get a startling limit: the <strong>maximum information</strong> a region can hold is proportional to its <strong>surface area</strong> (not its volume!) — the seed of the <strong>Bekenstein bound</strong> and the holographic principle, with a black hole's entropy exactly equal to its horizon area (in Planck-area units) divided by 4. Cram in too much information and the object collapses into a black hole. Seth Lloyd has even estimated how many operations "the universe as a computer" could have run so far (about 10¹²⁰). These threads lift <strong>information</strong> to a footing as fundamental as space, time, and gravity — and the information paradox of the black-holes-and-gravitational-waves installment catches fire right here.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Rolf Landauer, <em>"Irreversibility and Heat Generation in the Computing Process,"</em> <em>IBM J. Res. Dev.</em> 1961 — the founding paper of Landauer's principle</li>
+    <li>Charles H. Bennett, <em>"The Thermodynamics of Computation—a Review,"</em> <em>Int. J. Theor. Phys.</em> 1982 — the demon's settlement and a survey of reversible computing</li>
+    <li>Charles H. Bennett, <em>"Demons, Engines and the Second Law,"</em> <a href="https://www.scientificamerican.com/article/demons-engines-and-the-second-law/"><em>Scientific American</em>, 1987</a> — the most readable popular version</li>
+    <li>Bérut et al., <em>"Experimental verification of Landauer's principle…,"</em> <a href="https://www.nature.com/articles/nature10872"><em>Nature</em> 483, 2012</a> — single-particle measurement of the Landauer limit</li>
+    <li><a href="https://en.wikipedia.org/wiki/Maxwell%27s_demon">Maxwell's demon</a> and <a href="https://en.wikipedia.org/wiki/Landauer%27s_principle">Landauer's principle</a> (Wikipedia) — history and further links</li>
+  </ul>
+</div>
+
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

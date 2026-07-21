@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理：信息的物理 · Day 9</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>信息的物理</h1>
+  <div class="meta">Day 9 · 2026 · Phase B 热、熵与统计力学</div>
+  <div class="tagline">一个比特不是抽象的 0 或 1——它占空间、要能量、会发热。信息不是飘在世界之上的幽灵，它彻底是物理的。</div>
+</header>
+
+<div class="intro">
+一百五十年前，麦克斯韦设想了一个"小妖"：它守在两间气室的门口，只放快分子往一边跑、慢分子往另一边跑，就能凭空把一杯温水分成一半热、一半冷——<b>不花一点功，却让熵减少</b>。这直接踩了第二定律的脸。物理学花了一个世纪才抓住这个妖的破绽，而破绽的名字，正是<b>信息</b>。答案深得惊人：妖要分拣，就必须<b>知道</b>每个分子快不快——它得测量、得记住。而记忆是有限的，早晚要<b>擦除</b>；擦除一个比特，<b>必然</b>向环境吐出至少一份热。信息与热力学在这里合二为一，也第一次给"计算"划出了一条谁都绕不过的能量底线——那条线，正压在今天 AI 能耗问题的最深处。
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>麦克斯韦妖：信息能换来免费的功吗 <span class="en">Maxwell's Demon</span></h2>
+  <span class="pill">麦克斯韦 · 1867</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  想象一个盒子被隔成左右两间，中间一道小门，门上坐着一个眼尖手快的"小妖"。盒里的气体分子有快有慢（快=热、慢=冷）。妖盯着飞来的分子：看到快的从左飞来，就开门放它去右边；看到慢的从右飞来，就放它去左边。门开合几乎不费力。渐渐地，右边聚满快分子（变热）、左边聚满慢分子（变冷）——<strong>一杯本来温吞吞的均匀气体，自己分成了冷热两半</strong>。可这正是热量从"没有温差"里凭空造出温差，等于让熵<strong>减少</strong>了。你甚至能用这个温差去驱动一台热机做功——一台<strong>不花燃料的永动机</strong>。哪里出错了？</div>
+
+  <div class="field"><span class="lab">机制</span>
+  麦克斯韦 1867 年提这个思想实验，本意就是要说明：第二定律不是铁打的力学定理，而是一条<strong>统计</strong>规律——对<strong>大量</strong>分子成立，对会"作弊"的单分子操作未必成立。1929 年西拉德（Szilard）把妖榨到只剩骨架：设想盒里只有<strong>一个</strong>分子，妖只需知道它此刻在<strong>左半还是右半</strong>——这就是<strong>一个比特</strong>的信息。凭这一个比特，妖插入活塞、让分子推动它，就能从环境热库里提取出一份功：
+  <div class="eq"><var>W</var> = <var>k</var><var>T</var> ln2</div>
+  <div class="gloss"><var>W</var> 是提取到的功；<var>k</var> 是玻尔兹曼常数（把温度折成能量的"汇率"，约 1.38×10⁻²³ 焦/开）；<var>T</var> 是温度；ln2 是 2 的自然对数（约 0.69），来自"左/右"这<strong>两种</strong>可能。这行式子第一次把<strong>一个比特的信息</strong>和一份<strong>确切的能量</strong>钉在了一起：知道分子在哪，值 <span class="nowrap"><var>k</var><var>T</var> ln2</span> 的功。</div></div>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  很多人以为妖的破绽在"开门要花力气"。不是。门可以做得任意轻、开合任意省功——这条路堵不死妖。真正的破绽藏在一个几乎没人注意的动作里：妖要分拣，就<strong>必须先知道</strong>分子快不快、在左还是在右。<strong>它得测量，还得把结果记住。</strong>妖不是一个纯机械装置，它是一个<strong>会获取信息、有记忆</strong>的装置。账，最终要算在这份记忆头上——而不是那扇门。</div>
+
+  <div class="punch">
+    <div class="one">一句话：妖没在偷功，它在偷信息——问题是，信息真的免费吗？</div>
+    <div class="q"><b>思考：</b>如果妖的记忆是无限大的，它是不是就能永远作弊下去？"无限记忆"这个假设，藏着什么猫腻？</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>兰道尔原理：擦掉一个比特的最低代价 <span class="en">Landauer's Principle</span></h2>
+  <span class="pill">兰道尔 · 1961</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  把逻辑运算分成两类。有些是<strong>可逆</strong>的：比如把一个比特取反（0↔1），你事后总能从结果倒推回输入，没丢任何信息。另一些是<strong>不可逆</strong>的——最典型的就是<strong>擦除</strong>：不管这个比特原来是 0 还是 1，擦除后它一律变成 0。两个不同的输入（0 和 1）挤进了同一个输出（0）——<strong>倒推回去时，你分不清它原来是谁了，一个比特的信息永远丢失了</strong>。兰道尔 1961 年的洞见是：<strong>正是这种"信息丢失"，逼出了物理代价。</strong></div>
+
+  <div class="field"><span class="lab">机制</span>
+  想象比特存在一个"双井"里：左井=0，右井=1，中间隔着能垒。擦除意味着<strong>不管小球原来在哪个井，都把它赶进 0 井</strong>。原来有 2 种可能（左或右），擦除后只剩 1 种——这个存储子系统的相态数被压缩了一半，它的熵下降了 <span class="nowrap"><var>k</var> ln2</span>。但第二定律不许总熵下降：这份被挤出去的熵，必须以<strong>热</strong>的形式吐给环境。于是有了<strong>兰道尔极限</strong>——擦除一个比特，至少向环境放出：
+  <div class="eq"><var>Q</var> ≥ <var>k</var><var>T</var> ln2</div>
+  <div class="gloss"><var>Q</var> 是必然散出的热量。室温（<var>T</var>≈300 开）下这个数是 <span class="nowrap">≈ 2.9×10⁻²¹ 焦</span>——约 0.018 电子伏特，小得惊人，却<strong>严格大于 0（数字零）</strong>。关键在那个不等号：这不是"目前工艺做不到更省"，而是<strong>物理原理钉死的地板</strong>，再精巧的技术也不可能擦得比它更便宜。</div>
+  注意代价挂在<strong>擦除（逻辑不可逆）</strong>上，不在"计算"本身。可逆的运算，原则上<strong>一分钱能量都不必花</strong>——这正是下一张卡要用来给妖判死刑的钥匙。</div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="擦除比特：两个势井合并为一个，向环境放热 kT ln2">
+    <!-- before: double well -->
+    <text x="150" y="26" text-anchor="middle" font-size="12.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">擦除前：0 或 1（2 种可能）</text>
+    <path d="M40,86 C70,86 82,140 105,140 C128,140 138,96 150,96 C162,96 172,140 195,140 C218,140 230,86 260,86"
+          fill="none" stroke="#5b9bff" stroke-width="2.2"/>
+    <circle cx="105" cy="133" r="7" fill="#f0ad5a"/>
+    <circle cx="195" cy="133" r="7" fill="#f0ad5a" opacity="0.5"/>
+    <text x="105" y="162" text-anchor="middle" font-size="12" fill="#7db0ff" font-family="Georgia,serif">0</text>
+    <text x="195" y="162" text-anchor="middle" font-size="12" fill="#7db0ff" font-family="Georgia,serif">1</text>
+    <!-- arrow -->
+    <line x1="285" y1="110" x2="345" y2="110" stroke="#96a0ba" stroke-width="2" marker-end="url(#ar)"/>
+    <defs>
+      <marker id="ar" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M1,1 L9,5.5 L1,10 Z" fill="#96a0ba"/>
+      </marker>
+    </defs>
+    <text x="315" y="100" text-anchor="middle" font-size="11" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">擦除</text>
+    <!-- after: single well -->
+    <text x="470" y="26" text-anchor="middle" font-size="12.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">擦除后：一律是 0（1 种可能）</text>
+    <path d="M370,86 C410,86 430,140 470,140 C510,140 530,86 570,86"
+          fill="none" stroke="#5b9bff" stroke-width="2.2"/>
+    <circle cx="470" cy="133" r="7" fill="#f0ad5a"/>
+    <text x="470" y="162" text-anchor="middle" font-size="12" fill="#7db0ff" font-family="Georgia,serif">0</text>
+    <!-- heat released -->
+    <text x="470" y="205" text-anchor="middle" font-size="12.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">↯ 向环境放热 ≥ kT ln2</text>
+    <text x="470" y="228" text-anchor="middle" font-size="11" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">熵 kln2 被挤出，只能变成热</text>
+  </svg>
+  <figcaption>擦除把两种可能的输入压进唯一的输出——信息丢失的这一步，逼着系统向环境吐出至少 kT ln2 的热。这是任何计算机都逃不掉的物理地板。</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  一个纯逻辑的动作（"把变量清零"）竟然有一个<strong>热力学价格</strong>，而且这个价格<strong>与你用什么材料、什么电路无关</strong>——晶体管、齿轮、DNA、神经元，只要它做了"多对一"的擦除，就得付这笔 <span class="nowrap"><var>k</var><var>T</var> ln2</span>。这是<strong>"信息就是物理"</strong>最锋利的一刀：抽象的逻辑操作，被物理定律标了价。信息不再是飘在硬件之上的幽灵，它有质量般的实在——占空间、耗能量、遵守热力学。</div>
+
+  <div class="punch">
+    <div class="one">一句话：算不花钱，忘才花钱——擦掉一个比特，至少赔上 kT ln2 的热。</div>
+    <div class="q"><b>思考：</b>为什么"取反"（0↔1）可以免费，"清零"（都变 0）却要收费？两者对信息做了什么根本不同的事？</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>妖之死：账原来算在记忆上 <span class="en">Exorcising the Demon</span></h2>
+  <span class="pill">贝内特 · 1982 · 信息即物理</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  现在回去收拾麦克斯韦妖。妖靠一个比特的信息（分子在左还是右）提取了 <span class="nowrap"><var>k</var><var>T</var> ln2</span> 的功——账面上像是白赚。但别忘了：这个比特现在<strong>记在妖的脑子里</strong>。妖要接着干下一个分子，就得<strong>腾出记忆</strong>——把上一次的结果<strong>擦掉</strong>。而擦除，按兰道尔原理，<strong>恰好要付出 <span class="nowrap"><var>k</var><var>T</var> ln2</span> 的热</strong>。赚的和赔的<strong>分毫不差地抵消</strong>。妖忙活一圈，净收益是 <strong>0（数字零）</strong>。第二定律，一分钱都没被偷走。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  这个了断由贝内特（Charles Bennett）在 1982 年给出，接棒的是这样一条链子：测量本身<strong>可以</strong>做到可逆、不耗能（兰道尔与贝内特证明了<strong>可逆计算</strong>在原理上零能耗）；提取功也没问题。<strong>唯一无法回避的耗散，是妖为了循环工作而必须清空记忆的那一步。</strong>换句话说，早年大家以为代价在"测量"，其实错了——真正收费的是<strong>遗忘</strong>。
+  <div class="eq"><span style="color:#f0ad5a">赚：</span> <var>k</var><var>T</var> ln2 &nbsp;&nbsp;<span style="color:#5b9bff">赔（擦记忆）：</span> <var>k</var><var>T</var> ln2 &nbsp;&nbsp;⟹&nbsp;&nbsp; 净 = <span class="zero">0</span></div>
+  <div class="gloss">妖每提取一份功，就欠下一个"待擦的比特"；等它把这个比特擦掉以完成循环，欠的债连本带利还清。第二定律不是被违反，而是被<strong>信息</strong>这条隐藏的账目<strong>救了回来</strong>。</div></div>
+
+  <div class="field"><span class="lab">为什么重要</span>
+  这场跨越一个世纪的破案，结论只有一句：<strong>信息是物理的（information is physical，兰道尔的名言）。</strong>一个比特不是数学抽象，它一定<strong>承载在某个物理系统的状态上</strong>——占据空间、携带能量、参与熵账。麦克斯韦妖之所以能被降服，正因为我们终于承认：妖脑中的"知识"和气室里的"热"，是同一本热力学总账上的两笔，可以相互兑换、必须一起结算。前面「熵与时间之箭」把熵讲成"无序"，这一期它露出了另一张脸——<strong>熵就是你缺失的信息</strong>；两张脸，同一个 <span class="nowrap"><var>k</var> ln</span>。</div>
+
+  <div class="field xref"><span class="lab">跨学科对读 · 生物 / 工程 / 计算理论</span>
+  "信息与能量可兑换"这条兑换率，不止困住了一个思想实验里的妖：
+  <ul>
+    <li><strong>生物</strong>：细胞里的分子马达（如驱动蛋白沿微管"走路"）、离子泵、乃至 DNA 的纠错复制，都被论证为<strong>真实存在的麦克斯韦妖</strong>——它们靠读取分子信息来整流布朗运动，代价照样是消耗自由能（水解 ATP），一分不少。</li>
+    <li><strong>工程</strong>：<strong>可逆计算</strong>是一个真领域——用不擦除信息的逻辑门（如 Toffoli 门），原则上能把每步能耗压到兰道尔极限以下，为超低功耗芯片指路（量子计算天然可逆，也吃这套逻辑）。</li>
+    <li><strong>计算理论</strong>：把"信息=物理熵"反过来用，就得到用统计力学分析算法能耗、把学习看成"压缩信息"的整套视角——熵、信息、能量本是一体三面。</li>
+  </ul>
+  凡是"用信息去驯服随机"的地方，兰道尔的收费站都立在那里。</div>
+
+  <div class="punch">
+    <div class="one">一句话：妖没输在测量，输在遗忘——清空记忆的那一刻，它把偷来的功如数还清。</div>
+    <div class="q"><b>思考：</b>如果一个装置<strong>只记录、从不擦除</strong>，它能不能真的违反第二定律？它又能撑多久？（提示：宇宙里的存储空间够不够它用到永远？）</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>计算的热力学地板：AI 能耗的终极底线 <span class="en">The Thermodynamic Limit of Computation</span></h2>
+  <span class="pill">兰道尔极限 · 计算的物理</span>
+
+  <div class="field"><span class="lab">直觉</span>
+  兰道尔原理不只是给妖判案，它给<strong>一切计算机</strong>划了一条能量地板：每擦除一个比特，最少 <span class="nowrap"><var>k</var><var>T</var> ln2</span> 的热必须散掉。现代芯片离这条地板有多远？<strong>远得可怕。</strong>一次晶体管开关的实际耗能，大约是兰道尔极限的<strong>一万到十万倍</strong>。也就是说，物理上<strong>还有四到五个数量级的省电空间</strong>——但也意味着，无论工艺怎么进步，<strong>这条地板永远踩不穿</strong>：一台每秒擦万亿亿比特的机器，光是"遗忘"就注定要发一份下不去的热。</div>
+
+  <div class="field"><span class="lab">机制</span>
+  把地板换算成直觉：室温下擦一个比特 <span class="nowrap">≈ 2.9×10⁻²¹ 焦</span>。听着微不足道，但乘上今天数据中心每秒的运算量，兰道尔极限对应的<strong>理论最低功耗</strong>就成了一个能拿来跟真实电表对比的数。真实世界里，训练一个大模型耗电以<strong>兆瓦时</strong>计，其中绝大部分并非花在这条物理地板上，而是耗在<strong>远高于地板的工程损耗</strong>（漏电流、驱动、散热、数据搬运）里。
+  <div class="gloss">这给出一个清醒的双结论：其一，<strong>AI 的能耗瓶颈目前<em>不是</em>物理定律，而是工程</strong>——离兰道尔地板还有上万倍余量，省电空间巨大。其二，<strong>地板确实存在</strong>：可逆计算能逼近它却不能穿过它，除非计算过程<strong>永不擦除信息</strong>（那又要求无限大的存储）。物理学既给了希望，也钉死了极限。</div></div>
+
+  <div class="field"><span class="lab">反直觉的重点</span>
+  人脑约 20 瓦就跑完了今天超算望尘莫及的认知，能效比顶级芯片高出许多个数量级——它离兰道尔地板<strong>近得多</strong>。这暗示：<strong>低功耗智能在物理上完全允许，我们只是还没学会怎么造</strong>。当有人说"AI 的耗电是不可逾越的墙"，物理学的回答是冷静的：真正不可逾越的那堵墙（兰道尔地板）还在极远处，我们撞上的不过是自己工艺的临时天花板。<strong>把哪些计算做成可逆、少擦除，才是逼近物理极限的正道。</strong></div>
+
+  <div class="punch">
+    <div class="one">一句话：AI 的能耗天花板不是物理定律，而是工程——真正的物理地板还在一万倍之下。</div>
+    <div class="q"><b>思考：</b>如果一台计算机能把绝大多数运算做成"可逆、不擦除"，它是不是就能几乎零能耗地思考？这样的机器，代价会转嫁到哪里去？</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>深入思考</h2>
+
+  <details><summary>熵到底是"客观的无序"，还是"我缺失的信息"？这一期让它们撞在了一起。</summary>
+  <div class="body">两个看似不同的熵，在兰道尔这里被证明是<strong>同一个量</strong>。热力学熵 <span class="nowrap"><var>S</var>=<var>k</var> ln<var>W</var></span> 数的是微观态数目；香农信息熵数的是"你不知道的比特数"。麦克斯韦妖的了断只有承认"擦一个比特=丢一份物理熵 <span class="nowrap"><var>k</var> ln2</span>"才成立——这就把两者<strong>钉成了一枚硬币的两面</strong>，中间的兑换率正是玻尔兹曼常数 <var>k</var>。统计力学一期里 Jaynes 的最大熵视角早埋了这条线：熵度量的是"给定宏观约束下你最诚实的无知"。到这里它彻底点燃——<strong>无序与无知，本是同一件事</strong>。</div></details>
+
+  <details><summary>可逆计算真能零能耗吗？那为什么我的电脑还是烫的？</summary>
+  <div class="body">原理上，<strong>只要不擦除信息</strong>，计算就不欠热力学的债——用 Toffoli、Fredkin 这类<strong>可逆逻辑门</strong>（输入输出一一对应，随时能倒推），每步能耗可无限逼近 0。你电脑烫，是因为它<strong>时时刻刻在擦</strong>：每次改写寄存器、清缓存、丢弃中间结果，都在做兰道尔要收费的"多对一"操作，而且实际耗能还比地板高上万倍（漏电、驱动损耗）。可逆计算的代价是别处的：要么保留所有中间垃圾（吃存储），要么"反计算"把它们可逆地清掉（吃时间）。<strong>能量、空间、时间——三者之间在做交易，没有真正的免费午餐。</strong></div></details>
+
+  <details><summary>为什么恰恰是 ln2，而不是别的数？这个"2"从哪来？</summary>
+  <div class="body">那个 2 就是<strong>一个比特的两种可能</strong>：0 或 1、左或右。擦除把 2 种等可能状态压成 1 种，可及状态数从 <var>W</var>=2 降到 <var>W</var>=1，熵变 <span class="nowrap">Δ<var>S</var> = <var>k</var> ln1 − <var>k</var> ln2 = −<var>k</var> ln2</span>。若擦的是一个能存 <var>d</var> 种状态的存储单元（比如一个八进制位，<var>d</var>=8），代价就是 <span class="nowrap"><var>k</var><var>T</var> ln<var>d</var></span>。ln 里装的永远是"你消灭掉的可能性数目"。这也解释了信息为什么按 <strong>log</strong> 计：把可能性数目变成可加的比特，正需要取对数——这条 log 从熵 <span class="nowrap"><var>S</var>=<var>k</var> ln<var>W</var></span> 一路贯穿到香农信息，同一根骨架。</div></details>
+
+  <details><summary>真有人在实验室里"看见"兰道尔极限了吗，还是纯理论？</summary>
+  <div class="body">看见了。2012 年，一个法国小组用<strong>光镊</strong>把单个胶体微粒困在一个可调的"双井"里，当成一个物理比特，实测<strong>擦除它耗散的热逼近 <span class="nowrap"><var>k</var><var>T</var> ln2</span></strong>，漂亮地证实了兰道尔原理（<em>Nature</em> 2012）。后来在纳米磁体、单电子器件、乃至量子系统里都做了验证。这条 1961 年的原理，从纸面走成了可测的实验事实——<strong>"信息是物理的"不再是口号，而是能用温度计读出来的数字</strong>。</div></details>
+
+  <details><summary>宇宙本身能存多少信息、能算多少次？信息有终极上限吗？</summary>
+  <div class="body">有，而且深得吓人。把兰道尔、量子力学和引力凑到一起，会得到惊人的极限：一个区域能容纳的<strong>最大信息量</strong>，正比于它的<strong>表面积</strong>（不是体积！）——这就是<strong>贝肯斯坦上限</strong>与全息原理的种子，黑洞的熵正好等于其视界面积（以普朗克面积为单位）除以 4。塞进太多信息，物体会塌成黑洞。Seth Lloyd 甚至估算过"整个宇宙作为一台计算机"至今能执行的运算次数（约 10¹²⁰ 次）。这些线索把<strong>信息</strong>抬到了和空间、时间、引力同级的基本地位——后面「黑洞与引力波」一期的信息悖论，正是从这里烧起来的。</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>延伸阅读</h2>
+  <ul>
+    <li>Rolf Landauer，<em>"Irreversibility and Heat Generation in the Computing Process"</em>，<em>IBM J. Res. Dev.</em> 1961——兰道尔原理的原始文献</li>
+    <li>Charles H. Bennett，<em>"The Thermodynamics of Computation—a Review"</em>，<em>Int. J. Theor. Phys.</em> 1982——妖的了断与可逆计算总述</li>
+    <li>Charles H. Bennett，<em>"Demons, Engines and the Second Law"</em>，<a href="https://www.scientificamerican.com/article/demons-engines-and-the-second-law/"><em>Scientific American</em>, 1987</a>——最好读的科普版</li>
+    <li>Bérut et al.，<em>"Experimental verification of Landauer's principle…"</em>，<a href="https://www.nature.com/articles/nature10872"><em>Nature</em> 483, 2012</a>——单粒子实测兰道尔极限</li>
+    <li><a href="https://en.wikipedia.org/wiki/Maxwell%27s_demon">Maxwell's demon</a> 与 <a href="https://en.wikipedia.org/wiki/Landauer%27s_principle">Landauer's principle</a>（Wikipedia）——史脉络与延伸链接</li>
+  </ul>
+</div>
+
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
