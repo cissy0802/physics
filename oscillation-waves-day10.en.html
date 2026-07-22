@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: Oscillations &amp; Waves · Day 10</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.3rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">物理 · Physics</div>
+  <h1>Oscillations &amp; Waves</h1>
+  <div class="meta">Day 10 · 2026 · Phase C Waves, Light &amp; Electromagnetism</div>
+  <div class="tagline">A guitar string, a bridge, an electron inside an atom — all obey the same grammar, because almost anything pushed off balance rings back the same way.</div>
+</header>
+
+<div class="intro">
+From here physics changes its face. So far we asked <b>how particles move</b>; the next long stretch asks <b>how disturbances travel</b> — sound, light, electromagnetism, even quantum probability, all of it <b>waves</b>. And the seed of a wave is the humblest thing: <b>vibration</b>. Why does nearly every oscillation in the universe come out as the same sine curve? Why can a gentle push at just the right rhythm shake a bridge apart? And why, once you trap a wave inside a string, does it insist on existing only in <b>whole-number</b> patterns — that last point is the physical embryo of why atoms have discrete energy levels. Four cards: why SHM is everywhere, resonance, waves as travelling vibration, standing waves &amp; superposition.
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+  <h2>Simple Harmonic Motion: Why It's Everywhere <span class="en">简谐运动</span></h2>
+  <span class="pill">Classical mechanics · linear restoring force</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Nudge anything sitting quietly at a stable equilibrium — a pendulum, a mass on a spring, a marble in a bowl — and it <strong>swings back, overshoots, swings back again</strong>. The remarkable part: they all trace nearly the same curve, a <strong>sine</strong>. No coincidence. Zoom into the <strong>bottom of any energy valley</strong> and it looks like a parabola; a parabolic potential gives a restoring force <strong>exactly proportional to the displacement</strong> — and that dictates simple harmonic motion.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  The core is a linear restoring force: the farther you pull, the harder it tugs back, in strict proportion.
+  <div class="eq"><var>F</var> = −<var>k</var><var>x</var></div>
+  <div class="gloss"><var>F</var> is the restoring force, <var>x</var> is the displacement from equilibrium, <var>k</var> is the "stiffness" (how hard it pulls back). That leading <strong>minus sign</strong> is the soul: the force <strong>always points back toward equilibrium</strong> — pull right, it pulls left; pull left, it pushes right.</div>
+  This force law forces a pure sine:
+  <div class="eq"><var>x</var>(<var>t</var>) = <var>A</var> cos(<var>ω</var><var>t</var> + <var>φ</var>)</div>
+  <div class="gloss"><var>A</var> is the <strong>amplitude</strong> (how far it swings), <var>t</var> is time, <var>φ</var> ("phi") is the <strong>initial phase</strong> (where it started). The key player is <var>ω</var> ("omega") — the <strong>angular frequency</strong>, how fast it oscillates — set purely by the system itself: <span class="nowrap"><var>ω</var> = √(<var>k</var>/<var>m</var>)</span>, with <var>m</var> the mass. Stiffer and lighter means faster.</div>
+  The most counterintuitive line: <strong>frequency is independent of amplitude</strong>. Pull the mass twice as far and one round trip takes essentially the same time — which is exactly what lets a pendulum clock keep time.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 262" role="img" aria-label="The bottom of any potential well approximates a parabola; small oscillations are simple harmonic">
+    <line x1="62" y1="34" x2="62" y2="232" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="62,26 57,40 67,40" fill="#56607e"/>
+    <line x1="62" y1="232" x2="588" y2="232" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="596,232 582,227 582,237" fill="#56607e"/>
+    <text x="48" y="40" text-anchor="end" font-size="12.5" fill="#96a0ba" font-family="Georgia,serif" font-style="italic">U</text>
+    <text x="590" y="252" text-anchor="end" font-size="12.5" fill="#96a0ba" font-family="Georgia,serif" font-style="italic">x  position</text>
+    <path d="M 92 46 Q 190 214 300 202 Q 440 190 566 118" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
+    <polyline points="176,183 216,193 256,199 300,202 344,199 384,193 424,183" fill="none" stroke="#f0ad5a" stroke-width="2" stroke-dasharray="6 5"/>
+    <circle cx="300" cy="202" r="4.5" fill="#f0ad5a"/>
+    <text x="300" y="224" text-anchor="middle" font-size="12" fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif">equilibrium</text>
+    <line x1="256" y1="212" x2="344" y2="212" stroke="#dbe2f2" stroke-width="1.6"/>
+    <polygon points="250,212 262,208 262,216" fill="#dbe2f2"/>
+    <polygon points="350,212 338,208 338,216" fill="#dbe2f2"/>
+    <text x="470" y="150" font-size="12.5" fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif">true potential</text>
+    <text x="150" y="168" font-size="12.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">parabolic fit</text>
+  </svg>
+  <figcaption>Zoom into the bottom of any well and it ≈ a parabola (amber dashed) — so small oscillations are almost always simple harmonic. Only at large amplitude, climbing out of the valley, does the true potential (blue) diverge and SHM break down.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  SHM is everywhere <strong>not because nature loves sines</strong>, but as a mathematical inevitability: the Taylor expansion of any smooth potential near a minimum has, as its lowest nontrivial term, a quadratic (parabola). As long as the oscillation is small, higher terms are negligible and what's left is simple harmonic. <strong>"Small oscillations are harmonic" is the universal approximation you get by linearizing a complex system</strong> — which is why it's the starting point of all wave physics.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary · Math / Engineering</span>
+  "Near equilibrium, treat a nonlinear system as linear" is a craft that spans fields —
+  <ul>
+    <li><strong>Control engineering</strong>: controllers for aircraft and robot arms are mostly designed by <strong>linearizing</strong> the dynamics about an operating point; the whole stability analysis rides on this step;</li>
+    <li><strong>Economics</strong>: <strong>small-perturbation analysis</strong> around an equilibrium, to judge whether it's stable, uses the same linearizing intuition;</li>
+    <li><strong>Numerical optimization</strong>: a loss surface near its minimum ≈ a parabola (second-order Taylor) — precisely the geometry that makes Newton's method and second-order optimizers work.</li>
+  </ul>
+  The same "valley bottom ≈ parabola" idea is called SHM in physics and linearization elsewhere.</div>
+
+  <div class="punch">
+    <div class="one">In one line: every valley bottom is a parabola, so every small oscillation is a sine.</div>
+    <div class="q"><b>Ponder:</b> if an equilibrium's potential happens to have its quadratic term <strong>vanish</strong> (say a quartic bottom), is the small oscillation still harmonic? Would its frequency now depend on amplitude?</div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+  <h2>Resonance: Match the Frequency, Amplify <span class="en">共振</span></h2>
+  <span class="pill">Driven oscillation · natural frequency</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  Pushing a swing, you don't shove randomly — you push <strong>in time with its own rhythm</strong>, each push landing just as it swings back, so a little force accumulates until it's soaring. Anything that can oscillate has a <strong>natural frequency</strong> (the rate it "wants" to move at). When an external drive <strong>hits</strong> that frequency, energy is injected in the same direction every cycle and piles up — the amplitude <strong>explodes</strong>. That's resonance.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  Drive a harmonic system with a periodic force, and its steady-state amplitude depends on how close the <strong>drive frequency</strong> sits to the natural frequency <var>ω</var><sub>0</sub>. The closer, the bigger; dead-on, it peaks. How sharp and how tall that peak is depends on <strong>damping</strong> (friction, dissipation): less damping, narrower and taller peak — in the ideal undamped limit the amplitude is unbounded in principle.</div>
+
+  <figure>
+  <svg viewBox="0 0 620 250" role="img" aria-label="Resonance curve: amplitude peaks sharply at the natural frequency">
+    <line x1="66" y1="30" x2="66" y2="214" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="66,22 61,36 71,36" fill="#56607e"/>
+    <line x1="66" y1="214" x2="580" y2="214" stroke="#56607e" stroke-width="1.5"/>
+    <polygon points="588,214 574,209 574,219" fill="#56607e"/>
+    <text x="52" y="40" text-anchor="end" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">amplitude</text>
+    <text x="580" y="234" text-anchor="end" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">drive frequency</text>
+    <line x1="316" y1="52" x2="316" y2="214" stroke="#6a5326" stroke-width="1.3" stroke-dasharray="5 5"/>
+    <text x="316" y="230" text-anchor="middle" font-size="13" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">ω₀</text>
+    <path d="M70,208 L150,201 Q234,192 266,156 Q300,100 316,54 Q332,100 366,156 Q398,192 482,201 L560,208" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
+    <path d="M70,206 L150,196 Q236,185 268,160 Q300,132 316,116 Q332,132 364,160 Q396,185 482,196 L560,206" fill="none" stroke="#7b86a6" stroke-width="2.2" stroke-dasharray="7 5"/>
+    <text x="316" y="46" text-anchor="middle" font-size="12.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">amplitude spikes</text>
+    <line x1="418" y1="66" x2="446" y2="66" stroke="#5b9bff" stroke-width="2.4"/>
+    <text x="452" y="70" font-size="11.5" fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif">low damping</text>
+    <line x1="418" y1="86" x2="446" y2="86" stroke="#7b86a6" stroke-width="2.2" stroke-dasharray="7 5"/>
+    <text x="452" y="90" font-size="11.5" fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif">high damping</text>
+  </svg>
+  <figcaption>As the drive frequency sweeps across the natural frequency <span style="font-style:italic">ω₀</span>, the amplitude spikes. Less damping means a narrower, taller peak — the same effect that lets a radio "tune in" a station and that lets resonance destroy a bridge.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">Why it matters</span>
+  Resonance is the universal way to amplify a small input into a large response, and both edges are extreme: <strong>the good</strong> — it makes selectivity possible, a radio picking one station out of a sky full of waves; <strong>the bad</strong> — soldiers marching in step across a bridge, or a machine spinning up toward a structure's natural frequency, can pour energy into a single mode until it tears apart. The first thing an engineer does with anything that can shake is <strong>compute its natural frequency and keep the drive well away from it</strong>.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary · Biology / Engineering / Physics</span>
+  The same "match the frequency, amplify selectively" shows up everywhere —
+  <ul>
+    <li><strong>Biology · hearing</strong>: the basilar membrane in your cochlea <strong>resonates at different frequencies along its length</strong> — high frequencies near the entrance, low ones deep inside. Your inner ear is a hardware frequency analyzer, spreading sound out by pitch before sending it to the nerve;</li>
+    <li><strong>Engineering · communication</strong>: tuning a radio is tuning an LC circuit's natural frequency onto a station's carrier; MRI precisely "rings" the resonant frequency of hydrogen nuclei to image the body;</li>
+    <li><strong>Physics · instruments</strong>: a guitar's body, a violin's shell are resonant cavities that amplify the string's chosen frequencies — the timbre is set by which resonances get boosted.</li>
+  </ul>
+  Wherever you need to "pick one frequency out of many and amplify it," there's resonance.</div>
+
+  <div class="punch">
+    <div class="one">In one line: hit the natural frequency, and a tiny force accumulates into a huge swing.</div>
+    <div class="q"><b>Ponder:</b> the Tacoma Narrows Bridge is often taught as the textbook case of "resonance destroying a bridge," yet engineers largely blame <strong>aeroelastic flutter</strong> (a self-excited coupling of wind and structure), not simple external resonance. Where do the two differ?</div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+  <h2>Waves: Passing the Vibration On <span class="en">波</span></h2>
+  <span class="pill">Mechanical waves · v = fλ</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  One person vibrating in place is just vibrating; but if they <strong>tug</strong> the next person, who tugs the next, the vibration starts to <strong>travel</strong> — that's a wave. Flick a long rope and a bump races from your hand to the far end; yet every little segment of rope only <strong>bobs up and down in place</strong>, it doesn't run along. This is the most counterintuitive thing about waves: <strong>what travels is the "shape of the disturbance" and its energy, not the medium itself</strong>.</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  A simple wave is pinned down by three quantities: <strong>wavelength</strong> <var>λ</var> ("lambda," how long one full waveform is), <strong>frequency</strong> <var>f</var> (oscillations per second), and <strong>wave speed</strong> <var>v</var> (how fast the shape moves). One simple relation ties them together:
+  <div class="eq"><var>v</var> = <var>f</var><var>λ</var></div>
+  <div class="gloss">Each oscillation advances the waveform by one wavelength; at <var>f</var> oscillations per second it advances <var>f</var> wavelengths — so speed = frequency × wavelength. The key: <strong>wave speed is usually set by the medium</strong> (how taut the rope, how dense the air), not by how fast you shake. Shake faster (<var>f</var> up) and the wavelength <var>λ</var> shortens to compensate; the product holds.</div>
+  One layer deeper, a wave obeys a <strong>wave equation</strong>, saying "a tiny segment's acceleration is proportional to how much its neighbors bend it" (∂ reads "partial," the rate of change while holding all other variables fixed):
+  <div class="eq"><span class="frac"><span class="fnum">∂²<var>y</var></span><span class="fden">∂<var>t</var>²</span></span> = <var>v</var>² <span class="frac"><span class="fnum">∂²<var>y</var></span><span class="fden">∂<var>x</var>²</span></span></div>
+  <div class="gloss">The left side is the up-down acceleration of a point; the right side, ∂²<var>y</var>/∂<var>x</var>², is the <strong>curvature</strong> of the waveform there: the more the neighbors bend it, the harder it snaps back. Anything satisfying this equation — rope, sound, light — propagates at speed <var>v</var>. That's why "wave" is one concept spanning every medium.</div></div>
+
+  <figure>
+  <svg viewBox="0 0 620 210" role="img" aria-label="Snapshot of a travelling wave, labelling wavelength, amplitude and direction of propagation">
+    <defs>
+      <marker id="ah3" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#dbe2f2"/>
+      </marker>
+    </defs>
+    <line x1="46" y1="128" x2="586" y2="128" stroke="#33405f" stroke-width="1.2" stroke-dasharray="4 5"/>
+    <path d="M60,128 C85,83 110,83 135,128 C160,173 185,173 210,128 C235,83 260,83 285,128 C310,173 335,173 360,128 C385,83 410,83 435,128 C460,173 485,173 510,128"
+          fill="none" stroke="#5b9bff" stroke-width="2.6"/>
+    <line x1="97" y1="66" x2="247" y2="66" stroke="#dbe2f2" stroke-width="1.5" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+    <line x1="97" y1="72" x2="97" y2="90" stroke="#556080" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="247" y1="72" x2="247" y2="90" stroke="#556080" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="172" y="58" text-anchor="middle" font-size="14" fill="#eaeefb" font-family="Georgia,serif" font-style="italic">λ  wavelength</text>
+    <line x1="397" y1="128" x2="397" y2="84" stroke="#f0ad5a" stroke-width="1.6" marker-end="url(#ah3)"/>
+    <text x="410" y="106" font-size="13.5" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">A  amplitude</text>
+    <line x1="470" y1="190" x2="556" y2="190" stroke="#9fb0d0" stroke-width="2" marker-end="url(#ah3)"/>
+    <text x="464" y="194" text-anchor="end" font-size="12.5" fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif">wave speed v</text>
+  </svg>
+  <figcaption>A snapshot of the wave at one instant: wavelength λ is the length of one full undulation, amplitude A the maximum displacement. The whole shape slides right at speed v, while each point of the medium only bobs in place.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  A wave isn't "stuff flying," it's a <strong>relay of states</strong>. A cork on the sea surface just <strong>circles in place</strong> as swells pass; it isn't carried toward shore. Sound crossing a room doesn't fly air molecules from your mouth to the listener's ear — one layer pushes the next and passes it along. This insight — "what travels is the pattern, not the matter" — will carry all the way to light, and to quantum probability waves.</div>
+
+  <div class="punch">
+    <div class="one">In one line: a wave carries energy and shape, not the medium.</div>
+    <div class="q"><b>Ponder:</b> sound is faster in warm air, and roughly ten-plus times faster in steel than in air. Since <var>v</var>=<var>f</var><var>λ</var>, when a sound wave crosses from air into steel with its frequency unchanged, is it the wavelength that changes, or the frequency?</div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+  <h2>Standing Waves &amp; Superposition: Trapping a Wave <span class="en">驻波与叠加</span></h2>
+  <span class="pill">Superposition · normal modes</span>
+
+  <div class="field"><span class="lab">Intuition</span>
+  When two waves meet they don't collide — they <strong>superpose</strong>: the displacements simply add, and they pass through each other and carry on as if the other weren't there. This <strong>superposition principle</strong> is what sets waves apart from particles. And when a wave is <strong>trapped in a string fixed at both ends</strong>, it reflects back and forth and superposes with itself; only the waveforms whose "ends meet up" survive, forming a <strong>standing wave</strong> that undulates in place rather than travelling — some points never move (<strong>nodes</strong>), others swing hardest (<strong>antinodes</strong>).</div>
+
+  <div class="field"><span class="lab">Mechanism</span>
+  The <strong>boundary condition</strong> of both ends fixed is the crux: the length <var>L</var> must hold exactly a <strong>whole number of half-wavelengths</strong> for the wave to be self-consistent. So the allowed wavelengths are "sieved" into a discrete set:
+  <div class="eq"><var>λ</var><sub><var>n</var></sub> = <span class="frac"><span class="fnum">2<var>L</var></span><span class="fden"><var>n</var></span></span>,&nbsp;&nbsp;<var>n</var> = 1, 2, 3, …</div>
+  <div class="gloss"><var>L</var> is the string length, <var>n</var> the mode number (an integer). The frequencies come in integer multiples too: <var>f</var><sub><var>n</var></sub> = <var>n</var> <var>f</var><sub>1</sub>. The lowest, <var>n</var>=1, is the <strong>fundamental</strong> (it sets the pitch); <var>n</var>=2,3,… are the <strong>harmonics</strong> (together they set the timbre). A continuum of possibilities is <strong>quantized</strong> by the boundary into a discrete string of modes — note that word.</div></div>
+
+  <figure>
+  <svg viewBox="0 0 620 288" role="img" aria-label="The first three normal modes on a string fixed at both ends: fundamental, second and third harmonics">
+    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+      <line x1="90" y1="34" x2="90" y2="86" stroke="#6a5326" stroke-width="3"/>
+      <line x1="530" y1="34" x2="530" y2="86" stroke="#6a5326" stroke-width="3"/>
+      <line x1="90" y1="60" x2="530" y2="60" stroke="#33405f" stroke-width="1" stroke-dasharray="4 5"/>
+      <path d="M90,60 Q310,18 530,60" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
+      <path d="M90,60 Q310,102 530,60" fill="none" stroke="#5b9bff" stroke-width="1.4" stroke-dasharray="5 5" opacity=".7"/>
+      <text x="4" y="56" text-anchor="start" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">n=1</text>
+      <text x="4" y="72" text-anchor="start" fill="#96a0ba" font-size="10.5">fundamental</text>
+
+      <line x1="90" y1="118" x2="90" y2="170" stroke="#6a5326" stroke-width="3"/>
+      <line x1="530" y1="118" x2="530" y2="170" stroke="#6a5326" stroke-width="3"/>
+      <line x1="90" y1="144" x2="530" y2="144" stroke="#33405f" stroke-width="1" stroke-dasharray="4 5"/>
+      <path d="M90,144 Q200,110 310,144 Q420,178 530,144" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
+      <path d="M90,144 Q200,178 310,144 Q420,110 530,144" fill="none" stroke="#5b9bff" stroke-width="1.4" stroke-dasharray="5 5" opacity=".7"/>
+      <circle cx="310" cy="144" r="4" fill="#f0ad5a"/>
+      <text x="4" y="140" text-anchor="start" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">n=2</text>
+      <text x="4" y="156" text-anchor="start" fill="#96a0ba" font-size="10.5">2nd harmonic</text>
+
+      <line x1="90" y1="202" x2="90" y2="254" stroke="#6a5326" stroke-width="3"/>
+      <line x1="530" y1="202" x2="530" y2="254" stroke="#6a5326" stroke-width="3"/>
+      <line x1="90" y1="228" x2="530" y2="228" stroke="#33405f" stroke-width="1" stroke-dasharray="4 5"/>
+      <path d="M90,228 Q163,196 237,228 Q310,260 383,228 Q457,196 530,228" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
+      <path d="M90,228 Q163,260 237,228 Q310,196 383,228 Q457,260 530,228" fill="none" stroke="#5b9bff" stroke-width="1.4" stroke-dasharray="5 5" opacity=".7"/>
+      <circle cx="237" cy="228" r="4" fill="#f0ad5a"/>
+      <circle cx="383" cy="228" r="4" fill="#f0ad5a"/>
+      <text x="4" y="224" text-anchor="start" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">n=3</text>
+      <text x="4" y="240" text-anchor="start" fill="#96a0ba" font-size="10.5">3rd harmonic</text>
+
+      <circle cx="150" cy="276" r="4" fill="#f0ad5a"/>
+      <text x="162" y="280" fill="#9fb0d0" font-size="11.5">node (never moves)</text>
+      <line x1="330" y1="276" x2="356" y2="276" stroke="#5b9bff" stroke-width="2.4"/>
+      <text x="364" y="280" fill="#9fb0d0" font-size="11.5">two phases (dashed = half a cycle later)</text>
+    </g>
+  </svg>
+  <figcaption>Nailed at both ends, the string only exists in whole numbers of half-wavelengths: n=1, 2, 3… the modes are discrete. Solid and dashed are the same standing wave half a cycle apart — it breathes up and down, yet the nodes (amber dots) stay perfectly still.</figcaption>
+  </figure>
+
+  <div class="field"><span class="lab">The counterintuitive point</span>
+  A continuous string, yet its allowed vibrations are <strong>discrete</strong> — the string didn't "choose" integers, the boundary <strong>forced</strong> them. Anytime you "trap a wave inside a bounded region," you get a discrete series of allowed modes with their corresponding frequencies. Hold onto this: <strong>trap a particle inside an atom and its matter wave likewise collapses to a discrete series of standing-wave modes — the corresponding thing is the discrete energy levels</strong>. Why an atom emits only specific colors of light — the embryo is right here on this guitar string.</div>
+
+  <div class="field xref"><span class="lab">Cross-disciplinary · Math / Quantum / Engineering</span>
+  "Any state = a superposition of normal modes" is a very deep organizing principle —
+  <ul>
+    <li><strong>Math · Fourier</strong>: any waveform (indeed any signal) can be decomposed into a sum of sine modes. The complex sound of a plucked string is just its fundamental and harmonics at differing strengths — timbre is a "harmonic recipe";</li>
+    <li><strong>Quantum</strong>: a bound particle's wavefunction is a standing wave, and the boundary conditions sieve the energy into discrete levels — every line in the hydrogen spectrum is one allowed mode. This reading is the direct springboard to understanding quantization;</li>
+    <li><strong>Engineering · modal analysis</strong>: buildings, bridges, aircraft wings all have their own <strong>natural mode shapes</strong> (a structural version of harmonics); earthquake-resistant design means computing these modes and keeping quake frequencies from exciting them.</li>
+  </ul>
+  Once you learn to see a complex vibration as a sum of normal modes, you view everything — from musical tone to atom to skyscraper — with the same pair of eyes.</div>
+
+  <div class="punch">
+    <div class="one">In one line: trap a wave and the continuous turns discrete.</div>
+    <div class="q"><b>Ponder:</b> on one guitar string, fretting shortens the effective length and raises the pitch — use <var>λ</var><sub>1</sub>=2<var>L</var> and <var>v</var>=<var>f</var><var>λ</var> to explain: is it the wave speed on the string that changes, or the wavelength?</div>
+  </div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+  <h2>Going Deeper</h2>
+
+  <details><summary>Why is the sine so special? Wouldn't some other periodic waveform do?</summary>
+  <div class="body">Two reasons. First, the sine is the <strong>unique solution</strong> of simple harmonic motion — the equation of motion for a linear restoring force <var>F</var>=−<var>kx</var> can only be solved by a sine. Second, the sine is the <strong>eigenmode</strong> of the wave equation: it passes through a linear medium unchanged in shape, merely translated, whereas square and triangle waves spread and distort in a dispersive medium. Better still, Fourier tells us any periodic waveform can be written as a sum of sines — so the sine isn't "a" waveform, it's the <strong>alphabet</strong> of all of them. Study the sine and you've studied them all.</div></details>
+
+  <details><summary>Can resonance push the amplitude to infinity? Why doesn't a bridge "inevitably" collapse?</summary>
+  <div class="body">Only in the idealized <strong>zero-damping</strong> model does a drive exactly at the natural frequency grow without bound. In reality there's always damping (internal friction, air drag, radiated energy), so the amplitude settles at a finite peak — more damping, lower and blunter the peak. Engineering adds two safeguards: designing the structure's natural frequency <strong>far</strong> from common drive sources, and actively adding <strong>dampers</strong> (like the tuned mass damper atop Taipei 101 — a huge steel ball that swings out of phase, expressly to "drink away" resonant energy). So resonance is a danger that can be tamed, not a fate.</div></details>
+
+  <details><summary>Is superposition a universal truth, or a conditional approximation?</summary>
+  <div class="body">It's a property of <strong>linear</strong> systems, not an iron law of the universe. As long as a medium's response is proportional to the disturbance (small amplitude), two waves add cleanly without interfering — most everyday sound and light live in this regime. But push to <strong>large amplitude</strong>, the medium turns nonlinear, and superposition fails: shock waves (like a supersonic sonic boom) steepen and break; a tsunami curls up near shore. Intriguingly, quantum mechanics' superposition principle is thought to be <strong>exact</strong> — the Schrödinger equation is strictly linear, which is the root of why quantum superposition is so "absolute," a point the "Wavefunction &amp; Superposition" material tackles head-on.</div></details>
+
+  <details><summary>A standing wave "doesn't move" — so where does the energy go? Does it still transmit any?</summary>
+  <div class="body">A pure standing wave transmits <strong>no net energy</strong> — it's the superposition of two equal, oppositely travelling waves, and whatever energy one sends leftward the other sends back rightward, net flow zero. Energy just <strong>sloshes</strong> between nodes and antinodes (trading kinetic for potential between the antinodes). That's why it's called "standing." A real instrument does keep leaking a little energy as radiated sound (otherwise you'd hear nothing), so you must keep plucking to top it up — but that's a small leak on top of the ideal standing wave, whose bulk is a mode that stays put.</div></details>
+
+  <details><summary>If everything can be decomposed into sine modes, are "modes" really real, or just a convenient math trick?</summary>
+  <div class="body">Intriguing. On one hand, normal modes are indeed a <strong>mathematical choice</strong> — you could use a different basis (wavelets, say) to decompose the same vibration. On the other, modes are oddly "real": each has a definite frequency, can be <strong>independently</strong> excited or damped, and in quantum mechanics corresponds to a countable share of energy (a phonon). Perhaps the criterion is: when the system is <strong>linear</strong>, modes don't exchange energy and each evolves on its own, and this independence earns them the status of genuine degrees of freedom, beyond a mere math decomposition. Once nonlinearity enters, modes start to couple and feed each other energy, and that "reality" is discounted.</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+  <h2>Further Reading</h2>
+  <ul>
+    <li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, chs. 21–25 &amp; 49–50 "The Harmonic Oscillator · Waves · Modes" — the intuition baseline</li>
+    <li>A. P. French, <em>Vibrations and Waves</em> (the MIT intro classic) — takes you from oscillation to wave superbly</li>
+    <li>3Blue1Brown, <em>"But what is the Fourier Transform?"</em> — a visualization of "the sine as alphabet"</li>
+    <li>Wikipedia: <em>Simple harmonic motion</em> / <em>Resonance</em> / <em>Standing wave</em> — quick reference for concepts and figures</li>
+    <li>Billah &amp; Scanlan, <em>"Resonance, Tacoma Narrows Bridge Failure…"</em>, <em>Am. J. Phys.</em> 1991 — setting the "resonance" myth straight</li>
+  </ul>
+</div>
+
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
