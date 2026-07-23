@@ -60,6 +60,13 @@
   .read ul{margin:0;padding-left:20px;font-size:.92rem;color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px;font-size:.8rem;color:#5b6480;text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -128,7 +135,7 @@ Most people think physics is <b>a pile of formulas</b>. The deepest physicists s
 
   <div class="punch">
     <div class="one">In one line: a conservation law is the shadow of a symmetry.</div>
-    <div class="q"><b>Think:</b> if some quantity stopped being conserved in the very early universe, which symmetry would you go looking for as broken?</div>
+    <details class="q"><summary><b>Think:</b> if some quantity stopped being conserved in the very early universe, which symmetry would you go looking for as broken?</summary><div class="qa">Look for which symmetry broke. Energy non-conservation ↔ broken time-translation symmetry — exactly the case in an expanding universe: spacetime itself changes with time (the scale factor grows), so cosmological "total energy" really isn’t strictly conserved. A lost conservation law always points to a failed symmetry.</div></details>
   </div>
 </div>
 
@@ -189,7 +196,7 @@ Most people think physics is <b>a pile of formulas</b>. The deepest physicists s
 
   <div class="punch">
     <div class="one">In one line: there is no "universal law," only "the right law at the right scale."</div>
-    <div class="q"><b>Think:</b> is a large model's scaling law a kind of "effective theory"? What detail has it averaged out?</div>
+    <details class="q"><summary><b>Think:</b> is a large model's scaling law a kind of "effective theory"? What detail has it averaged out?</summary><div class="qa">Yes. It averages away individual weights, specific data points, and training trajectories, keeping only the regularity among macro quantities — "parameters · data · compute → loss" — just as thermodynamics ignores single molecules and speaks of temperature and pressure. Scaling laws are deep learning’s thermodynamics.</div></details>
   </div>
 </div>
 
@@ -219,7 +226,7 @@ Most people think physics is <b>a pile of formulas</b>. The deepest physicists s
 
   <div class="punch">
     <div class="one">In one line: reductionism holding does not mean constructionism holds.</div>
-    <div class="q"><b>Think:</b> is an LLM's "emergent ability" the same kind of emergence as a physical phase transition — or just an artifact of how we measure?</div>
+    <details class="q"><summary><b>Think:</b> is an LLM's "emergent ability" the same kind of emergence as a physical phase transition — or just an artifact of how we measure?</summary><div class="qa">Debated — probably not the same. Physical transitions have rigorous order parameters and scaling laws; many "emergent abilities" have been argued to be a <strong>measurement artifact</strong> — a hard pass/fail metric creates the jump, while a smooth metric shows steady growth. Test: real emergence should be metric-independent.</div></details>
   </div>
 </div>
 
@@ -244,7 +251,7 @@ Most people think physics is <b>a pile of formulas</b>. The deepest physicists s
 
   <div class="punch">
     <div class="one">In one line: a law is a compression, not a decree.</div>
-    <div class="q"><b>Think:</b> if a "law" could never be violated and never be checked outside observation, does it differ from a definition?</div>
+    <details class="q"><summary><b>Think:</b> if a "law" could never be violated and never be checked outside observation, does it differ from a definition?</summary><div class="qa">Almost none — which is descriptivism’s sharpest point. A "law" that makes no falsifiable prediction collapses into a rule about word usage (a definition), not a claim about the world. <strong>Falsifiability</strong> is the watershed between a law and a definition.</div></details>
   </div>
 </div>
 

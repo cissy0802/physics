@@ -71,6 +71,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -142,7 +149,7 @@
 
   <div class="punch">
     <div class="one">一句话：守恒律是对称性的影子。</div>
-    <div class="q"><b>思考：</b>如果某个量在极早期宇宙里"不守恒"了，你该去找哪个对称性被打破了？</div>
+    <details class="q"><summary><b>思考：</b>如果某个量在极早期宇宙里"不守恒"了，你该去找哪个对称性被打破了？</summary><div class="qa">找那条被破坏的对称性。能量不守恒 ↔ 时间平移对称被打破——这正是膨胀宇宙的实况：时空本身随时间在变（尺度在涨大），所以宇宙学里"总能量"确实不是严格守恒量。守恒的消失，永远对应一条对称的失效。</div></details>
   </div>
 </div>
 
@@ -203,7 +210,7 @@
 
   <div class="punch">
     <div class="one">一句话：没有"万能定律"，只有"对的尺度上对的定律"。</div>
-    <div class="q"><b>思考：</b>大模型的 scaling law 算不算一种"有效理论"？它把什么细节平均掉了？</div>
+    <details class="q"><summary><b>思考：</b>大模型的 scaling law 算不算一种"有效理论"？它把什么细节平均掉了？</summary><div class="qa">算。它把单个权重、每条数据、具体训练轨迹全"平均掉"，只留下"参数量·数据量·算力 → 损失"这几个宏观量之间的规律——正如热力学不管单个分子、只谈温度与压强。scaling law 就是深度学习的"热力学"。</div></details>
   </div>
 </div>
 
@@ -233,7 +240,7 @@
 
   <div class="punch">
     <div class="one">一句话：还原论成立，不代表构成论成立。</div>
-    <div class="q"><b>思考：</b>LLM 的"涌现能力"和物理的相变涌现，是同一种涌现吗？还是只是度量方式造出的假象？</div>
+    <details class="q"><summary><b>思考：</b>LLM 的"涌现能力"和物理的相变涌现，是同一种涌现吗？还是只是度量方式造出的假象？</summary><div class="qa">有争议，很可能不是。物理相变有严格的序参量和标度律；而不少"涌现能力"被指出是<strong>度量假象</strong>——用了"全对才算对"的阶跃指标，换成连续/平滑指标后，能力其实是渐增的。判据：真涌现应有与度量无关的突变。</div></details>
   </div>
 </div>
 
@@ -258,7 +265,7 @@
 
   <div class="punch">
     <div class="one">一句话：定律是压缩，不是律令。</div>
-    <div class="q"><b>思考：</b>如果一条"定律"永远无法被违反、也无法在观测之外被验证，它和一个"定义"还有区别吗？</div>
+    <details class="q"><summary><b>思考：</b>如果一条"定律"永远无法被违反、也无法在观测之外被验证，它和一个"定义"还有区别吗？</summary><div class="qa">几乎没有区别——这正是描述论最锋利处。一条不做任何可证伪预言的"定律"，就退化成对用词的规定（定义），而非关于世界的断言。<strong>可证伪性</strong>是"定律"与"定义"之间的分水岭。</div></details>
   </div>
 </div>
 
