@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>物理：统计力学 · Day 8</title>
 <style>
   :root{
@@ -68,212 +69,178 @@
 </head>
 <body>
 <div class="wrap">
-
 <header>
-  <div class="kicker">物理 · Physics</div>
-  <h1>统计力学</h1>
-  <div class="meta">Day 8 · 2026 · Phase B 热、熵与统计力学</div>
-  <div class="tagline">放弃追踪每一个分子，反而算得更准——这是物理学最深的一次"以退为进"。温度、压强、相变，全从"数数"里长出来。</div>
+<div class="kicker">物理 · Physics</div>
+<h1 data-tts="edf06739bec759fc">统计力学</h1>
+<div class="meta">Day 8 · 2026 · Phase B 热、熵与统计力学</div>
+<div class="tagline">放弃追踪每一个分子，反而算得更准——这是物理学最深的一次"以退为进"。温度、压强、相变，全从"数数"里长出来。</div>
 </header>
-
 <div class="intro">
 一杯水里有约 10²³ 个分子。就算你有一台无穷快的电脑，把这 10²³ 个牛顿方程全解出来，你也<b>看不懂</b>那堆数字——它不会告诉你水的温度、也不会告诉你它会不会结冰。统计力学的洞见是反过来的：<b>正因为分子太多，我们才能不管个体、只谈典型</b>。个体的疯乱在大数里被磨成集体的确定，"温度""压强""相变"这些宏观概念，都是从微观的<b>数微观态</b>里涌现出来的。它还给了 AI 一件核心工具——玻尔兹曼分布，2024 年物理诺奖正是发给了把它搬进神经网络的人。
 </div>
-
 <!-- Card 1 -->
-<div class="card">
-  <h2>放弃个体，转投典型 <span class="en">From Micro to Macro</span></h2>
-  <span class="pill">纲领 · 大数定律</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="f387fd648f7847d3">
+<h2>放弃个体，转投典型 <span class="en">From Micro to Macro</span></h2>
+<span class="pill">纲领 · 大数定律</span>
+<div class="field"><span class="lab">直觉</span>
   想象一间挤了十亿人的大厅，你要预测"整体"会怎样。挨个问每个人打算干什么，既做不到也没意义。但如果你只问"平均身高多少""往门口挪的人多不多"，答案会稳得惊人——<strong>个体越随机、越多，集体的平均就越确定</strong>。掷一枚硬币结果全凭运气；掷一亿枚，正面比例几乎铁定是 50%。统计力学就是把这条"大数定律"用到分子上：不追踪谁在哪，只问"典型情况长什么样"。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   区分两个层次：<strong>微观态（microstate）</strong>是每个分子的确切位置和速度——一份完整到变态的清单；<strong>宏观态（macrostate）</strong>是你真正能测的少数几个量（温度、压强、体积）。一个宏观态对应<strong>海量</strong>微观态。统计力学的地基是一条谦逊的假设——<strong>等概率原理</strong>：孤立系统在能量允许的所有微观态里，<strong>每一个出现的机会均等</strong>。于是"系统会往哪走"就化成一道纯粹的<strong>计数题</strong>：微观态最多的那个宏观态，压倒性地最可能被看到。这就接上了熵——<span class="nowrap"><var>S</var> = <var>k</var> log <var>W</var></span>，前面「熵与时间之箭」一期已把这行讲透。</div>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<div class="field"><span class="lab">反直觉的重点</span>
   牛顿方程是<strong>确定论</strong>的，里面没有半点"概率"。那概率是从哪冒出来的？答案惊人：<strong>它不是无知的补丁，而是从确定论里长出的稳固结论</strong>。我们并非"不知道分子在哪所以只好猜"——而是绝大多数微观态<strong>看起来都一样</strong>（都是均匀、热平衡的样子），少数"整齐"的态少到可以忽略。概率进入物理，靠的不是随机性，而是<strong>典型性</strong>：可能的方式实在太多，非典型的结局根本轮不上。</div>
-
-  <div class="punch">
-    <div class="one">一句话：分子越多越难算——这是错觉；分子越多，宏观越简单。</div>
-    <div class="q"><b>思考：</b>如果只有 5 个分子，"温度""压强"这些词还有意义吗？从几个分子起，统计描述才开始靠谱？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：分子越多越难算——这是错觉；分子越多，宏观越简单。</div>
+<div class="q"><b>思考：</b>如果只有 5 个分子，"温度""压强"这些词还有意义吗？从几个分子起，统计描述才开始靠谱？</div>
 </div>
-
+</div>
 <!-- Card 2 -->
-<div class="card">
-  <h2>玻尔兹曼分布：概率的形状 <span class="en">The Boltzmann Distribution</span></h2>
-  <span class="pill">玻尔兹曼 · 概率幅的指数律</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="5cf70270aad83362">
+<h2>玻尔兹曼分布：概率的形状 <span class="en">The Boltzmann Distribution</span></h2>
+<span class="pill">玻尔兹曼 · 概率幅的指数律</span>
+<div class="field"><span class="lab">直觉</span>
   把一个小系统泡进一个大热库（比如一个分子泡在整杯水里）。系统可以处在不同能量的状态上——高能态和低能态，它到底更爱待在哪？直觉会说"当然是低能态，像球滚到谷底"。对，但没那么绝对：热库会不停地把能量<strong>塞给</strong>系统。关键在于——系统每借走一份能量，热库就<strong>少了</strong>那份能量、能玩的花样（微观态）就变少了。所以系统占据高能态的代价，是让整个大世界的微观态数目下降。<strong>越高的能量越稀有，且是按指数律稀有下去。</strong></div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   系统处于某个能量为 <var>E</var> 的状态的概率，正比于<strong>玻尔兹曼因子</strong>：
   <div class="eq"><var>P</var>(<var>E</var>) ∝ <var>e</var><sup>−<var>E</var>/<var>k</var><var>T</var></sup></div>
-  <div class="gloss"><var>e</var> 是自然常数（约 2.718），<var>e</var> 的负指数意味着<strong>随 <var>E</var> 增大而快速衰减</strong>；<var>E</var> 是那个状态的能量；<var>T</var> 是热库的温度；<var>k</var> 是<strong>玻尔兹曼常数</strong>（把温度换算成能量单位的"汇率"，约 1.38×10⁻²³ 焦耳每开尔文）。组合 <span class="nowrap"><var>k</var><var>T</var></span> 是一份"热能配额"：状态能量 <var>E</var> 每超出 <var>kT</var> 一截，概率就被压掉约 <var>e</var> 倍（≈2.7 倍）。温度<strong>不是</strong>能量本身，而是<strong>能量的价格</strong>——<var>T</var> 越高，<var>kT</var> 越大，高能态才"买得起"、才更常被占据。</div>
+<div class="gloss"><var>e</var> 是自然常数（约 2.718），<var>e</var> 的负指数意味着<strong>随 <var>E</var> 增大而快速衰减</strong>；<var>E</var> 是那个状态的能量；<var>T</var> 是热库的温度；<var>k</var> 是<strong>玻尔兹曼常数</strong>（把温度换算成能量单位的"汇率"，约 1.38×10⁻²³ 焦耳每开尔文）。组合 <span class="nowrap"><var>k</var><var>T</var></span> 是一份"热能配额"：状态能量 <var>E</var> 每超出 <var>kT</var> 一截，概率就被压掉约 <var>e</var> 倍（≈2.7 倍）。温度<strong>不是</strong>能量本身，而是<strong>能量的价格</strong>——<var>T</var> 越高，<var>kT</var> 越大，高能态才"买得起"、才更常被占据。</div>
   要把"正比"变成真概率，得除以所有状态玻尔兹曼因子之和，那个和就是下一张卡的主角——配分函数 <var>Z</var>。</div>
-
-  <figure>
-  <svg viewBox="0 0 620 240" role="img" aria-label="能级越高，占据概率按指数衰减">
-    <!-- axes -->
-    <line x1="60" y1="200" x2="600" y2="200" stroke="#56607e" stroke-width="1.5"/>
-    <line x1="60" y1="200" x2="60" y2="26" stroke="#56607e" stroke-width="1.5"/>
-    <polygon points="60,18 55,32 65,32" fill="#56607e"/>
-    <text x="46" y="30" text-anchor="end" font-size="11.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">能量 E</text>
-    <text x="330" y="228" text-anchor="middle" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">占据概率 →（越高越稀有）</text>
-    <!-- energy levels as horizontal ticks + probability bars -->
-    <g font-family="Georgia,serif" font-size="12.5">
-      <!-- level 0 -->
-      <line x1="52" y1="180" x2="68" y2="180" stroke="#7db0ff" stroke-width="2.5"/>
-      <rect x="72" y="170" width="470" height="20" rx="4" fill="#5b9bff"/>
-      <text x="556" y="184" fill="#dbe2f2" font-size="11.5">E₀</text>
-      <!-- level 1 -->
-      <line x1="52" y1="140" x2="68" y2="140" stroke="#7db0ff" stroke-width="2.5"/>
-      <rect x="72" y="130" width="173" height="20" rx="4" fill="#5b9bff" opacity="0.78"/>
-      <text x="258" y="144" fill="#96a0ba" font-size="11.5">E₁</text>
-      <!-- level 2 -->
-      <line x1="52" y1="100" x2="68" y2="100" stroke="#7db0ff" stroke-width="2.5"/>
-      <rect x="72" y="90" width="64" height="20" rx="4" fill="#5b9bff" opacity="0.6"/>
-      <text x="150" y="104" fill="#96a0ba" font-size="11.5">E₂</text>
-      <!-- level 3 -->
-      <line x1="52" y1="60" x2="68" y2="60" stroke="#7db0ff" stroke-width="2.5"/>
-      <rect x="72" y="50" width="24" height="20" rx="4" fill="#5b9bff" opacity="0.42"/>
-      <text x="110" y="64" fill="#96a0ba" font-size="11.5">E₃</text>
-    </g>
-    <!-- exponential envelope -->
-    <path d="M542,180 C300,150 150,110 96,58" fill="none" stroke="#f0ad5a" stroke-width="2" stroke-dasharray="5 4"/>
-    <text x="470" y="70" fill="#f0ad5a" font-size="12.5" font-family="-apple-system,'Noto Sans SC',sans-serif">包络 ∝ e<tspan font-size="9" dy="-5">−E/kT</tspan></text>
-  </svg>
-  <figcaption>能量越高，被占据的概率沿指数曲线迅速衰减。升高温度（增大 kT）会把曲线"压平"，让高能态分到更多概率。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<figure>
+<svg aria-label="能级越高，占据概率按指数衰减" role="img" viewbox="0 0 620 240">
+<!-- axes -->
+<line stroke="#56607e" stroke-width="1.5" x1="60" x2="600" y1="200" y2="200"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="60" x2="60" y1="200" y2="26"></line>
+<polygon fill="#56607e" points="60,18 55,32 65,32"></polygon>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="end" x="46" y="30">能量 E</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="330" y="228">占据概率 →（越高越稀有）</text>
+<!-- energy levels as horizontal ticks + probability bars -->
+<g font-family="Georgia,serif" font-size="12.5">
+<!-- level 0 -->
+<line stroke="#7db0ff" stroke-width="2.5" x1="52" x2="68" y1="180" y2="180"></line>
+<rect fill="#5b9bff" height="20" rx="4" width="470" x="72" y="170"></rect>
+<text fill="#dbe2f2" font-size="11.5" x="556" y="184">E₀</text>
+<!-- level 1 -->
+<line stroke="#7db0ff" stroke-width="2.5" x1="52" x2="68" y1="140" y2="140"></line>
+<rect fill="#5b9bff" height="20" opacity="0.78" rx="4" width="173" x="72" y="130"></rect>
+<text fill="#96a0ba" font-size="11.5" x="258" y="144">E₁</text>
+<!-- level 2 -->
+<line stroke="#7db0ff" stroke-width="2.5" x1="52" x2="68" y1="100" y2="100"></line>
+<rect fill="#5b9bff" height="20" opacity="0.6" rx="4" width="64" x="72" y="90"></rect>
+<text fill="#96a0ba" font-size="11.5" x="150" y="104">E₂</text>
+<!-- level 3 -->
+<line stroke="#7db0ff" stroke-width="2.5" x1="52" x2="68" y1="60" y2="60"></line>
+<rect fill="#5b9bff" height="20" opacity="0.42" rx="4" width="24" x="72" y="50"></rect>
+<text fill="#96a0ba" font-size="11.5" x="110" y="64">E₃</text>
+</g>
+<!-- exponential envelope -->
+<path d="M542,180 C300,150 150,110 96,58" fill="none" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="2"></path>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="470" y="70">包络 ∝ e<tspan dy="-5" font-size="9">−E/kT</tspan></text>
+</svg>
+<figcaption>能量越高，被占据的概率沿指数曲线迅速衰减。升高温度（增大 kT）会把曲线"压平"，让高能态分到更多概率。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   这条指数律是<strong>普适</strong>的：不管系统是气体分子、磁铁里的自旋、还是恒星大气里的原子，只要它和一个恒温热库交换能量，占据概率<strong>就长这个样子</strong>。系统的具体物理被压进了那个 <var>E</var>，剩下的形状由温度独家决定。这也是为什么"温度"能当一个如此强大的旋钮——它不改变能级本身，只调节<strong>各能级之间的相对光顾率</strong>。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · AI（2024 物理诺奖）</span>
+<div class="field xref"><span class="lab">跨学科对读 · AI（2024 物理诺奖）</span>
   这条 <span class="nowrap"><var>P</var> ∝ <var>e</var><sup>−<var>E</var>/<var>T</var></sup></span> 不只是物理——它是现代 AI 的一块地基：
   <ul>
-    <li><strong>玻尔兹曼机（Hopfield & Hinton）</strong>：把神经网络的每种激活模式赋一个"能量"，让网络按玻尔兹曼因子采样——低能量=更可能的模式。<strong>2024 年物理诺奖</strong>正是发给这项"用物理学方法做机器学习"的工作。</li>
-    <li><strong>能量模型（EBM）与扩散模型</strong>：现代生成模型的骨架就是"学一个能量地形 <var>E</var>，再从 <span class="nowrap"><var>e</var><sup>−<var>E</var></sup></span> 里采样"——生成一张图，就是在能量谷里做一次热运动。</li>
-    <li><strong>softmax</strong>：你每天用的分类层 <span class="nowrap"><var>e</var><sup><var>z</var>ᵢ</sup>/Σ<var>e</var><sup><var>z</var>ⱼ</sup></span> 逐字就是玻尔兹曼分布，那个"温度"参数调的正是输出的随机性。</li>
-  </ul>
+<li><strong>玻尔兹曼机（Hopfield &amp; Hinton）</strong>：把神经网络的每种激活模式赋一个"能量"，让网络按玻尔兹曼因子采样——低能量=更可能的模式。<strong>2024 年物理诺奖</strong>正是发给这项"用物理学方法做机器学习"的工作。</li>
+<li><strong>能量模型（EBM）与扩散模型</strong>：现代生成模型的骨架就是"学一个能量地形 <var>E</var>，再从 <span class="nowrap"><var>e</var><sup>−<var>E</var></sup></span> 里采样"——生成一张图，就是在能量谷里做一次热运动。</li>
+<li><strong>softmax</strong>：你每天用的分类层 <span class="nowrap"><var>e</var><sup><var>z</var>ᵢ</sup>/Σ<var>e</var><sup><var>z</var>ⱼ</sup></span> 逐字就是玻尔兹曼分布，那个"温度"参数调的正是输出的随机性。</li>
+</ul>
   物理学数了一百年的微观态，最后数进了神经网络里。</div>
-
-  <div class="punch">
-    <div class="one">一句话：温度不是能量，是能量的价格——高能态贵，按指数涨价。</div>
-    <div class="q"><b>思考：</b>把 softmax 的"温度"调到接近 0（零）会怎样？调到无穷大又如何？对照一杯水降到绝对零度 vs 烧到极热。</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：温度不是能量，是能量的价格——高能态贵，按指数涨价。</div>
+<div class="q"><b>思考：</b>把 softmax 的"温度"调到接近 0（零）会怎样？调到无穷大又如何？对照一杯水降到绝对零度 vs 烧到极热。</div>
 </div>
-
+</div>
 <!-- Card 3 -->
-<div class="card">
-  <h2>配分函数：一个函数生成一切 <span class="en">The Partition Function Z</span></h2>
-  <span class="pill">Zustandssumme · 生成函数</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="7e124e16ea02bd68">
+<h2>配分函数：一个函数生成一切 <span class="en">The Partition Function Z</span></h2>
+<span class="pill">Zustandssumme · 生成函数</span>
+<div class="field"><span class="lab">直觉</span>
   把所有可能状态的玻尔兹曼因子加成一个总和，得到一个数——<strong>配分函数 <var>Z</var></strong>（德文原意就是"状态之和"）。它看起来只是个归一化的分母，实则是整个系统的<strong>一本总账</strong>：一旦你算出 <var>Z</var>，系统所有的宏观性质——平均能量、熵、压强、自由能——都能<strong>从这一个函数里"挤"出来</strong>，只需对它做不同的求导。一个标量，编码了一切。</div>
-
-  <div class="field"><span class="lab">机制</span>
-  <div class="eq"><var>Z</var> = <span style="font-size:1.5rem">Σ</span> <var>e</var><sup>−<var>E</var>ᵢ/<var>k</var><var>T</var></sup></div>
-  <div class="gloss">对系统<strong>每一个</strong>可能状态 <var>i</var>（能量 <var>E</var>ᵢ）算出玻尔兹曼因子，全部相加。<var>Z</var> 大，意味着"可及的状态多"。</div>
+<div class="field"><span class="lab">机制</span>
+<div class="eq"><var>Z</var> = <span style="font-size:1.5rem">Σ</span> <var>e</var><sup>−<var>E</var>ᵢ/<var>k</var><var>T</var></sup></div>
+<div class="gloss">对系统<strong>每一个</strong>可能状态 <var>i</var>（能量 <var>E</var>ᵢ）算出玻尔兹曼因子，全部相加。<var>Z</var> 大，意味着"可及的状态多"。</div>
   有了 <var>Z</var>，最有用的一步是求<strong>亥姆霍兹自由能</strong>：
   <div class="eq"><var>F</var> = −<var>k</var><var>T</var> ln <var>Z</var></div>
-  <div class="gloss"><var>F</var>（自由能）可拆成 <span class="nowrap"><var>F</var> = <var>U</var> − <var>T</var><var>S</var></span>：<var>U</var> 是平均能量、<var>S</var> 是熵。ln 是自然对数。系统在恒温下总是走向<strong><var>F</var> 最小</strong>的宏观态——这是一场<strong>能量与熵的拔河</strong>：低温下 <var>U</var> 说了算（系统求"低能量、有序"），高温下 <span class="nowrap"><var>T</var><var>S</var></span> 说了算（系统求"高熵、混乱"）。水在 0（零）℃ 结冰、在 100℃ 沸腾，本质都是这场拔河在不同温度下换了赢家。</div></div>
-
-  <div class="field"><span class="lab">为什么重要</span>
+<div class="gloss"><var>F</var>（自由能）可拆成 <span class="nowrap"><var>F</var> = <var>U</var> − <var>T</var><var>S</var></span>：<var>U</var> 是平均能量、<var>S</var> 是熵。ln 是自然对数。系统在恒温下总是走向<strong><var>F</var> 最小</strong>的宏观态——这是一场<strong>能量与熵的拔河</strong>：低温下 <var>U</var> 说了算（系统求"低能量、有序"），高温下 <span class="nowrap"><var>T</var><var>S</var></span> 说了算（系统求"高熵、混乱"）。水在 0（零）℃ 结冰、在 100℃ 沸腾，本质都是这场拔河在不同温度下换了赢家。</div></div>
+<div class="field"><span class="lab">为什么重要</span>
   这是统计力学真正的<strong>发动机</strong>：它把"物理问题"变成"算一个和、再求几次导"的<strong>纯数学流程</strong>。你不必再追问每个分子——写下能量、加出 <var>Z</var>、求导，宏观世界就自动浮现。相变、磁性、化学平衡……全套热力学都从这一个函数里流出来。前面「最小作用量」一期里，自然"选"路径靠的是作用量取极值；这里，平衡态"选"自己靠的是自由能取极小——<strong>物理反复在用同一种"极值即真相"的语法</strong>。</div>
-
-  <div class="punch">
-    <div class="one">一句话：算出配分函数，整套热力学就只是它的几个导数。</div>
-    <div class="q"><b>思考：</b>"自由能最小"里的"自由"指什么？为什么不是"总能量最小"？（提示：熵那一项在替谁说话。）</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：算出配分函数，整套热力学就只是它的几个导数。</div>
+<div class="q"><b>思考：</b>"自由能最小"里的"自由"指什么？为什么不是"总能量最小"？（提示：熵那一项在替谁说话。）</div>
 </div>
-
+</div>
 <!-- Card 4 -->
-<div class="card">
-  <h2>涨落：为什么平均值靠得住 <span class="en">Fluctuations & Ensembles</span></h2>
-  <span class="pill">涨落 · √N 律</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="ab73c55f0d5031b6">
+<h2>涨落：为什么平均值靠得住 <span class="en">Fluctuations &amp; Ensembles</span></h2>
+<span class="pill">涨落 · √N 律</span>
+<div class="field"><span class="lab">直觉</span>
   系统时刻在微观态之间乱跳，它的能量、密度其实一直在<strong>抖动（涨落）</strong>。那我们凭什么还敢说一杯水有一个"确定"的温度？因为抖动的<strong>相对幅度</strong>随分子数增多而急剧变小。这就是那条著名的 <strong>1/√N 律</strong>：</div>
-
-  <div class="field"><span class="lab">机制</span>
-  <div class="eq"><span class="frac"><span class="fnum">Δ<var>E</var></span><span class="fden">⟨<var>E</var>⟩</span></span> ∼ <span class="frac"><span class="fnum">1</span><span class="fden">√<var>N</var></span></span></div>
-  <div class="gloss">Δ<var>E</var> 是能量涨落的典型大小，⟨<var>E</var>⟩ 是平均能量（尖括号读作"平均"），<var>N</var> 是分子数。相对涨落按 <span class="nowrap">1/√<var>N</var></span> 衰减：<var>N</var>=100 时抖动约 10%，<var>N</var>=10²³ 时抖动约 <span class="nowrap">1/10¹¹·⁵</span>——小到任何仪器都测不出。<strong>这正是宏观世界看起来如此确定的原因：涨落没消失，只是被大数压到了看不见。</strong></div>
+<div class="field"><span class="lab">机制</span>
+<div class="eq"><span class="frac"><span class="fnum">Δ<var>E</var></span><span class="fden">⟨<var>E</var>⟩</span></span> ∼ <span class="frac"><span class="fnum">1</span><span class="fden">√<var>N</var></span></span></div>
+<div class="gloss">Δ<var>E</var> 是能量涨落的典型大小，⟨<var>E</var>⟩ 是平均能量（尖括号读作"平均"），<var>N</var> 是分子数。相对涨落按 <span class="nowrap">1/√<var>N</var></span> 衰减：<var>N</var>=100 时抖动约 10%，<var>N</var>=10²³ 时抖动约 <span class="nowrap">1/10¹¹·⁵</span>——小到任何仪器都测不出。<strong>这正是宏观世界看起来如此确定的原因：涨落没消失，只是被大数压到了看不见。</strong></div>
   这也解释了物理学为什么用"<strong>系综（ensemble）</strong>"这个概念：与其追踪一个系统随时间的跳动，不如想象<strong>无穷多个同样制备的系统的一整个集合</strong>，对整个集合求平均。孤立系统（能量固定）用<strong>微正则系综</strong>，接触热库（温度固定）用<strong>正则系综</strong>——玻尔兹曼分布正是后者的产物。</div>
-
-  <figure>
-  <svg viewBox="0 0 620 210" role="img" aria-label="分子数越多，涨落分布越尖锐">
-    <line x1="40" y1="175" x2="600" y2="175" stroke="#56607e" stroke-width="1.5"/>
-    <text x="320" y="200" text-anchor="middle" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">测得的能量（围绕平均值 ⟨E⟩ 涨落）</text>
-    <line x1="320" y1="175" x2="320" y2="30" stroke="#39456a" stroke-width="1" stroke-dasharray="4 4"/>
-    <text x="320" y="24" text-anchor="middle" font-size="11" fill="#96a0ba" font-family="Georgia,serif">⟨E⟩</text>
-    <!-- broad curve: small N -->
-    <path d="M60,175 C170,172 240,70 320,70 C400,70 470,172 580,175" fill="none" stroke="#5b9bff" stroke-width="2" opacity="0.55"/>
-    <text x="150" y="110" fill="#7db0ff" font-size="12" font-family="-apple-system,'Noto Sans SC',sans-serif">N 小：抖动大</text>
-    <!-- narrow curve: large N -->
-    <path d="M270,175 C305,175 312,44 320,44 C328,44 335,175 370,175" fill="none" stroke="#f0ad5a" stroke-width="2.4"/>
-    <text x="430" y="70" fill="#f0ad5a" font-size="12" font-family="-apple-system,'Noto Sans SC',sans-serif">N 大：几乎一根针</text>
-  </svg>
-  <figcaption>同一个平均值，分子数越多，实际测量值围绕它的分布越窄。到 10²³ 个分子，"分布"塌缩成一根尖针——这就是热力学"确定性"的来历。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<figure>
+<svg aria-label="分子数越多，涨落分布越尖锐" role="img" viewbox="0 0 620 210">
+<line stroke="#56607e" stroke-width="1.5" x1="40" x2="600" y1="175" y2="175"></line>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="320" y="200">测得的能量（围绕平均值 ⟨E⟩ 涨落）</text>
+<line stroke="#39456a" stroke-dasharray="4 4" stroke-width="1" x1="320" x2="320" y1="175" y2="30"></line>
+<text fill="#96a0ba" font-family="Georgia,serif" font-size="11" text-anchor="middle" x="320" y="24">⟨E⟩</text>
+<!-- broad curve: small N -->
+<path d="M60,175 C170,172 240,70 320,70 C400,70 470,172 580,175" fill="none" opacity="0.55" stroke="#5b9bff" stroke-width="2"></path>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" x="150" y="110">N 小：抖动大</text>
+<!-- narrow curve: large N -->
+<path d="M270,175 C305,175 312,44 320,44 C328,44 335,175 370,175" fill="none" stroke="#f0ad5a" stroke-width="2.4"></path>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" x="430" y="70">N 大：几乎一根针</text>
+</svg>
+<figcaption>同一个平均值，分子数越多，实际测量值围绕它的分布越窄。到 10²³ 个分子，"分布"塌缩成一根尖针——这就是热力学"确定性"的来历。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   热力学那些"铁律"其实<strong>没有一条是铁的</strong>——它们全是统计律，只因 <var>N</var> 太大，涨落被压到看不见，才装成了铁律。反过来说：<strong>只要 <var>N</var> 不够大，涨落就会重新变成主角</strong>。纳米机器、细胞里的分子马达就活在涨落的海里（布朗运动就是水分子撞击的可见涨落）；而在<strong>临界点</strong>——水与蒸汽将分未分之际——涨落会在所有尺度上同时爆发、大到肉眼可见（临界乳光）。后面「相变与临界」一期，主角恰恰就是这个平时被我们无视的涨落。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 计算 / 金融 / 生物</span>
+<div class="field xref"><span class="lab">跨学科对读 · 计算 / 金融 / 生物</span>
   "从随机采样里逼近确定平均"这套统计力学的看家本领，到处在用：
   <ul>
-    <li><strong>计算</strong>：<strong>蒙特卡洛方法</strong>——用随机采样估积分、估期望，误差正按 <span class="nowrap">1/√<var>N</var></span> 缩小；从核反应堆模拟到 AI 训练里的随机梯度，都是它。</li>
-    <li><strong>金融</strong>：一只股票每日涨跌像分子乱撞，但一个大投资组合的整体波动被 <span class="nowrap">1/√<var>N</var></span> 压低——"分散化"降风险，本质是同一条涨落律。</li>
-    <li><strong>生物</strong>：一个细胞里某种蛋白只有几十个拷贝，<var>N</var> 小到涨落无法忽略——<strong>基因表达噪声</strong>让基因完全相同的细胞也走上不同命运。</li>
-  </ul>
+<li><strong>计算</strong>：<strong>蒙特卡洛方法</strong>——用随机采样估积分、估期望，误差正按 <span class="nowrap">1/√<var>N</var></span> 缩小；从核反应堆模拟到 AI 训练里的随机梯度，都是它。</li>
+<li><strong>金融</strong>：一只股票每日涨跌像分子乱撞，但一个大投资组合的整体波动被 <span class="nowrap">1/√<var>N</var></span> 压低——"分散化"降风险，本质是同一条涨落律。</li>
+<li><strong>生物</strong>：一个细胞里某种蛋白只有几十个拷贝，<var>N</var> 小到涨落无法忽略——<strong>基因表达噪声</strong>让基因完全相同的细胞也走上不同命运。</li>
+</ul>
   凡是"大量随机个体求集体行为"，都在借统计力学的账。</div>
-
-  <div class="punch">
-    <div class="one">一句话：热力学的"确定"，是涨落被 √N 压没了的假象。</div>
-    <div class="q"><b>思考：</b>如果你能把一杯水缩到只剩 100 个分子，"这杯水的温度是 25℃"这句话还成立吗？该怎么重新表述它？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：热力学的"确定"，是涨落被 √N 压没了的假象。</div>
+<div class="q"><b>思考：</b>如果你能把一杯水缩到只剩 100 个分子，"这杯水的温度是 25℃"这句话还成立吗？该怎么重新表述它？</div>
 </div>
-
+</div>
 <!-- Deep think -->
 <div class="deep">
-  <h2>深入思考</h2>
-
-  <details><summary>牛顿方程完全确定论、还时间可逆，统计力学的概率和"熵增"到底从哪偷偷溜进来的？</summary>
-  <div class="body">这是统计力学最深的裂缝，叫<strong>洛施密特佯谬</strong>。底层方程确实可逆——把所有分子速度反转，系统会一步步"退回"低熵。那熵增哪来的？答案有两层：其一是<strong>初始条件</strong>——宇宙起步于一个极低熵的状态，之后只是在向典型态滑落（这把问题最终推给了宇宙学，前面「熵与时间之箭」一期已埋下这条线）。其二是<strong>典型性</strong>：能"退回低熵"的那些精确初始速度，在所有可能里少到可忽略；随手抓一个初始态，几乎必然通向熵增。概率不是塞进了方程，而是塞进了我们对<strong>初始条件的无知</strong>与<strong>非典型态的极端稀有</strong>。</div></details>
-
-  <details><summary>"等概率原理"凭什么成立？系统真的会均匀访问所有微观态吗？</summary>
-  <div class="body">这背后是<strong>各态历经假设（ergodicity）</strong>：系统随时间演化，会（近乎均匀地）跑遍能量允许的所有微观态，于是"时间平均"就等于"系综平均"。听着天经地义，其实<strong>数学上极难证明</strong>，而且对某些系统<strong>根本不成立</strong>——玻璃、某些被"卡住"的量子系统（多体局域化）就会困在一小片状态里出不来，热力学对它们部分失效。所以等概率原理更像一条<strong>用起来惊人地好、但地基仍在施工</strong>的工作假设。物理学常常这样：先用对了，再慢慢补证明。</div></details>
-
-  <details><summary>概率到底是系统"客观"的属性，还是只反映我们"主观"不知道分子在哪？</summary>
-  <div class="body">两派吵了一个世纪。<strong>客观派</strong>：涨落是真实的物理事件，布朗运动看得见、摸得着，概率就是自然的一部分。<strong>主观/信息派</strong>（以 E. T. Jaynes 为代表）：熵度量的是<strong>你缺失的信息</strong>，统计力学其实是"在已知宏观约束下最诚实的推断"——他由此把玻尔兹曼分布重新推导成<strong>最大熵原理</strong>（在满足已知约束的前提下，选最不武断、假设最少的那个分布）。有意思的是两条路给出<strong>完全相同</strong>的公式。也许这正说明：物理概率与信息概率，本就是一枚硬币的两面——这条线会在下一站「信息的物理」里彻底点燃。</div></details>
-
-  <details><summary>存在"负温度"吗？比绝对零度还冷，还是比无穷大还热？</summary>
-  <div class="body">存在，而且<strong>负温度比任何正温度都更"热"</strong>——听着荒谬，是因为日常直觉把温度当成了能量。回到定义：温度刻画的是"加一点能量、熵涨多少"。普通系统能量越高、可及状态越多，熵随能量上升。但有些系统（如自旋能级有<strong>上限</strong>的体系）一旦大多数粒子被泵到高能态，再加能量反而让状态数<strong>减少</strong>、熵下降——按定义这就对应<strong>负温度</strong>。它不在"绝对零度以下"，而在"正无穷之上"：能量标尺是 <span class="nowrap">…, +300K, +∞/−∞, …, −300K</span> 这样绕过去的。激光的<strong>粒子数反转</strong>就是一个负温度态。这提醒我们：<strong>温度的本质是熵对能量的斜率，不是"冷热"这个感官词。</strong></div></details>
-
-  <details><summary>把两瓶相同的气体混在一起，熵增加了吗？——一个叫"吉布斯佯谬"的陷阱。</summary>
-  <div class="body">抽掉隔板让两瓶<strong>不同</strong>气体混合，熵确实增加（混合熵）。但若两瓶是<strong>完全相同</strong>的气体呢？按朴素计算你会算出一个荒唐的熵增——可什么都没真的发生，抽不抽隔板毫无区别。这个<strong>吉布斯佯谬</strong>的解药惊人地深：必须承认<strong>同种粒子是全同、不可区分的</strong>——交换两个氧分子并不产生新的微观态。把这条"不可区分性"塞进计数，佯谬消失。而它的<strong>终极理由</strong>要到量子力学才交底：全同粒子的不可区分不是近似，是本质（这条伏笔留给后面「量子场论入门」一期）。一道经典的记数难题，逼出了量子的门票。</div></details>
+<h2 data-tts="d04d7c94c330bda8">深入思考</h2>
+<details><summary>牛顿方程完全确定论、还时间可逆，统计力学的概率和"熵增"到底从哪偷偷溜进来的？</summary>
+<div class="body">这是统计力学最深的裂缝，叫<strong>洛施密特佯谬</strong>。底层方程确实可逆——把所有分子速度反转，系统会一步步"退回"低熵。那熵增哪来的？答案有两层：其一是<strong>初始条件</strong>——宇宙起步于一个极低熵的状态，之后只是在向典型态滑落（这把问题最终推给了宇宙学，前面「熵与时间之箭」一期已埋下这条线）。其二是<strong>典型性</strong>：能"退回低熵"的那些精确初始速度，在所有可能里少到可忽略；随手抓一个初始态，几乎必然通向熵增。概率不是塞进了方程，而是塞进了我们对<strong>初始条件的无知</strong>与<strong>非典型态的极端稀有</strong>。</div></details>
+<details><summary>"等概率原理"凭什么成立？系统真的会均匀访问所有微观态吗？</summary>
+<div class="body">这背后是<strong>各态历经假设（ergodicity）</strong>：系统随时间演化，会（近乎均匀地）跑遍能量允许的所有微观态，于是"时间平均"就等于"系综平均"。听着天经地义，其实<strong>数学上极难证明</strong>，而且对某些系统<strong>根本不成立</strong>——玻璃、某些被"卡住"的量子系统（多体局域化）就会困在一小片状态里出不来，热力学对它们部分失效。所以等概率原理更像一条<strong>用起来惊人地好、但地基仍在施工</strong>的工作假设。物理学常常这样：先用对了，再慢慢补证明。</div></details>
+<details><summary>概率到底是系统"客观"的属性，还是只反映我们"主观"不知道分子在哪？</summary>
+<div class="body">两派吵了一个世纪。<strong>客观派</strong>：涨落是真实的物理事件，布朗运动看得见、摸得着，概率就是自然的一部分。<strong>主观/信息派</strong>（以 E. T. Jaynes 为代表）：熵度量的是<strong>你缺失的信息</strong>，统计力学其实是"在已知宏观约束下最诚实的推断"——他由此把玻尔兹曼分布重新推导成<strong>最大熵原理</strong>（在满足已知约束的前提下，选最不武断、假设最少的那个分布）。有意思的是两条路给出<strong>完全相同</strong>的公式。也许这正说明：物理概率与信息概率，本就是一枚硬币的两面——这条线会在下一站「信息的物理」里彻底点燃。</div></details>
+<details><summary>存在"负温度"吗？比绝对零度还冷，还是比无穷大还热？</summary>
+<div class="body">存在，而且<strong>负温度比任何正温度都更"热"</strong>——听着荒谬，是因为日常直觉把温度当成了能量。回到定义：温度刻画的是"加一点能量、熵涨多少"。普通系统能量越高、可及状态越多，熵随能量上升。但有些系统（如自旋能级有<strong>上限</strong>的体系）一旦大多数粒子被泵到高能态，再加能量反而让状态数<strong>减少</strong>、熵下降——按定义这就对应<strong>负温度</strong>。它不在"绝对零度以下"，而在"正无穷之上"：能量标尺是 <span class="nowrap">…, +300K, +∞/−∞, …, −300K</span> 这样绕过去的。激光的<strong>粒子数反转</strong>就是一个负温度态。这提醒我们：<strong>温度的本质是熵对能量的斜率，不是"冷热"这个感官词。</strong></div></details>
+<details><summary>把两瓶相同的气体混在一起，熵增加了吗？——一个叫"吉布斯佯谬"的陷阱。</summary>
+<div class="body">抽掉隔板让两瓶<strong>不同</strong>气体混合，熵确实增加（混合熵）。但若两瓶是<strong>完全相同</strong>的气体呢？按朴素计算你会算出一个荒唐的熵增——可什么都没真的发生，抽不抽隔板毫无区别。这个<strong>吉布斯佯谬</strong>的解药惊人地深：必须承认<strong>同种粒子是全同、不可区分的</strong>——交换两个氧分子并不产生新的微观态。把这条"不可区分性"塞进计数，佯谬消失。而它的<strong>终极理由</strong>要到量子力学才交底：全同粒子的不可区分不是近似，是本质（这条伏笔留给后面「量子场论入门」一期）。一道经典的记数难题，逼出了量子的门票。</div></details>
 </div>
-
 <!-- Reading -->
 <div class="read">
-  <h2>延伸阅读</h2>
-  <ul>
-    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 39–40 章（气体动理论 / 统计力学原理）——直觉起点</li>
-    <li>James Sethna，<em>Statistical Mechanics: Entropy, Order Parameters, and Complexity</em>（牛津，全书<a href="https://sethna.lassp.cornell.edu/StatMech/">免费在线</a>）——现代且直觉导向</li>
-    <li>E. T. Jaynes，<em>"Information Theory and Statistical Mechanics"</em>，<em>Phys. Rev.</em> 1957——最大熵视角的原始文献</li>
-    <li>The Nobel Prize in Physics 2024（Hopfield & Hinton），<a href="https://www.nobelprize.org/prizes/physics/2024/summary/">诺奖官方说明</a>——玻尔兹曼机与能量模型的物理渊源</li>
-    <li>Landau & Lifshitz，<em>Statistical Physics</em>（Vol. 5）——严谨深入的经典教程</li>
-  </ul>
+<h2 data-tts="4b9661f1ec1dd1e3">延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 39–40 章（气体动理论 / 统计力学原理）——直觉起点</li>
+<li>James Sethna，<em>Statistical Mechanics: Entropy, Order Parameters, and Complexity</em>（牛津，全书<a href="https://sethna.lassp.cornell.edu/StatMech/">免费在线</a>）——现代且直觉导向</li>
+<li>E. T. Jaynes，<em>"Information Theory and Statistical Mechanics"</em>，<em>Phys. Rev.</em> 1957——最大熵视角的原始文献</li>
+<li>The Nobel Prize in Physics 2024（Hopfield &amp; Hinton），<a href="https://www.nobelprize.org/prizes/physics/2024/summary/">诺奖官方说明</a>——玻尔兹曼机与能量模型的物理渊源</li>
+<li>Landau &amp; Lifshitz，<em>Statistical Physics</em>（Vol. 5）——严谨深入的经典教程</li>
+</ul>
 </div>
-
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
 </body>
 </html>

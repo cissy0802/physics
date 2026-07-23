@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>物理：振动与波 · Day 10</title>
 <style>
   :root{
@@ -68,300 +69,259 @@
 </head>
 <body>
 <div class="wrap">
-
 <header>
-  <div class="kicker">物理 · Physics</div>
-  <h1>振动与波</h1>
-  <div class="meta">Day 10 · 2026 · Phase C 波、光与电磁</div>
-  <div class="tagline">一根吉他弦、一座桥、一颗原子里的电子，遵守的是同一套语法——因为几乎任何被推离平衡的东西，都会以同一种方式回荡。</div>
+<div class="kicker">物理 · Physics</div>
+<h1 data-tts="db504eac07525d2a">振动与波</h1>
+<div class="meta">Day 10 · 2026 · Phase C 波、光与电磁</div>
+<div class="tagline">一根吉他弦、一座桥、一颗原子里的电子，遵守的是同一套语法——因为几乎任何被推离平衡的东西，都会以同一种方式回荡。</div>
 </header>
-
 <div class="intro">
 从这里起，物理换了一副面孔。前面讲的是<b>粒子怎么动</b>；接下来一大段讲的是<b>扰动怎么传</b>——声音、光、电磁、乃至量子概率，全是<b>波</b>。而波的种子是最朴素的一件事：<b>振动</b>。为什么全宇宙的振动几乎都长成同一个正弦？为什么轻轻一推、频率对了就能把桥晃塌？为什么把波关进一根弦里，它就只肯用<b>整数个</b>模式存在——这最后一点，正是原子为何有分立能级的物理胚胎。四张卡：简谐为何无处不在、共振、波即传播的振动、驻波与叠加。
 </div>
-
 <!-- Card 1 -->
-<div class="card">
-  <h2>简谐运动：为何无处不在 <span class="en">Simple Harmonic Motion</span></h2>
-  <span class="pill">经典力学 · 线性回复力</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="da21351a645d714b">
+<h2>简谐运动：为何无处不在 <span class="en">Simple Harmonic Motion</span></h2>
+<span class="pill">经典力学 · 线性回复力</span>
+<div class="field"><span class="lab">直觉</span>
   把任何稳稳待在平衡点的东西轻轻推一下——单摆、弹簧上的砝码、碗底的玻璃珠——它都会<strong>荡回来、冲过头、再荡回来</strong>，来回摆动。神奇的是它们摆出的曲线几乎一模一样：一条<strong>正弦</strong>。不是巧合。任何"势能谷"的<strong>谷底附近</strong>放大看，都近似一条抛物线；抛物线势能给出的回复力正好<strong>正比于偏离量</strong>——这就注定了简谐。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   核心是一条线性回复力：偏离越远，往回拉得越狠，且严格成正比。
   <div class="eq"><var>F</var> = −<var>k</var><var>x</var></div>
-  <div class="gloss"><var>F</var> 是回复力、<var>x</var> 是偏离平衡的位移、<var>k</var> 是"劲度"（拉回来的强度）。前面那个<strong>负号</strong>是灵魂：它表示力<strong>永远指向平衡点</strong>——你往右它往左拉，你往左它往右推。</div>
+<div class="gloss"><var>F</var> 是回复力、<var>x</var> 是偏离平衡的位移、<var>k</var> 是"劲度"（拉回来的强度）。前面那个<strong>负号</strong>是灵魂：它表示力<strong>永远指向平衡点</strong>——你往右它往左拉，你往左它往右推。</div>
   这条力律逼出的运动是纯正弦：
   <div class="eq"><var>x</var>(<var>t</var>) = <var>A</var> cos(<var>ω</var><var>t</var> + <var>φ</var>)</div>
-  <div class="gloss"><var>A</var> 是<strong>振幅</strong>（摆多大）、<var>t</var> 是时间、<var>φ</var>（读"fai"）是<strong>初相位</strong>（起步时在哪）。关键角色是 <var>ω</var>（读"omega"）——<strong>角频率</strong>，决定摆多快，而它只由系统本身定：<span class="nowrap"><var>ω</var> = √(<var>k</var>/<var>m</var>)</span>，<var>m</var> 是质量。劲度越大、质量越小，晃得越快。</div>
+<div class="gloss"><var>A</var> 是<strong>振幅</strong>（摆多大）、<var>t</var> 是时间、<var>φ</var>（读"fai"）是<strong>初相位</strong>（起步时在哪）。关键角色是 <var>ω</var>（读"omega"）——<strong>角频率</strong>，决定摆多快，而它只由系统本身定：<span class="nowrap"><var>ω</var> = √(<var>k</var>/<var>m</var>)</span>，<var>m</var> 是质量。劲度越大、质量越小，晃得越快。</div>
   最反直觉的一条：<strong>频率与振幅无关</strong>。你把砝码拉得多远，一个来回花的时间几乎不变——这正是摆钟能计时的根基。</div>
-
-  <figure>
-  <svg viewBox="0 0 620 262" role="img" aria-label="任意势阱谷底近似为抛物线，小振动即简谐">
-    <!-- axes -->
-    <line x1="62" y1="34" x2="62" y2="232" stroke="#56607e" stroke-width="1.5"/>
-    <polygon points="62,26 57,40 67,40" fill="#56607e"/>
-    <line x1="62" y1="232" x2="588" y2="232" stroke="#56607e" stroke-width="1.5"/>
-    <polygon points="596,232 582,227 582,237" fill="#56607e"/>
-    <text x="48" y="40" text-anchor="end" font-size="12.5" fill="#96a0ba" font-family="Georgia,serif" font-style="italic">U</text>
-    <text x="590" y="252" text-anchor="end" font-size="12.5" fill="#96a0ba" font-family="Georgia,serif" font-style="italic">x 位置</text>
-    <!-- true anharmonic potential (solid) -->
-    <path d="M 92 46 Q 190 214 300 202 Q 440 190 566 118" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
-    <!-- parabolic approximation near minimum (dashed) -->
-    <polyline points="176,183 216,193 256,199 300,202 344,199 384,193 424,183" fill="none" stroke="#f0ad5a" stroke-width="2" stroke-dasharray="6 5"/>
-    <!-- minimum marker -->
-    <circle cx="300" cy="202" r="4.5" fill="#f0ad5a"/>
-    <text x="300" y="224" text-anchor="middle" font-size="12" fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif">平衡点</text>
-    <!-- small oscillation double arrow -->
-    <line x1="256" y1="212" x2="344" y2="212" stroke="#dbe2f2" stroke-width="1.6"/>
-    <polygon points="250,212 262,208 262,216" fill="#dbe2f2"/>
-    <polygon points="350,212 338,208 338,216" fill="#dbe2f2"/>
-    <!-- labels -->
-    <text x="470" y="150" font-size="12.5" fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif">真实势能</text>
-    <text x="150" y="168" font-size="12.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">抛物线近似</text>
-  </svg>
-  <figcaption>放大任何势阱的谷底，它都≈一条抛物线（琥珀虚线）——所以小振动几乎总是简谐。振幅一大、走出谷底，真实势能（蓝）才开始偏离，简谐才失效。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<figure>
+<svg aria-label="任意势阱谷底近似为抛物线，小振动即简谐" role="img" viewbox="0 0 620 262">
+<!-- axes -->
+<line stroke="#56607e" stroke-width="1.5" x1="62" x2="62" y1="34" y2="232"></line>
+<polygon fill="#56607e" points="62,26 57,40 67,40"></polygon>
+<line stroke="#56607e" stroke-width="1.5" x1="62" x2="588" y1="232" y2="232"></line>
+<polygon fill="#56607e" points="596,232 582,227 582,237"></polygon>
+<text fill="#96a0ba" font-family="Georgia,serif" font-size="12.5" font-style="italic" text-anchor="end" x="48" y="40">U</text>
+<text fill="#96a0ba" font-family="Georgia,serif" font-size="12.5" font-style="italic" text-anchor="end" x="590" y="252">x 位置</text>
+<!-- true anharmonic potential (solid) -->
+<path d="M 92 46 Q 190 214 300 202 Q 440 190 566 118" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<!-- parabolic approximation near minimum (dashed) -->
+<polyline fill="none" points="176,183 216,193 256,199 300,202 344,199 384,193 424,183" stroke="#f0ad5a" stroke-dasharray="6 5" stroke-width="2"></polyline>
+<!-- minimum marker -->
+<circle cx="300" cy="202" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="300" y="224">平衡点</text>
+<!-- small oscillation double arrow -->
+<line stroke="#dbe2f2" stroke-width="1.6" x1="256" x2="344" y1="212" y2="212"></line>
+<polygon fill="#dbe2f2" points="250,212 262,208 262,216"></polygon>
+<polygon fill="#dbe2f2" points="350,212 338,208 338,216"></polygon>
+<!-- labels -->
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="470" y="150">真实势能</text>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="150" y="168">抛物线近似</text>
+</svg>
+<figcaption>放大任何势阱的谷底，它都≈一条抛物线（琥珀虚线）——所以小振动几乎总是简谐。振幅一大、走出谷底，真实势能（蓝）才开始偏离，简谐才失效。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   简谐无处不在，<strong>不是因为自然偏爱正弦</strong>，而是一条数学必然：任何光滑势能在极小值附近的泰勒展开，最低阶的非平庸项就是二次项（抛物线）。只要振动足够小，高阶项可忽略，剩下的就是简谐。<strong>"小振动皆简谐"是把复杂系统线性化后的通用近似</strong>——这也是它成为整个波动物理起点的原因。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 数学 / 工程</span>
+<div class="field xref"><span class="lab">跨学科对读 · 数学 / 工程</span>
   "在平衡点附近，把非线性系统当线性处理"是横跨学科的一门通用手艺——
   <ul>
-    <li><strong>控制工程</strong>：飞机、机械臂的控制器，大多在某个<strong>工作点</strong>把动力学线性化后再设计，稳定性分析全靠这一步；</li>
-    <li><strong>经济学</strong>：在均衡点做<strong>小扰动分析</strong>，判断均衡稳不稳，用的是同一套线性化直觉；</li>
-    <li><strong>数值优化</strong>：极小值附近的损失面≈抛物线（二阶泰勒），这正是牛顿法、二阶优化器起作用的几何。</li>
-  </ul>
+<li><strong>控制工程</strong>：飞机、机械臂的控制器，大多在某个<strong>工作点</strong>把动力学线性化后再设计，稳定性分析全靠这一步；</li>
+<li><strong>经济学</strong>：在均衡点做<strong>小扰动分析</strong>，判断均衡稳不稳，用的是同一套线性化直觉；</li>
+<li><strong>数值优化</strong>：极小值附近的损失面≈抛物线（二阶泰勒），这正是牛顿法、二阶优化器起作用的几何。</li>
+</ul>
   同一个"谷底≈抛物线"的念头，在物理里叫简谐，在别处叫线性化。</div>
-
-  <div class="punch">
-    <div class="one">一句话：任何谷底都是抛物线，所以任何小振动都是正弦。</div>
-    <div class="q"><b>思考：</b>如果一个平衡点的势能谷底恰好<strong>抹平</strong>了二次项（比如四次方谷），小振动还简谐吗？它的频率会依赖振幅吗？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：任何谷底都是抛物线，所以任何小振动都是正弦。</div>
+<div class="q"><b>思考：</b>如果一个平衡点的势能谷底恰好<strong>抹平</strong>了二次项（比如四次方谷），小振动还简谐吗？它的频率会依赖振幅吗？</div>
 </div>
-
+</div>
 <!-- Card 2 -->
-<div class="card">
-  <h2>共振：对准频率就放大 <span class="en">Resonance</span></h2>
-  <span class="pill">受迫振动 · 固有频率</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="87914a02cb62ad67">
+<h2>共振：对准频率就放大 <span class="en">Resonance</span></h2>
+<span class="pill">受迫振动 · 固有频率</span>
+<div class="field"><span class="lab">直觉</span>
   推秋千，你不会乱推——你<strong>踩着它自己的节奏</strong>推，每一下都赶在它荡到头往回走时，一点点小力就越攒越大，最后荡得老高。任何会振动的东西都有一个<strong>固有频率</strong>（它"自己想"的频率）。当外来的驱动<strong>踩中</strong>这个频率，能量每周期都同向注入、越攒越多，振幅会<strong>暴涨</strong>——这就是共振。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   给简谐系统加一个周期性驱动力，稳定后的振幅取决于<strong>驱动频率</strong>离固有频率 <var>ω</var><sub>0</sub> 有多近。越近，振幅越大；正对上时冲到峰值。峰有多尖、多高，由<strong>阻尼</strong>（摩擦、耗散）决定：阻尼越小，峰越窄越高——理想无阻尼下振幅原则上无界。</div>
-
-  <figure>
-  <svg viewBox="0 0 620 250" role="img" aria-label="共振曲线：振幅随驱动频率在固有频率处出现尖峰">
-    <!-- axes -->
-    <line x1="66" y1="30" x2="66" y2="214" stroke="#56607e" stroke-width="1.5"/>
-    <polygon points="66,22 61,36 71,36" fill="#56607e"/>
-    <line x1="66" y1="214" x2="580" y2="214" stroke="#56607e" stroke-width="1.5"/>
-    <polygon points="588,214 574,209 574,219" fill="#56607e"/>
-    <text x="52" y="40" text-anchor="end" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">振幅</text>
-    <text x="580" y="234" text-anchor="end" font-size="12" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">驱动频率</text>
-    <!-- omega0 marker -->
-    <line x1="316" y1="52" x2="316" y2="214" stroke="#6a5326" stroke-width="1.3" stroke-dasharray="5 5"/>
-    <text x="316" y="230" text-anchor="middle" font-size="13" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">ω₀</text>
-    <!-- low-damping sharp curve (blue) -->
-    <path d="M70,208 L150,201 Q234,192 266,156 Q300,100 316,54 Q332,100 366,156 Q398,192 482,201 L560,208" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
-    <!-- high-damping broad curve (muted) -->
-    <path d="M70,206 L150,196 Q236,185 268,160 Q300,132 316,116 Q332,132 364,160 Q396,185 482,196 L560,206" fill="none" stroke="#7b86a6" stroke-width="2.2" stroke-dasharray="7 5"/>
-    <!-- peak label -->
-    <text x="316" y="46" text-anchor="middle" font-size="12.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">振幅暴涨</text>
-    <!-- legend -->
-    <line x1="418" y1="66" x2="446" y2="66" stroke="#5b9bff" stroke-width="2.4"/>
-    <text x="452" y="70" font-size="11.5" fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif">低阻尼</text>
-    <line x1="418" y1="86" x2="446" y2="86" stroke="#7b86a6" stroke-width="2.2" stroke-dasharray="7 5"/>
-    <text x="452" y="90" font-size="11.5" fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif">高阻尼</text>
-  </svg>
-  <figcaption>驱动频率扫过固有频率 <span style="font-style:italic">ω₀</span> 时振幅冲上尖峰。阻尼越小，峰越窄越高——这既是收音机能"选台"的本事，也是共振能毁桥的危险。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">为什么重要</span>
+<figure>
+<svg aria-label="共振曲线：振幅随驱动频率在固有频率处出现尖峰" role="img" viewbox="0 0 620 250">
+<!-- axes -->
+<line stroke="#56607e" stroke-width="1.5" x1="66" x2="66" y1="30" y2="214"></line>
+<polygon fill="#56607e" points="66,22 61,36 71,36"></polygon>
+<line stroke="#56607e" stroke-width="1.5" x1="66" x2="580" y1="214" y2="214"></line>
+<polygon fill="#56607e" points="588,214 574,209 574,219"></polygon>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="end" x="52" y="40">振幅</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="end" x="580" y="234">驱动频率</text>
+<!-- omega0 marker -->
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.3" x1="316" x2="316" y1="52" y2="214"></line>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="13" font-style="italic" text-anchor="middle" x="316" y="230">ω₀</text>
+<!-- low-damping sharp curve (blue) -->
+<path d="M70,208 L150,201 Q234,192 266,156 Q300,100 316,54 Q332,100 366,156 Q398,192 482,201 L560,208" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<!-- high-damping broad curve (muted) -->
+<path d="M70,206 L150,196 Q236,185 268,160 Q300,132 316,116 Q332,132 364,160 Q396,185 482,196 L560,206" fill="none" stroke="#7b86a6" stroke-dasharray="7 5" stroke-width="2.2"></path>
+<!-- peak label -->
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="316" y="46">振幅暴涨</text>
+<!-- legend -->
+<line stroke="#5b9bff" stroke-width="2.4" x1="418" x2="446" y1="66" y2="66"></line>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" x="452" y="70">低阻尼</text>
+<line stroke="#7b86a6" stroke-dasharray="7 5" stroke-width="2.2" x1="418" x2="446" y1="86" y2="86"></line>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" x="452" y="90">高阻尼</text>
+</svg>
+<figcaption>驱动频率扫过固有频率 <span style="font-style:italic">ω₀</span> 时振幅冲上尖峰。阻尼越小，峰越窄越高——这既是收音机能"选台"的本事，也是共振能毁桥的危险。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
   共振是把小输入放大成大响应的通用机制，两面都极致：<strong>好的一面</strong>——它让选择性成为可能，收音机在满天电波里只挑出一个台；<strong>坏的一面</strong>——士兵齐步过桥、机器转速逼近结构固有频率，都可能把能量灌进单一模式直到结构解体。工程师设计任何会晃的东西，第一件事就是<strong>算清它的固有频率、离驱动源远一点</strong>。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 生物 / 工程 / 物理</span>
+<div class="field xref"><span class="lab">跨学科对读 · 生物 / 工程 / 物理</span>
   同一条"对准频率就选择性放大"，在多处各显神通——
   <ul>
-    <li><strong>生物·听觉</strong>：耳蜗里的基底膜<strong>不同位置对不同频率共振</strong>——高频在入口、低频在深处。你的内耳其实是一台硬件版的频率分析器，把声音按频率摊开再送进神经；</li>
-    <li><strong>工程·通信</strong>：调台就是调一个 LC 电路的固有频率去对准电台载波；核磁共振（MRI）用射频精确"敲"中氢核的共振频率来成像；</li>
-    <li><strong>物理·乐器</strong>：吉他的音箱、小提琴的琴体是共振腔，专门放大琴弦选定的那些频率，音色由哪些共振被加强决定。</li>
-  </ul>
+<li><strong>生物·听觉</strong>：耳蜗里的基底膜<strong>不同位置对不同频率共振</strong>——高频在入口、低频在深处。你的内耳其实是一台硬件版的频率分析器，把声音按频率摊开再送进神经；</li>
+<li><strong>工程·通信</strong>：调台就是调一个 LC 电路的固有频率去对准电台载波；核磁共振（MRI）用射频精确"敲"中氢核的共振频率来成像；</li>
+<li><strong>物理·乐器</strong>：吉他的音箱、小提琴的琴体是共振腔，专门放大琴弦选定的那些频率，音色由哪些共振被加强决定。</li>
+</ul>
   哪儿需要"从一堆频率里挑出一个并放大"，哪儿就有共振。</div>
-
-  <div class="punch">
-    <div class="one">一句话：踩准固有频率，小力也能攒成大摆。</div>
-    <div class="q"><b>思考：</b>塔科马海峡大桥常被当成"共振毁桥"的教科书案例，但工程界普遍认为真正的元凶是<strong>气动弹性颤振</strong>（风与结构耦合的自激振动），而非单纯外部共振。这两者差在哪？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：踩准固有频率，小力也能攒成大摆。</div>
+<div class="q"><b>思考：</b>塔科马海峡大桥常被当成"共振毁桥"的教科书案例，但工程界普遍认为真正的元凶是<strong>气动弹性颤振</strong>（风与结构耦合的自激振动），而非单纯外部共振。这两者差在哪？</div>
 </div>
-
+</div>
 <!-- Card 3 -->
-<div class="card">
-  <h2>波：把振动传出去 <span class="en">Waves</span></h2>
-  <span class="pill">机械波 · v = fλ</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="c85aa7cf5c4d8eb5">
+<h2>波：把振动传出去 <span class="en">Waves</span></h2>
+<span class="pill">机械波 · v = fλ</span>
+<div class="field"><span class="lab">直觉</span>
   一个人在原地振动，只是振动；但如果他<strong>拽动</strong>了旁边的人，旁边又拽动更旁边——振动就<strong>跑</strong>起来了，这就是波。抖一根长绳，一个鼓包从手边一路奔向另一端；可绳子上每一小段其实只是<strong>原地上下抖</strong>，并没有跟着跑过去。这是波最反直觉的一点：<strong>传出去的是"扰动的形状"和能量，不是介质本身</strong>。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   一列简单的波由三个量锁定：<strong>波长</strong> <var>λ</var>（读"lambda"，一个完整波形有多长）、<strong>频率</strong> <var>f</var>（每秒振动多少次）、<strong>波速</strong> <var>v</var>（波形跑多快）。它们被一条简单关系拴在一起：
   <div class="eq"><var>v</var> = <var>f</var><var>λ</var></div>
-  <div class="gloss">每振动一次，波形前进一个波长；每秒振动 <var>f</var> 次，就前进 <var>f</var> 个波长——所以速度 = 频率 × 波长。关键：<strong>波速通常由介质决定</strong>（绳有多紧、空气多密），而非由你抖多快。你抖快了（<var>f</var> 变大），波长 <var>λ</var> 就相应变短，乘积不变。</div>
+<div class="gloss">每振动一次，波形前进一个波长；每秒振动 <var>f</var> 次，就前进 <var>f</var> 个波长——所以速度 = 频率 × 波长。关键：<strong>波速通常由介质决定</strong>（绳有多紧、空气多密），而非由你抖多快。你抖快了（<var>f</var> 变大），波长 <var>λ</var> 就相应变短，乘积不变。</div>
   更深一层，波背后是一条<strong>波动方程</strong>，说的是"一小段的加速度正比于它被邻居拉弯的程度"（∂ 读"偏"，指只盯一个变量变、其余按住不动的变化率）：
   <div class="eq"><span class="frac"><span class="fnum">∂²<var>y</var></span><span class="fden">∂<var>t</var>²</span></span> = <var>v</var>² <span class="frac"><span class="fnum">∂²<var>y</var></span><span class="fden">∂<var>x</var>²</span></span></div>
-  <div class="gloss">左边是某点上下抖的加速度、右边的 ∂²<var>y</var>/∂<var>x</var>² 是波形在该点的<strong>弯曲程度</strong>：越被邻居拉弯，回复得越猛。凡满足这条方程的东西——绳、声、光——都以速度 <var>v</var> 传播，这就是"波"这个概念能横跨一切介质的原因。</div></div>
-
-  <figure>
-  <svg viewBox="0 0 620 210" role="img" aria-label="行波快照，标出波长与振幅，以及传播方向">
-    <defs>
-      <marker id="ah3" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-        <path d="M0,0 L7,3 L0,6 Z" fill="#dbe2f2"/>
-      </marker>
-    </defs>
-    <!-- baseline -->
-    <line x1="46" y1="128" x2="586" y2="128" stroke="#33405f" stroke-width="1.2" stroke-dasharray="4 5"/>
-    <!-- wave: 3 wavelengths, period 150, from x=60 -->
-    <path d="M60,128 C85,83 110,83 135,128 C160,173 185,173 210,128 C235,83 260,83 285,128 C310,173 335,173 360,128 C385,83 410,83 435,128 C460,173 485,173 510,128"
-          fill="none" stroke="#5b9bff" stroke-width="2.6"/>
-    <!-- wavelength double arrow between crest~97 and crest~247, at y=64 -->
-    <line x1="97" y1="66" x2="247" y2="66" stroke="#dbe2f2" stroke-width="1.5" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
-    <line x1="97" y1="72" x2="97" y2="90" stroke="#556080" stroke-width="1" stroke-dasharray="3 3"/>
-    <line x1="247" y1="72" x2="247" y2="90" stroke="#556080" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="172" y="58" text-anchor="middle" font-size="14" fill="#eaeefb" font-family="Georgia,serif" font-style="italic">λ 波长</text>
-    <!-- amplitude arrow at crest x=397 -->
-    <line x1="397" y1="128" x2="397" y2="84" stroke="#f0ad5a" stroke-width="1.6" marker-end="url(#ah3)"/>
-    <text x="410" y="106" font-size="13.5" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">A 振幅</text>
-    <!-- propagation arrow -->
-    <line x1="470" y1="190" x2="556" y2="190" stroke="#9fb0d0" stroke-width="2" marker-end="url(#ah3)"/>
-    <text x="464" y="194" text-anchor="end" font-size="12.5" fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif">波速 v</text>
-  </svg>
-  <figcaption>某一瞬间的波形快照：波长 λ 是一个完整起伏的长度，振幅 A 是最大偏离。整块图形以速度 v 向右平移，而介质每点只在原地上下抖。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<div class="gloss">左边是某点上下抖的加速度、右边的 ∂²<var>y</var>/∂<var>x</var>² 是波形在该点的<strong>弯曲程度</strong>：越被邻居拉弯，回复得越猛。凡满足这条方程的东西——绳、声、光——都以速度 <var>v</var> 传播，这就是"波"这个概念能横跨一切介质的原因。</div></div>
+<figure>
+<svg aria-label="行波快照，标出波长与振幅，以及传播方向" role="img" viewbox="0 0 620 210">
+<defs>
+<marker id="ah3" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3">
+<path d="M0,0 L7,3 L0,6 Z" fill="#dbe2f2"></path>
+</marker>
+</defs>
+<!-- baseline -->
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.2" x1="46" x2="586" y1="128" y2="128"></line>
+<!-- wave: 3 wavelengths, period 150, from x=60 -->
+<path d="M60,128 C85,83 110,83 135,128 C160,173 185,173 210,128 C235,83 260,83 285,128 C310,173 335,173 360,128 C385,83 410,83 435,128 C460,173 485,173 510,128" fill="none" stroke="#5b9bff" stroke-width="2.6"></path>
+<!-- wavelength double arrow between crest~97 and crest~247, at y=64 -->
+<line marker-end="url(#ah3)" marker-start="url(#ah3)" stroke="#dbe2f2" stroke-width="1.5" x1="97" x2="247" y1="66" y2="66"></line>
+<line stroke="#556080" stroke-dasharray="3 3" stroke-width="1" x1="97" x2="97" y1="72" y2="90"></line>
+<line stroke="#556080" stroke-dasharray="3 3" stroke-width="1" x1="247" x2="247" y1="72" y2="90"></line>
+<text fill="#eaeefb" font-family="Georgia,serif" font-size="14" font-style="italic" text-anchor="middle" x="172" y="58">λ 波长</text>
+<!-- amplitude arrow at crest x=397 -->
+<line marker-end="url(#ah3)" stroke="#f0ad5a" stroke-width="1.6" x1="397" x2="397" y1="128" y2="84"></line>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="13.5" font-style="italic" x="410" y="106">A 振幅</text>
+<!-- propagation arrow -->
+<line marker-end="url(#ah3)" stroke="#9fb0d0" stroke-width="2" x1="470" x2="556" y1="190" y2="190"></line>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="end" x="464" y="194">波速 v</text>
+</svg>
+<figcaption>某一瞬间的波形快照：波长 λ 是一个完整起伏的长度，振幅 A 是最大偏离。整块图形以速度 v 向右平移，而介质每点只在原地上下抖。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   波不是"东西在飞"，而是"<strong>状态在接力</strong>"。海面上的软木塞在浪来浪去时只是<strong>原地打圈</strong>，并不被推向岸边；声音穿过房间，空气分子并没有从你嘴边飞到对方耳朵，只是一层推一层地传了过去。这个"传的是模式不是物质"的洞见，之后会一路延伸到光、乃至量子概率波。</div>
-
-  <div class="punch">
-    <div class="one">一句话：波搬运的是能量与形状，不是介质。</div>
-    <div class="q"><b>思考：</b>声音在温暖空气里更快、在钢铁里比空气快十几倍。既然 <var>v</var>=<var>f</var><var>λ</var>，当声波从空气进入钢铁、频率不变时，是波长变了还是频率变了？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：波搬运的是能量与形状，不是介质。</div>
+<div class="q"><b>思考：</b>声音在温暖空气里更快、在钢铁里比空气快十几倍。既然 <var>v</var>=<var>f</var><var>λ</var>，当声波从空气进入钢铁、频率不变时，是波长变了还是频率变了？</div>
 </div>
-
+</div>
 <!-- Card 4 -->
-<div class="card">
-  <h2>驻波与叠加：波被关起来 <span class="en">Standing Waves &amp; Superposition</span></h2>
-  <span class="pill">叠加原理 · 简正模式</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="b39c5d9642386a54">
+<h2>驻波与叠加：波被关起来 <span class="en">Standing Waves &amp; Superposition</span></h2>
+<span class="pill">叠加原理 · 简正模式</span>
+<div class="field"><span class="lab">直觉</span>
   两列波相遇时不会相撞，而是<strong>叠加</strong>——各点的位移直接相加，穿过彼此后各走各的，仿佛对方不存在。这条<strong>叠加原理</strong>是波区别于粒子的核心。而当一列波被<strong>关进一根两端固定的弦</strong>里，它来回反射、与自己叠加，只有那些"首尾正好接上"的波形能存活下来，形成<strong>原地起伏、不再行走</strong>的驻波——弦上有些点永远不动（<strong>波节</strong>），有些点摆得最凶（<strong>波腹</strong>）。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   两端固定这个<strong>边界条件</strong>是关键：弦长 <var>L</var> 必须正好装下<strong>整数个半波长</strong>，波才自洽。于是允许的波长被"筛"成一串离散值：
-  <div class="eq"><var>λ</var><sub><var>n</var></sub> = <span class="frac"><span class="fnum">2<var>L</var></span><span class="fden"><var>n</var></span></span>，&nbsp;&nbsp;<var>n</var> = 1, 2, 3, …</div>
-  <div class="gloss"><var>L</var> 是弦长、<var>n</var> 是模式编号（整数）。对应的频率也成整数倍：<var>f</var><sub><var>n</var></sub> = <var>n</var> <var>f</var><sub>1</sub>。最低的 <var>n</var>=1 是<strong>基频</strong>（定音高），<var>n</var>=2,3,… 是<strong>谐波</strong>（叠在一起决定音色）。连续的可能性被边界<strong>量子化</strong>成一串离散模式——注意这个词。</div></div>
-
-  <figure>
-  <svg viewBox="0 0 620 288" role="img" aria-label="两端固定弦上的前三个简正模式：基频、二次与三次谐波">
-    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
-      <!-- walls helper drawn per row -->
-      <!-- n=1 -->
-      <line x1="90" y1="34" x2="90" y2="86" stroke="#6a5326" stroke-width="3"/>
-      <line x1="530" y1="34" x2="530" y2="86" stroke="#6a5326" stroke-width="3"/>
-      <line x1="90" y1="60" x2="530" y2="60" stroke="#33405f" stroke-width="1" stroke-dasharray="4 5"/>
-      <path d="M90,60 Q310,18 530,60" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
-      <path d="M90,60 Q310,102 530,60" fill="none" stroke="#5b9bff" stroke-width="1.4" stroke-dasharray="5 5" opacity=".7"/>
-      <text x="46" y="56" text-anchor="end" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">n=1</text>
-      <text x="46" y="72" text-anchor="end" fill="#96a0ba" font-size="10.5">基频</text>
-
-      <!-- n=2 -->
-      <line x1="90" y1="118" x2="90" y2="170" stroke="#6a5326" stroke-width="3"/>
-      <line x1="530" y1="118" x2="530" y2="170" stroke="#6a5326" stroke-width="3"/>
-      <line x1="90" y1="144" x2="530" y2="144" stroke="#33405f" stroke-width="1" stroke-dasharray="4 5"/>
-      <path d="M90,144 Q200,110 310,144 Q420,178 530,144" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
-      <path d="M90,144 Q200,178 310,144 Q420,110 530,144" fill="none" stroke="#5b9bff" stroke-width="1.4" stroke-dasharray="5 5" opacity=".7"/>
-      <circle cx="310" cy="144" r="4" fill="#f0ad5a"/>
-      <text x="46" y="140" text-anchor="end" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">n=2</text>
-      <text x="46" y="156" text-anchor="end" fill="#96a0ba" font-size="10.5">二次谐波</text>
-
-      <!-- n=3 -->
-      <line x1="90" y1="202" x2="90" y2="254" stroke="#6a5326" stroke-width="3"/>
-      <line x1="530" y1="202" x2="530" y2="254" stroke="#6a5326" stroke-width="3"/>
-      <line x1="90" y1="228" x2="530" y2="228" stroke="#33405f" stroke-width="1" stroke-dasharray="4 5"/>
-      <path d="M90,228 Q163,196 237,228 Q310,260 383,228 Q457,196 530,228" fill="none" stroke="#5b9bff" stroke-width="2.4"/>
-      <path d="M90,228 Q163,260 237,228 Q310,196 383,228 Q457,260 530,228" fill="none" stroke="#5b9bff" stroke-width="1.4" stroke-dasharray="5 5" opacity=".7"/>
-      <circle cx="237" cy="228" r="4" fill="#f0ad5a"/>
-      <circle cx="383" cy="228" r="4" fill="#f0ad5a"/>
-      <text x="46" y="224" text-anchor="end" fill="#f0ad5a" font-family="Georgia,serif" font-style="italic">n=3</text>
-      <text x="46" y="240" text-anchor="end" fill="#96a0ba" font-size="10.5">三次谐波</text>
-
-      <!-- legend -->
-      <circle cx="150" cy="276" r="4" fill="#f0ad5a"/>
-      <text x="162" y="280" fill="#9fb0d0" font-size="11.5">波节（永不动）</text>
-      <line x1="310" y1="276" x2="336" y2="276" stroke="#5b9bff" stroke-width="2.4"/>
-      <text x="344" y="280" fill="#9fb0d0" font-size="11.5">两个相位（虚线为半周期后）</text>
-    </g>
-  </svg>
-  <figcaption>两端钉死，弦只肯用整数个半波长存在：n=1、2、3……模式离散。实线与虚线是同一驻波相隔半周期的两个瞬间——它上下呼吸，波节（琥珀点）却纹丝不动。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+  <div class="eq"><var>λ</var><sub><var>n</var></sub> = <span class="frac"><span class="fnum">2<var>L</var></span><span class="fden"><var>n</var></span></span>，  <var>n</var> = 1, 2, 3, …</div>
+<div class="gloss"><var>L</var> 是弦长、<var>n</var> 是模式编号（整数）。对应的频率也成整数倍：<var>f</var><sub><var>n</var></sub> = <var>n</var> <var>f</var><sub>1</sub>。最低的 <var>n</var>=1 是<strong>基频</strong>（定音高），<var>n</var>=2,3,… 是<strong>谐波</strong>（叠在一起决定音色）。连续的可能性被边界<strong>量子化</strong>成一串离散模式——注意这个词。</div></div>
+<figure>
+<svg aria-label="两端固定弦上的前三个简正模式：基频、二次与三次谐波" role="img" viewbox="0 0 620 288">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<!-- walls helper drawn per row -->
+<!-- n=1 -->
+<line stroke="#6a5326" stroke-width="3" x1="90" x2="90" y1="34" y2="86"></line>
+<line stroke="#6a5326" stroke-width="3" x1="530" x2="530" y1="34" y2="86"></line>
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1" x1="90" x2="530" y1="60" y2="60"></line>
+<path d="M90,60 Q310,18 530,60" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<path d="M90,60 Q310,102 530,60" fill="none" opacity=".7" stroke="#5b9bff" stroke-dasharray="5 5" stroke-width="1.4"></path>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-style="italic" text-anchor="end" x="46" y="56">n=1</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="46" y="72">基频</text>
+<!-- n=2 -->
+<line stroke="#6a5326" stroke-width="3" x1="90" x2="90" y1="118" y2="170"></line>
+<line stroke="#6a5326" stroke-width="3" x1="530" x2="530" y1="118" y2="170"></line>
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1" x1="90" x2="530" y1="144" y2="144"></line>
+<path d="M90,144 Q200,110 310,144 Q420,178 530,144" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<path d="M90,144 Q200,178 310,144 Q420,110 530,144" fill="none" opacity=".7" stroke="#5b9bff" stroke-dasharray="5 5" stroke-width="1.4"></path>
+<circle cx="310" cy="144" fill="#f0ad5a" r="4"></circle>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-style="italic" text-anchor="end" x="46" y="140">n=2</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="46" y="156">二次谐波</text>
+<!-- n=3 -->
+<line stroke="#6a5326" stroke-width="3" x1="90" x2="90" y1="202" y2="254"></line>
+<line stroke="#6a5326" stroke-width="3" x1="530" x2="530" y1="202" y2="254"></line>
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1" x1="90" x2="530" y1="228" y2="228"></line>
+<path d="M90,228 Q163,196 237,228 Q310,260 383,228 Q457,196 530,228" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<path d="M90,228 Q163,260 237,228 Q310,196 383,228 Q457,260 530,228" fill="none" opacity=".7" stroke="#5b9bff" stroke-dasharray="5 5" stroke-width="1.4"></path>
+<circle cx="237" cy="228" fill="#f0ad5a" r="4"></circle>
+<circle cx="383" cy="228" fill="#f0ad5a" r="4"></circle>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-style="italic" text-anchor="end" x="46" y="224">n=3</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="46" y="240">三次谐波</text>
+<!-- legend -->
+<circle cx="150" cy="276" fill="#f0ad5a" r="4"></circle>
+<text fill="#9fb0d0" font-size="11.5" x="162" y="280">波节（永不动）</text>
+<line stroke="#5b9bff" stroke-width="2.4" x1="310" x2="336" y1="276" y2="276"></line>
+<text fill="#9fb0d0" font-size="11.5" x="344" y="280">两个相位（虚线为半周期后）</text>
+</g>
+</svg>
+<figcaption>两端钉死，弦只肯用整数个半波长存在：n=1、2、3……模式离散。实线与虚线是同一驻波相隔半周期的两个瞬间——它上下呼吸，波节（琥珀点）却纹丝不动。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   连续的弦，允许的振动却是<strong>离散</strong>的——这不是弦"选择"了整数，而是边界<strong>逼</strong>出来的。凡是"把波关进一个有界区域"，都会得到一串离散的允许模式与对应频率。记住这句话：<strong>把粒子关进原子里，它的物质波同样只剩下一串离散的驻波模式，对应的就是分立的能级</strong>——原子为什么只发特定颜色的光，胚胎就在这根吉他弦上。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 数学 / 量子 / 工程</span>
+<div class="field xref"><span class="lab">跨学科对读 · 数学 / 量子 / 工程</span>
   "任意状态 = 简正模式的叠加"是一条极深的组织原则——
   <ul>
-    <li><strong>数学·傅里叶</strong>：任何波形（乃至任何信号）都能拆成一堆正弦模式之和。拨一根弦发出的复杂声音，就是基频与各次谐波按不同强度的叠加——音色即"谐波配方"；</li>
-    <li><strong>量子</strong>：束缚粒子的波函数就是驻波，边界条件把能量筛成离散能级——氢原子光谱的每条谱线，都是一个允许模式。这条对读，正是理解量子化的直接跳板；</li>
-    <li><strong>工程·模态</strong>：大楼、桥、飞机机翼都有自己的<strong>固有振型</strong>（结构版的谐波），抗震设计就是算清这些模式、避免地震频率去激发它们。</li>
-  </ul>
+<li><strong>数学·傅里叶</strong>：任何波形（乃至任何信号）都能拆成一堆正弦模式之和。拨一根弦发出的复杂声音，就是基频与各次谐波按不同强度的叠加——音色即"谐波配方"；</li>
+<li><strong>量子</strong>：束缚粒子的波函数就是驻波，边界条件把能量筛成离散能级——氢原子光谱的每条谱线，都是一个允许模式。这条对读，正是理解量子化的直接跳板；</li>
+<li><strong>工程·模态</strong>：大楼、桥、飞机机翼都有自己的<strong>固有振型</strong>（结构版的谐波），抗震设计就是算清这些模式、避免地震频率去激发它们。</li>
+</ul>
   一旦学会"把复杂振动看成简正模式的和"，从乐音到原子到摩天楼，都用同一副眼睛看。</div>
-
-  <div class="punch">
-    <div class="one">一句话：把波关起来，连续就变离散。</div>
-    <div class="q"><b>思考：</b>吉他同一根弦，按住品格缩短有效弦长，音就变高——用 <var>λ</var><sub>1</sub>=2<var>L</var> 和 <var>v</var>=<var>f</var><var>λ</var> 解释：变的是弦上的波速，还是波长？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：把波关起来，连续就变离散。</div>
+<div class="q"><b>思考：</b>吉他同一根弦，按住品格缩短有效弦长，音就变高——用 <var>λ</var><sub>1</sub>=2<var>L</var> 和 <var>v</var>=<var>f</var><var>λ</var> 解释：变的是弦上的波速，还是波长？</div>
 </div>
-
+</div>
 <!-- Deep think -->
 <div class="deep">
-  <h2>深入思考</h2>
-
-  <details><summary>为什么偏偏是"正弦"这么特殊？换个别的周期波形不行吗？</summary>
-  <div class="body">两条原因。其一，正弦是简谐运动的<strong>唯一解</strong>——线性回复力 <var>F</var>=−<var>kx</var> 的运动方程数学上只能解出正弦。其二，正弦是波动方程的<strong>本征模式</strong>：穿过线性介质形状不变、只平移，而方波、三角波在有色散的介质里会散开变形。更妙的是傅里叶告诉我们，任何周期波形都能写成正弦之和——所以正弦不是"一种"波形，而是所有波形的<strong>字母表</strong>。研究正弦，就研究了全部。</div></details>
-
-  <details><summary>共振能把振幅推到无穷吗？为什么现实里桥不会"必然"塌？</summary>
-  <div class="body">只有在<strong>零阻尼</strong>的理想模型里，正对固有频率的驱动才会让振幅无限增长。现实中永远有阻尼（内摩擦、空气阻力、能量辐射走），振幅会稳定在一个有限的峰值——阻尼越大，峰越低越钝。工程上还有两道保险：把结构固有频率设计得<strong>远离</strong>常见驱动源，以及主动加<strong>阻尼器</strong>（如台北 101 顶部的调谐质量阻尼器，就是一个反相摆动的大铁球，专门"吸走"共振能量）。所以共振是可被驯服的危险，不是宿命。</div></details>
-
-  <details><summary>叠加原理是普适真理，还是有条件的近似？</summary>
-  <div class="body">它是<strong>线性</strong>系统的性质，而非宇宙铁律。只要介质响应正比于扰动（小振幅），两列波就能干净相加、互不干扰——日常声、光大多如此。但推到<strong>大振幅</strong>，介质变非线性，叠加失效：激波（超音速的音爆）会陡峭化、破碎，海啸近岸会拍卷。有趣的是量子力学的叠加原理却被认为是<strong>精确</strong>的——薛定谔方程严格线性，这正是量子叠加如此"绝对"的根源，后面「波函数与叠加」一段会正面讲。</div></details>
-
-  <details><summary>驻波"不动"，那能量去哪了？它还传递能量吗？</summary>
-  <div class="body">纯粹的驻波<strong>不净传递能量</strong>——它是两列等幅反向行波的叠加，一列往左送多少能量，另一列往右送回来，净流为零，能量只在波节与波腹之间<strong>来回荡</strong>（在波腹间的动能与势能间倒手）。这正是它叫"驻"（standing，站住不走）的原因。真实乐器会持续把一点能量泄漏成声波辐射出去（否则你听不见），所以要不停拨弦补充——但那是理想驻波之外的小泄漏，主体仍是站定的模式。</div></details>
-
-  <details><summary>既然一切都能拆成正弦模式，"模式"是真实存在，还是只是方便的数学分解？</summary>
-  <div class="body">耐人寻味。一方面简正模式确是<strong>数学选择</strong>——你也可以换别的基（如小波）分解同一振动。另一方面模式又异常"实在"：每个模式有确定频率、能<strong>独立</strong>被激发或阻尼、在量子里对应可数的能量份额（声子）。判据或许是：系统<strong>线性</strong>时模式互不交换能量、各自演化，这份"独立性"让它们比一般数学分解更有资格被当作真实的自由度。一旦非线性登场，模式开始耦合、互相喂能量，那份"实在性"就打了折扣。</div></details>
+<h2 data-tts="1a071bdbcedf6933">深入思考</h2>
+<details><summary>为什么偏偏是"正弦"这么特殊？换个别的周期波形不行吗？</summary>
+<div class="body">两条原因。其一，正弦是简谐运动的<strong>唯一解</strong>——线性回复力 <var>F</var>=−<var>kx</var> 的运动方程数学上只能解出正弦。其二，正弦是波动方程的<strong>本征模式</strong>：穿过线性介质形状不变、只平移，而方波、三角波在有色散的介质里会散开变形。更妙的是傅里叶告诉我们，任何周期波形都能写成正弦之和——所以正弦不是"一种"波形，而是所有波形的<strong>字母表</strong>。研究正弦，就研究了全部。</div></details>
+<details><summary>共振能把振幅推到无穷吗？为什么现实里桥不会"必然"塌？</summary>
+<div class="body">只有在<strong>零阻尼</strong>的理想模型里，正对固有频率的驱动才会让振幅无限增长。现实中永远有阻尼（内摩擦、空气阻力、能量辐射走），振幅会稳定在一个有限的峰值——阻尼越大，峰越低越钝。工程上还有两道保险：把结构固有频率设计得<strong>远离</strong>常见驱动源，以及主动加<strong>阻尼器</strong>（如台北 101 顶部的调谐质量阻尼器，就是一个反相摆动的大铁球，专门"吸走"共振能量）。所以共振是可被驯服的危险，不是宿命。</div></details>
+<details><summary>叠加原理是普适真理，还是有条件的近似？</summary>
+<div class="body">它是<strong>线性</strong>系统的性质，而非宇宙铁律。只要介质响应正比于扰动（小振幅），两列波就能干净相加、互不干扰——日常声、光大多如此。但推到<strong>大振幅</strong>，介质变非线性，叠加失效：激波（超音速的音爆）会陡峭化、破碎，海啸近岸会拍卷。有趣的是量子力学的叠加原理却被认为是<strong>精确</strong>的——薛定谔方程严格线性，这正是量子叠加如此"绝对"的根源，后面「波函数与叠加」一段会正面讲。</div></details>
+<details><summary>驻波"不动"，那能量去哪了？它还传递能量吗？</summary>
+<div class="body">纯粹的驻波<strong>不净传递能量</strong>——它是两列等幅反向行波的叠加，一列往左送多少能量，另一列往右送回来，净流为零，能量只在波节与波腹之间<strong>来回荡</strong>（在波腹间的动能与势能间倒手）。这正是它叫"驻"（standing，站住不走）的原因。真实乐器会持续把一点能量泄漏成声波辐射出去（否则你听不见），所以要不停拨弦补充——但那是理想驻波之外的小泄漏，主体仍是站定的模式。</div></details>
+<details><summary>既然一切都能拆成正弦模式，"模式"是真实存在，还是只是方便的数学分解？</summary>
+<div class="body">耐人寻味。一方面简正模式确是<strong>数学选择</strong>——你也可以换别的基（如小波）分解同一振动。另一方面模式又异常"实在"：每个模式有确定频率、能<strong>独立</strong>被激发或阻尼、在量子里对应可数的能量份额（声子）。判据或许是：系统<strong>线性</strong>时模式互不交换能量、各自演化，这份"独立性"让它们比一般数学分解更有资格被当作真实的自由度。一旦非线性登场，模式开始耦合、互相喂能量，那份"实在性"就打了折扣。</div></details>
 </div>
-
 <!-- Reading -->
 <div class="read">
-  <h2>延伸阅读</h2>
-  <ul>
-    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 21–25、49–50 章「谐振子 · 波 · 模式」——直觉基准</li>
-    <li>French，<em>Vibrations and Waves</em>（MIT 入门经典）——把振动到波讲得极透</li>
-    <li>3Blue1Brown，<em>"But what is the Fourier Transform?"</em>——正弦即字母表的可视化</li>
-    <li>Wikipedia：<em>Simple harmonic motion</em> / <em>Resonance</em> / <em>Standing wave</em>——概念与图示速查</li>
-    <li>Billah &amp; Scanlan，<em>"Resonance, Tacoma Narrows Bridge Failure…"</em>，<em>Am. J. Phys.</em> 1991——为塔科马桥的"共振"误解正名</li>
-  </ul>
+<h2 data-tts="ffaea080f3bfa77b">延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 21–25、49–50 章「谐振子 · 波 · 模式」——直觉基准</li>
+<li>French，<em>Vibrations and Waves</em>（MIT 入门经典）——把振动到波讲得极透</li>
+<li>3Blue1Brown，<em>"But what is the Fourier Transform?"</em>——正弦即字母表的可视化</li>
+<li>Wikipedia：<em>Simple harmonic motion</em> / <em>Resonance</em> / <em>Standing wave</em>——概念与图示速查</li>
+<li>Billah &amp; Scanlan，<em>"Resonance, Tacoma Narrows Bridge Failure…"</em>，<em>Am. J. Phys.</em> 1991——为塔科马桥的"共振"误解正名</li>
+</ul>
 </div>
-
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
 </body>
 </html>

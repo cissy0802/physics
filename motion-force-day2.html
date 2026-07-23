@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>物理：运动、力与决定论 · Day 2</title>
 <style>
   :root{
@@ -68,240 +69,203 @@
 </head>
 <body>
 <div class="wrap">
-
 <header>
-  <div class="kicker">物理 · Physics</div>
-  <h1>运动、力与决定论</h1>
-  <div class="meta">Day 2 · 2026 · Phase A 经典力学的骨架</div>
-  <div class="tagline">力不是「维持运动」的原因，而是「改变运动」的原因——搞反这一点，人类想了两千年才醒过来。</div>
+<div class="kicker">物理 · Physics</div>
+<h1 data-tts="014ea7d37dc5ded1">运动、力与决定论</h1>
+<div class="meta">Day 2 · 2026 · Phase A 经典力学的骨架</div>
+<div class="tagline">力不是「维持运动」的原因，而是「改变运动」的原因——搞反这一点，人类想了两千年才醒过来。</div>
 </header>
-
 <div class="intro">
 亚里士多德说：要东西动，就得一直推它。这符合日常经验，却<b>整整错了两千年</b>。伽利略和牛顿的翻案只改了一个字：力改变的不是<b>运动</b>，而是<b>运动的变化</b>。这一步翻案，把「天上」与「地上」缝成同一套定律——苹果落地和月球绕地成了同一件事。走到尽头，还逼出一只幽灵：如果一切都由力和初始状态定死，<b>未来是不是早已写好？</b>四张卡：惯性、<var>F</var>=<var>m</var><var>a</var> 的真意、万有引力的统一、拉普拉斯妖。
 </div>
-
 <!-- Card 1 -->
-<div class="card">
-  <h2>惯性：匀速不需要力 <span class="en">Inertia &amp; the First Law</span></h2>
-  <span class="pill">经典力学 · 1638 / 1687</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="100a1fc275582030">
+<h2>惯性：匀速不需要力 <span class="en">Inertia &amp; the First Law</span></h2>
+<span class="pill">经典力学 · 1638 / 1687</span>
+<div class="field"><span class="lab">直觉</span>
   推一个箱子，你一松手它就停——所以「运动需要力来维持」，对吗？<strong>错。</strong>它停下不是因为「运动的本性想停」，而是因为<strong>摩擦</strong>在偷偷拉它。把摩擦拿掉：冰壶在冰面上能滑很远，太空里的探测器关了引擎照样飞几十年。<strong>没有力，运动不会停，只会一直保持原样。</strong></div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   这就是<strong>牛顿第一定律（惯性定律）</strong>：物体在<strong>不受合外力</strong>时，保持静止或<strong>匀速直线运动</strong>。关键词是「合」——各种力可以同时存在，只要它们互相抵消（合力为零），运动状态就<strong>不变</strong>。所以「静止」和「匀速直线」在物理上是<strong>同一种状态</strong>，只是你站的参考系不同。</div>
-
-  <figure>
-  <svg viewBox="0 0 620 210" role="img" aria-label="无摩擦匀速 vs 有摩擦减速">
-    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
-      <!-- top: no friction, equal spacing -->
-      <text x="20" y="34" fill="#7db0ff" font-weight="700">无摩擦</text>
-      <text x="120" y="34" fill="#96a0ba">合力为零 → 匀速（间距不变）</text>
-      <circle cx="60" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <circle cx="160" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <circle cx="260" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <circle cx="360" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <circle cx="460" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <circle cx="560" cy="66" r="11" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <line x1="500" y1="98" x2="588" y2="98" stroke="#5b9bff" stroke-width="2.5"/>
-      <polygon points="588,92 604,98 588,104" fill="#5b9bff"/>
-      <text x="500" y="120" fill="#96a0ba" font-size="12">速度不变</text>
-      <!-- bottom: friction, decreasing spacing -->
-      <text x="20" y="158" fill="#f0ad5a" font-weight="700">有摩擦</text>
-      <text x="120" y="158" fill="#96a0ba">摩擦力向后 → 减速（间距变小）</text>
-      <circle cx="60" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <circle cx="180" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <circle cx="280" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <circle cx="360" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <circle cx="420" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <circle cx="460" cy="188" r="11" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <line x1="500" y1="188" x2="524" y2="188" stroke="#f0ad5a" stroke-width="2.5"/>
-      <polygon points="500,182 484,188 500,194" fill="#f0ad5a"/>
-      <text x="512" y="192" fill="#96a0ba" font-size="12">摩擦力</text>
-    </g>
-  </svg>
-  <figcaption>同样滑出去：无摩擦时每一步走得一样远（匀速）；有摩擦时越走越短，最后停下——停，是力干的，不是运动自己想停。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<figure>
+<svg aria-label="无摩擦匀速 vs 有摩擦减速" role="img" viewbox="0 0 620 210">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<!-- top: no friction, equal spacing -->
+<text fill="#7db0ff" font-weight="700" x="20" y="34">无摩擦</text>
+<text fill="#96a0ba" x="120" y="34">合力为零 → 匀速（间距不变）</text>
+<circle cx="60" cy="66" fill="#1d2a48" r="11" stroke="#5b9bff" stroke-width="2"></circle>
+<circle cx="160" cy="66" fill="#1d2a48" r="11" stroke="#5b9bff" stroke-width="2"></circle>
+<circle cx="260" cy="66" fill="#1d2a48" r="11" stroke="#5b9bff" stroke-width="2"></circle>
+<circle cx="360" cy="66" fill="#1d2a48" r="11" stroke="#5b9bff" stroke-width="2"></circle>
+<circle cx="460" cy="66" fill="#1d2a48" r="11" stroke="#5b9bff" stroke-width="2"></circle>
+<circle cx="560" cy="66" fill="#1d2a48" r="11" stroke="#5b9bff" stroke-width="2"></circle>
+<line stroke="#5b9bff" stroke-width="2.5" x1="500" x2="588" y1="98" y2="98"></line>
+<polygon fill="#5b9bff" points="588,92 604,98 588,104"></polygon>
+<text fill="#96a0ba" font-size="12" x="500" y="120">速度不变</text>
+<!-- bottom: friction, decreasing spacing -->
+<text fill="#f0ad5a" font-weight="700" x="20" y="158">有摩擦</text>
+<text fill="#96a0ba" x="120" y="158">摩擦力向后 → 减速（间距变小）</text>
+<circle cx="60" cy="188" fill="#2a2214" r="11" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="180" cy="188" fill="#2a2214" r="11" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="280" cy="188" fill="#2a2214" r="11" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="360" cy="188" fill="#2a2214" r="11" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="420" cy="188" fill="#2a2214" r="11" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="460" cy="188" fill="#2a2214" r="11" stroke="#f0ad5a" stroke-width="2"></circle>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="500" x2="524" y1="188" y2="188"></line>
+<polygon fill="#f0ad5a" points="500,182 484,188 500,194"></polygon>
+<text fill="#96a0ba" font-size="12" x="512" y="192">摩擦力</text>
+</g>
+</svg>
+<figcaption>同样滑出去：无摩擦时每一步走得一样远（匀速）；有摩擦时越走越短，最后停下——停，是力干的，不是运动自己想停。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   日常经验骗了我们两千年：因为地球上处处有摩擦和空气阻力，我们<strong>从没见过</strong>「不受力的运动」，于是误以为「不推就停」是运动的本性。牛顿的天才在于<strong>做减法</strong>——想象把摩擦全拿掉，剩下的才是纯粹的定律。<strong>物理的真相常藏在「理想情形」里，而非杂乱的日常表面。</strong></div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 认知 / AI</span>
+<div class="field xref"><span class="lab">跨学科对读 · 认知 / AI</span>
   这是一种典型的<strong>朴素物理错觉</strong>：人脑天生带着「要动就得使劲」的直觉先验，和真实定律相反。它对 AI 也是提醒——<strong>用海量日常数据训练出来的直觉，可能系统性地偏离底层规律</strong>；表面相关（松手就停）不等于机制因果（摩擦让它停）。要看清机制，物理和模型都得学会<strong>剥掉噪声、做减法</strong>。</div>
-
-  <div class="punch">
-    <div class="one">一句话：不是运动需要力，而是运动的<strong>改变</strong>才需要力。</div>
-    <div class="q"><b>思考：</b>如果「静止」和「匀速」在物理上没区别，那「绝对静止」这个概念还有意义吗？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：不是运动需要力，而是运动的<strong>改变</strong>才需要力。</div>
+<div class="q"><b>思考：</b>如果「静止」和「匀速」在物理上没区别，那「绝对静止」这个概念还有意义吗？</div>
 </div>
-
+</div>
 <!-- Card 2 -->
-<div class="card">
-  <h2><var>F</var>=<var>m</var><var>a</var> 的真意 <span class="en">The Meaning of F = ma</span></h2>
-  <span class="pill">牛顿第二定律 · 1687</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="3cad62d2f9b65496">
+<h2><var>F</var>=<var>m</var><var>a</var> 的真意 <span class="en">The Meaning of F = ma</span></h2>
+<span class="pill">牛顿第二定律 · 1687</span>
+<div class="field"><span class="lab">直觉</span>
   既然力改变的是「运动的变化」，那它到底怎么改？答案朴素得惊人：<strong>力越大，变得越快；东西越重，越难改。</strong>用同样的力推购物车和推卡车，购物车「窜」出去、卡车几乎不动——差别全在<strong>质量</strong>。质量就是物体对抗「被改变」的<strong>顽固程度</strong>。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   牛顿第二定律把这句话钉成一条方程：
   <div class="eq"><var>F</var> = <var>m</var><var>a</var></div>
-  <div class="gloss"><var>F</var> 是<strong>合外力</strong>（所有力加起来的净效果），<var>m</var> 是<strong>质量</strong>（惯性的度量，越大越难推动），<var>a</var> 是<strong>加速度</strong>——注意是加速度，<strong>不是速度</strong>。加速度指「速度<strong>变</strong>多快」：踩油门、踩刹车、转弯，都是在加速（速度的大小或方向在变）。移项就是 <span class="nowrap"><var>a</var> = <var>F</var>/<var>m</var></span>：同样的力，质量翻倍，加速度减半。</div>
+<div class="gloss"><var>F</var> 是<strong>合外力</strong>（所有力加起来的净效果），<var>m</var> 是<strong>质量</strong>（惯性的度量，越大越难推动），<var>a</var> 是<strong>加速度</strong>——注意是加速度，<strong>不是速度</strong>。加速度指「速度<strong>变</strong>多快」：踩油门、踩刹车、转弯，都是在加速（速度的大小或方向在变）。移项就是 <span class="nowrap"><var>a</var> = <var>F</var>/<var>m</var></span>：同样的力，质量翻倍，加速度减半。</div>
   当合力为零，<span class="nowrap"><var>a</var> = <span class="zero">0</span></span>（数字 0，零），速度不变——这正好<strong>回到第一定律</strong>，可见第一定律是第二定律的特例。</div>
-
-  <figure>
-  <svg viewBox="0 0 620 200" role="img" aria-label="同样的力作用在不同质量上">
-    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
-      <!-- small mass -->
-      <rect x="60" y="44" width="34" height="34" rx="4" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <text x="77" y="66" text-anchor="middle" fill="#dbe2f2" font-size="12">m</text>
-      <line x1="20" y1="61" x2="52" y2="61" stroke="#f0ad5a" stroke-width="3"/>
-      <polygon points="52,55 66,61 52,67" fill="#f0ad5a"/>
-      <text x="30" y="34" fill="#f0ad5a" font-size="12">力 F</text>
-      <line x1="102" y1="61" x2="250" y2="61" stroke="#5b9bff" stroke-width="3"/>
-      <polygon points="250,54 268,61 250,68" fill="#5b9bff"/>
-      <text x="150" y="34" fill="#7db0ff" font-size="12.5">大加速度 a（轻 → 好推）</text>
-
-      <!-- large mass -->
-      <rect x="60" y="128" width="60" height="60" rx="5" fill="#1d2a48" stroke="#5b9bff" stroke-width="2"/>
-      <text x="90" y="163" text-anchor="middle" fill="#dbe2f2" font-size="12">2m</text>
-      <line x1="20" y1="158" x2="52" y2="158" stroke="#f0ad5a" stroke-width="3"/>
-      <polygon points="52,152 66,158 52,164" fill="#f0ad5a"/>
-      <text x="30" y="120" fill="#f0ad5a" font-size="12">同样的力 F</text>
-      <line x1="128" y1="158" x2="202" y2="158" stroke="#5b9bff" stroke-width="3"/>
-      <polygon points="202,151 220,158 202,165" fill="#5b9bff"/>
-      <text x="150" y="120" fill="#7db0ff" font-size="12.5">小加速度 a（重 → 难推）</text>
-    </g>
-  </svg>
-  <figcaption>同样大小的力 <var>F</var>：质量翻倍，加速度就减半。质量是「抗拒被改变」的度量。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">反直觉的重点</span>
+<figure>
+<svg aria-label="同样的力作用在不同质量上" role="img" viewbox="0 0 620 200">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<!-- small mass -->
+<rect fill="#1d2a48" height="34" rx="4" stroke="#5b9bff" stroke-width="2" width="34" x="60" y="44"></rect>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="77" y="66">m</text>
+<line stroke="#f0ad5a" stroke-width="3" x1="20" x2="52" y1="61" y2="61"></line>
+<polygon fill="#f0ad5a" points="52,55 66,61 52,67"></polygon>
+<text fill="#f0ad5a" font-size="12" x="30" y="34">力 F</text>
+<line stroke="#5b9bff" stroke-width="3" x1="102" x2="250" y1="61" y2="61"></line>
+<polygon fill="#5b9bff" points="250,54 268,61 250,68"></polygon>
+<text fill="#7db0ff" font-size="12.5" x="150" y="34">大加速度 a（轻 → 好推）</text>
+<!-- large mass -->
+<rect fill="#1d2a48" height="60" rx="5" stroke="#5b9bff" stroke-width="2" width="60" x="60" y="128"></rect>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="90" y="163">2m</text>
+<line stroke="#f0ad5a" stroke-width="3" x1="20" x2="52" y1="158" y2="158"></line>
+<polygon fill="#f0ad5a" points="52,152 66,158 52,164"></polygon>
+<text fill="#f0ad5a" font-size="12" x="30" y="120">同样的力 F</text>
+<line stroke="#5b9bff" stroke-width="3" x1="128" x2="202" y1="158" y2="158"></line>
+<polygon fill="#5b9bff" points="202,151 220,158 202,165"></polygon>
+<text fill="#7db0ff" font-size="12.5" x="150" y="120">小加速度 a（重 → 难推）</text>
+</g>
+</svg>
+<figcaption>同样大小的力 <var>F</var>：质量翻倍，加速度就减半。质量是「抗拒被改变」的度量。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
   很多人把 <var>F</var>=<var>m</var><var>a</var> 背成「力=质量×加速度」的口诀，却错过了它真正说的事：<strong>力和加速度成正比，速度不进这条式子。</strong>一辆匀速 100 公里/小时的车，受的合力是<strong>零</strong>——尽管它跑得飞快。速度快慢无关紧要，<strong>速度在不在变</strong>才关乎受力。<var>F</var>=<var>m</var><var>a</var> 一半是<strong>定义</strong>（它定义了力和质量怎么量），一半是<strong>实验断言</strong>（真实世界恰好服从这条比例），两者合起来才成其为定律。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 控制 / 优化</span>
+<div class="field xref"><span class="lab">跨学科对读 · 控制 / 优化</span>
   「输出正比于施加的量、被一个惯性因子拖慢」是一条极通用的模板。<strong>控制论</strong>里，系统的响应被质量/惯量决定，工程师靠它设计刹车与稳定器；<strong>机器学习</strong>的梯度下降里，参数更新 ≈ 学习率 × 梯度，而<strong>动量法（momentum）</strong>干脆借用了物理惯性——让更新「带着惯性」滚过噪声与小坑。<strong>惯性既是物理的顽固，也是优化里的平滑器。</strong></div>
-
-  <div class="punch">
-    <div class="one">一句话：力管的是加速度，不是速度；质量是「难被改变」的度量。</div>
-    <div class="q"><b>思考：</b>坐电梯启动的一瞬你觉得变重，匀速上升时却毫无异样——为什么？哪一段有加速度？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：力管的是加速度，不是速度；质量是「难被改变」的度量。</div>
+<div class="q"><b>思考：</b>坐电梯启动的一瞬你觉得变重，匀速上升时却毫无异样——为什么？哪一段有加速度？</div>
 </div>
-
+</div>
 <!-- Card 3 -->
-<div class="card">
-  <h2>万有引力的统一 <span class="en">Universal Gravitation</span></h2>
-  <span class="pill">牛顿 · 1687</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="8f89ac0f3ff75d05">
+<h2>万有引力的统一 <span class="en">Universal Gravitation</span></h2>
+<span class="pill">牛顿 · 1687</span>
+<div class="field"><span class="lab">直觉</span>
   苹果往下掉，月亮却不掉下来——古人自然认为「天上」和「地上」是两个世界，各有各的规矩。牛顿问了一个疯狂的问题：<strong>会不会月亮其实也在「掉」？</strong>它一直朝地球坠落，只是同时有巨大的<strong>横向速度</strong>，让它每次都「错过」地球——于是永远绕着掉，成了轨道。<strong>绕圈，就是一直在掉却总掉不到。</strong></div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   牛顿断言：任意两个有质量的物体都<strong>互相吸引</strong>，力的大小是
   <div class="eq"><var>F</var> = <var>G</var> <span class="frac"><span class="fnum"><var>m</var><sub>1</sub> <var>m</var><sub>2</sub></span><span class="fden"><var>r</var><sup>2</sup></span></span></div>
-  <div class="gloss"><var>m</var><sub>1</sub>、<var>m</var><sub>2</sub> 是两个物体的质量，<var>r</var> 是它们之间的距离，<var>G</var> 是<strong>万有引力常数</strong>（一个极小的固定数，读作「大 G」）。<var>r</var><sup>2</sup> 在分母：距离拉远一倍，引力变成<strong>四分之一</strong>——这叫<strong>平方反比</strong>。同一条式子，既算出苹果的下落，也算出月球的轨道。</div></div>
-
-  <figure>
-  <svg viewBox="0 0 480 250" role="img" aria-label="月球绕地：一直在掉却总也掉不到">
-    <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
-      <!-- orbit -->
-      <circle cx="180" cy="150" r="96" fill="none" stroke="#31406a" stroke-width="1.4" stroke-dasharray="5 6"/>
-      <!-- earth -->
-      <circle cx="180" cy="150" r="30" fill="#16304f" stroke="#5b9bff" stroke-width="2"/>
-      <text x="180" y="155" text-anchor="middle" fill="#9fc2ff" font-size="12.5">地球</text>
-      <!-- moon at top -->
-      <circle cx="180" cy="54" r="13" fill="#2a2214" stroke="#f0ad5a" stroke-width="2"/>
-      <text x="180" y="34" text-anchor="middle" fill="#f0ad5a" font-size="12">月球</text>
-      <!-- velocity arrow: horizontal (tangent) -->
-      <line x1="197" y1="54" x2="285" y2="54" stroke="#5b9bff" stroke-width="2.5"/>
-      <polygon points="285,48 301,54 285,60" fill="#5b9bff"/>
-      <text x="243" y="46" text-anchor="middle" fill="#7db0ff" font-size="12">横向速度 v</text>
-      <!-- gravity arrow: downward to earth -->
-      <line x1="180" y1="70" x2="180" y2="112" stroke="#f0ad5a" stroke-width="2.5"/>
-      <polygon points="174,112 186,112 180,128" fill="#f0ad5a"/>
-      <text x="214" y="96" text-anchor="middle" fill="#f0ad5a" font-size="12">引力 F</text>
-      <!-- straight-line "if no gravity" -->
-      <line x1="197" y1="54" x2="360" y2="54" stroke="#4a5678" stroke-width="1.4" stroke-dasharray="3 5"/>
-      <text x="360" y="72" text-anchor="middle" fill="#96a0ba" font-size="11.5">没有引力就飞直线</text>
-    </g>
-  </svg>
-  <figcaption>月球的横向速度想让它飞成直线，引力把它不断「拽弯」回来——两者恰好平衡，就是绕地轨道。轨道 = 一直下落 + 一直错过。</figcaption>
-  </figure>
-
-  <div class="field"><span class="lab">为什么重要</span>
+<div class="gloss"><var>m</var><sub>1</sub>、<var>m</var><sub>2</sub> 是两个物体的质量，<var>r</var> 是它们之间的距离，<var>G</var> 是<strong>万有引力常数</strong>（一个极小的固定数，读作「大 G」）。<var>r</var><sup>2</sup> 在分母：距离拉远一倍，引力变成<strong>四分之一</strong>——这叫<strong>平方反比</strong>。同一条式子，既算出苹果的下落，也算出月球的轨道。</div></div>
+<figure>
+<svg aria-label="月球绕地：一直在掉却总也掉不到" role="img" viewbox="0 0 480 250">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<!-- orbit -->
+<circle cx="180" cy="150" fill="none" r="96" stroke="#31406a" stroke-dasharray="5 6" stroke-width="1.4"></circle>
+<!-- earth -->
+<circle cx="180" cy="150" fill="#16304f" r="30" stroke="#5b9bff" stroke-width="2"></circle>
+<text fill="#9fc2ff" font-size="12.5" text-anchor="middle" x="180" y="155">地球</text>
+<!-- moon at top -->
+<circle cx="180" cy="54" fill="#2a2214" r="13" stroke="#f0ad5a" stroke-width="2"></circle>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="180" y="34">月球</text>
+<!-- velocity arrow: horizontal (tangent) -->
+<line stroke="#5b9bff" stroke-width="2.5" x1="197" x2="285" y1="54" y2="54"></line>
+<polygon fill="#5b9bff" points="285,48 301,54 285,60"></polygon>
+<text fill="#7db0ff" font-size="12" text-anchor="middle" x="243" y="46">横向速度 v</text>
+<!-- gravity arrow: downward to earth -->
+<line stroke="#f0ad5a" stroke-width="2.5" x1="180" x2="180" y1="70" y2="112"></line>
+<polygon fill="#f0ad5a" points="174,112 186,112 180,128"></polygon>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="214" y="96">引力 F</text>
+<!-- straight-line "if no gravity" -->
+<line stroke="#4a5678" stroke-dasharray="3 5" stroke-width="1.4" x1="197" x2="360" y1="54" y2="54"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="360" y="72">没有引力就飞直线</text>
+</g>
+</svg>
+<figcaption>月球的横向速度想让它飞成直线，引力把它不断「拽弯」回来——两者恰好平衡，就是绕地轨道。轨道 = 一直下落 + 一直错过。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
   这是物理学第一次<strong>大统一</strong>：把「天上的运动」和「地上的下落」合并成<strong>同一条定律</strong>。它的威力不止于解释——它能<strong>预言</strong>：后来天文学家正是靠引力算出的偏差，在预言的位置上「算」出了海王星，笔尖先于望远镜找到一颗行星。<strong>统一 → 预言 → 验证</strong>，这条链条此后成了整部物理学的推进方式，电磁、电弱乃至对引力本身的重新理解都在重演它。</div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 科学方法 / AI</span>
+<div class="field xref"><span class="lab">跨学科对读 · 科学方法 / AI</span>
   「用一条简洁规则同时解释一大片看似无关的现象」正是<strong>统一</strong>的力量，也是好理论的黄金标准：<strong>覆盖越广、假设越少，越可能触到了真机制。</strong>这与机器学习的追求同构——一个能在众多任务上<strong>泛化</strong>的模型，胜过为每个任务单独打补丁；泛化之于模型，恰如统一之于物理。不过要诚实：牛顿引力极准，却在<strong>极强引力</strong>下露出破绽，终被时空弯曲的图景取代（『引力=时空弯曲』那一期会讲透）。<strong>再成功的统一也可能只是更深统一的近似。</strong></div>
-
-  <div class="punch">
-    <div class="one">一句话：轨道不是「不掉」，而是「一直掉、一直错过」。</div>
-    <div class="q"><b>思考：</b>空间站里的宇航员「失重」漂浮，是因为那里没有引力吗？（提示：他们和空间站在一起「掉」。）</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：轨道不是「不掉」，而是「一直掉、一直错过」。</div>
+<div class="q"><b>思考：</b>空间站里的宇航员「失重」漂浮，是因为那里没有引力吗？（提示：他们和空间站在一起「掉」。）</div>
 </div>
-
+</div>
 <!-- Card 4 -->
-<div class="card">
-  <h2>拉普拉斯妖 <span class="en">Laplace's Demon &amp; Determinism</span></h2>
-  <span class="pill">决定论 · 1814</span>
-
-  <div class="field"><span class="lab">直觉</span>
+<div class="card" data-tts="fab66d1e07a1fe0e">
+<h2>拉普拉斯妖 <span class="en">Laplace's Demon &amp; Determinism</span></h2>
+<span class="pill">决定论 · 1814</span>
+<div class="field"><span class="lab">直觉</span>
   牛顿定律有个惊人的性质：只要知道此刻每个粒子的<strong>位置</strong>和<strong>速度</strong>，加上力的规则，你就能把它们下一刻、再下一刻……<strong>一路算到底</strong>。1814 年拉普拉斯把这推到极致，想象一个无所不知的智者（后人叫它「<strong>拉普拉斯妖</strong>」）：若它知道宇宙中每个原子此刻的状态，那么<strong>整个过去和全部未来，对它而言都像现在一样清清楚楚</strong>。</div>
-
-  <div class="field"><span class="lab">机制</span>
+<div class="field"><span class="lab">机制</span>
   这叫<strong>决定论</strong>。它的数学根子是：牛顿定律是一组<strong>微分方程</strong>（描述状态如何随时间变化的规则），给定<strong>初始条件</strong>（此刻的位置与速度），方程的解<strong>唯一确定</strong>——未来没有第二种可能。世界像一台上好发条的钟：<strong>初始状态 + 定律 = 一条写死的轨迹</strong>。</div>
-
-  <div class="field"><span class="lab">反直觉的重点（诚实辨析）</span>
+<div class="field"><span class="lab">反直觉的重点（诚实辨析）</span>
   「决定」不等于「<strong>可预测</strong>」，这是最容易被玄化的一点，务必分清：
   <ul style="margin:8px 0 4px;padding-left:20px;font-size:.95rem;color:#c3cbe0">
-    <li><strong>混沌</strong>：许多系统（天气、三体）对初始条件<strong>极端敏感</strong>——起点差之毫厘，结局谬以千里。方程照样是决定论的，但你永远量不到「无限精确」的初值，所以<strong>原理上定死、实践中算不准</strong>（『混沌与非线性』那一期专讲）。</li>
-    <li><strong>量子力学</strong>：更深一层，微观世界的规律是<strong>概率性</strong>的——同样的初始条件也只给出各种结果的<strong>概率</strong>，而非唯一未来。拉普拉斯妖的经典梦想，被量子从根上动摇了（后面量子那几期会正面处理）。</li>
-  </ul>
+<li><strong>混沌</strong>：许多系统（天气、三体）对初始条件<strong>极端敏感</strong>——起点差之毫厘，结局谬以千里。方程照样是决定论的，但你永远量不到「无限精确」的初值，所以<strong>原理上定死、实践中算不准</strong>（『混沌与非线性』那一期专讲）。</li>
+<li><strong>量子力学</strong>：更深一层，微观世界的规律是<strong>概率性</strong>的——同样的初始条件也只给出各种结果的<strong>概率</strong>，而非唯一未来。拉普拉斯妖的经典梦想，被量子从根上动摇了（后面量子那几期会正面处理）。</li>
+</ul>
   所以别把决定论当成宿命论的科学背书：<strong>就算世界是决定论的，它也既不可预测、也不消解「我为何如此选择」这类问题。</strong></div>
-
-  <div class="field xref"><span class="lab">跨学科对读 · 计算 / AI</span>
+<div class="field xref"><span class="lab">跨学科对读 · 计算 / AI</span>
   拉普拉斯妖本质是一台<strong>完美的模拟器</strong>：输入初始态，运行定律，输出未来。这正是<strong>数值模拟</strong>（天气预报、分子动力学、宇宙学）的纲领——只是真实的「妖」要面对两道墙：<strong>初值测不准</strong>（混沌）与<strong>算力有限</strong>（没有比宇宙更大的计算机来模拟宇宙）。这也照见 AI 的边界：模型能多准地<strong>外推</strong>，被数据精度与系统的混沌程度共同锁死——<strong>决定论不等于可计算，可计算不等于可预测。</strong></div>
-
-  <div class="punch">
-    <div class="one">一句话：定死 ≠ 可预测；牛顿的钟很精确，却挡不住混沌与量子。</div>
-    <div class="q"><b>思考：</b>如果模拟宇宙需要一台比宇宙还大的计算机，那「原则上可预测」这句话还有实际意义吗？</div>
-  </div>
+<div class="punch">
+<div class="one">一句话：定死 ≠ 可预测；牛顿的钟很精确，却挡不住混沌与量子。</div>
+<div class="q"><b>思考：</b>如果模拟宇宙需要一台比宇宙还大的计算机，那「原则上可预测」这句话还有实际意义吗？</div>
 </div>
-
+</div>
 <!-- Deep think -->
 <div class="deep">
-  <h2>深入思考</h2>
-
-  <details><summary>牛顿第一和第二定律，是不是同一句话说了两遍？既然 F=ma 里 F=0 就得到匀速，为什么还要单列第一定律？</summary>
-  <div class="body">数学上第一定律确实是第二定律在 <var>F</var>=0 时的特例，但它<strong>逻辑上不多余</strong>。第一定律真正的活儿，是<strong>宣告「惯性参考系」的存在</strong>——只有在不受力就匀速的那类参考系里，<var>F</var>=<var>m</var><var>a</var> 才成立。在一个加速或旋转的参考系里（比如急刹车的公交车上），你会「看到」东西无缘无故往前冲，仿佛受了力，其实那是参考系在骗你。所以第一定律不是废话，而是<strong>为第二定律划定了舞台</strong>：先确定「站在哪看」，第二定律才有意义。</div></details>
-
-  <details><summary>惯性质量（越难推动）和引力质量（受多大引力），凭什么是同一个 m？会不会只是碰巧数值相等？</summary>
-  <div class="body">这是一个深到牛顿也答不上来的问题。<var>F</var>=<var>m</var><var>a</var> 里的 <var>m</var> 量的是「抗拒被改变的顽固」（惯性质量），引力公式里的 <var>m</var> 量的是「感受引力的强弱」（引力质量）——概念上毫不相干，实验上却<strong>精确相等</strong>（已验证到极高精度）。伽利略「重的轻的同时落地」正是这等价性的直接后果。牛顿把它当成巧合照用，直到爱因斯坦把这条「巧合」抬成<strong>等效原理</strong>——引力和加速无法区分——并由此重建了整个引力理论（『引力=时空弯曲』那一期的起点就是这里）。<strong>一条被忽视的巧合，往往是下一场革命的裂缝。</strong></div></details>
-
-  <details><summary>如果轨道是「一直在掉」，那为什么行星不会真的螺旋着掉进太阳，而是稳稳绕了几十亿年？</summary>
-  <div class="body">因为「掉」和「横向冲」恰好<strong>动态平衡</strong>：引力把行星往里拽，横向速度又让它往外「甩」，两者在椭圆轨道上不断交换而<strong>总量守恒</strong>（能量与角动量都守恒——『能量与动量』那一期会讲这守恒为何最深）。只要没有东西持续偷走能量，这个平衡就能维持天文尺度的时间。真要让它掉进去，得有耗散——比如稠密气体的摩擦或引力波极缓慢地带走能量。所以稳定轨道不是「不掉」，而是<strong>掉的趋势与逃的趋势被守恒律锁成了循环</strong>。</div></details>
-
-  <details><summary>既然牛顿引力被相对论取代了，那它还算「对」吗？我们现在学它是不是在学一个过时的错误？</summary>
-  <div class="body">牛顿引力没有被「推翻」，而是被<strong>定位</strong>了——它是更深理论在「弱引力、低速度」这一大片区域里的<strong>极佳近似</strong>，误差小到发射探测器、预报潮汐都绰绰有余（这正是「有效理论」的意思：每个尺度有它够用的定律）。相对论只在极端情形（水星近日点的微小进动、GPS 的计时、黑洞附近）才显出差别。所以学牛顿绝不是学错误，而是学<strong>一个被清楚划定了适用边界的真理</strong>——知道一条定律「在哪成立、在哪失效」，比记住它本身更重要。</div></details>
+<h2 data-tts="c655934ac0e54006">深入思考</h2>
+<details><summary>牛顿第一和第二定律，是不是同一句话说了两遍？既然 F=ma 里 F=0 就得到匀速，为什么还要单列第一定律？</summary>
+<div class="body">数学上第一定律确实是第二定律在 <var>F</var>=0 时的特例，但它<strong>逻辑上不多余</strong>。第一定律真正的活儿，是<strong>宣告「惯性参考系」的存在</strong>——只有在不受力就匀速的那类参考系里，<var>F</var>=<var>m</var><var>a</var> 才成立。在一个加速或旋转的参考系里（比如急刹车的公交车上），你会「看到」东西无缘无故往前冲，仿佛受了力，其实那是参考系在骗你。所以第一定律不是废话，而是<strong>为第二定律划定了舞台</strong>：先确定「站在哪看」，第二定律才有意义。</div></details>
+<details><summary>惯性质量（越难推动）和引力质量（受多大引力），凭什么是同一个 m？会不会只是碰巧数值相等？</summary>
+<div class="body">这是一个深到牛顿也答不上来的问题。<var>F</var>=<var>m</var><var>a</var> 里的 <var>m</var> 量的是「抗拒被改变的顽固」（惯性质量），引力公式里的 <var>m</var> 量的是「感受引力的强弱」（引力质量）——概念上毫不相干，实验上却<strong>精确相等</strong>（已验证到极高精度）。伽利略「重的轻的同时落地」正是这等价性的直接后果。牛顿把它当成巧合照用，直到爱因斯坦把这条「巧合」抬成<strong>等效原理</strong>——引力和加速无法区分——并由此重建了整个引力理论（『引力=时空弯曲』那一期的起点就是这里）。<strong>一条被忽视的巧合，往往是下一场革命的裂缝。</strong></div></details>
+<details><summary>如果轨道是「一直在掉」，那为什么行星不会真的螺旋着掉进太阳，而是稳稳绕了几十亿年？</summary>
+<div class="body">因为「掉」和「横向冲」恰好<strong>动态平衡</strong>：引力把行星往里拽，横向速度又让它往外「甩」，两者在椭圆轨道上不断交换而<strong>总量守恒</strong>（能量与角动量都守恒——『能量与动量』那一期会讲这守恒为何最深）。只要没有东西持续偷走能量，这个平衡就能维持天文尺度的时间。真要让它掉进去，得有耗散——比如稠密气体的摩擦或引力波极缓慢地带走能量。所以稳定轨道不是「不掉」，而是<strong>掉的趋势与逃的趋势被守恒律锁成了循环</strong>。</div></details>
+<details><summary>既然牛顿引力被相对论取代了，那它还算「对」吗？我们现在学它是不是在学一个过时的错误？</summary>
+<div class="body">牛顿引力没有被「推翻」，而是被<strong>定位</strong>了——它是更深理论在「弱引力、低速度」这一大片区域里的<strong>极佳近似</strong>，误差小到发射探测器、预报潮汐都绰绰有余（这正是「有效理论」的意思：每个尺度有它够用的定律）。相对论只在极端情形（水星近日点的微小进动、GPS 的计时、黑洞附近）才显出差别。所以学牛顿绝不是学错误，而是学<strong>一个被清楚划定了适用边界的真理</strong>——知道一条定律「在哪成立、在哪失效」，比记住它本身更重要。</div></details>
 </div>
-
 <!-- Reading -->
 <div class="read">
-  <h2>延伸阅读</h2>
-  <ul>
-    <li>Isaac Newton，<em>Principia（自然哲学的数学原理）</em>，1687——三大定律与万有引力的原始出处</li>
-    <li>Galileo Galilei，<em>关于两门新科学的对话</em>，1638——惯性思想的先声（斜面与理想化实验）</li>
-    <li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 7、9 章「引力理论」「牛顿动力学定律」——直觉讲法</li>
-    <li>P.-S. Laplace，<em>A Philosophical Essay on Probabilities</em>，1814——「拉普拉斯妖」的原始段落</li>
-    <li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>——现代视角的动力学与决定论</li>
-  </ul>
+<h2 data-tts="680fcd0f8747fe30">延伸阅读</h2>
+<ul>
+<li>Isaac Newton，<em>Principia（自然哲学的数学原理）</em>，1687——三大定律与万有引力的原始出处</li>
+<li>Galileo Galilei，<em>关于两门新科学的对话</em>，1638——惯性思想的先声（斜面与理想化实验）</li>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 7、9 章「引力理论」「牛顿动力学定律」——直觉讲法</li>
+<li>P.-S. Laplace，<em>A Philosophical Essay on Probabilities</em>，1814——「拉普拉斯妖」的原始段落</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>——现代视角的动力学与决定论</li>
+</ul>
 </div>
-
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
 </body>
 </html>
