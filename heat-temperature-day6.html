@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -144,7 +151,7 @@
   大模型采样里的 <strong>temperature（温度）</strong>参数正是借这个物理直觉：温度调高，概率分布被「摊平」，模型像高温气体一样<strong>东跳西窜、更随机</strong>；温度调到接近 0，分布收窄到只挑最可能的词，像被冻住只剩一个方向。<strong>高温 = 高熵 = 更发散</strong>，物理和采样共用同一套隐喻——这不是巧合，softmax 的公式本就是从统计物理的玻尔兹曼分布搬来的。</div>
 <div class="punch">
 <div class="one">一句话：温度不是一种东西，是分子乱撞的平均剧烈程度。</div>
-<div class="q"><b>思考：</b>如果只有一个分子在盒子里飞，谈论它的「温度」还有意义吗？</div>
+<details class="q"><summary><b>思考：</b>如果只有一个分子在盒子里飞，谈论它的「温度」还有意义吗？</summary><div class="qa">几乎没有意义。温度是大量分子动能的统计平均，单个分子只有瞬时动能、没有「分布」，谈温度就像谈「一个人的人口平均年龄」。硬要定义也只能靠时间平均、或落回它的动能本身。温度本质是集体（涌现）概念。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -165,7 +172,7 @@
 <strong>工程</strong>：任何发动机、任何芯片都逃不掉「做功必产废热」——数据中心一半的电费花在<strong>散热</strong>上，正是第二定律在收「税」。</div>
 <div class="punch">
 <div class="one">一句话：能量守恒管「多少」，熵增管「往哪个方向」。</div>
-<div class="q"><b>思考：</b>第零定律看似最不起眼，但少了它，「温度」这个词会失去意义吗？</div>
+<details class="q"><summary><b>思考：</b>第零定律看似最不起眼，但少了它，「温度」这个词会失去意义吗？</summary><div class="qa">会。第零定律说「与同一物体热平衡的两者彼此也热平衡」，这条传递性才让「温度」能作为一个可比较的单一数存在、温度计才有意义。没有它，「谁比谁热」无法自洽排序，温度就退化成两两之间的私事。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -211,7 +218,7 @@
   这是物理学里少见的<strong>「你不可能做得更好」</strong>式定理——它不告诉你怎么造机器，而是划死了所有机器的边界。它还有个惊人推论：卡诺效率与<strong>工作物质无关</strong>，用蒸汽、用空气、用任何气体都一样。这个「与细节无关」的味道，正是热力学最深的美——它暗示温度背后有个更根本的量（熵），在「统计力学」那一期会显形。</div>
 <div class="punch">
 <div class="one">一句话：热机效率的天花板，只由冷热两端的温度写死。</div>
-<div class="q"><b>思考：</b>为什么电厂宁可用几百度的高温高压蒸汽，也不用温吞的热水来发电？</div>
+<details class="q"><summary><b>思考：</b>为什么电厂宁可用几百度的高温高压蒸汽，也不用温吞的热水来发电？</summary><div class="qa">因为卡诺效率=1−T冷/T热，只由高低温比决定。热水的 T热 离环境 T冷 太近，效率极低；把 T热 拉到几百度，可用功的比例才大。发电要的不是「有多少热」，而是「热从多高掉到多低」——温差就是可用性的来源。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -235,7 +242,7 @@
   凡是宣称「零成本、净收益、可无限重复」的东西，多半藏着一台永动机，值得警惕。</div>
 <div class="punch">
 <div class="one">一句话：永动机不是造不出，是被宇宙从原理上封了死。</div>
-<div class="q"><b>思考：</b>你的身体每天消耗能量却「维持不变」，它算不算一种永动机？差别在哪？</div>
+<details class="q"><summary><b>思考：</b>你的身体每天消耗能量却「维持不变」，它算不算一种永动机？差别在哪？</summary><div class="qa">不算。永动机是「不吃能量白出功」；你是持续吃进食物化学能、又向环境排出等量的热与熵，是开放系统里的稳态，不是无中生有。维持「不变」恰恰要不停付能量与熵的账——和封闭系统里凭空做功是两回事。</div></details>
 </div>
 </div>
 <!-- Deep think -->

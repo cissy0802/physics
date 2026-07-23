@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -123,7 +130,7 @@
   透镜、光纤的设计全建立在费马原理上——把玻璃形状调到让所有光线"同时到达"，就聚成一个焦点。自然界也反复用这一招：蚂蚁觅食踩出的近似最短路、河流改道、闪电劈下的锯齿路径，都能读成某种<strong>"代价最小"的路径选择</strong>。"走代价最省的路"是自然一再复用的同一个模板。</div>
 <div class="punch">
 <div class="one">一句话：自然不走最短的路，走"代价"最省的路。</div>
-<div class="q"><b>思考：</b>如果水里游得和沙滩上跑得一样快，救生员的折线还会拐吗？</div>
+<details class="q"><summary><b>思考：</b>如果水里游得和沙滩上跑得一样快，救生员的折线还会拐吗？</summary><div class="qa">不会，直接走直线。折线是因为两段「代价」（速度）不同，为省总时间要在快慢介质里重新分配路程；一旦两边速度相同，最省时的路就是几何直线。这正是斯涅尔折射定律的直觉——光也这么「选路」。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -163,7 +170,7 @@
   这套数学叫<strong>变分法（calculus of variations）</strong>——在"所有可能的函数/路径"里，挑出让某个积分（泛函）取极值的那一个。机器学习的整个训练就是同一件事：在<strong>所有可能的参数配置</strong>里，找让<strong>损失函数</strong>最小的那组。物理的 δ<var>S</var>=0 和深度学习的 ∇Loss=0 是<strong>同一个数学动作</strong>，只是一个发生在路径空间、一个发生在参数空间。</div>
 <div class="punch">
 <div class="one">一句话：自然是个极简主义会计，只让 T−V 的总账驻定。</div>
-<div class="q"><b>思考：</b>F=ma 和 δS=0 完全等价，为什么物理学家越往后越偏爱后者？</div>
+<details class="q"><summary><b>思考：</b>F=ma 和 δS=0 完全等价，为什么物理学家越往后越偏爱后者？</summary><div class="qa">因为作用量视角更普适、更省事：一个标量 L 就编码全部动力学，天然兼容约束、场、相对论与量子（路径积分直接用 S），且对称↔守恒（Noether）在这框架里最透亮。F=ma 是矢量、逐力记账，换坐标就麻烦。等价，但后者高一层。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -226,7 +233,7 @@
   "自然在优化某个量"这幅图像，历史上一再被塞进<strong>目的论</strong>（自然仿佛有"目的"）甚至神学。诚实地说：驻定原理只是和逐力描述<strong>严格等价</strong>的另一种记法，并没有多给"自然知道终点"或"心怀意图"的任何证据。别把<strong>数学的优雅</strong>误读成<strong>宇宙的意志</strong>——下一张卡的量子解释，会把这层浪漫彻底祛魅。</div>
 <div class="punch">
 <div class="one">一句话：报一个物理理论，就是报它的作用量。</div>
-<div class="q"><b>思考：</b>如果两套不同的 L 给出完全相同的运动方程，它们算"同一个理论"吗？</div>
+<details class="q"><summary><b>思考：</b>如果两套不同的 L 给出完全相同的运动方程，它们算"同一个理论"吗？</summary><div class="qa">就可观测而言算同一个。L 有规范自由度——加一个全导数项、或乘常数，运动方程不变，物理预言也不变。物理只认能测的，两套 L 若给出全同的方程与观测，就是同一理论的两种写法。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -280,7 +287,7 @@
   路径积分 = 对所有可能配置按 e<sup>i<var>S</var>/ℏ</sup> 加权求和；这和统计里的<strong>配分函数</strong>、能量模型/扩散模型里"对所有可能样本按 e<sup>−<var>E</var></sup> 加权"，是<strong>同构的数学骨架</strong>（把 i<var>S</var>/ℏ 换成 −<var>E</var> 就从量子跨到统计）。采样、变分推断、乃至扩散式生成，骨子里都在做"路径积分"式的加权求和——物理与现代生成式 AI 在这里握了手。</div>
 <div class="punch">
 <div class="one">一句话：不是自然挑了最优路径，是所有路径里只有它没被抵消。</div>
-<div class="q"><b>思考：</b>如果 ℏ 不是极小、而是很大，我们还会看到"确定的经典轨迹"吗？</div>
+<details class="q"><summary><b>思考：</b>如果 ℏ 不是极小、而是很大，我们还会看到"确定的经典轨迹"吗？</summary><div class="qa">不会。经典轨迹之所以确定，是因为 ℏ 极小、让非最小作用量的路径剧烈相消，只剩 δS=0 那条。若 ℏ 很大，各路径相位差不大、都参与叠加，世界就「糊」成量子概率云，没有单一确定轨道。经典性是 ℏ→小 的极限。</div></details>
 </div>
 </div>
 <!-- Deep think -->

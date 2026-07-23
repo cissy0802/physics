@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -132,7 +139,7 @@ From here physics changes its face. So far we asked <b>how particles move</b>; t
 
   <div class="punch">
     <div class="one">In one line: every valley bottom is a parabola, so every small oscillation is a sine.</div>
-    <div class="q"><b>Ponder:</b> if an equilibrium's potential happens to have its quadratic term <strong>vanish</strong> (say a quartic bottom), is the small oscillation still harmonic? Would its frequency now depend on amplitude?</div>
+    <details class="q"><summary><b>Ponder:</b> if an equilibrium's potential happens to have its quadratic term <strong>vanish</strong> (say a quartic bottom), is the small oscillation still harmonic? Would its frequency now depend on amplitude?</summary><div class="qa">No longer simple-harmonic. Harmonicity comes from a potential minimum approximable as a quadratic parabola (restoring force ∝ displacement); if the quadratic term vanishes and a quartic dominates, the restoring force ∝ displacement³ — a nonlinear oscillator. Its frequency then depends on amplitude (larger swings run faster) — “anharmonic.” The amplitude-independence of SHM holds only for a quadratic bottom.</div></details>
   </div>
 </div>
 
@@ -182,7 +189,7 @@ From here physics changes its face. So far we asked <b>how particles move</b>; t
 
   <div class="punch">
     <div class="one">In one line: hit the natural frequency, and a tiny force accumulates into a huge swing.</div>
-    <div class="q"><b>Ponder:</b> the Tacoma Narrows Bridge is often taught as the textbook case of "resonance destroying a bridge," yet engineers largely blame <strong>aeroelastic flutter</strong> (a self-excited coupling of wind and structure), not simple external resonance. Where do the two differ?</div>
+    <details class="q"><summary><b>Ponder:</b> the Tacoma Narrows Bridge is often taught as the textbook case of "resonance destroying a bridge," yet engineers largely blame <strong>aeroelastic flutter</strong> (a self-excited coupling of wind and structure), not simple external resonance. Where do the two differ?</summary><div class="qa">Resonance needs an external drive at a fixed frequency that, hitting the natural frequency, amplifies — energy poured in from an outside periodic force. Flutter is self-excited: a steady wind, modulated by the structure's own motion, feeds energy back to that motion in a positive-feedback phase, needing no external periodic source; past a critical wind speed it diverges on its own. One is “driven on resonance,” the other “a self-instability from structure-flow coupling.”</div></details>
   </div>
 </div>
 
@@ -229,7 +236,7 @@ From here physics changes its face. So far we asked <b>how particles move</b>; t
 
   <div class="punch">
     <div class="one">In one line: a wave carries energy and shape, not the medium.</div>
-    <div class="q"><b>Ponder:</b> sound is faster in warm air, and roughly ten-plus times faster in steel than in air. Since <var>v</var>=<var>f</var><var>λ</var>, when a sound wave crosses from air into steel with its frequency unchanged, is it the wavelength that changes, or the frequency?</div>
+    <details class="q"><summary><b>Ponder:</b> sound is faster in warm air, and roughly ten-plus times faster in steel than in air. Since <var>v</var>=<var>f</var><var>λ</var>, when a sound wave crosses from air into steel with its frequency unchanged, is it the wavelength that changes, or the frequency?</summary><div class="qa">The wavelength changes. Frequency is set by the source and doesn't change across media; in v=fλ the speed v is set by the medium (a dozen-plus times faster in steel) and f is fixed, so λ scales up with v — the wavelength stretches on entering steel. Across media frequency is conserved; speed and wavelength change.</div></details>
   </div>
 </div>
 
@@ -299,7 +306,7 @@ From here physics changes its face. So far we asked <b>how particles move</b>; t
 
   <div class="punch">
     <div class="one">In one line: trap a wave and the continuous turns discrete.</div>
-    <div class="q"><b>Ponder:</b> on one guitar string, fretting shortens the effective length and raises the pitch — use <var>λ</var><sub>1</sub>=2<var>L</var> and <var>v</var>=<var>f</var><var>λ</var> to explain: is it the wave speed on the string that changes, or the wavelength?</div>
+    <details class="q"><summary><b>Ponder:</b> on one guitar string, fretting shortens the effective length and raises the pitch — use <var>λ</var><sub>1</sub>=2<var>L</var> and <var>v</var>=<var>f</var><var>λ</var> to explain: is it the wave speed on the string that changes, or the wavelength?</summary><div class="qa">The wavelength changes, not the wave speed. Wave speed v is set by the string's tension and linear density; fretting changes neither, so v stays essentially fixed. Shortening the effective length L shrinks the fundamental wavelength λ₁=2L, and by f=v/λ the frequency rises. On one string the speed is fixed — it's the “box holding the wave” that shortens, so the wavelength shortens and the pitch goes up.</div></details>
   </div>
 </div>
 

@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -90,7 +97,7 @@
   牛顿方程是<strong>确定论</strong>的，里面没有半点"概率"。那概率是从哪冒出来的？答案惊人：<strong>它不是无知的补丁，而是从确定论里长出的稳固结论</strong>。我们并非"不知道分子在哪所以只好猜"——而是绝大多数微观态<strong>看起来都一样</strong>（都是均匀、热平衡的样子），少数"整齐"的态少到可以忽略。概率进入物理，靠的不是随机性，而是<strong>典型性</strong>：可能的方式实在太多，非典型的结局根本轮不上。</div>
 <div class="punch">
 <div class="one">一句话：分子越多越难算——这是错觉；分子越多，宏观越简单。</div>
-<div class="q"><b>思考：</b>如果只有 5 个分子，"温度""压强"这些词还有意义吗？从几个分子起，统计描述才开始靠谱？</div>
+<details class="q"><summary><b>思考：</b>如果只有 5 个分子，"温度""压强"这些词还有意义吗？从几个分子起，统计描述才开始靠谱？</summary><div class="qa">5 个几乎没意义——温度压强是统计平均，粒子太少时涨落和均值同量级，数字乱跳。靠谱性随 √N 改善：涨落/均值 ~ 1/√N，到 10²³ 时小到约 10⁻¹²。粗略说成百上千起趋势渐稳，宏观量真正「锋利」要 10²⁰ 量级。少粒子时只能谈分布、不谈单值。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -149,7 +156,7 @@
   物理学数了一百年的微观态，最后数进了神经网络里。</div>
 <div class="punch">
 <div class="one">一句话：温度不是能量，是能量的价格——高能态贵，按指数涨价。</div>
-<div class="q"><b>思考：</b>把 softmax 的"温度"调到接近 0（零）会怎样？调到无穷大又如何？对照一杯水降到绝对零度 vs 烧到极热。</div>
+<details class="q"><summary><b>思考：</b>把 softmax 的"温度"调到接近 0（零）会怎样？调到无穷大又如何？对照一杯水降到绝对零度 vs 烧到极热。</summary><div class="qa">T→0：softmax 变成 argmax，把全部概率压到最优那项——如同水到绝对零度，全落最低能态（有序、确定）。T→∞：softmax 变均匀分布，各项等概率——如同烧到极热，各能态几乎等可能（无序、随机）。温度就是「贪心 vs 探索」的旋钮，物理和采样共用同一条玻尔兹曼公式。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -168,7 +175,7 @@
   这是统计力学真正的<strong>发动机</strong>：它把"物理问题"变成"算一个和、再求几次导"的<strong>纯数学流程</strong>。你不必再追问每个分子——写下能量、加出 <var>Z</var>、求导，宏观世界就自动浮现。相变、磁性、化学平衡……全套热力学都从这一个函数里流出来。前面「最小作用量」一期里，自然"选"路径靠的是作用量取极值；这里，平衡态"选"自己靠的是自由能取极小——<strong>物理反复在用同一种"极值即真相"的语法</strong>。</div>
 <div class="punch">
 <div class="one">一句话：算出配分函数，整套热力学就只是它的几个导数。</div>
-<div class="q"><b>思考：</b>"自由能最小"里的"自由"指什么？为什么不是"总能量最小"？（提示：熵那一项在替谁说话。）</div>
+<details class="q"><summary><b>思考：</b>"自由能最小"里的"自由"指什么？为什么不是"总能量最小"？（提示：熵那一项在替谁说话。）</summary><div class="qa">「自由」指可用来做功的那部分——F=U−TS，扣掉了被熵「锁住」、不可用的 TS。恒温下系统不追求能量最低，而是能量与熵的权衡：低温能量项主导（趋于有序），高温熵项主导（趋于无序）。熵那一项在替「无序也有回报」说话，所以最小化的是自由能不是 U。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -208,7 +215,7 @@
   凡是"大量随机个体求集体行为"，都在借统计力学的账。</div>
 <div class="punch">
 <div class="one">一句话：热力学的"确定"，是涨落被 √N 压没了的假象。</div>
-<div class="q"><b>思考：</b>如果你能把一杯水缩到只剩 100 个分子，"这杯水的温度是 25℃"这句话还成立吗？该怎么重新表述它？</div>
+<details class="q"><summary><b>思考：</b>如果你能把一杯水缩到只剩 100 个分子，"这杯水的温度是 25℃"这句话还成立吗？该怎么重新表述它？</summary><div class="qa">不再严格成立——100 个分子的动能剧烈涨落，「温度」不再是一个锋利的单值。该改成分布语言：「其动能分布对应的等效温度期望约 25℃，但瞬时涨落达百分之十量级」。宏观的「确定温度」是大数极限的产物，小系统只能谈分布与期望。</div></details>
 </div>
 </div>
 <!-- Deep think -->

@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -148,7 +155,7 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
 
   <div class="punch">
     <div class="one">In a sentence: temperature isn't a thing, it's the average violence of molecular jostling.</div>
-    <div class="q"><b>Ponder:</b> If a single molecule is flying around a box, does it even make sense to talk about its "temperature"?</div>
+    <details class="q"><summary><b>Ponder:</b> If a single molecule is flying around a box, does it even make sense to talk about its "temperature"?</summary><div class="qa">Almost none. Temperature is the statistical average of many molecules' kinetic energy; a single molecule has only an instantaneous energy, no “distribution” — like asking one person's “average population age.” At best you'd define it via a time-average or fall back to its kinetic energy itself. Temperature is inherently a collective (emergent) idea.</div></details>
   </div>
 </div>
 
@@ -175,7 +182,7 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
 
   <div class="punch">
     <div class="one">In a sentence: energy conservation governs "how much," entropy governs "which way."</div>
-    <div class="q"><b>Ponder:</b> The zeroth law looks the most trivial — but without it, would the very word "temperature" lose its meaning?</div>
+    <details class="q"><summary><b>Ponder:</b> The zeroth law looks the most trivial — but without it, would the very word "temperature" lose its meaning?</summary><div class="qa">Yes. The zeroth law says “two things each in equilibrium with a third are in equilibrium with each other” — that transitivity is what lets “temperature” exist as a single comparable number and makes thermometers meaningful. Without it, “who is hotter” can't be consistently ordered and temperature collapses into pairwise private affairs.</div></details>
   </div>
 </div>
 
@@ -221,7 +228,7 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
 
   <div class="punch">
     <div class="one">In a sentence: a heat engine's ceiling is fixed by the hot and cold temperatures alone.</div>
-    <div class="q"><b>Ponder:</b> Why would a power plant rather use several-hundred-degree high-pressure steam than lukewarm hot water to generate electricity?</div>
+    <details class="q"><summary><b>Ponder:</b> Why would a power plant rather use several-hundred-degree high-pressure steam than lukewarm hot water to generate electricity?</summary><div class="qa">Because Carnot efficiency = 1 − T_cold/T_hot, set only by the temperature ratio. Warm water's T_hot sits too close to ambient T_cold, so efficiency is tiny; pushing T_hot to hundreds of degrees makes the usable-work fraction large. Power generation needs not “how much heat” but “how far heat falls from hot to cold” — the gap is the source of usefulness.</div></details>
   </div>
 </div>
 
@@ -251,7 +258,7 @@ Before atoms, people thought heat was a <b>fluid</b> (called "caloric") that pou
 
   <div class="punch">
     <div class="one">In a sentence: perpetual motion isn't unbuildable — it's sealed off by the universe in principle.</div>
-    <div class="q"><b>Ponder:</b> Your body burns energy every day yet "stays the same" — is it a perpetual motion machine? Where's the difference?</div>
+    <details class="q"><summary><b>Ponder:</b> Your body burns energy every day yet "stays the same" — is it a perpetual motion machine? Where's the difference?</summary><div class="qa">No. A perpetual-motion machine does work while eating nothing; you continuously take in food's chemical energy and dump an equal amount of heat and entropy to the environment — a steady state in an open system, not something from nothing. Staying “unchanged” precisely requires paying an endless energy-and-entropy bill.</div></details>
   </div>
 </div>
 

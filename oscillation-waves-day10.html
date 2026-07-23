@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -130,7 +137,7 @@
   同一个"谷底≈抛物线"的念头，在物理里叫简谐，在别处叫线性化。</div>
 <div class="punch">
 <div class="one">一句话：任何谷底都是抛物线，所以任何小振动都是正弦。</div>
-<div class="q"><b>思考：</b>如果一个平衡点的势能谷底恰好<strong>抹平</strong>了二次项（比如四次方谷），小振动还简谐吗？它的频率会依赖振幅吗？</div>
+<details class="q"><summary><b>思考：</b>如果一个平衡点的势能谷底恰好<strong>抹平</strong>了二次项（比如四次方谷），小振动还简谐吗？它的频率会依赖振幅吗？</summary><div class="qa">不再简谐。简谐性来自势能谷底可近似成二次抛物线（回复力∝位移）；若二次项为零、由四次方主导，回复力∝位移³，是非线性振子。它的频率会随振幅变化（振幅越大越快），这就是「非等时」——简谐的等时性（频率与振幅无关）只在二次谷底成立。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -179,7 +186,7 @@
   哪儿需要"从一堆频率里挑出一个并放大"，哪儿就有共振。</div>
 <div class="punch">
 <div class="one">一句话：踩准固有频率，小力也能攒成大摆。</div>
-<div class="q"><b>思考：</b>塔科马海峡大桥常被当成"共振毁桥"的教科书案例，但工程界普遍认为真正的元凶是<strong>气动弹性颤振</strong>（风与结构耦合的自激振动），而非单纯外部共振。这两者差在哪？</div>
+<details class="q"><summary><b>思考：</b>塔科马海峡大桥常被当成"共振毁桥"的教科书案例，但工程界普遍认为真正的元凶是<strong>气动弹性颤振</strong>（风与结构耦合的自激振动），而非单纯外部共振。这两者差在哪？</summary><div class="qa">共振要有一个固定频率的外部驱动，撞上固有频率才放大——能量从外部周期力灌入。颤振是自激：风稳定地吹，结构自身的振动去调制气流、气流又在正反馈相位上把能量喂回振动，不需外部周期源，风速过临界就自发发散。一个是「被对频驱动」，一个是「结构与流耦合的自我失稳」。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -224,7 +231,7 @@
   波不是"东西在飞"，而是"<strong>状态在接力</strong>"。海面上的软木塞在浪来浪去时只是<strong>原地打圈</strong>，并不被推向岸边；声音穿过房间，空气分子并没有从你嘴边飞到对方耳朵，只是一层推一层地传了过去。这个"传的是模式不是物质"的洞见，之后会一路延伸到光、乃至量子概率波。</div>
 <div class="punch">
 <div class="one">一句话：波搬运的是能量与形状，不是介质。</div>
-<div class="q"><b>思考：</b>声音在温暖空气里更快、在钢铁里比空气快十几倍。既然 <var>v</var>=<var>f</var><var>λ</var>，当声波从空气进入钢铁、频率不变时，是波长变了还是频率变了？</div>
+<details class="q"><summary><b>思考：</b>声音在温暖空气里更快、在钢铁里比空气快十几倍。既然 <var>v</var>=<var>f</var><var>λ</var>，当声波从空气进入钢铁、频率不变时，是波长变了还是频率变了？</summary><div class="qa">波长变了。频率由声源定、跨介质不变；v=fλ 里 v 由介质定（钢里快十几倍），f 固定，所以 λ 随 v 成比例变大——进钢铁波长拉长。跨介质守恒的是频率，改变的是波速与波长。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -289,7 +296,7 @@
   一旦学会"把复杂振动看成简正模式的和"，从乐音到原子到摩天楼，都用同一副眼睛看。</div>
 <div class="punch">
 <div class="one">一句话：把波关起来，连续就变离散。</div>
-<div class="q"><b>思考：</b>吉他同一根弦，按住品格缩短有效弦长，音就变高——用 <var>λ</var><sub>1</sub>=2<var>L</var> 和 <var>v</var>=<var>f</var><var>λ</var> 解释：变的是弦上的波速，还是波长？</div>
+<details class="q"><summary><b>思考：</b>吉他同一根弦，按住品格缩短有效弦长，音就变高——用 <var>λ</var><sub>1</sub>=2<var>L</var> 和 <var>v</var>=<var>f</var><var>λ</var> 解释：变的是弦上的波速，还是波长？</summary><div class="qa">变的是波长，不是波速。波速 v 由弦的张力与线密度定，按品不改张力材质、v 基本不变；缩短有效弦长 L 使基频波长 λ₁=2L 变小，由 f=v/λ 频率就升高。同一根弦上波速固定，是「关住波的盒子」变短、波长变短，音才变高。</div></details>
 </div>
 </div>
 <!-- Deep think -->

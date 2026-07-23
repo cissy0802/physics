@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -96,7 +103,7 @@ A glass of water holds about 10²³ molecules. Even with an infinitely fast comp
 
   <div class="punch">
     <div class="one">In a sentence: "more molecules, harder to compute" is an illusion — more molecules, simpler the macroscopics.</div>
-    <div class="q"><b>Ponder:</b> With only 5 molecules, do words like "temperature" and "pressure" still mean anything? From how many molecules up does a statistical description start to be trustworthy?</div>
+    <details class="q"><summary><b>Ponder:</b> With only 5 molecules, do words like "temperature" and "pressure" still mean anything? From how many molecules up does a statistical description start to be trustworthy?</summary><div class="qa">Five is almost meaningless — temperature and pressure are statistical averages, and with too few particles the fluctuations rival the mean, so the numbers jitter. Reliability improves as √N: fluctuation/mean ~ 1/√N, reaching ~10⁻¹² at 10²³. Roughly, trends steady from hundreds to thousands, but macro quantities get truly “sharp” only near 10²⁰. With few particles you speak of distributions, not single values.</div></details>
   </div>
 </div>
 
@@ -155,7 +162,7 @@ A glass of water holds about 10²³ molecules. Even with an infinitely fast comp
 
   <div class="punch">
     <div class="one">In a sentence: temperature isn't energy — it's the price of energy, and high-energy states get exponentially dearer.</div>
-    <div class="q"><b>Ponder:</b> What happens as you drive softmax's "temperature" toward 0 (zero)? Toward infinity? Compare a glass of water cooled to absolute zero versus heated red-hot.</div>
+    <details class="q"><summary><b>Ponder:</b> What happens as you drive softmax's "temperature" toward 0 (zero)? Toward infinity? Compare a glass of water cooled to absolute zero versus heated red-hot.</summary><div class="qa">T→0: softmax becomes argmax, piling all probability on the best option — like water at absolute zero, everything drops to the lowest energy state (ordered, definite). T→∞: softmax becomes uniform, all options equally likely — like heating to the extreme, all energy states nearly equiprobable (disordered, random). Temperature is the greedy-vs-explore knob; physics and sampling share the same Boltzmann formula.</div></details>
   </div>
 </div>
 
@@ -179,7 +186,7 @@ A glass of water holds about 10²³ molecules. Even with an infinitely fast comp
 
   <div class="punch">
     <div class="one">In a sentence: compute the partition function, and all of thermodynamics is just a few of its derivatives.</div>
-    <div class="q"><b>Ponder:</b> What does the "free" in "free energy" refer to? Why not simply "minimum total energy"? (Hint: whose side is that entropy term arguing for?)</div>
+    <details class="q"><summary><b>Ponder:</b> What does the "free" in "free energy" refer to? Why not simply "minimum total energy"? (Hint: whose side is that entropy term arguing for?)</summary><div class="qa">“Free” means the part usable to do work — F = U − TS, having subtracted the TS locked away by entropy. At fixed temperature a system doesn't minimize energy but trades energy against entropy: at low T the energy term dominates (toward order), at high T the entropy term dominates (toward disorder). That entropy term speaks for “disorder pays too,” so what's minimized is free energy, not U.</div></details>
   </div>
 </div>
 
@@ -224,7 +231,7 @@ A glass of water holds about 10²³ molecules. Even with an infinitely fast comp
 
   <div class="punch">
     <div class="one">In a sentence: thermodynamic "certainty" is the illusion left when √N has crushed the fluctuations away.</div>
-    <div class="q"><b>Ponder:</b> If you could shrink a glass of water down to just 100 molecules, does "this water is at 25 °C" still hold? How would you restate it?</div>
+    <details class="q"><summary><b>Ponder:</b> If you could shrink a glass of water down to just 100 molecules, does "this water is at 25 °C" still hold? How would you restate it?</summary><div class="qa">Not strictly — 100 molecules' kinetic energy fluctuates wildly, so “temperature” is no longer a sharp single value. Restate it in the language of distributions: “the expected effective temperature of its energy distribution is ~25°C, but instantaneous fluctuations reach the ten-percent level.” A definite macro temperature is a large-number limit; small systems admit only distributions and expectations.</div></details>
   </div>
 </div>
 

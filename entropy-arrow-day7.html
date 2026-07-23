@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -116,7 +123,7 @@
   熵<strong>不是物体自带的属性</strong>，而是取决于你「看得多粗」。同一杯水，若你只关心温度和体积，它的熵很大（无数分子排布都对应同一个温度）；若你有本事逐个记下每个分子的位置和速度，那对你来说这杯水只有<strong>一种</strong>微观态，熵为 <span class="zero">0</span>（数字 0）。熵度量的是<strong>你不知道的信息量</strong>——它一半是物理，一半是「你选择忽略了什么」。这正是熵最深也最容易被误解的一面。</div>
 <div class="punch">
 <div class="one">一句话：熵不是「乱」，是「长成这个样子的方式有多少种」的对数。</div>
-<div class="q"><b>思考：</b>如果宇宙里有个无所不知、能记下每个分子的「妖」，对它来说熵还会增加吗？</div>
+<details class="q"><summary><b>思考：</b>如果宇宙里有个无所不知、能记下每个分子的「妖」，对它来说熵还会增加吗？</summary><div class="qa">从它的视角，熵可以不增——熵量的是「你缺的信息」，全知者不缺信息，微观态对它是确定的（吉布斯佯谬/信息熵视角）。但它存这些信息本身有物理代价（兰道尔），一旦擦除就把熵还给宇宙。熵增的「客观性」其实和「谁在看、记多少」纠缠在一起。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -140,7 +147,7 @@
 </ul></div>
 <div class="punch">
 <div class="one">一句话：热往哪流、功有多少限度、熵为何只增——是同一条定律的三张脸。</div>
-<div class="q"><b>思考：</b>既然熵减「不是不可能只是概率极小」，为什么我们从没见过一杯水自己结冰又放热？</div>
+<details class="q"><summary><b>思考：</b>既然熵减「不是不可能只是概率极小」，为什么我们从没见过一杯水自己结冰又放热？</summary><div class="qa">因为「极小」小到天文学都嫌大。一杯水约 10²⁵ 个分子，自发反向排布的概率是 e 的负天文数字次方——比在宇宙年龄里试遍所有可能还小无数个数量级。原理上可能、实践上永不发生，这正是第二定律「统计」而非「绝对」的含义。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -176,7 +183,7 @@
   我们记得过去、不记得未来；因先于果；我们会衰老——所有这些「时间在流」的体感，追到根上都是<strong>同一支箭</strong>：熵增。记忆本身就是把一个低熵的印记留在大脑/纸/硬盘上，这个「留下痕迹」的过程必然增熵。<strong>没有熵增，就没有记忆、没有因果、没有「变化」本身。</strong>时间之所以有方向，不是因为时间这条维度本身有朝向，而是因为我们恰好住在一个从超低熵起步、正在缓慢爬坡的宇宙里。</div>
 <div class="punch">
 <div class="one">一句话：破镜不重圆，不是被禁止，是重圆的概率小到等不到。</div>
-<div class="q"><b>思考：</b>如果宇宙的初始熵不是超低，而是随便一个中等值，还会有「过去」和「未来」的分别吗？</div>
+<details class="q"><summary><b>思考：</b>如果宇宙的初始熵不是超低，而是随便一个中等值，还会有「过去」和「未来」的分别吗？</summary><div class="qa">很可能没有清晰的时间箭头。时间之箭源于熵从「极低初态」单向爬升；若初态已是中等（近平衡），系统只在附近涨落、无持续增趋势，「过去/未来」就失去热力学区分。我们能记忆过去、区分方向，全靠宇宙起点那反常的低熵。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -199,7 +206,7 @@
 </ul></div>
 <div class="punch">
 <div class="one">一句话：物理熵和信息熵不是类比，是同一个量——你对系统的无知程度。</div>
-<div class="q"><b>思考：</b>如果熵是「你缺的信息」，那它到底是宇宙的客观属性，还是关于「你知道多少」的主观账本？</div>
+<details class="q"><summary><b>思考：</b>如果熵是「你缺的信息」，那它到底是宇宙的客观属性，还是关于「你知道多少」的主观账本？</summary><div class="qa">两者都对，张力是真的。给定宏观变量（能量、体积…），熵是客观确定的物理量、驱动真实的热机与箭头；但「宏观变量选哪些=你不去分辨哪些微观细节」，这层划分带主观/约定成分（吉布斯佯谬）。现代看法：熵是相对于你追踪的那组变量的客观量——客观，但相对于描述层。</div></details>
 </div>
 </div>
 <!-- Deep think -->

@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -92,7 +99,7 @@
   很多人以为妖的破绽在"开门要花力气"。不是。门可以做得任意轻、开合任意省功——这条路堵不死妖。真正的破绽藏在一个几乎没人注意的动作里：妖要分拣，就<strong>必须先知道</strong>分子快不快、在左还是在右。<strong>它得测量，还得把结果记住。</strong>妖不是一个纯机械装置，它是一个<strong>会获取信息、有记忆</strong>的装置。账，最终要算在这份记忆头上——而不是那扇门。</div>
 <div class="punch">
 <div class="one">一句话：妖没在偷功，它在偷信息——问题是，信息真的免费吗？</div>
-<div class="q"><b>思考：</b>如果妖的记忆是无限大的，它是不是就能永远作弊下去？"无限记忆"这个假设，藏着什么猫腻？</div>
+<details class="q"><summary><b>思考：</b>如果妖的记忆是无限大的，它是不是就能永远作弊下去？"无限记忆"这个假设，藏着什么猫腻？</summary><div class="qa">猫腻在「无限记忆」物理上不存在，而且不擦除只是把账赊着。妖每次测量都往记忆写信息，有限记忆迟早写满、必须擦除，而擦除按兰道尔要付 kT ln2 的熵——账最终结平，第二定律不破。「无限记忆」等于偷偷假设一个能无限承接熵的存储库，作弊前提本身就不成立。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -138,7 +145,7 @@
   一个纯逻辑的动作（"把变量清零"）竟然有一个<strong>热力学价格</strong>，而且这个价格<strong>与你用什么材料、什么电路无关</strong>——晶体管、齿轮、DNA、神经元，只要它做了"多对一"的擦除，就得付这笔 <span class="nowrap"><var>k</var><var>T</var> ln2</span>。这是<strong>"信息就是物理"</strong>最锋利的一刀：抽象的逻辑操作，被物理定律标了价。信息不再是飘在硬件之上的幽灵，它有质量般的实在——占空间、耗能量、遵守热力学。</div>
 <div class="punch">
 <div class="one">一句话：算不花钱，忘才花钱——擦掉一个比特，至少赔上 kT ln2 的热。</div>
-<div class="q"><b>思考：</b>为什么"取反"（0↔1）可以免费，"清零"（都变 0）却要收费？两者对信息做了什么根本不同的事？</div>
+<details class="q"><summary><b>思考：</b>为什么"取反"（0↔1）可以免费，"清零"（都变 0）却要收费？两者对信息做了什么根本不同的事？</summary><div class="qa">取反是一一映射（可逆）：信息量没减、随时能反推回去，原理上零耗散。清零是多对一（不可逆）：把 0 和 1 都压成 0，抹掉了「它原来是谁」，逻辑信息减少——而信息不会凭空消失，它以至少 kT ln2 的热被排进环境。收费的不是改状态，而是不可逆地丢信息。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -163,7 +170,7 @@
   凡是"用信息去驯服随机"的地方，兰道尔的收费站都立在那里。</div>
 <div class="punch">
 <div class="one">一句话：妖没输在测量，输在遗忘——清空记忆的那一刻，它把偷来的功如数还清。</div>
-<div class="q"><b>思考：</b>如果一个装置<strong>只记录、从不擦除</strong>，它能不能真的违反第二定律？它又能撑多久？（提示：宇宙里的存储空间够不够它用到永远？）</div>
+<details class="q"><summary><b>思考：</b>如果一个装置<strong>只记录、从不擦除</strong>，它能不能真的违反第二定律？它又能撑多久？（提示：宇宙里的存储空间够不够它用到永远？）</summary><div class="qa">短期像在违反，长期不能。只记不擦=把熵暂存进存储器而非排掉，总熵账没赖掉、只是挂在「记忆」名下。它能撑到存储空间用完为止——而宇宙里可用的存储（物质、能量）有限，迟早写满，届时要么停机、要么擦除付费。第二定律没被违反，只是被延期。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -179,7 +186,7 @@
   人脑约 20 瓦就跑完了今天超算望尘莫及的认知，能效比顶级芯片高出许多个数量级——它离兰道尔地板<strong>近得多</strong>。这暗示：<strong>低功耗智能在物理上完全允许，我们只是还没学会怎么造</strong>。当有人说"AI 的耗电是不可逾越的墙"，物理学的回答是冷静的：真正不可逾越的那堵墙（兰道尔地板）还在极远处，我们撞上的不过是自己工艺的临时天花板。<strong>把哪些计算做成可逆、少擦除，才是逼近物理极限的正道。</strong></div>
 <div class="punch">
 <div class="one">一句话：AI 的能耗天花板不是物理定律，而是工程——真正的物理地板还在一万倍之下。</div>
-<div class="q"><b>思考：</b>如果一台计算机能把绝大多数运算做成"可逆、不擦除"，它是不是就能几乎零能耗地思考？这样的机器，代价会转嫁到哪里去？</div>
+<details class="q"><summary><b>思考：</b>如果一台计算机能把绝大多数运算做成"可逆、不擦除"，它是不是就能几乎零能耗地思考？这样的机器，代价会转嫁到哪里去？</summary><div class="qa">原理上可逆计算能把每步耗散压到远低于 kT ln2、接近零能耗。但代价转嫁到别处：可逆要保留全部中间信息→存储与体积暴涨；要读出有用结果、丢掉垃圾比特，终究得擦除、付兰道尔的账；还得跑得极慢（近平衡才低耗散）。省了能耗，付出的是时间、空间与最终一次不可免的清账。</div></details>
 </div>
 </div>
 <!-- Deep think -->

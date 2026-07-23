@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -123,7 +130,7 @@
   这是一种典型的<strong>朴素物理错觉</strong>：人脑天生带着「要动就得使劲」的直觉先验，和真实定律相反。它对 AI 也是提醒——<strong>用海量日常数据训练出来的直觉，可能系统性地偏离底层规律</strong>；表面相关（松手就停）不等于机制因果（摩擦让它停）。要看清机制，物理和模型都得学会<strong>剥掉噪声、做减法</strong>。</div>
 <div class="punch">
 <div class="one">一句话：不是运动需要力，而是运动的<strong>改变</strong>才需要力。</div>
-<div class="q"><b>思考：</b>如果「静止」和「匀速」在物理上没区别，那「绝对静止」这个概念还有意义吗？</div>
+<details class="q"><summary><b>思考：</b>如果「静止」和「匀速」在物理上没区别，那「绝对静止」这个概念还有意义吗？</summary><div class="qa">没有意义。没有任何实验能区分「绝对静止」与「匀速运动」（伽利略相对性原理），所以「绝对静止」没有物理内容——只存在「相对某参考系静止」。这条直觉后来被爱因斯坦推到极致，成了狭义相对论的起点。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -168,7 +175,7 @@
   「输出正比于施加的量、被一个惯性因子拖慢」是一条极通用的模板。<strong>控制论</strong>里，系统的响应被质量/惯量决定，工程师靠它设计刹车与稳定器；<strong>机器学习</strong>的梯度下降里，参数更新 ≈ 学习率 × 梯度，而<strong>动量法（momentum）</strong>干脆借用了物理惯性——让更新「带着惯性」滚过噪声与小坑。<strong>惯性既是物理的顽固，也是优化里的平滑器。</strong></div>
 <div class="punch">
 <div class="one">一句话：力管的是加速度，不是速度；质量是「难被改变」的度量。</div>
-<div class="q"><b>思考：</b>坐电梯启动的一瞬你觉得变重，匀速上升时却毫无异样——为什么？哪一段有加速度？</div>
+<details class="q"><summary><b>思考：</b>坐电梯启动的一瞬你觉得变重，匀速上升时却毫无异样——为什么？哪一段有加速度？</summary><div class="qa">只有启动那一瞬有加速度（速度从零在变大）。这时电梯地板得比你的体重多推你一把、好让你跟着加速，你就感到「变重」；匀速段加速度为零、合力为零，与静止毫无差别，所以毫无异样。<strong>体感只跟加速度走，不跟速度走。</strong></div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -213,7 +220,7 @@
   「用一条简洁规则同时解释一大片看似无关的现象」正是<strong>统一</strong>的力量，也是好理论的黄金标准：<strong>覆盖越广、假设越少，越可能触到了真机制。</strong>这与机器学习的追求同构——一个能在众多任务上<strong>泛化</strong>的模型，胜过为每个任务单独打补丁；泛化之于模型，恰如统一之于物理。不过要诚实：牛顿引力极准，却在<strong>极强引力</strong>下露出破绽，终被时空弯曲的图景取代（『引力=时空弯曲』那一期会讲透）。<strong>再成功的统一也可能只是更深统一的近似。</strong></div>
 <div class="punch">
 <div class="one">一句话：轨道不是「不掉」，而是「一直掉、一直错过」。</div>
-<div class="q"><b>思考：</b>空间站里的宇航员「失重」漂浮，是因为那里没有引力吗？（提示：他们和空间站在一起「掉」。）</div>
+<details class="q"><summary><b>思考：</b>空间站里的宇航员「失重」漂浮，是因为那里没有引力吗？（提示：他们和空间站在一起「掉」。）</summary><div class="qa">不是。那个高度引力还有地面的约 90%。他们「失重」是因为和空间站一起<strong>自由下落</strong>（一直掉、一直错过），彼此之间没有挤压力。失重 = 自由下落，不是没有引力——这正是等效原理的日常版。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -235,7 +242,7 @@
   拉普拉斯妖本质是一台<strong>完美的模拟器</strong>：输入初始态，运行定律，输出未来。这正是<strong>数值模拟</strong>（天气预报、分子动力学、宇宙学）的纲领——只是真实的「妖」要面对两道墙：<strong>初值测不准</strong>（混沌）与<strong>算力有限</strong>（没有比宇宙更大的计算机来模拟宇宙）。这也照见 AI 的边界：模型能多准地<strong>外推</strong>，被数据精度与系统的混沌程度共同锁死——<strong>决定论不等于可计算，可计算不等于可预测。</strong></div>
 <div class="punch">
 <div class="one">一句话：定死 ≠ 可预测；牛顿的钟很精确，却挡不住混沌与量子。</div>
-<div class="q"><b>思考：</b>如果模拟宇宙需要一台比宇宙还大的计算机，那「原则上可预测」这句话还有实际意义吗？</div>
+<details class="q"><summary><b>思考：</b>如果模拟宇宙需要一台比宇宙还大的计算机，那「原则上可预测」这句话还有实际意义吗？</summary><div class="qa">意义很有限。若「预测」需要一台比宇宙还大的计算机，那「原则上可预测」就只是空话，实践中和「不可预测」没有区别。这也提醒把两件事分开：<strong>决定论是本体论断言（世界定死没定死），可预测是认识论/算力问题（我们算不算得出）。</strong></div></details>
 </div>
 </div>
 <!-- Deep think -->

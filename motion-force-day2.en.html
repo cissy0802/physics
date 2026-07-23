@@ -60,6 +60,13 @@
   .read ul{margin:0;padding-left:20px;font-size:.92rem;color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px;font-size:.8rem;color:#5b6480;text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -125,7 +132,7 @@ Aristotle said: to keep a thing moving, keep pushing it. It matches daily life �
 
   <div class="punch">
     <div class="one">In one line: motion doesn't need a force — a <strong>change</strong> in motion does.</div>
-    <div class="q"><b>Think:</b> if "at rest" and "uniform motion" are physically the same, does "absolute rest" even mean anything?</div>
+    <details class="q"><summary><b>Think:</b> if "at rest" and "uniform motion" are physically the same, does "absolute rest" even mean anything?</summary><div class="qa">No. No experiment can distinguish “absolute rest” from “uniform motion” (Galilean relativity), so “absolute rest” has no physical content — only rest relative to some frame. Einstein pushed this intuition to its limit, making it the starting point of special relativity.</div></details>
   </div>
 </div>
 
@@ -176,7 +183,7 @@ Aristotle said: to keep a thing moving, keep pushing it. It matches daily life �
 
   <div class="punch">
     <div class="one">In one line: force governs acceleration, not velocity; mass is the measure of "hard to change."</div>
-    <div class="q"><b>Think:</b> in an elevator you feel heavier the instant it starts, but nothing while it rises steadily — why? Which phase has acceleration?</div>
+    <details class="q"><summary><b>Think:</b> in an elevator you feel heavier the instant it starts, but nothing while it rises steadily — why? Which phase has acceleration?</summary><div class="qa">Only the instant of starting has acceleration (your speed is growing from zero). There the floor must push you a bit harder than your weight to accelerate you along — so you feel “heavier.” During constant-speed rise, acceleration and net force are zero, indistinguishable from standing still. <strong>What you feel tracks acceleration, not speed.</strong></div></details>
   </div>
 </div>
 
@@ -222,7 +229,7 @@ Aristotle said: to keep a thing moving, keep pushing it. It matches daily life �
 
   <div class="punch">
     <div class="one">In one line: an orbit isn't "not falling" — it's "always falling, always missing."</div>
-    <div class="q"><b>Think:</b> astronauts float "weightless" on the space station — is that because there's no gravity up there? (Hint: they're falling <em>with</em> the station.)</div>
+    <details class="q"><summary><b>Think:</b> astronauts float "weightless" on the space station — is that because there's no gravity up there? (Hint: they're falling <em>with</em> the station.)</summary><div class="qa">No. Gravity there is still ~90% of its ground value. They “float” because they and the station are in <strong>free fall</strong> together (always falling, always missing), with no squeeze between them. Weightlessness = free fall, not the absence of gravity — the everyday face of the equivalence principle.</div></details>
   </div>
 </div>
 
@@ -250,7 +257,7 @@ Aristotle said: to keep a thing moving, keep pushing it. It matches daily life �
 
   <div class="punch">
     <div class="one">In one line: fixed ≠ predictable; Newton's clock is precise, yet chaos and the quantum still block it.</div>
-    <div class="q"><b>Think:</b> if simulating the universe needs a computer bigger than the universe, does "predictable in principle" still mean anything in practice?</div>
+    <details class="q"><summary><b>Think:</b> if simulating the universe needs a computer bigger than the universe, does "predictable in principle" still mean anything in practice?</summary><div class="qa">Very limited meaning. If “prediction” needs a computer bigger than the universe, “predictable in principle” is empty talk, indistinguishable in practice from unpredictable. It warns us to separate two things: <strong>determinism is an ontological claim (is the world fixed?), predictability is an epistemic/compute question (can we actually compute it?).</strong></div></details>
   </div>
 </div>
 

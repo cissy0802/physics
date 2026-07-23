@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -125,7 +132,7 @@ So far we've read the world force by force, conservation law by conservation law
 
   <div class="punch">
     <div class="one">In a sentence: nature doesn't take the shortest path — it takes the cheapest one.</div>
-    <div class="q"><b>Ponder:</b> If swimming were exactly as fast as running on sand, would the lifeguard's path still bend?</div>
+    <details class="q"><summary><b>Ponder:</b> If swimming were exactly as fast as running on sand, would the lifeguard's path still bend?</summary><div class="qa">No — you'd go straight. The kink exists because the two “costs” (speeds) differ, so to save total time you re-allocate distance between the fast and slow media; once the speeds match, the quickest path is the geometric straight line. This is the intuition behind Snell's law of refraction — light “chooses” its path the same way.</div></details>
   </div>
 </div>
 
@@ -169,7 +176,7 @@ So far we've read the world force by force, conservation law by conservation law
 
   <div class="punch">
     <div class="one">In a sentence: nature is a minimalist accountant — it only makes the T−V ledger stationary.</div>
-    <div class="q"><b>Ponder:</b> F=ma and δS=0 are exactly equivalent — so why do physicists lean harder on the latter the further they go?</div>
+    <details class="q"><summary><b>Ponder:</b> F=ma and δS=0 are exactly equivalent — so why do physicists lean harder on the latter the further they go?</summary><div class="qa">Because the action view is more universal and economical: one scalar L encodes all the dynamics, naturally handles constraints, fields, relativity and quantum (path integrals use S directly), and makes symmetry↔conservation (Noether) transparent. F=ma is vectorial, force-by-force bookkeeping that gets clumsy under coordinate changes. Equivalent, but one level higher.</div></details>
   </div>
 </div>
 
@@ -235,7 +242,7 @@ So far we've read the world force by force, conservation law by conservation law
 
   <div class="punch">
     <div class="one">In a sentence: to state a physical theory is to state its action.</div>
-    <div class="q"><b>Ponder:</b> If two different Lagrangians give exactly the same equations of motion, are they "the same theory"?</div>
+    <details class="q"><summary><b>Ponder:</b> If two different Lagrangians give exactly the same equations of motion, are they "the same theory"?</summary><div class="qa">Observationally, yes. L has gauge freedom — add a total-derivative term or multiply by a constant and the equations of motion (and all predictions) are unchanged. Physics only counts the measurable, so two Ls giving identical equations and observations are one theory written two ways.</div></details>
   </div>
 </div>
 
@@ -290,7 +297,7 @@ So far we've read the world force by force, conservation law by conservation law
 
   <div class="punch">
     <div class="one">In a sentence: nature didn't pick the optimal path — it's just the only one that wasn't cancelled out.</div>
-    <div class="q"><b>Ponder:</b> If ℏ were not tiny but large, would we still see a "definite classical trajectory"?</div>
+    <details class="q"><summary><b>Ponder:</b> If ℏ were not tiny but large, would we still see a "definite classical trajectory"?</summary><div class="qa">No. Classical trajectories are sharp only because a tiny ℏ makes non-minimal-action paths interfere away, leaving just the δS=0 one. If ℏ were large, all paths would have comparable phases and all contribute, smearing the world into a quantum probability cloud with no single definite orbit. Classicality is the small-ℏ limit.</div></details>
   </div>
 </div>
 

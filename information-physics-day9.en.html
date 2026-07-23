@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -98,7 +105,7 @@ A century and a half ago, Maxwell imagined a tiny "demon" stationed at a door be
 
   <div class="punch">
     <div class="one">In a sentence: the demon isn't stealing work, it's stealing information — the question is, is information really free?</div>
-    <div class="q"><b>Ponder:</b> If the demon's memory were infinite, could it cheat forever? What sleight of hand is hidden inside the assumption of "infinite memory"?</div>
+    <details class="q"><summary><b>Ponder:</b> If the demon's memory were infinite, could it cheat forever? What sleight of hand is hidden inside the assumption of "infinite memory"?</summary><div class="qa">The catch: “infinite memory” doesn't exist physically, and not-erasing only defers the bill. Every measurement writes information into memory; finite memory eventually fills and must be erased, and erasure costs kT ln2 of entropy by Landauer — the books balance and the second law holds. “Infinite memory” secretly assumes a storage that can absorb infinite entropy, so the cheating premise itself fails.</div></details>
   </div>
 </div>
 
@@ -152,7 +159,7 @@ A century and a half ago, Maxwell imagined a tiny "demon" stationed at a door be
 
   <div class="punch">
     <div class="one">In a sentence: computing is free, forgetting is not — erase a bit and you forfeit at least kT ln2 of heat.</div>
-    <div class="q"><b>Ponder:</b> Why can "flip" (0↔1) be free while "clear" (all to 0) charges a fee? What fundamentally different thing does each do to the information?</div>
+    <details class="q"><summary><b>Ponder:</b> Why can "flip" (0↔1) be free while "clear" (all to 0) charges a fee? What fundamentally different thing does each do to the information?</summary><div class="qa">Flipping (0↔1) is a one-to-one map (reversible): no information is lost, you can always invert it, so zero dissipation in principle. Zeroing is many-to-one (irreversible): it crushes both 0 and 1 to 0, erasing “which it was,” reducing logical information — and information can't just vanish, so it leaves as at least kT ln2 of heat. The charge isn't for changing state, it's for irreversibly losing information.</div></details>
   </div>
 </div>
 
@@ -183,7 +190,7 @@ A century and a half ago, Maxwell imagined a tiny "demon" stationed at a door be
 
   <div class="punch">
     <div class="one">In a sentence: the demon didn't lose at measuring, it lost at forgetting — the instant it clears its memory, it repays the stolen work in full.</div>
-    <div class="q"><b>Ponder:</b> If a device only records and never erases, could it truly violate the Second Law? And how long could it last? (Hint: is there enough storage in the universe for it to run forever?)</div>
+    <details class="q"><summary><b>Ponder:</b> If a device only records and never erases, could it truly violate the Second Law? And how long could it last? (Hint: is there enough storage in the universe for it to run forever?)</summary><div class="qa">Short-term it looks like a violation; long-term no. Recording-without-erasing just parks entropy in the memory instead of dumping it — the total ledger isn't dodged, only filed under “memory.” It lasts until the storage runs out — and the universe's usable storage (matter, energy) is finite, so it fills eventually and must either halt or pay to erase. The second law isn't broken, just postponed.</div></details>
   </div>
 </div>
 
@@ -204,7 +211,7 @@ A century and a half ago, Maxwell imagined a tiny "demon" stationed at a door be
 
   <div class="punch">
     <div class="one">In a sentence: AI's energy ceiling isn't a law of physics but engineering — the real physical floor lies ten thousand times below.</div>
-    <div class="q"><b>Ponder:</b> If a computer could make most of its operations "reversible, erasure-free," could it think at nearly zero energy? Where would that machine's cost get shifted to instead?</div>
+    <details class="q"><summary><b>Ponder:</b> If a computer could make most of its operations "reversible, erasure-free," could it think at nearly zero energy? Where would that machine's cost get shifted to instead?</summary><div class="qa">In principle reversible computing can push per-step dissipation far below kT ln2, near zero energy. But the cost shifts elsewhere: reversibility means keeping all intermediate information → storage and volume explode; reading out the useful answer and discarding junk bits ultimately requires erasure, paying Landauer's bill; and it must run very slowly (low dissipation needs near-equilibrium). You save energy at the price of time, space, and one unavoidable final settling of the books.</div></details>
   </div>
 </div>
 

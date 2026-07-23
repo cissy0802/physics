@@ -65,6 +65,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -120,7 +127,7 @@
   深度学习的<strong>「动量法」（SGD with Momentum）</strong>直接借了这个词和这份直觉：让参数更新像一颗<strong>有质量的球</strong>那样带上惯性，不被每一步的噪声梯度左右乱晃，而是顺着累积下来的方向冲过小坑。物理的动量让运动<strong>记住方向</strong>，优化里的动量让下降<strong>记住方向</strong>——同一个念头，两处发力。</div>
 <div class="punch">
 <div class="one">一句话：你不能凭空得到运动，只能和别人交换。</div>
-<div class="q"><b>思考：</b>你蹬墙让自己后退，墙也获得了等量的动量，为什么墙看起来纹丝不动？</div>
+<details class="q"><summary><b>思考：</b>你蹬墙让自己后退，墙也获得了等量的动量，为什么墙看起来纹丝不动？</summary><div class="qa">因为墙（连着地球）质量极大。动量守恒给的是 mv 等量反向：你 m 小所以弹开的 v 大，墙+地球 M 巨大所以 v≈mv/M≈0，小到测不出。动量确实等量转移了，只是分给地球的速度微不可察。</div></details>
 </div>
 </div>
 <!-- Card 2 -->
@@ -169,7 +176,7 @@
   训练神经网络，就是在一片<strong>「势能地形」（损失曲面）</strong>上让参数往低处滚：损失 = 势能，梯度 = 坡度，梯度下降 = 重力。带动量的优化器甚至会像真球一样<strong>冲过小坑、在谷里来回震荡</strong>。物理的「滚到谷底」和训练的「收敛到极小」，是<strong>同一幅几何图像</strong>——难怪优化里满是「landscape」「basin」这些地形词。</div>
 <div class="punch">
 <div class="one">一句话：能量不生不灭，只改头换面。</div>
-<div class="q"><b>思考：</b>摩擦让能量「消失」了吗？还是它去了一本你没在记的账上？</div>
+<details class="q"><summary><b>思考：</b>摩擦让能量「消失」了吗？还是它去了一本你没在记的账上？</summary><div class="qa">没消失，去了热。摩擦把宏观动能转成分子无规则运动（热能），外加一点声与磨损。能量守恒从不破例——「消失」永远是你没把某本账（多半是热）记进来。把热纳入守恒，才有了热力学第一定律。</div></details>
 </div>
 </div>
 <!-- Card 3 -->
@@ -224,7 +231,7 @@
   安全设计里到处是<strong>「故意的非弹性」</strong>：头盔里的泡沫、高速公路的防撞护栏、快递箱里的缓冲泡沫，全靠<strong>形变</strong>把冲击的动能转成不伤人的热和塑性变形。工程师算的往往不是「怎么别撞上」，而是「一旦撞上，动能该往哪里引」。</div>
 <div class="punch">
 <div class="one">一句话：动量总守恒，动能看情况。</div>
-<div class="q"><b>思考：</b>完全非弹性碰撞损失的动能最多，为什么它的动量却一点没少？</div>
+<details class="q"><summary><b>思考：</b>完全非弹性碰撞损失的动能最多，为什么它的动量却一点没少？</summary><div class="qa">因为两者归不同定律管。动量没有耗散通道——碰撞内力成对抵消，总动量必守恒；动能却能转成热和形变，本就不是守恒量。所以「粘在一起」损失最多动能，动量却分文不少。守恒的是动量，不是动能。</div></details>
 </div>
 </div>
 <!-- Card 4 -->
@@ -261,7 +268,7 @@
   守恒量 = 系统的<strong>不变量</strong>，是读懂任何动力系统的第一把钥匙——这份直觉也焊进了 AI：<strong>哈密顿神经网络（Hamiltonian Neural Network）</strong>刻意让模型学出一个守恒的「能量」，于是它预测的长期轨迹自动<strong>不漏气、不发散</strong>。把物理的守恒约束嵌进网络，比让它硬从数据里死记规律更省、更稳、更准。</div>
 <div class="punch">
 <div class="one">一句话：先问对称，再问守恒，最后才问力。</div>
-<div class="q"><b>思考：</b>如果哪天真发现某个量在宇宙尺度上悄悄不守恒了，你第一个该怀疑的是哪条对称被打破了？</div>
+<details class="q"><summary><b>思考：</b>如果哪天真发现某个量在宇宙尺度上悄悄不守恒了，你第一个该怀疑的是哪条对称被打破了？</summary><div class="qa">怀疑对应的那条对称。能量不守恒 ↔ 时间平移对称破缺——宇宙学正是如此：膨胀让时空随时间变，所以宇宙学「总能量」本就不严格守恒。守恒的松动永远是某条对称在松动（Noether 反着用）。</div></details>
 </div>
 </div>
 <!-- Deep think -->

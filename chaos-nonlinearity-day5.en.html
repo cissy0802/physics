@@ -61,6 +61,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -96,7 +103,7 @@ Laplace held a famous belief: given the exact position and velocity of every par
 
   <div class="punch">
     <div class="one">In a sentence: determined equations don't guarantee a predictable future.</div>
-    <div class="q"><b>Ponder:</b> If the initial value really could be specified with infinite precision, would a chaotic system still be "chaotic"? Why does that assumption never hold in reality?</div>
+    <details class="q"><summary><b>Ponder:</b> If the initial value really could be specified with infinite precision, would a chaotic system still be "chaotic"? Why does that assumption never hold in reality?</summary><div class="qa">Mathematically, with infinitely precise initial data a chaotic system's future is fully determined and computable — chaos isn't randomness. But reality never delivers it: every measurement has finite precision, chaos amplifies error exponentially and eats your significant digits in a few steps; add irrational initial values needing infinite digits, plus thermal noise, and “infinite precision” simply doesn't exist physically. So determined ≠ predictable.</div></details>
   </div>
 </div>
 
@@ -150,7 +157,7 @@ Laplace held a famous belief: given the exact position and velocity of every par
 
   <div class="punch">
     <div class="one">In a sentence: chaos doesn't magnify small things — it evaporates long-term predictive information exponentially.</div>
-    <div class="q"><b>Ponder:</b> If the weather is unpredictable beyond two weeks, why is the climate — trends over decades — predictable at all?</div>
+    <details class="q"><summary><b>Ponder:</b> If the weather is unpredictable beyond two weeks, why is the climate — trends over decades — predictable at all?</summary><div class="qa">Because they ask different questions. Weather is “the specific trajectory at a point on a day,” blown up by chaos; climate is “the statistical shape of the attractor” — long-term averages and distributions, insensitive to initial conditions and pinned by constraints like the energy budget. Chaos destroys the point-by-point trajectory, not the statistics.</div></details>
   </div>
 </div>
 
@@ -196,7 +203,7 @@ Laplace held a famous belief: given the exact position and velocity of every par
 
   <div class="punch">
     <div class="one">In a sentence: add one more body and Newton's clock becomes a sea of chaos.</div>
-    <div class="q"><b>Ponder:</b> If the Solar System is essentially chaotic, how should we even phrase the question "why hasn't it flown apart"?</div>
+    <details class="q"><summary><b>Ponder:</b> If the Solar System is essentially chaotic, how should we even phrase the question "why hasn't it flown apart"?</summary><div class="qa">Don't ask “what exactly is the orbit” (not long-term predictable); ask “why is its statistical structure stable” — roughly how long planets stay in their zones, how resonances bound wandering, over what timescale the system stays bounded. Under chaos, “stable” means statistically/boundedly stable, not clockwork-precise extrapolation.</div></details>
   </div>
 </div>
 
@@ -260,7 +267,7 @@ Laplace held a famous belief: given the exact position and velocity of every par
 
   <div class="punch">
     <div class="one">In a sentence: one line of determined iteration breeds both chaos and a universal kind of order.</div>
-    <div class="q"><b>Ponder:</b> If the universal constant inside chaos is independent of the system's details, then what exactly are we understanding when we "understand" a chaotic system?</div>
+    <details class="q"><summary><b>Ponder:</b> If the universal constant inside chaos is independent of the system's details, then what exactly are we understanding when we "understand" a chaotic system?</summary><div class="qa">Its statistics and geometry, not the point-by-point trajectory: the attractor's shape and dimension, the route to chaos (e.g. period-doubling), and cross-system universals like the Feigenbaum constant. Understanding = grasping the detail-insensitive, reproducible structure — the same universality-class hunt physics runs everywhere.</div></details>
   </div>
 </div>
 

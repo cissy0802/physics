@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -121,7 +128,7 @@ Write out Newton's equations, Maxwell's equations, Schrödinger's equation, and 
 
   <div class="punch">
     <div class="one">In a sentence: entropy isn't "mess" — it's the log of how many ways there are to look like this.</div>
-    <div class="q"><b>Ponder:</b> If some all-knowing "demon" could track every molecule, would entropy still increase for it?</div>
+    <details class="q"><summary><b>Ponder:</b> If some all-knowing "demon" could track every molecule, would entropy still increase for it?</summary><div class="qa">From its view, entropy needn't rise — entropy measures the information you lack, and an all-knowing demon lacks none; the microstate is definite to it (the Gibbs-paradox / information-entropy view). But storing that information has a physical cost (Landauer), and erasing it hands the entropy back to the universe. Entropy's “objectivity” is entangled with who's looking and how much they record.</div></details>
   </div>
 </div>
 
@@ -151,7 +158,7 @@ Write out Newton's equations, Maxwell's equations, Schrödinger's equation, and 
 
   <div class="punch">
     <div class="one">In a sentence: which way heat flows, how much work you can extract, why entropy only rises — three faces of one law.</div>
-    <div class="q"><b>Ponder:</b> If an entropy decrease is "not impossible, just wildly improbable," why have we never seen a glass of water freeze itself and give off heat?</div>
+    <details class="q"><summary><b>Ponder:</b> If an entropy decrease is "not impossible, just wildly improbable," why have we never seen a glass of water freeze itself and give off heat?</summary><div class="qa">Because “tiny” is smaller than astronomy can stomach. A glass of water has ~10²⁵ molecules; the chance of a spontaneous reverse arrangement is e to a minus-astronomical power — smaller than trying every possibility over the age of the universe by countless orders of magnitude. Possible in principle, never in practice: that is what makes the second law statistical, not absolute.</div></details>
   </div>
 </div>
 
@@ -193,7 +200,7 @@ Write out Newton's equations, Maxwell's equations, Schrödinger's equation, and 
 
   <div class="punch">
     <div class="one">In a sentence: a broken mirror doesn't reassemble not because it's forbidden, but because reassembly's odds are too small to ever wait out.</div>
-    <div class="q"><b>Ponder:</b> If the universe's initial entropy weren't ultra-low but some middling value, would there still be a distinction between "past" and "future"?</div>
+    <details class="q"><summary><b>Ponder:</b> If the universe's initial entropy weren't ultra-low but some middling value, would there still be a distinction between "past" and "future"?</summary><div class="qa">Probably no clear arrow of time. Time's arrow comes from entropy climbing one-way out of an extremely low initial state; if the start were already medium (near equilibrium), the system just fluctuates nearby with no sustained rise, and “past/future” lose their thermodynamic distinction. That we remember the past and tell directions apart rests entirely on the universe's anomalously low-entropy beginning.</div></details>
   </div>
 </div>
 
@@ -221,7 +228,7 @@ Write out Newton's equations, Maxwell's equations, Schrödinger's equation, and 
 
   <div class="punch">
     <div class="one">In a sentence: physical entropy and information entropy aren't an analogy — they're one quantity: your ignorance about the system.</div>
-    <div class="q"><b>Ponder:</b> If entropy is "the information you lack," is it an objective property of the universe, or a subjective ledger of "how much you know"?</div>
+    <details class="q"><summary><b>Ponder:</b> If entropy is "the information you lack," is it an objective property of the universe, or a subjective ledger of "how much you know"?</summary><div class="qa">Both are true, and the tension is real. Given the macro variables (energy, volume…), entropy is an objectively fixed physical quantity that drives real engines and the arrow; but “which macro variables you pick = which micro details you decline to resolve” carries a subjective/convention element (Gibbs paradox). Modern view: entropy is objective relative to a chosen set of tracked variables — objective, but relative to a level of description.</div></details>
   </div>
 </div>
 

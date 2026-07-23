@@ -64,6 +64,13 @@
   .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
   .read li{margin:7px 0}
   .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
 </style>
 </head>
 <body>
@@ -128,7 +135,7 @@ Once you've met force and motion, a smarter question appears: stop tracking the 
 
   <div class="punch">
     <div class="one">In a sentence: you can't gain motion from nothing — only trade it with something else.</div>
-    <div class="q"><b>Ponder:</b> When you push off a wall to move backward, the wall gains an equal momentum — so why doesn't it visibly budge?</div>
+    <details class="q"><summary><b>Ponder:</b> When you push off a wall to move backward, the wall gains an equal momentum — so why doesn't it visibly budge?</summary><div class="qa">Because the wall (bolted to Earth) has enormous mass. Conservation gives equal-and-opposite mv: your small m means a large recoil v, while the wall+Earth's huge M gives v≈mv/M≈0, too tiny to measure. The momentum really did transfer — Earth's share of speed is just imperceptible.</div></details>
   </div>
 </div>
 
@@ -184,7 +191,7 @@ Once you've met force and motion, a smarter question appears: stop tracking the 
 
   <div class="punch">
     <div class="one">In a sentence: energy is neither created nor destroyed — only redressed in a new form.</div>
-    <div class="q"><b>Ponder:</b> Does friction make energy "vanish"? Or does it move to a ledger you simply weren't keeping?</div>
+    <details class="q"><summary><b>Ponder:</b> Does friction make energy "vanish"? Or does it move to a ledger you simply weren't keeping?</summary><div class="qa">It didn't vanish — it became heat. Friction turns macroscopic motion into random molecular motion (thermal energy), plus a little sound and wear. Energy conservation never breaks — “disappearance” always means a ledger you didn't count, usually heat. Counting heat in is exactly what gave us the first law of thermodynamics.</div></details>
   </div>
 </div>
 
@@ -249,7 +256,7 @@ Once you've met force and motion, a smarter question appears: stop tracking the 
 
   <div class="punch">
     <div class="one">In a sentence: momentum is always conserved; kinetic energy, it depends.</div>
-    <div class="q"><b>Ponder:</b> A perfectly inelastic collision loses the most kinetic energy — so why isn't a scrap of its momentum lost?</div>
+    <details class="q"><summary><b>Ponder:</b> A perfectly inelastic collision loses the most kinetic energy — so why isn't a scrap of its momentum lost?</summary><div class="qa">Because two different laws govern them. Momentum has no dissipation channel — internal collision forces cancel in pairs, so total momentum must be conserved; kinetic energy can convert to heat and deformation and isn't conserved. So sticking together loses the most kinetic energy yet keeps every bit of momentum.</div></details>
   </div>
 </div>
 
@@ -293,7 +300,7 @@ Once you've met force and motion, a smarter question appears: stop tracking the 
 
   <div class="punch">
     <div class="one">In a sentence: ask about symmetry first, conservation second, and force only last.</div>
-    <div class="q"><b>Ponder:</b> If some quantity were one day found to quietly fail to conserve on a cosmic scale, which broken symmetry should you suspect first?</div>
+    <details class="q"><summary><b>Ponder:</b> If some quantity were one day found to quietly fail to conserve on a cosmic scale, which broken symmetry should you suspect first?</summary><div class="qa">Suspect the matching symmetry. Energy non-conservation ↔ broken time-translation symmetry — and cosmology is exactly this: expansion makes spacetime change with time, so “total energy” isn't strictly conserved cosmologically. A loosened conservation law is always a loosening symmetry (Noether in reverse).</div></details>
   </div>
 </div>
 
