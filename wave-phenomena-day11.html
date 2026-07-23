@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：波动现象 · Day 11</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch details.q{background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:2px 14px; margin-top:9px}
+  .punch summary{cursor:pointer; font-size:.93rem; color:var(--muted); padding:9px 0; list-style:none}
+  .punch summary::-webkit-details-marker{display:none}
+  .punch summary b{color:var(--amber); font-style:normal}
+  .punch .qa{font-size:.9rem; color:#c3cbe0; border-top:1px dashed var(--line); padding:9px 0 11px}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.3rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>波动现象</h1>
+<div class="meta">Day 11 · 2026 · Phase C 波、光与电磁</div>
+<div class="tagline">波会做一件粒子永远做不到的事——两列波相遇，能相加成更亮，也能相加成一片漆黑。</div>
+</header>
+<div class="intro">
+上一段把波立了起来：扰动在介质里接力传播。这一期讲波真正<b>与众不同</b>的几手——都源自一条铁律：<b>波会叠加</b>。位移直接相加，于是有了<b>干涉</b>（相长变亮、相消变暗）；波能绕过障碍，于是有了<b>衍射</b>；波源一动，你听到的频率就变，于是有了<b>多普勒</b>。末卡收束到一条极深的原理：<b>任何波形都是一堆正弦的叠加</b>（傅里叶）——它把"音色是什么""为何能压缩音乐"一次性讲透。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>干涉：波 + 波，可以更亮也可以更暗 <span class="en">Interference</span></h2>
+<span class="pill">叠加原理 · 相长 / 相消</span>
+<div class="field"><span class="lab">直觉</span>
+  把两块石头同时丢进池塘，两圈涟漪相遇处会出现奇怪的花纹：有些线上水花翻倍地高，有些线上水面却<strong>纹丝不动</strong>。原因简单到反直觉——波会<strong>叠加</strong>。两列波在某点<strong>波峰叠波峰</strong>，位移相加、振幅翻倍（<strong>相长</strong>）；<strong>波峰正好遇上波谷</strong>，一正一负抵成零（<strong>相消</strong>）。粒子从不这样：两颗子弹相遇不会"抵消成零颗"。</div>
+<div class="field"><span class="lab">机制</span>
+  决定相长还是相消的，是两列波到某点的<strong>路程差</strong>。差整数个波长，波峰对波峰——相长；差半个波长（加整数个），波峰对波谷——相消：
+  <div class="eq">相长：Δ<var>d</var> = <var>n</var><var>λ</var><span style="margin:0 18px"></span>相消：Δ<var>d</var> = (<var>n</var> + ½)<var>λ</var></div>
+<div class="gloss">Δ<var>d</var> 是两条路的<strong>路程差</strong>、<var>λ</var>（读"lambda"）是波长、<var>n</var> 取 0,1,2… 的整数。核心只有一句：<strong>波程差是波长的整数倍就加强，半整数倍就抵消</strong>。托马斯·杨用一束光穿两条缝，在屏上得到明暗相间的条纹——这道"双缝"是光是波的头号证据。</div></div>
+<figure>
+<svg aria-label="两列波叠加：相长时振幅加倍，相消时抵消成平线" role="img" viewbox="0 0 620 244">
+<!-- baselines -->
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.1" x1="66" x2="566" y1="70" y2="70"></line>
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.1" x1="66" x2="566" y1="200" y2="200"></line>
+<!-- TOP: constructive -->
+<polyline fill="none" points="70,70.0 90,57.5 110,54.4 130,63.1 150,76.9 170,85.6 190,82.5 210,70.0 230,57.5 250,54.4 270,63.1 290,76.9 310,85.6 330,82.5 350,70.0 370,57.5 390,54.4 410,63.1 430,76.9 450,85.6 470,82.5 490,70.0 510,57.5 530,54.4 550,63.1 558,68.6" stroke="#5b9bff" stroke-width="1.6"></polyline>
+<polyline fill="none" points="70,70.0 90,57.5 110,54.4 130,63.1 150,76.9 170,85.6 190,82.5 210,70.0 230,57.5 250,54.4 270,63.1 290,76.9 310,85.6 330,82.5 350,70.0 370,57.5 390,54.4 410,63.1 430,76.9 450,85.6 470,82.5 490,70.0 510,57.5 530,54.4 550,63.1 558,68.6" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.6"></polyline>
+<polyline fill="none" points="70,70.0 90,45.0 110,38.8 130,56.1 150,83.9 170,101.2 190,95.0 210,70.0 230,45.0 250,38.8 270,56.1 290,83.9 310,101.2 330,95.0 350,70.0 370,45.0 390,38.8 410,56.1 430,83.9 450,101.2 470,95.0 490,70.0 510,45.0 530,38.8 550,56.1 558,67.1" stroke="#7fe0a8" stroke-width="2.8"></polyline>
+<text fill="#7fe0a8" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="70" y="30">相长：波峰叠波峰 → 振幅加倍</text>
+<!-- BOTTOM: destructive -->
+<polyline fill="none" points="70,200.0 90,187.5 110,184.4 130,193.1 150,206.9 170,215.6 190,212.5 210,200.0 230,187.5 250,184.4 270,193.1 290,206.9 310,215.6 330,212.5 350,200.0 370,187.5 390,184.4 410,193.1 430,206.9 450,215.6 470,212.5 490,200.0 510,187.5 530,184.4 550,193.1 558,198.6" stroke="#5b9bff" stroke-width="1.6"></polyline>
+<polyline fill="none" points="70,200.0 90,212.5 110,215.6 130,206.9 150,193.1 170,184.4 190,187.5 210,200.0 230,212.5 250,215.6 270,206.9 290,193.1 310,184.4 330,187.5 350,200.0 370,212.5 390,215.6 410,206.9 430,193.1 450,184.4 470,187.5 490,200.0 510,212.5 530,215.6 550,206.9 558,201.4" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.6"></polyline>
+<line stroke="#7fe0a8" stroke-width="2.8" x1="70" x2="558" y1="200" y2="200"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="70" y="163">相消：波峰遇波谷 → 抵成平线</text>
+</svg>
+<figcaption>蓝、琥珀（虚线）是两列待叠加的波，绿色粗线是它们的和。上：同相位 → 加倍；下：反相位 → 处处归零。同样两列波，只因相位不同，一处生光一处成暗。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  相消干涉最令人不安：<strong>光 + 光，可以等于黑</strong>。两束能量明明都在，叠一起却一片漆黑——能量没消失，只是被<strong>重新分配</strong>到相长的亮纹去了（暗处的份额跑到亮处，总能量守恒）。降噪耳机正是这套把戏：实时算出环境噪声的反相波播给你，两波相消，世界安静下来。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / 天文 / 量子</span>
+  "让波精确地相长或相消"是一门被反复利用的硬技术——
+  <ul>
+<li><strong>工程·降噪</strong>：主动降噪耳机合成噪声的反相波，靠相消把嗡嗡声抹平；</li>
+<li><strong>天文·干涉阵</strong>：把相隔上千公里的多台射电望远镜信号按相位合成，等效于一架口径上千公里的巨镜——拍下第一张黑洞照片靠的就是这招；</li>
+<li><strong>量子</strong>：单个电子穿双缝也会自己和自己干涉出条纹，逼我们承认它以"概率波"的方式同时探两条缝——这条线索，后面『波函数与叠加』会正面拆解。</li>
+</ul>
+  凡是要"让波协同或抵消"，干涉就是那把手术刀。</div>
+<div class="punch">
+<div class="one">一句话：波程差是波长整数倍就加强，半整数倍就抵消。</div>
+<details class="q"><summary><b>思考：</b>双缝实验里，若把其中一条缝挡住，屏上的明暗条纹会怎样？</summary><div class="qa">条纹消失，只剩一片由单缝衍射造成的、中间亮两边渐暗的宽光斑。明暗相间的条纹是<strong>两条缝的波相互干涉</strong>才有的；只剩一条缝，就没有"另一列波"来相长相消了。这也说明条纹并非光源本身的花样，而是两路波叠加的产物。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>衍射：波会拐弯 <span class="en">Diffraction</span></h2>
+<span class="pill">波绕障碍 · 分辨极限</span>
+<div class="field"><span class="lab">直觉</span>
+  你能听见墙角后有人说话，却看不见他——同样是波，声为何能"拐弯"而光不能？答案藏在一个比例里：<strong>波遇到和自己波长差不多大的缝或障碍时，会明显绕过去、向后散开</strong>，这就是衍射。声波波长以米计，门、墙角对它就是"小缝"，轻松绕过；可见光波长不到千分之一毫米，日常物体对它大得像高山，几乎不绕，于是留下清晰的影子。</div>
+<div class="field"><span class="lab">机制</span>
+  惠更斯给了一幅好图景：波前上<strong>每一点都可看成一个新的小波源</strong>，向前发出小圆波，它们的包络就是下一刻的波前。缝很宽时，小波叠成一道平整的直线波前，照直走；缝一旦窄到接近波长，边缘的小波无处抵消，就<strong>向阴影区散开</strong>。散开角度大致是：
+  <div class="eq"><var>θ</var> ≈ <span class="frac"><span class="fnum"><var>λ</var></span><span class="fden"><var>a</var></span></span></div>
+<div class="gloss"><var>θ</var>（读"theta"）是衍射散开的<strong>角度</strong>、<var>λ</var> 是波长、<var>a</var> 是缝宽（或障碍尺寸）。一句话：<strong>波长相对缝越大，拐得越狠</strong>。缝远大于波长时 <var>θ</var> 趋近 0（几乎不绕）；缝小到与波长相当，θ 就大到把波撒向四面八方。</div></div>
+<figure>
+<svg aria-label="平面波穿过一条窄缝后向阴影区衍射散开" role="img" viewbox="0 0 620 262">
+<defs>
+<marker id="ah" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3.5">
+<path d="M0,0 L8,3.5 L0,7 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<!-- incoming plane wavefronts -->
+<g stroke="#5b9bff" stroke-width="2">
+<line x1="86" x2="86" y1="52" y2="210"></line>
+<line x1="126" x2="126" y1="52" y2="210"></line>
+<line x1="166" x2="166" y1="52" y2="210"></line>
+<line x1="206" x2="206" y1="52" y2="210"></line>
+<line x1="246" x2="246" y1="52" y2="210"></line>
+</g>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="86" y="40">平面波</text>
+<!-- incoming propagation arrow -->
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="2" x1="150" x2="270" y1="230" y2="230"></line>
+<!-- barrier with slit at y 116..146 -->
+<rect fill="#6a5326" height="76" width="7" x="298" y="46"></rect>
+<rect fill="#6a5326" height="76" width="7" x="298" y="146"></rect>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="301" y="238">缝</text>
+<!-- diffracted circular wavefronts centered on slit (301,131) -->
+<g fill="none" stroke="#5b9bff" stroke-width="2">
+<path d="M301,89 A42,42 0 0 1 301,173"></path>
+<path d="M301,49 A82,82 0 0 1 301,213"></path>
+<path d="M301,11 A120,120 0 0 1 301,251"></path>
+</g>
+<!-- spreading arrows -->
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="1.8" x1="360" x2="470" y1="131" y2="80"></line>
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="1.8" x1="366" x2="486" y1="131" y2="131"></line>
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="1.8" x1="360" x2="470" y1="131" y2="182"></line>
+<text fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="452" y="210">衍射：向后散开</text>
+</svg>
+<figcaption>平直的波前（蓝竖线）撞上带窄缝的墙。缝以外被挡住，缝处的波却当作新波源，向阴影区呈弧形<strong>散开</strong>。缝越接近波长，散得越开——这就是声音能绕过墙角的原因。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  衍射给一切成像设下<strong>硬极限</strong>：能分辨的最小细节都被 <var>λ</var>/<var>a</var> 卡死——光一进仪器就衍射散开，把点光源糊成小斑，两斑靠太近就分不开。这不是工艺不精，是波的本性。想看更小，只有两条路：换<strong>更短的波长</strong>（电子显微镜用波长极短的电子波，看清了病毒和原子），或把<strong>口径 <var>a</var> 做大</strong>（天文台越修越大就为这个）。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 生物 / 工程</span>
+  同一条"缝越小、波长越长，散得越开"，处处定生死——
+  <ul>
+<li><strong>生物·视觉</strong>：鹰眼分辨率高，部分靠瞳孔大（<var>a</var> 大）、衍射斑小；夜里瞳孔放大，除了进光多，也顺带让分辨极限更好一点；</li>
+<li><strong>工程·光刻</strong>：芯片上刻多细的线，被光刻用的波长卡死——业界一路把光源推到极紫外（波长仅 13.5 纳米），就是为了绕过衍射极限刻出更密的晶体管；</li>
+<li><strong>工程·天线</strong>：卫星锅越大，波束越窄、指向越准，同样是 <var>θ</var>≈<var>λ</var>/<var>a</var> 在起作用。</li>
+</ul>
+  想要更"锐"，要么缩波长，要么放大口径，别无捷径。</div>
+<div class="punch">
+<div class="one">一句话：波长相对缝越大，波拐得越狠。</div>
+<details class="q"><summary><b>思考：</b>为什么隔着墙能听到低音炮的"咚咚"，人声却闷得听不清词？</summary><div class="qa">低频声波长长（几米），对门缝、墙这类障碍衍射强、绕射好，还更难被墙吸收，于是低音"咚咚"能绕进、穿过来。人声辅音多是高频、波长短（几十厘米以下），衍射弱、更易被墙吸收衰减，于是只剩含糊的低频——听得见"有人在说"，却听不清"说了什么"。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>多普勒效应：动起来，频率就变 <span class="en">Doppler Effect</span></h2>
+<span class="pill">相对运动 · 频移</span>
+<div class="field"><span class="lab">直觉</span>
+  救护车迎面开来时鸣笛尖利，擦身而过后骤然低沉——音调在那一瞬"掉"了下去。车其实一直按同一频率鸣笛，变的是<strong>你收到波的节奏</strong>。声源朝你冲来，一边跑一边发波，把前方的波<strong>挤密</strong>，你每秒撞上更多波峰，频率听起来<strong>更高</strong>；声源远离，波被<strong>拉疏</strong>，频率<strong>更低</strong>。变的从不是波源，而是波在空间里被"压"或"拉"了。</div>
+<div class="field"><span class="lab">机制</span>
+  声源速度 <var>v</var><sub>s</sub> 越接近波速 <var>v</var>，前方的波挤得越狠、频率抬得越高。声源以速度 <var>v</var><sub>s</sub> 朝静止的你驶来时：
+  <div class="eq"><var>f</var>′ = <var>f</var> · <span class="frac"><span class="fnum"><var>v</var></span><span class="fden"><var>v</var> − <var>v</var><sub>s</sub></span></span></div>
+<div class="gloss"><var>f</var> 是波源本身的频率、<var>f</var>′（读"f 撇"）是你实际听到的频率、<var>v</var> 是波在介质里的速度（声速）、<var>v</var><sub>s</sub> 是声源朝你的速度。分母 <var>v</var>−<var>v</var><sub>s</sub> 比 <var>v</var> 小，所以 <var>f</var>′&gt;<var>f</var>（升高）；若声源远离，把减号换成加号，分母变大，<var>f</var>′ 就降低。</div></div>
+<figure>
+<svg aria-label="运动声源发出的波前：前方被压缩频率升高，后方被拉伸频率降低" role="img" viewbox="0 0 620 296">
+<defs>
+<marker id="ah2" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3.5">
+<path d="M0,0 L8,3.5 L0,7 Z" fill="#dbe2f2"></path>
+</marker>
+</defs>
+<!-- concentric wavefronts, centers shifted left (source moved right) -->
+<g fill="none" stroke="#5b9bff" stroke-width="1.9">
+<circle cx="300" cy="150" r="30"></circle>
+<circle cx="270" cy="150" r="62"></circle>
+<circle cx="240" cy="150" r="96"></circle>
+<circle cx="210" cy="150" r="132"></circle>
+</g>
+<!-- source -->
+<circle cx="330" cy="150" fill="#f0ad5a" r="6.5"></circle>
+<line marker-end="url(#ah2)" stroke="#dbe2f2" stroke-width="2" x1="340" x2="398" y1="150" y2="150"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="406" y="154">声源 v</text>
+<!-- labels -->
+<text fill="#7fb0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="392" y="243">前方：波被压缩</text>
+<text fill="#7fb0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="392" y="261">频率升高（蓝移）</text>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="140" y="243">后方：波被拉伸</text>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="140" y="261">频率降低（红移）</text>
+</svg>
+<figcaption>声源边发波边向右跑，右侧波前挤成密密一叠（波长短、频率高），左侧被拉稀（波长长、频率低）。同一个波源，你站的方位不同，听到的音调就不同。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  多普勒把"频率的变化"变成一把<strong>测速度的尺子</strong>——测速雷达、天气雷达、B 超测血流，都是发一束波、看反射频率移了多少，反推目标速度。放到宇宙尺度更惊人：遥远星系的光谱整体<strong>红移</strong>（波长变长偏红），说明它们几乎都在<strong>远离</strong>我们，且越远退得越快。这正是宇宙在膨胀的头号证据——后面『大爆炸』一段会顺这根线索追下去。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 医学 / 天文 / 生物</span>
+  "从频移读出运动"是一把通用的尺——
+  <ul>
+<li><strong>医学</strong>：彩色多普勒超声给血流"上色"，朝探头流的显暖色、背离的显冷色，医生一眼看出血管堵没堵、瓣膜漏不漏；</li>
+<li><strong>天文</strong>：恒星被行星拽得轻轻摇摆，光谱周期性红蓝移，天文学家借此"称"出看不见的系外行星；</li>
+<li><strong>生物</strong>：蝙蝠发超声、听回声的频移判断猎物飞近还是飞远——一套天生的多普勒雷达。</li>
+</ul>
+  只要有相对运动，频率里就写着速度的密码。</div>
+<div class="punch">
+<div class="one">一句话：波源迎面而来波被挤密（音调升高），远去则被拉疏（降低）。</div>
+<details class="q"><summary><b>思考：</b>声音的多普勒里，"声源朝你动"和"你朝声源动"公式并不完全一样；可光的多普勒却只看两者的相对速度。为什么？</summary><div class="qa">声波要靠空气这个<strong>介质</strong>传播，"谁在动"相对介质有绝对区别：声源动会改变波长，观察者动会改变撞击波峰的频次，两种机制不同，公式自然不同。光却不需要介质、且光速对任何人都不变（狭义相对论），没有一个"绝对静止的以太"可参照，于是只剩<strong>光源与观察者的相对速度</strong>有意义——这点差异，正是相对论登场的伏笔。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>傅里叶：任何波形都是正弦的叠加 <span class="en">Fourier: Signals as Sums of Waves</span></h2>
+<span class="pill">频谱 · 音色 · 分解</span>
+<div class="field"><span class="lab">直觉</span>
+  同一个音符，钢琴和小提琴听起来天差地别——明明音高（基频）一样，凭什么分得出？秘密在<strong>波形</strong>：真实乐器发出的从不是干净的正弦，而是一条歪歪扭扭的复杂曲线。而有条惊人的定理说：<strong>任何这样的周期波形，都能唯一地拆成一堆纯正弦之和</strong>——基频加上它的整数倍谐波，各配一个强度。哪些谐波强、哪些弱，这份"配方"就是<strong>音色</strong>。这就是傅里叶的核心洞见。</div>
+<div class="field"><span class="lab">机制</span>
+  把一段复杂信号送进"傅里叶分解"，它吐出的是一张<strong>频谱</strong>：横轴是频率，每根竖条的高矮表示"该频率的正弦占多少分量"。时域里一条纠缠的曲线，在频域里摊成清清爽爽的一排竖条。
+  <div class="eq">复杂波形 = <var>a</var><sub>1</sub>sin(<var>f</var>) + <var>a</var><sub>2</sub>sin(2<var>f</var>) + <var>a</var><sub>3</sub>sin(3<var>f</var>) + …</div>
+<div class="gloss"><var>f</var> 是<strong>基频</strong>（定音高），2<var>f</var>、3<var>f</var>… 是它的<strong>谐波</strong>（整数倍频率），<var>a</var><sub>1</sub>、<var>a</var><sub>2</sub>… 是每个谐波的<strong>强度</strong>。改变这串强度，音高不变而音色全变——合成器就是照这张配方"配"出各种音色的。</div></div>
+<figure>
+<svg aria-label="一条复杂波形经傅里叶分解为频谱：基频最高，各次谐波依次降低" role="img" viewbox="0 0 620 300">
+<!-- top: complex waveform (time domain) -->
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.1" x1="70" x2="560" y1="92" y2="92"></line>
+<polyline fill="none" points="70,92.0 86,62.9 102,65.7 118,68.8 134,61.6 150,111.0 166,116.4 182,120.6 198,115.8 214,114.0 230,62.4 246,69.0 262,65.0 278,63.8 294,87.9 310,121.9 326,115.2 342,120.4 358,122.8 374,76.3 390,62.9 406,65.7 422,68.8 438,61.6 454,111.0 470,116.4 486,120.6 502,115.8 518,100.2 534,61.6 550,67.1 558,63.4" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="70" y="44">复杂波形（时域）</text>
+<!-- arrow down -->
+<line marker-end="url(#ahd)" stroke="#9fb0d0" stroke-width="2" x1="300" x2="300" y1="138" y2="164"></line>
+<defs>
+<marker id="ahd" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="3.5" refy="7">
+<path d="M0,0 L7,0 L3.5,8 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="13" font-style="italic" x="312" y="158">傅里叶分解</text>
+<!-- bottom: spectrum -->
+<line stroke="#56607e" stroke-width="1.5" x1="108" x2="512" y1="272" y2="272"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="108" x2="108" y1="176" y2="272"></line>
+<g fill="#f0ad5a">
+<rect height="120" width="17" x="132" y="152"></rect>
+<rect height="40" width="17" x="212" y="232"></rect>
+<rect height="24" width="17" x="292" y="248"></rect>
+<rect height="17" width="17" x="372" y="255"></rect>
+<rect height="13" width="17" x="452" y="259"></rect>
+</g>
+<g fill="#96a0ba" font-family="Georgia,serif" font-size="12" font-style="italic" text-anchor="middle">
+<text x="140" y="288">f₁</text>
+<text x="220" y="288">f₃</text>
+<text x="300" y="288">f₅</text>
+<text x="380" y="288">f₇</text>
+<text x="460" y="288">f₉</text>
+</g>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="end" x="512" y="290">频率 →</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" x="70" y="182">强度</text>
+</svg>
+<figcaption>上：一条杂乱的周期波形。下：它的频谱——每根竖条是一个纯正弦分量，高矮即强度。此例是方波，只含奇次谐波（f₁,f₃,f₅…）且依次减弱。时域的乱，在频域里一目了然。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  傅里叶不只是"能这么拆"，而是换了一副<strong>看世界的眼睛</strong>：同一段信号，时域看是"随时间起伏的曲线"，频域看是"哪些频率、各占多少"——两种描述完全等价，随时切换。这副眼睛几乎撑起了现代信息世界：<strong>MP3 与 JPEG</strong> 把信号转到频域，扔掉人耳人眼不敏感的高频来压缩；<strong>手机通信</strong>把不同用户分到不同频段互不打架。看似"分析波"的数学技巧，成了压缩、通信、成像的共同地基。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 数学 / 生物 / 工程</span>
+  "把复杂东西拆成简单振动之和"是一条横贯学科的组织原则——
+  <ul>
+<li><strong>数学</strong>：傅里叶变换是频域这副眼睛的严格语言，也是求解波动、热传导等方程的通用机器（这套数学工具本站不重讲，只借用它的直觉）；</li>
+<li><strong>生物·听觉</strong>：耳蜗按频率把声音摊开送进神经——你的内耳其实是一台生物版的实时傅里叶分析仪，"听见音色"就是大脑在读这份频谱；</li>
+<li><strong>工程·信号</strong>：从心电图找异常节律，到 Wi-Fi 把数据编码进不同频率的子载波，都是先跳进频域再动手。</li>
+</ul>
+  学会在时域与频域间自由切换，是理解一切波与信号的通用护照。</div>
+<div class="punch">
+<div class="one">一句话：任何波形都是纯正弦的叠加，那份配方就是它的频谱。</div>
+<details class="q"><summary><b>思考：</b>把一段音乐的高频分量全删掉，只留低频，它听起来会怎样？为什么 MP3 敢这么"扔"？</summary><div class="qa">会变得沉闷、发糊——高频负责亮度、清脆和细节（钹的"嚓"、辅音的锐利），删掉后像隔了层被子。MP3 敢扔，是因为它扔的不是"随便的高频"，而是靠<strong>心理声学</strong>模型算出人耳<strong>听不出</strong>的那部分（如强音附近被"掩蔽"的弱音、超出敏感区的极高频），在频域里精准剔除。省下大量数据，人耳却几乎无损。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>干涉里"光 + 光 = 黑"，能量守恒不是被破坏了吗？</summary>
+<div class="body">没有。相消干涉从不孤立存在——哪里变暗，别处必有地方变得更亮。以双缝为例，暗纹处两波抵消为零，但亮纹处两振幅相加、强度是单束的<strong>四倍</strong>（不是两倍）。把整屏光强积分起来，正好等于两束光能量之和，一分不差。干涉不创造也不消灭能量，只<strong>重新分配</strong>它的空间位置：把暗处的份额搬到亮处。</div></details>
+<details><summary>衍射极限是绝对不可突破的吗？显微镜到底能看多小？</summary>
+<div class="body">经典的衍射极限（约半个波长）是<strong>远场</strong>成像的铁律，但物理学家找到了绕行的门。荧光超分辨（如 STED、单分子定位，2014 诺贝尔化学奖）靠<strong>逐个点亮再精确定位</strong>发光分子，把中心位置算到远超衍射极限的精度。它们并没"违反"物理，而是换了成像策略——衍射极限限制的是"直接远场光学分辨"，不是"一切能获取的空间信息"。</div></details>
+<details><summary>多普勒里，如果声源速度追上甚至超过声速，会发生什么？</summary>
+<div class="body">当声源速度逼近声速，前方的波前挤到几乎重合，能量堆成一道极强的<strong>压力墙</strong>；一旦<strong>超过</strong>声速，所有波前的包络形成一个锥面（马赫锥），锥面扫过之处就是我们听到的<strong>音爆</strong>——那声炸响不是"撞破音障"的一次性巨响，而是锥面拖在身后、扫过你耳朵的瞬间。此时公式的分母 <var>v</var>−<var>v</var><sub>s</sub> 变号、失效，需换成激波的描述。它和光里的<strong>切伦科夫辐射</strong>是同一种几何。</div></details>
+<details><summary>傅里叶说"任何波形都能拆成正弦"，真的任何都行吗？有没有例外？</summary>
+<div class="body">对绝大多数物理信号成立，但有边界。经典傅里叶级数要求函数满足一定条件（如分段光滑、能量有限）；遇到<strong>突变的跳变</strong>（如理想方波的竖直沿），正弦叠加会在跳变处顽固过冲约 9%，加多少项都消不掉——这叫<strong>吉布斯现象</strong>。此外，正弦基"铺满整段时间"，不擅长描述<strong>又短又局域</strong>的瞬态（一记鼓点）；这时改用小波（wavelet）等能同时定位时间与频率的基更合适。傅里叶极强，但不是唯一、万能的分解法。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. I 第 28–30、47–50 章「干涉 · 衍射 · 波」——直觉基准</li>
+<li>Hecht，<em>Optics</em>——干涉与衍射的标准教科书，图示极佳</li>
+<li>3Blue1Brown，<em>"But what is the Fourier Transform? A visual introduction"</em>——频域这副眼睛的最佳可视化</li>
+<li>Wikipedia：<em>Double-slit experiment</em> / <em>Diffraction</em> / <em>Doppler effect</em> / <em>Fourier series</em>——概念与图示速查</li>
+<li>Smith，<em>The Scientist and Engineer's Guide to Digital Signal Processing</em>（免费在线）——傅里叶如何撑起数字信号世界</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

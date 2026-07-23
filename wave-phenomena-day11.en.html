@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Wave Phenomena · Day 11</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.8; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch details.q{background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:2px 14px; margin-top:9px}
+  .punch summary{cursor:pointer; font-size:.93rem; color:var(--muted); padding:9px 0; list-style:none}
+  .punch summary::-webkit-details-marker{display:none}
+  .punch summary b{color:var(--amber); font-style:normal}
+  .punch .qa{font-size:.9rem; color:#c3cbe0; border-top:1px dashed var(--line); padding:9px 0 11px}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.3rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Wave Phenomena</h1>
+<div class="meta">Day 11 · 2026 · Phase C Waves, Light &amp; Electromagnetism</div>
+<div class="tagline">A wave does what a particle never can: two of them meet, and they can add up brighter — or add up to pitch black.</div>
+</header>
+<div class="intro">
+Last time we set the concept of a wave on its feet: a disturbance relayed through a medium. This installment covers what makes waves truly <b>different</b> — all of it flowing from one iron rule: <b>waves superpose</b>. Displacements add directly, giving us <b>interference</b> (constructive brightens, destructive darkens); waves bend around obstacles, giving us <b>diffraction</b>; move the source and the frequency you hear shifts, giving us the <b>Doppler effect</b>. The last card converges on a deep principle: <b>every waveform is a sum of pure sines</b> (Fourier) — which settles, in one stroke, what "timbre" is and why we can compress music.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Interference: wave + wave, brighter or darker <span class="en">Interference</span></h2>
+<span class="pill">superposition · constructive / destructive</span>
+<div class="field"><span class="lab">Intuition</span>
+  Drop two stones into a pond at once and where the ripples meet you get a strange pattern: along some lines the water heaves twice as high, along others it stays <strong>dead still</strong>. The reason is counterintuitively simple — waves <strong>add</strong>. Where two waves meet <strong>crest on crest</strong>, displacements add and the amplitude doubles (<strong>constructive</strong>); where a <strong>crest lands on a trough</strong>, plus and minus cancel to zero (<strong>destructive</strong>). Particles never do this: two bullets meeting don't "cancel to zero bullets."</div>
+<div class="field"><span class="lab">Mechanism</span>
+  What decides constructive vs. destructive is the <strong>path difference</strong> the two waves travel to reach a point. Off by a whole number of wavelengths, crest meets crest — constructive; off by half a wavelength (plus whole ones), crest meets trough — destructive:
+  <div class="eq">constructive: Δ<var>d</var> = <var>n</var><var>λ</var><span style="margin:0 18px"></span>destructive: Δ<var>d</var> = (<var>n</var> + ½)<var>λ</var></div>
+<div class="gloss">Δ<var>d</var> is the <strong>path difference</strong> of the two routes, <var>λ</var> ("lambda") is the wavelength, <var>n</var> is an integer 0,1,2… The whole story in one line: <strong>a path difference that's an integer number of wavelengths adds up; a half-integer number cancels</strong>. Thomas Young sent one beam of light through two slits and got alternating bright and dark fringes on a screen — that double-slit is the number-one evidence that light is a wave.</div></div>
+<figure>
+<svg aria-label="Two waves superposing: constructive doubles the amplitude, destructive cancels to a flat line" role="img" viewbox="0 0 620 244">
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.1" x1="66" x2="566" y1="70" y2="70"></line>
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.1" x1="66" x2="566" y1="200" y2="200"></line>
+<polyline fill="none" points="70,70.0 90,57.5 110,54.4 130,63.1 150,76.9 170,85.6 190,82.5 210,70.0 230,57.5 250,54.4 270,63.1 290,76.9 310,85.6 330,82.5 350,70.0 370,57.5 390,54.4 410,63.1 430,76.9 450,85.6 470,82.5 490,70.0 510,57.5 530,54.4 550,63.1 558,68.6" stroke="#5b9bff" stroke-width="1.6"></polyline>
+<polyline fill="none" points="70,70.0 90,57.5 110,54.4 130,63.1 150,76.9 170,85.6 190,82.5 210,70.0 230,57.5 250,54.4 270,63.1 290,76.9 310,85.6 330,82.5 350,70.0 370,57.5 390,54.4 410,63.1 430,76.9 450,85.6 470,82.5 490,70.0 510,57.5 530,54.4 550,63.1 558,68.6" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.6"></polyline>
+<polyline fill="none" points="70,70.0 90,45.0 110,38.8 130,56.1 150,83.9 170,101.2 190,95.0 210,70.0 230,45.0 250,38.8 270,56.1 290,83.9 310,101.2 330,95.0 350,70.0 370,45.0 390,38.8 410,56.1 430,83.9 450,101.2 470,95.0 490,70.0 510,45.0 530,38.8 550,56.1 558,67.1" stroke="#7fe0a8" stroke-width="2.8"></polyline>
+<text fill="#7fe0a8" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="70" y="30">Constructive: crest + crest → amplitude doubles</text>
+<polyline fill="none" points="70,200.0 90,187.5 110,184.4 130,193.1 150,206.9 170,215.6 190,212.5 210,200.0 230,187.5 250,184.4 270,193.1 290,206.9 310,215.6 330,212.5 350,200.0 370,187.5 390,184.4 410,193.1 430,206.9 450,215.6 470,212.5 490,200.0 510,187.5 530,184.4 550,193.1 558,198.6" stroke="#5b9bff" stroke-width="1.6"></polyline>
+<polyline fill="none" points="70,200.0 90,212.5 110,215.6 130,206.9 150,193.1 170,184.4 190,187.5 210,200.0 230,212.5 250,215.6 270,206.9 290,193.1 310,184.4 330,187.5 350,200.0 370,212.5 390,215.6 410,206.9 430,193.1 450,184.4 470,187.5 490,200.0 510,212.5 530,215.6 550,206.9 558,201.4" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.6"></polyline>
+<line stroke="#7fe0a8" stroke-width="2.8" x1="70" x2="558" y1="200" y2="200"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="70" y="163">Destructive: crest meets trough → cancels flat</text>
+</svg>
+<figcaption>Blue and amber (dashed) are the two waves to be added; the thick green line is their sum. Top: in phase → doubles. Bottom: out of phase → zero everywhere. The same two waves, differing only in phase, make light in one place and dark in another.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive point</span>
+  Destructive interference is the unsettling one: <strong>light + light can equal black</strong>. Both beams' energy is plainly there, yet stacked together it's pitch dark — the energy hasn't vanished, it's been <strong>redistributed</strong> into the constructive bright fringes (the dark spots' share moves to the bright spots; total energy is conserved). Noise-cancelling headphones run exactly this trick: the device computes the inverted wave of the ambient noise in real time and plays it back, the two cancel, and the world goes quiet.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Engineering / Astronomy / Quantum</span>
+  "Making waves add or cancel on purpose" is a hard technology exploited again and again —
+  <ul>
+<li><strong>Engineering · noise cancellation</strong>: active-noise headphones synthesize the anti-phase of the noise and flatten the hum by destructive interference;</li>
+<li><strong>Astronomy · interferometry</strong>: combining signals from radio dishes thousands of kilometres apart, by phase, is equivalent to one telescope thousands of kilometres across — that's how the first image of a black hole was taken;</li>
+<li><strong>Quantum</strong>: a single electron through two slits interferes with itself into fringes, forcing us to admit it probes both slits as a "probability wave" — a thread the later "Wavefunction &amp; Superposition" installment takes apart head-on.</li>
+</ul>
+  Wherever you need waves to cooperate or cancel, interference is the scalpel.</div>
+<div class="punch">
+<div class="one">In a nutshell: an integer path difference in wavelengths reinforces; a half-integer one cancels.</div>
+<details class="q"><summary><b>Think:</b> In the double-slit setup, if you block one of the two slits, what happens to the bright-and-dark fringes on the screen?</summary><div class="qa">The fringes disappear, leaving only a broad patch of light from single-slit diffraction — bright in the middle, fading to the sides. The alternating fringes only exist because the waves from the <strong>two slits interfere</strong>; with one slit blocked there's no "second wave" to reinforce and cancel with. That also shows the fringes aren't a pattern in the source itself — they're the product of two paths superposing.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Diffraction: waves bend around corners <span class="en">Diffraction</span></h2>
+<span class="pill">bending around obstacles · resolution limit</span>
+<div class="field"><span class="lab">Intuition</span>
+  You can hear someone talking around a corner but can't see them — both are waves, so why does sound "bend" and light not? The answer lives in a ratio: <strong>when a wave meets a slit or obstacle roughly the size of its own wavelength, it visibly bends around and spreads into the shadow</strong> — that's diffraction. Sound wavelengths run to metres, so a door or corner is a "small slit" it rounds easily; visible light's wavelength is under a thousandth of a millimetre, so everyday objects loom over it like mountains, it barely bends, and it leaves crisp shadows.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Huygens gave the picture: <strong>every point on a wavefront acts as a new little source</strong>, emitting a small circular wavelet, and their envelope is the next instant's wavefront. When the slit is wide these wavelets stack into a flat straight front and go straight; once the slit narrows to near a wavelength, the edge wavelets have nothing to cancel against and <strong>spread into the shadow</strong>. The spread angle is roughly:
+  <div class="eq"><var>θ</var> ≈ <span class="frac"><span class="fnum"><var>λ</var></span><span class="fden"><var>a</var></span></span></div>
+<div class="gloss"><var>θ</var> ("theta") is the diffraction <strong>spread angle</strong>, <var>λ</var> is the wavelength, <var>a</var> is the slit width (or obstacle size). One line: <strong>the larger the wavelength relative to the slit, the harder it bends</strong>. With the slit much bigger than the wavelength, <var>θ</var> tends to 0 (almost no bending); once the slit shrinks to about a wavelength, θ grows large enough to fling the wave in all directions.</div></div>
+<figure>
+<svg aria-label="A plane wave passing through a narrow slit diffracts, spreading into the shadow region" role="img" viewbox="0 0 620 262">
+<defs>
+<marker id="ah" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3.5">
+<path d="M0,0 L8,3.5 L0,7 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<g stroke="#5b9bff" stroke-width="2">
+<line x1="86" x2="86" y1="52" y2="210"></line>
+<line x1="126" x2="126" y1="52" y2="210"></line>
+<line x1="166" x2="166" y1="52" y2="210"></line>
+<line x1="206" x2="206" y1="52" y2="210"></line>
+<line x1="246" x2="246" y1="52" y2="210"></line>
+</g>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="86" y="40">Plane waves</text>
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="2" x1="150" x2="270" y1="230" y2="230"></line>
+<rect fill="#6a5326" height="76" width="7" x="298" y="46"></rect>
+<rect fill="#6a5326" height="76" width="7" x="298" y="146"></rect>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="301" y="238">slit</text>
+<g fill="none" stroke="#5b9bff" stroke-width="2">
+<path d="M301,89 A42,42 0 0 1 301,173"></path>
+<path d="M301,49 A82,82 0 0 1 301,213"></path>
+<path d="M301,11 A120,120 0 0 1 301,251"></path>
+</g>
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="1.8" x1="360" x2="470" y1="131" y2="80"></line>
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="1.8" x1="366" x2="486" y1="131" y2="131"></line>
+<line marker-end="url(#ah)" stroke="#9fb0d0" stroke-width="1.8" x1="360" x2="470" y1="131" y2="182"></line>
+<text fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="430" y="210">Diffraction: spreads behind</text>
+</svg>
+<figcaption>A flat wavefront (blue verticals) hits a wall with a narrow slit. Everything but the slit is blocked; the wave at the slit acts as a new source and <strong>spreads</strong> in arcs into the shadow. The closer the slit is to a wavelength, the wider it spreads — that's why sound rounds a corner.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive point</span>
+  Diffraction sets a <strong>hard limit</strong> on all imaging: the finest detail anything can resolve is capped by <var>λ</var>/<var>a</var> — light diffracts the instant it enters an instrument, smearing a point source into a small blob, and two blobs too close together can't be told apart. This isn't sloppy craftsmanship; it's the nature of waves. To see smaller there are only two roads: use a <strong>shorter wavelength</strong> (electron microscopes use ultra-short electron waves and made viruses and atoms visible), or make the <strong>aperture <var>a</var> larger</strong> (which is why observatories keep getting bigger).</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Biology / Engineering</span>
+  The same "smaller slit, longer wavelength → wider spread" decides winners everywhere —
+  <ul>
+<li><strong>Biology · vision</strong>: a hawk's sharp resolution owes partly to a large pupil (big <var>a</var>) and a small diffraction blob; at night the pupil widens, which lets in more light and incidentally nudges the resolution limit a touch better;</li>
+<li><strong>Engineering · lithography</strong>: how fine a line you can etch on a chip is capped by the lithography wavelength — the industry pushed its source all the way to extreme ultraviolet (just 13.5 nm) precisely to beat the diffraction limit and pack transistors denser;</li>
+<li><strong>Engineering · antennas</strong>: a bigger satellite dish makes a narrower, better-aimed beam — again <var>θ</var>≈<var>λ</var>/<var>a</var> talking.</li>
+</ul>
+  Want it "sharper"? Shorten the wavelength or enlarge the aperture — no shortcut.</div>
+<div class="punch">
+<div class="one">In a nutshell: the larger the wavelength relative to the slit, the harder the wave bends.</div>
+<details class="q"><summary><b>Think:</b> Why, through a wall, can you hear the "thump-thump" of a subwoofer but the human voice comes through muffled and unintelligible?</summary><div class="qa">Low-frequency sound has a long wavelength (metres): it diffracts strongly around door gaps and walls and is harder for the wall to absorb, so the bassy "thumps" bend and pass through. Speech consonants are mostly high frequency, short wavelength (tens of centimetres or less): weak diffraction, more readily absorbed and damped by the wall, so only the muffled low-frequency content survives — you can tell "someone's talking" but not "what they said."</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>The Doppler effect: move, and the frequency shifts <span class="en">Doppler Effect</span></h2>
+<span class="pill">relative motion · frequency shift</span>
+<div class="field"><span class="lab">Intuition</span>
+  An ambulance racing toward you wails shrill; the instant it passes, the pitch drops sharply — the tone "falls" in that moment. The truck actually sirens at one steady frequency; what changes is <strong>the rhythm at which you receive the waves</strong>. As the source rushes toward you, emitting waves as it runs, it <strong>packs</strong> the waves ahead closer, you hit more crests per second, and the pitch sounds <strong>higher</strong>; as it recedes, the waves are <strong>stretched</strong> and the pitch drops <strong>lower</strong>. What changes is never the source, but the wave being "squeezed" or "stretched" in space.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The closer the source speed <var>v</var><sub>s</sub> gets to the wave speed <var>v</var>, the harder the waves pile up ahead and the higher the frequency climbs. For a source approaching stationary you at speed <var>v</var><sub>s</sub>:
+  <div class="eq"><var>f</var>′ = <var>f</var> · <span class="frac"><span class="fnum"><var>v</var></span><span class="fden"><var>v</var> − <var>v</var><sub>s</sub></span></span></div>
+<div class="gloss"><var>f</var> is the source's own frequency, <var>f</var>′ ("f-prime") is the frequency you actually hear, <var>v</var> is the wave's speed in the medium (the speed of sound), <var>v</var><sub>s</sub> is the source's speed toward you. The denominator <var>v</var>−<var>v</var><sub>s</sub> is smaller than <var>v</var>, so <var>f</var>′&gt;<var>f</var> (higher); if the source recedes, swap the minus for a plus, the denominator grows, and <var>f</var>′ drops.</div></div>
+<figure>
+<svg aria-label="Wavefronts from a moving source: compressed ahead so frequency rises, stretched behind so frequency falls" role="img" viewbox="0 0 620 296">
+<defs>
+<marker id="ah2" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3.5">
+<path d="M0,0 L8,3.5 L0,7 Z" fill="#dbe2f2"></path>
+</marker>
+</defs>
+<g fill="none" stroke="#5b9bff" stroke-width="1.9">
+<circle cx="300" cy="150" r="30"></circle>
+<circle cx="270" cy="150" r="62"></circle>
+<circle cx="240" cy="150" r="96"></circle>
+<circle cx="210" cy="150" r="132"></circle>
+</g>
+<circle cx="330" cy="150" fill="#f0ad5a" r="6.5"></circle>
+<line marker-end="url(#ah2)" stroke="#dbe2f2" stroke-width="2" x1="340" x2="398" y1="150" y2="150"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="406" y="154">Source v</text>
+<text fill="#7fb0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="404" y="243">Ahead: waves compressed</text>
+<text fill="#7fb0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="404" y="261">higher frequency (blueshift)</text>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="150" y="243">Behind: waves stretched</text>
+<text fill="#9fb0d0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" text-anchor="middle" x="150" y="261">lower frequency (redshift)</text>
+</svg>
+<figcaption>The source emits waves as it runs right; the wavefronts on the right pile into a dense stack (short wavelength, high frequency), while those on the left are thinned out (long wavelength, low frequency). One source — but the pitch you hear depends on where you stand.</figcaption>
+</figure>
+<div class="field"><span class="lab">Why it matters</span>
+  The Doppler effect turns "a change in frequency" into a <strong>ruler for speed</strong> — speed radar, weather radar, ultrasound blood-flow imaging all send out a wave and read how much the reflection's frequency shifted to back out the target's speed. On cosmic scales it's more startling: the spectra of distant galaxies are shifted wholesale to the <strong>red</strong> (longer wavelength), meaning they're nearly all <strong>receding</strong> from us, and the farther ones recede faster. That is the number-one evidence that the universe is expanding — a thread the later "The Big Bang" installment follows all the way down.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Medicine / Astronomy / Biology</span>
+  "Reading motion off a frequency shift" is a universal ruler —
+  <ul>
+<li><strong>Medicine</strong>: colour Doppler ultrasound "paints" blood flow — toward the probe in warm colours, away in cool — and a clinician sees at a glance whether a vessel is blocked or a valve is leaking;</li>
+<li><strong>Astronomy</strong>: a star tugged by a planet wobbles slightly, its spectrum shifting red and blue in a cycle, and astronomers "weigh" the unseen exoplanet from it;</li>
+<li><strong>Biology</strong>: a bat emits ultrasound and reads the frequency shift of the echo to tell whether prey is flying nearer or farther — a built-in Doppler radar.</li>
+</ul>
+  Wherever there's relative motion, the frequency carries a coded message about speed.</div>
+<div class="punch">
+<div class="one">In a nutshell: a source coming at you packs the waves tighter (pitch rises); receding, it stretches them (pitch falls).</div>
+<details class="q"><summary><b>Think:</b> For sound, the formulas for "source moving toward you" and "you moving toward the source" aren't quite the same; yet for light the Doppler shift depends only on their relative velocity. Why?</summary><div class="qa">Sound needs a <strong>medium</strong> — air — to travel in, so "who is moving" relative to the medium makes an absolute difference: a moving source changes the wavelength, a moving observer changes how often crests are hit — two different mechanisms, two different formulas. Light needs no medium, and the speed of light is the same for everyone (special relativity), so there's no "absolutely stationary aether" to reference; only the <strong>relative velocity</strong> of source and observer is meaningful. That very difference foreshadows relativity's entrance.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Fourier: every waveform is a sum of sines <span class="en">Signals as Sums of Waves</span></h2>
+<span class="pill">spectrum · timbre · decomposition</span>
+<div class="field"><span class="lab">Intuition</span>
+  The same note on a piano and a violin sounds worlds apart — the pitch (fundamental frequency) is identical, so how do we tell them apart? The secret is the <strong>waveform</strong>: a real instrument never puts out a clean sine, but a crooked, complicated curve. And a startling theorem says: <strong>any such periodic waveform can be uniquely decomposed into a stack of pure sines</strong> — the fundamental plus its integer-multiple harmonics, each with an assigned strength. Which harmonics are strong and which weak — that "recipe" is the <strong>timbre</strong>. This is Fourier's core insight.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Feed a complex signal into "Fourier decomposition" and out comes a <strong>spectrum</strong>: the horizontal axis is frequency, and each bar's height says "how much of that frequency's sine is in the mix." A tangled curve in the time domain spreads out into a clean row of bars in the frequency domain.
+  <div class="eq">complex waveform = <var>a</var><sub>1</sub>sin(<var>f</var>) + <var>a</var><sub>2</sub>sin(2<var>f</var>) + <var>a</var><sub>3</sub>sin(3<var>f</var>) + …</div>
+<div class="gloss"><var>f</var> is the <strong>fundamental</strong> (sets the pitch), 2<var>f</var>, 3<var>f</var>… are its <strong>harmonics</strong> (integer-multiple frequencies), and <var>a</var><sub>1</sub>, <var>a</var><sub>2</sub>… are each harmonic's <strong>strength</strong>. Change that string of strengths and the pitch stays but the timbre changes entirely — a synthesizer just "mixes" timbres from this recipe.</div></div>
+<figure>
+<svg aria-label="A complex waveform Fourier-decomposed into a spectrum: the fundamental tallest, harmonics falling off" role="img" viewbox="0 0 620 300">
+<line stroke="#33405f" stroke-dasharray="4 5" stroke-width="1.1" x1="70" x2="560" y1="92" y2="92"></line>
+<polyline fill="none" points="70,92.0 86,62.9 102,65.7 118,68.8 134,61.6 150,111.0 166,116.4 182,120.6 198,115.8 214,114.0 230,62.4 246,69.0 262,65.0 278,63.8 294,87.9 310,121.9 326,115.2 342,120.4 358,122.8 374,76.3 390,62.9 406,65.7 422,68.8 438,61.6 454,111.0 470,116.4 486,120.6 502,115.8 518,100.2 534,61.6 550,67.1 558,63.4" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5" x="70" y="44">Complex waveform (time domain)</text>
+<line marker-end="url(#ahd)" stroke="#9fb0d0" stroke-width="2" x1="300" x2="300" y1="138" y2="164"></line>
+<defs>
+<marker id="ahd" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="3.5" refy="7">
+<path d="M0,0 L7,0 L3.5,8 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="13" font-style="italic" x="312" y="158">Fourier decomposition</text>
+<line stroke="#56607e" stroke-width="1.5" x1="108" x2="512" y1="272" y2="272"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="108" x2="108" y1="176" y2="272"></line>
+<g fill="#f0ad5a">
+<rect height="120" width="17" x="132" y="152"></rect>
+<rect height="40" width="17" x="212" y="232"></rect>
+<rect height="24" width="17" x="292" y="248"></rect>
+<rect height="17" width="17" x="372" y="255"></rect>
+<rect height="13" width="17" x="452" y="259"></rect>
+</g>
+<g fill="#96a0ba" font-family="Georgia,serif" font-size="12" font-style="italic" text-anchor="middle">
+<text x="140" y="288">f₁</text>
+<text x="220" y="288">f₃</text>
+<text x="300" y="288">f₅</text>
+<text x="380" y="288">f₇</text>
+<text x="460" y="288">f₉</text>
+</g>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="end" x="512" y="290">Frequency →</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" x="70" y="182">Intensity</text>
+</svg>
+<figcaption>Top: a messy periodic waveform. Bottom: its spectrum — each bar is one pure sine component, its height the strength. This example is a square wave, containing only odd harmonics (f₁,f₃,f₅…) falling off in turn. The mess in time is obvious at a glance in frequency.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive point</span>
+  Fourier isn't just "you can decompose it this way"; it swaps in a whole new <strong>pair of eyes on the world</strong>: one signal, seen in time it's "a curve rising and falling with time," seen in frequency it's "which frequencies, how much of each" — the two descriptions are exactly equivalent and switchable at will. These eyes prop up nearly the whole modern information world: <strong>MP3 and JPEG</strong> transform to the frequency domain and throw away the high-frequency components the ear and eye don't notice, to compress; <strong>mobile networks</strong> assign different users to different frequency bands so they don't clash. What looks like a mathematical trick for "analysing waves" became the shared bedrock of compression, communication, and imaging.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Mathematics / Biology / Engineering</span>
+  "Decompose the complex into a sum of simple vibrations" is an organizing principle across disciplines —
+  <ul>
+<li><strong>Mathematics</strong>: the Fourier transform is the rigorous language of these frequency-domain eyes, and a general machine for solving the wave, heat, and other equations (this site borrows its intuition rather than re-teaching the machinery);</li>
+<li><strong>Biology · hearing</strong>: the cochlea spreads sound out by frequency and sends it to the nerves — your inner ear is a biological real-time Fourier analyzer, and "hearing timbre" is your brain reading that spectrum;</li>
+<li><strong>Engineering · signals</strong>: from spotting an abnormal rhythm on an ECG to Wi-Fi encoding data onto sub-carriers at different frequencies, you jump into the frequency domain first, then act.</li>
+</ul>
+  Learning to move freely between the time and frequency domains is the universal passport for understanding any wave or signal.</div>
+<div class="punch">
+<div class="one">In a nutshell: every waveform is a superposition of pure sines, and that recipe is its spectrum.</div>
+<details class="q"><summary><b>Think:</b> Strip all the high-frequency content from a piece of music, leaving only the lows — how does it sound, and why does MP3 dare to "throw away" like that?</summary><div class="qa">It goes dull and muddy — the highs carry brightness, crispness, and detail (the "tss" of a cymbal, the sharpness of consonants), and cut them out and it's like a blanket over the sound. MP3 dares to discard because what it throws isn't "high frequencies at random" but the part a <strong>psychoacoustic</strong> model computes the ear <strong>can't hear</strong> (a weak tone "masked" near a loud one, ultra-highs past the sensitive range), removed precisely in the frequency domain. Huge data saved, yet the ear barely notices.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>In interference "light + light = black," isn't energy conservation broken?</summary>
+<div class="body">No. Destructive interference never stands alone — wherever it darkens, somewhere else must brighten to match. Take the double slit: at a dark fringe the two waves cancel to zero, but at a bright fringe the two amplitudes add and the intensity is <strong>four times</strong> a single beam (not twice). Integrate the intensity across the whole screen and it exactly equals the sum of the two beams' energy, to the last bit. Interference neither creates nor destroys energy; it only <strong>redistributes</strong> its spatial position, moving the dark spots' share to the bright ones.</div></details>
+<details><summary>Is the diffraction limit truly unbreakable? Just how small can a microscope see?</summary>
+<div class="body">The classical diffraction limit (about half a wavelength) is an iron rule for <strong>far-field</strong> imaging, but physicists found doors around it. Fluorescence super-resolution (like STED, or single-molecule localization, 2014 Nobel Prize in Chemistry) works by <strong>lighting up and precisely locating</strong> emitting molecules one at a time, pinning the centre position to a precision far beyond the diffraction limit. These don't "violate" physics — they change the source of information or the imaging strategy. The diffraction limit constrains "direct far-field optical resolution," not "all obtainable spatial information."</div></details>
+<details><summary>In the Doppler effect, what happens if the source speed catches up to or exceeds the speed of sound?</summary>
+<div class="body">As the source nears the speed of sound, the wavefronts ahead crowd almost onto each other, energy heaping into a very strong <strong>pressure wall</strong>; once it <strong>exceeds</strong> the speed of sound, the envelope of all the wavefronts forms a cone (the Mach cone), and where the cone sweeps by is the <strong>sonic boom</strong> we hear — that crack isn't a one-off bang of "breaking the sound barrier" but the cone trailing behind, in the instant it sweeps across your ear. Here the denominator <var>v</var>−<var>v</var><sub>s</sub> changes sign, the formula fails, and you switch to a shock-wave description. It's the same geometry as <strong>Cherenkov radiation</strong> in light.</div></details>
+<details><summary>Fourier says "any waveform decomposes into sines" — really any? Are there exceptions?</summary>
+<div class="body">It holds for the vast majority of physical signals, but there are fine boundaries. A strict classical Fourier series requires the function to meet certain conditions (piecewise smooth, finite energy); at an abrupt <strong>jump</strong> (like the vertical edge of an ideal square wave), the sine sum stubbornly overshoots by about 9% right at the jump, no matter how many terms you add — this is the <strong>Gibbs phenomenon</strong>. Also, the sine basis "fills the whole span of time" and is poor at describing <strong>short, localized</strong> transients (a single drum hit); there, a basis like wavelets, which localizes both time and frequency, fits better. Fourier is extremely powerful, but not the one and only, universal decomposition.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. I, ch. 28–30, 47–50 "Interference · Diffraction · Waves" — the intuition baseline</li>
+<li>Hecht, <em>Optics</em> — the standard textbook on interference and diffraction, with superb figures</li>
+<li>3Blue1Brown, <em>"But what is the Fourier Transform? A visual introduction"</em> — the best visualization of the frequency-domain eyes</li>
+<li>Wikipedia: <em>Double-slit experiment</em> / <em>Diffraction</em> / <em>Doppler effect</em> / <em>Fourier series</em> — quick reference for concepts and figures</li>
+<li>Smith, <em>The Scientist and Engineer's Guide to Digital Signal Processing</em> (free online) — how Fourier props up the digital signal world</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
