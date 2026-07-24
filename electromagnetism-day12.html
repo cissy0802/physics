@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：电磁的统一 · Day 12</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>电磁的统一</h1>
+<div class="meta">Day 12 · 2026 · Phase C 波、光与电磁</div>
+<div class="tagline">电和磁看起来是两回事。麦克斯韦却证明它们是同一枚硬币的两面——而这枚硬币一晃动，出来的就是<strong>光</strong>。</div>
+</header>
+<div class="intro">
+你家墙里的电、手机里的无线电、照进窗户的阳光——在 19 世纪以前，这是<b>三桩互不相干的事</b>。然后有人发现：电流会拨动指南针（电生磁），磁铁一动会激起电流（磁生电）。麦克斯韦把这几条零散规律收拢成<b>四个方程</b>，结果方程自己"吐出"了一个惊人推论：<b>电和磁彼此激发，能像波一样自己往前跑，而这波的速度，恰好等于光速。</b>于是光不再神秘——它就是电磁。这一期讲三件事：<b>场</b>为什么是真实的东西、四方程各在说什么大白话、以及电磁感应如何点亮了整个现代文明。
+</div>
+
+<!-- Card 1 -->
+<div class="card">
+<h2>场：从"超距作用"到实在 <span class="en">The Field as a Real Thing</span></h2>
+<span class="pill">场 · Faraday 1830s</span>
+<div class="field"><span class="lab">直觉</span>
+  牛顿的引力有个让他自己都不安的地方：太阳怎么能"隔着"上亿公里的真空，<strong>瞬间</strong>拽住地球？中间什么都没有，力却传过去了——这叫<strong>超距作用</strong>，像魔法。法拉第（Faraday）换了个想法：真空里其实<strong>不空</strong>，每个电荷、每块磁铁都在自己周围铺开一层看不见的"影响"，充满整个空间。这层东西就是<strong>场</strong>。别的电荷不是被远方直接拉，而是被<strong>它所在那一点的场</strong>推——就像叶子不是被远处的风源拉走，而是被身边的空气推走。</div>
+<div class="field"><span class="lab">机制</span>
+  电场 <var>E</var>、磁场 <var>B</var> 是给空间里<strong>每一点</strong>都赋一个箭头（大小 + 方向）的规则。放一个电荷在某点，它感受到的力，只由<strong>那一点</strong>的场决定。关键转折：场不只是"记账的方便工具"——它<strong>携带能量与动量</strong>，本身就是实在。你能<strong>把场从源那里剥离出去</strong>：拨动这里的电荷，场的抖动要过一会儿才传到远处（以光速传），中途这份能量就<strong>存在场里</strong>，不在任何电荷上。既然它装着能量、能独立传播，它就和粒子一样真。</div>
+<figure>
+<svg aria-label="正负电荷之间的电场线" role="img" viewbox="0 0 620 230">
+<defs>
+<marker id="fl" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="3.5">
+<polygon fill="#5b9bff" points="0,0 9,3.5 0,7"></polygon>
+</marker>
+</defs>
+<!-- field lines from + to - -->
+<g fill="none" stroke="#5b9bff" stroke-width="1.7" marker-end="url(#fl)" opacity="0.85">
+<path d="M188,115 C 260,60 360,60 428,110"></path>
+<path d="M188,115 C 260,95 360,95 428,113"></path>
+<path d="M188,115 C 260,165 360,165 428,116"></path>
+<path d="M182,105 C 230,20 386,20 434,104"></path>
+<path d="M182,125 C 230,210 386,210 434,122"></path>
+</g>
+<!-- + charge -->
+<circle cx="180" cy="115" fill="#2a2214" r="24" stroke="#f0ad5a" stroke-width="2"></circle>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="26" text-anchor="middle" x="180" y="125">+</text>
+<!-- - charge -->
+<circle cx="440" cy="115" fill="#172038" r="24" stroke="#5b9bff" stroke-width="2"></circle>
+<text fill="#7db0ff" font-family="Georgia,serif" font-size="30" text-anchor="middle" x="440" y="124">−</text>
+<text fill="#cdd6ea" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5" text-anchor="middle" x="310" y="205">箭头指向：正电荷所在处的电场 <tspan fill="#7db0ff" font-style="italic">E</tspan> 方向</text>
+</svg>
+<figcaption>场把"超距的魔法"换成"每一点的推力"：电荷造出充满空间的场，别的电荷只感受身边那一点。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  我们习惯把"真实"留给<strong>能摸到的东西</strong>——粒子、球、砖头。但物理学在这里做了一次深刻的升级：<strong>看不见、摸不着的场，才是更基本的实在</strong>。粒子后来甚至被理解成"场的激发"（这条线后面『量子场论入门』一期会走到底）。场不是描述力的语言，场<strong>就是</strong>那个东西。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 数学 / AI</span>
+  描述场需要一套语言：给空间每点配一个矢量，问它在某点是"发散的源"还是"打旋的涡"——这正是<strong>矢量微积分里的散度与旋度</strong>。有趣的是深度学习也悄悄用上了"场"的思维：把图像、分子、物理系统建模成<strong>连续场</strong>（neural field / 隐式表示），让网络学一个"空间每点 → 值"的函数，而不是死记一堆离散像素——和法拉第"给每点赋箭头"是同一个抽象。</div>
+<div class="punch">
+<div class="one">一句话：场不是记账工具，它装着能量、能独立跑，和粒子一样真。</div>
+<details class="q"><summary><b>思考：</b>如果场是真的、还携带能量，那"真空"里到底有没有东西？</summary><div class="qa">有。经典电磁学里，只要有电磁波经过，真空那一段就存着场的能量；到了量子层面，真空更是充满起伏的<strong>零点涨落</strong>（后面『量子场论入门』会讲"真空不空"）。"空无一物"是错觉——真空是场的最低能量状态，不是"没有场"。</div></details>
+</div>
+</div>
+
+<!-- Card 2 -->
+<div class="card">
+<h2>麦克斯韦四方程（不用公式） <span class="en">Maxwell's Four Equations, in Plain Words</span></h2>
+<span class="pill">Maxwell · 1865</span>
+<div class="field"><span class="lab">直觉</span>
+  麦克斯韦方程组听起来吓人，其实四句话就说完了：<strong>电荷怎么造电场、磁为什么没有单极、变化的磁怎么生电、电流和变化的电怎么生磁</strong>。前两条讲"场从哪儿冒出来"，后两条讲"电和磁怎么互相激发"——正是后两条里那份<strong>互相激发</strong>，藏着光的秘密。</div>
+<div class="field"><span class="lab">机制 · 四句话</span>
+  <strong>① 电场从电荷发出（高斯定律）</strong>：电荷是电场线的"源头"和"归宿"，正电荷往外喷、负电荷往里收。<br/>
+  <strong>② 磁没有单极（磁的高斯定律）</strong>：磁场线永远是<strong>闭合的圈</strong>，没有头也没有尾。你把磁铁掰成两半，不会得到"单独一个 N 极"，只会得到两个各自完整的小磁铁。<br/>
+  <strong>③ 变化的磁生电（法拉第定律）</strong>：磁场只要在<strong>变</strong>，就会在周围<strong>激起一圈电场</strong>。<br/>
+  <strong>④ 电流 / 变化的电生磁（安培—麦克斯韦定律）</strong>：电流会绕出磁场；麦克斯韦补上关键一笔——<strong>变化的电场</strong>同样能绕出磁场（叫"位移电流"）。正是这一笔让③和④首尾相接，闭合成波。</div>
+<figure>
+<svg aria-label="麦克斯韦四方程的图示" role="img" viewbox="0 0 640 372">
+<defs>
+<marker id="a2" markerheight="8" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="4">
+<polygon fill="#5b9bff" points="0,0 9,4 0,8"></polygon>
+</marker>
+<marker id="a2a" markerheight="8" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="4">
+<polygon fill="#f0ad5a" points="0,0 9,4 0,8"></polygon>
+</marker>
+</defs>
+<!-- panel frames -->
+<g fill="#0f1626" stroke="#26314c">
+<rect height="150" rx="9" width="292" x="18" y="42"></rect>
+<rect height="150" rx="9" width="292" x="330" y="42"></rect>
+<rect height="150" rx="9" width="292" x="18" y="208"></rect>
+<rect height="150" rx="9" width="292" x="330" y="208"></rect>
+</g>
+<g font-family="Georgia,'Noto Serif SC',serif" font-size="14" fill="#f0ad5a" font-weight="700">
+<text x="30" y="34">① 电场从电荷发出</text>
+<text x="342" y="34">② 磁没有单极</text>
+<text x="30" y="200">③ 变化的磁 → 生电</text>
+<text x="342" y="200">④ 电流 / 变化的电 → 生磁</text>
+</g>
+<!-- Panel 1: + charge radiating -->
+<g marker-end="url(#a2)" stroke="#5b9bff" stroke-width="1.6">
+<line x1="163" x2="70" y1="117" y2="70"></line>
+<line x1="163" x2="70" y1="117" y2="164"></line>
+<line x1="163" x2="120" y1="117" y2="58"></line>
+<line x1="163" x2="120" y1="117" y2="176"></line>
+<line x1="164" x2="262" y1="117" y2="70"></line>
+<line x1="164" x2="262" y1="117" y2="164"></line>
+<line x1="165" x2="210" y1="117" y2="58"></line>
+<line x1="165" x2="210" y1="117" y2="176"></line>
+</g>
+<circle cx="164" cy="117" fill="#2a2214" r="17" stroke="#f0ad5a" stroke-width="2"></circle>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="20" text-anchor="middle" x="164" y="124">+</text>
+<!-- Panel 2: bar magnet with closed loops -->
+<rect fill="#c94f4f" height="20" width="34" x="459" y="107"></rect>
+<rect fill="#5b9bff" height="20" width="34" x="493" y="107"></rect>
+<text fill="#f0f3fb" font-size="12" text-anchor="middle" x="476" y="121">N</text>
+<text fill="#f0f3fb" font-size="12" text-anchor="middle" x="510" y="121">S</text>
+<g fill="none" stroke="#96a0ba" stroke-width="1.5">
+<path d="M476,107 C 400,60 400,175 476,127"></path>
+<path d="M510,107 C 590,60 590,175 510,127"></path>
+</g>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="476" y="168">磁场线是闭合圈 · 无起点终点</text>
+<!-- Panel 3: changing B up-arrows encircled by E loop -->
+<g marker-end="url(#a2)" stroke="#5b9bff" stroke-width="2">
+<line x1="164" x2="164" y1="330" y2="258"></line>
+<line x1="140" x2="140" y1="330" y2="272"></line>
+<line x1="188" x2="188" y1="330" y2="272"></line>
+</g>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="164" y="345">变化的 B（↑增强）</text>
+<path d="M96,285 A 72 40 0 1 1 96 286" fill="none" marker-end="url(#a2a)" stroke="#f0ad5a" stroke-width="2"></path>
+<text fill="#f0ad5a" font-family="Georgia,serif" font-size="14" font-style="italic" x="238" y="272">E</text>
+<!-- Panel 4: wire + changing E encircled by B loop -->
+<line marker-end="url(#a2a)" stroke="#f0ad5a" stroke-width="3" x1="476" x2="476" y1="332" y2="256"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="476" y="347">电流 / 变化的 E</text>
+<path d="M410,285 A 66 38 0 1 1 410 286" fill="none" marker-end="url(#a2)" stroke="#5b9bff" stroke-width="2"></path>
+<text fill="#7db0ff" font-family="Georgia,serif" font-size="14" font-style="italic" x="548" y="270">B</text>
+</svg>
+<figcaption>四句话：①②说场从哪来，③④说电与磁如何互相生。③④首尾相接，就能自己传成波。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  这是物理学史上第一次<strong>大统一</strong>：之前电学和磁学是两门课，之后它们成了<strong>同一个场的两个侧面</strong>。而四方程不只是把已知规律打包，它还<strong>预言了当时没人见过的东西</strong>（电磁波）——这正是好理论的标志：能算出你还没去找的现象。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 方法论</span>
+  "把两样看似无关的东西证明成一回事"是物理学最强的招式，麦克斯韦是它的第一个巅峰。后来同一招反复奏效：电磁力与弱核力被统一成<strong>电弱理论</strong>；牛顿把"苹果落地"和"月亮绕地"统一成同一种引力。统一 = 用<strong>更少的规则</strong>装下<strong>更多的现象</strong>——这和 Day 1 说的"定律是压缩"是同一件事，只是压得更狠。</div>
+<div class="punch">
+<div class="one">一句话：四句话装下所有电与磁，还多送一个预言——电磁波。</div>
+<details class="q"><summary><b>思考：</b>为什么"磁没有单极"这一条，写成方程后特别干净、特别对称？</summary><div class="qa">因为它说磁场线永远闭合、无源无汇，对应方程右边<strong>恒等于数字 0（零）</strong>。物理学家一直好奇：电有单极（就是电荷），磁为什么没有？如果哪天真找到<strong>磁单极子</strong>，这一条右边就不再是 0，四方程会变得和电、磁完全对称——这是至今仍在实验搜寻的深层线索。</div></details>
+</div>
+</div>
+
+<!-- Card 3 -->
+<div class="card">
+<h2>电磁感应：如何点亮文明 <span class="en">Induction: How It Electrified the World</span></h2>
+<span class="pill">法拉第感应 · 1831</span>
+<div class="field"><span class="lab">直觉</span>
+  法拉第 1831 年做了个改变世界的实验：拿一块磁铁，<strong>戳进</strong>一圈线圈里，线圈里<strong>凭空冒出了电流</strong>——不用电池，只靠磁铁在动。反过来抽出来，电流反向。核心不是"磁铁在不在"，而是<strong>磁场在不在变</strong>：磁铁静止不动地插在里面，一点电流都没有。<strong>"变化"本身，才是发电机。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  这就是第③条方程的日常版：<strong>穿过线圈的磁场在变，就在线圈里驱起电流</strong>。让磁铁转起来、或让线圈在磁场里转，磁场就<strong>周期性地变</strong>，于是电流源源不断——这台机器就叫<strong>发电机</strong>。你墙里插座的电，绝大多数就是这么来的：烧煤、核裂变、水流、风，最后都只是想办法<strong>让线圈转</strong>。反着用（通电让它转）就是<strong>电动机</strong>。发电机和电动机是同一个原理的正反两面。</div>
+<figure>
+<svg aria-label="磁铁插入线圈感应出电流" role="img" viewbox="0 0 620 210">
+<defs>
+<marker id="im" markerheight="8" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="4">
+<polygon fill="#f0ad5a" points="0,0 9,4 0,8"></polygon>
+</marker>
+</defs>
+<!-- coil (ellipses) -->
+<g fill="none" stroke="#5b9bff" stroke-width="2.4">
+<ellipse cx="360" cy="105" rx="15" ry="52"></ellipse>
+<ellipse cx="392" cy="105" rx="15" ry="52"></ellipse>
+<ellipse cx="424" cy="105" rx="15" ry="52"></ellipse>
+</g>
+<!-- wires down to meter -->
+<path d="M360,157 C 360,190 470,190 470,160" fill="none" stroke="#7d8aa8" stroke-width="2"></path>
+<path d="M424,157 C 424,178 540,178 540,120" fill="none" stroke="#7d8aa8" stroke-width="2"></path>
+<circle cx="505" cy="120" fill="#0f1626" r="26" stroke="#7d8aa8" stroke-width="2"></circle>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11" text-anchor="middle" x="505" y="124">电流表</text>
+<!-- magnet -->
+<rect fill="#c94f4f" height="30" width="52" x="150" y="90"></rect>
+<rect fill="#5b9bff" height="30" width="52" x="202" y="90"></rect>
+<text fill="#fff" font-size="14" text-anchor="middle" x="176" y="110">N</text>
+<text fill="#fff" font-size="14" text-anchor="middle" x="228" y="110">S</text>
+<!-- motion arrow -->
+<line marker-end="url(#im)" stroke="#f0ad5a" stroke-width="2.6" x1="262" x2="318" y1="105" y2="105"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" text-anchor="middle" x="290" y="86">推入（磁场在变）</text>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" text-anchor="middle" x="392" y="185">线圈里感应出电流</text>
+</svg>
+<figcaption>只有当磁铁在动、磁场在变，线圈里才有电流——静止不动则毫无反应。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  感应出的电流有个"脾气"（<strong>楞次定律</strong>）：它总是朝着<strong>反抗那个变化</strong>的方向流。你把磁铁往里推，线圈就造出一个磁场<strong>顶</strong>你；你往外抽，它又<strong>拽</strong>你。这不是自然在使坏——是<strong>能量守恒</strong>在把关：想发电，你就得<strong>做功去克服这份反抗</strong>，电能不会凭空来，是你手上（或涡轮上）的机械能换来的。发电机不"创造"能量，它<strong>转换</strong>能量。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 控制 / 生物 / 经济</span>
+  楞次定律"系统自发反抗施加于它的变化"，是<strong>负反馈</strong>的一个物理原型——同一条逻辑在别处反复出现：
+  <ul>
+<li><strong>控制工程</strong>：恒温器感到变冷就加热、变热就停，靠负反馈把温度稳在设定点；</li>
+<li><strong>生物</strong>：你的身体用出汗/寒战对抗体温漂移，这套<strong>稳态（homeostasis）</strong>就是生理版的楞次定律；</li>
+<li><strong>经济</strong>：价格涨了抑制需求、跌了刺激需求，供需的负反馈把市场往均衡拉。</li>
+</ul>
+  凡是稳定的系统，几乎都在用某种"反抗变化"的负反馈——楞次定律是它最干净的物理样板。</div>
+<div class="punch">
+<div class="one">一句话：不是磁铁发电，是"磁场在变"发电；而系统会反抗这个变化。</div>
+<details class="q"><summary><b>思考：</b>如果楞次定律反过来——感应电流去<strong>助长</strong>而非反抗变化，世界会怎样？</summary><div class="qa">会炸。轻轻一推磁铁，感应电流帮它推得更猛，磁场变得更快，又激起更强的电流……正反馈失控，能量凭空暴涨——直接违反能量守恒。楞次定律的"反抗"方向不是偶然，它<strong>正是能量守恒的守门人</strong>：宇宙不允许"永动"的白拿能量。</div></details>
+</div>
+</div>
+
+<!-- Card 4 -->
+<div class="card">
+<h2>顶点：电、磁、光原来是一回事 <span class="en">The Climax — Light Is Electromagnetism</span></h2>
+<span class="pill">电磁波 · c = 光速</span>
+<div class="field"><span class="lab">直觉</span>
+  把第③、④条接起来看：变化的磁生出变化的电，变化的电又生出变化的磁，电催磁、磁催电，<strong>你追我赶，谁也不用靠源头，就这么一路自己往前传</strong>。这就是<strong>电磁波</strong>——一份能量在真空里自己驮着自己跑。麦克斯韦一算它跑多快，答案让他浑身一震：这个速度<strong>正好等于早已测出的光速</strong>。</div>
+<div class="field"><span class="lab">机制</span>
+  波速由两个"真空常数"定死：一个管电场强弱（真空电容率 <var>ε</var><sub>0</sub>，读"epsilon zero"），一个管磁场强弱（真空磁导率 <var>μ</var><sub>0</sub>，读"mu zero"）。
+  <div class="eq"><var>c</var> = <span class="frac"><span class="fnum">1</span><span class="fden">√(<var>ε</var><sub>0</sub> <var>μ</var><sub>0</sub>)</span></span></div>
+<div class="gloss">读作「光速 <var>c</var> 等于 1 除以 <strong>根号下</strong>（<var>ε</var><sub>0</sub> 乘 <var>μ</var><sub>0</sub>）」。<var>ε</var><sub>0</sub>、<var>μ</var><sub>0</sub> 是在<strong>纯电、纯磁</strong>实验里量出来的常数，跟光八竿子打不着。可把它俩代进去，算出来 <strong>≈ 3×10⁸ 米/秒</strong>——分毫不差就是光速。两个"电磁常数"里<strong>本就藏着光速</strong>，这不可能是巧合。</div>
+  结论只有一个：<strong>光就是电磁波。</strong></div>
+<figure>
+<svg aria-label="电磁波：电场与磁场互相垂直、一起向前传播" role="img" viewbox="0 0 640 210">
+<defs>
+<marker id="pw" markerheight="9" markerunits="userSpaceOnUse" markerwidth="11" orient="auto" refx="9" refy="4.5">
+<polygon fill="#c3cbe0" points="0,0 11,4.5 0,9"></polygon>
+</marker>
+</defs>
+<!-- propagation axis -->
+<line marker-end="url(#pw)" stroke="#c3cbe0" stroke-width="1.6" x1="52" x2="600" y1="110" y2="110"></line>
+<text fill="#c3cbe0" font-family="Georgia,serif" font-size="15" font-style="italic" x="606" y="106">c</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" x="574" y="126">传播</text>
+<!-- E wave (red, vertical) -->
+<polyline fill="none" points="60,110 80,83.5 100,67.2 120,67.2 140,83.5 160,110 180,136.5 200,152.8 220,152.8 240,136.5 260,110 280,83.5 300,67.2 320,67.2 340,83.5 360,110 380,136.5 400,152.8 420,152.8 440,136.5 460,110 480,83.5 500,67.2 520,67.2 540,83.5 560,110" stroke="#ff6b6b" stroke-width="2.4"></polyline>
+<text fill="#ff6b6b" font-family="Georgia,serif" font-size="16" font-style="italic" x="104" y="58">E 电场</text>
+<!-- B wave (blue, perpendicular / depth-skewed) -->
+<polyline fill="none" points="60,110 94.1,117.1 122.8,121.4 142.8,121.4 154.1,117.1 160,110 165.9,102.9 177.2,98.6 197.2,98.6 225.9,102.9 260,110 294.1,117.1 322.8,121.4 342.8,121.4 354.1,117.1 360,110 365.9,102.9 377.2,98.6 397.2,98.6 425.9,102.9 460,110 494.1,117.1 522.8,121.4 542.8,121.4 554.1,117.1 560,110" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-family="Georgia,serif" font-size="16" font-style="italic" x="300" y="145">B 磁场</text>
+</svg>
+<figcaption>电场（红，上下振）与磁场（蓝，垂直方向振）彼此激发、锁相前进——这份自持的波，就是光。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  这是科学史上最漂亮的"统一"之一：电、磁、光被证明是<strong>同一件事</strong>。它还一下打开了整个<strong>电磁波谱</strong>：无线电、微波、红外、可见光、X 射线、伽马射线，全是同一种波，只是"晃得快慢"不同——你的 WiFi 和阳光是<strong>亲兄弟</strong>。1887 年赫兹（Hertz）在实验室里真造出并接收到了这种波，坐实了麦克斯韦的预言，也直接催生了无线电、雷达乃至今天一切无线设备。（光本身与电磁波谱，后面『光是什么』一期专讲。）</div>
+<div class="field xref"><span class="lab">跨学科对读 · 认识论</span>
+  "发现两样东西其实是一样"是人类理解世界最深的一种进步——它把知识<strong>压缩</strong>了：本来要记电学、磁学、光学三套规律，现在一套就够。这跟 Day 1 讲的"理解 = 压缩"精确同构，也是科学与机器学习共同的信仰：<strong>好的模型不是记住更多，而是发现底下少数几条把一切串起来的规律</strong>。麦克斯韦把三变成一，是这种"压缩式理解"的教科书范例。</div>
+<div class="punch">
+<div class="one">一句话：两个纯电磁实验的常数里，藏着光速——所以光就是电磁波。</div>
+<details class="q"><summary><b>思考：</b>光速由 <var>ε</var><sub>0</sub>、<var>μ</var><sub>0</sub> 定死，而它们不管你怎么跑都不变。这会逼出什么惊人后果？</summary><div class="qa">逼出<strong>狭义相对论</strong>。既然方程给出的光速只由真空常数定、和观察者的运动无关，那"光速对谁都一样"就成了铁律。可这和日常的速度叠加（追着光跑光该变慢）直接冲突——爱因斯坦选择相信麦克斯韦、放弃绝对时间，于是同时性、时间膨胀全来了。这条线后面『狭义相对论』一期会走到底。</div></details>
+</div>
+</div>
+
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>既然电和磁是"同一个场的两面"，那到底哪个更基本？还是说"电"和"磁"这个区分本身就是人为的？</summary>
+<div class="body">后者更接近真相。电、磁的"分家"其实<strong>依赖参考系</strong>：一个静止电荷在你看来只有电场；你一旦相对它运动，就会看到它<strong>还带磁场</strong>——同一个客观情形，动与不动的观察者拆出的"电""磁"比例不同。真正与参考系无关的实体是合在一起的<strong>电磁场</strong>（相对论里写成一个统一的"场张量"）。所以电和磁更像同一实体在不同视角下的两个投影，谁也不比谁基本。</div></details>
+<details><summary>位移电流（"变化的电场也生磁"）只是麦克斯韦为了让方程自洽硬补的一项吗？还是真有其物？</summary>
+<div class="body">两者都是——它<strong>因数学自洽而被补上，又被实验证明真实存在</strong>。麦克斯韦发现，不加这一项，方程会和"电荷不会凭空消失"（电荷守恒）打架。他补上后，方程不但自洽了，还<strong>意外</strong>预言了电磁波。而电磁波后来被赫兹造了出来——这就等于直接验证了位移电流：没有"变化的电场生磁"，波根本传不起来。一个纯为自洽而生的项，最后长成了整个无线电文明，这是理论物理里"数学先于观测"最震撼的案例之一。</div></details>
+<details><summary>为什么电磁波能在<strong>真空</strong>里传，声波却不能？"没有介质也能传"到底意味着什么？</summary>
+<div class="body">声波是空气分子的推挤，没有分子（真空）就传不了——它需要<strong>介质</strong>。电磁波不需要，因为它<strong>驮着自己跑</strong>：变化的电生磁、变化的磁又生电，这套自我激发不依赖任何物质，场本身就是"介质"。19 世纪的人很不适应这点，硬编出一种叫"以太"的隐形介质来当光的载体；后来迈克耳孙—莫雷实验怎么也找不到以太，爱因斯坦干脆宣布：不需要以太，<strong>场自己就够了</strong>。这再次说明场是独立的实在。</div></details>
+<details><summary>如果真找到了"磁单极子"（单独的 N 极或 S 极），四方程会怎么变？物理会天翻地覆吗？</summary>
+<div class="body">四方程会变得<strong>更对称</strong>：现在"电有单极（电荷）、磁没有"，方程里电和磁是瘸腿的；一旦有磁单极，第②条右边不再是 0，电与磁就完全对称了。狄拉克（Dirac）1931 年还证明：宇宙里只要<strong>存在哪怕一个</strong>磁单极，就能解释为什么电荷都是某个最小单位的整数倍（电荷量子化）。所以物理学家很想找到它——但至今一个都没抓到，它的缺席本身就是个谜。</div></details>
+</div>
+
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. II——电磁学与麦克斯韦方程的直觉讲法</li>
+<li>J. C. Maxwell，<em>"A Dynamical Theory of the Electromagnetic Field"</em>，1865——电磁统一的原始论文</li>
+<li>3Blue1Brown，<em>"Divergence and curl: the language of Maxwell's equations"</em>——散度与旋度的可视化</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe</em>——"场"作为实在的现代讲述</li>
+<li>Wikipedia：<em>Maxwell's equations</em> / <em>Electromagnetic induction</em>——四方程与感应的条目</li>
+<li>H. Hertz，1887 年电磁波实验——麦克斯韦预言的实验证实</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
