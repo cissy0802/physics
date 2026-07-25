@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
@@ -79,7 +80,7 @@
 <div class="wrap">
 <header>
 <div class="kicker">物理 · Physics</div>
-<h1>光是什么</h1>
+<h1 data-tts="9c39f2a5f17abfce">光是什么</h1>
 <div class="meta">Day 13 · 2026 · Phase C 波、光与电磁</div>
 <div class="tagline">你眼睛能接收的，只是整个电磁波谱上窄得可怜的一条缝——而"可见"这件事，一半的功劳在太阳，另一半在水。</div>
 </header>
@@ -87,7 +88,7 @@
 光把世界端到你面前，代价是你以为自己看到了全部。WiFi、微波炉、遥控器、体检的 X 光和照进窗户的阳光是<b>同一种东西</b>，差别只在晃得多快，而人眼能收的那一段窄到可笑。三件事：<b>可见光凭什么是这一段</b>、<b>光速为何特殊到被写进"米"的定义</b>、以及一个几乎人人问过却很少被答对的问题——<b>天为什么是蓝的，而不是紫的</b>。
 </div>
 <!-- Card 1 -->
-<div class="card">
+<div class="card" data-tts="abdeceb31a50c0c3">
 <h2>可见光：波谱上的一条窄缝 <span class="en">A Narrow Slit in the Spectrum</span></h2>
 <span class="pill">电磁波谱 · 380–700 纳米</span>
 <div class="field"><span class="lab">直觉</span>
@@ -98,25 +99,25 @@
 <div class="gloss"><var>λ</var>（读"lambda"，兰姆达）是<strong>波长</strong>——相邻两个波峰的距离；<var>f</var> 是<strong>频率</strong>——每秒晃多少次；<var>c</var> 是光速。<var>c</var> 固定不变，所以波长和频率是<strong>此消彼长</strong>的一枚硬币：波长越短，频率越高。</div>
   再加一条把"波"接到"能量"：单份光携带的能量 <var>E</var> = <var>h</var><var>f</var>，<var>h</var> 是普朗克常数（一个极小的固定数）。<strong>频率越高，每一份打得越狠</strong>——所以无线电天天穿过你毫无感觉，紫外线晒一下午就伤 DNA：不是紫外线"更多"，是它<strong>每一份</strong>更硬。</div>
 <figure>
-<svg viewBox="0 0 640 236" role="img" aria-label="电磁波谱：可见光只占极窄一段">
+<svg aria-label="电磁波谱：可见光只占极窄一段" role="img" viewbox="0 0 640 236">
 <defs>
-<linearGradient id="vis" x1="0" y1="0" x2="1" y2="0">
-<stop offset="0" stop-color="#7b3fd4"/><stop offset="0.18" stop-color="#3a6fe0"/>
-<stop offset="0.36" stop-color="#26b6c9"/><stop offset="0.52" stop-color="#3fc65a"/>
-<stop offset="0.68" stop-color="#e8d84a"/><stop offset="0.82" stop-color="#ef9a3a"/>
-<stop offset="1" stop-color="#e0503a"/>
-</linearGradient>
+<lineargradient id="vis" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0" stop-color="#7b3fd4"></stop><stop offset="0.18" stop-color="#3a6fe0"></stop>
+<stop offset="0.36" stop-color="#26b6c9"></stop><stop offset="0.52" stop-color="#3fc65a"></stop>
+<stop offset="0.68" stop-color="#e8d84a"></stop><stop offset="0.82" stop-color="#ef9a3a"></stop>
+<stop offset="1" stop-color="#e0503a"></stop>
+</lineargradient>
 </defs>
-<text x="30" y="28" font-size="11.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">波长长 · 每份能量低</text>
-<text x="610" y="28" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">波长短 · 每份能量高</text>
-<rect x="30" y="64" width="120" height="32" fill="#2c3f63"/>
-<rect x="150" y="64" width="85" height="32" fill="#35557f"/>
-<rect x="235" y="64" width="83" height="32" fill="#7a4a34"/>
-<rect x="318" y="64" width="12" height="32" fill="url(#vis)"/>
-<rect x="330" y="64" width="85" height="32" fill="#4a3a70"/>
-<rect x="415" y="64" width="90" height="32" fill="#3d5a52"/>
-<rect x="505" y="64" width="105" height="32" fill="#5a3550"/>
-<g font-size="11.5" fill="#e6ebf7" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" x="30" y="28">波长长 · 每份能量低</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="end" x="610" y="28">波长短 · 每份能量高</text>
+<rect fill="#2c3f63" height="32" width="120" x="30" y="64"></rect>
+<rect fill="#35557f" height="32" width="85" x="150" y="64"></rect>
+<rect fill="#7a4a34" height="32" width="83" x="235" y="64"></rect>
+<rect fill="url(#vis)" height="32" width="12" x="318" y="64"></rect>
+<rect fill="#4a3a70" height="32" width="85" x="330" y="64"></rect>
+<rect fill="#3d5a52" height="32" width="90" x="415" y="64"></rect>
+<rect fill="#5a3550" height="32" width="105" x="505" y="64"></rect>
+<g fill="#e6ebf7" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="middle">
 <text x="90" y="85">无线电</text>
 <text x="192" y="85">微波</text>
 <text x="276" y="85">红外</text>
@@ -124,14 +125,14 @@
 <text x="460" y="85">X 射线</text>
 <text x="557" y="85">伽马射线</text>
 </g>
-<line x1="324" y1="56" x2="324" y2="64" stroke="#f0f3fb" stroke-width="1.4"/>
-<text x="324" y="50" font-size="12" fill="#f0f3fb" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">可见光</text>
-<g stroke="#5b6480" stroke-width="1" stroke-dasharray="4 3">
-<line x1="318" y1="96" x2="70" y2="134"/>
-<line x1="330" y1="96" x2="600" y2="134"/>
+<line stroke="#f0f3fb" stroke-width="1.4" x1="324" x2="324" y1="56" y2="64"></line>
+<text fill="#f0f3fb" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle" x="324" y="50">可见光</text>
+<g stroke="#5b6480" stroke-dasharray="4 3" stroke-width="1">
+<line x1="318" x2="70" y1="96" y2="134"></line>
+<line x1="330" x2="600" y1="96" y2="134"></line>
 </g>
-<rect x="70" y="134" width="530" height="34" fill="url(#vis)"/>
-<g font-size="12" fill="#c3cbe0" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect fill="url(#vis)" height="34" width="530" x="70" y="134"></rect>
+<g fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12" text-anchor="middle">
 <text x="128" y="186">紫</text>
 <text x="222" y="186">蓝</text>
 <text x="322" y="186">绿</text>
@@ -139,9 +140,9 @@
 <text x="443" y="186">橙</text>
 <text x="534" y="186">红</text>
 </g>
-<text x="70" y="206" font-size="11" fill="#96a0ba" font-family="Georgia,serif">380 nm</text>
-<text x="600" y="206" font-size="11" fill="#96a0ba" text-anchor="end" font-family="Georgia,serif">700 nm</text>
-<text x="320" y="228" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">整个波谱横跨二十多个数量级，可见光只是其中一条缝</text>
+<text fill="#96a0ba" font-family="Georgia,serif" font-size="11" x="70" y="206">380 nm</text>
+<text fill="#96a0ba" font-family="Georgia,serif" font-size="11" text-anchor="end" x="600" y="206">700 nm</text>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="middle" x="320" y="228">整个波谱横跨二十多个数量级，可见光只是其中一条缝</text>
 </svg>
 <figcaption>把那条缝放大，才是我们熟悉的彩虹。缝之外的世界一直都在，只是没人给我们配相应的眼睛。</figcaption>
 </figure>
@@ -161,7 +162,7 @@
 </div>
 </div>
 <!-- Card 2 -->
-<div class="card">
+<div class="card" data-tts="9e46a1c68e537235">
 <h2>光速：不是"很快"，而是时空的换算率 <span class="en">c Is Not a Speed Record</span></h2>
 <span class="pill">c = 299 792 458 米/秒 · 定义值</span>
 <div class="field"><span class="lab">直觉</span>
@@ -172,36 +173,36 @@
 <div class="gloss"><var>ε</var><sub>0</sub>（读"epsilon zero"，下标是<strong>数字 0，零</strong>）管电场，<var>μ</var><sub>0</sub>（读"mu zero"）管磁场。跟"光"字毫无关系的两个常数，算出来正是光速。</div>
   更彻底的一步在 1983 年：国际计量大会把<strong>米</strong>重新定义为"光在真空中 1/299 792 458 秒走过的距离"。从那天起，<strong>光速不再被测量，而是一个定死的定义值</strong>——我们不再拿尺子量光，而是<strong>拿光当尺子</strong>。</div>
 <figure>
-<svg viewBox="0 0 640 160" role="img" aria-label="光走完各种距离所需的时间，对数尺度">
+<svg aria-label="光走完各种距离所需的时间，对数尺度" role="img" viewbox="0 0 640 160">
 <defs>
-<marker id="ax" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-<polygon points="0,0 10,4 0,8" fill="#c3cbe0"/>
+<marker id="ax" markerheight="8" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="8.5" refy="4">
+<polygon fill="#c3cbe0" points="0,0 10,4 0,8"></polygon>
 </marker>
 </defs>
-<text x="40" y="26" font-size="11.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">光传播时间（横轴每一格 = ×1000）</text>
-<line x1="40" y1="120" x2="612" y2="120" stroke="#c3cbe0" stroke-width="1.6" marker-end="url(#ax)"/>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" x="40" y="26">光传播时间（横轴每一格 = ×1000）</text>
+<line marker-end="url(#ax)" stroke="#c3cbe0" stroke-width="1.6" x1="40" x2="612" y1="120" y2="120"></line>
 <g stroke="#5b6480" stroke-width="1.2">
-<line x1="50" y1="120" x2="50" y2="127"/><line x1="140" y1="120" x2="140" y2="127"/>
-<line x1="230" y1="120" x2="230" y2="127"/><line x1="320" y1="120" x2="320" y2="127"/>
-<line x1="410" y1="120" x2="410" y2="127"/><line x1="500" y1="120" x2="500" y2="127"/>
-<line x1="590" y1="120" x2="590" y2="127"/>
+<line x1="50" x2="50" y1="120" y2="127"></line><line x1="140" x2="140" y1="120" y2="127"></line>
+<line x1="230" x2="230" y1="120" y2="127"></line><line x1="320" x2="320" y1="120" y2="127"></line>
+<line x1="410" x2="410" y1="120" y2="127"></line><line x1="500" x2="500" y1="120" y2="127"></line>
+<line x1="590" x2="590" y1="120" y2="127"></line>
 </g>
-<g font-size="11" fill="#96a0ba" text-anchor="middle" font-family="Georgia,serif">
+<g fill="#96a0ba" font-family="Georgia,serif" font-size="11" text-anchor="middle">
 <text x="50" y="142">10⁻⁹ 秒</text><text x="140" y="142">10⁻⁶</text><text x="230" y="142">10⁻³</text>
 <text x="320" y="142">1 秒</text><text x="410" y="142">10³</text><text x="500" y="142">10⁶</text>
 <text x="590" y="142">10⁹ 秒</text>
 </g>
 <g stroke="#f0ad5a" stroke-width="1.2">
-<line x1="50" y1="120" x2="50" y2="100"/><line x1="323" y1="120" x2="323" y2="100"/>
-<line x1="401" y1="120" x2="401" y2="74"/><line x1="564" y1="120" x2="564" y2="100"/>
+<line x1="50" x2="50" y1="120" y2="100"></line><line x1="323" x2="323" y1="120" y2="100"></line>
+<line x1="401" x2="401" y1="120" y2="74"></line><line x1="564" x2="564" y1="120" y2="100"></line>
 </g>
-<g fill="#f0ad5a"><circle cx="50" cy="120" r="3.5"/><circle cx="323" cy="120" r="3.5"/>
-<circle cx="401" cy="120" r="3.5"/><circle cx="564" cy="120" r="3.5"/></g>
-<g font-size="11.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">
+<g fill="#f0ad5a"><circle cx="50" cy="120" r="3.5"></circle><circle cx="323" cy="120" r="3.5"></circle>
+<circle cx="401" cy="120" r="3.5"></circle><circle cx="564" cy="120" r="3.5"></circle></g>
+<g fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5">
 <text x="44" y="94">1 纳秒 → 30 厘米</text>
-<text x="323" y="94" text-anchor="middle">1.28 秒 → 月球</text>
-<text x="401" y="68" text-anchor="middle">8 分 20 秒 → 太阳</text>
-<text x="578" y="94" text-anchor="end">4.2 年 → 最近的恒星</text>
+<text text-anchor="middle" x="323" y="94">1.28 秒 → 月球</text>
+<text text-anchor="middle" x="401" y="68">8 分 20 秒 → 太阳</text>
+<text text-anchor="end" x="578" y="94">4.2 年 → 最近的恒星</text>
 </g>
 </svg>
 <figcaption>同一个 <var>c</var>，在芯片尺度上慢得碍事，在星际尺度上慢得绝望。</figcaption>
@@ -209,7 +210,7 @@
 <div class="field"><span class="lab">反直觉的重点</span>
   "没有东西能超过光速"要修正一下：<strong>没有信息、能量或因果影响能超过 <var>c</var></strong>。不传信息的东西完全可以超——把激光笔往夜空一扫，光斑扫过月面的"速度"可远超 <var>c</var>。这不违反任何规则，因为<strong>光斑带不了话</strong>：它只是先后到达的不同光点，被我们脑补成"一个在动的点"。<var>c</var> 限制的从来不是移动，而是<strong>因果</strong>。</div>
 <div class="field xref"><span class="lab">跨学科对读 · 计算 / 金融 / 航天</span>
-  <var>c</var> 有限是一条渗进工程日常的硬约束：
+<var>c</var> 有限是一条渗进工程日常的硬约束：
   <ul>
 <li><strong>芯片</strong>：3 GHz 处理器一个时钟周期约 0.3 纳秒，光在这段时间只跑 10 厘米，信号在硅里还更慢。芯片做不大，不是工艺问题，是光速问题。</li>
 <li><strong>金融</strong>：高频交易公司在城市间铺尽可能笔直的光纤，甚至改用微波塔（微波在空气里比光在玻璃纤维里快），只为抢几毫秒。</li>
@@ -222,7 +223,7 @@
 </div>
 </div>
 <!-- Card 3 -->
-<div class="card">
+<div class="card" data-tts="f452bb0bc72ea6d7">
 <h2>天为什么是蓝的 <span class="en">Why the Sky Is Blue</span></h2>
 <span class="pill">瑞利散射 · 1871</span>
 <div class="field"><span class="lab">直觉</span>
@@ -233,61 +234,61 @@
 <div class="gloss">读作「散射强度正比于 1 除以波长的<strong>四次方</strong>」。四次方极其陡：波长减半，散射强 16 倍。拿蓝光（约 450 纳米）比红光（约 650 纳米）：(650÷450)<sup>4</sup> ≈ <strong>4.4 倍</strong>。就这 4 倍多的偏心，把整片天空染成了蓝的。</div>
   日落是同一条规律的另一面：太阳压低时阳光斜穿厚得多的大气，蓝绿一路被散射殆尽，能<strong>直着</strong>抵达眼睛的只剩红橙。天蓝与霞红是<strong>同一机制的两个视角</strong>：一个看被弹开的光，一个看剩下的光。</div>
 <figure>
-<svg viewBox="0 0 640 306" role="img" aria-label="正午天空散射蓝光与日落只剩红光的对比">
+<svg aria-label="正午天空散射蓝光与日落只剩红光的对比" role="img" viewbox="0 0 640 306">
 <defs>
-<marker id="sy" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
-<polygon points="0,0 9,3.5 0,7" fill="#f5e3a8"/>
+<marker id="sy" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="3.5">
+<polygon fill="#f5e3a8" points="0,0 9,3.5 0,7"></polygon>
 </marker>
-<marker id="sb" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
-<polygon points="0,0 9,3.5 0,7" fill="#5b9bff"/>
+<marker id="sb" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="3.5">
+<polygon fill="#5b9bff" points="0,0 9,3.5 0,7"></polygon>
 </marker>
-<marker id="sr" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
-<polygon points="0,0 9,3.5 0,7" fill="#e0674a"/>
+<marker id="sr" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="3.5">
+<polygon fill="#e0674a" points="0,0 9,3.5 0,7"></polygon>
 </marker>
 </defs>
-<rect x="8" y="30" width="304" height="264" rx="9" fill="#0f1626" stroke="#26314c"/>
-<rect x="328" y="30" width="304" height="264" rx="9" fill="#0f1626" stroke="#26314c"/>
-<text x="18" y="22" font-size="13" font-weight="700" fill="#f0ad5a" font-family="Georgia,'Noto Serif SC',serif">正午：抬头看天</text>
-<text x="338" y="22" font-size="13" font-weight="700" fill="#f0ad5a" font-family="Georgia,'Noto Serif SC',serif">日落：光斜穿厚大气</text>
-<line x1="20" y1="92" x2="300" y2="92" stroke="#5b6480" stroke-width="1" stroke-dasharray="5 4"/>
-<line x1="340" y1="92" x2="620" y2="92" stroke="#5b6480" stroke-width="1" stroke-dasharray="5 4"/>
-<text x="296" y="86" font-size="10" fill="#5b6480" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">大气层顶</text>
-<text x="616" y="86" font-size="10" fill="#5b6480" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">大气层顶</text>
-<line x1="20" y1="262" x2="300" y2="262" stroke="#4a5678" stroke-width="3"/>
-<line x1="340" y1="262" x2="620" y2="262" stroke="#4a5678" stroke-width="3"/>
-<circle cx="46" cy="62" r="12" fill="#f0ad5a"/>
-<g stroke="#f5e3a8" stroke-width="2" marker-end="url(#sy)">
-<line x1="56" y1="70" x2="92" y2="127"/>
-<line x1="57" y1="68" x2="166" y2="100"/>
-<line x1="58" y1="72" x2="243" y2="136"/>
+<rect fill="#0f1626" height="264" rx="9" stroke="#26314c" width="304" x="8" y="30"></rect>
+<rect fill="#0f1626" height="264" rx="9" stroke="#26314c" width="304" x="328" y="30"></rect>
+<text fill="#f0ad5a" font-family="Georgia,'Noto Serif SC',serif" font-size="13" font-weight="700" x="18" y="22">正午：抬头看天</text>
+<text fill="#f0ad5a" font-family="Georgia,'Noto Serif SC',serif" font-size="13" font-weight="700" x="338" y="22">日落：光斜穿厚大气</text>
+<line stroke="#5b6480" stroke-dasharray="5 4" stroke-width="1" x1="20" x2="300" y1="92" y2="92"></line>
+<line stroke="#5b6480" stroke-dasharray="5 4" stroke-width="1" x1="340" x2="620" y1="92" y2="92"></line>
+<text fill="#5b6480" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="10" text-anchor="end" x="296" y="86">大气层顶</text>
+<text fill="#5b6480" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="10" text-anchor="end" x="616" y="86">大气层顶</text>
+<line stroke="#4a5678" stroke-width="3" x1="20" x2="300" y1="262" y2="262"></line>
+<line stroke="#4a5678" stroke-width="3" x1="340" x2="620" y1="262" y2="262"></line>
+<circle cx="46" cy="62" fill="#f0ad5a" r="12"></circle>
+<g marker-end="url(#sy)" stroke="#f5e3a8" stroke-width="2">
+<line x1="56" x2="92" y1="70" y2="127"></line>
+<line x1="57" x2="166" y1="68" y2="100"></line>
+<line x1="58" x2="243" y1="72" y2="136"></line>
 </g>
-<g fill="#dbe1f0"><circle cx="96" cy="132" r="4"/><circle cx="170" cy="104" r="4"/><circle cx="248" cy="140" r="4"/></g>
-<g stroke="#5b9bff" stroke-width="2" marker-end="url(#sb)">
-<line x1="96" y1="132" x2="150" y2="226"/>
-<line x1="170" y1="104" x2="162" y2="224"/>
-<line x1="248" y1="140" x2="172" y2="227"/>
+<g fill="#dbe1f0"><circle cx="96" cy="132" r="4"></circle><circle cx="170" cy="104" r="4"></circle><circle cx="248" cy="140" r="4"></circle></g>
+<g marker-end="url(#sb)" stroke="#5b9bff" stroke-width="2">
+<line x1="96" x2="150" y1="132" y2="226"></line>
+<line x1="170" x2="162" y1="104" y2="224"></line>
+<line x1="248" x2="172" y1="140" y2="227"></line>
 </g>
-<g stroke="#5b9bff" stroke-width="1.4" opacity="0.5" marker-end="url(#sb)">
-<line x1="96" y1="132" x2="58" y2="170"/>
-<line x1="170" y1="104" x2="222" y2="68"/>
-<line x1="248" y1="140" x2="290" y2="112"/>
+<g marker-end="url(#sb)" opacity="0.5" stroke="#5b9bff" stroke-width="1.4">
+<line x1="96" x2="58" y1="132" y2="170"></line>
+<line x1="170" x2="222" y1="104" y2="68"></line>
+<line x1="248" x2="290" y1="140" y2="112"></line>
 </g>
-<circle cx="160" cy="238" r="8" fill="none" stroke="#c3cbe0" stroke-width="1.8"/>
-<line x1="160" y1="246" x2="160" y2="262" stroke="#c3cbe0" stroke-width="2"/>
-<text x="160" y="280" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">每个方向都弹来蓝光 → 天是蓝的</text>
-<circle cx="600" cy="248" r="14" fill="#f0ad5a"/>
-<line x1="586" y1="244" x2="510" y2="240" stroke="#f5e3a8" stroke-width="2.6"/>
-<line x1="510" y1="240" x2="444" y2="238" stroke="#f0ad5a" stroke-width="2.6"/>
-<line x1="444" y1="238" x2="390" y2="236" stroke="#e0674a" stroke-width="2.6" marker-end="url(#sr)"/>
-<g stroke="#5b9bff" stroke-width="1.6" opacity="0.85" marker-end="url(#sb)">
-<line x1="560" y1="242" x2="548" y2="196"/>
-<line x1="505" y1="240" x2="516" y2="190"/>
-<line x1="452" y1="238" x2="440" y2="192"/>
+<circle cx="160" cy="238" fill="none" r="8" stroke="#c3cbe0" stroke-width="1.8"></circle>
+<line stroke="#c3cbe0" stroke-width="2" x1="160" x2="160" y1="246" y2="262"></line>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="middle" x="160" y="280">每个方向都弹来蓝光 → 天是蓝的</text>
+<circle cx="600" cy="248" fill="#f0ad5a" r="14"></circle>
+<line stroke="#f5e3a8" stroke-width="2.6" x1="586" x2="510" y1="244" y2="240"></line>
+<line stroke="#f0ad5a" stroke-width="2.6" x1="510" x2="444" y1="240" y2="238"></line>
+<line marker-end="url(#sr)" stroke="#e0674a" stroke-width="2.6" x1="444" x2="390" y1="238" y2="236"></line>
+<g marker-end="url(#sb)" opacity="0.85" stroke="#5b9bff" stroke-width="1.6">
+<line x1="560" x2="548" y1="242" y2="196"></line>
+<line x1="505" x2="516" y1="240" y2="190"></line>
+<line x1="452" x2="440" y1="238" y2="192"></line>
 </g>
-<text x="500" y="176" font-size="11" fill="#7db0ff" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">蓝光沿途散射掉</text>
-<circle cx="368" cy="230" r="8" fill="none" stroke="#c3cbe0" stroke-width="1.8"/>
-<line x1="368" y1="238" x2="368" y2="262" stroke="#c3cbe0" stroke-width="2"/>
-<text x="486" y="280" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">路径长 → 蓝光散尽，只剩红橙</text>
+<text fill="#7db0ff" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11" text-anchor="middle" x="500" y="176">蓝光沿途散射掉</text>
+<circle cx="368" cy="230" fill="none" r="8" stroke="#c3cbe0" stroke-width="1.8"></circle>
+<line stroke="#c3cbe0" stroke-width="2" x1="368" x2="368" y1="238" y2="262"></line>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="middle" x="486" y="280">路径长 → 蓝光散尽，只剩红橙</text>
 </svg>
 <figcaption>天蓝与霞红不是两件事：一个数被弹开的光，一个数剩下的光。</figcaption>
 </figure>
@@ -307,7 +308,7 @@
 </div>
 </div>
 <!-- Card 4 -->
-<div class="card">
+<div class="card" data-tts="369f6187b5c074be">
 <h2>光是宇宙唯一的信使 <span class="en">Light as the Universe's Only Messenger</span></h2>
 <span class="pill">光谱学 · Fraunhofer 1814</span>
 <div class="field"><span class="lab">直觉</span>
@@ -316,40 +317,40 @@
   原子里的电子只能待在若干确定的能级上。<strong>吸收</strong>一个光子跳上去，要求这份能量恰好等于两级之差；<strong>掉下来</strong>时吐出同样能量的光子。能量对应频率（<var>E</var> = <var>h</var><var>f</var>），于是每种元素只在<strong>特定几条频率</strong>上吸收或发射，摊开成光谱就是几条亮线或暗线。
   这给出两层信息：<strong>线在哪些位置</strong>说明有哪些元素；<strong>整组线平移了多少</strong>说明光源相对我们的运动（多普勒效应，『波动现象』一期讲过）。1868 年，人们在太阳光谱里发现一条对不上任何已知元素的线，给它起名 helium（源自希腊语"太阳"）——<strong>氦是先在太阳上被发现，二十多年后才在地球上找到的</strong>。</div>
 <figure>
-<svg viewBox="0 0 640 205" role="img" aria-label="光谱吸收线与红移">
+<svg aria-label="光谱吸收线与红移" role="img" viewbox="0 0 640 205">
 <defs>
-<linearGradient id="vis2" x1="0" y1="0" x2="1" y2="0">
-<stop offset="0" stop-color="#7b3fd4"/><stop offset="0.18" stop-color="#3a6fe0"/>
-<stop offset="0.36" stop-color="#26b6c9"/><stop offset="0.52" stop-color="#3fc65a"/>
-<stop offset="0.68" stop-color="#e8d84a"/><stop offset="0.82" stop-color="#ef9a3a"/>
-<stop offset="1" stop-color="#e0503a"/>
-</linearGradient>
-<marker id="rs" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-<polygon points="0,0 10,4 0,8" fill="#f0ad5a"/>
+<lineargradient id="vis2" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0" stop-color="#7b3fd4"></stop><stop offset="0.18" stop-color="#3a6fe0"></stop>
+<stop offset="0.36" stop-color="#26b6c9"></stop><stop offset="0.52" stop-color="#3fc65a"></stop>
+<stop offset="0.68" stop-color="#e8d84a"></stop><stop offset="0.82" stop-color="#ef9a3a"></stop>
+<stop offset="1" stop-color="#e0503a"></stop>
+</lineargradient>
+<marker id="rs" markerheight="8" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="8.5" refy="4">
+<polygon fill="#f0ad5a" points="0,0 10,4 0,8"></polygon>
 </marker>
 </defs>
-<text x="158" y="62" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">实验室的氢</text>
-<rect x="170" y="40" width="440" height="36" fill="url(#vis2)"/>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="end" x="158" y="62">实验室的氢</text>
+<rect fill="url(#vis2)" height="36" width="440" x="170" y="40"></rect>
 <g fill="#0a0e1a">
-<rect x="249" y="40" width="3.5" height="36"/><rect x="267" y="40" width="3.5" height="36"/>
-<rect x="372" y="40" width="3.5" height="36"/><rect x="447" y="40" width="3.5" height="36"/>
-<rect x="522" y="40" width="3.5" height="36"/>
+<rect height="36" width="3.5" x="249" y="40"></rect><rect height="36" width="3.5" x="267" y="40"></rect>
+<rect height="36" width="3.5" x="372" y="40"></rect><rect height="36" width="3.5" x="447" y="40"></rect>
+<rect height="36" width="3.5" x="522" y="40"></rect>
 </g>
-<text x="158" y="140" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">远方星系的氢</text>
-<rect x="170" y="118" width="440" height="36" fill="url(#vis2)"/>
+<text fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="end" x="158" y="140">远方星系的氢</text>
+<rect fill="url(#vis2)" height="36" width="440" x="170" y="118"></rect>
 <g fill="#0a0e1a">
-<rect x="285" y="118" width="3.5" height="36"/><rect x="303" y="118" width="3.5" height="36"/>
-<rect x="408" y="118" width="3.5" height="36"/><rect x="483" y="118" width="3.5" height="36"/>
-<rect x="558" y="118" width="3.5" height="36"/>
+<rect height="36" width="3.5" x="285" y="118"></rect><rect height="36" width="3.5" x="303" y="118"></rect>
+<rect height="36" width="3.5" x="408" y="118"></rect><rect height="36" width="3.5" x="483" y="118"></rect>
+<rect height="36" width="3.5" x="558" y="118"></rect>
 </g>
-<g stroke="#96a0ba" stroke-width="1" stroke-dasharray="4 3">
-<line x1="250.5" y1="76" x2="286.5" y2="118"/><line x1="268.5" y1="76" x2="304.5" y2="118"/>
-<line x1="373.5" y1="76" x2="409.5" y2="118"/><line x1="448.5" y1="76" x2="484.5" y2="118"/>
-<line x1="523.5" y1="76" x2="559.5" y2="118"/>
+<g stroke="#96a0ba" stroke-dasharray="4 3" stroke-width="1">
+<line x1="250.5" x2="286.5" y1="76" y2="118"></line><line x1="268.5" x2="304.5" y1="76" y2="118"></line>
+<line x1="373.5" x2="409.5" y1="76" y2="118"></line><line x1="448.5" x2="484.5" y1="76" y2="118"></line>
+<line x1="523.5" x2="559.5" y1="76" y2="118"></line>
 </g>
-<line x1="516" y1="172" x2="556" y2="172" stroke="#f0ad5a" stroke-width="2" marker-end="url(#rs)"/>
-<text x="568" y="176" font-size="11.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">红移</text>
-<text x="320" y="196" font-size="11.5" fill="#c3cbe0" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">线的位置说成分，线的位移说速度</text>
+<line marker-end="url(#rs)" stroke="#f0ad5a" stroke-width="2" x1="516" x2="556" y1="172" y2="172"></line>
+<text fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" x="568" y="176">红移</text>
+<text fill="#c3cbe0" font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5" text-anchor="middle" x="320" y="196">线的位置说成分，线的位移说速度</text>
 </svg>
 <figcaption>一组暗线的位置与位移，就是一颗恒星的成分表和速度计。</figcaption>
 </figure>
@@ -370,7 +371,7 @@
 </div>
 <!-- Deep think -->
 <div class="deep">
-<h2>深入思考</h2>
+<h2 data-tts="38cf94e041b16033">深入思考</h2>
 <details><summary>光在水或玻璃里"变慢"了，可光子明明只能以 c 跑。到底是什么慢了？</summary>
 <div class="body">慢的不是光子本身，是<strong>光波整体推进的节奏</strong>。常见说法"光子被原子吸收再发射，一路耽误"其实不对——那样出射方向会乱掉，玻璃就不透明了。更准确的图像是：入射波让介质里的电子跟着振荡，振荡的电子又辐射出次级波，两者叠加后合成波的波峰<strong>整体后移</strong>一点，看起来就是变慢（折射率 <var>n</var> = <var>c</var>/<var>v</var>）。光进水里拐弯，正是这个减速在界面上的几何后果。</div></details>
 <details><summary>为什么不同颜色的光在玻璃里减速的程度不同？这跟彩虹有什么关系？</summary>
@@ -382,22 +383,22 @@
 </div>
 <!-- Reading -->
 <div class="read">
-<h2>延伸阅读</h2>
+<h2 data-tts="d8ea0860ac07a043">延伸阅读</h2>
 <ul>
-<li><a href="https://www.feynmanlectures.caltech.edu/I_32.html" target="_blank" rel="noopener">Feynman Lectures, Vol. I Ch. 32：Radiation Damping, Light Scattering</a>——天为什么蓝的第一性讲法</li>
-<li><a href="https://www.feynmanlectures.caltech.edu/I_31.html" target="_blank" rel="noopener">Feynman Lectures, Vol. I Ch. 31：The Origin of the Refractive Index</a>——光在介质里"变慢"的真实机制</li>
-<li><a href="https://en.wikipedia.org/wiki/Rayleigh_scattering" target="_blank" rel="noopener">Wikipedia：Rayleigh scattering</a>——瑞利散射与 1/λ⁴ 律</li>
-<li><a href="https://en.wikipedia.org/wiki/Electromagnetic_spectrum" target="_blank" rel="noopener">Wikipedia：Electromagnetic spectrum</a>——完整波谱与各波段应用</li>
-<li><a href="https://en.wikipedia.org/wiki/Speed_of_light" target="_blank" rel="noopener">Wikipedia：Speed of light</a>——含 1983 年米的重新定义</li>
-<li><a href="https://en.wikipedia.org/wiki/Fraunhofer_lines" target="_blank" rel="noopener">Wikipedia：Fraunhofer lines</a>——太阳光谱暗线与光谱学的开端</li>
-<li><a href="https://en.wikipedia.org/wiki/QED:_The_Strange_Theory_of_Light_and_Matter" target="_blank" rel="noopener">Feynman，<em>QED: The Strange Theory of Light and Matter</em></a>——光与物质相互作用的经典科普</li>
+<li><a href="https://www.feynmanlectures.caltech.edu/I_32.html" rel="noopener" target="_blank">Feynman Lectures, Vol. I Ch. 32：Radiation Damping, Light Scattering</a>——天为什么蓝的第一性讲法</li>
+<li><a href="https://www.feynmanlectures.caltech.edu/I_31.html" rel="noopener" target="_blank">Feynman Lectures, Vol. I Ch. 31：The Origin of the Refractive Index</a>——光在介质里"变慢"的真实机制</li>
+<li><a href="https://en.wikipedia.org/wiki/Rayleigh_scattering" rel="noopener" target="_blank">Wikipedia：Rayleigh scattering</a>——瑞利散射与 1/λ⁴ 律</li>
+<li><a href="https://en.wikipedia.org/wiki/Electromagnetic_spectrum" rel="noopener" target="_blank">Wikipedia：Electromagnetic spectrum</a>——完整波谱与各波段应用</li>
+<li><a href="https://en.wikipedia.org/wiki/Speed_of_light" rel="noopener" target="_blank">Wikipedia：Speed of light</a>——含 1983 年米的重新定义</li>
+<li><a href="https://en.wikipedia.org/wiki/Fraunhofer_lines" rel="noopener" target="_blank">Wikipedia：Fraunhofer lines</a>——太阳光谱暗线与光谱学的开端</li>
+<li><a href="https://en.wikipedia.org/wiki/QED:_The_Strange_Theory_of_Light_and_Matter" rel="noopener" target="_blank">Feynman，<em>QED: The Strange Theory of Light and Matter</em></a>——光与物质相互作用的经典科普</li>
 </ul>
 </div>
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
 </body>
 </html>
