@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：光是什么 · Day 13</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>光是什么</h1>
+<div class="meta">Day 13 · 2026 · Phase C 波、光与电磁</div>
+<div class="tagline">你眼睛能接收的，只是整个电磁波谱上窄得可怜的一条缝——而"可见"这件事，一半的功劳在太阳，另一半在水。</div>
+</header>
+<div class="intro">
+光把世界端到你面前，代价是你以为自己看到了全部。WiFi、微波炉、遥控器、体检的 X 光和照进窗户的阳光是<b>同一种东西</b>，差别只在晃得多快，而人眼能收的那一段窄到可笑。三件事：<b>可见光凭什么是这一段</b>、<b>光速为何特殊到被写进"米"的定义</b>、以及一个几乎人人问过却很少被答对的问题——<b>天为什么是蓝的，而不是紫的</b>。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>可见光：波谱上的一条窄缝 <span class="en">A Narrow Slit in the Spectrum</span></h2>
+<span class="pill">电磁波谱 · 380–700 纳米</span>
+<div class="field"><span class="lab">直觉</span>
+  电磁波彼此的差别只有一个：<strong>晃得多快</strong>。慢的是无线电，快一点是微波，再快是红外（皮肤感到的"热辐射"），再快一丁点眼睛突然亮了，那是可见光；继续快，紫外把你晒伤，X 射线穿过你的手，伽马射线从爆炸的恒星射来。它们不是七类东西，是<strong>同一根弦上的不同音高</strong>；而人眼这架耳朵只听得见其中<strong>不到一个八度</strong>。</div>
+<div class="field"><span class="lab">机制</span>
+  波长、频率、光速三者被一条极简的关系锁死：
+  <div class="eq"><var>c</var> = <var>λ</var> <var>f</var></div>
+<div class="gloss"><var>λ</var>（读"lambda"，兰姆达）是<strong>波长</strong>——相邻两个波峰的距离；<var>f</var> 是<strong>频率</strong>——每秒晃多少次；<var>c</var> 是光速。<var>c</var> 固定不变，所以波长和频率是<strong>此消彼长</strong>的一枚硬币：波长越短，频率越高。</div>
+  再加一条把"波"接到"能量"：单份光携带的能量 <var>E</var> = <var>h</var><var>f</var>，<var>h</var> 是普朗克常数（一个极小的固定数）。<strong>频率越高，每一份打得越狠</strong>——所以无线电天天穿过你毫无感觉，紫外线晒一下午就伤 DNA：不是紫外线"更多"，是它<strong>每一份</strong>更硬。</div>
+<figure>
+<svg viewBox="0 0 640 236" role="img" aria-label="电磁波谱：可见光只占极窄一段">
+<defs>
+<linearGradient id="vis" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#7b3fd4"/><stop offset="0.18" stop-color="#3a6fe0"/>
+<stop offset="0.36" stop-color="#26b6c9"/><stop offset="0.52" stop-color="#3fc65a"/>
+<stop offset="0.68" stop-color="#e8d84a"/><stop offset="0.82" stop-color="#ef9a3a"/>
+<stop offset="1" stop-color="#e0503a"/>
+</linearGradient>
+</defs>
+<text x="30" y="28" font-size="11.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">波长长 · 每份能量低</text>
+<text x="610" y="28" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">波长短 · 每份能量高</text>
+<rect x="30" y="64" width="120" height="32" fill="#2c3f63"/>
+<rect x="150" y="64" width="85" height="32" fill="#35557f"/>
+<rect x="235" y="64" width="83" height="32" fill="#7a4a34"/>
+<rect x="318" y="64" width="12" height="32" fill="url(#vis)"/>
+<rect x="330" y="64" width="85" height="32" fill="#4a3a70"/>
+<rect x="415" y="64" width="90" height="32" fill="#3d5a52"/>
+<rect x="505" y="64" width="105" height="32" fill="#5a3550"/>
+<g font-size="11.5" fill="#e6ebf7" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="90" y="85">无线电</text>
+<text x="192" y="85">微波</text>
+<text x="276" y="85">红外</text>
+<text x="372" y="85">紫外</text>
+<text x="460" y="85">X 射线</text>
+<text x="557" y="85">伽马射线</text>
+</g>
+<line x1="324" y1="56" x2="324" y2="64" stroke="#f0f3fb" stroke-width="1.4"/>
+<text x="324" y="50" font-size="12" fill="#f0f3fb" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">可见光</text>
+<g stroke="#5b6480" stroke-width="1" stroke-dasharray="4 3">
+<line x1="318" y1="96" x2="70" y2="134"/>
+<line x1="330" y1="96" x2="600" y2="134"/>
+</g>
+<rect x="70" y="134" width="530" height="34" fill="url(#vis)"/>
+<g font-size="12" fill="#c3cbe0" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="128" y="186">紫</text>
+<text x="222" y="186">蓝</text>
+<text x="322" y="186">绿</text>
+<text x="401" y="186">黄</text>
+<text x="443" y="186">橙</text>
+<text x="534" y="186">红</text>
+</g>
+<text x="70" y="206" font-size="11" fill="#96a0ba" font-family="Georgia,serif">380 nm</text>
+<text x="600" y="206" font-size="11" fill="#96a0ba" text-anchor="end" font-family="Georgia,serif">700 nm</text>
+<text x="320" y="228" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">整个波谱横跨二十多个数量级，可见光只是其中一条缝</text>
+</svg>
+<figcaption>把那条缝放大，才是我们熟悉的彩虹。缝之外的世界一直都在，只是没人给我们配相应的眼睛。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  为什么偏偏是这一段"可见"？两个原因合谋：太阳辐射的能量在这一段最集中，进化去收别的段位不划算；而<strong>水在这一段几乎完全透明</strong>——生命是在水里长出来的，眼球本身就是一包水。所以<strong>"可见"不是光的性质，是我们和这颗星球谈成的一笔交易</strong>。红外并不"不可见"，只是不被我们可见。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 生物 / 工程 / 天文</span>
+  只要换一副接收器，同一个世界就换一副长相：
+  <ul>
+<li><strong>生物</strong>：蜜蜂看得见紫外，很多花在紫外下有指向花蜜的"跑道纹"，对我们却是一片素白；响尾蛇的颊窝感红外，在全黑里"看见"体温。</li>
+<li><strong>工程</strong>：手机镜头前装一片红外截止滤镜，因为传感器本来看得见红外，不挡住照片会发紫；夜视仪则反过来，专收那一段。</li>
+<li><strong>天文</strong>：同一片星空，射电望远镜看到星系喷流，X 射线望远镜看到黑洞周围的高温气体，红外望远镜穿透尘埃看到正在诞生的恒星——三张图不像同一个天空。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：全部电磁波是同一种东西，人眼只是恰好开了一条极窄的窗。</div>
+<details class="q"><summary><b>思考：</b>如果人眼能看见全波段，世界会更清楚还是更糊？</summary><div class="qa">更糊。你会被自己身体的红外辐射从内部照亮，视野里永远是一片自发光的雾；无线电波长以米计，根本成不了细节的像。<strong>看得窄，才看得清</strong>——窄波段同时保证了分辨率和足够暗的背景。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>光速：不是"很快"，而是时空的换算率 <span class="en">c Is Not a Speed Record</span></h2>
+<span class="pill">c = 299 792 458 米/秒 · 定义值</span>
+<div class="field"><span class="lab">直觉</span>
+  把 <var>c</var> 当成"跑得最快的东西"是抓错了重点。<var>c</var> 更像一条<strong>汇率</strong>：它规定 1 秒"值"多少米，把时间和空间兑换成同一种单位。任何<strong>没有质量</strong>的东西都必然以这个速率跑——不是努力跑到了上限，而是<strong>没有别的选择</strong>。引力波和光毫无关系，也以 <var>c</var> 传播，只因它同样无质量。光坐上这班车，纯粹因为光子没有质量。</div>
+<div class="field"><span class="lab">机制</span>
+  这个数从哪来？『电磁的统一』一期给过答案：由两个纯电磁实验量出的真空常数定死，
+  <div class="eq"><var>c</var> = <span class="frac"><span class="fnum">1</span><span class="fden">√(<var>ε</var><sub>0</sub> <var>μ</var><sub>0</sub>)</span></span></div>
+<div class="gloss"><var>ε</var><sub>0</sub>（读"epsilon zero"，下标是<strong>数字 0，零</strong>）管电场，<var>μ</var><sub>0</sub>（读"mu zero"）管磁场。跟"光"字毫无关系的两个常数，算出来正是光速。</div>
+  更彻底的一步在 1983 年：国际计量大会把<strong>米</strong>重新定义为"光在真空中 1/299 792 458 秒走过的距离"。从那天起，<strong>光速不再被测量，而是一个定死的定义值</strong>——我们不再拿尺子量光，而是<strong>拿光当尺子</strong>。</div>
+<figure>
+<svg viewBox="0 0 640 160" role="img" aria-label="光走完各种距离所需的时间，对数尺度">
+<defs>
+<marker id="ax" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 10,4 0,8" fill="#c3cbe0"/>
+</marker>
+</defs>
+<text x="40" y="26" font-size="11.5" fill="#96a0ba" font-family="-apple-system,'Noto Sans SC',sans-serif">光传播时间（横轴每一格 = ×1000）</text>
+<line x1="40" y1="120" x2="612" y2="120" stroke="#c3cbe0" stroke-width="1.6" marker-end="url(#ax)"/>
+<g stroke="#5b6480" stroke-width="1.2">
+<line x1="50" y1="120" x2="50" y2="127"/><line x1="140" y1="120" x2="140" y2="127"/>
+<line x1="230" y1="120" x2="230" y2="127"/><line x1="320" y1="120" x2="320" y2="127"/>
+<line x1="410" y1="120" x2="410" y2="127"/><line x1="500" y1="120" x2="500" y2="127"/>
+<line x1="590" y1="120" x2="590" y2="127"/>
+</g>
+<g font-size="11" fill="#96a0ba" text-anchor="middle" font-family="Georgia,serif">
+<text x="50" y="142">10⁻⁹ 秒</text><text x="140" y="142">10⁻⁶</text><text x="230" y="142">10⁻³</text>
+<text x="320" y="142">1 秒</text><text x="410" y="142">10³</text><text x="500" y="142">10⁶</text>
+<text x="590" y="142">10⁹ 秒</text>
+</g>
+<g stroke="#f0ad5a" stroke-width="1.2">
+<line x1="50" y1="120" x2="50" y2="100"/><line x1="323" y1="120" x2="323" y2="100"/>
+<line x1="401" y1="120" x2="401" y2="74"/><line x1="564" y1="120" x2="564" y2="100"/>
+</g>
+<g fill="#f0ad5a"><circle cx="50" cy="120" r="3.5"/><circle cx="323" cy="120" r="3.5"/>
+<circle cx="401" cy="120" r="3.5"/><circle cx="564" cy="120" r="3.5"/></g>
+<g font-size="11.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="44" y="94">1 纳秒 → 30 厘米</text>
+<text x="323" y="94" text-anchor="middle">1.28 秒 → 月球</text>
+<text x="401" y="68" text-anchor="middle">8 分 20 秒 → 太阳</text>
+<text x="578" y="94" text-anchor="end">4.2 年 → 最近的恒星</text>
+</g>
+</svg>
+<figcaption>同一个 <var>c</var>，在芯片尺度上慢得碍事，在星际尺度上慢得绝望。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  "没有东西能超过光速"要修正一下：<strong>没有信息、能量或因果影响能超过 <var>c</var></strong>。不传信息的东西完全可以超——把激光笔往夜空一扫，光斑扫过月面的"速度"可远超 <var>c</var>。这不违反任何规则，因为<strong>光斑带不了话</strong>：它只是先后到达的不同光点，被我们脑补成"一个在动的点"。<var>c</var> 限制的从来不是移动，而是<strong>因果</strong>。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 计算 / 金融 / 航天</span>
+  <var>c</var> 有限是一条渗进工程日常的硬约束：
+  <ul>
+<li><strong>芯片</strong>：3 GHz 处理器一个时钟周期约 0.3 纳秒，光在这段时间只跑 10 厘米，信号在硅里还更慢。芯片做不大，不是工艺问题，是光速问题。</li>
+<li><strong>金融</strong>：高频交易公司在城市间铺尽可能笔直的光纤，甚至改用微波塔（微波在空气里比光在玻璃纤维里快），只为抢几毫秒。</li>
+<li><strong>航天</strong>：信号到火星单程 3–22 分钟，火星车不可能被"实时遥控"，只能自己决策——自主系统的需求在这里是被物理逼出来的。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：c 不是光的速度纪录，是时空的汇率，也是因果的上限。</div>
+<details class="q"><summary><b>思考：</b>既然米是用光速定义的，那"测量光速"这件事还有意义吗？</summary><div class="qa">没有了。1983 年之后 <var>c</var> 是精确的定义值，测它等于测自己的定义。真正被测的变成了长度相对于秒的比值，精度瓶颈落在原子钟对"秒"的实现上。这是计量学常用的一招：把一个测得极准的常数<strong>冻结成定义</strong>，把不确定度转移到更好控制的地方。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>天为什么是蓝的 <span class="en">Why the Sky Is Blue</span></h2>
+<span class="pill">瑞利散射 · 1871</span>
+<div class="field"><span class="lab">直觉</span>
+  太阳光是白的，空气是透明的，可抬头看到的天是蓝的——蓝从哪冒出来？空气分子会把经过的光<strong>往四面八方弹回去</strong>一点点，而这种"弹"对不同颜色的效率<strong>差得极多</strong>。蓝光被弹得厉害，天空各个方向都在往你眼里送蓝；红光基本径直穿过，只有正对太阳时才收得到。</div>
+<div class="field"><span class="lab">机制</span>
+  当散射体（空气分子）比波长小得多时，散射强度大致按
+  <div class="eq"><var>I</var> ∝ <span class="frac"><span class="fnum">1</span><span class="fden"><var>λ</var><sup>4</sup></span></span></div>
+<div class="gloss">读作「散射强度正比于 1 除以波长的<strong>四次方</strong>」。四次方极其陡：波长减半，散射强 16 倍。拿蓝光（约 450 纳米）比红光（约 650 纳米）：(650÷450)<sup>4</sup> ≈ <strong>4.4 倍</strong>。就这 4 倍多的偏心，把整片天空染成了蓝的。</div>
+  日落是同一条规律的另一面：太阳压低时阳光斜穿厚得多的大气，蓝绿一路被散射殆尽，能<strong>直着</strong>抵达眼睛的只剩红橙。天蓝与霞红是<strong>同一机制的两个视角</strong>：一个看被弹开的光，一个看剩下的光。</div>
+<figure>
+<svg viewBox="0 0 640 306" role="img" aria-label="正午天空散射蓝光与日落只剩红光的对比">
+<defs>
+<marker id="sy" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 9,3.5 0,7" fill="#f5e3a8"/>
+</marker>
+<marker id="sb" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 9,3.5 0,7" fill="#5b9bff"/>
+</marker>
+<marker id="sr" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 9,3.5 0,7" fill="#e0674a"/>
+</marker>
+</defs>
+<rect x="8" y="30" width="304" height="264" rx="9" fill="#0f1626" stroke="#26314c"/>
+<rect x="328" y="30" width="304" height="264" rx="9" fill="#0f1626" stroke="#26314c"/>
+<text x="18" y="22" font-size="13" font-weight="700" fill="#f0ad5a" font-family="Georgia,'Noto Serif SC',serif">正午：抬头看天</text>
+<text x="338" y="22" font-size="13" font-weight="700" fill="#f0ad5a" font-family="Georgia,'Noto Serif SC',serif">日落：光斜穿厚大气</text>
+<line x1="20" y1="92" x2="300" y2="92" stroke="#5b6480" stroke-width="1" stroke-dasharray="5 4"/>
+<line x1="340" y1="92" x2="620" y2="92" stroke="#5b6480" stroke-width="1" stroke-dasharray="5 4"/>
+<text x="296" y="86" font-size="10" fill="#5b6480" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">大气层顶</text>
+<text x="616" y="86" font-size="10" fill="#5b6480" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">大气层顶</text>
+<line x1="20" y1="262" x2="300" y2="262" stroke="#4a5678" stroke-width="3"/>
+<line x1="340" y1="262" x2="620" y2="262" stroke="#4a5678" stroke-width="3"/>
+<circle cx="46" cy="62" r="12" fill="#f0ad5a"/>
+<g stroke="#f5e3a8" stroke-width="2" marker-end="url(#sy)">
+<line x1="56" y1="70" x2="92" y2="127"/>
+<line x1="57" y1="68" x2="166" y2="100"/>
+<line x1="58" y1="72" x2="243" y2="136"/>
+</g>
+<g fill="#dbe1f0"><circle cx="96" cy="132" r="4"/><circle cx="170" cy="104" r="4"/><circle cx="248" cy="140" r="4"/></g>
+<g stroke="#5b9bff" stroke-width="2" marker-end="url(#sb)">
+<line x1="96" y1="132" x2="150" y2="226"/>
+<line x1="170" y1="104" x2="162" y2="224"/>
+<line x1="248" y1="140" x2="172" y2="227"/>
+</g>
+<g stroke="#5b9bff" stroke-width="1.4" opacity="0.5" marker-end="url(#sb)">
+<line x1="96" y1="132" x2="58" y2="170"/>
+<line x1="170" y1="104" x2="222" y2="68"/>
+<line x1="248" y1="140" x2="290" y2="112"/>
+</g>
+<circle cx="160" cy="238" r="8" fill="none" stroke="#c3cbe0" stroke-width="1.8"/>
+<line x1="160" y1="246" x2="160" y2="262" stroke="#c3cbe0" stroke-width="2"/>
+<text x="160" y="280" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">每个方向都弹来蓝光 → 天是蓝的</text>
+<circle cx="600" cy="248" r="14" fill="#f0ad5a"/>
+<line x1="586" y1="244" x2="510" y2="240" stroke="#f5e3a8" stroke-width="2.6"/>
+<line x1="510" y1="240" x2="444" y2="238" stroke="#f0ad5a" stroke-width="2.6"/>
+<line x1="444" y1="238" x2="390" y2="236" stroke="#e0674a" stroke-width="2.6" marker-end="url(#sr)"/>
+<g stroke="#5b9bff" stroke-width="1.6" opacity="0.85" marker-end="url(#sb)">
+<line x1="560" y1="242" x2="548" y2="196"/>
+<line x1="505" y1="240" x2="516" y2="190"/>
+<line x1="452" y1="238" x2="440" y2="192"/>
+</g>
+<text x="500" y="176" font-size="11" fill="#7db0ff" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">蓝光沿途散射掉</text>
+<circle cx="368" cy="230" r="8" fill="none" stroke="#c3cbe0" stroke-width="1.8"/>
+<line x1="368" y1="238" x2="368" y2="262" stroke="#c3cbe0" stroke-width="2"/>
+<text x="486" y="280" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">路径长 → 蓝光散尽，只剩红橙</text>
+</svg>
+<figcaption>天蓝与霞红不是两件事：一个数被弹开的光，一个数剩下的光。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  按 1/<var>λ</var><sup>4</sup>，紫光散射得比蓝光更狠——<strong>那天为什么不是紫的？</strong>三条叠加：太阳光谱里紫本来就比蓝少；高层大气吸收掉一部分最短波；最关键的是<strong>人眼锥细胞对紫极不敏感</strong>，天空送来的是紫蓝混合，大脑读成"天蓝"。<strong>"天是蓝的"一半是大气物理，一半是视觉生理。</strong>另一个常被答错的：云为什么白？水滴比波长<strong>大得多</strong>，1/<var>λ</var><sup>4</sup> 不再适用，各色一视同仁地被散射，混起来就是白。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 生理 / 材料 / 日常</span>
+  "小颗粒偏爱短波"这套机制在很多地方冒出来：
+  <ul>
+<li><strong>眼睛的颜色</strong>：蓝眼睛里<strong>没有蓝色素</strong>，是虹膜基质的细微结构散射短波，机制和天空同源——蓝眼睛是"眼睛里的一小片天"。</li>
+<li><strong>结构色</strong>：蓝闪蝶的翅膀、孔雀的羽毛也不含蓝色染料，颜色来自纳米结构对光的干涉与散射。染料会褪，结构色不会。</li>
+<li><strong>厨房里</strong>：脱脂牛奶对着光看微微发蓝，往清水里滴几滴牛奶打光也一样——蛋白微粒把短波弹了出来。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：蓝天不是天的颜色，是被空气弹回你眼里的那部分阳光。</div>
+<details class="q"><summary><b>思考：</b>如果地球大气突然变得非常稀薄（像火星），白天的天空会是什么样？</summary><div class="qa">接近黑色，太阳周围亮得刺眼。散射总量随分子数下降，蓝穹顶消失，白天也能看到星星——这正是宇航员在月球和空间站看到的景象。火星天空则因悬浮尘埃（颗粒比分子大得多）偏黄褐，日落反而是<strong>蓝的</strong>，和地球正好倒过来。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>光是宇宙唯一的信使 <span class="en">Light as the Universe's Only Messenger</span></h2>
+<span class="pill">光谱学 · Fraunhofer 1814</span>
+<div class="field"><span class="lab">直觉</span>
+  我们从没去过任何一颗恒星，却能说出它由什么组成、有多热、朝哪跑多快。凭什么？<strong>凭它送来的光</strong>。原子吸收和发射光的频率不是任意的，每种元素有一组固定频率，像指纹。把星光摊成彩虹，指纹就摆在那儿。</div>
+<div class="field"><span class="lab">机制</span>
+  原子里的电子只能待在若干确定的能级上。<strong>吸收</strong>一个光子跳上去，要求这份能量恰好等于两级之差；<strong>掉下来</strong>时吐出同样能量的光子。能量对应频率（<var>E</var> = <var>h</var><var>f</var>），于是每种元素只在<strong>特定几条频率</strong>上吸收或发射，摊开成光谱就是几条亮线或暗线。
+  这给出两层信息：<strong>线在哪些位置</strong>说明有哪些元素；<strong>整组线平移了多少</strong>说明光源相对我们的运动（多普勒效应，『波动现象』一期讲过）。1868 年，人们在太阳光谱里发现一条对不上任何已知元素的线，给它起名 helium（源自希腊语"太阳"）——<strong>氦是先在太阳上被发现，二十多年后才在地球上找到的</strong>。</div>
+<figure>
+<svg viewBox="0 0 640 205" role="img" aria-label="光谱吸收线与红移">
+<defs>
+<linearGradient id="vis2" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#7b3fd4"/><stop offset="0.18" stop-color="#3a6fe0"/>
+<stop offset="0.36" stop-color="#26b6c9"/><stop offset="0.52" stop-color="#3fc65a"/>
+<stop offset="0.68" stop-color="#e8d84a"/><stop offset="0.82" stop-color="#ef9a3a"/>
+<stop offset="1" stop-color="#e0503a"/>
+</linearGradient>
+<marker id="rs" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 10,4 0,8" fill="#f0ad5a"/>
+</marker>
+</defs>
+<text x="158" y="62" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">实验室的氢</text>
+<rect x="170" y="40" width="440" height="36" fill="url(#vis2)"/>
+<g fill="#0a0e1a">
+<rect x="249" y="40" width="3.5" height="36"/><rect x="267" y="40" width="3.5" height="36"/>
+<rect x="372" y="40" width="3.5" height="36"/><rect x="447" y="40" width="3.5" height="36"/>
+<rect x="522" y="40" width="3.5" height="36"/>
+</g>
+<text x="158" y="140" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,'Noto Sans SC',sans-serif">远方星系的氢</text>
+<rect x="170" y="118" width="440" height="36" fill="url(#vis2)"/>
+<g fill="#0a0e1a">
+<rect x="285" y="118" width="3.5" height="36"/><rect x="303" y="118" width="3.5" height="36"/>
+<rect x="408" y="118" width="3.5" height="36"/><rect x="483" y="118" width="3.5" height="36"/>
+<rect x="558" y="118" width="3.5" height="36"/>
+</g>
+<g stroke="#96a0ba" stroke-width="1" stroke-dasharray="4 3">
+<line x1="250.5" y1="76" x2="286.5" y2="118"/><line x1="268.5" y1="76" x2="304.5" y2="118"/>
+<line x1="373.5" y1="76" x2="409.5" y2="118"/><line x1="448.5" y1="76" x2="484.5" y2="118"/>
+<line x1="523.5" y1="76" x2="559.5" y2="118"/>
+</g>
+<line x1="516" y1="172" x2="556" y2="172" stroke="#f0ad5a" stroke-width="2" marker-end="url(#rs)"/>
+<text x="568" y="176" font-size="11.5" fill="#f0ad5a" font-family="-apple-system,'Noto Sans SC',sans-serif">红移</text>
+<text x="320" y="196" font-size="11.5" fill="#c3cbe0" text-anchor="middle" font-family="-apple-system,'Noto Sans SC',sans-serif">线的位置说成分，线的位移说速度</text>
+</svg>
+<figcaption>一组暗线的位置与位移，就是一颗恒星的成分表和速度计。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  天文学几乎是一门"只能看不能碰"的科学，光谱把这个劣势变成了优势：宇宙的化学成分、恒星的温度与年龄、星系的退行速度，乃至宇宙正在<strong>加速</strong>膨胀，都是从光谱线里读出来的。顺带一个诚实的提醒：能量是一份一份被吸收和发射的，这个"一份"就是<strong>光子</strong>。但这不等于"光有时是波、有时是粒子，看你怎么想"：<strong>光始终是同一个量子对象</strong>，只是每种实验只逼它露出一个侧面。这条线『量子革命』和『波函数与叠加』两期会走到底。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 化学 / 医学 / 遥感</span>
+  "从光谱指纹反推成分"早已离开天文台：
+  <ul>
+<li><strong>化学</strong>：红外与拉曼光谱是实验室认分子的标准手段，看的就是分子振动模式对应的吸收峰。</li>
+<li><strong>医学</strong>：指夹血氧仪用两个波长的光测血氧——含氧与缺氧的血红蛋白吸收谱不同，一比就出数。</li>
+<li><strong>遥感</strong>：卫星靠多光谱成像判断庄稼是否缺水、水体是否藻华，因为健康植物在近红外反射极强。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：光不只是照亮东西，它是宇宙唯一肯寄给我们的信。</div>
+<details class="q"><summary><b>思考：</b>既然几乎所有天文知识都来自光，那不发光、也不挡光的东西我们怎么知道它存在？</summary><div class="qa">只能靠它对别的东西的<strong>引力</strong>影响。星系外围的恒星转得比可见物质能解释的快得多，这份"多出来的引力"就是暗物质的主要证据——我们至今没收到它寄来的任何一封光的信。『暗物质与暗能量』一期专讲。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>光在水或玻璃里"变慢"了，可光子明明只能以 c 跑。到底是什么慢了？</summary>
+<div class="body">慢的不是光子本身，是<strong>光波整体推进的节奏</strong>。常见说法"光子被原子吸收再发射，一路耽误"其实不对——那样出射方向会乱掉，玻璃就不透明了。更准确的图像是：入射波让介质里的电子跟着振荡，振荡的电子又辐射出次级波，两者叠加后合成波的波峰<strong>整体后移</strong>一点，看起来就是变慢（折射率 <var>n</var> = <var>c</var>/<var>v</var>）。光进水里拐弯，正是这个减速在界面上的几何后果。</div></details>
+<details><summary>为什么不同颜色的光在玻璃里减速的程度不同？这跟彩虹有什么关系？</summary>
+<div class="body">因为电子的响应跟驱动频率有关：频率越接近电子自身的共振频率，响应越强，减速越明显。可见光里蓝光更靠近紫外的共振区，折射率略大、拐得更狠，这就叫<strong>色散</strong>。棱镜把白光摊成彩带靠它，雨后彩虹也靠它——阳光进入水滴、内部反射一次再折射出来，不同颜色出射角差约 2 度，天上就摊开一条弧。彩虹永远背对太阳、张角约 42 度，是同一套几何算出来的。</div></details>
+<details><summary>"光速不变"到底是什么意思？是说光在所有介质里都一样快吗？</summary>
+<div class="body">不是。它说的是<strong>真空中的光速对所有惯性观察者都相同</strong>——朝着光跑、背着光跑，量出来都是同一个数。这才是最反直觉的地方：日常速度会叠加（在行驶的车上扔球，地面看到球更快），光却不会。介质里的光速确实随材料变（水里约 0.75<var>c</var>），粒子甚至可以超过<strong>介质中</strong>的光速，产生蓝色的切伦科夫辐射——核反应堆水池那圈幽蓝就是它。红线始终只有真空中的 <var>c</var>。这条线『狭义相对论』一期会走到底。</div></details>
+<details><summary>如果光子没有质量，为什么它会被黑洞抓住、也会被太阳掰弯？</summary>
+<div class="body">因为引力弯的不是"有质量的东西"，而是<strong>时空本身</strong>。自由运动的物体都沿时空里的"最直路径"走，光也不例外；时空被大质量天体压弯，最直的路径看上去就是弯的。1919 年日食观测到星光经过太阳边缘被偏折，正是广义相对论的第一次决定性验证。黑洞视界内则连最直的路径也全部指向内部，光不是被拽住，是<strong>没有出去的方向了</strong>。这条线『广义相对论』一期会讲透。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li><a href="https://www.feynmanlectures.caltech.edu/I_32.html" target="_blank" rel="noopener">Feynman Lectures, Vol. I Ch. 32：Radiation Damping, Light Scattering</a>——天为什么蓝的第一性讲法</li>
+<li><a href="https://www.feynmanlectures.caltech.edu/I_31.html" target="_blank" rel="noopener">Feynman Lectures, Vol. I Ch. 31：The Origin of the Refractive Index</a>——光在介质里"变慢"的真实机制</li>
+<li><a href="https://en.wikipedia.org/wiki/Rayleigh_scattering" target="_blank" rel="noopener">Wikipedia：Rayleigh scattering</a>——瑞利散射与 1/λ⁴ 律</li>
+<li><a href="https://en.wikipedia.org/wiki/Electromagnetic_spectrum" target="_blank" rel="noopener">Wikipedia：Electromagnetic spectrum</a>——完整波谱与各波段应用</li>
+<li><a href="https://en.wikipedia.org/wiki/Speed_of_light" target="_blank" rel="noopener">Wikipedia：Speed of light</a>——含 1983 年米的重新定义</li>
+<li><a href="https://en.wikipedia.org/wiki/Fraunhofer_lines" target="_blank" rel="noopener">Wikipedia：Fraunhofer lines</a>——太阳光谱暗线与光谱学的开端</li>
+<li><a href="https://en.wikipedia.org/wiki/QED:_The_Strange_Theory_of_Light_and_Matter" target="_blank" rel="noopener">Feynman，<em>QED: The Strange Theory of Light and Matter</em></a>——光与物质相互作用的经典科普</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

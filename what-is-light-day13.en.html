@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: What Is Light · Day 13</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>What Is Light</h1>
+<div class="meta">Day 13 · 2026 · Phase C Waves, Light &amp; Electromagnetism</div>
+<div class="tagline">What your eyes can pick up is a pitifully narrow slit in the electromagnetic spectrum — and "visible" is half the Sun's doing, half water's.</div>
+</header>
+<div class="intro">
+Light hands you the world, and the price is that you assume you're seeing all of it. WiFi, a microwave oven, a TV remote, a medical X-ray and the sunlight through your window are <b>the same thing</b>, differing only in how fast they wiggle — and the band the human eye collects is comically thin. Three questions here: <b>why visible light is that particular band</b>, <b>why <var>c</var> is special enough to be written into the definition of the metre</b>, and one almost everyone has asked and few have been answered correctly — <b>why the sky is blue rather than violet</b>.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Visible Light: One Narrow Slit</h2>
+<span class="pill">Spectrum · 380–700 nm</span>
+<div class="field"><span class="lab">Intuition</span>
+  Electromagnetic waves differ in exactly one way: <strong>how fast they wiggle</strong>. Slow is radio, faster is microwave, faster still is infrared (the "radiant heat" your skin feels), a hair faster and your eyes suddenly light up — that's visible light; keep going and ultraviolet burns you, X-rays pass through your hand, gamma rays arrive from exploding stars. These aren't seven kinds of thing; they're <strong>different pitches on one string</strong>. And the human ear for it hears <strong>less than a single octave</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Wavelength, frequency and the speed of light are locked together by one minimal relation:
+  <div class="eq"><var>c</var> = <var>λ</var> <var>f</var></div>
+<div class="gloss"><var>λ</var> (Greek letter "lambda") is the <strong>wavelength</strong> — the distance between neighbouring crests; <var>f</var> is the <strong>frequency</strong> — wiggles per second; <var>c</var> is the speed of light. <var>c</var> is fixed, so wavelength and frequency are two faces of one coin: shorter wavelength means higher frequency.</div>
+  One more relation connects the wave to energy: a single packet of light carries <var>E</var> = <var>h</var><var>f</var>, where <var>h</var> is Planck's constant (a very small fixed number). <strong>Higher frequency, harder each packet hits</strong> — which is why radio passes through you all day unnoticed while an afternoon of ultraviolet damages DNA. It isn't that there is "more" ultraviolet; it's that <strong>each packet</strong> is harder.</div>
+<figure>
+<svg viewBox="0 0 640 236" role="img" aria-label="The electromagnetic spectrum, with visible light as a narrow sliver">
+<defs>
+<linearGradient id="vis" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#7b3fd4"/><stop offset="0.18" stop-color="#3a6fe0"/>
+<stop offset="0.36" stop-color="#26b6c9"/><stop offset="0.52" stop-color="#3fc65a"/>
+<stop offset="0.68" stop-color="#e8d84a"/><stop offset="0.82" stop-color="#ef9a3a"/>
+<stop offset="1" stop-color="#e0503a"/>
+</linearGradient>
+</defs>
+<text x="30" y="28" font-size="11.5" fill="#96a0ba" font-family="-apple-system,sans-serif">Longer wave · less energy per packet</text>
+<text x="610" y="28" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,sans-serif">Shorter wave · more energy per packet</text>
+<rect x="30" y="64" width="120" height="32" fill="#2c3f63"/>
+<rect x="150" y="64" width="85" height="32" fill="#35557f"/>
+<rect x="235" y="64" width="83" height="32" fill="#7a4a34"/>
+<rect x="318" y="64" width="12" height="32" fill="url(#vis)"/>
+<rect x="330" y="64" width="85" height="32" fill="#4a3a70"/>
+<rect x="415" y="64" width="90" height="32" fill="#3d5a52"/>
+<rect x="505" y="64" width="105" height="32" fill="#5a3550"/>
+<g font-size="11.5" fill="#e6ebf7" text-anchor="middle" font-family="-apple-system,sans-serif">
+<text x="90" y="85">Radio</text>
+<text x="192" y="85">Microwave</text>
+<text x="276" y="85">Infrared</text>
+<text x="372" y="85">Ultraviolet</text>
+<text x="460" y="85">X-rays</text>
+<text x="557" y="85">Gamma rays</text>
+</g>
+<line x1="324" y1="56" x2="324" y2="64" stroke="#f0f3fb" stroke-width="1.4"/>
+<text x="324" y="50" font-size="12" fill="#f0f3fb" text-anchor="middle" font-family="-apple-system,sans-serif">Visible</text>
+<g stroke="#5b6480" stroke-width="1" stroke-dasharray="4 3">
+<line x1="318" y1="96" x2="70" y2="134"/>
+<line x1="330" y1="96" x2="600" y2="134"/>
+</g>
+<rect x="70" y="134" width="530" height="34" fill="url(#vis)"/>
+<g font-size="12" fill="#c3cbe0" text-anchor="middle" font-family="-apple-system,sans-serif">
+<text x="128" y="186">Violet</text>
+<text x="222" y="186">Blue</text>
+<text x="322" y="186">Green</text>
+<text x="397" y="186">Yellow</text>
+<text x="450" y="186">Orange</text>
+<text x="534" y="186">Red</text>
+</g>
+<text x="70" y="206" font-size="11" fill="#96a0ba" font-family="Georgia,serif">380 nm</text>
+<text x="600" y="206" font-size="11" fill="#96a0ba" text-anchor="end" font-family="Georgia,serif">700 nm</text>
+<text x="320" y="228" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,sans-serif">The full spectrum spans 20+ orders of magnitude; visible light is one slit</text>
+</svg>
+<figcaption>Blow that slit up and you get the rainbow we know. Everything outside it was always there; nobody issued us the eyes.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Why is that band the visible one? Two reasons conspire: the Sun's output is most concentrated there, so evolving receptors for anything else is a poor deal; and <strong>water is nearly perfectly transparent in exactly that band</strong> — life grew up in water, and an eyeball is a bag of it. So <strong>"visible" isn't a property of light; it's a bargain we struck with this planet</strong>. Infrared isn't invisible — it's just not visible to us.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Biology / Engineering / Astronomy</span>
+  Swap the receiver and the same world puts on a different face:
+  <ul>
+<li><strong>Biology</strong>: bees see ultraviolet, and many flowers carry UV "runway stripes" pointing at the nectar that read as plain white to us; a pit viper's facial pits sense infrared and "see" body heat in total darkness.</li>
+<li><strong>Engineering</strong>: phone cameras carry an IR-cut filter, because the sensor does see infrared and photos go purple without it; night-vision gear does the opposite and collects exactly that band.</li>
+<li><strong>Astronomy</strong>: the same patch of sky shows galactic jets to a radio telescope, hot gas around black holes to an X-ray telescope, and stars being born behind dust to an infrared one — three pictures that hardly look like the same sky.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: all electromagnetic waves are one substance; the eye simply opens an extremely narrow window.</div>
+<details class="q"><summary><b>Think:</b> If we could see every wavelength, would the world get clearer or blurrier?</summary><div class="qa">Blurrier. Your own body's infrared would light you up from the inside — a permanently self-glowing fog. And radio wavelengths run to metres, far too coarse to image any detail. <strong>Seeing narrowly is what lets you see sharply</strong>: a narrow band buys both resolution and a dark enough background.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>c Is Not a Speed Record</h2>
+<span class="pill">c = 299,792,458 m/s · exact by definition</span>
+<div class="field"><span class="lab">Intuition</span>
+  Treating <var>c</var> as "the fastest thing around" misses the point. <var>c</var> is more like an <strong>exchange rate</strong>: it fixes how many metres one second is "worth", converting time and space into the same unit. Anything <strong>without mass</strong> must travel at that rate — not because it strains up to a limit, but because it has <strong>no other option</strong>. Gravitational waves have nothing to do with light and also travel at <var>c</var>, for the same reason. Light rides that bus purely because photons are massless.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Where does the number come from? The issue on the unification of electromagnetism answered that: it's pinned down by two vacuum constants measured in purely electric and magnetic experiments,
+  <div class="eq"><var>c</var> = <span class="frac"><span class="fnum">1</span><span class="fden">√(<var>ε</var><sub>0</sub> <var>μ</var><sub>0</sub>)</span></span></div>
+<div class="gloss"><var>ε</var><sub>0</sub> ("epsilon zero" — the subscript is the <strong>digit 0, zero</strong>) governs electric fields; <var>μ</var><sub>0</sub> ("mu zero") governs magnetic ones. Two constants with nothing to do with light produce exactly the speed of light.</div>
+  A more radical step came in 1983: the General Conference on Weights and Measures redefined the <strong>metre</strong> as "the distance light travels in vacuum in 1/299,792,458 of a second". From that day, <strong>the speed of light stopped being measured and became a fixed defined value</strong> — we no longer measure light with a ruler; we <strong>use light as the ruler</strong>.</div>
+<figure>
+<svg viewBox="0 0 640 160" role="img" aria-label="How long light takes to cross various distances, log scale">
+<defs>
+<marker id="ax" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 10,4 0,8" fill="#c3cbe0"/>
+</marker>
+</defs>
+<text x="40" y="26" font-size="11.5" fill="#96a0ba" font-family="-apple-system,sans-serif">Light travel time (each division = ×1000)</text>
+<line x1="40" y1="120" x2="612" y2="120" stroke="#c3cbe0" stroke-width="1.6" marker-end="url(#ax)"/>
+<g stroke="#5b6480" stroke-width="1.2">
+<line x1="50" y1="120" x2="50" y2="127"/><line x1="140" y1="120" x2="140" y2="127"/>
+<line x1="230" y1="120" x2="230" y2="127"/><line x1="320" y1="120" x2="320" y2="127"/>
+<line x1="410" y1="120" x2="410" y2="127"/><line x1="500" y1="120" x2="500" y2="127"/>
+<line x1="590" y1="120" x2="590" y2="127"/>
+</g>
+<g font-size="11" fill="#96a0ba" text-anchor="middle" font-family="Georgia,serif">
+<text x="50" y="142">10⁻⁹ s</text><text x="140" y="142">10⁻⁶</text><text x="230" y="142">10⁻³</text>
+<text x="320" y="142">1 s</text><text x="410" y="142">10³</text><text x="500" y="142">10⁶</text>
+<text x="590" y="142">10⁹ s</text>
+</g>
+<g stroke="#f0ad5a" stroke-width="1.2">
+<line x1="50" y1="120" x2="50" y2="100"/><line x1="323" y1="120" x2="323" y2="100"/>
+<line x1="401" y1="120" x2="401" y2="74"/><line x1="564" y1="120" x2="564" y2="100"/>
+</g>
+<g fill="#f0ad5a"><circle cx="50" cy="120" r="3.5"/><circle cx="323" cy="120" r="3.5"/>
+<circle cx="401" cy="120" r="3.5"/><circle cx="564" cy="120" r="3.5"/></g>
+<g font-size="11.5" fill="#f0ad5a" font-family="-apple-system,sans-serif">
+<text x="44" y="94">1 ns → 30 cm</text>
+<text x="323" y="94" text-anchor="middle">1.28 s → the Moon</text>
+<text x="401" y="68" text-anchor="middle">8 min 20 s → the Sun</text>
+<text x="578" y="94" text-anchor="end">4.2 yr → nearest star</text>
+</g>
+</svg>
+<figcaption>One and the same <var>c</var>: annoyingly slow at chip scale, hopelessly slow at interstellar scale.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  "Nothing can go faster than light" needs amending: <strong>no information, energy or causal influence can outrun <var>c</var></strong>. Things that carry no information certainly can — sweep a laser pointer across the night sky and the spot's "speed" across the lunar surface can far exceed <var>c</var>. No rule is broken, because <strong>the spot can't carry a message</strong>: it is just different photons arriving at different times, which our brains stitch into "one moving dot". What <var>c</var> limits was never motion — it's <strong>causality</strong>.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Computing / Finance / Spaceflight</span>
+  A finite <var>c</var> is a hard constraint that leaks into everyday engineering:
+  <ul>
+<li><strong>Chips</strong>: a 3 GHz processor has about 0.3 ns per clock cycle, in which light covers only 10 cm — and signals in silicon are slower still. Chips can't be large; that's not a fabrication limit, it's a light-speed limit.</li>
+<li><strong>Finance</strong>: high-frequency trading firms lay the straightest possible fibre between cities, and switch to microwave towers (microwaves in air beat light in glass fibre) to win a few milliseconds.</li>
+<li><strong>Spaceflight</strong>: signals to Mars take 3–22 minutes one way, so a rover can't be "driven live" and has to decide for itself — autonomy forced on engineers by physics.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: c isn't light's speed record, it's the exchange rate of spacetime and the ceiling on causality.</div>
+<details class="q"><summary><b>Think:</b> If the metre is defined by the speed of light, does "measuring the speed of light" still mean anything?</summary><div class="qa">No. Since 1983 <var>c</var> is an exact defined value, so measuring it means measuring your own definition. What actually gets measured is length relative to the second, and the precision bottleneck sits in how well atomic clocks realise the second. That's a standard metrology move: <strong>freeze a very well-measured constant into a definition</strong> and push the uncertainty somewhere more controllable.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Why the Sky Is Blue</h2>
+<span class="pill">Rayleigh scattering · 1871</span>
+<div class="field"><span class="lab">Intuition</span>
+  Sunlight is white, air is transparent, and yet the sky overhead is blue — where does the blue come from? Air molecules bounce a little of the passing light <strong>off in all directions</strong>, and that bouncing is <strong>wildly more efficient for some colours than others</strong>. Blue gets bounced hard, so every direction of sky is sending blue into your eye; red mostly goes straight through, and you only collect it looking at the Sun itself.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  When the scatterer (an air molecule) is far smaller than the wavelength, scattering strength goes roughly as
+  <div class="eq"><var>I</var> ∝ <span class="frac"><span class="fnum">1</span><span class="fden"><var>λ</var><sup>4</sup></span></span></div>
+<div class="gloss">Read: scattering strength is proportional to 1 divided by the <strong>fourth power</strong> of the wavelength. A fourth power is brutally steep — halve the wavelength and scattering is 16× stronger. Blue (~450 nm) against red (~650 nm): (650÷450)<sup>4</sup> ≈ <strong>4.4×</strong>. That modest factor of four is what paints the whole sky.</div>
+  Sunset is the same law seen from the other side: with the Sun low, its light slants through far more air, blue and green are scattered away along the route, and what reaches you <strong>in a straight line</strong> is red and orange. Blue sky and red sunset are <strong>two views of one mechanism</strong>: one counts the light bounced away, the other counts what's left.</div>
+<figure>
+<svg viewBox="0 0 640 306" role="img" aria-label="Noon scattering of blue light versus a reddened sunset beam">
+<defs>
+<marker id="sy" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 9,3.5 0,7" fill="#f5e3a8"/>
+</marker>
+<marker id="sb" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 9,3.5 0,7" fill="#5b9bff"/>
+</marker>
+<marker id="sr" markerWidth="9" markerHeight="7" refX="7.5" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 9,3.5 0,7" fill="#e0674a"/>
+</marker>
+</defs>
+<rect x="8" y="30" width="304" height="264" rx="9" fill="#0f1626" stroke="#26314c"/>
+<rect x="328" y="30" width="304" height="264" rx="9" fill="#0f1626" stroke="#26314c"/>
+<text x="18" y="22" font-size="13" font-weight="700" fill="#f0ad5a" font-family="Georgia,serif">Noon: looking up</text>
+<text x="338" y="22" font-size="13" font-weight="700" fill="#f0ad5a" font-family="Georgia,serif">Sunset: a long slant</text>
+<line x1="20" y1="92" x2="300" y2="92" stroke="#5b6480" stroke-width="1" stroke-dasharray="5 4"/>
+<line x1="340" y1="92" x2="620" y2="92" stroke="#5b6480" stroke-width="1" stroke-dasharray="5 4"/>
+<text x="296" y="86" font-size="10" fill="#5b6480" text-anchor="end" font-family="-apple-system,sans-serif">atmosphere</text>
+<text x="616" y="86" font-size="10" fill="#5b6480" text-anchor="end" font-family="-apple-system,sans-serif">atmosphere</text>
+<line x1="20" y1="262" x2="300" y2="262" stroke="#4a5678" stroke-width="3"/>
+<line x1="340" y1="262" x2="620" y2="262" stroke="#4a5678" stroke-width="3"/>
+<circle cx="46" cy="62" r="12" fill="#f0ad5a"/>
+<g stroke="#f5e3a8" stroke-width="2" marker-end="url(#sy)">
+<line x1="56" y1="70" x2="92" y2="127"/>
+<line x1="57" y1="68" x2="166" y2="100"/>
+<line x1="58" y1="72" x2="243" y2="136"/>
+</g>
+<g fill="#dbe1f0"><circle cx="96" cy="132" r="4"/><circle cx="170" cy="104" r="4"/><circle cx="248" cy="140" r="4"/></g>
+<g stroke="#5b9bff" stroke-width="2" marker-end="url(#sb)">
+<line x1="96" y1="132" x2="150" y2="226"/>
+<line x1="170" y1="104" x2="162" y2="224"/>
+<line x1="248" y1="140" x2="172" y2="227"/>
+</g>
+<g stroke="#5b9bff" stroke-width="1.4" opacity="0.5" marker-end="url(#sb)">
+<line x1="96" y1="132" x2="58" y2="170"/>
+<line x1="170" y1="104" x2="222" y2="68"/>
+<line x1="248" y1="140" x2="290" y2="112"/>
+</g>
+<circle cx="160" cy="238" r="8" fill="none" stroke="#c3cbe0" stroke-width="1.8"/>
+<line x1="160" y1="246" x2="160" y2="262" stroke="#c3cbe0" stroke-width="2"/>
+<text x="160" y="280" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,sans-serif">Blue arrives from every direction</text>
+<circle cx="600" cy="248" r="14" fill="#f0ad5a"/>
+<line x1="586" y1="244" x2="510" y2="240" stroke="#f5e3a8" stroke-width="2.6"/>
+<line x1="510" y1="240" x2="444" y2="238" stroke="#f0ad5a" stroke-width="2.6"/>
+<line x1="444" y1="238" x2="390" y2="236" stroke="#e0674a" stroke-width="2.6" marker-end="url(#sr)"/>
+<g stroke="#5b9bff" stroke-width="1.6" opacity="0.85" marker-end="url(#sb)">
+<line x1="560" y1="242" x2="548" y2="196"/>
+<line x1="505" y1="240" x2="516" y2="190"/>
+<line x1="452" y1="238" x2="440" y2="192"/>
+</g>
+<text x="500" y="176" font-size="11" fill="#7db0ff" text-anchor="middle" font-family="-apple-system,sans-serif">blue scattered away en route</text>
+<circle cx="368" cy="230" r="8" fill="none" stroke="#c3cbe0" stroke-width="1.8"/>
+<line x1="368" y1="238" x2="368" y2="262" stroke="#c3cbe0" stroke-width="2"/>
+<text x="486" y="280" font-size="11.5" fill="#96a0ba" text-anchor="middle" font-family="-apple-system,sans-serif">Long path → blue gone, red-orange left</text>
+</svg>
+<figcaption>Blue sky and red sunset aren't two phenomena: one counts the light bounced away, the other what survives.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  By 1/<var>λ</var><sup>4</sup>, violet scatters harder than blue — <strong>so why isn't the sky violet?</strong> Three effects stack: the Sun emits less violet than blue to begin with; the upper atmosphere absorbs some of the shortest wavelengths; and most importantly <strong>human cone cells are very insensitive to violet</strong>, so the violet-plus-blue mixture arriving from the sky gets read as "sky blue". <strong>"The sky is blue" is half atmospheric physics and half visual physiology.</strong> A related question that's usually answered wrong: why are clouds white? Water droplets are <strong>much larger</strong> than the wavelength, 1/<var>λ</var><sup>4</sup> no longer applies, all colours are scattered even-handedly — and the mixture is white.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Physiology / Materials / Kitchen</span>
+  "Small particles favour short wavelengths" turns up all over:
+  <ul>
+<li><strong>Eye colour</strong>: blue eyes contain <strong>no blue pigment</strong>. Fine structure in the iris stroma scatters short wavelengths by the same mechanism as the sky — a blue eye is a small patch of sky.</li>
+<li><strong>Structural colour</strong>: a morpho butterfly's wing and a peacock's feathers hold no blue dye either; the colour comes from nanostructure interference and scattering. Dyes fade, structural colour doesn't.</li>
+<li><strong>In the kitchen</strong>: skim milk looks faintly blue against the light, and so does water with a few drops of milk in it — protein particles bouncing the short wavelengths back.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: blue isn't the sky's colour, it's the part of sunlight the air bounced into your eye.</div>
+<details class="q"><summary><b>Think:</b> If Earth's atmosphere suddenly became very thin, like Mars', what would daytime sky look like?</summary><div class="qa">Nearly black, with a painfully bright Sun. Total scattering falls with molecule count, the blue dome disappears and stars are visible in daylight — exactly what astronauts see from the Moon and the ISS. Mars' sky is instead yellowish-brown from suspended dust (particles far bigger than molecules), and its sunsets are <strong>blue</strong> — the reverse of Earth's.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Light Is the Universe's Only Messenger</h2>
+<span class="pill">Spectroscopy · Fraunhofer 1814</span>
+<div class="field"><span class="lab">Intuition</span>
+  We have never visited a single star, yet we can state what it's made of, how hot it is and how fast it's moving toward or away from us. On what evidence? <strong>The light it sends</strong>. Atoms absorb and emit only at particular frequencies, a fixed set per element — a fingerprint. Spread starlight into a rainbow and the fingerprint is sitting right there.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Electrons in an atom can only occupy certain energy levels. <strong>Absorbing</strong> a photon to jump up requires that packet's energy to match the gap exactly; <strong>falling back</strong> emits a photon of the same energy. Energy corresponds to frequency (<var>E</var> = <var>h</var><var>f</var>), so each element absorbs or emits at <strong>a few specific frequencies</strong> — which, spread out, appear as a handful of bright or dark lines.
+  That gives two layers of information: <strong>where the lines sit</strong> tells you which elements are present; <strong>how far the whole set has shifted</strong> tells you the source's motion relative to us (the Doppler effect, covered in the issue on wave phenomena). In 1868 a line was found in the solar spectrum matching no known element, and named helium after the Greek for "sun" — <strong>helium was discovered on the Sun and only found on Earth some twenty-five years later</strong>.</div>
+<figure>
+<svg viewBox="0 0 640 205" role="img" aria-label="Absorption lines and their redshift">
+<defs>
+<linearGradient id="vis2" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#7b3fd4"/><stop offset="0.18" stop-color="#3a6fe0"/>
+<stop offset="0.36" stop-color="#26b6c9"/><stop offset="0.52" stop-color="#3fc65a"/>
+<stop offset="0.68" stop-color="#e8d84a"/><stop offset="0.82" stop-color="#ef9a3a"/>
+<stop offset="1" stop-color="#e0503a"/>
+</linearGradient>
+<marker id="rs" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+<polygon points="0,0 10,4 0,8" fill="#f0ad5a"/>
+</marker>
+</defs>
+<text x="158" y="62" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,sans-serif">Hydrogen, lab</text>
+<rect x="170" y="40" width="440" height="36" fill="url(#vis2)"/>
+<g fill="#0a0e1a">
+<rect x="249" y="40" width="3.5" height="36"/><rect x="267" y="40" width="3.5" height="36"/>
+<rect x="372" y="40" width="3.5" height="36"/><rect x="447" y="40" width="3.5" height="36"/>
+<rect x="522" y="40" width="3.5" height="36"/>
+</g>
+<text x="158" y="140" font-size="11.5" fill="#96a0ba" text-anchor="end" font-family="-apple-system,sans-serif">Hydrogen, distant galaxy</text>
+<rect x="170" y="118" width="440" height="36" fill="url(#vis2)"/>
+<g fill="#0a0e1a">
+<rect x="285" y="118" width="3.5" height="36"/><rect x="303" y="118" width="3.5" height="36"/>
+<rect x="408" y="118" width="3.5" height="36"/><rect x="483" y="118" width="3.5" height="36"/>
+<rect x="558" y="118" width="3.5" height="36"/>
+</g>
+<g stroke="#96a0ba" stroke-width="1" stroke-dasharray="4 3">
+<line x1="250.5" y1="76" x2="286.5" y2="118"/><line x1="268.5" y1="76" x2="304.5" y2="118"/>
+<line x1="373.5" y1="76" x2="409.5" y2="118"/><line x1="448.5" y1="76" x2="484.5" y2="118"/>
+<line x1="523.5" y1="76" x2="559.5" y2="118"/>
+</g>
+<line x1="516" y1="172" x2="556" y2="172" stroke="#f0ad5a" stroke-width="2" marker-end="url(#rs)"/>
+<text x="568" y="176" font-size="11.5" fill="#f0ad5a" font-family="-apple-system,sans-serif">redshift</text>
+<text x="320" y="196" font-size="11.5" fill="#c3cbe0" text-anchor="middle" font-family="-apple-system,sans-serif">Where the lines sit = composition. How far they shift = velocity.</text>
+</svg>
+<figcaption>The position and the displacement of a set of dark lines: a star's ingredient list and its speedometer.</figcaption>
+</figure>
+<div class="field"><span class="lab">Why it matters</span>
+  Astronomy is almost entirely a look-don't-touch science, and spectroscopy turns that handicap into an advantage: the chemical make-up of the universe, stellar temperatures and ages, galactic recession speeds, even the fact that expansion is <strong>accelerating</strong>, are all read off spectral lines. One honest aside: energy is absorbed and emitted in discrete packets, and that packet is the <strong>photon</strong>. This does not amount to "light is sometimes a wave and sometimes a particle, depending how you feel about it": <strong>light is always the same quantum object</strong>, and each kind of experiment merely forces one face of it into view. The issues on the quantum revolution and on the wavefunction take this line all the way.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Chemistry / Medicine / Remote sensing</span>
+  "Infer composition from a spectral fingerprint" left the observatory long ago:
+  <ul>
+<li><strong>Chemistry</strong>: infrared and Raman spectroscopy are the standard way to identify molecules in a lab, reading absorption peaks that correspond to vibrational modes.</li>
+<li><strong>Medicine</strong>: a fingertip pulse oximeter uses two wavelengths, because oxygenated and deoxygenated haemoglobin have different absorption spectra — compare the two and you have a number.</li>
+<li><strong>Remote sensing</strong>: satellites judge crop water stress and algal blooms from multispectral imaging, since healthy vegetation reflects strongly in the near infrared.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: light doesn't merely illuminate things — it's the only letter the universe is willing to send us.</div>
+<details class="q"><summary><b>Think:</b> If nearly all astronomical knowledge arrives as light, how do we know about things that neither emit nor block it?</summary><div class="qa">Only through their <strong>gravity</strong> on other things. Stars in the outskirts of galaxies orbit far faster than the visible matter can explain, and that surplus gravity is the main evidence for dark matter — which has never sent us a single letter of light. The issue on dark matter and dark energy takes this up.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>Light "slows down" in water or glass, yet photons only ever travel at c. What exactly is slowing?</summary>
+<div class="body">Not the photon — <strong>the pace at which the wave as a whole advances</strong>. The popular story that "photons get absorbed and re-emitted by atoms, losing time" is wrong: that would scramble the outgoing direction and glass would be opaque. The better picture is that the incoming wave makes the medium's electrons oscillate, those oscillating electrons radiate secondary waves, and the two superpose into a wave whose crests sit slightly <strong>further back</strong> — which looks like a slower speed (refractive index <var>n</var> = <var>c</var>/<var>v</var>). Light bending as it enters water is the geometric consequence of that slowdown at the boundary.</div></details>
+<details><summary>Why does the slowdown differ by colour, and what does that have to do with rainbows?</summary>
+<div class="body">Because an electron's response depends on the driving frequency: the closer the drive is to the electron's own resonance, the stronger the response and the greater the slowdown. Within the visible range blue sits nearer the ultraviolet resonances, so its refractive index is slightly higher and it bends harder. That's <strong>dispersion</strong>. It's what lets a prism fan white light into a band, and what makes a rainbow — sunlight enters a droplet, reflects once inside, refracts out, and the exit angles of different colours differ by about 2°, smearing an arc across the sky. A rainbow always appears opposite the Sun at about 42°, from the same geometry.</div></details>
+<details><summary>What does "the speed of light is constant" actually claim? That light travels equally fast in all media?</summary>
+<div class="body">No. It claims that <strong>light's speed in vacuum is the same for all inertial observers</strong> — run toward the beam or away from it and you measure the same number. That's the genuinely counterintuitive part: ordinary velocities add (throw a ball from a moving car and the ground sees it move faster), light's does not. Speed in a medium does vary with material (about 0.75<var>c</var> in water), and a particle can even outrun light <strong>in that medium</strong>, producing blue Cherenkov radiation — the eerie glow in a reactor pool. The red line is only ever <var>c</var> in vacuum. The issue on special relativity takes this all the way.</div></details>
+<details><summary>If photons are massless, why does a black hole trap them and the Sun bend their path?</summary>
+<div class="body">Because gravity doesn't bend "things with mass" — it bends <strong>spacetime itself</strong>. Freely moving objects follow the straightest available path through spacetime, light included; when a massive body curves spacetime, the straightest path looks bent. Starlight grazing the Sun was seen deflected during the 1919 eclipse, the first decisive test of general relativity. Inside a black hole's horizon every straightest path points inward: light isn't held back so much as left with <strong>no outward direction to take</strong>. The issue on general relativity works this through.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://www.feynmanlectures.caltech.edu/I_32.html" target="_blank" rel="noopener">Feynman Lectures, Vol. I Ch. 32: Radiation Damping, Light Scattering</a> — why the sky is blue, from first principles</li>
+<li><a href="https://www.feynmanlectures.caltech.edu/I_31.html" target="_blank" rel="noopener">Feynman Lectures, Vol. I Ch. 31: The Origin of the Refractive Index</a> — what really "slows" light in a medium</li>
+<li><a href="https://en.wikipedia.org/wiki/Rayleigh_scattering" target="_blank" rel="noopener">Wikipedia: Rayleigh scattering</a> — the 1/λ⁴ law and its limits</li>
+<li><a href="https://en.wikipedia.org/wiki/Electromagnetic_spectrum" target="_blank" rel="noopener">Wikipedia: Electromagnetic spectrum</a> — the full spectrum band by band</li>
+<li><a href="https://en.wikipedia.org/wiki/Speed_of_light" target="_blank" rel="noopener">Wikipedia: Speed of light</a> — including the 1983 redefinition of the metre</li>
+<li><a href="https://en.wikipedia.org/wiki/Fraunhofer_lines" target="_blank" rel="noopener">Wikipedia: Fraunhofer lines</a> — solar dark lines and the birth of spectroscopy</li>
+<li><a href="https://en.wikipedia.org/wiki/QED:_The_Strange_Theory_of_Light_and_Matter" target="_blank" rel="noopener">Feynman, <em>QED: The Strange Theory of Light and Matter</em></a> — the classic popular account of light and matter</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
