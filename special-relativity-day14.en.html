@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Special Relativity · Day 14</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Special Relativity</h1>
+<div class="meta">Day 14 · 2026 · Phase D Relativity</div>
+<div class="tagline">What gets relativised isn't the laws of physics but the word "simultaneous" — to keep one speed invariant, spacetime gives up having a universe-wide "now".</div>
+</header>
+<div class="intro">
+The name has been misleading readers for a century. The theory's claim is not that "everything is relative" — quite the opposite: it insists that some things are <b>absolutely invariant</b>, namely the laws of physics and that speed called <var>c</var>. The trouble is that once you demand an invariant speed, <b>time and length have to give way</b>. And the first casualty is the concept you'd have bet on last: <b>two events happening "at the same time"</b>.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>The Invariance of <var>c</var></h2>
+<span class="pill">principle of relativity · 1905</span>
+<div class="field"><span class="lab">Intuition</span>
+  At sixteen Einstein asked a childlike question: <strong>if I chase a light beam at the speed of light, what do I see?</strong> By everyday experience (catch up with a car at its own speed and it stands still to you), you ought to see a beam of <strong>frozen light</strong>. But no such thing exists in Maxwell's equations — they only allow waves travelling at one fixed speed, and the <span class="nowrap"><var>c</var> = 1/√(<var>ε</var><sub>0</sub><var>μ</var><sub>0</sub>)</span> they hand you (those subscripts are the <strong>digit 0, zero</strong>, meaning vacuum; see <a href="electromagnetism-day12.en.html">"The Unification of Electromagnetism"</a>) has no slot at all for "relative to whom".</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Einstein's move was to accept that as a fact and see what it costs. Two postulates: ① the <strong>principle of relativity</strong> — the laws of physics take the same form in every <strong>inertial frame</strong> (a frame moving uniformly in a straight line, not accelerating); ② the <strong>invariance of light speed</strong> — the vacuum speed of light is the same <var>c</var> for every inertial observer, independent of how the source or the observer moves. The cost is that velocities no longer simply add:
+  <div class="eq"><var>w</var> = <span class="frac"><span class="fnum"><var>u</var> + <var>v</var></span><span class="fden">1 + <var>uv</var>/<var>c</var>²</span></span></div>
+<div class="gloss">A train moves at <var>v</var>, someone aboard throws a ball forward at <var>u</var> (relative to the train), and the ground sees speed <var>w</var>. The <span class="nowrap"><var>uv</var>/<var>c</var>²</span> in the denominator is the whole of what's new: at everyday speeds it is absurdly tiny and the formula collapses back to the schoolroom <span class="nowrap"><var>w</var> = <var>u</var>+<var>v</var></span>; but put <var>u</var> = <var>c</var> and the answer <strong>is always still <var>c</var></strong>. Light isn't a speed you "can't add to" — it's this rule's fixed point.</div></div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <var>c</var> is <strong>not "the speed of light"</strong>; light merely happens to reach it. <var>c</var> is <strong>spacetime's own conversion rate</strong> — the exchange rate turning "one second" into "this much distance". Anything with <strong>no rest mass</strong> travels at it (light, gravitational waves); anything with mass never gets there. That step promotes <var>c</var> from a property of some wave to a <strong>structural constant of spacetime</strong> — and since 1983 the metre has simply been <strong>defined</strong> as the distance light covers in 1/299792458 of a second: the speed of light is no longer measured, it's fixed by decree.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · chips / networks / deep space</span>
+  A finite <var>c</var> is a wall engineering runs into daily:
+  <ul>
+<li><strong>Chips</strong>: at 5 GHz one clock period is 0.2 nanoseconds, in which light travels <strong>6 centimetres</strong> — shorter than the motherboard. A signal crossing the die misses the beat, which is why clock skew and multiple clock domains exist: <strong>a single chip no longer has one unified "now" inside it</strong>.</li>
+<li><strong>Data centres</strong>: two machines 100 metres apart need at least 0.67 microseconds for a round trip; across the Atlantic, at least 60 milliseconds. That's a physical floor, and every difficulty in "globally strongly consistent databases" follows from it.</li>
+<li><strong>Deep space</strong>: Earth–Mars one-way comms take 3–22 minutes, so a rover must decide for itself. "Remote driving" is physically off the table.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: <var>c</var> isn't the speed of light, it's spacetime's conversion rate.</div>
+<details class="q"><summary><b>Ponder:</b> If nothing can outrun <var>c</var>, why do astronomers say some galaxies recede from us faster than light?</summary><div class="qa">Because that isn't "running through space" — it's <strong>space itself getting bigger</strong>. Relativity limits motion through space and says nothing about the expansion of space. Nobody is chasing anybody; new space keeps being made between them. It breaks no rule, and it can't carry a signal.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Relativity of Simultaneity</h2>
+<span class="pill">simultaneity · the train experiment</span>
+<div class="field"><span class="lab">Intuition</span>
+  One carriage, a lamp hung at its exact centre, a detector at each end. <strong>The passenger</strong>: equal distances, equal speed, both ends light up <strong>at once</strong>. <strong>The observer on the platform</strong>: the train is moving forward, so the rear wall runs into the leftward light while the front wall flees from the rightward light — and light travels at <var>c</var> for him too (that's the postulate, no discounts), so the light <strong>reaches the rear wall first</strong>. Neither has miscalculated, and neither may call the other wrong: the word "simultaneous" simply doesn't refer to the same thing in their two mouths.</div>
+<figure>
+<svg aria-label="Train thought experiment: one pair of events, simultaneous on the train and not on the ground" role="img" viewbox="0 0 620 306">
+<defs>
+<marker id="ar" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3">
+<path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path>
+</marker>
+<marker id="av" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3">
+<path d="M0,0 L7,3 L0,6 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<!-- ===== top: train frame ===== -->
+<text fill="#7db0ff" font-weight="700" x="20" y="24">On the train: both ends light up at once</text>
+<rect fill="#141d33" height="54" rx="7" stroke="#2b3a5e" stroke-width="1.5" width="360" x="130" y="42"></rect>
+<circle cx="310" cy="69" fill="#f0ad5a" r="5"></circle>
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="300" x2="150" y1="69" y2="69"></line>
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="320" x2="470" y1="69" y2="69"></line>
+<rect fill="#5b9bff" height="30" width="7" x="131" y="54"></rect>
+<rect fill="#5b9bff" height="30" width="7" x="482" y="54"></rect>
+<text fill="#5b9bff" text-anchor="middle" x="140" y="112">rear ✓ lit</text>
+<text fill="#5b9bff" text-anchor="middle" x="480" y="112">front ✓ lit</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="310" y="112">equal paths → arrive together</text>
+<!-- ===== bottom: ground frame ===== -->
+<text fill="#7db0ff" font-weight="700" x="20" y="176">On the ground: the rear wall lights first</text>
+<rect fill="#141d33" height="54" rx="7" stroke="#2b3a5e" stroke-width="1.5" width="360" x="200" y="196"></rect>
+<rect fill="#5b9bff" height="30" width="7" x="201" y="208"></rect>
+<rect fill="#37456b" height="30" width="7" x="552" y="208"></rect>
+<!-- ground-fixed emission point -->
+<line stroke="#6a5326" stroke-dasharray="4 4" stroke-width="1.2" x1="310" x2="310" y1="186" y2="276"></line>
+<text fill="#8d7a4d" font-size="11.5" text-anchor="middle" x="310" y="290">where the lamp flashed (ground coordinates)</text>
+<!-- light fronts, equal distance both ways -->
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="308" x2="206" y1="223" y2="223"></line>
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="312" x2="414" y1="223" y2="223"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="258" y="215">light: 100</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="363" y="215">light: 100</text>
+<!-- train velocity -->
+<line marker-end="url(#av)" stroke="#9fb0d0" stroke-width="2" x1="470" x2="546" y1="182" y2="182"></line>
+<text fill="#9fb0d0" font-size="12.5" text-anchor="end" x="464" y="186">train speed v</text>
+<text fill="#5b9bff" font-size="12" text-anchor="middle" x="212" y="264">rear runs into it ✓ lit</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="500" y="264">front is fleeing ✗ not yet</text>
+</g>
+</svg>
+<figcaption>Both beams cover the same distance (light is <var>c</var> for everyone), but the walls themselves are moving: the rear one runs into it, the front one ducks away.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  Written out, this is the time line of the Lorentz transformation:
+  <div class="eq">Δ<var>t</var>′ = <var>γ</var> ( Δ<var>t</var> − <span class="frac"><span class="fnum"><var>v</var> Δ<var>x</var></span><span class="fden"><var>c</var>²</span></span> )</div>
+<div class="gloss">Δ ("delta") means "the difference between two events": Δ<var>t</var> is the <strong>time gap</strong> measured in one frame and Δ<var>x</var> their <strong>spatial separation</strong>, Δ<var>t</var>′ ("t prime") is the time gap in the other frame, <var>v</var> is the relative speed of the frames, and <var>γ</var> ("gamma") is for now just a number slightly above 1. The crux is the second term <span class="nowrap"><var>v</var>Δ<var>x</var>/<var>c</var>²</span>: <strong>it is non-zero only when Δ<var>x</var> is non-zero</strong>, i.e. when the events happen in different places. Two events at the same spot are simultaneous for everybody; <strong>the further apart they are, the wider the disagreement about "at once"</strong>.</div></div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  There is no global snapshot called "now". "What is happening in the Andromeda galaxy at this moment" <strong>has no unique answer</strong>: the "now" slice you cut while strolling and the one you cut standing still are <strong>days apart</strong> out at 2.5 million light years.<br/>
+  But don't slide from there into mysticism: this does <strong>not</strong> mean your walking influences Andromeda. Those events are <strong>spacelike separated</strong> from you — unseeable, untouchable, 2.5 million years before light could link you. What relativity actually guarantees is that for any two events <strong>with a causal connection</strong>, every observer agrees on the order; the ones whose order can be shuffled are precisely those that can never reach each other, where the order makes no difference anyway.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · distributed systems</span>
+  Computer science hit the same wall and came out with almost the same structure:
+  <ul>
+<li><strong>Partial order instead of a timeline</strong>: Lamport's 1978 classic points out that a distributed system has no global clock — events only stand in a <strong>partial order</strong> called <strong>happens-before</strong>. Those that can influence each other have a definite order; those that can't are "concurrent" and may be sorted arbitrarily. Same diagram as "causal order absolute, spacelike order observer-dependent". Git recording commits as a DAG (directed acyclic graph) rather than a timeline is exactly this partial order.</li>
+<li><strong>Putting the uncertainty in the interface</strong>: Google Spanner's TrueTime returns not an instant but an <strong>interval</strong> [earliest, latest], and a transaction waits out that interval before committing — an admission that simultaneity is undecidable and can only be bought back with waiting. Stock exchanges go the other way, paying dearly for a single matching engine that manufactures an absolute "now".</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: the universe has no shared "now", only the slice each observer cuts.</div>
+<details class="q"><summary><b>Ponder:</b> If observers can disagree about which event came first, why doesn't an effect ever precede its cause?</summary><div class="qa">Because the disagreement only arises between <strong>spacelike</strong> events — too far apart in space and too close in time for even light to make the trip, so no causal link was possible in the first place. For any two events that a not-faster-than-light signal can connect, every inertial frame computes the same order. Relativity traded the absoluteness of simultaneity for the absoluteness of causation.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Time Dilation &amp; Length Contraction</h2>
+<span class="pill">light clock · the γ factor</span>
+<div class="field"><span class="lab">Intuition</span>
+  Build the most honest clock there is: two parallel mirrors with a light pulse bouncing between them, up and back counting as one "tick". At rest the light runs a <strong>vertical</strong> path; set the whole clock flying sideways and, from where you stand, the light is carried forward while it climbs, so it runs a <strong>slanted</strong> path — and the hypotenuse is longer. Yet light still moves at <var>c</var> for you, not a hair faster. <strong>Longer path, same speed: one tick has to take more time.</strong> A moving clock runs slow not because the clock is faulty, but because time is.</div>
+<figure>
+<svg aria-label="Light clock: vertical path at rest, slanted path when moving, hypotenuse longer" role="img" viewbox="0 0 620 250">
+<defs>
+<marker id="lb" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3">
+<path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path>
+</marker>
+<marker id="gv" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3">
+<path d="M0,0 L6.5,3 L0,6 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<!-- left: rest clock -->
+<text fill="#7db0ff" font-weight="700" text-anchor="middle" x="130" y="26">Clock at rest (its own frame)</text>
+<line stroke="#8fa3c8" stroke-width="4" x1="75" x2="185" y1="52" y2="52"></line>
+<line stroke="#8fa3c8" stroke-width="4" x1="75" x2="185" y1="192" y2="192"></line>
+<line marker-end="url(#lb)" stroke="#f0ad5a" stroke-width="2" x1="130" x2="130" y1="190" y2="58"></line>
+<text fill="#f0ad5a" font-size="12" x="140" y="128">light: c·t₀</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="130" y="216">one tick = t₀ (proper time)</text>
+<line stroke="#26314c" stroke-dasharray="5 6" x1="250" x2="250" y1="30" y2="230"></line>
+<!-- right: moving clock -->
+<text fill="#7db0ff" font-weight="700" text-anchor="middle" x="435" y="26">Same clock flying past (your frame)</text>
+<line stroke="#3d4a6b" stroke-width="3" x1="290" x2="370" y1="192" y2="192"></line>
+<line stroke="#8fa3c8" stroke-width="4" x1="370" x2="450" y1="52" y2="52"></line>
+<line stroke="#8fa3c8" stroke-width="4" x1="450" x2="530" y1="192" y2="192"></line>
+<line marker-end="url(#lb)" stroke="#f0ad5a" stroke-width="2" x1="330" x2="406" y1="190" y2="58"></line>
+<line marker-end="url(#lb)" stroke="#f0ad5a" stroke-width="2" x1="414" x2="490" y1="58" y2="190"></line>
+<line stroke="#5b9bff" stroke-dasharray="4 4" stroke-width="1.4" x1="330" x2="410" y1="192" y2="192"></line>
+<line stroke="#5b9bff" stroke-dasharray="4 4" stroke-width="1.4" x1="410" x2="410" y1="192" y2="54"></line>
+<text fill="#f0ad5a" font-size="12" text-anchor="end" x="360" y="112">c·t/2</text>
+<text fill="#5b9bff" font-size="12" x="416" y="130">c·t₀/2</text>
+<text fill="#5b9bff" font-size="12" text-anchor="middle" x="370" y="208">v·t/2</text>
+<line marker-end="url(#gv)" stroke="#9fb0d0" stroke-width="1.8" x1="470" x2="536" y1="36" y2="36"></line>
+<text fill="#9fb0d0" font-size="12" text-anchor="end" x="464" y="40">v</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="435" y="230">longer hypotenuse → one tick = t &gt; t₀</text>
+</g>
+</svg>
+<figcaption>One clock, one tick: straight edges on the left, slanted on the right. Light speed is fixed, so the slanted trip costs more time — the right triangle hands you γ directly.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  One use of Pythagoras on the right-hand figure does it. Over half a tick the hypotenuse is the light's path <span class="nowrap"><var>c</var><var>t</var>/2</span>, the vertical leg is the mirror gap <span class="nowrap"><var>c</var><var>t</var><sub>0</sub>/2</span>, the horizontal leg is how far the clock itself travelled, <span class="nowrap"><var>v</var><var>t</var>/2</span>. So <span class="nowrap">(<var>ct</var>)² = (<var>ct</var><sub>0</sub>)² + (<var>vt</var>)²</span>:
+  <div class="eq"><var>t</var> = <var>γ</var> <var>t</var><sub>0</sub> ,　<var>γ</var> = <span class="frac"><span class="fnum">1</span><span class="fden">√(1 − <var>v</var>²/<var>c</var>²)</span></span></div>
+<div class="gloss"><var>t</var><sub>0</sub> (that subscript is the <strong>digit 0, zero</strong>) is the time the clock measures <strong>for itself</strong>, called <strong>proper time</strong>; <var>t</var> is the same tick as measured by you standing beside it. <var>γ</var> ("gamma") is always ≥ 1: at <var>v</var> = 0 it equals 1 (no difference at all), and the closer <var>v</var> gets to <var>c</var>, the closer the square root in the denominator comes to the <strong>digit 0 (zero)</strong>, sending <var>γ</var> to infinity. The same <var>γ</var> also governs <strong>length contraction</strong>: a moving object is <span class="nowrap">1/<var>γ</var></span> as long along its direction of travel.</div>
+  A few numbers: at 0.1<var>c</var>, <var>γ</var> ≈ 1.005; at 0.5<var>c</var>, 1.15; at 0.87<var>c</var>, exactly 2; at 0.99<var>c</var>, 7.1. A jet's <var>γ</var> exceeds 1 by about 5×10⁻¹³ — a lifetime of flying won't accumulate a millisecond. <strong>Relativity doesn't switch off at low speed; it's just too small to catch.</strong></div>
+<figure>
+<svg aria-label="The γ factor against speed, rising steeply near the speed of light" role="img" viewbox="0 0 620 250">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12">
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="24" y2="200"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="560" y1="200" y2="200"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="62" y="204">1</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="62" y="180">2</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="62" y="35">8</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" transform="rotate(-90 34 112)" x="34" y="112">γ factor</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="70" y="220">0</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="300" y="220">0.5c</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="530" y="220">c</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="300" y="240">speed v</text>
+<line stroke="#33405f" stroke-dasharray="4 5" x1="70" x2="470" y1="176" y2="176"></line>
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="530" x2="530" y1="24" y2="200"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="end" x="524" y="38">the v = c wall</text>
+<text fill="#8d7a4d" font-size="11.5" text-anchor="end" x="518" y="54">nothing with mass gets here</text>
+<polyline fill="none" points="70,200 116,200 162,199 208,199 254,198 300,196 346,194 392,190 438,184 461,178 484,169 498,158 507,147 516,124 521,102 525,52" stroke="#5b9bff" stroke-width="2.6"></polyline>
+<circle cx="470" cy="176" fill="#f0ad5a" r="4"></circle>
+<text fill="#f0ad5a" font-size="11.5" x="360" y="168">γ=2 takes 0.87c</text>
+<text fill="#96a0ba" font-size="11.5" x="86" y="192">everyday speeds all sit in here, γ≈1</text>
+</g>
+</svg>
+<figcaption>The curve hugs 1 across most of the range — which is why nobody noticed relativity for two thousand years; only near <var>c</var> does it rear up and diverge.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The sky verifies this every second: cosmic rays create <strong>muons</strong> (particles like electrons but 200 times heavier) about 15 km up, and a muon lives on average 2.2 microseconds — enough for 660 metres even at light speed, so it <strong>should never reach the ground</strong>. Yet detectors collect them by the minute. The beauty is that the two frames give completely different accounts that agree: <strong>from the ground</strong>, the muon's clock is slowed by <var>γ</var> ≈ 20 and it lives long enough; <strong>from the muon</strong>, its lifetime is untouched and the 15 km of atmosphere has been squeezed to a few hundred metres. <strong>Time dilation and length contraction aren't two effects; they're two slices of one thing.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary · navigation / accelerators</span>
+  <ul>
+<li><strong>Satellite navigation</strong>: a GPS satellite's atomic clock runs about 7 microseconds a day slow because of its speed (that's only the special-relativistic share; the gravitational share points the other way and is larger — that's for the "General Relativity" issue). Uncorrected, the positional error piles up to <strong>kilometres per day</strong>: the blue dot on your phone casts a signed vote for relativity daily.</li>
+<li><strong>Particle accelerators</strong>: protons in the LHC run at <var>γ</var> ≈ 7500, so the 27-kilometre ring they "feel" is 3.6 metres long. Magnet timing, beam lifetime and collision energy are all computed relativistically.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: a moving clock isn't wrong — the path it takes is a different length.</div>
+<details class="q"><summary><b>Ponder:</b> Motion is relative, so A sees B's clock run slow and B sees A's do the same. Isn't that a contradiction?</summary><div class="qa">No. Comparing clocks in two different places requires first agreeing what "simultaneous" means, and their planes of simultaneity are tilted with respect to each other. As long as they never meet, no objective fact decides between them and both accounts are self-consistent. Once they do meet (the twins), one of them must have switched frames along the way, the symmetry breaks, and the answer is unique.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>What <var>E</var>=<var>mc</var>² Really Says</h2>
+<span class="pill">mass–energy equivalence · 1905</span>
+<div class="field"><span class="lab">Intuition</span>
+  The popular reading is "mass can turn into energy", as though mass were a fuel you burn for energy. The accurate reading is that <strong>mass is already a form of energy</strong> — another name for "the part of the energy that is sitting still". <var>c</var>² is no mysterious conversion engine, just an <strong>exchange rate between units</strong> (kilograms into joules), like the 3600 in "1 hour = 3600 seconds".</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The full expression isn't the famous line but this one:
+  <div class="eq"><var>E</var>² = (<var>pc</var>)² + (<var>mc</var>²)²</div>
+<div class="gloss"><var>E</var> is total energy, <var>p</var> is momentum (how hard it's moving), <var>m</var> is the <strong>rest mass</strong> (also called invariant mass — the value every observer agrees on). Two limits are the useful ones: for an object <strong>at rest</strong>, <var>p</var> = <strong>the digit 0 (zero)</strong> and the formula collapses to <span class="nowrap"><var>E</var> = <var>mc</var>²</span>, so the famous line is only <strong>the at-rest special case</strong>; a photon has <strong>no rest mass</strong>, <var>m</var> = <strong>0 (zero)</strong>, and the formula becomes <span class="nowrap"><var>E</var> = <var>pc</var></span> — no mass, yet energy and momentum, which is what pushes a solar sail.</div>
+  The structure is itself a right triangle: <var>mc</var>² is one leg (what you have standing still), <var>pc</var> is the other (what you get by moving), and the total energy <var>E</var> is the hypotenuse. <strong>However you run, the <var>mc</var>² leg keeps its length</strong> — hence the name "invariant mass".</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  A nuclear reaction does <strong>not</strong> annihilate mass to buy energy. What happens is that the fragments end up <strong>bound more tightly</strong>, the binding energy changes, and so they weigh slightly less than what went in, the difference having escaped as kinetic energy and radiation. Seal all that escaping energy <strong>inside a closed box</strong> and weigh it, and the total mass is unchanged to the last decimal. <strong>Conservation of mass and conservation of energy were never two laws; they are one.</strong><br/>
+  A harder blow: about <strong>99%</strong> of your body's mass is not the rest mass of its quarks but the strong-interaction <strong>field energy</strong> binding those quarks inside protons; what the Higgs mechanism supplies directly is roughly 1% (the issue on the origin of mass and symmetry will do that accounting). "Mass is energy" isn't a literary flourish — it's the literal composition of your body weight.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · astrophysics / energy / chemistry</span>
+  <ul>
+<li><strong>Stars and life</strong>: the Sun turns about <strong>4×10⁹ kilograms</strong> (four million tonnes) of mass into radiation every second. Photosynthesis, food, fossil fuels, your body heat right now — all downstream of that one exchange machine.</li>
+<li><strong>Energy</strong>: a 1-gigawatt nuclear plant running flat out for a year truly "loses" <strong>about one kilogram</strong> of mass. Conversely, one gram is about 9×10¹³ joules — the Hiroshima bomb released roughly 6×10¹³ joules, a mass deficit of <strong>under a gram</strong>.</li>
+<li><strong>Chemistry</strong>: chemical reactions have a mass deficit too, about a hundred million times smaller — burn a tonne of coal and the products are about 0.3 micrograms lighter, undetectable on any balance, which is why the "conservation of mass" taught in chemistry holds perfectly at its own precision.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: mass isn't the raw material of energy — mass is energy locked in place.</div>
+<details class="q"><summary><b>Ponder:</b> Heat a sealed box of gas so the molecules move faster. Does the box get heavier?</summary>
+    <div class="qa">Yes. A box's invariant mass includes every kind of energy inside it divided by <var>c</var>², molecular kinetic energy included — about 1.1×10⁻¹⁷ kg per extra joule. Unmeasurable, but unambiguous in principle: a wound spring outweighs a slack one, hot coffee outweighs cold.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>Why is "relativity" a badly chosen name?</summary>
+<div class="body">Because it suggests the subject is what varies, when the skeleton of the theory is what <strong>doesn't</strong>. Besides light speed there is a deeper invariant: the <strong>spacetime interval</strong> between two events, <span class="nowrap"><var>s</var>² = (<var>c</var>Δ<var>t</var>)² − Δ<var>x</var>²</span>. Observers disagree about Δ<var>t</var> and Δ<var>x</var> separately, yet that combination comes out <strong>the same for everyone</strong> — like a stick whose projected length changes with viewing angle while the stick's own length does not. Einstein at one point favoured calling it "the theory of invariants". That invariant is the front door to the issue on spacetime.</div></details>
+<details><summary>The twin paradox: who really ends up younger, and on what grounds?</summary>
+<div class="body">The one who flies out and comes back, uncontroversially. The resolution is that the two are <strong>not symmetric</strong>: the stay-at-home sits in one inertial frame throughout, while the traveller must <strong>turn around</strong>, and turning around means switching frames. The prettier statement comes from spacetime geometry: each person's <strong>proper time</strong> is the "length" of their own worldline, and in spacetime <strong>the straighter the path, the more proper time it holds</strong> (exactly the reverse of "a straight line is the shortest path" in Euclidean geometry). The stay-at-home goes straight, so they age the most.</div></details>
+<details><summary>Lorentz and Poincaré wrote down the same transformation first. Why does the credit go to Einstein?</summary>
+<div class="body">The formulae did come first. Lorentz read length contraction as a <strong>real deformation</strong> of an object moving through the <strong>ether</strong>, and his "local time" was to him a mathematical convenience; Poincaré came closer still but wouldn't part with the ether either. Einstein's step was <strong>ontological</strong>: he threw the ether out entirely and declared these to be not the dynamics of objects but <strong>the kinematics of spacetime itself</strong> — every inertial frame's time equally real, none more "true" than another.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>Einstein, <em>"On the Electrodynamics of Moving Bodies"</em> (1905) — <a href="https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies">full English translation (Wikisource)</a>; the trains and clocks appear on the opening pages</li>
+<li>Feynman, <em>The Feynman Lectures on Physics</em> Vol. I ch.15–17 — <a href="https://www.feynmanlectures.caltech.edu/I_15.html">free full text from Caltech</a></li>
+<li>Taylor &amp; Wheeler, <em>Spacetime Physics</em> — <a href="https://www.eftaylor.com/spacetimephysics/">the authors' free second edition</a>, the finest treatment of the invariant interval</li>
+<li>Sean Carroll, <em>The Biggest Ideas in the Universe: Space, Time, and Motion</em> (2022)</li>
+<li><a href="https://en.wikipedia.org/wiki/Relativity_of_simultaneity">Wikipedia: Relativity of simultaneity</a> / <a href="https://en.wikipedia.org/wiki/Special_relativity">Special relativity</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ives%E2%80%93Stilwell_experiment">The Ives–Stilwell experiment</a> — the classic direct measurement of time dilation</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

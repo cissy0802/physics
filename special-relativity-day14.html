@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：狭义相对论 · Day 14</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>狭义相对论</h1>
+<div class="meta">Day 14 · 2026 · Phase D 相对论</div>
+<div class="tagline">被相对化的不是物理定律，而是"同时"这个词——为了保住一个不变的速度，时空交出了全宇宙统一的"现在"。</div>
+</header>
+<div class="intro">
+"相对论"这个名字骗了一百年的读者。它真正的主张不是"一切都是相对的"，恰恰相反：它坚持有些东西<b>绝对不变</b>——物理定律，以及那个叫 <var>c</var> 的速度。麻烦在于，一旦你要求速度不变，<b>时间和长度就必须让步</b>。而第一个牺牲品，是你以为最不可能出问题的那个概念：<b>两件事"同时"发生</b>。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>光速不变 <span class="en">The Invariance of <var>c</var></span></h2>
+<span class="pill">相对性原理 · 1905</span>
+<div class="field"><span class="lab">直觉</span>
+  十六岁的爱因斯坦问过一个孩子气的问题：<strong>如果我以光速追一束光，会看到什么？</strong>按日常经验（追上同速的车，它在你眼里就静止），你该看到一束<strong>冻住不动的光</strong>。可这东西在麦克斯韦方程里<strong>根本不存在</strong>——那套方程只允许以固定速度传播的波，而它算出的 <span class="nowrap"><var>c</var> = 1/√(<var>ε</var><sub>0</sub><var>μ</var><sub>0</sub>)</span>（下标是<strong>数字 0，零</strong>，代表真空；见<a href="electromagnetism-day12.html">「电磁的统一」</a>）里压根没有"相对于谁"这一栏。</div>
+<div class="field"><span class="lab">机制</span>
+  爱因斯坦把它当成事实接受，然后看代价。两条公设：① <strong>相对性原理</strong>——在所有<strong>惯性系</strong>（不加速、匀速直线运动的参考系）里物理定律形式相同；② <strong>光速不变</strong>——真空光速对任何惯性观察者都是同一个 <var>c</var>，与光源和观察者的运动无关。代价是速度不能再直接相加：
+  <div class="eq"><var>w</var> = <span class="frac"><span class="fnum"><var>u</var> + <var>v</var></span><span class="fden">1 + <var>uv</var>/<var>c</var>²</span></span></div>
+<div class="gloss">火车以 <var>v</var> 前进，车上的人再以 <var>u</var>（相对火车）向前扔球，地面看到球速 <var>w</var>。分母的 <span class="nowrap"><var>uv</var>/<var>c</var>²</span> 是全部的新东西：日常速度下它小得离谱，公式退回小学的 <span class="nowrap"><var>w</var> = <var>u</var>+<var>v</var></span>；而只要把 <var>u</var> 换成 <var>c</var>，算出来<strong>永远还是 <var>c</var></strong>。光速不是"加不上去"，它是这条法则的不动点。</div></div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <var>c</var> <strong>不是"光的速度"</strong>，光只是恰好跑到了它。<var>c</var> 是<strong>时空自带的换算率</strong>——把"一秒"折成"多长距离"的汇率：凡<strong>无静质量</strong>的东西都以它传播（光、引力波），凡有质量的都到不了。这一步把 <var>c</var> 从"某种波的性质"提拔成<strong>时空的结构常数</strong>——1983 年起，米干脆被<strong>定义</strong>成光在 1/299792458 秒里走的距离：光速不再是测出来的，是定死的。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 芯片 / 网络 / 深空</span>
+  <var>c</var> 有限，在工程里是一堵天天撞上的墙：
+  <ul>
+<li><strong>芯片</strong>：5 GHz 主频下一个时钟周期只有 0.2 纳秒，光只能走 <strong>6 厘米</strong>，比主板还短。信号跨过芯片就赶不上同一拍，于是有了时钟偏斜（clock skew）与多时钟域——<strong>一块芯片内部已经没有统一的"此刻"</strong>。</li>
+<li><strong>数据中心</strong>：相隔 100 米的两台机器一来一回最快 0.67 微秒，跨大西洋往返至少 60 毫秒——物理下限，"全球强一致数据库"的难点由它定下。</li>
+<li><strong>深空</strong>：地火单程通信 3–22 分钟，所以火星车必须自主决策，"遥控开车"物理上做不到。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：<var>c</var> 不是光的速度，是时空的换算率。</div>
+<details class="q"><summary><b>思考：</b>既然任何信息都跑不过 <var>c</var>，为什么天文学家说有些星系正以超过光速的速度远离我们？</summary><div class="qa">因为那不是"在空间里跑"，而是<strong>空间本身在变大</strong>。相对论限制的是穿过空间的速度，对空间自身的膨胀没有约束——没有谁在追赶谁，只是它们之间不断有新的空间被造出来。不违反相对论，也不能用来传信。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>同时性的相对 <span class="en">Relativity of Simultaneity</span></h2>
+<span class="pill">同时性 · 火车思想实验</span>
+<div class="field"><span class="lab">直觉</span>
+  一节车厢，正中央挂一盏灯，两端各有一个探测器。<strong>车上的人</strong>：两边距离相同、速度相同，两端<strong>同时</strong>亮。<strong>站台上的人</strong>：车在往前开，后壁迎着左行的光扑上来，前壁却在往前逃，而光速对他也是 <var>c</var>（公设，不许打折），于是光<strong>先追上后壁</strong>。两人都没算错，也都没资格说对方错："同时"这个词在他们嘴里就不是同一件事。</div>
+<figure>
+<svg aria-label="火车思想实验：同一对事件在车上同时、在地面不同时" role="img" viewbox="0 0 620 306">
+<defs>
+<marker id="ar" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3">
+<path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path>
+</marker>
+<marker id="av" markerheight="10" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="7" refy="3">
+<path d="M0,0 L7,3 L0,6 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<!-- ===== top: train frame ===== -->
+<text fill="#7db0ff" font-weight="700" x="20" y="24">车上的人看：两端同时亮</text>
+<rect fill="#141d33" height="54" rx="7" stroke="#2b3a5e" stroke-width="1.5" width="360" x="130" y="42"></rect>
+<circle cx="310" cy="69" fill="#f0ad5a" r="5"></circle>
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="300" x2="150" y1="69" y2="69"></line>
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="320" x2="470" y1="69" y2="69"></line>
+<rect fill="#5b9bff" height="30" width="7" x="131" y="54"></rect>
+<rect fill="#5b9bff" height="30" width="7" x="482" y="54"></rect>
+<text fill="#5b9bff" text-anchor="middle" x="134" y="112">后壁 ✓ 亮</text>
+<text fill="#5b9bff" text-anchor="middle" x="486" y="112">前壁 ✓ 亮</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="310" y="112">两段路一样长 → 同时到</text>
+<!-- ===== bottom: ground frame ===== -->
+<text fill="#7db0ff" font-weight="700" x="20" y="176">地面上的人看：后壁先亮</text>
+<rect fill="#141d33" height="54" rx="7" stroke="#2b3a5e" stroke-width="1.5" width="360" x="200" y="196"></rect>
+<rect fill="#5b9bff" height="30" width="7" x="201" y="208"></rect>
+<rect fill="#37456b" height="30" width="7" x="552" y="208"></rect>
+<!-- ground-fixed emission point -->
+<line stroke="#6a5326" stroke-dasharray="4 4" stroke-width="1.2" x1="310" x2="310" y1="186" y2="276"></line>
+<text fill="#8d7a4d" font-size="11.5" text-anchor="middle" x="310" y="290">灯亮的地点（地面坐标）</text>
+<!-- light fronts, equal distance both ways -->
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="308" x2="206" y1="223" y2="223"></line>
+<line marker-end="url(#ar)" stroke="#f0ad5a" stroke-width="1.8" x1="312" x2="414" y1="223" y2="223"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="258" y="215">光走了 100</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="363" y="215">光走了 100</text>
+<!-- train velocity -->
+<line marker-end="url(#av)" stroke="#9fb0d0" stroke-width="2" x1="470" x2="546" y1="182" y2="182"></line>
+<text fill="#9fb0d0" font-size="12.5" text-anchor="end" x="464" y="186">车速 v</text>
+<text fill="#5b9bff" text-anchor="middle" x="205" y="264">后壁迎上来 ✓ 已亮</text>
+<text fill="#96a0ba" text-anchor="middle" x="520" y="264">前壁在逃 ✗ 还没亮</text>
+</g>
+</svg>
+<figcaption>两道光走了同样的距离（光速对谁都是 <var>c</var>），但车壁自己在动：后壁迎上去、前壁躲开。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  把这件事写成公式，就是洛伦兹变换里管时间的那一行：
+  <div class="eq">Δ<var>t</var>′ = <var>γ</var> ( Δ<var>t</var> − <span class="frac"><span class="fnum"><var>v</var> Δ<var>x</var></span><span class="fden"><var>c</var>²</span></span> )</div>
+<div class="gloss">Δ（读"delta"）是"两件事之间的差"：Δ<var>t</var> 是一个系里量到的<strong>时间差</strong>、Δ<var>x</var> 是它们的<strong>空间距离</strong>，Δ<var>t</var>′（读"t 撇"）是另一个系里的时间差，<var>v</var> 是两系的相对速度，<var>γ</var>（读"gamma"）先只当它是个略大于 1 的数。要害是第二项 <span class="nowrap"><var>v</var>Δ<var>x</var>/<var>c</var>²</span>：<strong>只有 Δ<var>x</var> 不为 0（两事分处异地）时它才不为零</strong>。同地发生的两件事对谁都同时；<strong>隔得越远，"同时"的分歧越大</strong>。</div></div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  宇宙里没有一张全局的"现在"快照。"此刻仙女座星系正在发生什么"<strong>没有唯一答案</strong>：你散步和你站住，划出的那条"现在"切面会在 250 万光年外错开<strong>好几天</strong>。<br/>
+  但别顺着滑进玄学：这<strong>不</strong>意味着你能用走路影响仙女座。那些事件与你是<strong>类空间隔</strong>——看不见也碰不到，光要走 250 万年才能建立联系。相对论真正保证的是：凡<strong>有因果联系</strong>的两件事，所有观察者对先后的判断<strong>完全一致</strong>；能被打乱顺序的，恰恰是那些互相够不着、怎么排都无所谓的事。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 分布式系统</span>
+  计算机科学撞上同一堵墙，撞出的解法几乎同构：
+  <ul>
+<li><strong>偏序取代时间线</strong>：Lamport 1978 年那篇经典论文指出，分布式系统没有全局时钟，事件之间只有 <strong>happens-before</strong> 这种<strong>偏序</strong>——能互相影响的有确定先后，够不着的就"并发"、排序随意。和"因果序绝对、类空事件随观察者"是同一张结构图；Git 用 DAG（有向无环图）记提交，正是这个偏序。</li>
+<li><strong>把不确定性写进接口</strong>：Google Spanner 的 TrueTime 不返回时刻而返回<strong>区间</strong>[最早, 最晚]，提交前先"等过"它——等于承认同时性不可判定，只能用等待买回来。证券交易所则反着来，花大代价养单一撮合引擎，硬造一个绝对的"现在"。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：宇宙没有共同的"现在"，只有每个观察者自己切的那一刀。</div>
+<details class="q"><summary><b>思考：</b>既然不同观察者对"谁先谁后"能有分歧，为什么不会出现"结果先于原因"的荒唐事？</summary><div class="qa">因为分歧只发生在<strong>类空</strong>事件之间——隔得太远、间隔太短，连光都来不及跑一趟，本就不可能有因果关系。凡能被不超光速的信号联系起来的两件事，任何惯性系算出的先后都相同。相对论是用"因果的绝对"换掉了"同时的绝对"。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>时间膨胀与长度收缩 <span class="en">Time Dilation &amp; Length Contraction</span></h2>
+<span class="pill">光钟 · γ 因子</span>
+<div class="field"><span class="lab">直觉</span>
+  造一只最诚实的钟：两面平行的镜子，中间弹一个光脉冲，弹上去再回来算"嘀嗒"一次。钟静止时光走<strong>竖直</strong>路径；让整只钟横着飞过去，在你看来光往上走的同时也被带着往前，走的是<strong>斜</strong>路径，而斜边更长。可光速对你还是 <var>c</var>，一分不多。<strong>路更长、速度不变，一次"嘀嗒"就得花更多时间</strong>。运动的钟走得慢，不是钟出了毛病，是时间本身。</div>
+<figure>
+<svg aria-label="光钟：静止时光走竖直路径，运动时光走斜边，斜边更长" role="img" viewbox="0 0 620 250">
+<defs>
+<marker id="lb" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3">
+<path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path>
+</marker>
+<marker id="gv" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3">
+<path d="M0,0 L6.5,3 L0,6 Z" fill="#9fb0d0"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<!-- left: rest clock -->
+<text fill="#7db0ff" font-weight="700" text-anchor="middle" x="130" y="26">钟静止（钟自己的视角）</text>
+<line stroke="#8fa3c8" stroke-width="4" x1="75" x2="185" y1="52" y2="52"></line>
+<line stroke="#8fa3c8" stroke-width="4" x1="75" x2="185" y1="192" y2="192"></line>
+<line marker-end="url(#lb)" stroke="#f0ad5a" stroke-width="2" x1="130" x2="130" y1="190" y2="58"></line>
+<text fill="#f0ad5a" font-size="12" x="140" y="128">光走 c·t₀</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="130" y="216">一次嘀嗒 = t₀（固有时）</text>
+<line stroke="#26314c" stroke-dasharray="5 6" x1="250" x2="250" y1="30" y2="230"></line>
+<!-- right: moving clock -->
+<text fill="#7db0ff" font-weight="700" text-anchor="middle" x="435" y="26">同一只钟横着飞（你的视角）</text>
+<!-- mirrors: start position (ghost) and end position -->
+<line stroke="#3d4a6b" stroke-width="3" x1="290" x2="370" y1="192" y2="192"></line>
+<line stroke="#8fa3c8" stroke-width="4" x1="370" x2="450" y1="52" y2="52"></line>
+<line stroke="#8fa3c8" stroke-width="4" x1="450" x2="530" y1="192" y2="192"></line>
+<!-- light path: up-then-down -->
+<line marker-end="url(#lb)" stroke="#f0ad5a" stroke-width="2" x1="330" x2="406" y1="190" y2="58"></line>
+<line marker-end="url(#lb)" stroke="#f0ad5a" stroke-width="2" x1="414" x2="490" y1="58" y2="190"></line>
+<!-- right triangle on first half -->
+<line stroke="#5b9bff" stroke-dasharray="4 4" stroke-width="1.4" x1="330" x2="410" y1="192" y2="192"></line>
+<line stroke="#5b9bff" stroke-dasharray="4 4" stroke-width="1.4" x1="410" x2="410" y1="192" y2="54"></line>
+<text fill="#f0ad5a" font-size="12" text-anchor="end" x="360" y="112">c·t/2</text>
+<text fill="#5b9bff" font-size="12" x="416" y="130">c·t₀/2</text>
+<text fill="#5b9bff" font-size="12" text-anchor="middle" x="370" y="208">v·t/2</text>
+<line marker-end="url(#gv)" stroke="#9fb0d0" stroke-width="1.8" x1="470" x2="536" y1="36" y2="36"></line>
+<text fill="#9fb0d0" font-size="12" text-anchor="end" x="464" y="40">v</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="435" y="230">斜边更长 → 一次嘀嗒 = t &gt; t₀</text>
+</g>
+</svg>
+<figcaption>同一只钟、同一次嘀嗒：左边光走直边，右边走斜边。光速不变，斜边那次就更费时间——直角三角形直接把 γ 交了出来。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  对着右图用一次勾股定理就够。半程里斜边是光走的路 <span class="nowrap"><var>c</var><var>t</var>/2</span>、竖直边是镜子间距 <span class="nowrap"><var>c</var><var>t</var><sub>0</sub>/2</span>、水平边是钟自己走的 <span class="nowrap"><var>v</var><var>t</var>/2</span>，于是 <span class="nowrap">(<var>ct</var>)² = (<var>ct</var><sub>0</sub>)² + (<var>vt</var>)²</span>：
+  <div class="eq"><var>t</var> = <var>γ</var> <var>t</var><sub>0</sub> ，　<var>γ</var> = <span class="frac"><span class="fnum">1</span><span class="fden">√(1 − <var>v</var>²/<var>c</var>²)</span></span></div>
+<div class="gloss"><var>t</var><sub>0</sub>（下标是<strong>数字 0，零</strong>）是钟<strong>自己</strong>量到的时间，叫<strong>固有时</strong>；<var>t</var> 是你在旁边量到的同一次嘀嗒。<var>γ</var> 读"gamma"，永远 ≥ 1：<var>v</var> 为 0 时 <var>γ</var>=1（毫无差别），<var>v</var> 越接近 <var>c</var>，分母的根号越接近<strong>数字 0（零）</strong>，<var>γ</var> 就冲向无穷。同一个 <var>γ</var> 还管着<strong>长度收缩</strong>：运动物体沿运动方向缩成 <span class="nowrap">1/<var>γ</var></span> 长。</div>
+  几个数：0.1<var>c</var> 时 <var>γ</var>≈1.005，0.5<var>c</var> 时 1.15，0.87<var>c</var> 时正好 2，0.99<var>c</var> 时 7.1；而喷气客机的 <var>γ</var> 只比 1 大出约 5×10⁻¹³，飞一辈子攒不出一毫秒。<strong>相对论并没在低速时"关掉"，只是小到测不出。</strong></div>
+<figure>
+<svg aria-label="γ 因子随速度变化的曲线，接近光速时急剧上升" role="img" viewbox="0 0 620 250">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12">
+<!-- axes -->
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="24" y2="200"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="560" y1="200" y2="200"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="62" y="204">1</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="62" y="180">2</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="62" y="35">8</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" transform="rotate(-90 34 112)" x="34" y="112">γ 因子</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="70" y="220">0</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="300" y="220">0.5c</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="530" y="220">c</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="300" y="240">速度 v</text>
+<!-- gamma = 2 guide -->
+<line stroke="#33405f" stroke-dasharray="4 5" x1="70" x2="470" y1="176" y2="176"></line>
+<!-- wall at c -->
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="530" x2="530" y1="24" y2="200"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="end" x="524" y="38">v = c 这堵墙</text>
+<text fill="#8d7a4d" font-size="11.5" text-anchor="end" x="524" y="54">有质量的东西到不了</text>
+<!-- curve -->
+<polyline fill="none" points="70,200 116,200 162,199 208,199 254,198 300,196 346,194 392,190 438,184 461,178 484,169 498,158 507,147 516,124 521,102 525,52" stroke="#5b9bff" stroke-width="2.6"></polyline>
+<circle cx="470" cy="176" fill="#f0ad5a" r="4"></circle>
+<text fill="#f0ad5a" font-size="11.5" x="380" y="168">γ=2 要跑到 0.87c</text>
+<text fill="#96a0ba" font-size="11.5" x="86" y="192">日常速度全挤在这一小段里，γ≈1</text>
+</g>
+</svg>
+<figcaption>曲线在大半个区间里几乎贴着 1——这就是两千年没人发现相对论的原因；只有逼近 <var>c</var> 时它才陡然翘起并发散。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  天上每秒都在验证：宇宙射线在约 15 公里高空撞出 <strong>μ子</strong>（像电子但重 200 倍的粒子），平均只活 2.2 微秒——就算以光速跑也只够走 660 米，<strong>本该到不了地面</strong>，可地面探测器每分钟都收到大量 μ子。妙在两个参考系给出两套完全不同却结论一致的解释：<strong>地面看</strong>，μ子的钟被 <var>γ</var>≈20 拖慢，它"活"够了；<strong>μ子自己看</strong>，寿命一点没变，是那 15 公里大气被压成了几百米。<strong>时间膨胀和长度收缩不是两个效应，是同一件事的两种切法。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 导航 / 加速器</span>
+  <ul>
+<li><strong>卫星导航</strong>：GPS 卫星的原子钟因高速运行每天比地面慢约 7 微秒（这只是狭义相对论那份；引力那份方向相反且更大，后面「广义相对论」一期再算）。不校正的话每天累积的定位误差是<strong>公里量级</strong>——手机上那个蓝点每天都在给相对论投实名票。</li>
+<li><strong>粒子加速器</strong>：LHC 里质子的 <var>γ</var> 约 7500，它们"感觉到"的 27 公里环长只有 3.6 米。磁铁时序、束流寿命、对撞能量全按相对论公式算。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：运动的钟不是走错了，是它走的那条路本来就不一样长。</div>
+<details class="q"><summary><b>思考：</b>运动是相对的，A 看 B 的钟慢、B 看 A 的钟也慢——这不自相矛盾吗？</summary><div class="qa">不矛盾。"比较相隔两地的钟"必须先约定什么叫同时，而两人的"同时面"本来就是斜的。只要不再见面，就没有任何客观事实能判谁对，各自的说法都自洽。一旦见面（双生子那样），必有一人中途换过参考系，对称破了，答案唯一。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2><var>E</var>=<var>mc</var>² 的真意 <span class="en">What Mass–Energy Equivalence Really Says</span></h2>
+<span class="pill">质能等价 · 1905</span>
+<div class="field"><span class="lab">直觉</span>
+  流行的读法是"质量可以变成能量"，好像质量是种燃料，烧掉换来能量。更准确的读法是：<strong>质量本来就是能量的一种形态</strong>——"待在原地不动的那部分能量"的另一个名字。<var>c</var>² 不是神秘的转换机器，只是<strong>单位换算的汇率</strong>（千克折成焦耳），就像"1 小时 = 3600 秒"里的 3600。</div>
+<div class="field"><span class="lab">机制</span>
+  完整的式子其实不是那条名句，而是它：
+  <div class="eq"><var>E</var>² = (<var>pc</var>)² + (<var>mc</var>²)²</div>
+<div class="gloss"><var>E</var> 是总能量、<var>p</var> 是动量（跑得多"凶"）、<var>m</var> 是<strong>静质量</strong>（又叫不变质量，所有观察者都同意的值）。两个极端最有用：物体<strong>静止</strong>时 <var>p</var> = <strong>数字 0（零）</strong>，式子塌成 <span class="nowrap"><var>E</var> = <var>mc</var>²</span>——那条名句只是<strong>静止时的特例</strong>；光子<strong>没有静质量</strong>，<var>m</var> = <strong>0（零）</strong>，式子变成 <span class="nowrap"><var>E</var> = <var>pc</var></span>——没有质量却有能量也有动量，太阳帆就是靠它推的。</div>
+  这结构本身是个直角三角形：<var>mc</var>² 是一条直角边（不动也有的那份），<var>pc</var> 是另一条（跑起来才有的），总能量 <var>E</var> 是斜边。<strong>不管你怎么跑，<var>mc</var>² 那条边长不变</strong>——这就是"不变质量"的来历。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  核反应<strong>并没有</strong>把质量"消灭"掉去兑换能量。真正发生的是：反应后那堆碎片<strong>捆得更紧</strong>，结合能变了，称起来比反应前轻一点，差额以动能和辐射跑掉了。可若把跑掉的能量<strong>全部关进密闭盒子</strong>再称，总质量分毫不差。<strong>质量守恒和能量守恒从来不是两条定律，是同一条。</strong><br/>
+  更彻底的一击：你身上约 <strong>99%</strong> 的质量并不是夸克自带的静质量，而是把夸克捆在质子里的强相互作用<strong>场能量</strong>，希格斯机制直接给的只占约 1%（后面「对称性与质量的起源」一期会算这套账）。"质量就是能量"不是文学修辞，是你体重的实况。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 天体 / 能源 / 化学</span>
+  <ul>
+<li><strong>天体与生命</strong>：太阳每秒把约 <strong>4×10⁹ 千克</strong>（四百万吨）质量转成辐射。光合作用、粮食、化石燃料、你此刻的体温，全是这台兑换机的下游产物。</li>
+<li><strong>能源</strong>：一座 1 吉瓦核电站满功率跑一整年，真正"消失"的质量<strong>只有约 1 千克</strong>。反过来，1 克质量约合 9×10¹³ 焦耳——广岛那颗弹释放约 6×10¹³ 焦耳，质量亏损<strong>不到 1 克</strong>。</li>
+<li><strong>化学</strong>：化学反应的质量亏损小了约一亿倍——烧一吨煤，产物只轻约 0.3 微克，天平称不出，所以化学课的"质量守恒"在它的精度里永远成立。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：质量不是能量的原料，质量就是被关起来的能量。</div>
+<details class="q"><summary><b>思考：</b>把一盒气体加热，让分子跑得更快，这盒气体会变重吗？</summary>    <div class="qa">会。盒子的不变质量包含内部一切能量除以 <var>c</var>²，分子动能也算在内——每多 1 焦耳约增 1.1×10⁻¹⁷ 千克。测不出来，但原理毫不含糊：拧紧的弹簧比松弛的重，热咖啡比凉咖啡重。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>为什么"相对论"这个名字其实起坏了？</summary>
+<div class="body">因为它让人以为主题是"什么都相对"，而理论的骨架恰恰是<strong>什么绝对不变</strong>。除了光速，还有一个更深的不变量：两事件之间的<strong>时空间隔</strong> <span class="nowrap"><var>s</var>² = (<var>c</var>Δ<var>t</var>)² − Δ<var>x</var>²</span>。不同观察者对 Δ<var>t</var>、Δ<var>x</var> 各执一词，这个组合算出来却<strong>人人相同</strong>——像一根棍子从不同角度看投影长短不一，棍子本身的长度固定。爱因斯坦一度倾向叫它"不变量理论"。这个不变量正是「时空」那一期的正门。</div></details>
+<details><summary>双生子佯谬：到底谁更年轻，凭什么？</summary>
+<div class="body">飞走再回来的那位更年轻，没有争议。破解点是两人<strong>并不对称</strong>：留守者始终待在同一个惯性系，飞行者必须<strong>掉头</strong>，掉头时换了参考系。更漂亮的说法来自时空几何：每个人的<strong>固有时</strong>就是他那条世界线的"长度"，而在时空里<strong>越直的路对应越长的固有时</strong>（正好和欧氏几何"两点之间直线最短"反过来）。留守者走直线，所以老得最多。</div></details>
+<details><summary>洛伦兹和庞加莱早就写出了同样的变换式，功劳凭什么归爱因斯坦？</summary>
+<div class="body">公式确实先有。洛伦兹把长度收缩理解成物体在<strong>以太</strong>中运动时的<strong>真实形变</strong>，那个"本地时间"在他眼里只是数学辅助量；庞加莱走得更近，也没舍得扔掉以太。爱因斯坦的一步是<strong>本体论上的</strong>：他把以太整个丢掉，宣布这不是物体的动力学毛病，而是<strong>时空本身的运动学</strong>——每个惯性系的时间同样真实，没有哪一个更"本真"。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Einstein，<em>《论动体的电动力学》</em>（1905）——<a href="https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies">英译全文（Wikisource）</a>，开篇几页就是火车与钟</li>
+<li>Feynman，<em>The Feynman Lectures on Physics</em> Vol. I ch.15–17——<a href="https://www.feynmanlectures.caltech.edu/I_15.html">加州理工免费全文</a></li>
+<li>Taylor &amp; Wheeler，<em>Spacetime Physics</em>——<a href="https://www.eftaylor.com/spacetimephysics/">作者公开的第二版 PDF</a>，讲不变间隔最漂亮的一本</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>（2022）</li>
+<li><a href="https://en.wikipedia.org/wiki/Relativity_of_simultaneity">Wikipedia: Relativity of simultaneity</a> / <a href="https://en.wikipedia.org/wiki/Special_relativity">Special relativity</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ives%E2%80%93Stilwell_experiment">Ives–Stilwell 实验</a>——直接测到时间膨胀的经典实验</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
