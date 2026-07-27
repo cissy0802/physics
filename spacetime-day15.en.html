@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Spacetime · Day 15</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Spacetime</h1>
+<div class="meta">Day 15 · 2026 · Phase D Relativity</div>
+<div class="tagline">Time isn't background music playing over the stage — it's an axis. And in this geometry, the straighter you travel, the longer you live.</div>
+</header>
+<div class="intro">
+Even after the Lorentz transformation was written down, physicists were still picturing the old thing: an absolute spatial stage plus a pile of strange correction terms. In 1908 the mathematician Minkowski <b>translated that algebra into geometry</b> and delivered a famous line — henceforth space by itself and time by itself are doomed to fade into mere shadows, and only a union of the two preserves an independent reality. Accept the geometry and "moving clocks run slow" stops being a defect in the clock: <b>it's you taking a turn in spacetime</b>.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>The Fourth Dimension &amp; the Invariant Interval</h2>
+<span class="pill">Minkowski · 1908</span>
+<div class="field"><span class="lab">Intuition</span>
+  A stick stands slanted on a table: photograph it from directly above and the shadow is short; shift your angle and it stretches. Nobody concludes the stick is expanding — <strong>the shadow varies with viewpoint, the stick does not</strong>. What <a href="special-relativity-day14.en.html">"Special Relativity"</a> left behind is exactly a pile of shadows: observers disagree about the time gap Δ<var>t</var> and the spatial distance Δ<var>x</var>, and none of them is wrong. Minkowski asked the only question worth asking: <strong>what is the stick behind the shadows?</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  He found it. Between any two events there is a quantity every inertial observer computes to the same value, the <strong>spacetime interval</strong>:
+  <div class="eq"><var>s</var>² = (<var>c</var>Δ<var>t</var>)² − Δ<var>x</var>²</div>
+<div class="gloss">Δ ("delta") means "the difference between two events": Δ<var>t</var> is the time gap, Δ<var>x</var> the spatial distance. Multiplying by <var>c</var> converts seconds into metres (one second ≈ 300 million metres) so the two terms can be subtracted at all. Grind the Lorentz transformation through it and every <var>γ</var> ("gamma") <strong>cancels</strong>: you say five years passed, I say eight, and we get the same <var>s</var>². The crux is the <strong>minus sign</strong> in the middle — Pythagoras has a plus there, and turning this one into a plus would destroy relativity entirely.</div></div>
+<figure>
+<svg aria-label="Euclidean rotation slides points along a circle; a Lorentz boost slides events along a hyperbola" role="img" viewbox="0 0 620 300">
+<defs>
+<marker id="axr" markerheight="8" markerunits="userSpaceOnUse" markerwidth="8" orient="auto" refx="6" refy="2.6"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="12.5">
+<line stroke="#26314c" stroke-dasharray="5 6" x1="298" x2="298" y1="14" y2="286"></line>
+<!-- ==== left: Euclidean ==== -->
+<text fill="#7db0ff" font-size="14" font-weight="700" text-anchor="middle" x="152" y="28">Euclidean: rotate</text>
+<text fill="#c3cbe0" text-anchor="middle" x="152" y="50">x² + y² invariant</text>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="65" x2="245" y1="255" y2="255"></line>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="150" x2="150" y1="262" y2="120"></line>
+<text fill="#6b7899" font-size="11.5" x="250" y="259">x</text>
+<text fill="#6b7899" font-size="11.5" x="156" y="126">y</text>
+<path d="M 220,255 A 70,70 0 0 0 80,255" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="150" x2="213.4" y1="255" y2="225.4"></line>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="150" x2="179.6" y1="255" y2="191.6"></line>
+<circle cx="213.4" cy="225.4" fill="#f0ad5a" r="4.5"></circle>
+<circle cx="179.6" cy="191.6" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="152" y="100">points slide on a circle</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="152" y="284">the stick's length is fixed</text>
+<!-- ==== right: Minkowski ==== -->
+<text fill="#7db0ff" font-size="14" font-weight="700" text-anchor="middle" x="452" y="28">Minkowski: change frames</text>
+<text fill="#c3cbe0" text-anchor="middle" x="452" y="50">(ct)² − x² invariant</text>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="345" x2="575" y1="255" y2="255"></line>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="450" x2="450" y1="262" y2="112"></line>
+<text fill="#6b7899" font-size="11.5" x="580" y="259">x</text>
+<text fill="#6b7899" font-size="11.5" x="456" y="118">ct</text>
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="450" x2="578" y1="255" y2="127"></line>
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="450" x2="322" y1="255" y2="127"></line>
+<polyline fill="none" points="344.3,128.3 378.1,154.7 405.4,172.0 428.7,181.8 450,185 471.3,181.8 494.6,172.0 521.9,154.7 555.7,128.3" stroke="#5b9bff" stroke-width="2"></polyline>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="450" x2="450" y1="255" y2="185"></line>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="450" x2="521.9" y1="255" y2="154.7"></line>
+<circle cx="450" cy="185" fill="#f0ad5a" r="4.5"></circle>
+<circle cx="521.9" cy="154.7" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="452" y="100">points slide on a hyperbola</text>
+<text fill="#8d7a4d" font-size="11" text-anchor="middle" x="556" y="112">light, 45°</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="452" y="284">the interval is fixed</text>
+</g>
+</svg>
+<figcaption>A plus sign gives you a circle; a minus sign gives you a hyperbola. Changing frames slides an event along that hyperbola — it can slide very far and still <strong>never reach the 45° line of light</strong>.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  That minus sign is the entire difference between the "fourth dimension" and the other three. In Euclidean geometry the points with equal <span class="nowrap"><var>x</var>²+<var>y</var>²</span> form a <strong>circle</strong>, and rotation slides points around it; in Minkowski geometry the points with equal <span class="nowrap">(<var>c</var><var>t</var>)²−<var>x</var>²</span> form a <strong>hyperbola</strong>, and changing frames slides events along that. The hyperbola's asymptote is precisely the path of light — <strong>slide as far as you like, you never touch it</strong>. That is the deep reason velocities can't be added up to <var>c</var>, deeper than "your mass blows up so you can't be pushed". Time isn't one more spatial axis: it enters <strong>carrying a minus sign</strong>.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · find the invariant, then talk about what's real</span>
+  "Whatever survives the transformations is what's real" is a method far beyond physics:
+  <ul>
+<li><strong>Geometry</strong>: Gauss's Theorema Egregium shows curvature is <strong>intrinsic</strong> — an ant never leaving the surface can compute it by measurement alone. That's what made "curved" a thing one can speak about at all.</li>
+<li><strong>AI</strong>: equivariant neural networks weld "the answer doesn't change under rotation and translation" into the architecture instead of forcing the model to memorise it from data. AlphaFold on protein conformations and machine-learned potentials on molecular energies both cut their data appetite by an order of magnitude this way.</li>
+<li><strong>Representation learning</strong>: contrastive learning first stipulates a set of transformations (crop, recolour, add noise), then forces the model to learn a representation invariant under them — <strong>choosing the group of transformations is what defines "the same thing"</strong>.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: time gaps and distances are shadows; the interval is the stick.</div>
+<details class="q"><summary><b>Ponder:</b> <var>s</var>² can come out negative. What does a negative "square" mean?</summary><div class="qa">It means the two events <strong>cannot reach each other</strong>: too far apart for even light to make the trip. Such intervals are usually rewritten as Δ<var>x</var>²−(<var>c</var>Δ<var>t</var>)² and rooted to give the <strong>proper distance</strong>: there is an inertial frame in which the two happen simultaneously, and that's the separation you'd measure there. The sign is a classification of event pairs.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Worldlines &amp; Proper Time</h2>
+<span class="pill">spacetime diagram · the twins</span>
+<div class="field"><span class="lab">Intuition</span>
+  Draw a spacetime diagram: space across, time up — but scaled by <var>c</var> into <span class="nowrap"><var>c</var><var>t</var></span>, so that light runs at exactly 45°. Nothing on this diagram <strong>moves</strong>: sitting still is a line running straight up (you're still advancing through time), and walking away tilts it. Everything is not a point but <strong>a line</strong>, called a <strong>worldline</strong> — your life is one long noodle stretching from birth to death, and you only ever see one cross-section of it at a time. (Incidentally, at this scale one second of time axis is 300 million metres while you move about one metre: we are creatures travelling almost perfectly straight up the time axis, never turning, which is why the geometry stays invisible to us.)</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The time your own wristwatch logs along your own worldline is called <strong>proper time</strong>, <var>τ</var> ("tau"). For one stretch of uniform motion:
+  <div class="eq"><var>c</var><var>τ</var> = √( (<var>c</var>Δ<var>t</var>)² − Δ<var>x</var>² )</div>
+<div class="gloss">The right-hand side is the same <var>s</var> as before — <strong>proper time is the "length" of a worldline in spacetime</strong>. Δ<var>t</var> and Δ<var>x</var> are coordinate differences measured in whichever inertial frame you picked and change with that choice; the <var>τ</var> they yield is the real reading on your watch, which everybody accepts. If the path bends, chop it into small straight pieces and add them up (that is precisely what integration does). Real numbers: fly to Proxima Centauri, 4.2 light years away, at 0.95<var>c</var>. Earth coordinates say 4.5 years; the ship's clock logs <strong>1.4 years</strong>. The clock isn't slacking — that worldline is genuinely shorter.</div></div>
+<figure>
+<svg aria-label="Twin paradox spacetime diagram: the stay-at-home worldline is straight, the traveller's bends" role="img" viewbox="0 0 620 330">
+<defs>
+<marker id="ax2" markerheight="8" markerunits="userSpaceOnUse" markerwidth="8" orient="auto" refx="6" refy="2.6"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="12.5">
+<line marker-end="url(#ax2)" stroke="#6b7899" stroke-width="1.3" x1="95" x2="560" y1="300" y2="300"></line>
+<line marker-end="url(#ax2)" stroke="#6b7899" stroke-width="1.3" x1="120" x2="120" y1="300" y2="40"></line>
+<text fill="#6b7899" font-size="11.5" x="500" y="320">x (space)</text>
+<text fill="#6b7899" font-size="11.5" x="92" y="32">ct (time × c)</text>
+<!-- light ray reference -->
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="220" x2="365" y1="278" y2="133"></line>
+<text fill="#8d7a4d" font-size="11.5" x="372" y="129">light (45°)</text>
+<!-- stay-at-home worldline -->
+<line stroke="#5b9bff" stroke-width="3" x1="220" x2="220" y1="278" y2="48"></line>
+<text fill="#5b9bff" text-anchor="end" x="210" y="158">stay-at-home</text>
+<text fill="#5b9bff" font-size="11.5" text-anchor="end" x="210" y="178">τ = 10 yr</text>
+<!-- traveller worldline -->
+<polyline fill="none" points="220,278 312,163 220,48" stroke="#f0ad5a" stroke-width="3"></polyline>
+<text fill="#f0ad5a" x="322" y="192">traveller</text>
+<text fill="#f0ad5a" font-size="11.5" x="322" y="212">τ = 6 yr</text>
+<!-- events -->
+<circle cx="220" cy="278" fill="#f0f3fb" r="5"></circle>
+<circle cx="220" cy="48" fill="#f0f3fb" r="5"></circle>
+<circle cx="312" cy="163" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#dbe1f0" font-size="11.5" text-anchor="end" x="208" y="284">departure</text>
+<text fill="#dbe1f0" font-size="11.5" text-anchor="end" x="208" y="54">reunion</text>
+<text fill="#f0ad5a" font-size="11.5" x="322" y="164">turnaround: new frame</text>
+<text fill="#96a0ba" font-size="11.5" x="380" y="262">same two events, two paths</text>
+<text fill="#96a0ba" font-size="11.5" x="380" y="282">the straight one banks more time</text>
+</g>
+</svg>
+<figcaption>At 0.8<var>c</var>, <var>γ</var> ≈ 1.67: the stay-at-home ages 10 years, the traveller 6. The bent path looks longer and is shorter in spacetime.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>In spacetime, the straight line is the longest.</strong> Euclidean geometry says a straight line is the shortest route and detours cost you distance; the minus sign flips the whole thing over — <strong>turning costs you proper time</strong>. The twin paradox stops being a paradox here, and you needn't litigate "who was really moving": the stay-at-home goes straight, the traveller turns around (that manoeuvre swaps frames, so the two are not symmetric), and comes back younger. Ageing isn't time passively flowing over you; it's <strong>the length of the path you took</strong>.</div>
+<div class="punch">
+<div class="one">In a sentence: you don't exist "in time" — you are a line in spacetime with a length, and that length is your age.</div>
+<details class="q"><summary><b>Ponder:</b> If the turnaround causes the difference, does making it arbitrarily brief make the difference vanish?</summary><div class="qa">No. The turnaround itself can take almost no proper time, but what it changes is <strong>the direction of the entire leg that follows</strong> — the difference comes from the total lengths of the two worldlines, not from the corner. A geometric quantity measures the whole path.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Light Cones &amp; Causality</h2>
+<span class="pill">timelike · lightlike · spacelike</span>
+<div class="field"><span class="lab">Intuition</span>
+  Stand at the origin of a spacetime diagram and draw two 45° light rays outward; they cut the diagram into three. The wedge opening upward is your <strong>future light cone</strong>: anything you do now has an influence that will never, in your whole life, escape it. The downward wedge is the <strong>past light cone</strong>: everything capable of affecting you right now lies inside. The vast region left and right is <strong>elsewhere</strong> — you can't reach it and it can't reach the present you, however much some coordinate system insists it is happening "right now".</div>
+<figure>
+<svg aria-label="Light cone: future cone, past cone, the elsewhere region, and timelike, lightlike, spacelike directions" role="img" viewbox="0 0 640 360">
+<defs>
+<marker id="ry" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3"><path d="M0,0 L6.5,3 L0,6 Z" fill="#9fb0d0"></path></marker>
+<marker id="ax3" markerheight="8" markerunits="userSpaceOnUse" markerwidth="8" orient="auto" refx="6" refy="2.6"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="12.5">
+<polygon fill="#5b9bff" fill-opacity="0.13" points="280,185 140,45 420,45"></polygon>
+<polygon fill="#5b9bff" fill-opacity="0.07" points="280,185 140,325 420,325"></polygon>
+<line stroke="#f0ad5a" stroke-width="1.8" x1="140" x2="420" y1="45" y2="325"></line>
+<line stroke="#f0ad5a" stroke-width="1.8" x1="420" x2="140" y1="45" y2="325"></line>
+<text fill="#7db0ff" font-size="15" font-weight="700" text-anchor="middle" x="280" y="80">FUTURE CONE</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="280" y="101">all you can affect</text>
+<text fill="#7db0ff" font-size="15" font-weight="700" text-anchor="middle" x="280" y="292">PAST CONE</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="280" y="313">all that can affect you</text>
+<text fill="#c3cbe0" font-size="13.5" x="452" y="175">elsewhere</text>
+<text fill="#96a0ba" font-size="11.5" x="452" y="196">out of touch with you now</text>
+<text fill="#c3cbe0" font-size="13.5" text-anchor="end" x="145" y="175">elsewhere</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="145" y="196">(same region)</text>
+<line marker-end="url(#ry)" stroke="#9fb0d0" stroke-width="1.8" x1="280" x2="330" y1="185" y2="105"></line>
+<line marker-end="url(#ry)" stroke="#9fb0d0" stroke-width="1.8" x1="280" x2="390" y1="185" y2="75"></line>
+<line marker-end="url(#ry)" stroke="#9fb0d0" stroke-width="1.8" x1="280" x2="450" y1="185" y2="150"></line>
+<text fill="#dbe1f0" font-size="12" x="336" y="104">timelike</text>
+<text fill="#dbe1f0" font-size="12" x="412" y="62">lightlike</text>
+<text fill="#dbe1f0" font-size="12" x="458" y="146">spacelike</text>
+<circle cx="280" cy="185" fill="#f0f3fb" r="5.5"></circle>
+<text fill="#f0f3fb" font-size="12" text-anchor="end" x="252" y="166">you, now</text>
+<line marker-end="url(#ax3)" stroke="#6b7899" stroke-width="1.3" x1="70" x2="70" y1="336" y2="272"></line>
+<line marker-end="url(#ax3)" stroke="#6b7899" stroke-width="1.3" x1="70" x2="140" y1="336" y2="336"></line>
+<text fill="#6b7899" font-size="11" x="78" y="276">ct</text>
+<text fill="#6b7899" font-size="11" x="96" y="352">x</text>
+</g>
+</svg>
+<figcaption>Timelike (<var>s</var>²&gt;0) admits causation, lightlike (<var>s</var>²=0) is exactly bridged by light, spacelike (<var>s</var>²&lt;0) can never be connected at all.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  One number settles which region you're in: the sign of <var>s</var>². <span class="nowrap"><var>s</var>² &gt; 0</span> is <strong>timelike</strong> — enough time, little enough distance, and there's an inertial frame in which the two events happen at <strong>the same place</strong>, one after the other; causation is allowed. <span class="nowrap"><var>s</var>² = <span class="zero">0</span></span> (that's the <strong>digit 0, zero</strong>, on the right) is <strong>lightlike</strong>: light arrives exactly, neither early nor late. <span class="nowrap"><var>s</var>² &lt; 0</span> is <strong>spacelike</strong> — some frame has them happening <strong>simultaneously</strong>, and neither can influence the other. (Some books use the opposite sign convention; the physics is unchanged.)</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The basic structure of the universe is not "objects arranged in space while time flows past". It is a web of <strong>which events can influence which</strong>. How strong is that web? Give it the causal relations among all events and the geometry of spacetime is pinned down up to <strong>a single overall scale</strong>. An everyday corollary: every star you look up at sits strictly on your past light cone, and "what the Sun looks like now" is a question you only earn the right to ask eight minutes later.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · local interactions always grow a light cone</span>
+  Light cones aren't relativity's private property; they are what <strong>locality</strong> produces:
+  <ul>
+<li><strong>Quantum many-body systems</strong>: a spin chain has no <var>c</var> anywhere in it, yet the Lieb–Robinson bound (1972) proves that nearest-neighbour interactions imply an <strong>effective maximum speed</strong>, with information leaking outside the cone only exponentially weakly. Cold-atom experiments in 2012 <strong>photographed</strong> that cone directly.</li>
+<li><strong>Cellular automata</strong>: in the Game of Life information moves one cell per step, so any pattern's influence is sealed inside a lattice light cone — a glider is just a subluminal particle inside it.</li>
+<li><strong>Deep learning</strong>: a convolutional network's receptive field is a light cone widening layer by layer; autoregressive models simply write "the future must not affect the past" as an upper-triangular causal mask, and training depends on it to stop the model peeking at the answer.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: causal structure comes first, spacetime geometry second.</div>
+<details class="q"><summary><b>Ponder:</b> If everything we see is the past, is "what Mars looks like right now" still a meaningful question?</summary><div class="qa">Pick a frame and you can slice out a "now", so it has an answer — but the answer is <strong>neither observable nor unique</strong>, and changing your speed changes the slice. Deep-space navigation handles this honestly: it fixes a coordinate time and states plainly that this is a convention, not a discovery.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Why You Can't Outrun Light</h2>
+<span class="pill">causality protection · tachyonic antitelephone</span>
+<div class="field"><span class="lab">Intuition</span>
+  The usual explanation is "the faster you go the heavier you get, so you can't be pushed" — that's only the dynamical invoice. The harder reason is <strong>logical</strong>. Suppose you own a faster-than-light telephone. Since simultaneity differs between observers, there is always some inertial frame in which your message <strong>arrives before it was sent</strong>. Wire two such phones together, outbound in one frame and return in another, and you can send a message to <strong>yourself five minutes ago</strong> telling him not to send it. The device has a proper name: the <strong>tachyonic antitelephone</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  It hides in the line of the Lorentz transformation that governs time:
+  <div class="eq">Δ<var>t</var>′ = <var>γ</var> ( Δ<var>t</var> − <span class="frac"><span class="fnum"><var>v</var> Δ<var>x</var></span><span class="fden"><var>c</var>²</span></span> )</div>
+<div class="gloss">Δ<var>t</var> and Δ<var>x</var> are the time gap and distance measured in one frame, Δ<var>t</var>′ ("t prime") is the time gap in another, and <var>v</var> is their relative speed. If the two events are "sent" and "received" and the signal outran light, then <span class="nowrap">Δ<var>x</var> &gt; <var>c</var>Δ<var>t</var></span> — and you can always pick a perfectly law-abiding <var>v</var> below <var>c</var> that makes the bracket negative, so <span class="nowrap">Δ<var>t</var>′ &lt; <span class="zero">0</span></span> (<strong>digit 0</strong>): in that frame, <strong>reception precedes transmission</strong>. "Faster-than-light signal" and "a signal running backwards in time in some frame" are not two things.</div></div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Plenty of things do exceed <var>c</var>, and none of them carries information. The test is single: <strong>can you use it to deliver one bit of your own choosing?</strong> A laser spot sweeping the Moon can move arbitrarily fast, but that's a sequence of independent events, with nothing travelling. A wave's <strong>phase velocity</strong> can exceed <var>c</var> while the front velocity that carries information is exactly <var>c</var>. Quantum entanglement's correlations are instant, yet locally you see nothing but random outcomes, and without the other party's record you can read nothing out. <strong>Relativity never forbade speed; it forbids scrambled causal order.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary · suppose causality really did break</span>
+  <ul>
+<li><strong>Computational complexity</strong>: Aaronson and Watrous proved in 2009 that once closed timelike curves are permitted (information can reach its own past), classical and quantum computing both balloon to PSPACE and become <strong>exactly equal</strong>, with NP-complete problems turning trivial. When an assumption makes "hard" collapse wholesale, that usually indicates it is wrong, not powerful.</li>
+<li><strong>Engineering</strong>: a game's client-side prediction is precisely "acting outside your light cone" — guess locally, let the server adjudicate, roll back when wrong, at the cost of watching opponents teleport. It works only because a server exists to arbitrate. Physics has no server: once causal order fails, nobody can declare which history counts.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In a sentence: the speed limit isn't a cap on the speedometer, it's the guardrail around causality.</div>
+<details class="q"><summary><b>Ponder:</b> If faster-than-light communication were measured tomorrow, what would physicists worry about first?</summary><div class="qa">Not "relativity is wrong" but <strong>causality</strong>. Only two roads remain: either a preferred frame exists (the principle of relativity falls), or messages really can be sent to the past, in which case the grandfather paradox needs an answer. Most would bet on the first — giving up a symmetry is cheaper than giving up cause and effect.</div></details>
+</div>
+</div>
+<!-- Deep -->
+<div class="deep">
+<h2>Deeper questions</h2>
+<details><summary>It's one minus sign. Why are the consequences so large?</summary>
+<div class="body">Because a minus sign permits <strong>directions of zero length that aren't zero</strong>. In Euclidean geometry only the origin has length 0; in Minkowski geometry every direction on the light cone has length 0 while pointing at a genuinely distant place. Every distinction between what you can and cannot reach descends from that sign. Physicists call the pattern of pluses and minuses the <strong>metric signature</strong>, written (+,−,−,−): one time direction, three space directions, and the skeleton of the universe is fixed.</div></details>
+<details><summary>Is four-dimensional spacetime "really there" — is every moment equally real?</summary>
+<div class="body">This is the <strong>block universe</strong>: past, present and future equally real, with "flow" a mere appearance. Relativity does supply ammunition — with no global "now", what would single out one slice as the real one? But be honest: it only shows there is <strong>no preferred way to slice</strong>. It does not show that passage is an illusion, still less that the future is already fixed, so don't recruit it as a warrant for fatalism. As for why time has a <strong>direction</strong>, the answer isn't in this geometry at all — Minkowski spacetime is entirely indifferent to reversing time. That belongs to <a href="entropy-arrow-day7.en.html">"Entropy and the Arrow of Time"</a>.</div></details>
+<details><summary>Proper time is "what a clock reads" — but is an accelerating clock trustworthy?</summary>
+<div class="body">An independent assumption hides here, the <strong>clock hypothesis</strong>: an ideal clock's rate depends only on its <strong>instantaneous velocity</strong>, not its acceleration. It doesn't follow from the postulates, so it has to be tested — and it has been tested brutally. In CERN's muon storage ring, muons endure a centripetal acceleration around 10<sup>18</sup> times gravity, and their lifetime still dilates strictly by <var>γ</var>. So "proper time = length of worldline" survives on real, bent worldlines too.</div></details>
+<details><summary>How much does causal structure determine?</summary>
+<div class="body">Nearly everything. A family of theorems (Malament 1977 is the standard reference) says that knowing the causal order of all events fixes the spacetime metric up to a single pointwise scaling factor — <strong>the angles are settled, only the ruler's calibration is left</strong> — and adding a volume element completes the geometry. The <strong>causal set</strong> programme takes this as its starting point: assume the universe is fundamentally discrete events plus a partial order of "which precedes which", and let continuous spacetime emerge as the coarse-graining. It's a minority route to quantum gravity, with no experimental verdict yet.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Minkowski, <em>Space and Time</em> (1908 address) — <a href="https://en.wikisource.org/wiki/Translation:Space_and_Time">full English translation (Wikisource)</a>, the source of the "shadows" line</li>
+<li>Taylor &amp; Wheeler, <em>Spacetime Physics</em> — <a href="https://www.eftaylor.com/spacetimephysics/">the authors' free second-edition PDF</a>, the classic geometric treatment of the interval</li>
+<li>Feynman, <em>The Feynman Lectures on Physics</em> Vol. I ch.17 "Space-Time" — <a href="https://www.feynmanlectures.caltech.edu/I_17.html">free full text from Caltech</a></li>
+<li>Sean Carroll, <em>The Biggest Ideas in the Universe: Space, Time, and Motion</em> (2022)</li>
+<li><a href="https://en.wikipedia.org/wiki/Minkowski_space">Wikipedia: Minkowski space</a> / <a href="https://en.wikipedia.org/wiki/Light_cone">Light cone</a> / <a href="https://en.wikipedia.org/wiki/Tachyonic_antitelephone">Tachyonic antitelephone</a></li>
+<li>Cheneau et al., <em>Light-cone-like spreading of correlations in a quantum many-body system</em>, Nature 481 (2012) — <a href="https://arxiv.org/abs/1111.0776">arXiv:1111.0776</a></li>
+<li>Aaronson &amp; Watrous, <em>Closed Timelike Curves Make Quantum and Classical Computing Equivalent</em> — <a href="https://arxiv.org/abs/0808.2669">arXiv:0808.2669</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

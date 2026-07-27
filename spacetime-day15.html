@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：时空 · Day 15</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>时空</h1>
+<div class="meta">Day 15 · 2026 · Phase D 相对论</div>
+<div class="tagline">时间不是流过舞台的背景音，它是一根轴——而在这套几何里，走得越直的人，活得越久。</div>
+</header>
+<div class="intro">
+洛伦兹变换写出来之后，物理学家还在用旧图景想事情：一个绝对的空间舞台，加一堆奇怪的修正项。1908 年，数学家闵可夫斯基把这堆代数<b>翻译成了几何</b>，并撂下一句狠话：从此单独的空间和单独的时间都注定沦为影子，只有二者的结合还保有独立的实在。接受这套几何，"运动的钟变慢"就不再是钟出了毛病——<b>那是你在时空里拐了个弯</b>。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>第四维与不变间隔 <span class="en">The Invariant Interval</span></h2>
+<span class="pill">闵可夫斯基 · 1908</span>
+<div class="field"><span class="lab">直觉</span>
+  一根棍子斜插在桌上：从正上方拍照影子很短，换个角度再拍又变长。没人会说棍子在伸缩——<strong>影子随视角变，棍子本身不变</strong>。<a href="special-relativity-day14.html">「狭义相对论」</a>留下的正是一堆影子：不同观察者量到的时间差 Δ<var>t</var> 和空间距离 Δ<var>x</var> 谁也不服谁。闵可夫斯基问了唯一该问的问题：<strong>影子背后那根棍子是什么？</strong></div>
+<div class="field"><span class="lab">机制</span>
+  他找到了。任意两个事件之间存在一个所有惯性观察者都算出同一个值的量，叫<strong>时空间隔</strong>：
+  <div class="eq"><var>s</var>² = (<var>c</var>Δ<var>t</var>)² − Δ<var>x</var>²</div>
+<div class="gloss">Δ（读"delta"）是"两个事件之差"：Δ<var>t</var> 是时间差、Δ<var>x</var> 是空间距离。乘 <var>c</var> 是把秒换算成米（1 秒 ≈ 3 亿米），两项才能相减。代入洛伦兹变换硬算，<var>γ</var>（读"gamma"）会<strong>全部约掉</strong>：你说过了 5 年、我说 8 年，算出的 <var>s</var>² 却一模一样。要害是中间那个<strong>减号</strong>——勾股定理里是加号，这里但凡改成加号，整个相对论就没了。</div></div>
+<figure>
+<svg aria-label="欧氏几何中旋转让点在圆上滑动，闵氏几何中变换参考系让点在双曲线上滑动" role="img" viewbox="0 0 620 300">
+<defs>
+<marker id="axr" markerheight="8" markerunits="userSpaceOnUse" markerwidth="8" orient="auto" refx="6" refy="2.6"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#26314c" stroke-dasharray="5 6" x1="298" x2="298" y1="14" y2="286"></line>
+<!-- ==== left: Euclidean ==== -->
+<text fill="#7db0ff" font-size="14" font-weight="700" text-anchor="middle" x="152" y="28">欧氏几何：转个角度</text>
+<text fill="#c3cbe0" text-anchor="middle" x="152" y="50">x² + y² 不变</text>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="65" x2="245" y1="255" y2="255"></line>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="150" x2="150" y1="262" y2="120"></line>
+<text fill="#6b7899" font-size="11.5" x="250" y="259">x</text>
+<text fill="#6b7899" font-size="11.5" x="156" y="126">y</text>
+<path d="M 220,255 A 70,70 0 0 0 80,255" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="150" x2="213.4" y1="255" y2="225.4"></line>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="150" x2="179.6" y1="255" y2="191.6"></line>
+<circle cx="213.4" cy="225.4" fill="#f0ad5a" r="4.5"></circle>
+<circle cx="179.6" cy="191.6" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="152" y="100">点在圆上滑动</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="152" y="284">棍子长度不变</text>
+<!-- ==== right: Minkowski ==== -->
+<text fill="#7db0ff" font-size="14" font-weight="700" text-anchor="middle" x="452" y="28">闵氏几何：换个参考系</text>
+<text fill="#c3cbe0" text-anchor="middle" x="452" y="50">(ct)² − x² 不变</text>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="345" x2="575" y1="255" y2="255"></line>
+<line marker-end="url(#axr)" stroke="#6b7899" stroke-width="1.3" x1="450" x2="450" y1="262" y2="112"></line>
+<text fill="#6b7899" font-size="11.5" x="580" y="259">x</text>
+<text fill="#6b7899" font-size="11.5" x="456" y="118">ct</text>
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="450" x2="578" y1="255" y2="127"></line>
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="450" x2="322" y1="255" y2="127"></line>
+<polyline fill="none" points="344.3,128.3 378.1,154.7 405.4,172.0 428.7,181.8 450,185 471.3,181.8 494.6,172.0 521.9,154.7 555.7,128.3" stroke="#5b9bff" stroke-width="2"></polyline>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="450" x2="450" y1="255" y2="185"></line>
+<line stroke="#9fb0d0" stroke-width="1.6" x1="450" x2="521.9" y1="255" y2="154.7"></line>
+<circle cx="450" cy="185" fill="#f0ad5a" r="4.5"></circle>
+<circle cx="521.9" cy="154.7" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="452" y="100">点在双曲线上滑动</text>
+<text fill="#8d7a4d" font-size="11" text-anchor="middle" x="556" y="112">光线 45°</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="452" y="284">时空间隔不变</text>
+</g>
+</svg>
+<figcaption>加号给出圆，减号给出双曲线。换参考系就是让事件沿双曲线滑动——它可以滑到很远，却<strong>永远贴不上那条 45° 的光线</strong>。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  那个减号就是"第四维"和另外三维的全部区别。欧氏几何里 <span class="nowrap"><var>x</var>²+<var>y</var>²</span> 相等的点连成<strong>圆</strong>，旋转让点在圆上滑；闵氏几何里 <span class="nowrap">(<var>c</var><var>t</var>)²−<var>x</var>²</span> 相等的点连成<strong>双曲线</strong>，换参考系就是让点在双曲线上滑。而双曲线的渐近线正是光的路径——<strong>滑多远都碰不到</strong>。这才是速度加不到 <var>c</var> 的底层原因，比"质量变无穷大推不动"更深。时间不是"再加一根空间轴"，它<strong>带着负号进来</strong>。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 先找不变量，再谈实在</span>
+  "什么在变换下不变，什么才是真的"——这套方法论远不止物理在用：
+  <ul>
+<li><strong>几何</strong>：高斯的绝妙定理证明曲率是<strong>内蕴</strong>的——蚂蚁不必离开曲面、只靠丈量就能算出它。这才让"弯曲"成为可谈论的实在。</li>
+<li><strong>AI</strong>：等变神经网络把"旋转平移下结果不变"焊进结构而非靠数据去背，AlphaFold 处理蛋白质构象、机器学习势函数算分子能量，都靠这一手把数据需求砍掉一个量级。</li>
+<li><strong>表示学习</strong>：对比学习先指定一组变换（裁剪、变色、加噪），再逼模型学出在这组变换下不变的表示——<strong>先选定变换群，才定义了"什么算同一个东西"</strong>。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：时间差和距离都是影子，时空间隔才是那根棍子。</div>
+<details class="q"><summary><b>思考：</b><var>s</var>² 居然可以是负数，一个"平方"是负的，这在说什么？</summary><div class="qa">说这两件事<strong>谁也够不着谁</strong>：隔得太远，连光都来不及跑一趟。这类间隔通常改写成 Δ<var>x</var>²−(<var>c</var>Δ<var>t</var>)² 再开根，得到"<strong>固有距离</strong>"：存在一个惯性系让它们恰好同时发生，那时量到的距离就是它。正负号是在给事件对分类。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>世界线与固有时 <span class="en">Worldlines &amp; Proper Time</span></h2>
+<span class="pill">时空图 · 双生子</span>
+<div class="field"><span class="lab">直觉</span>
+  画一张时空图：横轴是空间，竖轴是时间——乘上 <var>c</var> 画成 <span class="nowrap"><var>c</var><var>t</var></span>，好让光正好走 45°。图上<strong>没有会动的点</strong>：你坐着不动是一条笔直向上的线（你仍在时间里前进），走开则线倾斜。每样东西都不是点而是<strong>一条线</strong>，叫<strong>世界线</strong>——你的一生是一根从出生延伸到死亡的细长面条，只是每次只看得见一个截面。（顺带一提，按这个换算，一秒钟对应的时间轴长度是三亿米，而我们一秒才挪一米：人几乎是沿时间轴笔直前进、从不拐弯的生物，自然看不出这是一段几何。）</div>
+<div class="field"><span class="lab">机制</span>
+  沿着自己的世界线，你随身那只表走过的时间叫<strong>固有时</strong> <var>τ</var>（读"tau"）。对一段匀速运动：
+  <div class="eq"><var>c</var><var>τ</var> = √( (<var>c</var>Δ<var>t</var>)² − Δ<var>x</var>² )</div>
+<div class="gloss">右边正是刚才那个 <var>s</var>——<strong>固有时就是世界线在时空里的"长度"</strong>。Δ<var>t</var>、Δ<var>x</var> 是任选一个惯性系量的坐标差，随系而变；算出的 <var>τ</var> 却是你手表的真实读数，人人认账。路线弯了就切成小段各算各的再累加（积分正是做这件事）。举个真数：飞到 4.2 光年外的比邻星，速度 0.95<var>c</var>，地球坐标算 4.5 年，飞船上的表只走了 <strong>1.4 年</strong>——不是表偷懒，是那条世界线本来就短。</div></div>
+<figure>
+<svg aria-label="双生子时空图：留守者的世界线笔直，飞行者折返，两条线连接同一对事件" role="img" viewbox="0 0 620 330">
+<defs>
+<marker id="ax2" markerheight="8" markerunits="userSpaceOnUse" markerwidth="8" orient="auto" refx="6" refy="2.6"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line marker-end="url(#ax2)" stroke="#6b7899" stroke-width="1.3" x1="95" x2="560" y1="300" y2="300"></line>
+<line marker-end="url(#ax2)" stroke="#6b7899" stroke-width="1.3" x1="120" x2="120" y1="300" y2="40"></line>
+<text fill="#6b7899" font-size="11.5" x="500" y="320">x（空间）</text>
+<text fill="#6b7899" font-size="11.5" x="92" y="32">ct（时间 × c）</text>
+<!-- light ray reference -->
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="220" x2="365" y1="278" y2="133"></line>
+<text fill="#8d7a4d" font-size="11.5" x="372" y="129">光线（45°）</text>
+<!-- stay-at-home worldline -->
+<line stroke="#5b9bff" stroke-width="3" x1="220" x2="220" y1="278" y2="48"></line>
+<text fill="#5b9bff" text-anchor="end" x="210" y="158">留守者</text>
+<text fill="#5b9bff" font-size="11.5" text-anchor="end" x="210" y="178">固有时 10 年</text>
+<!-- traveller worldline -->
+<polyline fill="none" points="220,278 312,163 220,48" stroke="#f0ad5a" stroke-width="3"></polyline>
+<text fill="#f0ad5a" x="322" y="192">飞行者</text>
+<text fill="#f0ad5a" font-size="11.5" x="322" y="212">固有时 6 年</text>
+<!-- events -->
+<circle cx="220" cy="278" fill="#f0f3fb" r="5"></circle>
+<circle cx="220" cy="48" fill="#f0f3fb" r="5"></circle>
+<circle cx="312" cy="163" fill="#f0ad5a" r="4.5"></circle>
+<text fill="#dbe1f0" font-size="11.5" text-anchor="end" x="208" y="284">出发</text>
+<text fill="#dbe1f0" font-size="11.5" text-anchor="end" x="208" y="54">重逢</text>
+<text fill="#f0ad5a" font-size="11.5" x="322" y="164">掉头：换了参考系</text>
+<text fill="#96a0ba" font-size="11.5" x="380" y="262">同一对事件，两条路</text>
+<text fill="#96a0ba" font-size="11.5" x="380" y="282">直的那条积累的固有时更多</text>
+</g>
+</svg>
+<figcaption>速度 0.8<var>c</var> 时 <var>γ</var> ≈ 1.67：留守者老了 10 年，飞行者老了 6 年。折线看着更长，在时空里却更短。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <strong>在时空里，直线最长。</strong>欧氏几何两点之间直线最短，绕路更远；闵氏几何因为那个减号，整件事翻了过来——<strong>拐弯让固有时变少</strong>。双生子佯谬到此不再是佯谬，也不必追究"谁在动"：留守者走直线，飞行者掉了个头（那一下换了参考系，两人并不对称），所以回来更年轻。变老不是"时间流过你"，而是<strong>你走过的那条路的长度</strong>。</div>
+<div class="punch">
+<div class="one">一句话：你不是"存在于时间中"，你是时空里一条有长度的线，那个长度就是你的年龄。</div>
+<details class="q"><summary><b>思考：</b>既然是掉头造成的差异，那把掉头时间压到极短，差异是不是也会跟着变小？</summary><div class="qa">不会。掉头本身占的固有时可以趋近于零，它<strong>改变的是之后那一整段路的方向</strong>——差异来自两条世界线的总长之差，不是拐点那一小段。几何量算的是整条路。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>光锥与因果 <span class="en">Light Cones &amp; Causality</span></h2>
+<span class="pill">类时 · 类光 · 类空</span>
+<div class="field"><span class="lab">直觉</span>
+  站在时空图的原点向外画两条 45° 的光线，整张图被切成三块。向上张开的楔形是<strong>未来光锥</strong>：你此刻做的任何事，影响范围一辈子出不了它。向下的是<strong>过去光锥</strong>：能影响此刻的你的一切都在里面。左右两侧那一大片叫<strong>他处</strong>——你够不着它，它也够不着现在的你，哪怕它在某种坐标下"就在此刻"。</div>
+<figure>
+<svg aria-label="光锥：未来光锥、过去光锥与他处区域，以及类时、类光、类空三种方向" role="img" viewbox="0 0 640 360">
+<defs>
+<marker id="ry" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="6.5" refy="3"><path d="M0,0 L6.5,3 L0,6 Z" fill="#9fb0d0"></path></marker>
+<marker id="ax3" markerheight="8" markerunits="userSpaceOnUse" markerwidth="8" orient="auto" refx="6" refy="2.6"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<polygon fill="#5b9bff" fill-opacity="0.13" points="280,185 140,45 420,45"></polygon>
+<polygon fill="#5b9bff" fill-opacity="0.07" points="280,185 140,325 420,325"></polygon>
+<line stroke="#f0ad5a" stroke-width="1.8" x1="140" x2="420" y1="45" y2="325"></line>
+<line stroke="#f0ad5a" stroke-width="1.8" x1="420" x2="140" y1="45" y2="325"></line>
+<text fill="#7db0ff" font-size="15" font-weight="700" text-anchor="middle" x="280" y="80">未来光锥</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="280" y="101">你能影响的一切</text>
+<text fill="#7db0ff" font-size="15" font-weight="700" text-anchor="middle" x="280" y="292">过去光锥</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="280" y="313">能影响你的一切</text>
+<text fill="#c3cbe0" font-size="13.5" x="455" y="175">他处 elsewhere</text>
+<text fill="#96a0ba" font-size="11.5" x="455" y="196">与此刻的你互不相干</text>
+<text fill="#c3cbe0" font-size="13.5" text-anchor="end" x="145" y="175">他处</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="145" y="196">（同一片区域）</text>
+<line marker-end="url(#ry)" stroke="#9fb0d0" stroke-width="1.8" x1="280" x2="330" y1="185" y2="105"></line>
+<line marker-end="url(#ry)" stroke="#9fb0d0" stroke-width="1.8" x1="280" x2="390" y1="185" y2="75"></line>
+<line marker-end="url(#ry)" stroke="#9fb0d0" stroke-width="1.8" x1="280" x2="450" y1="185" y2="150"></line>
+<text fill="#dbe1f0" font-size="12" x="336" y="104">类时</text>
+<text fill="#dbe1f0" font-size="12" x="410" y="62">类光</text>
+<text fill="#dbe1f0" font-size="12" x="458" y="146">类空</text>
+<circle cx="280" cy="185" fill="#f0f3fb" r="5.5"></circle>
+<text fill="#f0f3fb" font-size="12" text-anchor="end" x="252" y="166">此刻的你</text>
+<line marker-end="url(#ax3)" stroke="#6b7899" stroke-width="1.3" x1="70" x2="70" y1="336" y2="272"></line>
+<line marker-end="url(#ax3)" stroke="#6b7899" stroke-width="1.3" x1="70" x2="140" y1="336" y2="336"></line>
+<text fill="#6b7899" font-size="11" x="78" y="276">ct</text>
+<text fill="#6b7899" font-size="11" x="96" y="352">x</text>
+</g>
+</svg>
+<figcaption>类时（<var>s</var>²&gt;0）可以有因果，类光（<var>s</var>²=0）由光正好连上，类空（<var>s</var>²&lt;0）无论如何也联系不上。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  判据就是 <var>s</var>² 的符号，一个数说了算。<span class="nowrap"><var>s</var>² &gt; 0</span> 是<strong>类时</strong>：时间够多、距离够近，存在一个惯性系让两件事在<strong>同一地点</strong>先后发生，可以有因果。<span class="nowrap"><var>s</var>² = <span class="zero">0</span></span>（等号右边是<strong>数字 0，零</strong>）是<strong>类光</strong>：不多不少，光正好赶到。<span class="nowrap"><var>s</var>² &lt; 0</span> 是<strong>类空</strong>：存在一个惯性系让它们<strong>同时</strong>发生，谁也影响不了谁。（有的书用相反的符号约定，物理没变。）</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  宇宙的底层结构不是"空间里摆着物体，时间在旁边流"，而是一张事件之间<strong>谁能影响谁</strong>的网。这张网强到：只要给定所有事件的因果关系，时空几何就<strong>只剩一个整体尺度</strong>没定。顺带一个日常推论——你看到的每一颗星都严格躺在过去光锥上，"太阳现在什么样"，你只能在八分钟后才有资格问。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 只要相互作用是局域的，就会长出光锥</span>
+  光锥不是相对论的专利，它是<strong>局域性</strong>的通用后果：
+  <ul>
+<li><strong>量子多体</strong>：自旋链里根本没有 <var>c</var>，但 Lieb–Robinson 界（1972）证明只要相互作用是近邻的，就存在<strong>有效最大速度</strong>，信息漏到锥外呈指数衰减。2012 年冷原子实验把这个锥<strong>拍了出来</strong>。</li>
+<li><strong>元胞自动机</strong>：生命游戏里信息每步只传一格，任何图案的影响被关死在格点光锥内，滑翔机就是锥里的"亚光速粒子"。</li>
+<li><strong>深度学习</strong>：卷积网络的感受野是逐层张开的光锥；自回归模型则把"未来不能影响过去"写成一个上三角的因果掩码矩阵，训练时全靠它保证不偷看答案。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：先有因果结构，后有时空几何。</div>
+<details class="q"><summary><b>思考：</b>既然看到的全是过去，"火星此刻长什么样"还是一个有意义的问题吗？</summary><div class="qa">在选定的参考系里可以切出一条"现在"，于是它有答案——但这答案<strong>既不可观测也不唯一</strong>，换个速度切法就变。深空导航的做法很诚实：约定一个坐标时，并声明这是约定而非发现。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>为什么不能超光速 <span class="en">Why You Can't Outrun Light</span></h2>
+<span class="pill">因果保护 · 快子反电话</span>
+<div class="field"><span class="lab">直觉</span>
+  常听到的解释是"越快越重，推不动了"——那只是动力学的账单。更硬的理由是<strong>逻辑上的</strong>：假设你有一台超光速电话。因为"同时"因人而异，总存在某个惯性系，在那里消息<strong>比发出更早到达</strong>。把两台这样的电话接起来，去程用一个参考系、回程用另一个，你就能给<strong>五分钟前的自己</strong>发消息，让他别发。这设备有个正式名字：<strong>快子反电话</strong>。</div>
+<div class="field"><span class="lab">机制</span>
+  它就藏在洛伦兹变换管时间的那一行里：
+  <div class="eq">Δ<var>t</var>′ = <var>γ</var> ( Δ<var>t</var> − <span class="frac"><span class="fnum"><var>v</var> Δ<var>x</var></span><span class="fden"><var>c</var>²</span></span> )</div>
+<div class="gloss">Δ<var>t</var>、Δ<var>x</var> 是一个系里量到的时间差与距离，Δ<var>t</var>′（读"t 撇"）是另一个系里的时间差，<var>v</var> 是两系相对速度。若这两件事是"发出"与"收到"而信号超光速，就意味着 <span class="nowrap">Δ<var>x</var> &gt; <var>c</var>Δ<var>t</var></span>——此时总能挑出一个老实小于 <var>c</var> 的 <var>v</var> 让括号变负，于是 <span class="nowrap">Δ<var>t</var>′ &lt; <span class="zero">0</span></span>（<strong>数字 0</strong>）：在那个系里<strong>收到发生在发出之前</strong>。"超光速信号"和"某个系里的时间倒流信号"不是两件事。</div></div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  很多东西确实"超光速"，却没有一个能传信息，判据只有一条：<strong>能不能用它把一个你说了算的比特送过去</strong>。激光光斑扫过月面可以任意快，但那是一串独立事件依次发生，没有东西在跑；波的<strong>相速度</strong>可以大于 <var>c</var>，能载信息的前沿速度却严格等于 <var>c</var>；量子纠缠的关联瞬时，可本地怎么测都只看到随机结果，不拿到对方那份记录就什么也读不出。<strong>相对论禁的不是"快"，是"因果乱序"。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 假如因果真被打破</span>
+  <ul>
+<li><strong>计算复杂性</strong>：Aaronson 与 Watrous 2009 年证明，一旦允许闭合类时曲线（信息能回到自己的过去），经典与量子计算的能力会双双暴涨到 PSPACE 且<strong>完全相等</strong>，NP 完全问题变得平凡。一个假设让"难"整体塌掉，通常不说明它厉害，而说明它错了。</li>
+<li><strong>工程</strong>：网络游戏的客户端预测干的正是"在光锥外抢先行动"——本地先猜，服务器裁决，猜错回滚，代价是你看见对手瞬移。它成立只因为有服务器充当仲裁；物理没有服务器，一旦因果失序，没人能宣布哪条历史算数。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：光速上限不是速度表的极限，是因果律的护栏。</div>
+<details class="q"><summary><b>思考：</b>如果明天真测到了超光速通信，物理学家最先担心的会是什么？</summary><div class="qa">不是"相对论错了"，而是<strong>因果</strong>。只剩两条路：要么存在一个特殊的优先参考系（相对性原理破产），要么真能给过去发消息，那就得回答祖父悖论。多数人会先押第一条——放弃一条对称性，总比放弃因果便宜。</div></details>
+</div>
+</div>
+<!-- Deep -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>只差一个负号，为什么后果差这么远？</summary>
+<div class="body">因为负号允许出现<strong>"长度为零却不是零"的方向</strong>。欧氏几何里长度为 0 只能是原点自己；闵氏几何里整个光锥面上的方向长度都是 0，却指向真实的远方。所有"够得着够不着"的分野都是这个负号的产物。物理学家把这套加减号的搭配叫<strong>度规签名</strong>，写作 (+,−,−,−)：一个时间方向，三个空间方向，骨架就这么定下来了。</div></details>
+<details><summary>四维时空是"真实存在"的吗——所有时刻都同样实在？</summary>
+<div class="body">这被称为<strong>块宇宙</strong>：过去、现在、未来同等实在，"流逝"只是错觉。相对论确实给了它弹药——既然没有全局的"现在"，凭什么说某一片时刻才实在？但要诚实：它只证明了<strong>没有优先的切法</strong>，没有证明流逝是幻觉，更没有证明未来已经定死，别拿它给宿命论背书。至于时间为什么<strong>有方向</strong>，答案根本不在这套几何里——闵氏时空对调转时间方向毫不在意，那是<a href="entropy-arrow-day7.html">「熵与时间之箭」</a>的地盘。</div></details>
+<details><summary>固有时是"钟测出来的"，可加速中的钟准吗？</summary>
+<div class="body">这里藏着一条独立假设，叫<strong>钟假设</strong>：理想钟的读数只取决于它<strong>瞬时的速度</strong>，与加速度无关。它不是从公设推出来的，得靠实验查——查得相当狠：CERN 的 μ 子（读"缪子"）存储环里，μ 子承受约 10<sup>18</sup> 倍重力加速度的向心加速度，寿命膨胀倍数仍严格按 <var>γ</var> 走。所以"固有时 = 世界线长度"在拐着弯的真实世界线上也成立。</div></details>
+<details><summary>因果结构能决定多少？</summary>
+<div class="body">几乎全部。有一族定理（Malament 1977 是代表）说：知道所有事件的因果先后，时空度规就唯一确定到只差一个逐点的缩放因子——<strong>角度定了，只剩尺子的刻度没定</strong>，再补一个体积元，几何就全有了。<strong>因果集</strong>纲领把这句话当出发点：假设宇宙底层是一堆离散事件加一个"谁在谁之前"的偏序，让连续时空作为粗粒化涌现出来。它是量子引力的少数派路线，尚无实验判决。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Minkowski，<em>Space and Time</em>（1908 演讲）——<a href="https://en.wikisource.org/wiki/Translation:Space_and_Time">英译全文（Wikisource）</a>，"影子"那句名言的出处</li>
+<li>Taylor &amp; Wheeler，<em>Spacetime Physics</em>——<a href="https://www.eftaylor.com/spacetimephysics/">作者公开的第二版 PDF</a>，把不变间隔讲成几何的经典</li>
+<li>Feynman，<em>The Feynman Lectures on Physics</em> Vol. I ch.17 "Space-Time"——<a href="https://www.feynmanlectures.caltech.edu/I_17.html">加州理工免费全文</a></li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>（2022）</li>
+<li><a href="https://en.wikipedia.org/wiki/Minkowski_space">Wikipedia: Minkowski space</a> / <a href="https://en.wikipedia.org/wiki/Light_cone">Light cone</a> / <a href="https://en.wikipedia.org/wiki/Tachyonic_antitelephone">Tachyonic antitelephone</a></li>
+<li>Cheneau et al.，<em>Light-cone-like spreading of correlations in a quantum many-body system</em>，Nature 481 (2012)——<a href="https://arxiv.org/abs/1111.0776">arXiv:1111.0776</a></li>
+<li>Aaronson &amp; Watrous，<em>Closed Timelike Curves Make Quantum and Classical Computing Equivalent</em>——<a href="https://arxiv.org/abs/0808.2669">arXiv:0808.2669</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
