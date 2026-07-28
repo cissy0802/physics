@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: General Relativity · Day 16</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>General Relativity</h1>
+<div class="meta">Day 16 · 2026 · Phase D Relativity</div>
+<div class="tagline">Nobody is pulling the apple down. It has been travelling in a straight line all along — it is just that time runs a little slower down here.</div>
+</header>
+<div class="intro">
+Newton was the first person to be unhappy with his own law of gravitation: how could one body reach across empty space, through no medium at all, and instantly push on another? He called the idea <b>absurd</b>, and insisted he was only describing, not explaining. Two centuries later Einstein's answer was to cancel the question: <b>there is no such force as gravity</b>. There is only spacetime, bent by matter, and objects travelling dutifully straight through it.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>The Equivalence Principle</h2>
+<span class="pill">Einstein · 1907</span>
+<div class="field"><span class="lab">Intuition</span>
+  A windowless elevator. You have weight underfoot and a tossed ball accelerates to the floor — can you tell whether you are parked on the ground or strapped to a rocket accelerating at 9.8 m/s²? <strong>You cannot.</strong> Cut the cable, and the ball simply hangs in front of you; now you cannot tell falling from drifting in deep space either. In 1907 Einstein called this <strong>the happiest thought of my life</strong>.</div>
+<figure>
+<svg role="img" aria-label="Four panels: an elevator on Earth and an accelerating rocket in deep space look identical inside; a falling elevator and a drifting capsule look identical inside" viewBox="0 0 640 400">
+<defs>
+<marker id="m1" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path></marker>
+<marker id="m1b" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#5b9bff"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<!-- row 1 -->
+<text x="155" y="34" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">At rest on the ground</text>
+<rect x="90" y="50" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="128" cy="76" r="6" fill="#f0ad5a"></circle>
+<line x1="128" y1="86" x2="128" y2="128" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m1)"></line>
+<circle cx="186" cy="88" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="186" y1="95" x2="186" y2="128" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="128" x2="176" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="128" x2="196" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="78" y1="162" x2="238" y2="162" stroke="#6b7899" stroke-width="2.4"></line>
+<line x1="86" y1="162" x2="78" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="110" y1="162" x2="102" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="134" y1="162" x2="126" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="158" y1="162" x2="150" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="182" y1="162" x2="174" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="206" y1="162" x2="198" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="230" y1="162" x2="222" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<text x="155" y="192" fill="#96a0ba" font-size="11.5" text-anchor="middle">ball accelerates to the floor</text>
+<text x="316" y="104" fill="#5b9bff" font-size="24" text-anchor="middle">≡</text>
+<text x="316" y="128" fill="#96a0ba" font-size="11" text-anchor="middle">no measurable</text>
+<text x="316" y="145" fill="#96a0ba" font-size="11" text-anchor="middle">difference</text>
+<text x="472" y="34" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">Rocket accelerating in deep space</text>
+<rect x="407" y="50" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="445" cy="76" r="6" fill="#f0ad5a"></circle>
+<line x1="445" y1="86" x2="445" y2="128" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m1)"></line>
+<circle cx="503" cy="88" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="503" y1="95" x2="503" y2="128" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="128" x2="493" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="128" x2="513" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="560" y1="160" x2="560" y2="58" stroke="#5b9bff" stroke-width="2" marker-end="url(#m1b)"></line>
+<text x="568" y="106" fill="#5b9bff" font-size="12">a = g</text>
+<circle cx="392" cy="66" r="1.6" fill="#4a5678"></circle>
+<circle cx="380" cy="122" r="1.6" fill="#4a5678"></circle>
+<circle cx="398" cy="150" r="1.6" fill="#4a5678"></circle>
+<text x="472" y="192" fill="#96a0ba" font-size="11.5" text-anchor="middle">ball accelerates to the floor</text>
+<!-- row 2 -->
+<text x="155" y="238" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">Elevator with a cut cable</text>
+<rect x="90" y="254" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="128" cy="300" r="6" fill="#f0ad5a"></circle>
+<circle cx="186" cy="292" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="186" y1="299" x2="186" y2="330" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="330" x2="177" y2="350" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="330" x2="197" y2="348" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="66" y1="262" x2="66" y2="358" stroke="#5b9bff" stroke-width="2" marker-end="url(#m1b)"></line>
+<text x="58" y="256" fill="#5b9bff" font-size="12" text-anchor="middle">free fall</text>
+<text x="155" y="392" fill="#96a0ba" font-size="11.5" text-anchor="middle">ball just hangs in mid-air</text>
+<text x="316" y="308" fill="#5b9bff" font-size="24" text-anchor="middle">≡</text>
+<text x="316" y="332" fill="#96a0ba" font-size="11" text-anchor="middle">no measurable</text>
+<text x="316" y="349" fill="#96a0ba" font-size="11" text-anchor="middle">difference</text>
+<text x="472" y="238" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">Capsule drifting in deep space</text>
+<rect x="407" y="254" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="445" cy="300" r="6" fill="#f0ad5a"></circle>
+<circle cx="503" cy="292" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="503" y1="299" x2="503" y2="330" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="330" x2="494" y2="350" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="330" x2="514" y2="348" stroke="#9fb0d0" stroke-width="1.4"></line>
+<circle cx="392" cy="270" r="1.6" fill="#4a5678"></circle>
+<circle cx="382" cy="326" r="1.6" fill="#4a5678"></circle>
+<circle cx="398" cy="354" r="1.6" fill="#4a5678"></circle>
+<circle cx="565" cy="286" r="1.6" fill="#4a5678"></circle>
+<circle cx="574" cy="340" r="1.6" fill="#4a5678"></circle>
+<text x="472" y="392" fill="#96a0ba" font-size="11.5" text-anchor="middle">ball just hangs in mid-air</text>
+</g>
+</svg>
+<figcaption>Left and right are indistinguishable from inside the box. Since no measurement separates them, simply declare them <strong>the same thing</strong> — that step is the foundation of the whole theory.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  Why the coincidence? Because of an equation that had been sitting unclaimed since Newton:
+  <div class="eq"><var>m</var><sub>inertial</sub> = <var>m</var><sub>gravitational</sub></div>
+<div class="gloss"><var>m</var><sub>inertial</sub> is the <var>m</var> in <var>F</var>=<var>m</var><var>a</var> — how hard it is to push something. <var>m</var><sub>gravitational</sub> is the <var>m</var> in the law of gravitation: a <strong>gravitational charge</strong>, the analogue of electric charge in an electric field. Conceptually the two have nothing to do with each other, yet they are equal everywhere: they cancel, the <var>m</var> drops out of the acceleration, and a feather falls beside an iron ball in vacuum. The coincidence has only been pinned down harder — from Eötvös's torsion balance to the MICROSCOPE satellite, whose final results came out in 2022, the ratio of two materials' falling accelerations differs from 1 by less than <span class="nowrap">10<sup>−15</sup></span>. Einstein stopped calling it a coincidence and made it an <strong>axiom</strong>.</div></div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+<strong>The person in free fall is the one feeling no force.</strong> Standing on the ground, you are being shoved upward by the floor — right now you are <strong>accelerating</strong> at 9.8 m/s². This is not wordplay: the accelerometer in your phone, sitting still on a table, reads 9.8 and not <span class="nowrap"><span style="color:#5b9bff;font-weight:700">0</span> (the digit zero)</span>; throw it out the window and for those few hundred milliseconds it honestly reads 0. What matters more is that <strong>the equivalence principle holds only locally</strong>: gravity can be transformed away, but only one small patch at a time, and <strong>what refuses to go is curvature</strong>.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary read · promoting "no detectable difference" to an axiom</span>
+  Turning a string of failed attempts to tell things apart into a defining principle is one of science's most productive moves:
+  <ul>
+<li><strong>Thermodynamics</strong>: nobody could build a perpetual motion machine — that purely empirical failure was promoted to the second law, which then yields the Carnot limit and entropy.</li>
+<li><strong>Cryptography</strong>: modern security is defined as <strong>indistinguishability</strong> — given ciphertexts of two plaintexts, an adversary must not guess which is which appreciably better than a coin flip. Security is not "well hidden", it is "the two worlds look alike".</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: free fall is not being dragged along — it is the only state of motion with no force acting.</div>
+<details class="q"><summary><b>Think:</b> If free fall cancels gravity, can one coordinate system cancel the whole Earth's gravity at once?</summary><div class="qa">No — only within a <strong>small neighbourhood</strong> of each point. Objects falling freely on opposite sides of the Earth head in opposite directions, and no single acceleration matches both. What survives is the tidal effect: no change of coordinates removes it, so it is real.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Gravity Is Geometry</h2>
+<span class="pill">Geodesics · Field equations · 1915</span>
+<div class="field"><span class="lab">Intuition</span>
+  Two people stand on the equator a hundred kilometres apart and both set off due north. Neither ever turns, yet they drift together and collide at the pole. If they insisted that "straight lines do not meet", they would have to invent a force that pulls them together and — awkwardly — is independent of their weight. On a curved surface the truth is plainer: no force, the surface is curved. The action-at-a-distance tug of <a href="motion-force-day2.en.html">"Motion, Force and Determinism"</a> becomes a single sentence here: <strong>objects travel straight all along; it is the meaning of "straight" that spacetime rewrote.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  A "straight line" in curved spacetime is a <strong>geodesic</strong> — the locally straightest path, one that never turns of its own accord. A freely moving body does exactly one thing: follow a geodesic. How spacetime bends is fixed by the <strong>field equations</strong> Einstein wrote down in 1915:
+  <div class="eq"><var>G</var><sub><var>μν</var></sub> = <span class="frac"><span class="fnum">8π<var>G</var></span><span class="fden"><var>c</var><sup>4</sup></span></span> <var>T</var><sub><var>μν</var></sub></div>
+<div class="gloss"><var>μ</var> and <var>ν</var> (read "mu" and "nu") are indices, each running over 4 values — one time direction plus three space directions — so this is not one equation but a whole set. <var>G</var><sub><var>μν</var></sub> is the <strong>Einstein tensor</strong>, pure geometry; <var>T</var><sub><var>μν</var></sub> is the <strong>stress-energy tensor</strong>, holding energy density, momentum and pressure. <strong>Watch out: the two <var>G</var>s look alike and are unrelated</strong> — the one with indices is a geometric tensor, the one in 8π<var>G</var> is Newton's gravitational constant. The coefficient <span class="nowrap">8π<var>G</var>/<var>c</var><sup>4</sup> ≈ 2×10<sup>−43</sup></span> (SI units) is absurdly small: that is "gravity is weak" in quantitative form. Wheeler compressed the whole equation into one line — <strong>spacetime tells matter how to move; matter tells spacetime how to curve.</strong></div></div>
+<div class="field"><span class="lab">Mechanism · how to measure curvature</span>
+  Curvature has an operational definition: <strong>release two freely falling bodies and watch their relative acceleration</strong>. Neither feels a force, yet the distance between them changes — that is geometry talking. The effect has a more familiar name, <strong>tidal force</strong>: it is the difference, not the pull itself, that is curvature.</div>
+<figure>
+<svg role="img" aria-label="Left: two initially parallel geodesics on a sphere meet at the pole. Right: a freely falling cloud of particles is stretched into an ellipsoid by tidal forces" viewBox="0 0 640 380">
+<defs>
+<marker id="m2" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#5b9bff"></path></marker>
+<marker id="m2a" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line x1="316" y1="16" x2="316" y2="364" stroke="#26314c" stroke-dasharray="5 6"></line>
+<!-- left: geodesics on a sphere -->
+<text x="155" y="30" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">Two initially parallel lines</text>
+<text x="155" y="51" fill="#c3cbe0" font-size="11.5" text-anchor="middle">neither turned, yet they meet</text>
+<circle cx="155" cy="200" r="96" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></circle>
+<ellipse cx="155" cy="200" rx="96" ry="27" fill="none" stroke="#3a4a70" stroke-width="1.1" stroke-dasharray="4 5"></ellipse>
+<path d="M 59,200 A 96,27 0 0 1 251,200" fill="none" stroke="#6b7899" stroke-width="1.5"></path>
+<path d="M 122,225 Q 107,152 152,118" fill="none" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#m2)"></path>
+<path d="M 188,225 Q 203,152 158,118" fill="none" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#m2)"></path>
+<circle cx="122" cy="225" r="4.5" fill="#f0ad5a"></circle>
+<circle cx="188" cy="225" r="4.5" fill="#f0ad5a"></circle>
+<circle cx="155" cy="104" r="5" fill="#f0f3fb"></circle>
+<text x="155" y="94" fill="#f0f3fb" font-size="11.5" text-anchor="middle">north pole: collision</text>
+<text x="155" y="252" fill="#f0ad5a" font-size="11.5" text-anchor="middle">start: both due north</text>
+<text x="155" y="272" fill="#96a0ba" font-size="11.5" text-anchor="middle">equator</text>
+<text x="155" y="330" fill="#96a0ba" font-size="11.5" text-anchor="middle">no force — the surface is curved</text>
+<!-- right: tidal ellipsoid -->
+<text x="476" y="30" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">A freely falling cloud</text>
+<text x="476" y="51" fill="#c3cbe0" font-size="11.5" text-anchor="middle">no forces, yet the shape changes</text>
+<circle cx="476" cy="185" r="52" fill="none" stroke="#3a4a70" stroke-width="1.2" stroke-dasharray="4 5"></circle>
+<ellipse cx="476" cy="185" rx="35" ry="70" fill="rgba(240,173,90,.08)" stroke="#f0ad5a" stroke-width="2"></ellipse>
+<line x1="476" y1="112" x2="476" y2="88" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<line x1="476" y1="258" x2="476" y2="282" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<line x1="416" y1="185" x2="437" y2="185" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<line x1="536" y1="185" x2="515" y2="185" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<text x="492" y="88" fill="#f0ad5a" font-size="11.5">stretched</text>
+<text x="410" y="178" fill="#f0ad5a" font-size="11.5" text-anchor="end">squeezed</text>
+<text x="542" y="178" fill="#f0ad5a" font-size="11.5">squeezed</text>
+<text x="476" y="298" fill="#96a0ba" font-size="11.5" text-anchor="middle">dashed: the original shape</text>
+<circle cx="476" cy="345" r="17" fill="#1c2947" stroke="#3a4a70" stroke-width="1.3"></circle>
+<text x="506" y="350" fill="#96a0ba" font-size="11.5">mass lies this way</text>
+</g>
+</svg>
+<figcaption>The left panel is what causes curvature; the right panel is how you <strong>read</strong> it. Tidal force is not a side effect of gravity — it is the one part of gravity no change of coordinates can erase.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The commonest question about "curved spacetime" is <strong>curved into what?</strong> The answer is: into nothing. Curvature is <strong>intrinsic</strong>. An ant that can never leave a sphere can measure the angles of a triangle, or the ratio of a circle's circumference to its radius, and work out that the surface is curved — without ever knowing the sphere sits in three-dimensional space. Spacetime is the same: whether some higher-dimensional "outside" exists is neither needed nor of interest to physics.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary read · go round a loop and come back different: holonomy</span>
+  Curvature has an equivalent reading: <strong>carry an arrow around a closed loop and it comes back rotated</strong>. Go from the north pole down a meridian to the equator, a quarter-turn along the equator, then back up to the pole — you never turned the arrow, and it has swung by 90°. This is holonomy:
+  <ul>
+<li><strong>The Foucault pendulum</strong>: the swing plane rotates 360°×sin(latitude) per day — about 260° in Beijing, and not at all on the equator. The Earth is not "dragging" the pendulum; this is the holonomy of parallel-transporting the swing direction once around a circle of latitude.</li>
+<li><strong>Mechanics and robotics</strong>: a cat dropped upside down has exactly zero angular momentum throughout, yet turns a net 180° — by tucking and extending so its shape traces a closed loop, with the net rotation being that loop's holonomy.</li>
+<li><strong>Quantum mechanics</strong>: drag a quantum system's parameters slowly around a loop back to the start and the wavefunction picks up a phase fixed by the loop's geometry alone — the Berry phase (1984), now basic vocabulary for topological phases of matter.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: gravity is not a force — the definition of "straight" changed.</div>
+<details class="q"><summary><b>Think:</b> If gravity is pure geometry, why does the equation still need a measured constant <var>G</var>?</summary><div class="qa">Geometry itself does not know "how much matter bends how much". <var>G</var> (together with <var>c</var>) sets the <strong>exchange rate</strong> converting kilograms of matter into units of curvature. An exchange rate is not a geometric fact — it has to be measured. And its being as small as <span class="nowrap">2×10<sup>−43</sup></span> is exactly why we can stand on a planet without being shredded by the folds in spacetime.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Why the Apple Falls</h2>
+<span class="pill">Gravitational time dilation · Maximal proper time</span>
+<div class="field"><span class="lab">Intuition</span>
+  Put two facts together. The first comes from <a href="spacetime-day15.en.html">"Spacetime"</a>: a freely moving body follows the worldline of <strong>maximal proper time</strong> — the path on which its own watch ticks the most. The second is new: <strong>clocks lower down run slower</strong>. So "falling" gets a new explanation: spending time higher up buys extra proper time, but getting up there requires speed, and speed slows the clock again. The optimal compromise between those two ledgers is exactly a parabola.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  In a weak gravitational field, two clocks separated by a height <var>h</var> tick at a ratio:
+  <div class="eq"><span class="frac"><span class="fnum">Δ<var>τ</var></span><span class="fden"><var>τ</var></span></span> ≈ <span class="frac"><span class="fnum"><var>g</var><var>h</var></span><span class="fden"><var>c</var><sup>2</sup></span></span></div>
+<div class="gloss"><var>τ</var> (read "tau") is proper time, the reading on the watch you carry; Δ<var>τ</var>/<var>τ</var> is how much faster one clock runs than the other; <var>g</var> is the local gravitational acceleration, <var>h</var> the height difference, <var>c</var> the speed of light. Put in numbers for the Earth's surface: <strong>each metre of altitude makes a clock gain 1.09×10<sup>−16</sup> seconds per second</strong>, so your head ages roughly 3 nanoseconds per year more than your feet. Laughably small, and measured directly: in 2010 NIST resolved a <strong>33 cm</strong> height difference with two optical clocks, and in 2022 JILA resolved the gravitational redshift across millimetres <strong>inside a single</strong> cloud of cold atoms.</div></div>
+<figure>
+<svg role="img" aria-label="Worldlines of a thrown ball: height on the horizontal axis, time on the vertical; of three candidate paths the real parabola has the longest proper time" viewBox="0 0 640 372">
+<defs>
+<marker id="m3" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line x1="150" y1="308" x2="586" y2="308" stroke="#6b7899" stroke-width="1.3" marker-end="url(#m3)"></line>
+<line x1="150" y1="308" x2="150" y2="46" stroke="#6b7899" stroke-width="1.3" marker-end="url(#m3)"></line>
+<text x="548" y="330" fill="#6b7899" font-size="11.5">height h</text>
+<text x="158" y="42" fill="#6b7899" font-size="11.5">ct (time × c)</text>
+<text x="166" y="330" fill="#96a0ba" font-size="11">low · clocks slow</text>
+<text x="330" y="330" fill="#96a0ba" font-size="11">high · clocks fast →</text>
+<!-- candidate C: too high -->
+<path d="M 150,308 Q 690,196 150,84" fill="none" stroke="#6b7899" stroke-width="2" stroke-dasharray="6 5"></path>
+<!-- candidate A: stay put -->
+<line x1="150" y1="308" x2="150" y2="84" stroke="#6b7899" stroke-width="2" stroke-dasharray="6 5"></line>
+<!-- candidate B: real parabola -->
+<path d="M 150,308 Q 396,196 150,84" fill="none" stroke="#f0ad5a" stroke-width="3"></path>
+<circle cx="150" cy="308" r="5" fill="#f0f3fb"></circle>
+<circle cx="150" cy="84" r="5" fill="#f0f3fb"></circle>
+<text x="142" y="312" fill="#dbe1f0" font-size="11.5" text-anchor="end">thrown</text>
+<text x="142" y="88" fill="#dbe1f0" font-size="11.5" text-anchor="end">back down</text>
+<text x="142" y="184" fill="#9fb0d0" font-size="11.5" text-anchor="end">stay on the ground</text>
+<text x="142" y="202" fill="#6b7899" font-size="11" text-anchor="end">clocks slowest here</text>
+<text x="286" y="182" fill="#f0ad5a" font-size="12.5" font-weight="700">the real trajectory</text>
+<text x="286" y="201" fill="#f0ad5a" font-size="11">longest proper time</text>
+<text x="440" y="128" fill="#9fb0d0" font-size="11.5">too high, too fast</text>
+<text x="440" y="146" fill="#6b7899" font-size="11">speed slows the clock: a net loss</text>
+<text x="150" y="354" fill="#96a0ba" font-size="11">all three paths join the same two events</text>
+</g>
+</svg>
+<figcaption>Height runs horizontally, time vertically — this is a spacetime diagram, not a trajectory. Over a one-second flight the ball banks about <span class="nowrap">4×10<sup>−17</sup></span> s of proper time more than staying put. For those few tens of attoseconds it climbed 1.25 metres.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Everyday gravity comes <strong>almost entirely from the curvature of time, not of space</strong>. The reason is the conversion: every second you advance 300 million metres along the time axis, while moving perhaps one metre through space. That tiny bend in the time direction (of order 10<sup>−16</sup> per metre), amplified by a 300-million-metre "displacement in time", becomes a visible fall. The spatial share only becomes comparable near <var>c</var> — starlight grazing the Sun is deflected by 1.75 arcseconds, whereas counting only the curvature of time gives half that, and the missing half is exactly what space contributes.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary read · the metric decides what "steepest" means</span>
+  Once you admit that "how distance is measured" must be stated first, several fields' core problems change shape:
+  <ul>
+<li><strong>Optimisation and AI</strong>: a neural network's parameter space is not flat — equal-sized parameter changes affect behaviour wildly differently. Natural gradient descent (Amari, 1998) treats the Fisher information matrix as the metric, which rewrites the "direction of steepest descent"; K-FAC and Adam's per-coordinate scaling are cheap approximations of the same idea.</li>
+<li><strong>Optics</strong>: Fermat's principle says light takes the path of stationary optical length. A weak gravitational field can be written equivalently as a medium of refractive index <span class="nowrap"><var>n</var> ≈ 1 + 2<var>GM</var>/<var>rc</var><sup>2</sup></span> — starlight bending past the Sun and light bending in graded-index glass are the same mathematics.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the apple falls because it is buying its own watch the largest possible reading.</div>
+<details class="q"><summary><b>Think:</b> If time really runs slow down low, why does nobody in a basement feel their day is shorter?</summary><div class="qa">Because <strong>everything</strong> slows together — heartbeat, metabolism, atomic clocks, thought — so no local experiment can detect it. The difference exists only when you bring two clocks together and compare. GPS cannot dodge it, because it is permanently comparing two clocks twenty thousand kilometres apart in altitude.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>The Verdicts</h2>
+<span class="pill">Mercury · 1919 · GPS</span>
+<div class="field"><span class="lab">Intuition</span>
+  Elegance counts for nothing. General relativity opened by staking several bets it <strong>could lose</strong> — each one a definite number, with no dial to turn afterwards.</div>
+<div class="field"><span class="lab">Mechanism · four bills</span>
+  <strong>1. Mercury's perihelion.</strong> The long axis of Mercury's orbit swings 5600 arcseconds per century; the Newtonian account explains 5557, and the leftover 43 hung there for half a century — people even went looking for a planet called Vulcan to take the blame. Einstein's calculation gave exactly 43, with no adjustable parameter anywhere in the equations.<br/>
+  <strong>2. Light deflection.</strong> Starlight grazing the Sun's edge should bend by <strong>1.75 arcseconds</strong>; treating light as a Newtonian particle with mass gives precisely half that, 0.87. Eddington's 1919 eclipse expedition picked the former.<br/>
+  <strong>3. Gravitational redshift.</strong> In 1959 Pound and Rebka set a gamma-ray source and absorber at the top and bottom of a 22.5-metre tower at Harvard and used the Mössbauer effect to resolve a shift of <span class="nowrap">2.5×10<sup>−15</sup></span> — light emitted below is reddened as it climbs.<br/>
+  <strong>4. GPS.</strong> Navigation satellites orbit twenty thousand kilometres up at about 3.9 km/s. Altitude makes the onboard clock gain roughly 45.7 microseconds a day, speed makes it lose about 7.2, netting <strong>+38 microseconds per day</strong>; uncorrected, position errors accumulate at around 10 km a day.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The theory's status has changed: <strong>from the thing being tested to the ruler doing the testing.</strong> Gravitational lensing is standard astronomical equipment, with galaxy clusters used as natural telescopes to magnify earlier galaxies behind them. And an honest engineering detail: the frequency of a GPS satellite clock is <strong>detuned at the factory</strong> so it runs correctly once in orbit — the relativistic correction is not a software patch, it is welded into the hardware.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary read · what it takes to convict a theory</span>
+<ul>
+<li><strong>Philosophy of science</strong>: Popper used that 1919 eclipse as his model case for falsifiability — Einstein had committed in advance to 1.75 arcseconds, and any other value would have sunk the theory. He set it against theories that can explain any outcome, arguing that their explanatory reach is precisely their weakness.</li>
+<li><strong>Statistics and machine learning</strong>: the same criterion goes by <strong>preregistration</strong> and held-out test sets — state in advance what you predict and on which unseen data it will be checked. Tuning after the fact to fit known data is the same disease as inventing Vulcan to absorb those 43 arcseconds.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: only a theory a single observation could have killed deserves to survive.</div>
+<details class="q"><summary><b>Think:</b> What if Eddington's 1919 measurement had come out at Newton's 0.87 arcseconds?</summary><div class="qa">General relativity would have had to concede — there is no dial that reaches 0.87. But history has another side: Eddington's error bars were large, and people have questioned ever since whether he discarded data with a thumb on the scale. What nailed the result was decades of repetition: very-long-baseline interferometry has pinned the deflection to within a few parts in ten thousand of 1.75 arcseconds.</div></details>
+</div>
+</div>
+<!-- Deep -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>The bowling ball on a rubber sheet — what exactly is wrong with that picture?</summary>
+<div class="body">Three things. First, it <strong>explains gravity using gravity</strong>: the small ball rolls into the dip only because there is a "down" outside the frame pulling it; take the sheet into space and nothing happens. Second, it draws only the curvature of <strong>space</strong>, while everyday gravity comes almost entirely from the curvature of time — and the picture has no time axis at all. Third, it invites the question "curved into what?", when curvature is intrinsic. A better substitute is a spacetime diagram of worldlines.</div></details>
+<details><summary>Where exactly do general relativity and quantum mechanics collide?</summary>
+<div class="body">Look at the two sides of the field equations. The right-hand side holds matter, and matter is quantum — it can be in superposition; the left-hand side is a definite classical geometry. Put a particle in a superposition of "on the left" and "on the right": which way does spacetime bend? Replacing the right side with an expectation value (semiclassical gravity) is known to yield conclusions in conflict with quantum mechanics. What makes it worse is that the two only meet head-on at the <strong>Planck scale</strong> (around 10<sup>19</sup> GeV, more than ten orders of magnitude above existing colliders). That is territory for "The Open Problems of Physics".</div></details>
+<details><summary>Why are they called "the field equation" when there are 10 of them?</summary>
+<div class="body"><var>μ</var> and <var>ν</var> each take 4 values, giving 16 components; both tensors are symmetric (swapping indices changes nothing), leaving 10 independent ones. The Bianchi identities then supply 4 constraints — those 4 equations govern the self-consistency of the initial data rather than evolution. Genuinely independent dynamical degrees of freedom: <strong>2</strong>, matching the two polarisations of a ripple travelling through vacuum. That counting exercise pays off in "Black Holes and Gravitational Waves".</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Feynman, <em>The Feynman Lectures on Physics</em> Vol. II ch.42 "Curved Space" — <a href="https://www.feynmanlectures.caltech.edu/II_42.html">free full text from Caltech</a>, the classic chapter that explains intrinsic curvature without tensors</li>
+<li>Sean Carroll, <em>Lecture Notes on General Relativity</em> — <a href="https://arxiv.org/abs/gr-qc/9712019">arXiv:gr-qc/9712019</a>, his openly posted graduate notes, unusually strong on physical intuition</li>
+<li>Sean Carroll, <em>The Biggest Ideas in the Universe: Space, Time, and Motion</em> (2022)</li>
+<li>Taylor &amp; Wheeler, <em>Exploring Black Holes: Introduction to General Relativity</em> — <a href="https://www.eftaylor.com/exploringblackholes/">the authors' freely posted book</a></li>
+<li>Neil Ashby, <em>Relativity in the Global Positioning System</em>, Living Reviews in Relativity 6, 1 (2003) — <a href="https://link.springer.com/article/10.12942/lrr-2003-1">open-access full text</a>, the authoritative review of GPS relativistic corrections</li>
+<li><a href="https://en.wikipedia.org/wiki/General_relativity">Wikipedia: General relativity</a> / <a href="https://en.wikipedia.org/wiki/Equivalence_principle">Equivalence principle</a> / <a href="https://en.wikipedia.org/wiki/Tests_of_general_relativity">Tests of general relativity</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pound%E2%80%93Rebka_experiment">Wikipedia: Pound–Rebka experiment</a> / <a href="https://en.wikipedia.org/wiki/MICROSCOPE_(satellite)">MICROSCOPE (satellite)</a> — the two experiments that pushed redshift and the equivalence principle to their limits</li>
+<li>Montgomery, <em>Gauge Theory of the Falling Cat</em> (1993) — the falling cat as holonomy on shape space, the textbook example of a geometric phase</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

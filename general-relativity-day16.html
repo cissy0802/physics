@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：广义相对论 · Day 16</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>广义相对论</h1>
+<div class="meta">Day 16 · 2026 · Phase D 相对论</div>
+<div class="tagline">苹果没有被谁拽下来。它一直在走直线——只是低处的时间走得慢了那么一点点。</div>
+</header>
+<div class="intro">
+牛顿写下万有引力定律时自己第一个不满意：一个物体怎么可能穿过真空、不借任何中介、瞬间对另一个物体施力？他管这叫<b>荒谬</b>，声明自己只描述、不解释。两百多年后爱因斯坦的答案是把问题取消掉：<b>根本没有引力这种力</b>。有的只是被物质掰弯的时空，和在里面老实走直线的物体。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>等效原理 <span class="en">The Equivalence Principle</span></h2>
+<span class="pill">爱因斯坦 · 1907</span>
+<div class="field"><span class="lab">直觉</span>
+  一间没有窗户的电梯。脚下有重量，抛出的球加速落地——你能判断自己是停在地面，还是被拴在一艘以 9.8 米每二次方秒加速的火箭上吗？<strong>不能。</strong>反过来，缆绳一断，球就静静悬在你面前，你也分不清是在坠落还是漂在深空。1907 年爱因斯坦称这个念头是<strong>一生中最快乐的想法</strong>。</div>
+<figure>
+<svg role="img" aria-label="四格对照：地球表面的电梯与深空加速的火箭内部现象相同；自由下落的电梯与深空漂浮的舱内部现象相同" viewBox="0 0 640 400">
+<defs>
+<marker id="m1" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path></marker>
+<marker id="m1b" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#5b9bff"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<!-- row 1 -->
+<text x="155" y="34" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">静止在地球表面</text>
+<rect x="90" y="50" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="128" cy="76" r="6" fill="#f0ad5a"></circle>
+<line x1="128" y1="86" x2="128" y2="128" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m1)"></line>
+<circle cx="186" cy="88" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="186" y1="95" x2="186" y2="128" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="128" x2="176" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="128" x2="196" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="78" y1="162" x2="238" y2="162" stroke="#6b7899" stroke-width="2.4"></line>
+<line x1="86" y1="162" x2="78" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="110" y1="162" x2="102" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="134" y1="162" x2="126" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="158" y1="162" x2="150" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="182" y1="162" x2="174" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="206" y1="162" x2="198" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<line x1="230" y1="162" x2="222" y2="172" stroke="#4a5678" stroke-width="1.2"></line>
+<text x="155" y="192" fill="#96a0ba" font-size="11.5" text-anchor="middle">球加速落向地板</text>
+<text x="316" y="104" fill="#5b9bff" font-size="24" text-anchor="middle">≡</text>
+<text x="316" y="128" fill="#96a0ba" font-size="11" text-anchor="middle">测不出</text>
+<text x="316" y="145" fill="#96a0ba" font-size="11" text-anchor="middle">差别</text>
+<text x="472" y="34" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">深空中加速的火箭</text>
+<rect x="407" y="50" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="445" cy="76" r="6" fill="#f0ad5a"></circle>
+<line x1="445" y1="86" x2="445" y2="128" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m1)"></line>
+<circle cx="503" cy="88" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="503" y1="95" x2="503" y2="128" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="128" x2="493" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="128" x2="513" y2="150" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="560" y1="160" x2="560" y2="58" stroke="#5b9bff" stroke-width="2" marker-end="url(#m1b)"></line>
+<text x="568" y="106" fill="#5b9bff" font-size="12">加速度 = g</text>
+<circle cx="392" cy="66" r="1.6" fill="#4a5678"></circle>
+<circle cx="380" cy="122" r="1.6" fill="#4a5678"></circle>
+<circle cx="398" cy="150" r="1.6" fill="#4a5678"></circle>
+<text x="472" y="192" fill="#96a0ba" font-size="11.5" text-anchor="middle">球加速落向地板</text>
+<!-- row 2 -->
+<text x="155" y="238" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">缆绳断掉的电梯</text>
+<rect x="90" y="254" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="128" cy="300" r="6" fill="#f0ad5a"></circle>
+<circle cx="186" cy="292" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="186" y1="299" x2="186" y2="330" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="330" x2="177" y2="350" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="186" y1="330" x2="197" y2="348" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="66" y1="262" x2="66" y2="358" stroke="#5b9bff" stroke-width="2" marker-end="url(#m1b)"></line>
+<text x="58" y="248" fill="#5b9bff" font-size="12" text-anchor="middle">整箱下落</text>
+<text x="155" y="392" fill="#96a0ba" font-size="11.5" text-anchor="middle">球静静悬在半空</text>
+<text x="316" y="308" fill="#5b9bff" font-size="24" text-anchor="middle">≡</text>
+<text x="316" y="332" fill="#96a0ba" font-size="11" text-anchor="middle">测不出</text>
+<text x="316" y="349" fill="#96a0ba" font-size="11" text-anchor="middle">差别</text>
+<text x="472" y="238" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">深空里漂着的舱</text>
+<rect x="407" y="254" width="130" height="112" rx="4" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></rect>
+<circle cx="445" cy="300" r="6" fill="#f0ad5a"></circle>
+<circle cx="503" cy="292" r="7" fill="none" stroke="#9fb0d0" stroke-width="1.4"></circle>
+<line x1="503" y1="299" x2="503" y2="330" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="330" x2="494" y2="350" stroke="#9fb0d0" stroke-width="1.4"></line>
+<line x1="503" y1="330" x2="514" y2="348" stroke="#9fb0d0" stroke-width="1.4"></line>
+<circle cx="392" cy="270" r="1.6" fill="#4a5678"></circle>
+<circle cx="382" cy="326" r="1.6" fill="#4a5678"></circle>
+<circle cx="398" cy="354" r="1.6" fill="#4a5678"></circle>
+<circle cx="565" cy="286" r="1.6" fill="#4a5678"></circle>
+<circle cx="574" cy="340" r="1.6" fill="#4a5678"></circle>
+<text x="472" y="392" fill="#96a0ba" font-size="11.5" text-anchor="middle">球静静悬在半空</text>
+</g>
+</svg>
+<figcaption>左右两栏在箱内完全不可分辨。既然测不出差别，就干脆宣布它们<strong>是同一件事</strong>——这一步是整个理论的地基。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  为什么这么巧？因为有个从牛顿时代就挂着没人认领的等式：
+  <div class="eq"><var>m</var><sub>惯性</sub> = <var>m</var><sub>引力</sub></div>
+<div class="gloss"><var>m</var><sub>惯性</sub> 是 <var>F</var>=<var>m</var><var>a</var> 里那个 <var>m</var>——抗拒被推动的程度。<var>m</var><sub>引力</sub> 是万有引力公式里那个 <var>m</var>，是<strong>引力荷</strong>，就像电荷之于电场。两者概念上毫无关系，却处处相等：分子分母一约，加速度里不再有 <var>m</var>——羽毛和铁球在真空中同时落地。这巧合被越查越准：从厄缶（读"厄特沃什"）的扭秤到 2022 年结题的 MICROSCOPE 卫星，两种物质下落加速度之比与 1 的偏差被压到 <span class="nowrap">10<sup>−15</sup></span> 以内。爱因斯坦不再把它当巧合，而当<strong>公理</strong>。</div></div>
+<div class="field"><span class="lab">反直觉的重点</span>
+<strong>自由下落的人才是不受力的那个。</strong>站在地上的你正被地面持续向上推着——此刻你正以 9.8 米每二次方秒<strong>加速</strong>。这不是文字游戏：手机里的加速度计静止放桌上读数是 9.8 而非 <span class="nowrap"><span style="color:#5b9bff;font-weight:700">0</span>（数字 0，零）</span>，扔出窗外那几百毫秒它才读 0。更要紧的是，<strong>等效原理只在局域成立</strong>：引力能被变换掉，但只能一小块一小块地掉，<strong>掉不掉的那部分就是曲率</strong>。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 把"测不出差别"升格成公理</span>
+  把一次次失败的区分尝试变成定义性原理，是科学里最有生产力的一招：
+  <ul>
+<li><strong>热力学</strong>：没人造得出永动机——这条纯经验的挫败被升格为第二定律，反过来推出卡诺极限与熵。</li>
+<li><strong>密码学</strong>：现代加密的安全性定义正是<strong>不可区分性</strong>——敌手拿到两条明文的密文，猜对哪条的胜率不能明显高于抛硬币。安全不是"藏得好"，是"两种世界看起来一样"。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：自由下落不是"被拽着走"，而是唯一不受力的运动状态。</div>
+<details class="q"><summary><b>思考：</b>既然自由下落能消掉引力，能不能找一个坐标系一次性消掉整个地球的引力？</summary><div class="qa">不能，只能在每一点的<strong>小邻域</strong>里消掉。地球正对面的自由落体朝相反方向掉，没有哪个统一的加速度能同时对上两边。消不掉的那部分就是潮汐力，坐标换不掉，它是实在。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>引力就是时空弯曲 <span class="en">Gravity Is Geometry</span></h2>
+<span class="pill">测地线 · 场方程 · 1915</span>
+<div class="field"><span class="lab">直觉</span>
+  两个人站在赤道上相距一百公里，各自朝正北出发。谁也没有转向，却越走越近，最后在北极撞上。若坚信"直线不相交"，他们就得发明一种把两人拽到一起、又恰好与体重无关的<strong>力</strong>。曲面上的真相朴素得多：没有力，是面弯了。<a href="motion-force-day2.html">「运动、力与决定论」</a>里那种超距拉扯，在这里换成一句话：<strong>物体一直在走直线，只是"直线"的定义被时空改写了。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  弯曲时空里的"直线"叫<strong>测地线</strong>——局域最直、不主动拐弯的路径。自由运动的物体只做一件事：沿测地线走。时空怎么弯，由爱因斯坦 1915 年写下的<strong>场方程</strong>决定：
+  <div class="eq"><var>G</var><sub><var>μν</var></sub> = <span class="frac"><span class="fnum">8π<var>G</var></span><span class="fden"><var>c</var><sup>4</sup></span></span> <var>T</var><sub><var>μν</var></sub></div>
+<div class="gloss"><var>μ</var>、<var>ν</var>（读"mu""nu"）是下标，各取 4 个值——一个时间方向加三个空间方向，所以这不是一个方程而是一整组。<var>G</var><sub><var>μν</var></sub> 是<strong>爱因斯坦张量</strong>，纯描述几何；<var>T</var><sub><var>μν</var></sub> 是<strong>能量-动量张量</strong>，装能量密度、动量与压强。<strong>注意两个 <var>G</var> 长得一样却毫不相干</strong>：带下标的是几何张量，8π<var>G</var> 里那个是牛顿引力常数。系数 <span class="nowrap">8π<var>G</var>/<var>c</var><sup>4</sup> ≈ 2×10<sup>−43</sup></span>（国际单位制）小得离谱，这就是"引力弱"的量化版。惠勒把整个方程翻成一句话——<strong>时空告诉物质如何运动，物质告诉时空如何弯曲。</strong></div></div>
+<div class="field"><span class="lab">机制 · 怎么量曲率</span>
+  曲率有可操作的定义：<strong>放两个自由落体，看它们的相对加速度</strong>。两者都不受力，距离却变了，那就是几何在说话。这效应更熟的名字是<strong>潮汐力</strong>——差值而非拉力本身才是曲率。</div>
+<figure>
+<svg role="img" aria-label="左：球面上两条起初平行的测地线在北极相交；右：一团自由下落的粒子被潮汐力拉成竖直的椭球" viewBox="0 0 640 380">
+<defs>
+<marker id="m2" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#5b9bff"></path></marker>
+<marker id="m2a" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line x1="316" y1="16" x2="316" y2="364" stroke="#26314c" stroke-dasharray="5 6"></line>
+<!-- left: geodesics on a sphere -->
+<text x="155" y="30" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">起初平行的两条直线</text>
+<text x="155" y="51" fill="#c3cbe0" font-size="11.5" text-anchor="middle">谁也没有转向，却相交了</text>
+<circle cx="155" cy="200" r="96" fill="#0f1626" stroke="#2b3a5e" stroke-width="1.4"></circle>
+<ellipse cx="155" cy="200" rx="96" ry="27" fill="none" stroke="#3a4a70" stroke-width="1.1" stroke-dasharray="4 5"></ellipse>
+<path d="M 59,200 A 96,27 0 0 1 251,200" fill="none" stroke="#6b7899" stroke-width="1.5"></path>
+<path d="M 122,225 Q 107,152 152,118" fill="none" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#m2)"></path>
+<path d="M 188,225 Q 203,152 158,118" fill="none" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#m2)"></path>
+<circle cx="122" cy="225" r="4.5" fill="#f0ad5a"></circle>
+<circle cx="188" cy="225" r="4.5" fill="#f0ad5a"></circle>
+<circle cx="155" cy="104" r="5" fill="#f0f3fb"></circle>
+<text x="155" y="94" fill="#f0f3fb" font-size="11.5" text-anchor="middle">北极：撞上</text>
+<text x="155" y="252" fill="#f0ad5a" font-size="11.5" text-anchor="middle">出发：都朝正北</text>
+<text x="155" y="272" fill="#96a0ba" font-size="11.5" text-anchor="middle">赤道</text>
+<text x="155" y="330" fill="#96a0ba" font-size="11.5" text-anchor="middle">没有力，是面弯了</text>
+<!-- right: tidal ellipsoid -->
+<text x="476" y="30" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">自由下落的一团粒子</text>
+<text x="476" y="51" fill="#c3cbe0" font-size="11.5" text-anchor="middle">各自不受力，形状却变了</text>
+<circle cx="476" cy="185" r="52" fill="none" stroke="#3a4a70" stroke-width="1.2" stroke-dasharray="4 5"></circle>
+<ellipse cx="476" cy="185" rx="35" ry="70" fill="rgba(240,173,90,.08)" stroke="#f0ad5a" stroke-width="2"></ellipse>
+<line x1="476" y1="112" x2="476" y2="88" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<line x1="476" y1="258" x2="476" y2="282" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<line x1="416" y1="185" x2="437" y2="185" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<line x1="536" y1="185" x2="515" y2="185" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#m2a)"></line>
+<text x="492" y="88" fill="#f0ad5a" font-size="11.5">拉长</text>
+<text x="410" y="178" fill="#f0ad5a" font-size="11.5" text-anchor="end">挤扁</text>
+<text x="542" y="178" fill="#f0ad5a" font-size="11.5">挤扁</text>
+<text x="476" y="298" fill="#96a0ba" font-size="11.5" text-anchor="middle">虚线：原来的形状</text>
+<circle cx="476" cy="345" r="17" fill="#1c2947" stroke="#3a4a70" stroke-width="1.3"></circle>
+<text x="506" y="350" fill="#96a0ba" font-size="11.5">天体在这一侧</text>
+</g>
+</svg>
+<figcaption>左边是曲率的成因，右边是曲率的<strong>读数</strong>。潮汐力不是引力的副作用——它才是引力里唯一换坐标也抹不掉的那份。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  "时空弯曲"最容易被问的是：<strong>它弯到哪里去了？</strong>答案是不需要弯到任何地方。曲率是<strong>内蕴</strong>的：一只出不了球面的蚂蚁，只靠量三角形内角和、量圆周与半径之比就能算出球面是弯的，不必知道球面泡在三维空间里。时空同理，"外面"有没有更高维空间，物理既不关心也不需要。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 绕一圈回来不一样：和乐</span>
+  曲率还有个等价读法：<strong>带着箭头沿闭合回路走一圈，回来时它转了向</strong>。从北极沿经线到赤道、沿赤道走四分之一圈、再回北极，你全程没转过箭头，它却偏了 90°。这叫和乐（holonomy）：
+  <ul>
+<li><strong>傅科摆</strong>：摆面每天转过 360°×sin(纬度)，在北京约 260°，在赤道纹丝不动。不是地球"拽偏"了摆，而是振动方向沿纬圈平行移动一周后的和乐。</li>
+<li><strong>力学与机器人</strong>：猫背朝下摔落时总角动量始终为零，却能净转体 180°——靠先屈后伸让身体形状走一个闭合回路，转角就是那圈的和乐。</li>
+<li><strong>量子力学</strong>：把量子系统的参数缓慢绕一圈拉回原处，波函数会多出一个只由回路几何决定的相位——Berry 相位（1984），如今是拓扑物态的基本语言。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：引力不是一种力，是"直线"的定义变了。</div>
+<details class="q"><summary><b>思考：</b>如果引力纯粹是几何，为什么方程里还需要一个实验测来的常数 <var>G</var>？</summary><div class="qa">几何自己不知道"多少物质该弯多少"。<var>G</var>（连同 <var>c</var>）定的是<strong>汇率</strong>：把以千克计的物质换算成曲率。汇率不是几何事实，得测。它小到 <span class="nowrap">2×10<sup>−43</sup></span>，正是我们能站在行星上而不被时空的褶皱撕碎的原因。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>苹果为什么会掉 <span class="en">Why the Apple Falls</span></h2>
+<span class="pill">引力时间膨胀 · 最大固有时</span>
+<div class="field"><span class="lab">直觉</span>
+  把两件事拼起来。第一件来自<a href="spacetime-day15.html">「时空」</a>：自由运动的物体走<strong>固有时最长</strong>的那条世界线——手表走得最多的那条路。第二件是新的：<strong>低处的时钟走得慢</strong>。于是"掉下来"有了新解释：在高处多待一会儿能多攒固有时，可上去必须有速度，速度又让钟变慢。两笔账的最优折中，恰恰是抛物线。</div>
+<div class="field"><span class="lab">机制</span>
+  弱引力场里，两个高度相差 <var>h</var> 的钟，走时快慢之比是：
+  <div class="eq"><span class="frac"><span class="fnum">Δ<var>τ</var></span><span class="fden"><var>τ</var></span></span> ≈ <span class="frac"><span class="fnum"><var>g</var><var>h</var></span><span class="fden"><var>c</var><sup>2</sup></span></span></div>
+<div class="gloss"><var>τ</var>（读"tau"）是固有时，即随身那只表的读数；Δ<var>τ</var>/<var>τ</var> 是两只表的相对快慢；<var>g</var> 是当地重力加速度，<var>h</var> 是高度差，<var>c</var> 是光速。代入地表数值：<strong>每升高 1 米，钟每秒快 1.09×10<sup>−16</sup> 秒</strong>，你的头一年比脚多老约 3 纳秒。小得可笑，却已被直接测到：2010 年美国国家标准与技术研究院用两台光钟分辨出 <strong>33 厘米</strong>的高度差；2022 年 JILA 更在<strong>同一团</strong>冷原子的上下毫米之间读出了引力红移。</div></div>
+<figure>
+<svg role="img" aria-label="抛体的世界线：横轴为高度，纵轴为时间；三条候选路径中真实的抛物线固有时最长" viewBox="0 0 640 372">
+<defs>
+<marker id="m3" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line x1="150" y1="308" x2="586" y2="308" stroke="#6b7899" stroke-width="1.3" marker-end="url(#m3)"></line>
+<line x1="150" y1="308" x2="150" y2="46" stroke="#6b7899" stroke-width="1.3" marker-end="url(#m3)"></line>
+<text x="560" y="330" fill="#6b7899" font-size="11.5">高度 h</text>
+<text x="158" y="42" fill="#6b7899" font-size="11.5">ct（时间 × c）</text>
+<text x="166" y="330" fill="#96a0ba" font-size="11">低处 · 钟慢</text>
+<text x="330" y="330" fill="#96a0ba" font-size="11">高处 · 钟快 →</text>
+<!-- candidate C: too high -->
+<path d="M 150,308 Q 690,196 150,84" fill="none" stroke="#6b7899" stroke-width="2" stroke-dasharray="6 5"></path>
+<!-- candidate A: stay put -->
+<line x1="150" y1="308" x2="150" y2="84" stroke="#6b7899" stroke-width="2" stroke-dasharray="6 5"></line>
+<!-- candidate B: real parabola -->
+<path d="M 150,308 Q 396,196 150,84" fill="none" stroke="#f0ad5a" stroke-width="3"></path>
+<circle cx="150" cy="308" r="5" fill="#f0f3fb"></circle>
+<circle cx="150" cy="84" r="5" fill="#f0f3fb"></circle>
+<text x="142" y="312" fill="#dbe1f0" font-size="11.5" text-anchor="end">抛出</text>
+<text x="142" y="88" fill="#dbe1f0" font-size="11.5" text-anchor="end">落回</text>
+<text x="142" y="184" fill="#9fb0d0" font-size="11.5" text-anchor="end">贴地不动</text>
+<text x="142" y="202" fill="#6b7899" font-size="11" text-anchor="end">一直待在钟慢的地方</text>
+<text x="286" y="182" fill="#f0ad5a" font-size="12.5" font-weight="700">真实的抛体轨迹</text>
+<text x="286" y="201" fill="#f0ad5a" font-size="11">固有时最长</text>
+<text x="440" y="128" fill="#9fb0d0" font-size="11.5">抛得太高太快</text>
+<text x="440" y="146" fill="#6b7899" font-size="11">速度让钟变慢，反而亏了</text>
+<text x="150" y="354" fill="#96a0ba" font-size="11">三条路连接同一对事件：起点与终点都相同</text>
+</g>
+</svg>
+<figcaption>横轴是高度、纵轴是时间——这是时空图，不是轨迹图。抛体飞行 1 秒，比贴地不动多攒固有时约 <span class="nowrap">4×10<sup>−17</sup></span> 秒。为这几十阿秒，它跑了 1.25 米高。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  日常引力<strong>几乎全部来自时间的弯曲，而非空间的弯曲</strong>。原因在换算：你每过 1 秒就沿时间轴前进 3 亿米，在空间里一秒才挪一米。时间方向那一丁点弯曲（每米 10<sup>−16</sup> 量级），被 3 亿米的"时间位移"放大，成了肉眼可见的下落。空间那一份要等速度接近 <var>c</var> 才平起平坐——星光掠过太阳偏折 1.75 角秒，只算时间弯曲则只有一半，多出的那份正是空间弯曲交的账。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 度规决定什么叫"最陡"</span>
+  一旦承认"距离怎么量"必须先说清楚，很多学科的难题都换了面孔：
+  <ul>
+<li><strong>优化与 AI</strong>：神经网络的参数空间不是平的，同样大小的参数改动对模型行为的影响千差万别。自然梯度下降（Amari，1998）把 Fisher 信息矩阵当作度规，"最陡下降方向"随之改写；K-FAC 与 Adam 的逐坐标缩放都是它的廉价近似。</li>
+<li><strong>光学</strong>：费马原理说光走光程取极值的路径。弱引力场恰好可等价写成一块折射率 <span class="nowrap"><var>n</var> ≈ 1 + 2<var>GM</var>/<var>rc</var><sup>2</sup></span> 的介质——星光被太阳偏折，与光在渐变折射率玻璃里拐弯是同一套数学。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：苹果掉下来，是因为它在给自己的表争取最多的读数。</div>
+<details class="q"><summary><b>思考：</b>低处时间真的慢，为什么住地下室的人没觉得自己的一天更短？</summary><div class="qa">因为慢的是<strong>一切</strong>——心跳、代谢、原子钟、思考，同步地慢，没有本地实验察觉得到。差异只在把两地的钟拿到一起对比时才存在。GPS 躲不过，正因为它时刻在把高度差两万公里的两只钟直接对表。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>它是怎么被判决的 <span class="en">The Verdicts</span></h2>
+<span class="pill">水星 · 1919 · GPS</span>
+<div class="field"><span class="lab">直觉</span>
+  一个理论漂不漂亮不算数。广义相对论刚出手就押上了几个<strong>可以输</strong>的赌注——每个都给出确定的数，没有一个事后可调的旋钮。</div>
+<div class="field"><span class="lab">机制 · 四份账单</span>
+  <strong>1. 水星近日点。</strong>水星轨道长轴每世纪转 5600 角秒，牛顿框架能解释 5557 秒，剩下 43 秒挂了半个多世纪——人们甚至去找一颗叫"火神星"的行星来背锅。爱因斯坦一算正好 43，而方程里没有可调参数。<br/>
+  <strong>2. 光偏折。</strong>星光掠过太阳边缘应偏折 <strong>1.75 角秒</strong>；若只把光当有质量的牛顿粒子，答案恰是一半，0.87 角秒。1919 年爱丁顿的日食观测选中了前者。<br/>
+  <strong>3. 引力红移。</strong>1959 年庞德与雷布卡在哈佛一座 22.5 米高的塔上下架起伽马射线源与吸收体，用穆斯堡尔效应分辨出 <span class="nowrap">2.5×10<sup>−15</sup></span> 的频移——低处发出的光爬上来会变红。<br/>
+  <strong>4. GPS。</strong>导航卫星在两万公里高空以约 3.9 千米每秒飞行。高度让星载钟每天快约 45.7 微秒，速度让它慢约 7.2 微秒，净结果<strong>每天快 38 微秒</strong>；不修正，定位误差每天累积约 10 公里。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  今天它的地位已经变了：<strong>从被检验的对象，变成了检验用的尺子。</strong>引力透镜成了天文学的标准装备，星系团被当作天然望远镜去放大背后更早期的星系。还有个诚实的细节：GPS 星载钟的频率<strong>出厂就被调低</strong>，好让它上了轨道正好走准——修正不是软件补丁，是焊进了硬件。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 一个理论怎么才算被判决</span>
+<ul>
+<li><strong>科学哲学</strong>：波普尔正是拿 1919 年那次日食当"可证伪性"的样板——爱因斯坦事先把数字说死在 1.75 角秒，量出别的值理论就完蛋。他拿它对照"什么结果都能解释得通"的理论，认为后者的解释力恰恰是弱点。</li>
+<li><strong>统计与机器学习</strong>：同一条判据在这里叫<strong>预注册</strong>和留出测试集——事先说死预测什么、在哪份没见过的数据上验。事后调参去拟合已知数据，和当年为凑 43 秒而虚构的"火神星"是同一种病。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：能被一次观测杀死的理论，才配活下来。</div>
+<details class="q"><summary><b>思考：</b>如果 1919 年爱丁顿量出的是牛顿的 0.87 角秒，会怎么样？</summary><div class="qa">广义相对论就得认输——它没有旋钮可调到 0.87。但历史还有另一面：爱丁顿那次的误差棒相当大，后世一直有人质疑他取舍数据带着偏心。真正把结论钉死的是几十年的重复：甚长基线干涉测量把偏折量压进了 1.75 角秒的万分之几。</div></details>
+</div>
+</div>
+<!-- Deep -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>橡皮膜上压一个铅球——那张图到底错在哪？</summary>
+<div class="body">错三处。其一，它<strong>用引力解释引力</strong>：小球滚向凹陷，是因为画面外还有一个"下"在拉它；把那张膜搬到太空，什么也不会发生。其二，它只画了<strong>空间</strong>的弯曲，而日常引力几乎全来自时间的弯曲——图里根本没有时间这一维。其三，它诱导人去问"弯到哪里去了"，而曲率是内蕴的。更靠谱的替代是画世界线的时空图。</div></details>
+<details><summary>广义相对论和量子力学具体是在哪儿打架的？</summary>
+<div class="body">看场方程两边就够了。右边 <var>T</var><sub><var>μν</var></sub> 装的是物质，而物质是量子的、可以叠加；左边的几何却是确定的经典对象。让一颗粒子处在"在左边"与"在右边"的叠加态，时空该弯成哪样？把右边换成期望值的折中方案（半经典引力）已知会导出与量子力学冲突的结论。更麻烦的是两者要到<strong>普朗克能标</strong>（约 10<sup>19</sup> GeV，比现有对撞机高十几个数量级）才短兵相接。这些留给「物理学的未解之谜」。</div></details>
+<details><summary>为什么叫"场方程"却有 10 个？</summary>
+<div class="body"><var>μ</var>、<var>ν</var> 各取 4 个值给出 16 个分量，两个张量都对称（换下标不变），独立的只剩 10 个。比安基恒等式又给出 4 个约束——那 4 个方程管的是初始数据必须自洽，而非演化。真正独立的动力学自由度只剩 <strong>2 个</strong>，恰好对应真空里传播的涟漪有两种偏振。这条数数练习会在「黑洞与引力波」那里派上大用场。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em> Vol. II ch.42 "Curved Space"——<a href="https://www.feynmanlectures.caltech.edu/II_42.html">加州理工免费全文</a>，不用张量讲清内蕴曲率的经典一章</li>
+<li>Sean Carroll，<em>Lecture Notes on General Relativity</em>——<a href="https://arxiv.org/abs/gr-qc/9712019">arXiv:gr-qc/9712019</a>，公开的研究生讲义，物理直觉极好</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Space, Time, and Motion</em>（2022）</li>
+<li>Taylor &amp; Wheeler，<em>Exploring Black Holes: Introduction to General Relativity</em>——<a href="https://www.eftaylor.com/exploringblackholes/">作者公开的全书</a></li>
+<li>Neil Ashby，<em>Relativity in the Global Positioning System</em>，Living Reviews in Relativity 6, 1 (2003)——<a href="https://link.springer.com/article/10.12942/lrr-2003-1">开放获取全文</a>，GPS 相对论修正的权威综述</li>
+<li><a href="https://en.wikipedia.org/wiki/General_relativity">Wikipedia: General relativity</a> / <a href="https://en.wikipedia.org/wiki/Equivalence_principle">Equivalence principle</a> / <a href="https://en.wikipedia.org/wiki/Tests_of_general_relativity">Tests of general relativity</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pound%E2%80%93Rebka_experiment">Wikipedia: Pound–Rebka experiment</a> / <a href="https://en.wikipedia.org/wiki/MICROSCOPE_(satellite)">MICROSCOPE (satellite)</a>——把引力红移与等效原理逼到极限的两个实验</li>
+<li>Montgomery，<em>Gauge Theory of the Falling Cat</em>（1993）——猫翻身作为形状空间上的和乐，几何相位的教科书级例子</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
