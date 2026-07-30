@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: The Quantum Revolution · Day 18</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>The Quantum Revolution</h1>
+<div class="meta">Day 18 · 2026 · Phase E Quantum Mechanics</div>
+<div class="tagline">Energy comes in packets not because the world runs out of smallness, but because it is confined — what is bound has rungs; what is free stays continuous.</div>
+</header>
+<div class="intro">
+In October 1900 Planck had two formulas: one that worked at long wavelengths, one that worked at short. He stitched them into a single expression and it fitted the whole curve. To find a reason for the stitched formula, two months later he was forced to assume that energy could only be emitted <b>in packets</b> — his own phrase for it was an "act of desperation", and for the next decade and a half he kept trying to get rid of the assumption. Textbooks say he was rescuing physics from the "ultraviolet catastrophe"; in fact Ehrenfest only coined that phrase in 1911, and Planck was simply chasing an experimental curve. The person who took the packet seriously was Einstein.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>An Act of Desperation</h2>
+<span class="pill">Black-body radiation · 1900</span>
+<div class="field"><span class="lab">Intuition</span>
+  Everything with a temperature glows: iron at 700 ℃ glows dull red, at 1500 ℃ white, and you are glowing in the infrared right now. Classical theory should have been able to compute that spectrum — the electromagnetic waves inside a hot cavity are a collection of standing waves, and equipartition hands every way of vibrating (every <strong>mode</strong>) the same share of energy. The trouble is that the higher the frequency, the more modes fit inside; their number grows as the square of the frequency, and each still gets an equal share. The total is infinite. On that arithmetic, opening the oven door would blast you with X-rays.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Planck changed exactly one thing: a mode of frequency <var>ν</var> cannot hold an arbitrary amount of energy, only a whole number of some smallest packet.
+  <div class="eq"><var>E</var> = <var>n</var> <var>h</var> <var>ν</var></div>
+<div class="gloss"><var>ν</var> is the Greek letter nu (say "new", <strong>not</strong> the Latin letter v) and stands for <strong>frequency</strong> — vibrations per second; <var>h</var> is <strong>Planck's constant</strong>, 6.626×10⁻³⁴ joule·seconds; <var>n</var> is a whole number 1, 2, 3… — how many packets. <var>h</var> is absurdly small, so on everyday scales these steps are far too fine to notice.</div>
+  Once there is a smallest packet, the high-frequency ones become "expensive": the energy a heat bath can hand out casually is about <var>kT</var> (<var>k</var> is Boltzmann's constant, <var>T</var> the temperature), and when <span class="nowrap"><var>h</var><var>ν</var></span> greatly exceeds <var>kT</var> that mode cannot even afford its first packet and is exponentially suppressed. The curve therefore rises to a peak and comes back down — exactly the shape measured.</div>
+<figure>
+<svg aria-label="Black-body spectrum: the classical Rayleigh-Jeans curve climbs as the square of frequency and runs off the top of the figure, while the Planck curve rises to a peak and falls back" role="img" viewbox="0 0 660 320">
+<defs>
+<marker id="up1" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#e0685a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#6b7899" stroke-width="1.4" x1="80" x2="628" y1="272" y2="272"></line>
+<polygon fill="#6b7899" points="634,272 622,267 622,277"></polygon>
+<line stroke="#6b7899" stroke-width="1.4" x1="80" x2="80" y1="272" y2="34"></line>
+<polygon fill="#6b7899" points="80,28 75,40 85,40"></polygon>
+<text fill="#96a0ba" x="546" y="292">Frequency ν →</text>
+<text fill="#96a0ba" text-anchor="middle" transform="translate(30,160) rotate(-90)" x="0" y="0">Radiated intensity</text>
+<polyline fill="none" points="80.0,272.0 89.9,268.5 99.9,257.8 109.8,240.1 119.8,215.3 129.7,183.4 139.6,144.4 149.6,98.3 156.2,63.6 161.5,34.0" stroke="#e0685a" stroke-dasharray="7 4" stroke-width="2.2" marker-end="url(#up1)"></polyline>
+<polyline fill="none" points="80.0,272.0 86.6,270.5 93.2,266.3 99.9,259.8 106.5,251.5 113.1,241.6 119.8,230.6 126.4,218.7 133.0,206.2 139.6,193.3 146.2,180.3 152.9,167.3 159.5,154.6 166.1,142.3 172.8,130.5 179.4,119.2 186.0,108.7 192.6,98.9 199.2,90.0 205.9,81.9 212.5,74.7 219.1,68.3 225.8,62.9 232.4,58.3 239.0,54.7 245.6,51.8 252.2,49.8 258.9,48.5 265.5,48.0 272.1,48.2 278.8,49.1 285.4,50.5 292.0,52.6 298.6,55.1 305.2,58.2 311.9,61.6 318.5,65.5 325.1,69.6 331.8,74.1 338.4,78.9 345.0,83.8 351.6,89.0 358.2,94.3 364.9,99.7 371.5,105.1 378.1,110.7 384.8,116.3 391.4,121.8 398.0,127.4 404.6,132.9 411.2,138.4 417.9,143.8 424.5,149.1 431.1,154.3 437.8,159.4 444.4,164.4 451.0,169.3 457.6,174.0 464.2,178.6 470.9,183.1 477.5,187.4 484.1,191.6 490.8,195.6 497.4,199.5 504.0,203.2 510.6,206.8 517.2,210.3 523.9,213.6 530.5,216.8 537.1,219.8 543.8,222.7 550.4,225.4 557.0,228.1 563.6,230.6 570.2,232.9 576.9,235.2 583.5,237.4 590.1,239.4 596.8,241.3 603.4,243.2 610.0,244.9" stroke="#5b9bff" stroke-width="2.6"></polyline>
+<text fill="#e0685a" font-size="12.5" x="344" y="54">Classical prediction (Rayleigh–Jeans) → ∞</text>
+<text fill="#e0685a" font-size="11.5" x="344" y="72">too many high-ν modes, each given kT</text>
+<text fill="#5b9bff" font-size="12.5" x="292" y="212">Planck: energy comes in hν packets</text>
+<text fill="#7db0ff" font-size="11.5" x="292" y="232">the high-ν packet is unaffordable → suppressed</text>
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1.2" x1="268" x2="268" y1="48" y2="272"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="268" y="290">peak position set only by T</text>
+</g>
+</svg>
+<figcaption>One furnace, two calculations. The classical curve runs off the top of the frame; once energy comes in packets, the curve peaks and falls — which is what the instruments see.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  What deserves your attention is the dimension of <var>h</var>: <strong>energy × time</strong>, which is exactly the <strong>action</strong> of <a href="least-action-day4.en.html">"The Principle of Least Action"</a>. What nature cuts into packets is neither energy nor length but action; <var>h</var> is this universe's unit of action, small enough that three centuries of classical physics never bumped into it.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Engineering / Cosmology / Method</span>
+<ul>
+<li><strong>Engineering</strong>: the position of the peak depends only on temperature (Wien's displacement law), so colour alone measures temperature — the pyrometer on a steel furnace, the infrared thermometer at your forehead, and the surface temperature astronomers read off a star's colour are all the same curve.</li>
+<li><strong>Cosmology</strong>: the cosmic microwave background is a black-body spectrum at 2.725 K, and COBE found deviations below a few parts in ten thousand — the most perfect black body ever measured. The early universe really was a hot cavity.</li>
+<li><strong>Method</strong>: Planck treated <var>h</var> as a fitting parameter and spent over a decade trying to push it back into the continuum. An assumption introduced purely to fit data turned out to be the structure of the world — there is no line drawn in advance between "just a mathematical trick" and "this is real".</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: h is not the smallest unit of energy but the smallest unit of action.</div>
+<details class="q"><summary><b>Think:</b> The classical failure came from "too many high-frequency modes". The specific heat of a solid also collapses toward zero at low temperature — same mechanism?</summary><div class="qa">Yes. Atomic vibrations in a solid are also a set of modes (phonons). At low temperature <var>kT</var> falls below the packet <span class="nowrap"><var>h</var><var>ν</var></span> of the high-frequency modes, so they are never excited, contribute nothing to heat absorption, and the specific heat drops toward zero — which is how Einstein in 1907 and Debye in 1912 solved the low-temperature specific-heat puzzle.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Photoelectric Effect: One Electron, One Packet</h2>
+<span class="pill">Einstein · 1905</span>
+<div class="field"><span class="lab">Intuition</span>
+  Shine light on a metal and electrons come out. On the wave picture light is energy flowing in continuously: brighter light should push harder, and even feeble light should do the job if you wait long enough. Every result is the opposite — brightness decides only <strong>how many</strong> electrons come out, never how <strong>fast</strong> the fastest one moves; speed is set by colour. Light redder than some threshold colour ejects nothing at all no matter how bright the lamp, while light above the threshold produces current the instant you switch it on, with no waiting time. Throw fine sand at a window all day and nothing breaks; throw one stone and it shatters.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Einstein's step: the energy of light is itself absorbed in packets of size <span class="nowrap"><var>h</var><var>ν</var></span> (later called <strong>photons</strong>), and one electron swallows exactly one packet.
+  <div class="eq"><var>E</var><sub>max</sub> = <var>h</var><var>ν</var> − <var>W</var></div>
+<div class="gloss"><var>E</var><sub>max</sub> is the largest kinetic energy an ejected electron can have; <span class="nowrap"><var>h</var><var>ν</var></span> is the entire energy of the packet it swallowed; <var>W</var> is the <strong>work function</strong>, the minimum toll for dragging one electron out of that particular metal. So when <span class="nowrap"><var>h</var><var>ν</var></span> is less than <var>W</var> the right-hand side is negative — nothing comes out, and no amount of intensity changes that.</div>
+  This is a straight line: frequency across, maximum kinetic energy up, <strong>slope exactly <var>h</var></strong>, intercept <span class="nowrap">−<var>W</var></span>. Change the metal and the line slides up or down without the slope budging. Millikan spent a decade trying to disprove the relation; his 1916 experiment instead pinned the line down to high precision.</div>
+<figure>
+<svg aria-label="Photoelectric effect: maximum kinetic energy plotted against frequency is a straight line whose slope is Planck's constant; two metals give parallel lines with different threshold frequencies" role="img" viewbox="0 0 660 320">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<rect fill="rgba(224,104,90,.10)" height="150" width="130" x="100" y="55"></rect>
+<line stroke="#6b7899" stroke-width="1.4" x1="100" x2="620" y1="205" y2="205"></line>
+<polygon fill="#6b7899" points="626,205 614,200 614,210"></polygon>
+<line stroke="#6b7899" stroke-width="1.4" x1="100" x2="100" y1="300" y2="46"></line>
+<polygon fill="#6b7899" points="100,40 95,52 105,52"></polygon>
+<text fill="#96a0ba" x="470" y="226">Light frequency ν (colour)</text>
+<text fill="#96a0ba" text-anchor="middle" transform="translate(34,150) rotate(-90)" x="0" y="0">Max kinetic energy of ejected electron</text>
+<line stroke="#5b9bff" stroke-width="2.6" x1="230" x2="612" y1="205" y2="71.3"></line>
+<line stroke="#5b9bff" stroke-dasharray="5 4" stroke-width="1.6" x1="100" x2="230" y1="250.5" y2="205"></line>
+<line stroke="#f0ad5a" stroke-width="2.6" x1="350" x2="612" y1="205" y2="113.3"></line>
+<line stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.6" x1="100" x2="350" y1="292.5" y2="205"></line>
+<circle cx="230" cy="205" fill="#5b9bff" r="4"></circle>
+<circle cx="350" cy="205" fill="#f0ad5a" r="4"></circle>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="230" y="224">ν₀ (metal A)</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="352" y="224">ν₀ (metal B)</text>
+<text fill="#5b9bff" font-size="12" transform="translate(408,124) rotate(-19.3)" x="0" y="0">metal A (small work function)</text>
+<text fill="#f0ad5a" font-size="12" transform="translate(408,166) rotate(-19.3)" x="0" y="0">metal B (large work function)</text>
+<text fill="#e08a7a" font-size="12" text-anchor="middle" x="165" y="96">below ν₀ :</text>
+<text fill="#e08a7a" font-size="12" text-anchor="middle" x="165" y="116">no electrons,</text>
+<text fill="#e08a7a" font-size="12" text-anchor="middle" x="165" y="136">however bright</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="94" y="254">−W (A)</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="94" y="296">−W (B)</text>
+<text fill="#cdd6ea" font-size="12.5" x="356" y="256">Strictly parallel: slope = h,</text>
+<text fill="#cdd6ea" font-size="12.5" x="356" y="276">the same for every metal</text>
+</g>
+</svg>
+<figcaption>Changing the metal moves the intercept, never the slope. The slope of this line is Planck's constant — a number that first crawled out of a furnace, turning up again in a completely different experiment.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Einstein's 1921 Nobel Prize was for this work, not for relativity. And here is the part usually left out: <strong>the photoelectric effect alone does not prove that photons exist</strong>. A semiclassical model — atoms treated quantum mechanically, the electromagnetic field still treated as a classical wave — reproduces both the frequency threshold and the instant response. What really forced light quanta was Compton scattering in 1923 (light bouncing off an electron and changing wavelength, like two balls colliding) and, later, antibunching experiments with single-photon sources. The photoelectric effect opened the door; it did not close it.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Biology / Energy</span>
+<ul>
+<li><strong>Biology</strong>: a rod cell in your retina responds to a <strong>single photon</strong> (Hecht's threshold experiment in 1942, confirmed directly in 2016). You cannot see infrared not because it is weak but because one infrared photon carries too little energy to flip the molecule inside rhodopsin into its other shape — the retina has a work function of its own.</li>
+<li><strong>Energy</strong>: a solar cell's band gap is its work function. Photons below the gap pass straight through; the excess energy of photons above it turns into waste heat. That leak-plus-waste is the main reason a single-junction silicon cell is capped near 33% efficiency (the Shockley–Queisser limit).</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: intensity governs how many, frequency governs whether at all.</div>
+<details class="q"><summary><b>Think:</b> Could two beams of red light, each below threshold, "club together" to eject one electron?</summary><div class="qa">Not at ordinary intensities — two photons will essentially never hit the same electron at once. But push the instantaneous intensity up by a dozen orders of magnitude with an ultrashort laser pulse and two-photon ionisation does happen; it is routine in strong-field physics. So the "no" is a matter of probability, not of law, which is precisely what you expect if the threshold comes from eating one packet at a time.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Rungs Inside the Atom</h2>
+<span class="pill">Bohr · 1913</span>
+<div class="field"><span class="lab">Intuition</span>
+  Two facts classical physics cannot account for. First, an electron circling a nucleus is an accelerating charge, and electromagnetism says it must radiate continuously; it would spiral in within about ten nanoseconds. Atoms should collapse instantly, yet they have been stable for over thirteen billion years. Second, heat a tube of hydrogen and it emits not a continuous rainbow but a handful of sharp bright lines, fixed precisely enough to serve as an identity card.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Bohr's assumption: an electron may only sit at certain energies (<strong>stationary states</strong>), and while sitting there it does not radiate; light is emitted only in the instant it drops from one rung to another, spitting out a photon whose energy is exactly the gap. For hydrogen the rungs come out as
+  <div class="eq"><var>E</var><sub>n</sub> = − <span class="frac"><span class="fnum">13.6 eV</span><span class="fden"><var>n</var><sup>2</sup></span></span></div>
+<div class="gloss"><var>n</var> is the rung number 1, 2, 3…; eV means "electron volt", the convenient energy unit at atomic scale, 1 eV ≈ 1.6×10⁻¹⁹ joules. The minus sign says this is a <strong>bound state</strong>: by convention an electron dragged infinitely far away and fully free has energy <strong>zero</strong>, so anything still inside the atom lies below it; larger <var>n</var> means closer to zero and more loosely bound.</div>
+  Every transition landing on <span class="nowrap"><var>n</var> = 2</span> falls in the visible band — the Balmer series of hydrogen at 656, 486, 434 and 410 nanometres: red, cyan, blue, violet. The higher rungs crowd together, and so do the lines toward the violet end.</div>
+<figure>
+<svg aria-label="Left: the hydrogen energy ladder, whose rungs crowd together upward, with four arrows dropping to n equals 2. Right: the corresponding Balmer lines at 656, 486, 434 and 410 nanometres" role="img" viewbox="0 0 700 322">
+<defs>
+<marker id="dn1" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#ff7b7b"></path></marker>
+<marker id="dn2" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#4fd6cf"></path></marker>
+<marker id="dn3" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#6b9bff"></path></marker>
+<marker id="dn4" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#a97bff"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#56607e" stroke-dasharray="5 4" stroke-width="1.3" x1="60" x2="290" y1="60" y2="60"></line>
+<text fill="#96a0ba" font-size="11.5" x="60" y="50">n → ∞ : energy = zero, electron is free</text>
+<line stroke="#3f4b6b" stroke-width="2" x1="60" x2="290" y1="66.7" y2="66.7"></line>
+<line stroke="#3f4b6b" stroke-width="2" x1="60" x2="290" y1="69.6" y2="69.6"></line>
+<line stroke="#3f4b6b" stroke-width="2" x1="60" x2="290" y1="75" y2="75"></line>
+<line stroke="#5b9bff" stroke-width="2.4" x1="60" x2="290" y1="86.7" y2="86.7"></line>
+<line stroke="#5b9bff" stroke-width="2.4" x1="60" x2="290" y1="120" y2="120"></line>
+<line stroke="#5b9bff" stroke-width="2.4" x1="60" x2="290" y1="300" y2="300"></line>
+<text fill="#96a0ba" font-size="11.5" x="298" y="72">n = 4, 5, 6… (ever denser)</text>
+<text fill="#cdd6ea" font-size="12" x="298" y="91">n = 3&#160;&#160;−1.51 eV</text>
+<text fill="#cdd6ea" font-size="12" x="298" y="124">n = 2&#160;&#160;−3.40 eV</text>
+<text fill="#cdd6ea" font-size="12" x="298" y="304">n = 1&#160;&#160;−13.6 eV (ground state)</text>
+<line marker-end="url(#dn1)" stroke="#ff7b7b" stroke-width="2.2" x1="100" x2="100" y1="86.7" y2="114"></line>
+<line marker-end="url(#dn2)" stroke="#4fd6cf" stroke-width="2.2" x1="140" x2="140" y1="75" y2="114"></line>
+<line marker-end="url(#dn3)" stroke="#6b9bff" stroke-width="2.2" x1="180" x2="180" y1="69.6" y2="114"></line>
+<line marker-end="url(#dn4)" stroke="#a97bff" stroke-width="2.2" x1="220" x2="220" y1="66.7" y2="114"></line>
+<text fill="#96a0ba" font-size="11.5" x="60" y="152">four drops to n = 2 → visible light</text>
+<text fill="#96a0ba" font-size="11.5" x="60" y="174">drops to n = 1 → ultraviolet</text>
+<text fill="#96a0ba" font-size="11.5" x="60" y="196">drops to n = 3 → infrared</text>
+<text fill="#7db0ff" font-size="13" font-weight="700" x="440" y="138">Balmer series of hydrogen</text>
+<rect fill="#05070d" height="56" stroke="#26314c" width="250" x="440" y="150"></rect>
+<line stroke="#a97bff" stroke-width="2.6" x1="456.1" x2="456.1" y1="150" y2="206"></line>
+<line stroke="#6b9bff" stroke-width="2.6" x1="475.5" x2="475.5" y1="150" y2="206"></line>
+<line stroke="#4fd6cf" stroke-width="2.6" x1="517.4" x2="517.4" y1="150" y2="206"></line>
+<line stroke="#ff7b7b" stroke-width="3" x1="654.5" x2="654.5" y1="150" y2="206"></line>
+<line stroke="#6b7899" stroke-width="1.2" x1="440" x2="690" y1="216" y2="216"></line>
+<g fill="#96a0ba" font-size="11" text-anchor="middle">
+<text x="448" y="232">400</text>
+<text x="529" y="232">500</text>
+<text x="609" y="232">600</text>
+<text x="690" y="232">700</text>
+</g>
+<text fill="#96a0ba" font-size="11" x="556" y="252">wavelength / nm</text>
+<text fill="#a97bff" font-size="11" text-anchor="middle" x="452" y="284">410</text>
+<text fill="#6b9bff" font-size="11" text-anchor="middle" x="480" y="268">434</text>
+<text fill="#4fd6cf" font-size="11" text-anchor="middle" x="517" y="284">486</text>
+<text fill="#ff7b7b" font-size="11" text-anchor="middle" x="654" y="268">656</text>
+</g>
+</svg>
+<figcaption>The size of the gap on the left fixes where the line glows on the right. The four positions are not fitted; they drop straight out of the energy formula.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Bohr's model gets hydrogen's levels right while being a semiclassical patchwork: it copies classical orbits, then rules by hand which ones are "allowed", with no account of why, and it fails as soon as you hand it helium. The real explanation needs the electron treated as a wave — <strong>energy has rungs not because the scale is small but because the thing is confined</strong>: a string clamped at both ends can only vibrate in whole numbers of half-wavelengths (the standing-wave modes of <a href="oscillation-waves-day10.en.html">"Oscillation &amp; Waves"</a>), and a bound electron likewise has only certain shapes that close on themselves. A free electron, by contrast, has a perfectly continuous energy — quantum mechanics has never meant "discrete everywhere".</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Astronomy / Metrology</span>
+<ul>
+<li><strong>Astronomy</strong>: every element's set of lines is unique. Helium was identified in the solar spectrum during an eclipse in 1868 and only found on Earth more than twenty years later; and how far the whole set of lines has slid toward the red is exactly a galaxy's redshift.</li>
+<li><strong>Metrology</strong>: the second is defined as 9,192,631,770 periods of the radiation from the transition between two hyperfine levels of caesium-133. The international standard of time rests on one rung of a ladder.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: an atom is not a little solar system but an instrument with fixed pitches.</div>
+<details class="q"><summary><b>Think:</b> If a spectral line corresponds to an exact energy gap, why does every real line have a width?</summary><div class="qa">Three sources: an excited state has a finite lifetime, and the shorter it is the blurrier the energy (natural linewidth); the atoms are moving, so their differing Doppler shifts smear the line (wider the hotter it is); and collisions interrupt the radiation (wider the higher the pressure). Astronomers read temperature and turbulent velocity straight out of that width.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Wave–Particle Duality: Two Old Words, Neither Sufficient</h2>
+<span class="pill">de Broglie · 1924</span>
+<div class="field"><span class="lab">Intuition</span>
+  De Broglie turned the question around: if light, always treated as a wave, is absorbed in particle-like packets, might the electron, always treated as a particle, have a wavelength? The relation he wrote down is absurdly simple.
+  <div class="eq"><var>λ</var> = <span class="frac"><span class="fnum"><var>h</var></span><span class="fden"><var>p</var></span></span></div>
+<div class="gloss"><var>λ</var> is the Greek letter lambda and means <strong>wavelength</strong> (not the digit 1 or the letter l); <var>p</var> is <strong>momentum</strong>, at everyday speeds just mass times velocity; <var>h</var> is still Planck's constant. More momentum, shorter wavelength.</div>
+  Three years later Davisson and Germer fired electrons at a nickel crystal and got the same diffraction pattern X-rays give, with the wavelength the formula predicts. Since then the relation has been pushed to heavier and heavier things — neutrons, atoms, a football-shaped molecule of sixty carbon atoms (1999), organic molecules beyond 25,000 daltons (2019) — all of them producing interference fringes.</div>
+<figure>
+<svg aria-label="de Broglie wavelengths on a logarithmic scale: electrons, neutrons, helium atoms and fullerene molecules all lie between 0.001 and 0.2 nanometres, while a baseball comes in at 10 to the minus 34 metres" role="img" viewbox="0 0 660 256">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12">
+<text fill="#7db0ff" font-size="13" font-weight="700" x="20" y="24">de Broglie wavelength (each step = ×10)</text>
+<line stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.4" x1="598" x2="598" y1="44" y2="236"></line>
+<text fill="#f0ad5a" font-size="11" text-anchor="end" x="594" y="40">↓ atomic spacing 10⁻¹⁰ m: the finest "grating" we can build</text>
+<rect fill="#5b9bff" height="13" width="425" x="175" y="50"></rect>
+<text fill="#cdd6ea" font-size="11" x="20" y="61">electron (100 eV)</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="584" y="60">1.2×10⁻¹⁰ m</text>
+<rect fill="#5b9bff" height="13" width="427" x="175" y="76"></rect>
+<text fill="#cdd6ea" font-size="11" x="20" y="87">neutron at 300 K</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="584" y="86">1.8×10⁻¹⁰ m</text>
+<rect fill="#5b9bff" height="13" width="421" x="175" y="102"></rect>
+<text fill="#cdd6ea" font-size="11" x="20" y="113">helium atom at 300 K</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="584" y="112">0.7×10⁻¹⁰ m</text>
+<rect fill="#4a7fd6" height="13" width="399" x="175" y="128"></rect>
+<text fill="#cdd6ea" font-size="11" x="20" y="139">electron in an EM (100 kV)</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="568" y="138">4×10⁻¹² m</text>
+<rect fill="#4a7fd6" height="13" width="396" x="175" y="154"></rect>
+<text fill="#cdd6ea" font-size="11" x="20" y="165">C₆₀ molecule</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="565" y="164">2.5×10⁻¹² m</text>
+<rect fill="#e0685a" height="13" width="18" x="175" y="180"></rect>
+<text fill="#cdd6ea" font-size="11" x="20" y="191">baseball (145 g, 40 m/s)</text>
+<text fill="#e0685a" font-size="10.5" font-weight="700" x="200" y="191">1.1×10⁻³⁴ m&#160;&#160;19 orders below a nucleus</text>
+<line stroke="#6b7899" stroke-width="1.3" x1="175" x2="640" y1="206" y2="206"></line>
+<g fill="#96a0ba" font-size="10.5" text-anchor="middle">
+<line stroke="#6b7899" stroke-width="1.1" x1="175" x2="175" y1="206" y2="212"></line>
+<text x="175" y="226">10⁻³⁵</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="259.6" x2="259.6" y1="206" y2="212"></line>
+<text x="259.6" y="226">10⁻³⁰</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="344.2" x2="344.2" y1="206" y2="212"></line>
+<text x="344.2" y="226">10⁻²⁵</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="428.8" x2="428.8" y1="206" y2="212"></line>
+<text x="428.8" y="226">10⁻²⁰</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="513.4" x2="513.4" y1="206" y2="212"></line>
+<text x="513.4" y="226">10⁻¹⁵</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="598" x2="598" y1="206" y2="212"></line>
+<text x="598" y="226">10⁻¹⁰</text>
+</g>
+<text fill="#96a0ba" font-size="11" x="490" y="244">wavelength / m</text>
+</g>
+</svg>
+<figcaption>Five objects that do produce interference sit within one step of each other; the baseball is thrown twenty-odd orders of magnitude away. The dividing line is not "microscopic versus macroscopic" but wavelength: it has to be comparable to the slit.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  "Sometimes a wave, sometimes a particle" is a surrender dressed as an explanation. The honest version: an electron is neither a tiny ball nor a ripple on water, it is a third kind of thing; "wave" and "particle" are two old words borrowed from the large-scale world, each useful for one class of experiment. Feynman's line about nobody understanding quantum mechanics is about exactly this — what is not understood is not the mathematics, which is accurate to a dozen significant figures; what is not understood is which picture to hold.<br/>
+  One more thing to be clear about: duality has nothing to do with whether anyone is watching. What decides which face shows is the <strong>apparatus</strong> itself. "Measurement &amp; Interpretations" will deal with that piece of folklore head-on.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Engineering / Philosophy</span>
+<ul>
+<li><strong>Engineering</strong>: an optical microscope is stuck at a few hundred nanometres by the wavelength of visible light. An electron microscope accelerates electrons through 100 kV, giving a wavelength near 0.004 nanometres and a resolution orders of magnitude better; cryo-EM now resolves individual atoms in a protein (2017 Nobel Prize in Chemistry). That machine is <span class="nowrap"><var>λ</var> = <var>h</var>/<var>p</var></span> industrialised.</li>
+<li><strong>Philosophy</strong>: when two ready-made concepts are each half right, the correct move is neither to pick one nor to declare the world contradictory, but to admit that both words were borrowed from elsewhere and go build a third.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: the electron is not fickle; our vocabulary is old.</div>
+<details class="q"><summary><b>Think:</b> If everything has a wavelength, why not build a "baseball microscope" and use baseball waves to see smaller things?</summary><div class="qa">Shorter wavelength does mean better resolution in principle, and a baseball's is preposterously short, so it sounds ideal. The other end is what stops you: to show interference the slit spacing has to be comparable to the wavelength, around 10⁻³⁴ metres, far smaller than any structure known — and any single collision with the environment scrambles the phase anyway.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>Why is the everyday world free of quantum effects?</summary>
+<div class="body">Two reasons usually blurred into one. The first is <strong>scale</strong>: <var>h</var> is only 10⁻³⁴ joule·seconds, so an everyday object's wavelength is far too short to show. The second matters more — <strong>decoherence</strong>: any interaction with the environment at all, a collision with an air molecule, the emission of one thermal photon, carries away the phase relations interference depends on. A dust grain in air stays coherent for less than 10⁻³¹ seconds. So the classical look of the large-scale world is not quantum mechanics stopping; it is quantum mechanics applied to a system that is never isolated. Molecular interference experiments have to run in high vacuum and at low temperature: the problem is not that the molecules are big, it is that the environment is loud.</div></details>
+<details><summary>Does "quantised" mean the world is pixellated at the bottom?</summary>
+<div class="body">No, and that is the commonest misreading of the word. Quantum means "a portion", not "tiny". Which quantities are discrete depends on the situation: energies of bound states are discrete (the electron in an atom), energies of free particles are perfectly continuous; angular momentum and spin do take only discrete values; while position, time and the values of the electromagnetic field itself are <strong>not</strong> discrete in standard quantum mechanics. Whether space has a smallest unit is a question inside conjectures such as loop quantum gravity, with no experimental support to date. Read "quantised" as "the universe is a pixel image" and it will mislead you at every step afterwards.</div></details>
+<details><summary>If the old quantum theory got hydrogen right, why did it have to go?</summary>
+<div class="body">Because it was stitched together: keep the classical orbits, then add a rule by hand that picks out the "allowed" ones, with nothing behind the rule. The cost showed up fast — it cannot give the relative brightness of the lines, cannot say when a transition happens, and fails on helium, which has exactly one more electron. In 1925 Heisenberg started from "speak only of observables" and in 1926 Schrödinger from matter waves; two entirely different routes produced the same self-consistent theory, and the old quantum theory was replaced wholesale. The lesson is a hard one: a model that fits the main data can still be a completely wrong framework.</div></details>
+<details><summary>Einstein introduced the photon — so why did he end up opposing quantum mechanics?</summary>
+<div class="body">What he opposed was never quantisation; he pushed that further than anyone. What he would not accept was probability as a basic layer of the world ("God does not play dice" is about this) and the kind of long-range correlation the theory permits. In 1935, with Podolsky and Rosen, he wrote the EPR argument, meant to show quantum mechanics was incomplete: either there are hidden variables, or you must accept nonlocality. Thirty years later Bell turned the dispute into an inequality experiments could rule on, and experiment has sided with quantum mechanics every time ("Entanglement &amp; Nonlocality" covers this). The objection was valuable precisely because it forced out new measurable questions.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. III ch. 1 — <a href="https://www.feynmanlectures.caltech.edu/III_01.html">free full text from Caltech</a>; still the best opening chapter on quantum behaviour anyone has written</li>
+<li>Einstein, <em>Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt</em>, Ann. Phys. 17, 132 (1905) — <a href="https://einsteinpapers.press.princeton.edu/vol2-trans/100">English translation in the Princeton Collected Papers</a>, the original light-quantum paper</li>
+<li>Millikan, <em>A Direct Photoelectric Determination of Planck's "h"</em>, Phys. Rev. 7, 355 (1916) — <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.7.355">the paper</a>; an experiment meant to demolish the relation that measured it instead</li>
+<li>Davisson &amp; Germer, <em>Diffraction of Electrons by a Crystal of Nickel</em>, Phys. Rev. 30, 705 (1927) — <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.30.705">the first direct evidence for matter waves</a></li>
+<li>Arndt et al., <em>Wave–particle duality of C₆₀ molecules</em>, Nature 401, 680 (1999) — <a href="https://www.nature.com/articles/44348">fullerene interference</a>; Fein et al., <em>Quantum superposition of molecules beyond 25 kDa</em>, Nat. Phys. 15, 1242 (2019) — <a href="https://www.nature.com/articles/s41567-019-0663-9">pushed past 25,000 daltons</a></li>
+<li>Tinsley et al., <em>Direct detection of a single photon by humans</em>, Nat. Commun. 7, 12172 (2016) — <a href="https://www.nature.com/articles/ncomms12172">the human eye can see one photon</a></li>
+<li>Thomas S. Kuhn, <em>Black-Body Theory and the Quantum Discontinuity, 1894–1912</em> (1978) — <a href="https://en.wikipedia.org/wiki/Black-Body_Theory_and_the_Quantum_Discontinuity,_1894-1912">overview</a>; argues that Planck did not in fact claim energy was really discrete, and that the textbook story was assembled afterwards</li>
+<li>Sean Carroll, <em>The Biggest Ideas in the Universe: Quanta and Fields</em> (2024) — written for non-specialists without dodging the equations</li>
+<li><a href="https://en.wikipedia.org/wiki/Planck%27s_law">Wikipedia: Planck's law</a> / <a href="https://en.wikipedia.org/wiki/Ultraviolet_catastrophe">Ultraviolet catastrophe</a> / <a href="https://en.wikipedia.org/wiki/Bohr_model">Bohr model</a> / <a href="https://en.wikipedia.org/wiki/Matter_wave">Matter wave</a></li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

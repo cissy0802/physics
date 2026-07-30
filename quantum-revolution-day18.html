@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：量子革命 · Day 18</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>量子革命</h1>
+<div class="meta">Day 18 · 2026 · Phase E 量子力学</div>
+<div class="tagline">能量一份一份，不是因为世界小到了尽头，而是因为它被关住了——被束缚的东西才有台阶，自由的东西照样连续。</div>
+</header>
+<div class="intro">
+1900 年 10 月，普朗克手上有两条公式：一条在长波段对，一条在短波段对。他把它们缝成一条，居然全段都对。为了给这条缝出来的式子找个理由，两个月后他被迫假设能量只能<b>一份一份</b>地吐出——他自己叫它"绝望之举"，此后十几年一直想把这假设消掉。教科书说他是去拯救"紫外灾难"，其实那个词 1911 年才被埃伦费斯特造出来，他当时只是在追一条实验曲线。真正把"一份"当真的是爱因斯坦。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>绝望之举 <span class="en">Planck's Quantum of Action</span></h2>
+<span class="pill">黑体辐射 · 1900</span>
+<div class="field"><span class="lab">直觉</span>
+  任何有温度的东西都在发光：铁块烧到 700 ℃ 发暗红，1500 ℃ 发白，你此刻在发红外。经典理论本该算出这道光谱——炉腔里的电磁波是一堆驻波，每种振动方式（一个<strong>模式</strong>）按能量均分都分到同样一份。麻烦是频率越高、塞得进的模式越多，数目按频率平方涨，每个还都分同样一份，加起来是无穷大：照这算法，打开烤箱门会有 X 射线扑面而来。</div>
+<div class="field"><span class="lab">机制</span>
+  普朗克只改了一处：一个频率为 <var>ν</var> 的模式，能量不能任取，只能是某个最小份的整数倍。
+  <div class="eq"><var>E</var> = <var>n</var> <var>h</var> <var>ν</var></div>
+<div class="gloss"><var>ν</var> 是希腊字母 nu（读"纽"，<strong>不是</strong>小写拉丁字母 v），表示<strong>频率</strong>——每秒振动多少次；<var>h</var> 是<strong>普朗克常数</strong>，6.626×10⁻³⁴ 焦耳·秒；<var>n</var> 是 1、2、3… 的整数，就是"几份"。<var>h</var> 小得离谱，日常尺度上这些台阶细得跟连续没区别。</div>
+  有了最小份，高频那份就"太贵"：热库随手掏得出的能量约为 <var>kT</var>（<var>k</var> 玻尔兹曼常数，<var>T</var> 温度），当 <span class="nowrap"><var>h</var><var>ν</var></span> 远大于 <var>kT</var>，这个模式连第一份都买不起，被指数压死。曲线于是拱起一个峰——正是实验测到的形状。</div>
+<figure>
+<svg aria-label="黑体辐射谱：经典瑞利-金斯曲线随频率平方一路冲出图外，普朗克曲线在中间拱起一个峰后回落" role="img" viewbox="0 0 660 320">
+<defs>
+<marker id="up1" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#e0685a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#6b7899" stroke-width="1.4" x1="80" x2="628" y1="272" y2="272"></line>
+<polygon fill="#6b7899" points="634,272 622,267 622,277"></polygon>
+<line stroke="#6b7899" stroke-width="1.4" x1="80" x2="80" y1="272" y2="34"></line>
+<polygon fill="#6b7899" points="80,28 75,40 85,40"></polygon>
+<text fill="#96a0ba" x="566" y="292">频率 ν →</text>
+<text fill="#96a0ba" text-anchor="middle" transform="translate(30,160) rotate(-90)" x="0" y="0">辐射强度</text>
+<polyline fill="none" points="80.0,272.0 89.9,268.5 99.9,257.8 109.8,240.1 119.8,215.3 129.7,183.4 139.6,144.4 149.6,98.3 156.2,63.6 161.5,34.0" stroke="#e0685a" stroke-dasharray="7 4" stroke-width="2.2" marker-end="url(#up1)"></polyline>
+<polyline fill="none" points="80.0,272.0 86.6,270.5 93.2,266.3 99.9,259.8 106.5,251.5 113.1,241.6 119.8,230.6 126.4,218.7 133.0,206.2 139.6,193.3 146.2,180.3 152.9,167.3 159.5,154.6 166.1,142.3 172.8,130.5 179.4,119.2 186.0,108.7 192.6,98.9 199.2,90.0 205.9,81.9 212.5,74.7 219.1,68.3 225.8,62.9 232.4,58.3 239.0,54.7 245.6,51.8 252.2,49.8 258.9,48.5 265.5,48.0 272.1,48.2 278.8,49.1 285.4,50.5 292.0,52.6 298.6,55.1 305.2,58.2 311.9,61.6 318.5,65.5 325.1,69.6 331.8,74.1 338.4,78.9 345.0,83.8 351.6,89.0 358.2,94.3 364.9,99.7 371.5,105.1 378.1,110.7 384.8,116.3 391.4,121.8 398.0,127.4 404.6,132.9 411.2,138.4 417.9,143.8 424.5,149.1 431.1,154.3 437.8,159.4 444.4,164.4 451.0,169.3 457.6,174.0 464.2,178.6 470.9,183.1 477.5,187.4 484.1,191.6 490.8,195.6 497.4,199.5 504.0,203.2 510.6,206.8 517.2,210.3 523.9,213.6 530.5,216.8 537.1,219.8 543.8,222.7 550.4,225.4 557.0,228.1 563.6,230.6 570.2,232.9 576.9,235.2 583.5,237.4 590.1,239.4 596.8,241.3 603.4,243.2 610.0,244.9" stroke="#5b9bff" stroke-width="2.6"></polyline>
+<text fill="#e0685a" font-size="13" x="352" y="54">经典预言（瑞利-金斯）→ ∞</text>
+<text fill="#e0685a" font-size="11.5" x="352" y="72">高频模式太多，每个还都分同样一份</text>
+<text fill="#5b9bff" font-size="13" x="296" y="212">普朗克：能量按 hν 分份</text>
+<text fill="#7db0ff" font-size="11.5" x="296" y="232">高频那一份太贵，买不起 → 压下去</text>
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1.2" x1="268" x2="268" y1="48" y2="272"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="268" y="290">峰的位置只由温度定</text>
+</g>
+</svg>
+<figcaption>同一个炉子，两种算法。经典曲线在高频端一路冲出画面；分了份之后，曲线拱起一个峰再落下——这才是实验测到的。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  真正该盯住的是 <var>h</var> 的量纲：<strong>能量 × 时间</strong>，正是<a href="least-action-day4.html">「最小作用量」</a>里那个<strong>作用量</strong>。自然界切成份的既不是能量也不是长度，而是作用量；<var>h</var> 就是这个宇宙的作用量刻度，小到经典物理三百年没撞见。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / 宇宙学 / 方法论</span>
+<ul>
+<li><strong>工程</strong>：峰的位置只由温度定（维恩位移律），看颜色就能测温——炼钢炉高温计、红外测温枪、由恒星颜色定出的表面温度，同一条曲线。</li>
+<li><strong>宇宙学</strong>：宇宙微波背景是一条 2.725 K 的黑体谱，COBE 测出的偏离小于万分之几，是人类量过最完美的黑体——早期宇宙确实当过一个热腔。</li>
+<li><strong>方法论</strong>：普朗克把 <var>h</var> 当拟合参数，十几年里一直想把它退回连续。一个纯为凑数据引进的假设最后成了世界的结构——"数学技巧"和"实在"之间没有事先划好的界线。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：h 不是能量的最小单位，是作用量的最小单位。</div>
+<details class="q"><summary><b>思考：</b>经典理论的毛病出在"高频模式太多"。固体的比热在低温下也塌向零，会不会是同一个机制？</summary><div class="qa">正是。固体里原子的振动同样是一堆模式（声子）。低温下 <var>kT</var> 小于高频模式的一份 <span class="nowrap"><var>h</var><var>ν</var></span>，那些模式激发不起来，对吸热没有贡献，比热于是掉向零——爱因斯坦 1907 年、德拜 1912 年正是这样解开低温比热之谜。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>光电效应：一个电子只吃一份 <span class="en">The Photoelectric Effect</span></h2>
+<span class="pill">爱因斯坦 · 1905</span>
+<div class="field"><span class="lab">直觉</span>
+  拿光照金属能打出电子。按波动图像，光是连续流下来的能量：越强推得越猛，再弱等久点也总该攒够。实验全是反面——亮度只决定打出<strong>多少个</strong>电子，不改变它们最快跑<strong>多快</strong>；决定速度的是颜色。比某个临界颜色更红的光，灯开到多亮也出不来一个电子；够格的光则一接通就有电流。拿细沙砸玻璃砸一天也砸不破，换一颗石子一下就碎。</div>
+<div class="field"><span class="lab">机制</span>
+  爱因斯坦的一步：光的能量本身就是一份份被吸收的，一份大小 <span class="nowrap"><var>h</var><var>ν</var></span>（后来叫<strong>光子</strong>），一个电子一次只吞一份。
+  <div class="eq"><var>E</var><sub>max</sub> = <var>h</var><var>ν</var> − <var>W</var></div>
+<div class="gloss"><var>E</var><sub>max</sub> 是打出的电子最大动能；<span class="nowrap"><var>h</var><var>ν</var></span> 是它吞下那份的全部能量；<var>W</var> 叫<strong>逸出功</strong>，把一个电子从这块金属里拽出来至少要付的"过路费"，每种金属不同。所以当 <span class="nowrap"><var>h</var><var>ν</var></span> 小于 <var>W</var>，右边是负数——根本出不来，跟光强无关。</div>
+  这是一条直线：横轴频率、纵轴最大动能，<strong>斜率就是 <var>h</var></strong>、截距 <span class="nowrap">−<var>W</var></span>；换金属只上下平移，斜率纹丝不动。密立根花十年想推翻它，1916 年的实验反倒把这条线量得极准。</div>
+<figure>
+<svg aria-label="光电效应：最大动能对频率作图是一条直线，斜率等于普朗克常数，两种金属的直线平行、只是阈值频率不同" role="img" viewbox="0 0 660 320">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<rect fill="rgba(224,104,90,.10)" height="150" width="130" x="100" y="55"></rect>
+<line stroke="#6b7899" stroke-width="1.4" x1="100" x2="620" y1="205" y2="205"></line>
+<polygon fill="#6b7899" points="626,205 614,200 614,210"></polygon>
+<line stroke="#6b7899" stroke-width="1.4" x1="100" x2="100" y1="300" y2="46"></line>
+<polygon fill="#6b7899" points="100,40 95,52 105,52"></polygon>
+<text fill="#96a0ba" x="498" y="226">光的频率 ν（颜色）</text>
+<text fill="#96a0ba" text-anchor="middle" transform="translate(34,150) rotate(-90)" x="0" y="0">打出的电子最大动能</text>
+<line stroke="#5b9bff" stroke-width="2.6" x1="230" x2="612" y1="205" y2="71.3"></line>
+<line stroke="#5b9bff" stroke-dasharray="5 4" stroke-width="1.6" x1="100" x2="230" y1="250.5" y2="205"></line>
+<line stroke="#f0ad5a" stroke-width="2.6" x1="350" x2="612" y1="205" y2="113.3"></line>
+<line stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.6" x1="100" x2="350" y1="292.5" y2="205"></line>
+<circle cx="230" cy="205" fill="#5b9bff" r="4"></circle>
+<circle cx="350" cy="205" fill="#f0ad5a" r="4"></circle>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="230" y="224">ν₀（金属 A）</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="352" y="224">ν₀（金属 B）</text>
+<text fill="#5b9bff" font-size="12" transform="translate(420,124) rotate(-19.3)" x="0" y="0">金属 A（逸出功小）</text>
+<text fill="#f0ad5a" font-size="12" transform="translate(420,166) rotate(-19.3)" x="0" y="0">金属 B（逸出功大）</text>
+<text fill="#e08a7a" font-size="12" text-anchor="middle" x="165" y="88">这一段</text>
+<text fill="#e08a7a" font-size="12" text-anchor="middle" x="165" y="106">再亮也打不出</text>
+<text fill="#e08a7a" font-size="12" text-anchor="middle" x="165" y="124">一个电子</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="94" y="254">−W（A）</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="94" y="296">−W（B）</text>
+<text fill="#cdd6ea" font-size="12.5" x="372" y="256">两条线严格平行：斜率 = h，</text>
+<text fill="#cdd6ea" font-size="12.5" x="372" y="276">与用哪块金属无关</text>
+</g>
+</svg>
+<figcaption>换金属只改截距，不改斜率。这条直线的斜率是普朗克常数——一个原本从炉子里冒出来的数，在完全另一个实验里又出现了一次。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  爱因斯坦 1921 年的诺奖颁的是这项工作，不是相对论。还有件常被讲漏的事：<strong>光电效应本身并不足以证明光子存在</strong>——把电磁场仍按经典波处理的半经典模型，照样算得出阈值和瞬时响应。真正逼出光量子的是康普顿散射（1923，光被电子撞得改了波长，像两球对撞）和后来单光子源的反聚束实验。光电效应打开了门，没有关上门。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 生物 / 能源</span>
+<ul>
+<li><strong>生物</strong>：视杆细胞能对<strong>单个光子</strong>响应（1942 年赫克特的阈值实验，2016 年直接验证）。看不见红外不是因为它弱，是每个红外光子的能量不够把视紫红质里那根分子扳成另一形状——视网膜有自己的逸出功。</li>
+<li><strong>能源</strong>：太阳能电池的带隙就是它的逸出功：低于带隙的光子直接穿过去，高出的部分变成废热。这一漏一浪费，是单结硅电池效率封顶在约 33% 的主因（Shockley–Queisser 极限）。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：强度管数量，频率管本事。</div>
+<details class="q"><summary><b>思考：</b>用两束都不够格的红光同时照，能不能"凑"出一个电子？</summary><div class="qa">常规光强下不能——两个光子几乎不可能同时撞上同一个电子。但用超短脉冲激光把瞬时光强推高十几个数量级，双光子电离确实会发生，已是强场物理的常规手段。所以"不行"是概率问题、不是禁律，这反过来说明阈值来自"一次吃一份"。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>原子里的台阶 <span class="en">Bohr's Atom &amp; Spectral Lines</span></h2>
+<span class="pill">玻尔 · 1913</span>
+<div class="field"><span class="lab">直觉</span>
+  两件事经典物理交代不了。其一，绕核转的电子是加速运动的电荷，按电磁理论必须不停辐射，能量掉光只需约一亿分之一秒——原子该瞬间坍塌，可它稳定了一百多亿年。其二，加热一管氢气，发出的不是连续彩虹，而是几条位置固定的亮线，准到能当身份证用。</div>
+<div class="field"><span class="lab">机制</span>
+  玻尔的假设：电子只能待在某些特定能量上（<strong>定态</strong>），待着时不辐射；发光只发生在从一级台阶跳到另一级的瞬间，差多少能量就吐出一个正好等于差值的光子。氢原子的台阶是
+  <div class="eq"><var>E</var><sub>n</sub> = − <span class="frac"><span class="fnum">13.6 eV</span><span class="fden"><var>n</var><sup>2</sup></span></span></div>
+<div class="gloss"><var>n</var> 是台阶编号 1、2、3…；eV 读"电子伏"，是原子尺度上顺手的能量单位，1 eV ≈ 1.6×10⁻¹⁹ 焦耳。负号表示这是<strong>束缚态</strong>：约定电子被拉到无穷远、彻底自由时能量为<strong>数字 0（零）</strong>，留在原子里就都低于 0；<var>n</var> 越大越靠近 0，束缚越松。</div>
+  所有落到 <span class="nowrap"><var>n</var> = 2</span> 的跃迁正好在可见光段，这就是巴尔末线系：656、486、434、410 纳米，红、青、蓝、紫四条。台阶往上越挤，谱线也往紫端越挤。</div>
+<figure>
+<svg aria-label="左侧氢原子能级阶梯，越往上越密集，四支箭头从高能级落到 n 等于 2；右侧对应巴尔末线系的四条谱线，波长依次是 656、486、434、410 纳米" role="img" viewbox="0 0 700 322">
+<defs>
+<marker id="dn1" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#ff7b7b"></path></marker>
+<marker id="dn2" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#4fd6cf"></path></marker>
+<marker id="dn3" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#6b9bff"></path></marker>
+<marker id="dn4" markerheight="9" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7" refy="3"><path d="M0,0 L7,3 L0,6 Z" fill="#a97bff"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#56607e" stroke-dasharray="5 4" stroke-width="1.3" x1="60" x2="290" y1="60" y2="60"></line>
+<text fill="#96a0ba" font-size="11.5" x="60" y="50">n → ∞：能量 = 数字 0（零），电子自由了</text>
+<line stroke="#3f4b6b" stroke-width="2" x1="60" x2="290" y1="66.7" y2="66.7"></line>
+<line stroke="#3f4b6b" stroke-width="2" x1="60" x2="290" y1="69.6" y2="69.6"></line>
+<line stroke="#3f4b6b" stroke-width="2" x1="60" x2="290" y1="75" y2="75"></line>
+<line stroke="#5b9bff" stroke-width="2.4" x1="60" x2="290" y1="86.7" y2="86.7"></line>
+<line stroke="#5b9bff" stroke-width="2.4" x1="60" x2="290" y1="120" y2="120"></line>
+<line stroke="#5b9bff" stroke-width="2.4" x1="60" x2="290" y1="300" y2="300"></line>
+<text fill="#96a0ba" font-size="11.5" x="298" y="72">n = 4、5、6…（越挤越密）</text>
+<text fill="#cdd6ea" font-size="12" x="298" y="91">n = 3　−1.51 eV</text>
+<text fill="#cdd6ea" font-size="12" x="298" y="124">n = 2　−3.40 eV</text>
+<text fill="#cdd6ea" font-size="12" x="298" y="304">n = 1　−13.6 eV（基态）</text>
+<line marker-end="url(#dn1)" stroke="#ff7b7b" stroke-width="2.2" x1="100" x2="100" y1="86.7" y2="114"></line>
+<line marker-end="url(#dn2)" stroke="#4fd6cf" stroke-width="2.2" x1="140" x2="140" y1="75" y2="114"></line>
+<line marker-end="url(#dn3)" stroke="#6b9bff" stroke-width="2.2" x1="180" x2="180" y1="69.6" y2="114"></line>
+<line marker-end="url(#dn4)" stroke="#a97bff" stroke-width="2.2" x1="220" x2="220" y1="66.7" y2="114"></line>
+<text fill="#96a0ba" font-size="11.5" x="60" y="152">跳到 n = 2 的四支落在可见光</text>
+<text fill="#96a0ba" font-size="11.5" x="60" y="174">跳到 n = 1 落在紫外</text>
+<text fill="#96a0ba" font-size="11.5" x="60" y="196">跳到 n = 3 落在红外</text>
+<text fill="#7db0ff" font-size="13" font-weight="700" x="440" y="138">氢的巴尔末线系</text>
+<rect fill="#05070d" height="56" stroke="#26314c" width="250" x="440" y="150"></rect>
+<line stroke="#a97bff" stroke-width="2.6" x1="456.1" x2="456.1" y1="150" y2="206"></line>
+<line stroke="#6b9bff" stroke-width="2.6" x1="475.5" x2="475.5" y1="150" y2="206"></line>
+<line stroke="#4fd6cf" stroke-width="2.6" x1="517.4" x2="517.4" y1="150" y2="206"></line>
+<line stroke="#ff7b7b" stroke-width="3" x1="654.5" x2="654.5" y1="150" y2="206"></line>
+<line stroke="#6b7899" stroke-width="1.2" x1="440" x2="690" y1="216" y2="216"></line>
+<g fill="#96a0ba" font-size="11" text-anchor="middle">
+<text x="448" y="232">400</text>
+<text x="529" y="232">500</text>
+<text x="609" y="232">600</text>
+<text x="690" y="232">700</text>
+</g>
+<text fill="#96a0ba" font-size="11" x="560" y="252">波长 / 纳米</text>
+<text fill="#a97bff" font-size="11" text-anchor="middle" x="452" y="284">410</text>
+<text fill="#6b9bff" font-size="11" text-anchor="middle" x="480" y="268">434</text>
+<text fill="#4fd6cf" font-size="11" text-anchor="middle" x="517" y="284">486</text>
+<text fill="#ff7b7b" font-size="11" text-anchor="middle" x="654" y="268">656</text>
+</g>
+</svg>
+<figcaption>左边的台阶差多少，右边就亮在哪儿。四条线的位置不是拟合出来的，是从能级公式一算就出来的。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  玻尔模型给对了氢的能级，本身却是件半经典拼贴：照抄经典轨道，又手工规定哪些"允许"，说不清为什么，一碰上氦就失灵。真正的解释要把电子当成波——<strong>能量之所以有台阶，不是因为尺度小，而是因为被关住了</strong>：两端固定的琴弦只能振出整数个半波长（<a href="oscillation-waves-day10.html">「振动与波」</a>里的驻波模式），被束缚的电子也只有某些形状能自洽合拢。反过来，自由电子的能量完全连续——量子力学从不等于处处离散。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 天文 / 计量</span>
+<ul>
+<li><strong>天文</strong>：每种元素的线系位置独一无二。氦是 1868 年先在日食的太阳光谱里认出来、二十多年后才在地球上找到的；整套谱线一起朝红端平移多少，就是星系的红移。</li>
+<li><strong>计量</strong>："一秒"的定义是铯-133 原子两个超精细能级之间跃迁辐射的 9 192 631 770 个周期——时间的国际标准架在一级台阶上。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：原子不是小太阳系，是一件有固定音高的乐器。</div>
+<details class="q"><summary><b>思考：</b>既然谱线对应精确的能量差，为什么真实谱线总有宽度？</summary><div class="qa">三个来源：激发态寿命有限，越短能量越"糊"（自然线宽）；原子在动，多普勒频移各异把线抹宽（温度越高越宽）；碰撞打断辐射（气压越高越宽）。天文学家正是从线宽反读出温度与湍流速度。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>波粒二象性：两个旧词都不够用 <span class="en">Wave–Particle Duality</span></h2>
+<span class="pill">德布罗意 · 1924</span>
+<div class="field"><span class="lab">直觉</span>
+  德布罗意把问题倒过来问：既然一直被当成波的光会像粒子一样一份份被吸收，那被当成粒子的电子，会不会也有波长？他写下的关系简单得离谱。
+  <div class="eq"><var>λ</var> = <span class="frac"><span class="fnum"><var>h</var></span><span class="fden"><var>p</var></span></span></div>
+<div class="gloss"><var>λ</var> 是希腊字母 lambda（读"兰姆达"，不是数字 1 也不是字母 l），表示<strong>波长</strong>；<var>p</var> 是<strong>动量</strong>，日常速度下就是质量乘速度；<var>h</var> 还是那个普朗克常数。动量越大，波长越短。</div>
+  三年后戴维孙与革末把电子打在镍晶体上，得到了和 X 射线一样的衍射图样，波长与式子吻合。此后它被推向越来越重的东西——中子、原子、60 个碳原子的足球状分子（1999）、两万多道尔顿的大分子（2019），统统做出了干涉条纹。</div>
+<figure>
+<svg aria-label="不同物体的德布罗意波长对数标度对比：电子、中子、氦原子、电镜电子、富勒烯分子都在 0.001 到 0.2 纳米之间，棒球只有 10 的负 34 次方米" role="img" viewbox="0 0 660 256">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12">
+<text fill="#7db0ff" font-size="13" font-weight="700" x="20" y="24">德布罗意波长（横轴每格 10 倍）</text>
+<line stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.4" x1="598" x2="598" y1="44" y2="236"></line>
+<text fill="#f0ad5a" font-size="11" text-anchor="end" x="594" y="40">↓ 原子间距 10⁻¹⁰ 米：能造出的最细"光栅"</text>
+<rect fill="#5b9bff" height="13" x="175" y="50" width="425"></rect>
+<text fill="#cdd6ea" x="20" y="61">电子（100 电子伏）</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="584" y="60">1.2×10⁻¹⁰ 米</text>
+<rect fill="#5b9bff" height="13" x="175" y="76" width="427"></rect>
+<text fill="#cdd6ea" x="20" y="87">室温中子</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="584" y="86">1.8×10⁻¹⁰ 米</text>
+<rect fill="#5b9bff" height="13" x="175" y="102" width="421"></rect>
+<text fill="#cdd6ea" x="20" y="113">室温氦原子</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="584" y="112">0.7×10⁻¹⁰ 米</text>
+<rect fill="#4a7fd6" height="13" x="175" y="128" width="399"></rect>
+<text fill="#cdd6ea" x="20" y="139">电镜里的电子（10 万伏）</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="568" y="138">4×10⁻¹² 米</text>
+<rect fill="#4a7fd6" height="13" x="175" y="154" width="396"></rect>
+<text fill="#cdd6ea" x="20" y="165">60 个碳原子的分子</text>
+<text fill="#0a0e1a" font-size="10.5" font-weight="700" text-anchor="end" x="565" y="164">2.5×10⁻¹² 米</text>
+<rect fill="#e0685a" height="13" x="175" y="180" width="18"></rect>
+<text fill="#cdd6ea" x="20" y="191">棒球（145 克，40 米/秒）</text>
+<text fill="#e0685a" font-size="10.5" font-weight="700" x="200" y="191">1.1×10⁻³⁴ 米　比原子核还小 19 个数量级</text>
+<line stroke="#6b7899" stroke-width="1.3" x1="175" x2="640" y1="206" y2="206"></line>
+<g fill="#96a0ba" font-size="10.5" text-anchor="middle">
+<line stroke="#6b7899" stroke-width="1.1" x1="175" x2="175" y1="206" y2="212"></line>
+<text x="175" y="226">10⁻³⁵</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="259.6" x2="259.6" y1="206" y2="212"></line>
+<text x="259.6" y="226">10⁻³⁰</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="344.2" x2="344.2" y1="206" y2="212"></line>
+<text x="344.2" y="226">10⁻²⁵</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="428.8" x2="428.8" y1="206" y2="212"></line>
+<text x="428.8" y="226">10⁻²⁰</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="513.4" x2="513.4" y1="206" y2="212"></line>
+<text x="513.4" y="226">10⁻¹⁵</text>
+<line stroke="#6b7899" stroke-width="1.1" x1="598" x2="598" y1="206" y2="212"></line>
+<text x="598" y="226">10⁻¹⁰</text>
+</g>
+<text fill="#96a0ba" font-size="11" x="500" y="244">波长 / 米</text>
+</g>
+</svg>
+<figcaption>五个做得出干涉的对象挤在同一格里，棒球被甩到二十几个数量级之外。分界不在"微观 / 宏观"，在波长：波长和缝可比才显得出波动性。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  "有时是波、有时是粒子"这句流行说法其实是投降。更诚实的版本：电子既不是小球也不是水波，它是第三样东西；"波"和"粒"是从宏观世界借来的两个旧词，各自只在一类实验里好用。费曼那句"没有人真懂量子力学"说的正是这个——不懂的不是数学，数学精确到十几位有效数字都对，不懂的是该用什么图像。<br/>
+  还有一件必须说清：二象性跟"有没有人在看"毫无关系，决定显出哪一面的是<strong>实验装置</strong>本身。这条误传「测量问题与诠释」会正面清算。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / 哲学</span>
+<ul>
+<li><strong>工程</strong>：光学显微镜被可见光波长卡死在几百纳米；电子显微镜用 10 万伏加速的电子，波长约 0.004 纳米，分辨率高出几个数量级，冷冻电镜今天能直接看清蛋白质里单个原子的位置（2017 年诺贝尔化学奖）。这台机器就是 <span class="nowrap"><var>λ</var> = <var>h</var>/<var>p</var></span> 的工业化。</li>
+<li><strong>哲学</strong>：两个现成概念各自只对一半时，正确的动作既不是二选一也不是宣布世界矛盾，而是承认它们都借自别处，然后去造第三个。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：不是电子善变，是我们的词太旧。</div>
+<details class="q"><summary><b>思考：</b>既然一切物体都有波长，能不能造一台"棒球显微镜"，用棒球的波去看更小的东西？</summary><div class="qa">波长越短分辨率原则上越高，棒球的波长小得离谱，听着正合适。卡住的是另一头：要显出干涉，缝间距得和波长可比，也就是 10⁻³⁴ 米量级，比任何已知结构都小得多。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>为什么日常世界看不见量子效应？</summary>
+<div class="body">两个原因常被混成一个。其一是<strong>尺度</strong>：<var>h</var> 只有 10⁻³⁴ 焦耳·秒，日常物体的波长小到无从显现。其二更要紧，是<strong>退相干</strong>：物体只要和环境有任何相互作用——撞上空气分子、放出一个热光子——干涉依赖的相位关系就被带走，一颗尘埃在空气中的相干性维持不到 10⁻³¹ 秒。宏观世界的经典外观不是量子力学"到此为止"，而是它作用于一个从不孤立的系统的结果。分子干涉实验必须做在高真空低温里：不是分子太大，是环境太吵。</div></details>
+<details><summary>"量子化"是不是说世界在最底层是像素化的？</summary>
+<div class="body">不是，这是这个词最常见的误读。quantum 的本意是"一份"，不是"很小"。哪些量离散要看情况：束缚态的能量离散（原子里的电子），自由粒子的能量完全连续；角动量和自旋只取离散值；而位置、时间、电磁场本身的取值，在标准量子力学里<strong>都不离散</strong>。空间有没有最小单位，是圈量子引力一类猜想的议题，至今没有实验支持。把"量子化"读成"宇宙是像素画"，往后每一步都会误导你。</div></details>
+<details><summary>爱因斯坦引进了光子，为什么后来反对量子力学？</summary>
+<div class="body">他反对的从来不是量子化——那是他推到底的。他不接受的是概率成为世界的基本层（"上帝不掷骰子"说的是这个），以及理论允许的那种远距离关联。1935 年他和波多尔斯基、罗森写下 EPR 论证，本意是证明量子力学不完备：要么有隐藏的变量，要么就得承认非定域。三十年后贝尔把这场争论变成了可以拿实验判决的不等式，实验一次次站在量子力学一边（「纠缠与非定域」会讲透）。这个反对之所以有价值，正在于它逼出了新的可测量问题。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. III 第 1 章——<a href="https://www.feynmanlectures.caltech.edu/III_01.html">加州理工免费全文</a>，量子行为的最佳入门章，至今没有更好的替代</li>
+<li>Einstein，<em>Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt</em>，Ann. Phys. 17, 132 (1905)——<a href="https://einsteinpapers.press.princeton.edu/vol2-trans/100">普林斯顿《爱因斯坦全集》英译本</a>，光量子假设的原始论文</li>
+<li>Millikan，<em>A Direct Photoelectric Determination of Planck's "h"</em>，Phys. Rev. 7, 355 (1916)——<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.7.355">原文</a>；一场想推翻却把对方量准了的实验</li>
+<li>Davisson &amp; Germer，<em>Diffraction of Electrons by a Crystal of Nickel</em>，Phys. Rev. 30, 705 (1927)——<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.30.705">物质波的第一份直接证据</a></li>
+<li>Arndt 等，<em>Wave–particle duality of C₆₀ molecules</em>，Nature 401, 680 (1999)——<a href="https://www.nature.com/articles/44348">富勒烯干涉</a>；Fein 等，<em>Quantum superposition of molecules beyond 25 kDa</em>，Nat. Phys. 15, 1242 (2019)——<a href="https://www.nature.com/articles/s41567-019-0663-9">推到两万五千道尔顿</a></li>
+<li>Tinsley 等，<em>Direct detection of a single photon by humans</em>，Nat. Commun. 7, 12172 (2016)——<a href="https://www.nature.com/articles/ncomms12172">人眼能看见单个光子</a></li>
+<li>Thomas S. Kuhn，<em>Black-Body Theory and the Quantum Discontinuity, 1894–1912</em>（1978）——<a href="https://en.wikipedia.org/wiki/Black-Body_Theory_and_the_Quantum_Discontinuity,_1894-1912">条目介绍</a>；论证普朗克当年并未主张能量真的离散，教科书叙事是后来倒装的</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Quanta and Fields</em>（2024）——面向非专业读者但不回避方程的量子入门</li>
+<li><a href="https://en.wikipedia.org/wiki/Planck%27s_law">Wikipedia: Planck's law</a> / <a href="https://en.wikipedia.org/wiki/Ultraviolet_catastrophe">Ultraviolet catastrophe</a> / <a href="https://en.wikipedia.org/wiki/Bohr_model">Bohr model</a> / <a href="https://en.wikipedia.org/wiki/Matter_wave">Matter wave</a></li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
