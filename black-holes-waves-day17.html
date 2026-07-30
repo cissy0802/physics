@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：黑洞与引力波 · Day 17</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>黑洞与引力波</h1>
+<div class="meta">Day 17 · 2026 · Phase D 相对论</div>
+<div class="tagline">有些边界不需要一堵墙。跨过去的那一瞬你什么也感觉不到——只是从此再没有一条路通向"外面"。</div>
+</header>
+<div class="intro">
+1916 年初，史瓦西在战壕里解出了爱因斯坦方程的第一个精确解，几个月后死于战场上得的重病。解里冒出一个半径，在那儿式子彻底失灵；此后近半个世纪，连爱因斯坦都当它是纸上的病灶——而这个病灶最终逼出了物理学至今最深的一道裂缝。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>视界：一张单向的膜 <span class="en">The Event Horizon</span></h2>
+<span class="pill">史瓦西 · 1916</span>
+<div class="field"><span class="lab">直觉</span>
+  流行的讲法是逃逸速度：连光都留不住的天体就是黑洞。这给对了半径，给错了图景——光并不是飞出去再掉回来。更准的图像要用<a href="spacetime-day15.html">「时空」</a>那套光锥：越靠近中心光锥越向内倾，到某个半径上连“向外那条边”都被扳成竖直；再往里，<strong>所有未来方向都通向更小的半径</strong>。</div>
+<figure>
+<svg role="img" aria-label="光锥随半径变化：远处对称，靠近视界时向外那条边越来越陡，在视界上恰好竖直，视界内部整个光锥倾向 r 等于零的奇点" viewBox="0 0 640 360">
+<defs>
+<marker id="a1" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#5b9bff"></path></marker>
+<marker id="a1g" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text x="400" y="30" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">越靠近中心，未来能去的方向越偏向内</text>
+<line x1="60" y1="300" x2="612" y2="300" stroke="#6b7899" stroke-width="1.3" marker-end="url(#a1g)"></line>
+<text x="556" y="322" fill="#6b7899" font-size="11.5">半径 r</text>
+<line x1="98" y1="148" x2="98" y2="58" stroke="#6b7899" stroke-width="1.3" marker-end="url(#a1g)"></line>
+<text x="106" y="90" fill="#6b7899" font-size="11.5">时间</text>
+<!-- singularity -->
+<path d="M 70,300 L 77,288 L 63,276 L 77,264 L 63,252 L 77,240 L 63,228 L 77,216 L 63,204 L 77,192 L 63,180 L 77,168 L 63,156 L 77,144 L 63,132 L 77,120 L 63,108 L 77,96 L 63,84 L 77,72 L 63,60 L 70,48" fill="none" stroke="#9fb0d0" stroke-width="1.6"></path>
+<text transform="translate(44,180) rotate(-90)" fill="#9fb0d0" font-size="11.5" text-anchor="middle">奇点 r = 0（数字零）</text>
+<!-- horizon -->
+<line x1="210" y1="48" x2="210" y2="274" stroke="#f0ad5a" stroke-dasharray="5 6" stroke-width="1.6"></line>
+<text x="218" y="60" fill="#f0ad5a" font-size="12">视界</text>
+<!-- cone: inside -->
+<path d="M 140,265 L 98,175 L 126,175 Z" fill="rgba(91,155,255,.14)" stroke="none"></path>
+<line x1="140" y1="265" x2="101" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<line x1="140" y1="265" x2="127" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<circle cx="140" cy="265" r="3.4" fill="#f0f3fb"></circle>
+<text x="140" y="288" fill="#dbe1f0" font-size="11.5" text-anchor="middle">内部</text>
+<!-- cone: on horizon -->
+<path d="M 210,265 L 168,175 L 210,175 Z" fill="rgba(240,173,90,.14)" stroke="none"></path>
+<line x1="210" y1="265" x2="171" y2="182" stroke="#f0ad5a" stroke-width="1.8" marker-end="url(#a1)"></line>
+<line x1="213" y1="265" x2="213" y2="182" stroke="#f0ad5a" stroke-width="2.4" marker-end="url(#a1)"></line>
+<circle cx="210" cy="265" r="3.4" fill="#f0f3fb"></circle>
+<text x="210" y="288" fill="#f0ad5a" font-size="11.5" text-anchor="middle">视界上</text>
+<!-- cone: near -->
+<path d="M 310,265 L 255,175 L 330,175 Z" fill="rgba(91,155,255,.14)" stroke="none"></path>
+<line x1="310" y1="265" x2="258" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<line x1="310" y1="265" x2="327" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<circle cx="310" cy="265" r="3.4" fill="#f0f3fb"></circle>
+<text x="310" y="288" fill="#dbe1f0" font-size="11.5" text-anchor="middle">近处</text>
+<!-- cone: farther -->
+<path d="M 430,265 L 372,175 L 472,175 Z" fill="rgba(91,155,255,.14)" stroke="none"></path>
+<line x1="430" y1="265" x2="375" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<line x1="430" y1="265" x2="468" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<circle cx="430" cy="265" r="3.4" fill="#f0f3fb"></circle>
+<text x="430" y="288" fill="#dbe1f0" font-size="11.5" text-anchor="middle">较远</text>
+<!-- cone: far -->
+<path d="M 555,265 L 500,175 L 610,175 Z" fill="rgba(91,155,255,.14)" stroke="none"></path>
+<line x1="555" y1="265" x2="503" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<line x1="555" y1="265" x2="607" y2="182" stroke="#5b9bff" stroke-width="1.8" marker-end="url(#a1)"></line>
+<circle cx="555" cy="265" r="3.4" fill="#f0f3fb"></circle>
+<text x="555" y="288" fill="#dbe1f0" font-size="11.5" text-anchor="middle">远处</text>
+</g>
+</svg>
+<figcaption>每个楔形是一次闪光下一刻能到达的范围。视界上向外那支恰好竖直，光原地悬着；再往里两支都朝 r 变小的方向去——<strong>不是有东西挡住你，是“路”没了。</strong></figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  这条边界的半径叫史瓦西半径：
+  <div class="eq"><var>r</var><sub>s</sub> = <span class="frac"><span class="fnum">2<var>G</var><var>M</var></span><span class="fden"><var>c</var><sup>2</sup></span></span></div>
+<div class="gloss"><var>G</var> 是牛顿引力常数，<var>M</var> 是质量，<var>c</var> 是光速。太阳的 <var>r</var><sub>s</sub> 约 3 公里，地球约 9 毫米，一个 70 公斤的人约 10<sup>−25</sup> 米。它与 <var>M</var> 成<strong>正比</strong>，而体积按半径三次方涨，于是平均密度反比于质量的平方——<strong>越大的黑洞越“稀”</strong>：M87 中心那个 65 亿太阳质量的家伙，平均密度只有空气的三分之一。</div></div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  黑洞不是宇宙吸尘器。<strong>同样距离上，一个太阳质量的黑洞与太阳的引力分毫不差</strong>——把太阳换成黑洞，地球轨道一点不变，只是天黑了。特别之处在<strong>你能靠得多近</strong>：太阳把质量摊开，黑洞把它压进 3 公里。而视界本身没有膜、没有墙、没有闪光——<strong>它是一句关于未来的判决，不是某处的性质。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 由未来定义的边界，当下测不出来</span>
+  越过之后再无退路，而越过那一刻毫无征兆——不只黑洞如此：
+  <ul>
+<li><strong>航空</strong>：起飞决策速度 V<sub>1</sub>——过了它剩下的跑道已不够刹停。座舱里没有仪表在那一刻跳动，它是关于跑道、刹车与推力的<strong>全局</strong>计算。</li>
+<li><strong>生态学</strong>：湖泊越过临界磷负荷后，把排放降回原值也不再变清；而越过的当天，水面和前一天一样。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：视界不是一堵墙，是所有未来方向都指向里面的那条线。</div>
+<details class="q"><summary><b>思考：</b>既然本地测不到视界，宇航员能做实验知道自己已经进去了吗？</summary><div class="qa">不能，就地实验都给出正常结果。她只能<strong>推算</strong>：知道黑洞质量与自己的轨迹，便能算出何时越过 <var>r</var><sub>s</sub>。无可回避的提示要晚得多——潮汐力变强，然后奇点到来。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>边缘的时间 <span class="en">Time at the Edge</span></h2>
+<span class="pill">引力红移 · 有限的告别</span>
+<div class="field"><span class="lab">直觉</span>
+  你的朋友驾飞船坠向黑洞，约好每秒发一个光脉冲。她表上：几小时后越过视界，再过一会儿一切结束。你的表上：间隔越拉越长——1 秒、2 秒、4 秒……越来越红、越来越暗，她仿佛<strong>永远停在视界上方</strong>。<a href="special-relativity-day14.html">「狭义相对论」</a>已取消了普适的“同时”，这里更彻底：两人之间没有共同的“现在”。</div>
+<div class="field"><span class="lab">机制</span>
+  在静态黑洞外，半径 <var>r</var> 处的钟与无穷远处的钟，走时之比是：
+  <div class="eq"><span class="frac"><span class="fnum">d<var>τ</var></span><span class="fden">d<var>t</var></span></span> = <span style="font-size:1.1em">√</span><span style="border-top:1.4px solid #f0f3fb; padding:0 4px">1 − <var>r</var><sub>s</sub>/<var>r</var></span></div>
+<div class="gloss">d 读作“微小变化”。<var>τ</var>（读“tau”）是<strong>固有时</strong>，她随身那只表的读数；<var>t</var> 是远处静止观者的时间；<var>r</var> 是她所在的半径。<var>r</var> 趋近 <var>r</var><sub>s</sub> 时根号里的量趋于 <span class="nowrap"><span style="color:#5b9bff;font-weight:700">0</span>（数字 0，零）</span>：她的钟越来越慢，光爬到远处频率越来越低（引力红移），间隔被拉向无穷。</div></div>
+<figure>
+<svg role="img" aria-label="时空图：横轴半径、纵轴时间；下落者的世界线渐近逼近视界，她等间隔发出的光信号到达远处观者的间隔越来越长" viewBox="0 0 640 400">
+<defs>
+<marker id="b1" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#5b9bff"></path></marker>
+<marker id="b1g" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line x1="150" y1="356" x2="600" y2="356" stroke="#6b7899" stroke-width="1.2" marker-end="url(#b1g)"></line>
+<text x="470" y="376" fill="#6b7899" font-size="11.5">半径 r</text>
+<line x1="172" y1="90" x2="172" y2="46" stroke="#6b7899" stroke-width="1.2" marker-end="url(#b1g)"></line>
+<text x="182" y="60" fill="#6b7899" font-size="11.5">时间</text>
+<!-- horizon -->
+<line x1="150" y1="40" x2="150" y2="356" stroke="#f0ad5a" stroke-dasharray="5 6" stroke-width="1.6"></line>
+<text transform="translate(132,210) rotate(-90)" fill="#f0ad5a" font-size="12" text-anchor="middle">视界</text>
+<!-- your worldline -->
+<line x1="555" y1="356" x2="555" y2="44" stroke="#7db0ff" stroke-width="2.2"></line>
+<text x="551" y="34" fill="#7db0ff" font-size="12" text-anchor="middle">你（远处）</text>
+<!-- her worldline -->
+<path d="M 545,352 C 470,330 400,312 330,282 C 258,250 195,218 168,168 C 154,136 150,96 149,44" fill="none" stroke="#f0ad5a" stroke-width="2.6"></path>
+<text x="196" y="340" fill="#f0ad5a" font-size="11.5">她的世界线</text>
+<!-- light rays -->
+<path d="M 479,333 L 549,268" fill="none" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#b1)"></path>
+<path d="M 393,306 C 405,282 460,254 549,230" fill="none" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#b1)"></path>
+<path d="M 232,232 C 244,192 300,180 549,168" fill="none" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#b1)"></path>
+<path d="M 182,189 C 188,120 260,86 549,66" fill="none" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#b1)"></path>
+<path d="M 160,144 C 164,80 200,50 330,42" fill="none" stroke="#3a4a70" stroke-width="1.5" stroke-dasharray="5 5"></path>
+<text x="340" y="46" fill="#6b7899" font-size="11">更晚发出的光：爬得越来越久</text>
+<circle cx="479" cy="333" r="4.4" fill="#f0ad5a"></circle>
+<circle cx="393" cy="306" r="4.4" fill="#f0ad5a"></circle>
+<circle cx="232" cy="232" r="4.4" fill="#f0ad5a"></circle>
+<circle cx="182" cy="189" r="4.4" fill="#f0ad5a"></circle>
+<text x="487" y="349" fill="#f0ad5a" font-size="11.5">①</text>
+<text x="401" y="322" fill="#f0ad5a" font-size="11.5">②</text>
+<text x="240" y="248" fill="#f0ad5a" font-size="11.5">③</text>
+<text x="190" y="205" fill="#f0ad5a" font-size="11.5">④</text>
+<circle cx="555" cy="262" r="4" fill="#f0f3fb"></circle>
+<circle cx="555" cy="224" r="4" fill="#f0f3fb"></circle>
+<circle cx="555" cy="162" r="4" fill="#f0f3fb"></circle>
+<circle cx="555" cy="60" r="4" fill="#f0f3fb"></circle>
+<text x="566" y="266" fill="#dbe1f0" font-size="11.5">①</text>
+<text x="566" y="228" fill="#dbe1f0" font-size="11.5">②</text>
+<text x="566" y="166" fill="#dbe1f0" font-size="11.5">③</text>
+<text x="566" y="64" fill="#dbe1f0" font-size="11.5">④</text>
+<text transform="translate(608,180) rotate(90)" fill="#96a0ba" font-size="11.5" text-anchor="middle">收到的间隔越拉越长</text>
+</g>
+</svg>
+<figcaption>她<strong>等间隔</strong>发出 ①②③④，你收到的间隔却成倍增长——“多久之后”这句话对两人不再是同一件事。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 诚实的修正</span>
+  “你会永远看见她冻在视界上”是科普里的一处失真。光是<strong>有限多个光子</strong>，接收速率随时间指数衰减，特征时标是 <var>r</var><sub>s</sub>/<var>c</var>——太阳质量黑洞约 10 微秒。所以她会迅速变暗变红，然后<strong>一个光子也不再来</strong>。数学上的“永远”，在照片上不成立。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  越过视界之后，<var>r</var> 不再像“位置”而更像“时刻”。她撞上奇点的不可回避，和你躲不过下周二是同一种：<strong>那不是空间里的一个点，是她未来的终点</strong>。而且并不漫长——太阳质量黑洞从视界到中心最长约 15 微秒，开引擎挣扎只会更短。至于奇点，多半不是实在，而是理论在自己失效处发出的警报：那里量子引力必须接管，而我们还没有量子引力。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 没有共享的"现在"</span>
+  一旦只剩“谁能影响谁”，难题就换了面孔：
+  <ul>
+<li><strong>分布式系统</strong>：Lamport（1978）用消息的因果关系取代全局时钟，给事件一个<strong>偏序</strong>——与光锥的因果结构是同一个东西。Spanner 为勉强恢复全局顺序，代价是配原子钟、每次提交都等一会儿。</li>
+<li><strong>神经科学</strong>：大脑没有中央时钟，视听通路延迟差几十毫秒。“同时”是事后重建的判断，可以被骗——错配的口型会改写你听到的音节。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：她的坠落只花几小时，你的等待却看不到尽头——两只表说的都是真话。</div>
+<details class="q"><summary><b>思考：</b>如果落进去的东西“永远”停在视界上，黑洞怎么可能长大、怎么可能蒸发完？</summary><div class="qa">“永远”是远处坐标时的说法，不是任何人的经历——落入的物质在自己的固有时里早就到了中心。而事件视界由整个未来定义，它甚至会在物质到达之前就向外膨胀。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>时空的涟漪 <span class="en">Ripples in Spacetime</span></h2>
+<span class="pill">LIGO · 2015 年 9 月 14 日</span>
+<div class="field"><span class="lab">直觉</span>
+  抖动电荷会发出电磁波（见<a href="electromagnetism-day12.html">「电磁的统一」</a>）。质量既然弯曲时空，抖动质量就该发出时空的波。它不是“在空间里传播的波”，而是<strong>空间本身伸缩的节奏</strong>：一圈自由漂浮的物体先横向拉长、纵向压扁，半周期后反过来。变的不是位置，是“距离”本身。</div>
+<div class="field"><span class="lab">机制</span>
+  引力波的强度用无量纲的<strong>应变</strong>描述：
+  <div class="eq"><var>h</var> = <span class="frac"><span class="fnum">Δ<var>L</var></span><span class="fden"><var>L</var></span></span></div>
+<div class="gloss">Δ 读作“变化量”，<var>L</var> 是两个自由物体的距离，<var>h</var> 是它被拉伸的比例。2015 年那次事件（编号 GW150914，两个约 30 太阳质量的黑洞并合）峰值 <var>h</var> 约 <span class="nowrap">1×10<sup>−21</sup></span>；LIGO 臂长 4 公里，于是 Δ<var>L</var> 约 <span class="nowrap">4×10<sup>−18</sup></span> 米——<strong>质子直径的千分之一</strong>。凭什么测得到：干涉仪把两臂光程差变成干涉信号，光在臂内往返约 280 次，镜子挂在四级摆上隔震；两台相距 3000 公里的探测器再用 7 毫秒的时差互证。</div></div>
+<div class="field"><span class="lab">机制 · 为什么这么弱</span>
+  电磁辐射的最低阶是<strong>偶极</strong>，引力的偶极辐射却被守恒律封死：质量偶极的一阶导数就是总动量，动量守恒使它不能变化。引力最低阶只能是<strong>四极</strong>——源的<strong>形状</strong>必须随时间变。所以完美球对称的塌缩，再天翻地覆也发不出引力波。</div>
+<figure>
+<svg role="img" aria-label="上排：一圈试验质量在加号偏振引力波下一个周期内先横向拉长后纵向拉长；下排：并合的啁啾波形，频率与幅度同时攀升，并合后迅速衰减" viewBox="0 0 640 348">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text x="320" y="26" fill="#7db0ff" font-size="13.5" font-weight="700" text-anchor="middle">一圈自由漂浮的试验质量：一个周期里的形变</text>
+<circle cx="100" cy="90" r="42" fill="none" stroke="#3a4a70" stroke-dasharray="4 5" stroke-width="1.1"></circle>
+<circle cx="100" cy="90" r="42" fill="rgba(240,173,90,.06)" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="142" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="130" cy="120" r="3.6" fill="#f0ad5a"></circle><circle cx="100" cy="132" r="3.6" fill="#f0ad5a"></circle><circle cx="70" cy="120" r="3.6" fill="#f0ad5a"></circle><circle cx="58" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="70" cy="60" r="3.6" fill="#f0ad5a"></circle><circle cx="100" cy="48" r="3.6" fill="#f0ad5a"></circle><circle cx="130" cy="60" r="3.6" fill="#f0ad5a"></circle>
+<text x="100" y="172" fill="#dbe1f0" font-size="12" text-anchor="middle">0</text>
+<circle cx="240" cy="90" r="42" fill="none" stroke="#3a4a70" stroke-dasharray="4 5" stroke-width="1.1"></circle>
+<ellipse cx="240" cy="90" rx="54" ry="32" fill="rgba(240,173,90,.06)" stroke="#f0ad5a" stroke-width="2"></ellipse>
+<circle cx="294" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="278" cy="113" r="3.6" fill="#f0ad5a"></circle><circle cx="240" cy="122" r="3.6" fill="#f0ad5a"></circle><circle cx="202" cy="113" r="3.6" fill="#f0ad5a"></circle><circle cx="186" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="202" cy="67" r="3.6" fill="#f0ad5a"></circle><circle cx="240" cy="58" r="3.6" fill="#f0ad5a"></circle><circle cx="278" cy="67" r="3.6" fill="#f0ad5a"></circle>
+<text x="240" y="172" fill="#dbe1f0" font-size="12" text-anchor="middle">T/4</text>
+<circle cx="380" cy="90" r="42" fill="none" stroke="#3a4a70" stroke-dasharray="4 5" stroke-width="1.1"></circle>
+<circle cx="380" cy="90" r="42" fill="rgba(240,173,90,.06)" stroke="#f0ad5a" stroke-width="2"></circle>
+<circle cx="422" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="410" cy="120" r="3.6" fill="#f0ad5a"></circle><circle cx="380" cy="132" r="3.6" fill="#f0ad5a"></circle><circle cx="350" cy="120" r="3.6" fill="#f0ad5a"></circle><circle cx="338" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="350" cy="60" r="3.6" fill="#f0ad5a"></circle><circle cx="380" cy="48" r="3.6" fill="#f0ad5a"></circle><circle cx="410" cy="60" r="3.6" fill="#f0ad5a"></circle>
+<text x="380" y="172" fill="#dbe1f0" font-size="12" text-anchor="middle">T/2</text>
+<circle cx="520" cy="90" r="42" fill="none" stroke="#3a4a70" stroke-dasharray="4 5" stroke-width="1.1"></circle>
+<ellipse cx="520" cy="90" rx="32" ry="54" fill="rgba(240,173,90,.06)" stroke="#f0ad5a" stroke-width="2"></ellipse>
+<circle cx="552" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="543" cy="128" r="3.6" fill="#f0ad5a"></circle><circle cx="520" cy="144" r="3.6" fill="#f0ad5a"></circle><circle cx="497" cy="128" r="3.6" fill="#f0ad5a"></circle><circle cx="488" cy="90" r="3.6" fill="#f0ad5a"></circle><circle cx="497" cy="52" r="3.6" fill="#f0ad5a"></circle><circle cx="520" cy="36" r="3.6" fill="#f0ad5a"></circle><circle cx="543" cy="52" r="3.6" fill="#f0ad5a"></circle>
+<text x="520" y="172" fill="#dbe1f0" font-size="12" text-anchor="middle">3T/4</text>
+<text x="320" y="198" fill="#96a0ba" font-size="11.5" text-anchor="middle">虚线圈是波经过之前的形状；面积基本不变，只是被反复“揉”（图中形变已夸大）</text>
+<line x1="60" y1="268" x2="600" y2="268" stroke="#26314c" stroke-width="1"></line>
+<line x1="470" y1="222" x2="470" y2="318" stroke="#3a4a70" stroke-dasharray="4 5" stroke-width="1.2"></line>
+<text x="470" y="216" fill="#f0f3fb" font-size="11.5" text-anchor="middle">并合</text>
+<path d="M 70.0,273.6 L 72.6,272.1 L 75.2,270.2 L 77.9,268.1 L 80.5,266.0 L 83.1,264.0 L 85.7,262.4 L 88.3,261.2 L 90.8,260.6 L 93.4,260.7 L 96.0,261.5 L 98.6,262.8 L 101.1,264.7 L 103.7,266.8 L 106.2,269.1 L 108.7,271.3 L 111.3,273.3 L 113.8,274.8 L 116.3,275.7 L 118.8,275.9 L 121.3,275.4 L 123.8,274.3 L 126.3,272.5 L 128.8,270.3 L 131.3,267.9 L 133.8,265.5 L 136.2,263.2 L 138.7,261.4 L 141.1,260.1 L 143.6,259.5 L 146.0,259.7 L 148.5,260.6 L 150.9,262.2 L 153.3,264.4 L 155.7,266.9 L 158.1,269.5 L 160.5,272.0 L 162.9,274.2 L 165.3,275.9 L 167.7,276.9 L 170.1,277.1 L 172.4,276.4 L 174.8,275.0 L 177.1,273.0 L 179.5,270.5 L 181.8,267.7 L 184.1,264.9 L 186.5,262.3 L 188.8,260.3 L 191.1,258.9 L 193.4,258.3 L 195.7,258.5 L 198.0,259.7 L 200.3,261.6 L 202.5,264.1 L 204.8,267.0 L 207.1,270.0 L 209.3,272.9 L 211.6,275.4 L 213.8,277.2 L 216.0,278.3 L 218.3,278.4 L 220.5,277.6 L 222.7,275.9 L 224.9,273.5 L 227.1,270.5 L 229.3,267.3 L 231.5,264.1 L 233.6,261.2 L 235.8,258.9 L 238.0,257.4 L 240.1,256.8 L 242.3,257.2 L 244.4,258.6 L 246.6,260.8 L 248.7,263.8 L 250.8,267.1 L 252.9,270.6 L 255.0,273.9 L 257.1,276.7 L 259.2,278.8 L 261.3,279.9 L 263.3,279.9 L 265.4,278.9 L 267.5,276.9 L 269.5,274.0 L 271.6,270.6 L 273.6,266.9 L 275.6,263.2 L 277.6,259.9 L 279.7,257.3 L 281.7,255.6 L 283.7,255.0 L 285.7,255.6 L 287.6,257.3 L 289.6,260.0 L 291.6,263.5 L 293.5,267.4 L 295.5,271.4 L 297.4,275.2 L 299.4,278.4 L 301.3,280.7 L 303.2,281.8 L 305.1,281.8 L 307.0,280.5 L 308.9,278.0 L 310.8,274.7 L 312.7,270.6 L 314.6,266.3 L 316.4,262.0 L 318.3,258.3 L 320.1,255.3 L 322.0,253.5 L 323.8,252.9 L 325.6,253.7 L 327.5,255.8 L 329.3,259.1 L 331.1,263.2 L 332.9,267.7 L 334.6,272.4 L 336.4,276.8 L 338.2,280.4 L 339.9,283.0 L 341.7,284.2 L 343.4,284.0 L 345.2,282.4 L 346.9,279.4 L 348.6,275.3 L 350.3,270.5 L 352.0,265.4 L 353.7,260.5 L 355.4,256.2 L 357.1,252.8 L 358.7,250.8 L 360.4,250.3 L 362.0,251.4 L 363.7,254.0 L 365.3,257.9 L 366.9,262.9 L 368.5,268.3 L 370.1,273.8 L 371.7,278.9 L 373.3,283.1 L 374.9,286.0 L 376.5,287.3 L 378.0,286.9 L 379.6,284.7 L 381.1,281.0 L 382.7,276.1 L 384.2,270.3 L 385.7,264.3 L 387.2,258.4 L 388.7,253.3 L 390.2,249.5 L 391.7,247.3 L 393.1,246.9 L 394.6,248.4 L 396.0,251.7 L 397.5,256.6 L 398.9,262.6 L 400.3,269.2 L 401.7,275.8 L 403.1,281.8 L 404.5,286.7 L 405.9,290.0 L 407.3,291.4 L 408.7,290.6 L 410.0,287.8 L 411.3,283.1 L 412.7,277.0 L 414.0,269.9 L 415.3,262.5 L 416.6,255.4 L 417.9,249.4 L 419.2,244.9 L 420.5,242.4 L 421.7,242.2 L 423.0,244.3 L 424.2,248.6 L 425.4,254.8 L 426.7,262.4 L 427.9,270.6 L 429.1,278.8 L 430.3,286.2 L 431.4,292.1 L 432.6,295.9 L 433.7,297.3 L 434.9,296.0 L 436.0,292.2 L 437.1,286.0 L 438.2,278.1 L 439.3,269.0 L 440.4,259.6 L 441.5,250.7 L 442.6,243.2 L 443.6,237.7 L 444.7,234.9 L 445.7,235.0 L 446.7,238.1 L 447.7,244.1 L 448.7,252.4 L 449.7,262.4 L 450.6,273.2 L 451.6,283.9 L 452.5,293.4 L 453.5,300.9 L 454.4,305.7 L 455.3,307.1 L 456.2,304.9 L 457.1,298.9 L 457.9,289.9 L 458.8,278.9 L 459.6,267.0 L 460.4,255.1 L 461.2,244.4 L 462.0,235.8 L 462.8,230.2 L 463.6,228.0 L 464.3,229.5 L 465.1,234.4 L 465.8,242.4 L 466.5,252.8 L 467.2,264.6 L 467.8,276.6 L 468.5,287.9 L 469.1,297.4 L 469.8,304.2 L 470.0,305.9 L 471.8,304.5 L 473.6,295.9 L 475.4,282.8 L 477.2,268.7 L 479.0,256.5 L 480.8,248.5 L 482.6,245.7 L 484.4,247.9 L 486.2,253.9 L 488.0,261.9 L 489.8,269.9 L 491.6,276.3 L 493.4,280.1 L 495.2,280.8 L 497.0,278.8 L 498.8,274.9 L 500.5,270.1 L 502.3,265.7 L 504.1,262.3 L 505.9,260.7 L 507.7,260.8 L 509.5,262.3 L 511.3,264.8 L 513.1,267.6 L 514.9,270.0 L 516.7,271.7 L 518.5,272.3 L 520.3,272.0 L 522.1,270.9 L 523.9,269.4 L 525.7,267.8 L 527.5,266.5 L 529.3,265.7 L 531.1,265.5 L 532.9,265.8 L 534.7,266.6 L 536.5,267.5 L 538.3,268.4 L 540.1,269.1 L 541.9,269.4 L 543.7,269.4 L 545.5,269.2 L 547.3,268.7 L 549.1,268.1 L 550.9,267.6 L 552.7,267.3 L 554.5,267.2 L 556.2,267.2 L 558.0,267.4 L 559.8,267.7 L 561.6,268.0 L 563.4,268.3 L 565.2,268.4 L 567.0,268.5 L 568.8,268.4 L 570.6,268.3 L 572.4,268.1 L 574.2,267.9 L 576.0,267.8 L 577.8,267.7 L 579.6,267.7 L 581.4,267.8 L 583.2,267.9 L 585.0,268.0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<text x="120" y="234" fill="#f0ad5a" font-size="11.5">旋近：频率与幅度一起攀升</text>
+<text x="512" y="238" fill="#9fb0d0" font-size="11.5">铃宕</text>
+<text x="60" y="338" fill="#96a0ba" font-size="11">横轴：约 0.2 秒　纵轴：应变 h，峰值约 10<tspan dy="-4" font-size="9">−21</tspan></text>
+</g>
+</svg>
+<figcaption>上排是引力波干的事，下排是它被记录的样子。两个黑洞越转越近越快，频率与幅度同时飙升（这段叫啁啾），并合后新黑洞像被敲响的钟一样衰减。全程 0.2 秒。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  最常见的反驳是：空间在伸缩，尺子和激光波长不也一起伸缩，效应不就抵消了？关键在<strong>自由与刚性的区别</strong>。LIGO 的镜子自由悬挂，在探测频段内随时空一起动；而光速不变，光走完往返的<strong>时间</strong>随光程改变。被测的从来不是“米尺读数”，而是相位差。还有个巧合：那次事件的频率从 35 赫兹升到 250 赫兹，正落在人耳范围里。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 在噪声底下几个数量级处捞信号：匹配滤波</span>
+  比噪声小几个数量级的信号也能挖出来，前提是<strong>知道要找什么形状</strong>：
+  <ul>
+<li><strong>引力波</strong>：LIGO 把数据与数十万条理论波形模板做相关，信噪比才从“看不见”变成 24——这一步全靠广义相对论提前给出了精确波形，理论是探测器的一部分。</li>
+<li><strong>机器学习</strong>：卷积核就是<strong>可学的</strong>匹配滤波器——没有解析前向模型时，就用数据把模板学出来。“知道该找什么”常比“再多要点数据”值钱。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：真正难的不是宇宙里没有大事发生，而是时空硬得几乎不肯把大事传给我们。</div>
+<details class="q"><summary><b>思考：</b>既然信号这么微弱，为什么说并合瞬间的功率大得离谱？</summary><div class="qa">两回事。峰值功率约 <span class="nowrap">3.6×10<sup>49</sup></span> 瓦，据 LIGO 估算是可观测宇宙全部星光功率的几十倍，但只持续几毫秒，又传了 13 亿光年。“弱”不在源，在耦合：时空太硬。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>信息悖论 <span class="en">The Information Paradox</span></h2>
+<span class="pill">霍金 · 1974 · 至今未决</span>
+<div class="field"><span class="lab">直觉</span>
+  黑洞“无毛”：一个稳定黑洞只由质量、角动量、电荷三个数决定。一本书和一块同质量的石头掉进去，外面测到的完全一样。这还不算灾难，信息也许只是被关在里面。1974 年霍金把地板抽掉：<strong>黑洞会蒸发</strong>——视界附近的量子场效应让它持续辐射，直到彻底消失。那本书的信息去哪了？</div>
+<div class="field"><span class="lab">机制</span>
+  黑洞的熵不由体积、而由<strong>视界面积</strong>给出：
+  <div class="eq"><var>S</var> = <var>k</var><sub>B</sub> <span class="frac"><span class="fnum"><var>A</var></span><span class="fden">4<var>ℓ</var><sub>P</sub><sup>2</sup></span></span>，　<var>T</var> = <span class="frac"><span class="fnum"><var>ℏ</var><var>c</var><sup>3</sup></span><span class="fden">8π<var>G</var><var>M</var><var>k</var><sub>B</sub></span></span></div>
+<div class="gloss"><var>A</var> 是视界面积，<var>ℓ</var><sub>P</sub>（读“普朗克长度”，是字母 ell 不是数字 1）约 1.6×10<sup>−35</sup> 米，<var>k</var><sub>B</sub> 是玻尔兹曼常数，<var>ℏ</var> 读“h 拔”，即普朗克常数除以 2π。第一式说熵<strong>正比于面积而不是体积</strong>，这是全息想法的种子。第二式给出霍金温度：<strong>越大越冷</strong>。太阳质量黑洞约 6×10<sup>−8</sup> K，低于宇宙微波背景的 2.7 K，所以它现在还在长大。</div>
+<strong>悖论在哪：</strong>量子力学的演化是酉的——原则上可逆，纯态永远是纯态。而霍金原始计算给出的辐射是纯热的，谱只依赖质量，与掉进去什么无关。纯态进、混态出，两条基本原理正面相撞。</div>
+<figure>
+<svg role="img" aria-label="Page 曲线：横轴蒸发进程，纵轴辐射的纠缠熵。霍金原算法给出只升不降的虚线；正确答案在 Page 时间转向，沿黑洞剩余熵下降回到零" viewBox="0 0 640 320">
+<defs>
+<marker id="c1" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#6b7899"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line x1="90" y1="250" x2="600" y2="250" stroke="#6b7899" stroke-width="1.2" marker-end="url(#c1)"></line>
+<line x1="90" y1="250" x2="90" y2="44" stroke="#6b7899" stroke-width="1.2" marker-end="url(#c1)"></line>
+<text transform="translate(66,150) rotate(-90)" fill="#96a0ba" font-size="11.5" text-anchor="middle">辐射携带的纠缠熵</text>
+<text x="330" y="276" fill="#96a0ba" font-size="11.5" text-anchor="middle">蒸发进程</text>
+<text x="576" y="268" fill="#96a0ba" font-size="11" text-anchor="end">蒸发完毕</text>
+<line x1="90" y1="60" x2="570" y2="250" stroke="#5b9bff" stroke-dasharray="6 5" stroke-width="1.6"></line>
+<text x="152" y="62" fill="#5b9bff" font-size="11.5">黑洞剩下的熵（∝ 视界面积）</text>
+<line x1="90" y1="250" x2="430" y2="42" stroke="#6b7899" stroke-dasharray="6 5" stroke-width="1.6"></line>
+<text x="438" y="66" fill="#9fb0d0" font-size="11.5">霍金原算法：只升不降</text>
+<path d="M 90,250 L 278,134 L 570,250" fill="none" stroke="#f0ad5a" stroke-width="3"></path>
+<line x1="278" y1="250" x2="278" y2="128" stroke="#3a4a70" stroke-dasharray="4 5" stroke-width="1.2"></line>
+<text x="278" y="118" fill="#f0ad5a" font-size="11.5" text-anchor="middle">Page 时间</text>
+<circle cx="570" cy="250" r="4.6" fill="#f0f3fb"></circle>
+<line x1="92" y1="304" x2="122" y2="304" stroke="#f0ad5a" stroke-width="3"></line>
+<text x="130" y="308" fill="#f0ad5a" font-size="11.5">正确答案：先升后降，回到零</text>
+</g>
+</svg>
+<figcaption>若辐射真是纯热的，它的熵只会一路上升（灰虚线），最后比黑洞剩下的熵还大——自相矛盾。信息守恒要求它在 Page 时间转向、降回零。2019 年起，人们终于算出了这条转折。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  这不是“信息藏得太深找不回来”的工程问题，而是两套各自极其成功的理论给出互不相容的答案，必有一方要改。诚实的现状：多数理论家站在信息守恒这边（AdS/CFT 对偶强烈支持这一侧），2019 年起用“复本虫洞／岛屿”方法算出了正确的 Page 曲线；但辐射究竟以什么方式携带信息，仍无共识。霍金 2004 年公开认输常被讲成“问题已解决”，那只是他改变了立场。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 把"信息还在，但取不出"说清楚</span>
+  <ul>
+<li><strong>计算复杂性</strong>：Harlow 与 Hayden（2013）指出，即使信息完整编码在霍金辐射里，解码所需的量子计算时间也长到黑洞早已蒸发干净——“原则上可恢复”与“物理上可操作”被分开了。</li>
+<li><strong>统计力学</strong>：搅匀的咖啡在微观上仍记得初态，牛顿方程完全可逆，不可逆只是粗粒化的产物。这条线在「熵与时间之箭」与「信息的物理」里铺过，黑洞把它推到了极端。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：黑洞逼出的真问题不是"信息去哪了"，而是"量子力学和引力，谁得让步"。</div>
+<details class="q"><summary><b>思考：</b>熵正比于面积而不是体积，这暗示了什么？</summary><div class="qa">一个区域能装的最大熵由它的<strong>边界面积</strong>决定（贝肯斯坦上限），这给存储与计算划了一条物理红线。't Hooft 与 Susskind 由此提出全息原理：体积里的物理可完整编码在边界上，多出来的那一维不是基本的。</div></details>
+</div>
+</div>
+<!-- Deep -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>我们真的"看见"过黑洞吗？</summary>
+<div class="body">三条独立证据。其一，银河系中心的恒星轨道把约 400 万太阳质量框进了比水星轨道还小的范围（Genzel 与 Ghez 因此分享 2020 年诺贝尔物理学奖）。其二，事件视界望远镜 2019 年发布 M87 中心的亮环、2022 年发布银河系中心的，环的大小与形状符合旋转黑洞解的预言。其三，并合信号最后的“铃宕”：新天体按特定频率衰减，而那些频率只由质量与自旋决定。诚实的说法是：这些确证的是“极端致密、尺度与视界相当的暗天体”，视界的存在是最简洁的解释。</div></details>
+<details><summary>能穿过黑洞去另一个宇宙吗？</summary>
+<div class="body">最大延伸的史瓦西时空（克鲁斯卡尔图）里确实有第二片外部区域和一个白洞。但那是<strong>永恒</strong>真空解——一个从来没有形成过、也永远不会消失的黑洞。真实的塌缩只保留其中一部分，白洞区被正在塌缩的物质替换掉了，什么也不通。可穿越虫洞在方程里写得下来，但需要负能量密度的物质撑开喉咙，而我们只在极微量的效应里见过类似的东西。</div></details>
+<details><summary>除了并合，引力波还能听见什么？</summary>
+<div class="body">频段决定听什么。地面探测器的几十到几千赫兹对应恒星质量的黑洞与中子星并合——2017 年的 GW170817 同时被引力波和伽马射线捕捉到，一举确认了重元素的一条产地。空间探测器 LISA（2030 年代）瞄准毫赫兹的超大质量黑洞并合，一批毫秒脉冲星组成的计时阵列覆盖纳赫兹（2023 年多个团队已报告相符的信号）。最低频的一端是暴胀留下的原初引力波，只能靠宇宙微波背景的偏振间接找——2014 年 BICEP2 那次宣布后来被证明来自银河系尘埃。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Kip Thorne，<em>Black Holes and Time Warps: Einstein's Outrageous Legacy</em>（1994）——<a href="https://en.wikipedia.org/wiki/Black_Holes_and_Time_Warps">条目介绍</a>；参与者写的黑洞研究史，至今没有更好的替代</li>
+<li>Taylor、Wheeler &amp; Bertschinger，<em>Exploring Black Holes</em>——<a href="https://www.eftaylor.com/exploringblackholes/">作者公开的全书</a>，只用最少的数学把落入视界算清楚</li>
+<li>Hamilton &amp; Lisle，<em>The River Model of Black Holes</em>——<a href="https://arxiv.org/abs/gr-qc/0411060">arXiv:gr-qc/0411060</a>，把视界讲成"空间流速达到光速的那条线"，直觉极好</li>
+<li>Abbott 等（LIGO / Virgo），<em>Observation of Gravitational Waves from a Binary Black Hole Merger</em>，PRL 116, 061102 (2016)——<a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102">开放获取原文</a>；另有 <a href="https://www.ligo.caltech.edu/detection">LIGO 官方探测页</a>，含把信号转成声音的音频</li>
+<li>Hawking，<em>Breakdown of Predictability in Gravitational Collapse</em>，Phys. Rev. D 14, 2460 (1976)——<a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.14.2460">悖论的原始论文</a></li>
+<li>Harlow，<em>Jerusalem Lectures on Black Holes and Quantum Information</em>——<a href="https://arxiv.org/abs/1409.1231">arXiv:1409.1231</a>，公认最好的入门综述</li>
+<li>Almheiri 等，<em>The Entropy of Hawking Radiation</em>，Rev. Mod. Phys. 93, 035002 (2021)——<a href="https://arxiv.org/abs/2006.06872">arXiv:2006.06872</a>，岛屿公式与 Page 曲线的权威回顾</li>
+<li><a href="https://en.wikipedia.org/wiki/Schwarzschild_radius">Wikipedia: Schwarzschild radius</a> / <a href="https://en.wikipedia.org/wiki/No-hair_theorem">No-hair theorem</a> / <a href="https://en.wikipedia.org/wiki/GW150914">GW150914</a> / <a href="https://en.wikipedia.org/wiki/Black_hole_information_paradox">Black hole information paradox</a></li>
+<li><a href="https://eventhorizontelescope.org/">事件视界望远镜官方站</a>——M87 与银河系中心两张图像的原始发布</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
