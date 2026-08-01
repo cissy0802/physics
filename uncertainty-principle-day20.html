@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理：不确定性原理 · Day 20</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>不确定性原理</h1>
+<div class="meta">Day 20 · 2026 · Phase E 量子力学</div>
+<div class="tagline">不是仪器不够好，也不是你一看它就乱了——是"同时拥有确定的位置和确定的动量"这句话，压根没有对应的东西。</div>
+</header>
+<div class="intro">
+中文那个"<b>测不准</b>"的译名骗了几代读者：它听起来像在说仪器精度不够，或者人一伸手就把系统碰乱了。海森堡 1927 年最初也这么讲——他设想一台用光子照电子的显微镜，说光子撞了电子一下。真正的理由跟仪器、撞击、意识全都无关：<b>位置和动量是同一个波的两种问法</b>，一个问得越死，另一个的答案就越散。这是傅里叶 1822 年就写下的数学，量子力学只是给它安了一个尺度 <b>ħ</b>。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>不是你把它碰乱了 <span class="en">Not a Disturbance</span></h2>
+<span class="pill">海森堡显微镜 · 1927</span>
+<div class="field"><span class="lab">直觉</span>
+  想看清电子在哪儿，就得拿光去照它。波长越短看得越细，可波长越短的光子动量越大，撞上去就把电子踹飞——位置看清了，速度毁了。这个故事叫<strong>海森堡显微镜</strong>，好懂好记，而且<strong>是错的</strong>：它把一条关于世界本身的陈述，讲成了一条关于我们手艺的陈述。玻尔当年就不接受，逼海森堡在论文付印前补了一段附注。</div>
+<div class="field"><span class="lab">机制</span>
+  最干净的反例是<strong>单缝</strong>。缝有多宽，就等于把电子的横向位置限定在多大范围里，这就是 <var>Δx</var>。缝越窄，屏上的亮斑不但没变窄，反而<strong>摊得更开</strong>——出射方向的散布 <var>Δp</var> 变大了。整个过程<strong>没有任何东西撞它</strong>：缝只挡住一部分波，剩下那部分自己就是散的。</div>
+<figure>
+<svg viewBox="0 0 620 442" role="img" aria-label="单缝越窄，出射方向越发散">
+<defs>
+<marker id="f1ar" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"></path></marker>
+<marker id="f1al" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M9,0 L0,4 L9,8 Z" fill="#f0ad5a"></path></marker>
+<marker id="f1b" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="9" refX="11" refY="4.5" orient="auto"><path d="M0,0 L12,4.5 L0,9 Z" fill="#5b9bff"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<!-- ===== row 1: wide slit ===== -->
+<line x1="40" y1="28" x2="40" y2="162" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="68" y1="28" x2="68" y2="162" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="96" y1="28" x2="96" y2="162" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="25" y1="95" x2="130" y2="95" stroke="#5b9bff" stroke-width="2" marker-end="url(#f1b)"></line>
+<rect x="150" y="20" width="9" height="55" fill="#56607e"></rect>
+<rect x="150" y="115" width="9" height="55" fill="#56607e"></rect>
+<polygon points="159,75 420,52 420,138 159,115" fill="rgba(91,155,255,.16)"></polygon>
+<line x1="159" y1="95" x2="428" y2="95" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#f1b)"></line>
+<line x1="166" y1="75" x2="166" y2="115" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="166" y="66" fill="#f0ad5a" text-anchor="middle">Δx</text>
+<line x1="436" y1="52" x2="436" y2="138" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="450" y="90" fill="#f0ad5a">Δp 小</text>
+<text x="450" y="110" fill="#96a0ba" font-size="12.5">方向集中</text>
+<text x="25" y="196" fill="#96a0ba" font-size="12.5">宽缝：位置知道得糙（Δx 大），出去的方向很集中（Δp 小）</text>
+<!-- ===== row 2: narrow slit ===== -->
+<line x1="40" y1="243" x2="40" y2="377" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="68" y1="243" x2="68" y2="377" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="96" y1="243" x2="96" y2="377" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="25" y1="318" x2="130" y2="318" stroke="#5b9bff" stroke-width="2" marker-end="url(#f1b)"></line>
+<rect x="150" y="235" width="9" height="73" fill="#56607e"></rect>
+<rect x="150" y="328" width="9" height="73" fill="#56607e"></rect>
+<polygon points="159,308 420,242 420,394 159,328" fill="rgba(91,155,255,.16)"></polygon>
+<line x1="159" y1="318" x2="428" y2="318" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#f1b)"></line>
+<line x1="166" y1="306" x2="166" y2="330" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="166" y="297" fill="#f0ad5a" text-anchor="middle">Δx</text>
+<line x1="436" y1="242" x2="436" y2="394" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="450" y="310" fill="#f0ad5a">Δp 大</text>
+<text x="450" y="330" fill="#96a0ba" font-size="12.5">方向发散</text>
+<text x="25" y="422" fill="#96a0ba" font-size="12.5">窄缝：位置知道得准（Δx 小），出去的方向反而更散（Δp 大）</text>
+</g>
+</svg>
+<figcaption>把缝收窄，没人碰它，出射方向自己就散开。左边竖线是入射波前。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  "测量会扰动系统"<strong>真实存在</strong>，但那是<strong>另一条</strong>关系。海森堡不等式约束的是<strong>制备</strong>：态一旦准备好，位置分布与动量分布的宽度之积就定了下限——哪怕你之后什么都不测。而"某台仪器测位置会扰动多少动量"是另一个问题：2012 年中子自旋实验显示，<strong>朴素的"误差×扰动 ≥ ħ/2"确实会被违反</strong>。争论本身就说明：<strong>扰动可讨论、可优化，Δx·Δp 的下限不能。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 哲学 / 统计</span>
+  分野在<strong>认识论（我不知道）</strong>与<strong>本体论（它没有）</strong>：
+  <ul>
+<li><strong>哲学</strong>：盒里有个红球或蓝球，我不知道是哪个——球本来是某个颜色，缺的只是我的信息。电子不是这样：不是"它其实在某处而我不知道"，而是"确定的位置"此刻不存在。两种无知能在实验上分开，判决者是「纠缠与非定域」那期的贝尔实验。</li>
+<li><strong>统计</strong>：称体重时秤有 ±0.1 kg 的<strong>仪器误差</strong>，换台好秤就能压下去；而一群人的体重本身有<strong>标准差</strong>，换什么秤都消不掉。<var>Δx</var> 是后者。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：不确定性说的是"没有"，不是"测不出"。</div>
+<details class="q"><summary><b>思考：</b>如果有人发明了一种完全不打扰系统的测量法，Δx·Δp ≥ ħ/2 会失效吗？</summary><div class="qa">不会。这类测量真实存在（量子非破坏测量），能反复读同一个量而不搅乱它——但读的始终是<strong>那一个</strong>量，共轭量的散布原封不动留在那里。不等式约束的是态，不是读取手段。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>位置和动量是同一张谱的两面 <span class="en">Fourier Duality</span></h2>
+<span class="pill">傅里叶对偶 · 德布罗意 1924</span>
+<div class="field"><span class="lab">直觉</span>
+  拨一根琴弦响一整秒，你能听出准确的音高；在鼓面上敲极短的一下，你说不出那声"啪"是什么音。<strong>短促的声音没有确定的音高</strong>——这不是耳朵的毛病，是波的算术：想拼出"只在一瞬间响"的信号，就得把很多不同频率的正弦波叠起来，叠得越集中，用到的频率范围越宽。</div>
+<div class="field"><span class="lab">机制</span>
+  德布罗意把这条算术接到了粒子上：物质波的波长与动量成反比，
+  <div class="eq"><var>p</var> = <span class="frac"><span class="fnum"><var>h</var></span><span class="fden">λ</span></span></div>
+<div class="gloss"><var>p</var> 是动量；λ 读作"lambda"，是波长；<var>h</var> 是普朗克常数（约 6.626×10<sup>−34</sup> J·s，"J·s"读作焦耳·秒）。这式子说<strong>波长短 = 动量大</strong>，所以"问电子的动量"就是"问它的波长"。</div>
+  两头于是都被卡死：一列<strong>单一波长</strong>的波，动量完全确定，却在整条直线上均匀铺开，<strong>位置毫无信息</strong>；反过来要把波挤成一个窄包，就得掺进许多不同波长，<strong>动量随之散开</strong>。</div>
+<figure>
+<svg viewBox="0 0 660 400" role="img" aria-label="长波列与短波包的动量分布对比">
+<defs>
+<marker id="f2ar" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"></path></marker>
+<marker id="f2al" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M9,0 L0,4 L9,8 Z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<text x="180" y="22" fill="#dbe2f2" text-anchor="middle">一列长长的波</text>
+<text x="500" y="22" fill="#dbe2f2" text-anchor="middle">一个很窄的波包</text>
+<text x="58" y="50" fill="#f0ad5a" font-size="13">① 波在空间里的样子</text>
+<line x1="58" y1="115" x2="302" y2="115" stroke="#2b3a5e" stroke-width="1"></line>
+<line x1="378" y1="115" x2="622" y2="115" stroke="#2b3a5e" stroke-width="1"></line>
+<path d="M58,119.1 L61,123.1 L64,126.4 L67,128.3 L70,128.4 L73,126.4 L76,122.5 L79,117.1 L82,110.7 L85,104.4 L88,99.0 L91,95.5 L94,94.7 L97,96.8 L100,101.8 L103,109.2 L106,118.0 L109,127.1 L112,135.0 L115,140.5 L118,142.7 L121,140.8 L124,135.1 L127,126.1 L130,115.0 L133,103.3 L136,92.8 L139,85.1 L142,81.3 L145,82.3 L148,88.1 L151,97.9 L154,110.5 L157,124.0 L160,136.6 L163,146.3 L166,151.7 L169,152.0 L172,146.9 L175,137.3 L178,124.4 L181,110.2 L184,96.7 L187,85.8 L190,79.2 L193,77.6 L196,81.3 L199,89.7 L202,101.6 L205,115.0 L208,128.1 L211,139.0 L214,146.3 L217,148.9 L220,146.7 L223,140.2 L226,130.4 L229,118.9 L232,107.4 L235,97.6 L238,90.7 L241,87.5 L244,88.3 L247,92.8 L250,100.1 L253,108.9 L256,118.0 L259,126.0 L262,131.8 L265,135.0 L268,135.1 L271,132.4 L274,127.6 L277,121.5 L280,115.0 L283,109.2 L286,104.7 L289,102.0 L292,101.5 L295,102.8 L298,105.7 L301,109.5" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<path d="M378,115.0 L381,115.0 L384,115.0 L387,115.0 L390,115.0 L393,115.0 L396,115.0 L399,115.0 L402,115.0 L405,115.0 L408,115.0 L411,115.0 L414,115.0 L417,115.0 L420,115.0 L423,115.0 L426,115.0 L429,115.0 L432,115.0 L435,115.0 L438,115.0 L441,115.1 L444,115.1 L447,115.1 L450,115.0 L453,114.7 L456,114.1 L459,113.1 L462,111.9 L465,110.7 L468,110.0 L471,110.7 L474,113.5 L477,118.8 L480,126.2 L483,134.5 L486,141.6 L489,145.3 L492,143.7 L495,136.4 L498,124.4 L501,110.2 L504,97.2 L507,88.1 L510,84.6 L513,86.7 L516,92.9 L519,101.1 L522,108.9 L525,115.0 L528,118.6 L531,119.9 L534,119.7 L537,118.6 L540,117.3 L543,116.2 L546,115.5 L549,115.1 L552,114.9 L555,114.9 L558,114.9 L561,114.9 L564,115.0 L567,115.0 L570,115.0 L573,115.0 L576,115.0 L579,115.0 L582,115.0 L585,115.0 L588,115.0 L591,115.0 L594,115.0 L597,115.0 L600,115.0 L603,115.0 L606,115.0 L609,115.0 L612,115.0 L615,115.0 L618,115.0 L621,115.0" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<line x1="62" y1="178" x2="298" y2="178" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="180" y="199" fill="#f0ad5a" text-anchor="middle">Δx 大：位置几乎没信息</text>
+<line x1="466" y1="178" x2="534" y2="178" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="500" y="199" fill="#f0ad5a" text-anchor="middle">Δx 小：位置很确定</text>
+<text x="58" y="234" fill="#f0ad5a" font-size="13">② 拆出来的动量分布</text>
+<line x1="58" y1="340" x2="302" y2="340" stroke="#2b3a5e" stroke-width="1"></line>
+<line x1="378" y1="340" x2="622" y2="340" stroke="#2b3a5e" stroke-width="1"></line>
+<path d="M58,340.0 L61,340.0 L64,340.0 L67,340.0 L70,340.0 L73,340.0 L76,340.0 L79,340.0 L82,340.0 L85,340.0 L88,340.0 L91,340.0 L94,340.0 L97,340.0 L100,340.0 L103,340.0 L106,340.0 L109,340.0 L112,340.0 L115,340.0 L118,340.0 L121,340.0 L124,340.0 L127,340.0 L130,339.9 L133,339.9 L136,339.7 L139,339.4 L142,338.8 L145,337.7 L148,335.9 L151,332.9 L154,328.5 L157,322.2 L160,314.0 L163,303.9 L166,292.4 L169,280.6 L172,269.7 L175,261.1 L178,256.0 L181,255.3 L184,258.9 L187,266.5 L190,276.8 L193,288.4 L196,300.1 L199,310.8 L202,319.7 L205,326.6 L208,331.6 L211,335.0 L214,337.2 L217,338.5 L220,339.3 L223,339.6 L226,339.8 L229,339.9 L232,340.0 L235,340.0 L238,340.0 L241,340.0 L244,340.0 L247,340.0 L250,340.0 L253,340.0 L256,340.0 L259,340.0 L262,340.0 L265,340.0 L268,340.0 L271,340.0 L274,340.0 L277,340.0 L280,340.0 L283,340.0 L286,340.0 L289,340.0 L292,340.0 L295,340.0 L298,340.0 L301,340.0" fill="rgba(240,173,90,.14)" stroke="#f0ad5a" stroke-width="2"></path>
+<path d="M378,336.5 L382,335.8 L386,335.0 L390,334.1 L394,333.1 L398,332.0 L402,330.7 L406,329.3 L410,327.7 L414,326.0 L418,324.1 L422,322.1 L426,320.0 L430,317.8 L434,315.4 L438,313.0 L442,310.5 L446,307.9 L450,305.4 L454,302.8 L458,300.3 L462,297.9 L466,295.6 L470,293.4 L474,291.5 L478,289.7 L482,288.2 L486,287.0 L490,286.0 L494,285.4 L498,285.0 L502,285.0 L506,285.4 L510,286.0 L514,287.0 L518,288.2 L522,289.7 L526,291.5 L530,293.4 L534,295.6 L538,297.9 L542,300.3 L546,302.8 L550,305.4 L554,307.9 L558,310.5 L562,313.0 L566,315.4 L570,317.8 L574,320.0 L578,322.1 L582,324.1 L586,326.0 L590,327.7 L594,329.3 L598,330.7 L602,332.0 L606,333.1 L610,334.1 L614,335.0 L618,335.8 L622,336.5" fill="rgba(240,173,90,.14)" stroke="#f0ad5a" stroke-width="2"></path>
+<line x1="154" y1="362" x2="206" y2="362" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="180" y="383" fill="#f0ad5a" text-anchor="middle">Δp 小：波长很纯</text>
+<line x1="396" y1="362" x2="604" y2="362" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="500" y="383" fill="#f0ad5a" text-anchor="middle">Δp 大：掺了很多波长</text>
+</g>
+</svg>
+<figcaption>同一个东西的两种展开：上排挤窄，下排必然摊开。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  它不是量子力学额外添的怪规矩。只要承认电子是波（这是<a href="quantum-revolution-day18.html">「量子革命」</a>那期被实验逼出来的结论），剩下的全是<strong>傅里叶的纯数学</strong>——量子力学只加了 <var>p</var> = <var>h</var>/λ 这一步。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 信号处理 / 听觉 / 通信</span>
+  同一条不等式的经典版本，工程师每天在用：
+  <ul>
+<li><strong>信号处理</strong>：频谱图永远要在"时间分得细"与"频率分得准"之间二选一——窗口开短了看得清鼓点落在哪一刻，音高却糊成一片。这叫 Gabor 极限。</li>
+<li><strong>听觉</strong>：耳蜗本身是一台频率分析器，所以几毫秒的极短音人耳听不出音高，只听见"咔"一声。</li>
+<li><strong>通信</strong>：雷达脉冲越短距离分辨率越高，占的带宽也越宽——运营商竞标频谱花的钱，是在为这条不等式买单。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：位置与动量不是两件事，是同一个波的两种展开方式。</div>
+<details class="q"><summary><b>思考：</b>既然这是纯傅里叶数学，为什么没人说水波"受不确定性原理支配"？</summary><div class="qa">水波其实同样受"位置宽度 × 波长散布有下限"的约束，只是没人管一个水波包的波长散布叫"动量不确定"。量子力学的新东西只有一条：<var>p</var> = <var>h</var>/λ 把它变成<strong>可对单个粒子测量的力学量</strong>。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>ħ/2 这个下限从哪儿来 <span class="en">The Commutator</span></h2>
+<span class="pill">对易子 · Kennard 1927 / Robertson 1929</span>
+<div class="field"><span class="lab">直觉</span>
+  有些操作换个顺序结果就不同：先穿袜子再穿鞋，和先穿鞋再穿袜子。量子力学里"先问位置再问动量"与反过来问也差一点点——而这"一点点"不是零，正是它把不等式的右边从 0 顶了上去。</div>
+<div class="field"><span class="lab">机制</span>
+  位置和动量在量子力学里不是数，是<strong>算符</strong>（作用在波函数上的操作），而它们不对易：
+  <div class="eq">[ <var>x̂</var> , <var>p̂</var> ] = <var>x̂</var><var>p̂</var> − <var>p̂</var><var>x̂</var> = <var>i</var>ħ</div>
+<div class="gloss">字母上的小尖帽（<var>x̂</var> 读作"x-hat"）表示它是<strong>操作</strong>不是数值；方括号 [ , ] 叫<strong>对易子</strong>，即"两种顺序之差"；<var>i</var> 是<strong>虚数单位</strong>（<var>i</var>² = −1，斜体字母 i，不是数字 1 也不是字母 l）；ħ 读"h-bar"，等于 <var>h</var>/2π ≈ 1.055×10<sup>−34</sup> J·s。若这个差是<strong>数字 0（零）</strong>，两个量就能同时确定——经典世界正是如此。</div>
+  1929 年 Robertson 把它推广成对任意两个可观测量都成立的不等式，代入上式即得 Kennard 1927 年已给出的形式：
+  <div class="eq">Δ<var>x</var> · Δ<var>p</var> ≥ <span class="frac"><span class="fnum">ħ</span><span class="fden">2</span></span></div>
+<div class="gloss">Δ 是<strong>标准差</strong>，统计学里那个"散布多宽"，不是"误差多大"。要拿到它，得把<strong>同一个态制备很多很多次</strong>、每次测一个量再看散布——<strong>单独一次测量根本没有 Δ</strong>。ħ/2 ≈ 5.3×10<sup>−35</sup> J·s：把一颗 1 克的球定位到 1 微米，速度的不确定才 10<sup>−26</sup> 米/秒量级，宏观世界里这条线形同虚设；而对关在原子里的电子，同一公式给出每秒上百万米。</div></div>
+<figure>
+<svg viewBox="0 0 560 330" role="img" aria-label="Δx 与 Δp 的允许区域">
+<defs>
+<marker id="f3b" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L11,4.5 L0,9 Z" fill="#56607e"></path></marker>
+</defs>
+<path d="M70,40 L140,40 L140,40.0 L148,64.6 L156,84.7 L164,101.3 L172,115.3 L180,127.3 L188,137.6 L196,146.7 L204,154.6 L212,161.7 L220,168.0 L228,173.7 L236,178.8 L244,183.4 L252,187.7 L260,191.6 L268,195.2 L276,198.4 L284,201.5 L292,204.3 L300,207.0 L308,209.4 L316,211.7 L324,213.9 L332,215.9 L340,217.8 L348,219.6 L356,221.3 L364,222.9 L372,224.4 L380,225.8 L388,227.2 L396,228.5 L404,229.7 L412,230.9 L420,232.0 L428,233.1 L436,234.1 L444,235.1 L452,236.0 L460,236.9 L468,237.8 L476,238.6 L484,239.4 L492,240.2 L500,240.9 L508,241.6 L512,280 L70,280 Z" fill="rgba(196,88,88,.13)"></path>
+<path d="M140,40 L512,40 L512,241.6 L508,241.6 L500,240.9 L492,240.2 L484,239.4 L476,238.6 L468,237.8 L460,236.9 L452,236.0 L444,235.1 L436,234.1 L428,233.1 L420,232.0 L412,230.9 L404,229.7 L396,228.5 L388,227.2 L380,225.8 L372,224.4 L364,222.9 L356,221.3 L348,219.6 L340,217.8 L332,215.9 L324,213.9 L316,211.7 L308,209.4 L300,207.0 L292,204.3 L284,201.5 L276,198.4 L268,195.2 L260,191.6 L252,187.7 L244,183.4 L236,178.8 L228,173.7 L220,168.0 L212,161.7 L204,154.6 L196,146.7 L188,137.6 L180,127.3 L172,115.3 L164,101.3 L156,84.7 L148,64.6 L140,40.0 Z" fill="rgba(91,155,255,.10)"></path>
+<path d="M140,40.0 L148,64.6 L156,84.7 L164,101.3 L172,115.3 L180,127.3 L188,137.6 L196,146.7 L204,154.6 L212,161.7 L220,168.0 L228,173.7 L236,178.8 L244,183.4 L252,187.7 L260,191.6 L268,195.2 L276,198.4 L284,201.5 L292,204.3 L300,207.0 L308,209.4 L316,211.7 L324,213.9 L332,215.9 L340,217.8 L348,219.6 L356,221.3 L364,222.9 L372,224.4 L380,225.8 L388,227.2 L396,228.5 L404,229.7 L412,230.9 L420,232.0 L428,233.1 L436,234.1 L444,235.1 L452,236.0 L460,236.9 L468,237.8 L476,238.6 L484,239.4 L492,240.2 L500,240.9 L508,241.6" fill="none" stroke="#f0ad5a" stroke-width="2.4"></path>
+<line x1="70" y1="280" x2="532" y2="280" stroke="#56607e" stroke-width="1.6" marker-end="url(#f3b)"></line>
+<line x1="70" y1="280" x2="70" y2="30" stroke="#56607e" stroke-width="1.6" marker-end="url(#f3b)"></line>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<text x="200" y="78" fill="#8fb8ff">允许：Δx · Δp ≥ ħ/2</text>
+<text x="200" y="98" fill="#96a0ba" font-size="12.5">真实的量子态都落在这一侧</text>
+<text x="330" y="166" fill="#f0ad5a">Δx · Δp = ħ/2</text>
+<text x="330" y="185" fill="#96a0ba" font-size="12.5">高斯波包恰好踩线</text>
+<text x="106" y="216" fill="#d98a8a">禁区</text>
+<text x="106" y="236" fill="#96a0ba" font-size="12.5">没有任何量子态在这里</text>
+<text x="300" y="306" fill="#96a0ba" font-size="12.5" text-anchor="middle">位置的不确定 Δx  →</text>
+<text x="36" y="160" fill="#96a0ba" font-size="12.5" text-anchor="middle" transform="rotate(-90 36 160)">动量的不确定 Δp  →</text>
+</g>
+</svg>
+<figcaption>不等式画出来是一条双曲线：Δx 可以压到任意小，代价是 Δp 沿线爬上去。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  长得一模一样的 Δ<var>E</var>·Δ<var>t</var> ≥ ħ/2，地位<strong>完全不同</strong>：时间不是可观测量（没有"时间算符"），推不出 Robertson 不等式。正确读法是——<strong>只活了 Δt 那么久的态，能量必然有 ΔE 那么宽</strong>，这就是激发态寿命越短谱线越宽的原因。至于"真空里借 ΔE·Δt 凭空造虚粒子"，是个方便的比喻，别当机制读。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 信息论 / 密码学</span>
+  <ul>
+<li><strong>信息论</strong>：把 Δ 换成香农熵能写出更普适的"熵不确定性关系"——"不能同时压缩两组问题的答案"本质上是条<strong>信息不等式</strong>。</li>
+<li><strong>密码学</strong>：BB84 量子密钥分发的安全性就建在这上面——窃听者必须先选一组基去测，选错了就毁掉另一组基里的信息，于是在误码率里留下指纹。安全性由<strong>物理定律</strong>而非"计算太难"保证。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：不等式右边不是零——这就是量子世界与经典世界的全部分界。</div>
+<details class="q"><summary><b>思考：</b>如果 ħ 突然变成 0，世界会怎样？</summary><div class="qa">所有对易子归零，位置和动量可同时确定，波包想多窄有多窄——世界退回经典力学，ħ→0 正是量子力学的经典极限。代价立刻显现：原子的大小完全靠 ħ 撑着，ħ 一没，物质就塌了。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>不是"测不准"，而且正是它撑住了物质 <span class="en">Zero-Point Energy</span></h2>
+<span class="pill">零点能 · 译名辨析</span>
+<div class="field"><span class="lab">直觉</span>
+  海森堡原文用的德语词是 <em>Ungenauigkeit</em>（不精确）和 <em>Unbestimmtheit</em>（未定），英文取了 <em>uncertainty</em>，中文又滑一步变成"<strong>测不准</strong>"——把"没有确定值"讲成了"我们量不准"。这不是咬文嚼字：叫"测不准"，你会去想更好的仪器；叫"不确定"，你才会去想波。</div>
+<div class="field"><span class="lab">机制</span>
+  把粒子关得越紧 Δ<var>p</var> 越大，而动能至少是 (Δ<var>p</var>)²/2<var>m</var>，于是
+  <div class="eq"><var>E</var><sub>动</sub> ≳ <span class="frac"><span class="fnum">ħ²</span><span class="fden">8<var>m</var>(Δ<var>x</var>)²</span></span></div>
+<div class="gloss"><var>m</var> 是质量；"≳"读作"大致不小于"（数量级估算，不较真系数）。这份"一关起来就自动产生"的能量叫<strong>零点能</strong>：它不是热，降到绝对零度也拿不走，因为它是不确定性的直接后果。</div>
+  拿它去估氢原子，能量随半径 <var>r</var> 大致是
+  <div class="eq"><var>E</var>(<var>r</var>) ≈ <span class="frac"><span class="fnum">ħ²</span><span class="fden">2<var>m</var><var>r</var>²</span></span> − <span class="frac"><span class="fnum"><var>ke</var>²</span><span class="fden"><var>r</var></span></span></div>
+<div class="gloss">左项是"被关在半径 <var>r</var> 里"付出的动能，右项是库仑吸引（<var>e</var> 是电子电荷，<var>k</var> 是库仑常数，负号表示越近越低）。<var>r</var> 变小时左项以 1/<var>r</var>² <strong>爆炸</strong>，右项只以 1/<var>r</var> 变深——一个打不过另一个，就出现最低点。</div>
+  最低点落在 <var>r</var> ≈ 0.53 Å（1 Å = 10<sup>−10</sup> 米），正是氢原子的实际大小。</div>
+<div class="field"><span class="lab">为什么重要</span>
+  "原子为什么不塌缩"第一次有了非循环的回答：<strong>不是电子转得快，而是把它关得更小的代价太贵</strong>。同一笔账往上推——白矮星靠电子的零点运动（简并压）顶住自身引力，顶不住的门槛就是约 1.4 倍太阳质量的钱德拉塞卡极限；液氦在常压下降到绝对零度也不结冰。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 化学 / 天体物理 / 工程</span>
+  <ul>
+<li><strong>化学</strong>：C–H 键的零点能比 C–D（氘代）高，断 C–H 就比断 C–D 容易，速率差好几倍——这叫动力学同位素效应；把药物关键位置的氢换成氘以延缓代谢，已有获批上市的品种。</li>
+<li><strong>天体物理</strong>：白矮星越重反而越小，半径由零点能与引力的平衡定死——一颗星的尺寸直接写在一条量子不等式里。</li>
+<li><strong>工程</strong>：闪存的写入擦除、扫描隧道显微镜的成像都靠电子"穿墙"，而隧穿正是波包在势垒里不肯归零的后果；太阳点得着火，同样靠质子渗过库仑势垒。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：不确定性不是知识的缺口，是物质有体积的原因。</div>
+<details class="q"><summary><b>思考：</b>如果电子能安安静静"停在"原子核里，会怎样？</summary><div class="qa">Δx 缩到 10<sup>−15</sup> 米量级，Δp 随之暴涨，动能上冲到上百 MeV——远超库仑吸引能提供的束缚，电子根本待不住。所以原子的尺寸不是"轨道半径"，是不确定性与吸引力拔河的平衡点。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>"观察者效应""意识使波函数坍缩"和不确定性原理是什么关系？</summary>
+<div class="body">是三件必须分开的事，混起来就出玄学。① <strong>不确定性原理</strong>：关于态的<strong>制备</strong>，跟有没有人看毫无关系。② <strong>测量扰动</strong>：真实的物理相互作用，可优化可定量，一台探测器就能造成。③ <strong>测量问题</strong>：为什么每次只看到一个结果——这是诠释层面的争论，「测量问题与诠释」那期会专门处理。意识在这三件事里<strong>都没有位置</strong>：没有任何实验要求"观察者是人"，探测器、气泡室、感光胶片同样让干涉条纹消失。</div></details>
+<details><summary>"压缩态"能把不确定性压到下限以下吗？引力波探测器用它做了什么？</summary>
+<div class="body">不能突破乘积，但可以<strong>重新分配</strong>。光的"振幅方向"与"相位方向"也是一对共轭量，普通激光的量子噪声在两者上均匀分布；所谓<strong>压缩态</strong>就是把一个方向的涨落挤小、另一个相应放大，乘积仍老实守着下限。引力波探测器正是这么干：它只关心相位噪声，于是注入压缩光把相位方向压下去，牺牲掉自己不在乎的振幅方向——这条不等式已不是黑板上的哲学，而是工程师每天要绕的一堵墙。</div></details>
+<details><summary>不确定性原理算不算"粒子没有隐藏的确定属性"的证据？</summary>
+<div class="body">不算，这一步经常被跨得太快。它本身<strong>与隐变量兼容</strong>：德布罗意–玻姆理论里每个粒子任何时刻都有确定的位置和速度，但因为无法知道初始位置的精确分布，统计上照样复现 Δx·Δp ≥ ħ/2。光凭这条不等式，排除不掉"其实有确定值只是藏起来了"。真正堵死这条路的是<strong>贝尔不等式</strong>及其实验判决（「纠缠与非定域」的主题）。诚实的说法是：不确定性原理只告诉你"确定值即使存在也读不出来"。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Feynman，<em>The Feynman Lectures on Physics</em>，Vol. III 第 2 章「The Relation of Wave and Particle Viewpoints」——<a href="https://www.feynmanlectures.caltech.edu/III_02.html">加州理工免费全文</a>，单缝论证与"原子有多大"都在这章</li>
+<li>Heisenberg，<em>Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik</em>，Z. Phys. 43, 172 (1927)——<a href="https://doi.org/10.1007/BF01397280">原始论文</a>，显微镜论证与末尾致谢玻尔的附注</li>
+<li>Kennard，<em>Zur Quantenmechanik einfacher Bewegungstypen</em>，Z. Phys. 44, 326 (1927)——<a href="https://doi.org/10.1007/BF01391200">Δx·Δp ≥ ħ/2 的第一个严格证明</a></li>
+<li>Robertson，<em>The Uncertainty Principle</em>，Phys. Rev. 34, 163 (1929)——<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.34.163">推广到任意两个可观测量</a></li>
+<li>Erhart 等，Nat. Phys. 8, 185 (2012)——<a href="https://arxiv.org/abs/1201.1833">中子自旋实验</a>，朴素的"误差×扰动"形式被违反；Busch、Lahti、Werner，Phys. Rev. Lett. 111, 160405 (2013)——<a href="https://arxiv.org/abs/1306.1565">反方论证</a>，两篇一起读才看得清争点</li>
+<li>Bohm、Hiley，<em>The Undivided Universe</em>（1993）——隐变量方案如何在有确定位置的前提下复现同一条不等式</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Quanta and Fields</em>（2024）——不回避方程的量子入门</li>
+<li><a href="https://en.wikipedia.org/wiki/Uncertainty_principle">Wikipedia: Uncertainty principle</a> / <a href="https://en.wikipedia.org/wiki/Canonical_commutation_relation">Canonical commutation relation</a> / <a href="https://en.wikipedia.org/wiki/Zero-point_energy">Zero-point energy</a> / <a href="https://en.wikipedia.org/wiki/Squeezed_coherent_state">Squeezed coherent state</a> / <a href="https://en.wikipedia.org/wiki/Kinetic_isotope_effect">Kinetic isotope effect</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

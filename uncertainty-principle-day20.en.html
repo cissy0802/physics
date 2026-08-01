@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics: The Uncertainty Principle · Day 20</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>The Uncertainty Principle</h1>
+<div class="meta">Day 20 · 2026 · Phase E Quantum Mechanics</div>
+<div class="tagline">Not that our instruments are too crude, nor that looking disturbs things — the sentence "it has both a definite position and a definite momentum" simply has nothing to refer to.</div>
+</header>
+<div class="intro">
+The name has misled generations: "uncertainty" sounds like a shortfall of instrumental precision, or like something we ruin by reaching in. Heisenberg's own first telling in 1927 went exactly that way — he imagined a microscope that looks at an electron with a photon, and said the photon gave it a kick. The real reason has nothing to do with instruments, with collisions, or with consciousness: <b>position and momentum are two ways of interrogating the same wave</b>, and the harder you pin one, the more scattered the other's answer becomes. That is mathematics Fourier wrote down in 1822; quantum mechanics only fixed the scale, <b>ħ</b>.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Nothing Bumped Into It <span class="en">Not a Disturbance</span></h2>
+<span class="pill">Heisenberg's microscope · 1927</span>
+<div class="field"><span class="lab">Intuition</span>
+  To see where an electron is, you have to shine light on it. Shorter wavelengths resolve finer detail, but shorter-wavelength photons carry more momentum, so the photon that lets you see it also kicks it away — position gained, velocity destroyed. This story is called <strong>Heisenberg's microscope</strong>. It is memorable, and it is <strong>wrong</strong>: it turns a statement about the world into a statement about our craftsmanship. Bohr never accepted it, and made Heisenberg add a postscript before the paper went to press.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The cleanest counterexample is a <strong>single slit</strong>. The slit width is exactly how tightly you have confined the electron's transverse position — that is <var>Δx</var>. Narrow the slit and the bright patch on the screen does not narrow with it; it <strong>spreads wider</strong>, because the spread of outgoing directions <var>Δp</var> has grown. Nothing in this process <strong>collides with anything</strong>: the slit merely blocks part of the wave, and the part that survives is spread out all by itself.</div>
+<figure>
+<svg viewBox="0 0 620 442" role="img" aria-label="A narrower slit makes the outgoing beam spread more">
+<defs>
+<marker id="f1ar" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"></path></marker>
+<marker id="f1al" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M9,0 L0,4 L9,8 Z" fill="#f0ad5a"></path></marker>
+<marker id="f1b" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="9" refX="11" refY="4.5" orient="auto"><path d="M0,0 L12,4.5 L0,9 Z" fill="#5b9bff"></path></marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13.5">
+<!-- ===== row 1: wide slit ===== -->
+<line x1="40" y1="28" x2="40" y2="162" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="68" y1="28" x2="68" y2="162" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="96" y1="28" x2="96" y2="162" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="25" y1="95" x2="130" y2="95" stroke="#5b9bff" stroke-width="2" marker-end="url(#f1b)"></line>
+<rect x="150" y="20" width="9" height="55" fill="#56607e"></rect>
+<rect x="150" y="115" width="9" height="55" fill="#56607e"></rect>
+<polygon points="159,75 420,52 420,138 159,115" fill="rgba(91,155,255,.16)"></polygon>
+<line x1="159" y1="95" x2="428" y2="95" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#f1b)"></line>
+<line x1="166" y1="75" x2="166" y2="115" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="166" y="66" fill="#f0ad5a" text-anchor="middle">Δx</text>
+<line x1="436" y1="52" x2="436" y2="138" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="450" y="90" fill="#f0ad5a">Δp small</text>
+<text x="450" y="110" fill="#96a0ba" font-size="12.5">beam stays tight</text>
+<text x="25" y="196" fill="#96a0ba" font-size="12.5">Wide slit: position known loosely (large Δx), outgoing beam stays tight (small Δp)</text>
+<!-- ===== row 2: narrow slit ===== -->
+<line x1="40" y1="243" x2="40" y2="377" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="68" y1="243" x2="68" y2="377" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="96" y1="243" x2="96" y2="377" stroke="#3d5a8f" stroke-width="2"></line>
+<line x1="25" y1="318" x2="130" y2="318" stroke="#5b9bff" stroke-width="2" marker-end="url(#f1b)"></line>
+<rect x="150" y="235" width="9" height="73" fill="#56607e"></rect>
+<rect x="150" y="328" width="9" height="73" fill="#56607e"></rect>
+<polygon points="159,308 420,242 420,394 159,328" fill="rgba(91,155,255,.16)"></polygon>
+<line x1="159" y1="318" x2="428" y2="318" stroke="#5b9bff" stroke-width="1.6" marker-end="url(#f1b)"></line>
+<line x1="166" y1="306" x2="166" y2="330" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="166" y="297" fill="#f0ad5a" text-anchor="middle">Δx</text>
+<line x1="436" y1="242" x2="436" y2="394" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f1al)" marker-end="url(#f1ar)"></line>
+<text x="450" y="310" fill="#f0ad5a">Δp large</text>
+<text x="450" y="330" fill="#96a0ba" font-size="12.5">beam fans out</text>
+<text x="25" y="422" fill="#96a0ba" font-size="12.5">Narrow slit: position known sharply (small Δx), yet the beam fans out (large Δp)</text>
+</g>
+</svg>
+<figcaption>Narrow the slit and — with nothing touching the electron — the beam spreads on its own. The vertical lines on the left are incoming wavefronts.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Measurement disturbance is <strong>real</strong>, but it is a <strong>different</strong> relation. Heisenberg's inequality constrains <strong>preparation</strong>: once a state exists, the product of the widths of its position and momentum distributions already has a floor — even if you never measure it afterwards. "How much momentum does this particular apparatus disturb while measuring position?" is a separate question, and a 2012 neutron-spin experiment showed that <strong>the naive "error × disturbance ≥ ħ/2" really can be violated</strong>. The dispute itself makes the point: <strong>disturbance is negotiable and can be engineered down; the floor on Δx·Δp cannot.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary · Philosophy / Statistics</span>
+  The dividing line is <strong>epistemic (I don't know)</strong> versus <strong>ontic (it doesn't have one)</strong>:
+  <ul>
+<li><strong>Philosophy</strong>: a box holds a red ball or a blue ball and I don't know which — the ball already has a colour, only my information is missing. An electron is not like that: it is not "really somewhere and I don't know where", it is that "definite position" does not exist right now. The two kinds of ignorance can be told apart experimentally, and the verdict comes from the Bell tests in "Entanglement and Nonlocality".</li>
+<li><strong>Statistics</strong>: a bathroom scale has an <strong>instrument error</strong> of ±0.1 kg that a better scale removes; a population's weights have a <strong>standard deviation</strong> that no scale can remove. <var>Δx</var> is the second kind.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: uncertainty says "there isn't one", not "we can't measure it".</div>
+<details class="q"><summary><b>Think:</b> If someone invented a measurement that disturbed nothing at all, would Δx·Δp ≥ ħ/2 fail?</summary><div class="qa">No. Such measurements do exist (quantum non-demolition), and they can read the same quantity over and over without scrambling it — but what they read is always <strong>that one</strong> quantity, and the conjugate spread sits there untouched. The inequality constrains the state, not the read-out method.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Two Faces of the Same Spectrum <span class="en">Fourier Duality</span></h2>
+<span class="pill">Fourier duality · de Broglie 1924</span>
+<div class="field"><span class="lab">Intuition</span>
+  Pluck a string and let it ring for a full second and you can name the pitch; strike a drum head for an instant and you cannot say what note that "thwack" was. <strong>A very short sound has no definite pitch</strong> — not a defect of the ear, but the arithmetic of waves: to build a signal that sounds only for an instant you must add up many different frequencies, and the tighter the burst, the broader the range you need.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  De Broglie wired that arithmetic into particles: a matter wave's wavelength is inversely proportional to momentum,
+  <div class="eq"><var>p</var> = <span class="frac"><span class="fnum"><var>h</var></span><span class="fden">λ</span></span></div>
+<div class="gloss"><var>p</var> is momentum; λ is the Greek letter "lambda", the wavelength; <var>h</var> is Planck's constant (about 6.626×10<sup>−34</sup> J·s, joule-seconds). The formula says <strong>short wavelength = large momentum</strong>, so "asking an electron's momentum" is "asking its wavelength".</div>
+  Both ends are therefore pinned. A wave of a <strong>single wavelength</strong> has perfectly definite momentum, but it is spread evenly along the whole line, so <strong>position carries no information</strong>. Conversely, squeezing the wave into a narrow packet requires mixing in many wavelengths, and <strong>momentum spreads out</strong>.</div>
+<figure>
+<svg viewBox="0 0 660 400" role="img" aria-label="A long wave train versus a narrow packet, and their momentum spreads">
+<defs>
+<marker id="f2ar" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"></path></marker>
+<marker id="f2al" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M9,0 L0,4 L9,8 Z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13.5">
+<text x="180" y="22" fill="#dbe2f2" text-anchor="middle">A long wave train</text>
+<text x="500" y="22" fill="#dbe2f2" text-anchor="middle">A very narrow packet</text>
+<text x="58" y="50" fill="#f0ad5a" font-size="13">① The wave in space</text>
+<line x1="58" y1="115" x2="302" y2="115" stroke="#2b3a5e" stroke-width="1"></line>
+<line x1="378" y1="115" x2="622" y2="115" stroke="#2b3a5e" stroke-width="1"></line>
+<path d="M58,119.1 L61,123.1 L64,126.4 L67,128.3 L70,128.4 L73,126.4 L76,122.5 L79,117.1 L82,110.7 L85,104.4 L88,99.0 L91,95.5 L94,94.7 L97,96.8 L100,101.8 L103,109.2 L106,118.0 L109,127.1 L112,135.0 L115,140.5 L118,142.7 L121,140.8 L124,135.1 L127,126.1 L130,115.0 L133,103.3 L136,92.8 L139,85.1 L142,81.3 L145,82.3 L148,88.1 L151,97.9 L154,110.5 L157,124.0 L160,136.6 L163,146.3 L166,151.7 L169,152.0 L172,146.9 L175,137.3 L178,124.4 L181,110.2 L184,96.7 L187,85.8 L190,79.2 L193,77.6 L196,81.3 L199,89.7 L202,101.6 L205,115.0 L208,128.1 L211,139.0 L214,146.3 L217,148.9 L220,146.7 L223,140.2 L226,130.4 L229,118.9 L232,107.4 L235,97.6 L238,90.7 L241,87.5 L244,88.3 L247,92.8 L250,100.1 L253,108.9 L256,118.0 L259,126.0 L262,131.8 L265,135.0 L268,135.1 L271,132.4 L274,127.6 L277,121.5 L280,115.0 L283,109.2 L286,104.7 L289,102.0 L292,101.5 L295,102.8 L298,105.7 L301,109.5" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<path d="M378,115.0 L381,115.0 L384,115.0 L387,115.0 L390,115.0 L393,115.0 L396,115.0 L399,115.0 L402,115.0 L405,115.0 L408,115.0 L411,115.0 L414,115.0 L417,115.0 L420,115.0 L423,115.0 L426,115.0 L429,115.0 L432,115.0 L435,115.0 L438,115.0 L441,115.1 L444,115.1 L447,115.1 L450,115.0 L453,114.7 L456,114.1 L459,113.1 L462,111.9 L465,110.7 L468,110.0 L471,110.7 L474,113.5 L477,118.8 L480,126.2 L483,134.5 L486,141.6 L489,145.3 L492,143.7 L495,136.4 L498,124.4 L501,110.2 L504,97.2 L507,88.1 L510,84.6 L513,86.7 L516,92.9 L519,101.1 L522,108.9 L525,115.0 L528,118.6 L531,119.9 L534,119.7 L537,118.6 L540,117.3 L543,116.2 L546,115.5 L549,115.1 L552,114.9 L555,114.9 L558,114.9 L561,114.9 L564,115.0 L567,115.0 L570,115.0 L573,115.0 L576,115.0 L579,115.0 L582,115.0 L585,115.0 L588,115.0 L591,115.0 L594,115.0 L597,115.0 L600,115.0 L603,115.0 L606,115.0 L609,115.0 L612,115.0 L615,115.0 L618,115.0 L621,115.0" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<line x1="62" y1="178" x2="298" y2="178" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="180" y="199" fill="#f0ad5a" text-anchor="middle">Large Δx — position is vague</text>
+<line x1="466" y1="178" x2="534" y2="178" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="500" y="199" fill="#f0ad5a" text-anchor="middle">Small Δx — position is sharp</text>
+<text x="58" y="234" fill="#f0ad5a" font-size="13">② The momentum spread inside it</text>
+<line x1="58" y1="340" x2="302" y2="340" stroke="#2b3a5e" stroke-width="1"></line>
+<line x1="378" y1="340" x2="622" y2="340" stroke="#2b3a5e" stroke-width="1"></line>
+<path d="M58,340.0 L61,340.0 L64,340.0 L67,340.0 L70,340.0 L73,340.0 L76,340.0 L79,340.0 L82,340.0 L85,340.0 L88,340.0 L91,340.0 L94,340.0 L97,340.0 L100,340.0 L103,340.0 L106,340.0 L109,340.0 L112,340.0 L115,340.0 L118,340.0 L121,340.0 L124,340.0 L127,340.0 L130,339.9 L133,339.9 L136,339.7 L139,339.4 L142,338.8 L145,337.7 L148,335.9 L151,332.9 L154,328.5 L157,322.2 L160,314.0 L163,303.9 L166,292.4 L169,280.6 L172,269.7 L175,261.1 L178,256.0 L181,255.3 L184,258.9 L187,266.5 L190,276.8 L193,288.4 L196,300.1 L199,310.8 L202,319.7 L205,326.6 L208,331.6 L211,335.0 L214,337.2 L217,338.5 L220,339.3 L223,339.6 L226,339.8 L229,339.9 L232,340.0 L235,340.0 L238,340.0 L241,340.0 L244,340.0 L247,340.0 L250,340.0 L253,340.0 L256,340.0 L259,340.0 L262,340.0 L265,340.0 L268,340.0 L271,340.0 L274,340.0 L277,340.0 L280,340.0 L283,340.0 L286,340.0 L289,340.0 L292,340.0 L295,340.0 L298,340.0 L301,340.0" fill="rgba(240,173,90,.14)" stroke="#f0ad5a" stroke-width="2"></path>
+<path d="M378,336.5 L382,335.8 L386,335.0 L390,334.1 L394,333.1 L398,332.0 L402,330.7 L406,329.3 L410,327.7 L414,326.0 L418,324.1 L422,322.1 L426,320.0 L430,317.8 L434,315.4 L438,313.0 L442,310.5 L446,307.9 L450,305.4 L454,302.8 L458,300.3 L462,297.9 L466,295.6 L470,293.4 L474,291.5 L478,289.7 L482,288.2 L486,287.0 L490,286.0 L494,285.4 L498,285.0 L502,285.0 L506,285.4 L510,286.0 L514,287.0 L518,288.2 L522,289.7 L526,291.5 L530,293.4 L534,295.6 L538,297.9 L542,300.3 L546,302.8 L550,305.4 L554,307.9 L558,310.5 L562,313.0 L566,315.4 L570,317.8 L574,320.0 L578,322.1 L582,324.1 L586,326.0 L590,327.7 L594,329.3 L598,330.7 L602,332.0 L606,333.1 L610,334.1 L614,335.0 L618,335.8 L622,336.5" fill="rgba(240,173,90,.14)" stroke="#f0ad5a" stroke-width="2"></path>
+<line x1="154" y1="362" x2="206" y2="362" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="180" y="383" fill="#f0ad5a" text-anchor="middle">Small Δp — one pure wavelength</text>
+<line x1="396" y1="362" x2="604" y2="362" stroke="#f0ad5a" stroke-width="1.8" marker-start="url(#f2al)" marker-end="url(#f2ar)"></line>
+<text x="500" y="383" fill="#f0ad5a" text-anchor="middle">Large Δp — many wavelengths mixed</text>
+</g>
+</svg>
+<figcaption>Two expansions of the same object: squeeze the top row and the bottom row must spread.</figcaption>
+</figure>
+<div class="field"><span class="lab">Why it matters</span>
+  This is not an extra rule quantum mechanics bolted on. Once you grant that the electron is a wave — the conclusion experiments forced in <a href="quantum-revolution-day18.en.html">"The Quantum Revolution"</a> — everything left is <strong>pure Fourier mathematics</strong>; quantum mechanics only added the step <var>p</var> = <var>h</var>/λ.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · Signal processing / Hearing / Communications</span>
+  Engineers use the classical version of this same inequality every day:
+  <ul>
+<li><strong>Signal processing</strong>: a spectrogram forever trades "sharp in time" against "sharp in frequency" — shorten the analysis window and you see exactly when the drum hit landed, but the pitch smears. This is the Gabor limit.</li>
+<li><strong>Hearing</strong>: the cochlea is itself a frequency analyser, so a tone lasting a few milliseconds has no audible pitch at all — you hear a click.</li>
+<li><strong>Communications</strong>: a shorter radar pulse buys finer range resolution and costs more bandwidth — the money carriers pay at spectrum auctions is, at bottom, payment on this inequality.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: position and momentum are not two things, but two expansions of one wave.</div>
+<details class="q"><summary><b>Think:</b> If this is pure Fourier mathematics, why does nobody say water waves "obey the uncertainty principle"?</summary><div class="qa">Water waves obey the same constraint; it is just that nobody calls the wavelength spread of a water-wave packet a "momentum uncertainty". Quantum mechanics adds exactly one new thing: <var>p</var> = <var>h</var>/λ turns that spread into <strong>a mechanical quantity measurable on a single particle</strong>.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Where the Floor ħ/2 Comes From <span class="en">The Commutator</span></h2>
+<span class="pill">Commutator · Kennard 1927 / Robertson 1929</span>
+<div class="field"><span class="lab">Intuition</span>
+  Some operations give different results in different orders: socks then shoes, versus shoes then socks. In quantum mechanics, "ask position then momentum" and the reverse also differ by a little — and that little is not zero, which is precisely what lifts the right-hand side of the inequality off 0.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Position and momentum are not numbers here but <strong>operators</strong> (operations acting on the wavefunction), and they do not commute:
+  <div class="eq">[ <var>x̂</var> , <var>p̂</var> ] = <var>x̂</var><var>p̂</var> − <var>p̂</var><var>x̂</var> = <var>i</var>ħ</div>
+<div class="gloss">The little hat (<var>x̂</var>, read "x-hat") marks it as an <strong>operation</strong> rather than a value; the bracket [ , ] is the <strong>commutator</strong>, the difference between the two orders; <var>i</var> is the <strong>imaginary unit</strong> (<var>i</var>² = −1 — the italic letter i, not the digit 1 and not the letter l); ħ is read "h-bar" and equals <var>h</var>/2π ≈ 1.055×10<sup>−34</sup> J·s. If that difference were the <strong>digit 0 (zero)</strong>, both quantities could be sharp at once — which is exactly the classical world.</div>
+  In 1929 Robertson generalised this into an inequality holding for any two observables; substituting the relation above returns the form Kennard had already proved in 1927:
+  <div class="eq">Δ<var>x</var> · Δ<var>p</var> ≥ <span class="frac"><span class="fnum">ħ</span><span class="fden">2</span></span></div>
+<div class="gloss">Δ is the <strong>standard deviation</strong> — the statistician's "how wide is the spread", not "how big is the error". To obtain one you must prepare <strong>the same state very many times</strong>, measure one quantity each run, and look at the scatter: <strong>a single measurement has no Δ at all</strong>. ħ/2 ≈ 5.3×10<sup>−35</sup> J·s: localise a 1-gram ball to within a micrometre and the velocity uncertainty is only about 10<sup>−26</sup> m/s, so the bound is toothless in the everyday world — while for an electron confined inside an atom the same formula gives millions of metres per second.</div></div>
+<figure>
+<svg viewBox="0 0 560 330" role="img" aria-label="The allowed region for Δx and Δp">
+<defs>
+<marker id="f3b" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L11,4.5 L0,9 Z" fill="#56607e"></path></marker>
+</defs>
+<path d="M70,40 L140,40 L140,40.0 L148,64.6 L156,84.7 L164,101.3 L172,115.3 L180,127.3 L188,137.6 L196,146.7 L204,154.6 L212,161.7 L220,168.0 L228,173.7 L236,178.8 L244,183.4 L252,187.7 L260,191.6 L268,195.2 L276,198.4 L284,201.5 L292,204.3 L300,207.0 L308,209.4 L316,211.7 L324,213.9 L332,215.9 L340,217.8 L348,219.6 L356,221.3 L364,222.9 L372,224.4 L380,225.8 L388,227.2 L396,228.5 L404,229.7 L412,230.9 L420,232.0 L428,233.1 L436,234.1 L444,235.1 L452,236.0 L460,236.9 L468,237.8 L476,238.6 L484,239.4 L492,240.2 L500,240.9 L508,241.6 L512,280 L70,280 Z" fill="rgba(196,88,88,.13)"></path>
+<path d="M140,40 L512,40 L512,241.6 L508,241.6 L500,240.9 L492,240.2 L484,239.4 L476,238.6 L468,237.8 L460,236.9 L452,236.0 L444,235.1 L436,234.1 L428,233.1 L420,232.0 L412,230.9 L404,229.7 L396,228.5 L388,227.2 L380,225.8 L372,224.4 L364,222.9 L356,221.3 L348,219.6 L340,217.8 L332,215.9 L324,213.9 L316,211.7 L308,209.4 L300,207.0 L292,204.3 L284,201.5 L276,198.4 L268,195.2 L260,191.6 L252,187.7 L244,183.4 L236,178.8 L228,173.7 L220,168.0 L212,161.7 L204,154.6 L196,146.7 L188,137.6 L180,127.3 L172,115.3 L164,101.3 L156,84.7 L148,64.6 L140,40.0 Z" fill="rgba(91,155,255,.10)"></path>
+<path d="M140,40.0 L148,64.6 L156,84.7 L164,101.3 L172,115.3 L180,127.3 L188,137.6 L196,146.7 L204,154.6 L212,161.7 L220,168.0 L228,173.7 L236,178.8 L244,183.4 L252,187.7 L260,191.6 L268,195.2 L276,198.4 L284,201.5 L292,204.3 L300,207.0 L308,209.4 L316,211.7 L324,213.9 L332,215.9 L340,217.8 L348,219.6 L356,221.3 L364,222.9 L372,224.4 L380,225.8 L388,227.2 L396,228.5 L404,229.7 L412,230.9 L420,232.0 L428,233.1 L436,234.1 L444,235.1 L452,236.0 L460,236.9 L468,237.8 L476,238.6 L484,239.4 L492,240.2 L500,240.9 L508,241.6" fill="none" stroke="#f0ad5a" stroke-width="2.4"></path>
+<line x1="70" y1="280" x2="532" y2="280" stroke="#56607e" stroke-width="1.6" marker-end="url(#f3b)"></line>
+<line x1="70" y1="280" x2="70" y2="30" stroke="#56607e" stroke-width="1.6" marker-end="url(#f3b)"></line>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13.5">
+<text x="200" y="78" fill="#8fb8ff">Allowed: Δx · Δp ≥ ħ/2</text>
+<text x="200" y="98" fill="#96a0ba" font-size="12.5">every real quantum state lives on this side</text>
+<text x="330" y="166" fill="#f0ad5a">Δx · Δp = ħ/2</text>
+<text x="330" y="185" fill="#96a0ba" font-size="12.5">Gaussian packets ride the line</text>
+<text x="106" y="216" fill="#d98a8a">Forbidden</text>
+<text x="106" y="236" fill="#96a0ba" font-size="12.5">no quantum state can be here</text>
+<text x="300" y="306" fill="#96a0ba" font-size="12.5" text-anchor="middle">Position uncertainty Δx  →</text>
+<text x="36" y="160" fill="#96a0ba" font-size="12.5" text-anchor="middle" transform="rotate(-90 36 160)">Momentum uncertainty Δp  →</text>
+</g>
+</svg>
+<figcaption>Drawn out, the inequality is a hyperbola: Δx can be squeezed as small as you like, at the price of Δp climbing the curve.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The identical-looking Δ<var>E</var>·Δ<var>t</var> ≥ ħ/2 has a <strong>completely different status</strong>: time is not an observable in quantum mechanics (there is no "time operator"), so it does not follow from Robertson's inequality. The correct reading is that <strong>a state which only lives for Δt must have an energy width ΔE</strong> — which is why shorter-lived excited states give broader spectral lines, measured routinely in the lab. As for "the vacuum borrowing energy via ΔE·Δt to make virtual particles", that is a convenient metaphor, not a mechanism.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · Information theory / Cryptography</span>
+  <ul>
+<li><strong>Information theory</strong>: replace Δ with Shannon entropy and you get the more general "entropic uncertainty relations" — "you cannot compress the answers to both sets of questions at once" is fundamentally an <strong>information inequality</strong>.</li>
+<li><strong>Cryptography</strong>: the security of BB84 quantum key distribution rests on exactly this — an eavesdropper must pick a basis to measure in, and picking wrong destroys the information in the other basis, leaving fingerprints in the error rate. Security guaranteed by <strong>physical law</strong> rather than by "computationally hard".</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the right-hand side isn't zero — and that is the entire border between the quantum and classical worlds.</div>
+<details class="q"><summary><b>Think:</b> What would the world be like if ħ suddenly became 0?</summary><div class="qa">Every commutator vanishes, position and momentum can be sharp together, and wave packets can be as narrow as you please — the world reverts to classical mechanics, since ħ→0 <em>is</em> the classical limit. The price shows up at once: the size of an atom is held up entirely by ħ, so with ħ gone, matter collapses.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Indeterminacy, Not Imprecision — and It Holds Matter Up <span class="en">Zero-Point Energy</span></h2>
+<span class="pill">Zero-point energy · naming</span>
+<div class="field"><span class="lab">Intuition</span>
+  Heisenberg's German words were <em>Ungenauigkeit</em> (imprecision) and <em>Unbestimmtheit</em> (indeterminacy); English settled on <em>uncertainty</em>, which leans towards the first sense and away from the second. The distinction is not pedantry: read it as imprecision and you start imagining better instruments; read it as indeterminacy and you start thinking about waves.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The tighter you confine a particle, the larger Δ<var>p</var> grows, and kinetic energy is at least (Δ<var>p</var>)²/2<var>m</var>, so
+  <div class="eq"><var>E</var><sub>kin</sub> ≳ <span class="frac"><span class="fnum">ħ²</span><span class="fden">8<var>m</var>(Δ<var>x</var>)²</span></span></div>
+<div class="gloss"><var>m</var> is mass; "≳" reads "is roughly at least" (an order-of-magnitude estimate, never mind the constants). This energy that appears the moment you box something in is called <strong>zero-point energy</strong>, and it cannot be removed even at absolute zero.</div>
+  Apply it to hydrogen: the energy as a function of radius <var>r</var> is roughly
+  <div class="eq"><var>E</var>(<var>r</var>) ≈ <span class="frac"><span class="fnum">ħ²</span><span class="fden">2<var>m</var><var>r</var>²</span></span> − <span class="frac"><span class="fnum"><var>ke</var>²</span><span class="fden"><var>r</var></span></span></div>
+<div class="gloss">The left term is the kinetic price of being confined within radius <var>r</var>; the right is the Coulomb attraction (<var>e</var> is the electron's charge, <var>k</var> Coulomb's constant, and the minus sign means closer is lower). As <var>r</var> shrinks the left term <strong>blows up</strong> as 1/<var>r</var>² while the right only deepens as 1/<var>r</var> — one outruns the other, and a minimum appears.</div>
+  That minimum sits at <var>r</var> ≈ 0.53 Å (1 Å = 10<sup>−10</sup> m), which is the actual size of a hydrogen atom.</div>
+<div class="field"><span class="lab">Why it matters</span>
+  "Why doesn't the atom collapse?" finally has a non-circular answer: <strong>not because the electron orbits fast, but because confining it further is too expensive</strong>. Run the same ledger upwards — a white dwarf is held against its own gravity by the zero-point motion of its electrons (degeneracy pressure), and the threshold where that fails is the Chandrasekhar limit of about 1.4 solar masses; liquid helium at ordinary pressure never freezes, even at absolute zero.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary · Chemistry / Astrophysics / Engineering</span>
+  <ul>
+<li><strong>Chemistry</strong>: a C–H bond has higher zero-point energy than C–D (deuterated), so C–H breaks more easily and rates differ severalfold — the kinetic isotope effect. Swapping hydrogen for deuterium at a key position to slow metabolism has already produced approved drugs.</li>
+<li><strong>Astrophysics</strong>: heavier white dwarfs are <em>smaller</em>, their radius fixed by the balance of zero-point energy against gravity — a star's size written directly into a quantum inequality.</li>
+<li><strong>Engineering</strong>: flash-memory writes and scanning tunnelling microscopy both rely on electrons going "through the wall", and tunnelling is exactly a wave packet refusing to vanish inside a barrier; the Sun ignites for the same reason, protons seeping through the Coulomb barrier.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: uncertainty is not a gap in our knowledge — it is why matter takes up space.</div>
+<details class="q"><summary><b>Think:</b> What if an electron could simply sit still inside the nucleus?</summary><div class="qa">Δx would shrink to around 10<sup>−15</sup> m, Δp would explode, and the kinetic energy would climb to hundreds of MeV — far more than the Coulomb attraction can bind, so the electron cannot stay. The size of an atom is not an "orbital radius"; it is the standoff between uncertainty and attraction.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>How do the "observer effect" and "consciousness collapses the wavefunction" relate to the uncertainty principle?</summary>
+<div class="body">They are three separate things, and mixing them is where the mysticism starts. ① <strong>The uncertainty principle</strong>: about the <strong>preparation</strong> of a state, and utterly indifferent to whether anyone is watching. ② <strong>Measurement disturbance</strong>: a genuine physical interaction, quantifiable and reducible, produced perfectly well by a detector. ③ <strong>The measurement problem</strong>: why do we only ever see one outcome — an interpretational dispute, handled in "Measurement and Interpretations". Consciousness has <strong>no role in any of the three</strong>: no experiment requires the observer to be a person, and detectors, bubble chambers and photographic film wash out interference just as effectively.</div></details>
+<details><summary>Can "squeezed states" push uncertainty below the floor? What do gravitational-wave detectors do with them?</summary>
+<div class="body">They cannot beat the product, but they can <strong>redistribute</strong> it. Light's "amplitude quadrature" and "phase quadrature" are also a conjugate pair, and ordinary laser light spreads its quantum noise evenly between them; a <strong>squeezed state</strong> pinches the fluctuation in one and lets the other grow, with the product still dutifully respecting the bound. That is what gravitational-wave detectors do: they care only about phase noise, so they inject squeezed light to push the phase quadrature down and sacrifice the amplitude quadrature they don't care about. This inequality is no longer blackboard philosophy — it is a wall engineers work around daily.</div></details>
+<details><summary>Is the uncertainty principle evidence that particles have no hidden definite properties?</summary>
+<div class="body">No, and this step gets taken far too quickly. The principle is <strong>compatible with hidden variables</strong>: in de Broglie–Bohm theory every particle has a definite position and velocity at every moment, yet because we cannot know the precise initial distribution, the statistics still reproduce Δx·Δp ≥ ħ/2. This inequality alone cannot rule out "there are definite values, merely hidden". What actually closes that door is <strong>Bell's inequality</strong> and its experimental verdict (the subject of "Entanglement and Nonlocality"). The honest statement: the uncertainty principle only tells you that definite values, if they exist, cannot be read out.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>Feynman, <em>The Feynman Lectures on Physics</em>, Vol. III ch. 2, "The Relation of Wave and Particle Viewpoints" — <a href="https://www.feynmanlectures.caltech.edu/III_02.html">free full text from Caltech</a>; both the single-slit argument and the "how big is an atom" estimate live here</li>
+<li>Heisenberg, <em>Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik</em>, Z. Phys. 43, 172 (1927) — <a href="https://doi.org/10.1007/BF01397280">the original paper</a>, microscope argument and the closing postscript acknowledging Bohr</li>
+<li>Kennard, <em>Zur Quantenmechanik einfacher Bewegungstypen</em>, Z. Phys. 44, 326 (1927) — <a href="https://doi.org/10.1007/BF01391200">the first rigorous proof of Δx·Δp ≥ ħ/2</a></li>
+<li>Robertson, <em>The Uncertainty Principle</em>, Phys. Rev. 34, 163 (1929) — <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.34.163">the generalisation to any two observables</a></li>
+<li>Erhart et al., Nat. Phys. 8, 185 (2012) — <a href="https://arxiv.org/abs/1201.1833">the neutron-spin experiment</a> violating the naive "error × disturbance" form; Busch, Lahti &amp; Werner, Phys. Rev. Lett. 111, 160405 (2013) — <a href="https://arxiv.org/abs/1306.1565">the case for the defence</a>. Read both to see what is actually in dispute</li>
+<li>Bohm &amp; Hiley, <em>The Undivided Universe</em> (1993) — how a hidden-variable account reproduces the same statistical inequality while granting particles definite positions</li>
+<li>Sean Carroll, <em>The Biggest Ideas in the Universe: Quanta and Fields</em> (2024) — a quantum introduction for general readers that does not dodge the equations</li>
+<li><a href="https://en.wikipedia.org/wiki/Uncertainty_principle">Wikipedia: Uncertainty principle</a> / <a href="https://en.wikipedia.org/wiki/Canonical_commutation_relation">Canonical commutation relation</a> / <a href="https://en.wikipedia.org/wiki/Zero-point_energy">Zero-point energy</a> / <a href="https://en.wikipedia.org/wiki/Squeezed_coherent_state">Squeezed coherent state</a> / <a href="https://en.wikipedia.org/wiki/Kinetic_isotope_effect">Kinetic isotope effect</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
