@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：纠缠与非定域 · Day 21</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>纠缠与非定域</h1>
+<div class="meta">Day 21 · 2026 · Phase E 量子力学</div>
+<div class="tagline">爱因斯坦管它叫"鬼魅般的超距作用"，并据此断定量子力学不完备。三十年后有人把这场争论改写成一道可以真做的实验题——判决出来了，输的是更像常识的那一边。</div>
+</header>
+<div class="intro">
+1935 年，爱因斯坦、波多尔斯基、罗森提出一个两难：两个曾经相互作用的粒子飞散开来，测了这个就同时知道那个——要么远处发生了瞬时影响（荒唐），要么<b>粒子出门时就带着答案，只是量子力学没写出来</b>（那它就不完备）。这道选择题被当成哲学口水搁了近三十年，直到 1964 年贝尔发现：<b>第二个选项会留下可测的指纹</b>。指纹查了，对不上。世界不是"各自带着答案"的世界——但也没人能靠它打一通超光速电话，两件事得同时讲清楚。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>纠缠不是"一双手套" <span class="en">Not a Pair of Gloves</span></h2>
+<span class="pill">EPR 1935 · 玻姆自旋版 1951</span>
+<div class="field"><span class="lab">直觉</span>
+  把一双手套拆进两个盒子，一个寄到北京一个寄到里斯本。里斯本那位打开看见左手，<strong>瞬间</strong>知道北京那只是右手。没人觉得这里有超距作用：装箱时左右就定死了，飞过去的只是无知的消失。<strong>纠缠几乎总被这样讲给外行听，而这个讲法恰恰是实验否掉的那一个。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  两个电子可以处在这样一个态：
+  <div class="eq">|Ψ⁻⟩ = <span class="frac"><span class="fnum">1</span><span class="fden">√2</span></span> ( |↑⟩<sub>A</sub>|↓⟩<sub>B</sub> − |↓⟩<sub>A</sub>|↑⟩<sub>B</sub> )</div>
+<div class="gloss">竖线加尖括号 |…⟩ 读作"ket"，是量子态的记号；↑ ↓ 表示自旋朝上、朝下；下标 A、B 是两个粒子（Alice 和 Bob 各拿一个）。<span class="frac"><span class="fnum">1</span><span class="fden">√2</span></span> 让两种可能的概率加起来等于<strong>数字 1（一）</strong>；中间的减号是相位，不是"减去"。关键在于：这一整串<strong>没法拆成"A 的态 × B 的态"</strong>。拆不开，就叫纠缠。</div>
+  后果是：<strong>整体有确定的性质，部分没有</strong>。这个态的总自旋确定为<strong>数字 0（零）</strong>，可单独问 A 的自旋朝哪，答案是完全的随机。</div>
+<figure>
+<svg aria-label="纠缠源向两侧各发一个粒子，两台可转向的探测器分别测量" role="img" viewbox="0 0 640 330">
+<defs>
+<marker id="g1a" markerheight="9" markerunits="userSpaceOnUse" markerwidth="11" orient="auto" refx="10" refy="4.5"><path d="M0,0 L11,4.5 L0,9 Z" fill="#5b9bff"></path></marker>
+<marker id="g1b" markerheight="8" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="8" refy="4"><path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<rect fill="#0f1626" height="92" rx="9" stroke="#3d5a8f" stroke-width="1.6" width="98" x="52" y="44"></rect>
+<rect fill="#0f1626" height="92" rx="9" stroke="#3d5a8f" stroke-width="1.6" width="98" x="490" y="44"></rect>
+<circle cx="101" cy="90" fill="none" r="27" stroke="#2b3a5e" stroke-width="1.4"></circle>
+<circle cx="539" cy="90" fill="none" r="27" stroke="#2b3a5e" stroke-width="1.4"></circle>
+<line marker-end="url(#g1b)" stroke="#f0ad5a" stroke-width="2.2" x1="101" x2="101" y1="90" y2="66"></line>
+<line marker-end="url(#g1b)" stroke="#f0ad5a" stroke-width="2.2" x1="539" x2="551" y1="90" y2="69"></line>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="101" y="156">Alice · 方向 a</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="539" y="156">Bob · 方向 b</text>
+<circle cx="320" cy="90" fill="#0f1626" r="25" stroke="#5b9bff" stroke-width="2"></circle>
+<text fill="#8fb8ff" font-size="12.5" text-anchor="middle" x="320" y="95">源</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="320" y="140">总自旋 = 0</text>
+<line marker-end="url(#g1a)" stroke="#5b9bff" stroke-width="2" x1="292" x2="158" y1="90" y2="90"></line>
+<line marker-end="url(#g1a)" stroke="#5b9bff" stroke-width="2" x1="348" x2="482" y1="90" y2="90"></line>
+<text fill="#dbe2f2" font-size="13" text-anchor="middle" x="320" y="200">两边都转到同一个方向时，一连测很多对：</text>
+<text fill="#96a0ba" font-size="13" text-anchor="end" x="150" y="238">A</text>
+<text fill="#96a0ba" font-size="13" text-anchor="end" x="150" y="276">B</text>
+<text fill="#f0ad5a" font-size="20" text-anchor="middle" x="190" y="240">↑</text>
+<text fill="#5b9bff" font-size="20" text-anchor="middle" x="190" y="278">↓</text>
+<text fill="#f0ad5a" font-size="20" text-anchor="middle" x="248" y="240">↓</text>
+<text fill="#5b9bff" font-size="20" text-anchor="middle" x="248" y="278">↑</text>
+<text fill="#f0ad5a" font-size="20" text-anchor="middle" x="306" y="240">↓</text>
+<text fill="#5b9bff" font-size="20" text-anchor="middle" x="306" y="278">↑</text>
+<text fill="#f0ad5a" font-size="20" text-anchor="middle" x="364" y="240">↑</text>
+<text fill="#5b9bff" font-size="20" text-anchor="middle" x="364" y="278">↓</text>
+<text fill="#f0ad5a" font-size="20" text-anchor="middle" x="422" y="240">↓</text>
+<text fill="#5b9bff" font-size="20" text-anchor="middle" x="422" y="278">↑</text>
+<text fill="#f0ad5a" font-size="20" text-anchor="middle" x="480" y="240">↑</text>
+<text fill="#5b9bff" font-size="20" text-anchor="middle" x="480" y="278">↓</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="320" y="312">每一列都相反；可单读任何一行，↑↓ 各半、毫无规律</text>
+</g>
+</svg>
+<figcaption>关联是铁的，个体是随机的。全部争论就在一句话上：这份关联是不是出门时就装在口袋里了。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  手套的比喻错在把纠缠说成"两个各自确定的东西碰巧相关"。纠缠是<strong>关系里有信息，部分里没有</strong>：把 A 能测的量测遍也拼不回那个减号。<a href="wavefunction-superposition-day19.html">「波函数与叠加」</a>里"叠加不是既此又彼"的教训，在这里升级成"整体确定不等于部分确定"。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 机器学习 / 计算理论 / 还原论</span>
+<ul>
+<li><strong>机器学习</strong>：真实材料基态的纠缠只沿"边界"增长而不随体积暴涨（面积律），这条限制催生了<strong>张量网络</strong>——用多项式个参数装下指数大的量子态；同一套张量分解后来被搬去压缩神经网络的权重矩阵。</li>
+<li><strong>计算理论</strong>：有些两人不许通信的协作游戏，带纠缠出门的一对严格赢得更多——CHSH 游戏经典策略最高赢 75%，共享纠缠能赢到约 85.4%。纠缠是<strong>可计价的资源</strong>。</li>
+<li><strong>还原论</strong>：这是"描述完各部分 ≠ 描述完整体"最硬的实例。<a href="statistical-mechanics-day8.html">「统计力学」</a>的涌现还能说"原则上可还原"，纠缠态连原则上都不行。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：纠缠不是两个东西碰巧相关，而是它们压根不是"两个东西"。</div>
+<details class="q"><summary><b>思考：</b>把一只袜子寄到火星，我打开自己这只发现是左脚，就"瞬间"知道火星那只是右脚。这和纠缠差在哪？</summary><div class="qa">差在<strong>只问一个方向不够</strong>。袜子只有左右这一个属性，纠缠粒子却能沿任意方向测，而各方向的关联强度合起来，超出了任何"预装答案表"的范围。单看一个方向两者确实分不出来——争论卡三十年正因为此。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>贝尔把哲学变成了一道算术题 <span class="en">Bell's Theorem</span></h2>
+<span class="pill">Bell 1964 · CHSH 1969 · 2022 诺贝尔物理学奖</span>
+<div class="field"><span class="lab">直觉</span>
+  先做一个跟物理无关的推理。一群人，每人对三个是非题 <var>a</var>、<var>b</var>、<var>c</var> 都<strong>心里早有固定答案</strong>，只是你每人只能问一个。纯数数就能保证：<br>
+  「<var>a</var> 是、<var>b</var> 否」的人数 ≤ 「<var>a</var> 是、<var>c</var> 否」＋「<var>c</var> 是、<var>b</var> 否」。<br>
+  理由笨得可爱：任何"<var>a</var> 是、<var>b</var> 否"的人，他的 <var>c</var> 要么答否（被第一项收走）要么答是（被第二项收走），一个都跑不掉。这条不等式<strong>没用到任何物理</strong>，只用到"答案事先存在"。</div>
+<div class="field"><span class="lab">机制</span>
+  贝尔发现，把"答案事先存在"换成"粒子自带一张对所有测量方向的答卷"，再加上"Alice 转旋钮不影响 Bob 那边"，就能对实验数据写出同样性质的不等式。最常用的版本叫 CHSH：
+  <div class="eq">|<var>S</var>| = |<var>E</var>(a,b) − <var>E</var>(a,b′) + <var>E</var>(a′,b) + <var>E</var>(a′,b′)| ≤ <span class="zero">2</span></div>
+<div class="gloss"><var>E</var>(a,b) 是"Alice 沿方向 a、Bob 沿方向 b"时两边结果的<strong>关联度</strong>：+1 永远相同，−1 永远相反，<strong>数字 0（零）</strong>毫无关联。a′ 读作"a-prime"，是 Alice 可选的<strong>另一个</strong>方向。右边这个 2 是<strong>局域实在论</strong>——"自带答卷 + 互不影响"——能给出的天花板。</div>
+  量子力学给纠缠对算出的关联度是 <var>E</var> = −cos θ（θ 是两台探测器方向的夹角）。代进去，45° 附近 <var>S</var> 冲到 2√2 ≈ <strong>2.828</strong>，顶穿天花板。2√2 也不能再涨——那是量子力学自己的上限，叫 Tsirelson 界。</div>
+<figure>
+<svg aria-label="CHSH 关联量随探测器夹角变化，量子曲线越过局域实在论上限 2" role="img" viewbox="0 0 570 340">
+<defs>
+<marker id="g2a" markerheight="9" markerunits="userSpaceOnUse" markerwidth="11" orient="auto" refx="10" refy="4.5"><path d="M0,0 L11,4.5 L0,9 Z" fill="#56607e"></path></marker>
+</defs>
+<path d="M80.0,120.0 L80.0,120.0 L87.3,119.8 L94.7,119.3 L102.0,118.5 L109.3,117.4 L116.7,116.0 L124.0,114.2 L131.3,112.2 L138.7,110.0 L146.0,107.5 L153.3,104.7 L160.7,101.8 L168.0,98.8 L175.3,95.6 L182.7,92.3 L190.0,88.9 L197.3,85.5 L204.7,82.1 L212.0,78.7 L219.3,75.4 L226.7,72.2 L234.0,69.1 L241.3,66.2 L248.7,63.5 L256.0,61.1 L263.3,59.0 L270.7,57.2 L278.0,55.7 L285.3,54.6 L292.7,54.0 L300.0,53.7 L307.3,54.0 L314.7,54.7 L322.0,55.9 L329.3,57.7 L336.7,60.0 L344.0,62.8 L351.3,66.3 L358.7,70.3 L366.0,74.8 L373.3,80.0 L380.7,85.7 L388.0,92.0 L395.3,98.9 L402.7,106.3 L410.0,114.2 L415.0,120.0 Z" fill="rgba(240,173,90,.16)"></path>
+<path d="M80.0,120.0 L87.3,119.8 L94.7,119.3 L102.0,118.5 L109.3,117.4 L116.7,116.0 L124.0,114.2 L131.3,112.2 L138.7,110.0 L146.0,107.5 L153.3,104.7 L160.7,101.8 L168.0,98.8 L175.3,95.6 L182.7,92.3 L190.0,88.9 L197.3,85.5 L204.7,82.1 L212.0,78.7 L219.3,75.4 L226.7,72.2 L234.0,69.1 L241.3,66.2 L248.7,63.5 L256.0,61.1 L263.3,59.0 L270.7,57.2 L278.0,55.7 L285.3,54.6 L292.7,54.0 L300.0,53.7 L307.3,54.0 L314.7,54.7 L322.0,55.9 L329.3,57.7 L336.7,60.0 L344.0,62.8 L351.3,66.3 L358.7,70.3 L366.0,74.8 L373.3,80.0 L380.7,85.7 L388.0,92.0 L395.3,98.9 L402.7,106.3 L410.0,114.2 L417.3,122.7 L424.7,131.7 L432.0,141.1 L439.3,151.0 L446.7,161.3 L454.0,172.0 L461.3,183.1 L468.7,194.5 L476.0,206.1 L483.3,218.1 L490.7,230.2 L498.0,242.5 L505.3,254.9 L512.7,267.4 L520.0,280.0" fill="none" stroke="#5b9bff" stroke-width="2.6"></path>
+<line stroke="#c45858" stroke-dasharray="7 5" stroke-width="2" x1="80" x2="530" y1="120" y2="120"></line>
+<line stroke="#6a5326" stroke-dasharray="4 4" stroke-width="1.6" x1="80" x2="530" y1="53.7" y2="53.7"></line>
+<circle cx="300" cy="53.7" fill="#f0ad5a" r="4.5"></circle>
+<line marker-end="url(#g2a)" stroke="#56607e" stroke-width="1.6" x1="80" x2="546" y1="280" y2="280"></line>
+<line marker-end="url(#g2a)" stroke="#56607e" stroke-width="1.6" x1="80" x2="80" y1="280" y2="32"></line>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.4" x1="80" x2="75" y1="120" y2="120"></line>
+<line stroke="#56607e" stroke-width="1.4" x1="80" x2="75" y1="53.7" y2="53.7"></line>
+<line stroke="#56607e" stroke-width="1.4" x1="80" x2="75" y1="280" y2="280"></line>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="70" y="124">2</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="70" y="58">2.83</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="70" y="284">0</text>
+<line stroke="#56607e" stroke-width="1.4" x1="226.7" x2="226.7" y1="280" y2="285"></line>
+<line stroke="#56607e" stroke-width="1.4" x1="300" x2="300" y1="280" y2="285"></line>
+<line stroke="#56607e" stroke-width="1.4" x1="373.3" x2="373.3" y1="280" y2="285"></line>
+<line stroke="#56607e" stroke-width="1.4" x1="520" x2="520" y1="280" y2="285"></line>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="80" y="300">0°</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="226.7" y="300">30°</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="300" y="300">45°</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="373.3" y="300">60°</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="520" y="300">90°</text>
+<text fill="#8fb8ff" x="316" y="46">量子预言的最高点 2√2</text>
+<text fill="#d98a8a" font-size="12.5" x="86" y="139">局域实在论的天花板 S = 2</text>
+<text fill="#f0ad5a" font-size="12.5" x="150" y="172">↑ 橙色那块 = 任何"自带答卷"的</text>
+<text fill="#f0ad5a" font-size="12.5" x="163" y="191">世界都到不了的地方</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="305" y="324">两台探测器方向的夹角 θ  →</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" transform="rotate(-90 32 160)" x="32" y="160">关联量 S  →</text>
+</g>
+</svg>
+<figcaption>横轴转旋钮，纵轴是四组关联算出的 S。红虚线是局域实在论翻不过去的墙，蓝线是量子力学的预言——实验数据落在蓝线上。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  贝尔实验测的<strong>不是"量子力学对不对"</strong>，而是"局域实在论对不对"。哪怕量子力学将来被更好的理论取代，只要新理论满足①信号不超光速②粒子自带答案，照样过不了这道墙。真做起来还有<strong>漏洞</strong>要堵：1972 年 Freedman 与 Clauser 首次测到违反，1982 年 Aspect 让旋钮在粒子飞行途中切换，<strong>2015 年代尔夫特、维也纳、NIST 三组各自完成了无漏洞版本</strong>。2022 年的诺贝尔物理学奖发给了 Clauser、Aspect、Zeilinger。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 因果推断 / 随机数工程</span>
+<ul>
+<li><strong>因果推断</strong>：赖欣巴哈的共同原因原则说，两件事若相关，要么一个导致另一个，要么背后有共同原因。贝尔违反意味着这份关联<strong>装不进任何一张因果图</strong>——统计学家画箭头的语言在这里撞了墙，也因此长出"量子因果模型"这一支。</li>
+<li><strong>随机数工程</strong>：违反贝尔不等式是一张<strong>无法伪造的收据</strong>——不必信任设备里装了什么，只看统计就能认证"这串比特没人预先知道"。美国 NIST 自 2018 年起用它驱动公开随机信标。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：贝尔的贡献不是发现纠缠很怪，而是把"怪不怪"变成了可以拿数据判决的算术。</div>
+<details class="q"><summary><b>思考：</b>为什么局域实在论的天花板正好是 2，而量子只能到 2√2、不能更高？</summary><div class="qa">2 来自纯逻辑：四个关联度都在 ±1 之间，若结果事先注定，代数上必有一项与其余抵消。2√2 是量子态数学结构给出的硬上限。有趣的是，"不能超光速传信"<strong>并不</strong>把 S 限制到 2√2，理论上可以写出 S = 4 的假想盒子——量子力学为什么恰好严到 2√2，至今没有公认答案。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>为什么不能拿它打电话 <span class="en">No-Signalling</span></h2>
+<span class="pill">无信号定理 · 量子隐形传态 1993</span>
+<div class="field"><span class="lab">直觉</span>
+  Alice 一测，Bob 那边"立刻"就定了，这不就是超光速电话吗？卡点在于：<strong>Alice 唯一能做的动作是"测"，而她控制不了测出什么</strong>。她想发个 1，老天给她的却是随机的 ↑ 或 ↓。她能选的只有旋钮方向，而旋钮方向恰恰是 Bob 看不见的东西。</div>
+<div class="field"><span class="lab">机制</span>
+  Bob 单独统计自己那一堆结果，得到的概率是：
+  <div class="eq"><var>P</var>(B=↑) = <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> × <span class="zero">0</span> + <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> × 1 = <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span></div>
+<div class="gloss">读法：Alice 有一半机会测到 ↑（这时 Bob 沿同方向测到 ↑ 的概率是<strong>数字 0（零）</strong>，两边永远相反），另一半机会测到 ↓（这时 Bob 测到 ↑ 的概率是 1）。加起来永远是二分之一。Alice 把旋钮转到任何角度、甚至干脆不测，这个数<strong>纹丝不动</strong>。</div>
+  关联是真的，但<strong>只在两份记录被拿到一起对照时才现形</strong>——而送记录得走普通信道，受光速管着。</div>
+<figure>
+<svg aria-label="无论 Alice 做什么，Bob 那边的结果分布始终是各占一半" role="img" viewbox="0 0 620 268">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<text fill="#dbe2f2" font-size="13.5" x="30" y="66">Bob 自己那一堆数据的分布：</text>
+<line stroke="#6a5326" stroke-dasharray="5 5" stroke-width="1.4" x1="60" x2="560" y1="110" y2="110"></line>
+<text fill="#f0ad5a" font-size="12" x="566" y="114">50%</text>
+<rect fill="rgba(240,173,90,.55)" height="90" width="34" x="100" y="110"></rect>
+<rect fill="rgba(91,155,255,.55)" height="90" width="34" x="146" y="110"></rect>
+<rect fill="rgba(240,173,90,.55)" height="90" width="34" x="270" y="110"></rect>
+<rect fill="rgba(91,155,255,.55)" height="90" width="34" x="316" y="110"></rect>
+<rect fill="rgba(240,173,90,.55)" height="90" width="34" x="440" y="110"></rect>
+<rect fill="rgba(91,155,255,.55)" height="90" width="34" x="486" y="110"></rect>
+<line stroke="#56607e" stroke-width="1.6" x1="60" x2="560" y1="200" y2="200"></line>
+<text fill="#f0ad5a" font-size="17" text-anchor="middle" x="117" y="222">↑</text>
+<text fill="#5b9bff" font-size="17" text-anchor="middle" x="163" y="222">↓</text>
+<text fill="#f0ad5a" font-size="17" text-anchor="middle" x="287" y="222">↑</text>
+<text fill="#5b9bff" font-size="17" text-anchor="middle" x="333" y="222">↓</text>
+<text fill="#f0ad5a" font-size="17" text-anchor="middle" x="457" y="222">↑</text>
+<text fill="#5b9bff" font-size="17" text-anchor="middle" x="503" y="222">↓</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="140" y="248">Alice 测方向 a</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="310" y="248">Alice 测方向 b</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="480" y="248">Alice 干脆不测</text>
+</g>
+</svg>
+<figcaption>三张图一模一样。Bob 盯着自己的数据看到天荒地老，也读不出 Alice 做了什么——这就是无信号定理。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  所以纠缠<strong>既不能传信，也没推翻相对论</strong>。量子隐形传态不是例外：它能把未知量子态"搬"到远方，但 Alice 必须把 2 个经典比特<strong>用普通信道</strong>发过去，Bob 才知道做哪一步修正；那 2 个比特不到，他手里就是一团噪声。市面上的"量子纠缠通信仪"没有一件是真的。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 通信工程 / 理论边界 / 辨伪</span>
+<ul>
+<li><strong>通信工程</strong>：中国的量子科学实验卫星把纠缠光子对分发到相距约 1200 公里的两个地面站——但每次都伴随一条老实的经典无线电链路，那条链路才是速率瓶颈。</li>
+<li><strong>理论边界</strong>：无信号性比量子力学"弱"。可以写出关联更强却仍不能传信的假想装置（Popescu–Rohrlich 盒），说明"相对论不被违反"不足以推出量子力学。</li>
+<li><strong>辨伪</strong>：凡宣称"纠缠可即时传信"的产品，不必看技术细节就能否掉——定理约束的是<strong>任何</strong>用纠缠做的操作。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：纠缠让远方的两份记录高度相关，但没给任何人一支能往对面写字的笔。</div>
+<details class="q"><summary><b>思考：</b>Alice 通过"选择测哪个方向"来编码信息，行不行？</summary><div class="qa">不行。方向的选择只影响<strong>条件</strong>概率（Bob 的结果在 Alice 结果<em>已知</em>时的分布），不影响 Bob 单独看到的分布。要用上条件概率，Bob 得先拿到 Alice 的结果——那已经是经典信道了。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>判决之后，我们究竟丢了什么 <span class="en">What Had to Go</span></h2>
+<span class="pill">单配性 · 器件无关密码学</span>
+<div class="field"><span class="lab">直觉</span>
+  实验没告诉我们"世界是怎样的"，只告诉我们<strong>三条假设不能同时留着</strong>：①<strong>局域性</strong>②<strong>实在性</strong>（测之前就有值）③<strong>测量独立性</strong>（实验员选方向与粒子无关）。放弃哪一条，就是各家诠释分道扬镳的路口，「测量问题与诠释」那期会走一遍。这里只强调常被跨得太快的一步：贝尔<strong>没有</strong>选中任何一家。</div>
+<div class="field"><span class="lab">机制</span>
+  丢掉的东西之外，还落下一条硬约束：<strong>纠缠是单配的</strong>。A 与 B 若达到最大纠缠，A 与任何第三方 C 的纠缠<strong>必然为数字 0（零）</strong>——不像经典关联能随便复制给无数人：
+  <div class="eq"><var>C</var>²<sub>AB</sub> + <var>C</var>²<sub>AC</sub> ≤ <var>C</var>²<sub>A(BC)</sub></div>
+<div class="gloss"><var>C</var> 是一种叫"concurrence"的纠缠度量，从 0（毫无纠缠）到 1（最大纠缠）；下标 AB 指 A 与 B 之间，A(BC) 指 A 与"B 加 C 合起来"之间。这条 2000 年由 Coffman、Kundu、Wootters 证明的不等式说的是：<strong>纠缠分给谁，就少给别人多少。</strong></div></div>
+<div class="field"><span class="lab">为什么重要</span>
+  单配性把一条哲学结论变成了安全保证。1991 年 Ekert 提出的量子密钥分发方案里，双方拿一部分纠缠对去测贝尔不等式：<strong>只要看到足够强的违反，就等于证明了没有第三方与他们纠缠</strong>。这叫"器件无关"安全性——不必信任设备是谁造的、有没有后门。<a href="information-physics-day9.html">「信息的物理」</a>那种"信息受物理约束"的思路在这里最锋利：<strong>保密不再靠对手算力不够，而靠世界本身的结构。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 网络工程 / 黑洞物理</span>
+<ul>
+<li><strong>网络工程</strong>：量子态不可克隆，造不出经典意义的"信号放大中继"；量子网络只能靠<strong>纠缠交换</strong>接力——把 A–B 与 B–C 两段在中间点"焊接"成 A–C。这是量子互联网的技术核心，也是它进展缓慢的原因。</li>
+<li><strong>黑洞物理</strong>：单配性是"黑洞火墙"争论（2012 年 Almheiri 等）的核心武器——一颗晚期霍金辐射光子不可能同时与黑洞内部和早期辐射都最大纠缠，可两者又都是别的原理要求的。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：世界不是"各自带着答案"的世界，而这份亏空恰好被兑换成了别处买不到的安全性。</div>
+<details class="q"><summary><b>思考：</b>既然放弃"局域性"是一个选项，那量子力学到底算不算"超距作用"？</summary><div class="qa">谨慎的说法是：量子关联<strong>不能用局域的共同原因解释</strong>，但也<strong>没有可用的超距影响</strong>——没有任何物理量被送过去。很多物理学家因此宁可放弃"测量前就有值"。叫"非定域性"是历史习惯，别读成"有东西超光速跑了"。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>"漏洞"到底是什么？为什么要等到 2015 年才算数？</summary>
+<div class="body">三个。<strong>局域性漏洞</strong>：探测器若离得不够远、旋钮转得不够晚，一个以光速传播的影响就来得及通风报信；解法是拉开几百米以上，并在粒子飞行途中才随机定方向。<strong>探测效率漏洞</strong>：早期实验只收到一小部分粒子，"收到的恰好不代表全体"排除不掉；解法是把效率提到七成以上。2015 年那三组同时堵住了这两个。<strong>自由选择漏洞</strong>原则上关不死，只能推远：2018 年的"宇宙贝尔实验"用几十亿年前的类星体光子决定旋钮方向。</div></details>
+<details><summary>违反贝尔不等式，是不是证明了多世界诠释、或者证明了"意识参与"？</summary>
+<div class="body">都不是。贝尔定理否掉的是一个<strong>合取</strong>。各家诠释砍掉不同的一条——玻姆理论保住"粒子始终有确定位置"，代价是明目张胆的非局域；多世界主张每个结果都发生，不存在"单一结果"要去关联；哥本哈根式读法放弃"测量前有值"。三者都还活着，实验没帮我们选。至于意识：贝尔实验里的"观察者"是探测器和自动记录仪，随机数发生器也是电路，全程可以没有人在场——<strong>没有任何环节需要意识。</strong></div></details>
+<details><summary>纠缠会不会被"用光"？它到底像什么样的资源？</summary>
+<div class="body">会。纠缠可量化：一对最大纠缠的粒子记作 1 个"ebit"。关键定理是：只靠各自的局域操作加打电话，纠缠<strong>只能减少不能凭空增加</strong>——这正是它能当资源计价的原因，像热力学里的自由能。用掉就得重新分发，而分发靠光纤或卫星，一路还被损耗吃掉。量子网络的苦恼全在这里：它不是在传数据，而是在<strong>补货</strong>。</div></details>
+<details><summary>纠缠明明脆弱得一碰就散，为什么又说自然界里到处都是？</summary>
+<div class="body">因为它极容易<strong>泄漏给环境</strong>。粒子和空气分子随便撞一下就与环境纠缠上了，单配性接着生效：与环境纠缠得越深，与你关心的伙伴就纠缠得越浅，实验上表现为干涉消失。这个<strong>退相干</strong>过程正是宏观世界看起来经典的原因——不是纠缠不存在，而是迅速摊薄到无数环境自由度里再也收不回来。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Einstein、Podolsky、Rosen，<em>Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?</em>，Phys. Rev. 47, 777 (1935)——<a href="https://doi.org/10.1103/PhysRev.47.777">争论的起点</a></li>
+<li>Bell，<em>On the Einstein Podolsky Rosen Paradox</em>，Physics 1, 195 (1964)——<a href="https://cds.cern.ch/record/111654">CERN 存档全文</a>，六页纸，不用超过高中代数</li>
+<li>Clauser、Horne、Shimony、Holt，Phys. Rev. Lett. 23, 880 (1969)——<a href="https://doi.org/10.1103/PhysRevLett.23.880">CHSH 不等式</a>，把贝尔的想法改写成可做的实验</li>
+<li>Aspect、Dalibard、Roger，Phys. Rev. Lett. 49, 1804 (1982)——<a href="https://doi.org/10.1103/PhysRevLett.49.1804">飞行途中切换分析器方向</a></li>
+<li>Hensen 等，Nature 526, 682 (2015)——<a href="https://arxiv.org/abs/1508.05949">代尔夫特无漏洞实验</a>；Giustina 等 <a href="https://arxiv.org/abs/1511.03190">PRL 115, 250401</a> 与 Shalm 等 <a href="https://arxiv.org/abs/1511.03189">PRL 115, 250402</a>，三篇同年</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2022/summary/">2022 年诺贝尔物理学奖</a>（Clauser、Aspect、Zeilinger）——官方科学背景文件是一份极好的综述</li>
+<li>Ekert，<em>Quantum Cryptography Based on Bell's Theorem</em>，Phys. Rev. Lett. 67, 661 (1991)——<a href="https://doi.org/10.1103/PhysRevLett.67.661">把不等式变成密钥</a></li>
+<li>Yin 等，<em>Satellite-based entanglement distribution over 1200 kilometres</em>，Science 356, 1140 (2017)——<a href="https://www.science.org/doi/10.1126/science.aan3211">卫星分发纠缠</a></li>
+<li>Bell，<em>Speakable and Unspeakable in Quantum Mechanics</em>（剑桥大学出版社）——他本人的文集，比任何转述都清楚</li>
+<li><a href="https://plato.stanford.edu/entries/bell-theorem/">Stanford Encyclopedia of Philosophy: Bell's Theorem</a>——对"到底放弃了哪一条"最细致的梳理</li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_entanglement">Wikipedia: Quantum entanglement</a> / <a href="https://en.wikipedia.org/wiki/CHSH_inequality">CHSH inequality</a> / <a href="https://en.wikipedia.org/wiki/Monogamy_of_entanglement">Monogamy of entanglement</a> / <a href="https://en.wikipedia.org/wiki/No-communication_theorem">No-communication theorem</a></li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

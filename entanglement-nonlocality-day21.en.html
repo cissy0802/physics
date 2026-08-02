@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Entanglement &amp; Nonlocality · Day 21</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .field a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .field a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Entanglement &amp; Nonlocality</h1>
+<div class="meta">Day 21 · 2026 · Phase E Quantum Mechanics</div>
+<div class="tagline">Einstein called it "spooky action at a distance" and concluded that quantum mechanics must be incomplete. Thirty years later someone turned the argument into an experiment you can actually run — and the verdict went against the side that looked like common sense.</div>
+</header>
+<div class="intro">
+In 1935 Einstein, Podolsky and Rosen posed a dilemma. Two particles that once interacted fly apart; measure this one and you instantly know that one — so either something influenced the far particle instantaneously (absurd), or <b>the particles left home carrying their answers and quantum mechanics simply failed to write them down</b> (in which case it is incomplete). The choice was filed away as philosophy for nearly thirty years, until Bell noticed in 1964 that <b>the second option leaves a measurable fingerprint</b>. The fingerprint was checked. It does not match. Ours is not a world where each particle carries its own answers — and yet nobody can use that fact to place a faster-than-light phone call. Both halves have to be said together.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Entanglement Is Not a Pair of Gloves <span class="en">Not Pre-Packed Answers</span></h2>
+<span class="pill">EPR 1935 · Bohm's spin version 1951</span>
+<div class="field"><span class="lab">Intuition</span>
+  Split a pair of gloves into two boxes, ship one to Beijing and one to Lisbon. Whoever opens the Lisbon box sees a left glove and <strong>instantly</strong> knows the Beijing one is right-handed. Nobody smells action at a distance here: the handedness was fixed at packing time, and all that travelled was the end of someone's ignorance. <strong>This is almost always how entanglement gets explained to outsiders, and it is exactly the explanation experiment has ruled out.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  Two electrons can sit in this state:
+  <div class="eq">|Ψ⁻⟩ = <span class="frac"><span class="fnum">1</span><span class="fden">√2</span></span> ( |↑⟩<sub>A</sub>|↓⟩<sub>B</sub> − |↓⟩<sub>A</sub>|↑⟩<sub>B</sub> )</div>
+<div class="gloss">The bar-and-bracket |…⟩ is read "ket" and denotes a quantum state; ↑ ↓ mean spin up and spin down; the subscripts A and B are the two particles (one each for Alice and Bob). The <span class="frac"><span class="fnum">1</span><span class="fden">√2</span></span> makes the two possibilities' probabilities add to <strong>the number 1 (one)</strong>; the minus sign in the middle is a relative phase, not a subtraction. The point is that this whole expression <strong>cannot be split into "a state for A × a state for B"</strong>. Not splittable is what entangled means.</div>
+  The consequence: <strong>the whole has a definite property and the parts do not</strong>. The total spin of this state is definitely <strong>the number 0 (zero)</strong>, yet ask which way A's spin points and the answer is completely random.</div>
+<figure>
+<svg viewBox="0 0 640 330" role="img" aria-label="A source emits one particle each way to two rotatable detectors">
+<defs>
+<marker id="g1a" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L11,4.5 L0,9 Z" fill="#5b9bff"></path></marker>
+<marker id="g1b" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13.5">
+<rect x="52" y="44" width="98" height="92" rx="9" fill="#0f1626" stroke="#3d5a8f" stroke-width="1.6"></rect>
+<rect x="490" y="44" width="98" height="92" rx="9" fill="#0f1626" stroke="#3d5a8f" stroke-width="1.6"></rect>
+<circle cx="101" cy="90" r="27" fill="none" stroke="#2b3a5e" stroke-width="1.4"></circle>
+<circle cx="539" cy="90" r="27" fill="none" stroke="#2b3a5e" stroke-width="1.4"></circle>
+<line x1="101" y1="90" x2="101" y2="66" stroke="#f0ad5a" stroke-width="2.2" marker-end="url(#g1b)"></line>
+<line x1="539" y1="90" x2="551" y2="69" stroke="#f0ad5a" stroke-width="2.2" marker-end="url(#g1b)"></line>
+<text x="101" y="156" fill="#96a0ba" font-size="12.5" text-anchor="middle">Alice · setting a</text>
+<text x="539" y="156" fill="#96a0ba" font-size="12.5" text-anchor="middle">Bob · setting b</text>
+<circle cx="320" cy="90" r="25" fill="#0f1626" stroke="#5b9bff" stroke-width="2"></circle>
+<text x="320" y="95" fill="#8fb8ff" font-size="12" text-anchor="middle">source</text>
+<text x="320" y="140" fill="#96a0ba" font-size="12.5" text-anchor="middle">total spin = 0</text>
+<line x1="292" y1="90" x2="158" y2="90" stroke="#5b9bff" stroke-width="2" marker-end="url(#g1a)"></line>
+<line x1="348" y1="90" x2="482" y2="90" stroke="#5b9bff" stroke-width="2" marker-end="url(#g1a)"></line>
+<text x="320" y="200" fill="#dbe2f2" font-size="13" text-anchor="middle">Both dials on the same axis, many pairs in a row:</text>
+<text x="150" y="238" fill="#96a0ba" font-size="13" text-anchor="end">A</text>
+<text x="150" y="276" fill="#96a0ba" font-size="13" text-anchor="end">B</text>
+<text x="190" y="240" fill="#f0ad5a" font-size="20" text-anchor="middle">↑</text>
+<text x="190" y="278" fill="#5b9bff" font-size="20" text-anchor="middle">↓</text>
+<text x="248" y="240" fill="#f0ad5a" font-size="20" text-anchor="middle">↓</text>
+<text x="248" y="278" fill="#5b9bff" font-size="20" text-anchor="middle">↑</text>
+<text x="306" y="240" fill="#f0ad5a" font-size="20" text-anchor="middle">↓</text>
+<text x="306" y="278" fill="#5b9bff" font-size="20" text-anchor="middle">↑</text>
+<text x="364" y="240" fill="#f0ad5a" font-size="20" text-anchor="middle">↑</text>
+<text x="364" y="278" fill="#5b9bff" font-size="20" text-anchor="middle">↓</text>
+<text x="422" y="240" fill="#f0ad5a" font-size="20" text-anchor="middle">↓</text>
+<text x="422" y="278" fill="#5b9bff" font-size="20" text-anchor="middle">↑</text>
+<text x="480" y="240" fill="#f0ad5a" font-size="20" text-anchor="middle">↑</text>
+<text x="480" y="278" fill="#5b9bff" font-size="20" text-anchor="middle">↓</text>
+<text x="320" y="312" fill="#96a0ba" font-size="12.5" text-anchor="middle">every column opposite — yet either row alone is 50/50 noise</text>
+</g>
+</svg>
+<figcaption>The correlation is iron; the individual outcomes are random. The whole dispute is one sentence: was that correlation already in their pockets when they left?</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The glove analogy fails by describing entanglement as "two individually definite things that happen to match." Entanglement means <strong>the information lives in the relation, not in the parts</strong>: measure everything measurable about A and you still cannot reconstruct that minus sign. The lesson from <a href="wavefunction-superposition-day19.en.html">"Wavefunction &amp; Superposition"</a> — that superposition is not "both at once" — is upgraded here into "definiteness of the whole is not definiteness of the parts."</div>
+<div class="field xref"><span class="lab">Cross-reading · machine learning / computation / reductionism</span>
+<ul>
+<li><strong>Machine learning</strong>: entanglement in the ground states of real materials grows with the <em>boundary</em> rather than the volume (an area law), and that restriction is what made <strong>tensor networks</strong> possible — packing an exponentially large quantum state into polynomially many parameters. The same tensor decompositions were later borrowed to compress neural-network weight matrices.</li>
+<li><strong>Computation</strong>: in certain cooperative games where two players cannot communicate, a pair who left home sharing entanglement strictly wins more often — classical strategies top out at 75% in the CHSH game, shared entanglement reaches about 85.4%. Entanglement is <strong>a resource with a price</strong>.</li>
+<li><strong>Reductionism</strong>: this is the hardest physical instance of "a complete description of the parts ≠ a complete description of the whole." Emergence in <a href="statistical-mechanics-day8.en.html">"Statistical Mechanics"</a> can still claim to be reducible in principle; an entangled state cannot even do that.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: entanglement is not two things that happen to match — it is two things that were never quite two.</div>
+<details class="q"><summary><b>Think:</b> I ship one sock to Mars, open mine, find the left one, and "instantly" know Mars has the right one. How is entanglement different?</summary><div class="qa">The difference is that <strong>one axis of questioning is not enough</strong>. A sock has one property, left or right; an entangled particle can be measured along any direction, and the correlation strengths across all those directions add up to more than any pre-packed answer sheet can deliver. Along a single axis the two really are indistinguishable — which is why the argument stalled for thirty years.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Bell Turned Philosophy Into Arithmetic <span class="en">Bell's Theorem</span></h2>
+<span class="pill">Bell 1964 · CHSH 1969 · 2022 Nobel Prize in Physics</span>
+<div class="field"><span class="lab">Intuition</span>
+  Start with a piece of reasoning that has nothing to do with physics. Take a crowd in which everyone already holds a fixed yes/no answer to three questions <var>a</var>, <var>b</var>, <var>c</var>, and you are allowed to ask each person only one. Plain counting guarantees:<br>
+  the number of "<var>a</var> yes, <var>b</var> no" people ≤ "<var>a</var> yes, <var>c</var> no" + "<var>c</var> yes, <var>b</var> no".<br>
+  The reason is charmingly dumb: anyone who is "<var>a</var> yes, <var>b</var> no" answers <var>c</var> either no (swept up by the first term) or yes (swept up by the second). Nobody escapes. This inequality <strong>uses no physics at all</strong> — only the assumption that the answers exist beforehand.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Bell saw that replacing "the answers exist beforehand" with "each particle carries an answer sheet covering every measurement direction," plus "Alice turning her dial does not affect Bob's side," yields an inequality of the same kind for real data. The version experiments use is CHSH:
+  <div class="eq">|<var>S</var>| = |<var>E</var>(a,b) − <var>E</var>(a,b′) + <var>E</var>(a′,b) + <var>E</var>(a′,b′)| ≤ <span class="zero">2</span></div>
+<div class="gloss"><var>E</var>(a,b) is the <strong>correlation</strong> between the two outcomes when Alice measures along a and Bob along b: +1 means always equal, −1 always opposite, <strong>the number 0 (zero)</strong> means no correlation at all. a′ is read "a-prime" and is simply <strong>another</strong> setting Alice can choose. The 2 on the right is the ceiling available to <strong>local realism</strong> — "answers packed in advance, no influence across the gap."</div>
+  Quantum mechanics predicts <var>E</var> = −cos θ for an entangled pair, where θ is the angle between the two detector settings. Plug that in and near 45° <var>S</var> climbs to 2√2 ≈ <strong>2.828</strong>, straight through the ceiling. Nor can 2√2 be pushed higher: it is quantum mechanics' own limit, the Tsirelson bound.</div>
+<figure>
+<svg viewBox="0 0 570 340" role="img" aria-label="The CHSH quantity versus detector angle, crossing above the local-realist bound of 2">
+<defs>
+<marker id="g2a" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L11,4.5 L0,9 Z" fill="#56607e"></path></marker>
+</defs>
+<path d="M80.0,120.0 L80.0,120.0 L87.3,119.8 L94.7,119.3 L102.0,118.5 L109.3,117.4 L116.7,116.0 L124.0,114.2 L131.3,112.2 L138.7,110.0 L146.0,107.5 L153.3,104.7 L160.7,101.8 L168.0,98.8 L175.3,95.6 L182.7,92.3 L190.0,88.9 L197.3,85.5 L204.7,82.1 L212.0,78.7 L219.3,75.4 L226.7,72.2 L234.0,69.1 L241.3,66.2 L248.7,63.5 L256.0,61.1 L263.3,59.0 L270.7,57.2 L278.0,55.7 L285.3,54.6 L292.7,54.0 L300.0,53.7 L307.3,54.0 L314.7,54.7 L322.0,55.9 L329.3,57.7 L336.7,60.0 L344.0,62.8 L351.3,66.3 L358.7,70.3 L366.0,74.8 L373.3,80.0 L380.7,85.7 L388.0,92.0 L395.3,98.9 L402.7,106.3 L410.0,114.2 L415.0,120.0 Z" fill="rgba(240,173,90,.16)"></path>
+<path d="M80.0,120.0 L87.3,119.8 L94.7,119.3 L102.0,118.5 L109.3,117.4 L116.7,116.0 L124.0,114.2 L131.3,112.2 L138.7,110.0 L146.0,107.5 L153.3,104.7 L160.7,101.8 L168.0,98.8 L175.3,95.6 L182.7,92.3 L190.0,88.9 L197.3,85.5 L204.7,82.1 L212.0,78.7 L219.3,75.4 L226.7,72.2 L234.0,69.1 L241.3,66.2 L248.7,63.5 L256.0,61.1 L263.3,59.0 L270.7,57.2 L278.0,55.7 L285.3,54.6 L292.7,54.0 L300.0,53.7 L307.3,54.0 L314.7,54.7 L322.0,55.9 L329.3,57.7 L336.7,60.0 L344.0,62.8 L351.3,66.3 L358.7,70.3 L366.0,74.8 L373.3,80.0 L380.7,85.7 L388.0,92.0 L395.3,98.9 L402.7,106.3 L410.0,114.2 L417.3,122.7 L424.7,131.7 L432.0,141.1 L439.3,151.0 L446.7,161.3 L454.0,172.0 L461.3,183.1 L468.7,194.5 L476.0,206.1 L483.3,218.1 L490.7,230.2 L498.0,242.5 L505.3,254.9 L512.7,267.4 L520.0,280.0" fill="none" stroke="#5b9bff" stroke-width="2.6"></path>
+<line x1="80" y1="120" x2="530" y2="120" stroke="#c45858" stroke-width="2" stroke-dasharray="7 5"></line>
+<line x1="80" y1="53.7" x2="530" y2="53.7" stroke="#6a5326" stroke-width="1.6" stroke-dasharray="4 4"></line>
+<circle cx="300" cy="53.7" r="4.5" fill="#f0ad5a"></circle>
+<line x1="80" y1="280" x2="546" y2="280" stroke="#56607e" stroke-width="1.6" marker-end="url(#g2a)"></line>
+<line x1="80" y1="280" x2="80" y2="32" stroke="#56607e" stroke-width="1.6" marker-end="url(#g2a)"></line>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<line x1="80" y1="120" x2="75" y2="120" stroke="#56607e" stroke-width="1.4"></line>
+<line x1="80" y1="53.7" x2="75" y2="53.7" stroke="#56607e" stroke-width="1.4"></line>
+<line x1="80" y1="280" x2="75" y2="280" stroke="#56607e" stroke-width="1.4"></line>
+<text x="70" y="124" fill="#96a0ba" font-size="12" text-anchor="end">2</text>
+<text x="70" y="58" fill="#96a0ba" font-size="12" text-anchor="end">2.83</text>
+<text x="70" y="284" fill="#96a0ba" font-size="12" text-anchor="end">0</text>
+<line x1="226.7" y1="280" x2="226.7" y2="285" stroke="#56607e" stroke-width="1.4"></line>
+<line x1="300" y1="280" x2="300" y2="285" stroke="#56607e" stroke-width="1.4"></line>
+<line x1="373.3" y1="280" x2="373.3" y2="285" stroke="#56607e" stroke-width="1.4"></line>
+<line x1="520" y1="280" x2="520" y2="285" stroke="#56607e" stroke-width="1.4"></line>
+<text x="80" y="300" fill="#96a0ba" font-size="12" text-anchor="middle">0°</text>
+<text x="226.7" y="300" fill="#96a0ba" font-size="12" text-anchor="middle">30°</text>
+<text x="300" y="300" fill="#96a0ba" font-size="12" text-anchor="middle">45°</text>
+<text x="373.3" y="300" fill="#96a0ba" font-size="12" text-anchor="middle">60°</text>
+<text x="520" y="300" fill="#96a0ba" font-size="12" text-anchor="middle">90°</text>
+<text x="316" y="46" fill="#8fb8ff">quantum maximum 2√2</text>
+<text x="86" y="139" fill="#d98a8a" font-size="12.5">local-realist ceiling, S = 2</text>
+<text x="140" y="172" fill="#f0ad5a" font-size="12.5">↑ the orange sliver: unreachable by</text>
+<text x="153" y="191" fill="#f0ad5a" font-size="12.5">any pre-packed-answer world</text>
+<text x="305" y="324" fill="#96a0ba" font-size="12.5" text-anchor="middle">angle θ between the two detector settings  →</text>
+<text x="32" y="160" fill="#96a0ba" font-size="12.5" text-anchor="middle" transform="rotate(-90 32 160)">correlation quantity S  →</text>
+</g>
+</svg>
+<figcaption>Turn the dials along the horizontal axis; the vertical axis is S computed from four correlations. The red dashed line is the wall local realism can never climb. The blue curve is the quantum prediction — and the data land on it.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  A Bell experiment does <strong>not</strong> test "is quantum mechanics right." It tests "is local realism right." Even if quantum mechanics is someday replaced by something better, any successor satisfying (1) no faster-than-light signals and (2) particles carrying their answers will hit the same wall. Doing it for real means plugging <strong>loopholes</strong>: Freedman and Clauser measured the first violation in 1972, Aspect switched the settings while the particles were in flight in 1982, and <strong>in 2015 groups in Delft, Vienna and at NIST each completed a loophole-free version</strong>. The 2022 Nobel Prize in Physics went to Clauser, Aspect and Zeilinger.</div>
+<div class="field xref"><span class="lab">Cross-reading · causal inference / randomness engineering</span>
+<ul>
+<li><strong>Causal inference</strong>: Reichenbach's common cause principle says that if two things are correlated, either one causes the other or something causes both. A Bell violation means this correlation <strong>fits into no causal diagram at all</strong> — the arrow-drawing language of statistics hits a wall here, which is why "quantum causal models" grew as a field.</li>
+<li><strong>Randomness engineering</strong>: a Bell violation is <strong>an unforgeable receipt</strong> — without trusting what is inside the box, the statistics alone certify that nobody knew these bits in advance. NIST has driven a public randomness beacon this way since 2018.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: Bell's contribution was not noticing that entanglement is strange — it was making strangeness something data could rule on.</div>
+<details class="q"><summary><b>Think:</b> Why is the local-realist ceiling exactly 2, and why can quantum mechanics reach only 2√2 rather than more?</summary><div class="qa">The 2 is pure logic: each of the four correlations lies in ±1, and if outcomes are predetermined, algebra forces one term to cancel against the rest. The 2√2 is a hard limit from the mathematical structure of quantum states. Curiously, "no faster-than-light signalling" alone does <strong>not</strong> cap S at 2√2 — one can write down hypothetical boxes reaching S = 4. Why quantum mechanics stops exactly where it does has no agreed answer.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Why You Cannot Phone With It <span class="en">No-Signalling</span></h2>
+<span class="pill">no-communication theorem · teleportation 1993</span>
+<div class="field"><span class="lab">Intuition</span>
+  Alice measures and Bob's side is "instantly" settled — surely that is a faster-than-light telephone? The sticking point: <strong>the only move Alice has is to measure, and she cannot control what comes out</strong>. She wants to send a 1; the universe hands her a random ↑ or ↓. The one thing she chooses is the dial setting, and the dial setting is precisely what Bob cannot see.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Tallying his own pile of results, Bob finds:
+  <div class="eq"><var>P</var>(B=↑) = <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> × <span class="zero">0</span> + <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> × 1 = <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span></div>
+<div class="gloss">Read it as: half the time Alice gets ↑ (and then Bob's chance of ↑ along the same axis is <strong>the number 0 (zero)</strong>, since the two are always opposite), half the time she gets ↓ (and then Bob's chance of ↑ is 1). It always sums to one half. Turn Alice's dial to any angle, or have her not measure at all, and this number <strong>does not budge</strong>.</div>
+  The correlation is real, but it <strong>only shows up when the two records are brought together and compared</strong> — and shipping a record means an ordinary channel, governed by the speed of light.</div>
+<figure>
+<svg viewBox="0 0 620 268" role="img" aria-label="Whatever Alice does, Bob's outcome distribution stays fifty-fifty">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13.5">
+<text x="30" y="66" fill="#dbe2f2" font-size="13.5">The distribution in Bob's own pile of data:</text>
+<line x1="60" y1="110" x2="560" y2="110" stroke="#6a5326" stroke-width="1.4" stroke-dasharray="5 5"></line>
+<text x="566" y="114" fill="#f0ad5a" font-size="12">50%</text>
+<rect x="100" y="110" width="34" height="90" fill="rgba(240,173,90,.55)"></rect>
+<rect x="146" y="110" width="34" height="90" fill="rgba(91,155,255,.55)"></rect>
+<rect x="270" y="110" width="34" height="90" fill="rgba(240,173,90,.55)"></rect>
+<rect x="316" y="110" width="34" height="90" fill="rgba(91,155,255,.55)"></rect>
+<rect x="440" y="110" width="34" height="90" fill="rgba(240,173,90,.55)"></rect>
+<rect x="486" y="110" width="34" height="90" fill="rgba(91,155,255,.55)"></rect>
+<line x1="60" y1="200" x2="560" y2="200" stroke="#56607e" stroke-width="1.6"></line>
+<text x="117" y="222" fill="#f0ad5a" font-size="17" text-anchor="middle">↑</text>
+<text x="163" y="222" fill="#5b9bff" font-size="17" text-anchor="middle">↓</text>
+<text x="287" y="222" fill="#f0ad5a" font-size="17" text-anchor="middle">↑</text>
+<text x="333" y="222" fill="#5b9bff" font-size="17" text-anchor="middle">↓</text>
+<text x="457" y="222" fill="#f0ad5a" font-size="17" text-anchor="middle">↑</text>
+<text x="503" y="222" fill="#5b9bff" font-size="17" text-anchor="middle">↓</text>
+<text x="140" y="248" fill="#96a0ba" font-size="12.5" text-anchor="middle">Alice measures along a</text>
+<text x="310" y="248" fill="#96a0ba" font-size="12.5" text-anchor="middle">Alice measures along b</text>
+<text x="480" y="248" fill="#96a0ba" font-size="12.5" text-anchor="middle">Alice does not measure</text>
+</g>
+</svg>
+<figcaption>All three are identical. Bob can stare at his own data forever without reading off what Alice did — that is the no-communication theorem.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  So entanglement <strong>neither transmits information nor overturns relativity</strong>. Quantum teleportation is no exception: it can move an unknown quantum state to a distant place, but Alice must send 2 classical bits <strong>over an ordinary channel</strong> before Bob knows which correction to apply, and until those 2 bits arrive what he holds is noise. Not one of the "quantum entanglement communicators" on sale anywhere is real.</div>
+<div class="field xref"><span class="lab">Cross-reading · communications / theoretical limits / spotting fakes</span>
+<ul>
+<li><strong>Communications</strong>: China's quantum science satellite distributed entangled photon pairs to two ground stations about 1200 km apart — but every run came with a plain classical radio link alongside it, and that link is the rate bottleneck.</li>
+<li><strong>Theoretical limits</strong>: no-signalling is <em>weaker</em> than quantum mechanics. One can write down hypothetical devices with stronger correlations that still cannot signal (Popescu–Rohrlich boxes), showing that "relativity is not violated" is not enough to derive quantum mechanics.</li>
+<li><strong>Spotting fakes</strong>: any product claiming that entanglement transmits information instantly can be dismissed without reading its technical details — the theorem constrains <strong>every</strong> operation you can perform with entanglement.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: entanglement makes two distant records agree beautifully, but hands nobody a pen for writing on the far one.</div>
+<details class="q"><summary><b>Think:</b> Could Alice encode information by <em>choosing which direction to measure</em>?</summary><div class="qa">No. The choice of setting affects only the <strong>conditional</strong> probabilities — Bob's outcomes given that Alice's result is <em>known</em> — and not the distribution Bob sees on his own. To use a conditional probability, Bob first has to receive Alice's result, and that is already a classical channel.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>What the Verdict Actually Cost Us <span class="en">What Had to Go</span></h2>
+<span class="pill">monogamy · device-independent cryptography</span>
+<div class="field"><span class="lab">Intuition</span>
+  The experiments do not tell us how the world is; they tell us that <strong>three assumptions cannot all be kept</strong>: (1) <strong>locality</strong>, (2) <strong>realism</strong> (values exist before measurement), (3) <strong>measurement independence</strong> (the experimenter's choice of setting is unrelated to the particles). Which one you drop is the fork where interpretations part ways, and "Measurement &amp; Interpretations" walks each road. One step gets skipped far too fast, so it is worth stating flatly: Bell singled out <strong>no</strong> interpretation.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Besides what was lost, one hard constraint was left behind: <strong>entanglement is monogamous</strong>. If A and B are maximally entangled, A's entanglement with any third party C is <strong>necessarily the number 0 (zero)</strong> — unlike classical correlation, which can be copied to any number of people:
+  <div class="eq"><var>C</var>²<sub>AB</sub> + <var>C</var>²<sub>AC</sub> ≤ <var>C</var>²<sub>A(BC)</sub></div>
+<div class="gloss"><var>C</var> is an entanglement measure called concurrence, running from 0 (no entanglement) to 1 (maximal); the subscript AB means between A and B, and A(BC) means between A and "B plus C taken together." Proved in 2000 by Coffman, Kundu and Wootters, this inequality says: <strong>whatever entanglement you give one partner, you take from the others.</strong></div></div>
+<div class="field"><span class="lab">Why it matters</span>
+  Monogamy converts a philosophical result into a security guarantee. In the quantum key distribution scheme Ekert proposed in 1991, the two parties spend part of their entangled pairs testing a Bell inequality: <strong>a strong enough violation is itself proof that no third party is entangled with them</strong>. This is "device-independent" security — you need not trust who built the hardware or whether it has a backdoor. The thread from <a href="information-physics-day9.en.html">"The Physics of Information"</a>, that information is bound by physics, is at its sharpest here: <strong>secrecy no longer rests on the adversary's lack of compute, but on the structure of the world.</strong></div>
+<div class="field xref"><span class="lab">Cross-reading · network engineering / black holes</span>
+<ul>
+<li><strong>Network engineering</strong>: because quantum states cannot be cloned, there is no such thing as a signal-amplifying repeater; a quantum network can only relay by <strong>entanglement swapping</strong> — welding an A–B and a B–C link into an A–C link at the midpoint. This is the technical core of every quantum-internet roadmap, and the reason progress is slow.</li>
+<li><strong>Black holes</strong>: monogamy is the central weapon in the black-hole firewall argument (Almheiri et al., 2012) — a late Hawking photon cannot be maximally entangled with both the interior and the early radiation, yet other principles demand both.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the world does not hand out pre-packed answers — and that deficit turns out to buy a kind of security available nowhere else.</div>
+<details class="q"><summary><b>Think:</b> If abandoning locality is one of the options, does quantum mechanics involve action at a distance or not?</summary><div class="qa">The careful statement is that quantum correlations <strong>cannot be explained by a local common cause</strong>, yet there is also <strong>no usable influence at a distance</strong> — no physical quantity gets sent. Many physicists would therefore rather give up "values exist before measurement." Calling it "nonlocality" is a historical habit; do not read it as something outrunning light.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>What exactly are the "loopholes," and why did it take until 2015?</summary>
+<div class="body">Three of them. The <strong>locality loophole</strong>: if the detectors are not far enough apart or the dials are set too early, an influence travelling at light speed has time to tip off the other side; the fix is separations of hundreds of metres plus settings chosen at random while the particles are already in flight. The <strong>detection loophole</strong>: early experiments caught only a small fraction of the particles, and "the ones we caught happen not to represent the rest" could not be excluded; the fix is pushing efficiency above roughly seventy percent. The three 2015 experiments closed both at once. The <strong>freedom-of-choice loophole</strong> cannot be closed in principle, only pushed back: the 2018 "cosmic Bell test" used photons emitted by quasars billions of years ago to choose the settings.</div></details>
+<details><summary>Does a Bell violation prove the many-worlds interpretation, or that consciousness is involved?</summary>
+<div class="body">Neither. What Bell's theorem rules out is a <strong>conjunction</strong>. Different interpretations cut a different member of it — Bohmian mechanics keeps particles with definite positions at all times, at the cost of frank nonlocality; many-worlds holds that every outcome occurs, so there is no single outcome that needs correlating; Copenhagen-style readings drop "values before measurement." All three are alive, and the experiments did not choose for us. As for consciousness: the "observers" in a Bell test are photodetectors and automatic loggers, the random-number generators are circuits, and the whole run can happen with nobody in the room — <strong>no step requires a mind.</strong></div></details>
+<details><summary>Can entanglement be used up? What kind of resource is it?</summary>
+<div class="body">Yes. It is quantifiable: a maximally entangled pair counts as one "ebit." The key theorem is that under local operations plus telephone calls, entanglement <strong>can only decrease, never appear from nothing</strong> — which is exactly what makes it priceable as a resource, much like free energy in thermodynamics. Spend it and you must redistribute more, and redistribution means fibre or satellites, with loss eating away along the route. That is the whole headache of quantum networking: it is not moving data, it is <strong>restocking</strong>.</div></details>
+<details><summary>Entanglement seems to shatter at the slightest touch — so why is it said to be everywhere?</summary>
+<div class="body">Because it leaks so easily <strong>into the environment</strong>. One bump against an air molecule and a particle is entangled with its surroundings; monogamy then does the rest — the deeper the entanglement with the environment, the shallower it is with the partner you care about, which shows up experimentally as vanishing interference. This process, <strong>decoherence</strong>, is why the macroscopic world looks classical: not that entanglement is absent, but that it is smeared into countless environmental degrees of freedom and cannot be gathered back.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Einstein, Podolsky, Rosen, <em>Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?</em>, Phys. Rev. 47, 777 (1935) — <a href="https://doi.org/10.1103/PhysRev.47.777">where the argument begins</a></li>
+<li>Bell, <em>On the Einstein Podolsky Rosen Paradox</em>, Physics 1, 195 (1964) — <a href="https://cds.cern.ch/record/111654">full text in the CERN archive</a>; six pages, no algebra beyond high school</li>
+<li>Clauser, Horne, Shimony, Holt, Phys. Rev. Lett. 23, 880 (1969) — <a href="https://doi.org/10.1103/PhysRevLett.23.880">the CHSH inequality</a>, Bell's idea rewritten as a doable experiment</li>
+<li>Aspect, Dalibard, Roger, Phys. Rev. Lett. 49, 1804 (1982) — <a href="https://doi.org/10.1103/PhysRevLett.49.1804">switching the analyser settings in flight</a></li>
+<li>Hensen et al., Nature 526, 682 (2015) — <a href="https://arxiv.org/abs/1508.05949">the Delft loophole-free test</a>; Giustina et al. <a href="https://arxiv.org/abs/1511.03190">PRL 115, 250401</a> and Shalm et al. <a href="https://arxiv.org/abs/1511.03189">PRL 115, 250402</a>, all in the same year</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2022/summary/">The 2022 Nobel Prize in Physics</a> (Clauser, Aspect, Zeilinger) — the official scientific background document is an excellent review</li>
+<li>Ekert, <em>Quantum Cryptography Based on Bell's Theorem</em>, Phys. Rev. Lett. 67, 661 (1991) — <a href="https://doi.org/10.1103/PhysRevLett.67.661">turning the inequality into a key</a></li>
+<li>Yin et al., <em>Satellite-based entanglement distribution over 1200 kilometres</em>, Science 356, 1140 (2017) — <a href="https://www.science.org/doi/10.1126/science.aan3211">entanglement from orbit</a></li>
+<li>Bell, <em>Speakable and Unspeakable in Quantum Mechanics</em> (Cambridge University Press) — his own essays, clearer than any retelling</li>
+<li><a href="https://plato.stanford.edu/entries/bell-theorem/">Stanford Encyclopedia of Philosophy: Bell's Theorem</a> — the most careful account of exactly which assumption gets dropped</li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_entanglement">Wikipedia: Quantum entanglement</a> / <a href="https://en.wikipedia.org/wiki/CHSH_inequality">CHSH inequality</a> / <a href="https://en.wikipedia.org/wiki/Monogamy_of_entanglement">Monogamy of entanglement</a> / <a href="https://en.wikipedia.org/wiki/No-communication_theorem">No-communication theorem</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
