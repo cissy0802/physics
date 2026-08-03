@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：测量问题与诠释 · Day 22</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>测量问题与诠释</h1>
+<div class="meta">Day 22 · 2026 · Phase E 量子力学</div>
+<div class="tagline">量子力学有两条互相打架的演化规则，却没有任何物理判据告诉你何时该用哪一条。这道缝一百年没补上——所谓"诠释"，就是各家开的不同药方。</div>
+</header>
+<div class="intro">
+薛定谔方程是<b>确定的、可逆的、线性的</b>：它从不做选择，只把所有可能性一起往前推。而"一测就得到一个确定读数"是<b>随机的、不可逆的</b>。教科书把后者当成单独一条公设塞进来，把"测量"当作不必定义的词——可仪器也由原子构成，也该服从薛定谔方程。这就是<b>测量问题</b>：不是我们不知道结果，而是<b>理论没说清哪条规则什么时候生效</b>。五十年来真正的进展是把这道缝切成两半：为什么从不看见叠加，已经算得清清楚楚；为什么只发生一件事，原封不动。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>两本规则手册 <span class="en">Two Rules, One Theory</span></h2>
+<span class="pill">冯·诺依曼 1932 · 投影公设</span>
+<div class="field"><span class="lab">直觉</span>
+  一个游戏配了两本规则手册。<strong>手册 A</strong>：局面平滑、确定地往前走，没有哪种可能被划掉，原则上还能倒放。<strong>手册 B</strong>：这一刻许多可能里"啪"地只剩一个，随机挑的，回不去。什么时候翻哪本？教科书说"测量时翻 B"。可"测量"是什么——计数器咔一声算，还是非得有人瞄一眼？<strong>没有任何能从质量、能量、粒子数里读出的判据</strong>告诉你界线在哪。</div>
+<div class="field"><span class="lab">机制</span>
+  手册 A 就是薛定谔方程：
+  <div class="eq"><var>i</var>ħ <span class="frac"><span class="fnum">∂<var>ψ</var></span><span class="fden">∂<var>t</var></span></span> = <var>Ĥ</var><var>ψ</var></div>
+<div class="gloss"><var>ψ</var>（读"普赛"）是波函数，系统的完整状态；<strong>∂</strong> 是偏导号，<span class="nowrap">∂<var>ψ</var>/∂<var>t</var></span> 即状态随时间变多快；<var>Ĥ</var>（读"H hat"）是哈密顿量，装着系统的能量信息；ħ 读"h bar"，是普朗克常数除以 2π；<var>i</var> 是虚数单位——<strong>字母 i</strong>，不是数字 1。</div>
+  要害性质是<strong>线性</strong>：它既把"朝上＋仪器待命"推成"指针指上"，也把"朝下＋仪器待命"推成"指针指下"，于是<strong>输入叠加，输出必是叠加</strong>：
+  <div class="eq">(<var>a</var>|↑⟩ + <var>b</var>|↓⟩)|待命⟩ → <var>a</var>|↑⟩|指上⟩ + <var>b</var>|↓⟩|指下⟩</div>
+<div class="gloss">|↑⟩ 读作"ket"，即"处于某状态"；<var>a</var>、<var>b</var> 是<strong>概率幅</strong>（不是概率，见<a href="wavefunction-superposition-day19.html">波函数与叠加</a>）；玻恩规则给出测到"下"的概率 <var>P</var> = |<var>b</var>|²，概率幅的模平方。</div>
+  这不是额外假设，是<strong>线性的直接推论</strong>：仪器既然也由原子做成，叠加就一定传染给指针。手册 A 从不自己给出唯一读数。</div>
+<figure>
+<svg aria-label="薛定谔演化与投影公设两条规则的对比" role="img" viewbox="0 0 640 268">
+<defs>
+<marker id="ar1" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5">
+<path d="M0,0 L11,4.5 L0,9 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect fill="#172038" height="56" rx="7" stroke="#2b3a5e" width="180" x="12" y="106"></rect>
+<text fill="#dbe2f2" font-size="13.5" text-anchor="middle" x="102" y="129">原子处于叠加</text>
+<text fill="#7db0ff" font-size="13.5" text-anchor="middle" x="102" y="150">＋ 仪器待命</text>
+<line marker-end="url(#ar1)" stroke="#5b9bff" stroke-width="2" x1="196" x2="252" y1="120" y2="72"></line>
+<line marker-end="url(#ar1)" stroke="#5b9bff" stroke-width="2" x1="196" x2="252" y1="150" y2="198"></line>
+<rect fill="#172038" height="76" rx="7" stroke="#2b3a5e" width="368" x="256" y="18"></rect>
+<text fill="#7db0ff" font-size="13.5" font-weight="700" x="270" y="42">手册 A · 薛定谔方程</text>
+<text fill="#dbe2f2" font-family="Georgia,'Noto Serif SC',serif" font-size="14.5" x="270" y="64">a|↑⟩|指上⟩ ＋ b|↓⟩|指下⟩</text>
+<text fill="#96a0ba" font-size="12" x="270" y="84">线性 · 确定 · 可逆——叠加原样传给指针</text>
+<rect fill="#2a2214" height="76" rx="7" stroke="#6a5326" width="368" x="256" y="174"></rect>
+<text fill="#f0ad5a" font-size="13.5" font-weight="700" x="270" y="198">手册 B · 投影公设</text>
+<text fill="#f2e4cd" font-family="Georgia,'Noto Serif SC',serif" font-size="14.5" x="270" y="220">|↓⟩|指下⟩　，概率 |b|²</text>
+<text fill="#96a0ba" font-size="12" x="270" y="240">随机 · 不可逆 · 非线性——只剩一支</text>
+<text fill="#c3cbe0" font-size="12.5" text-anchor="middle" x="440" y="136">教科书说「测量时用 B」，</text>
+<text fill="#f0ad5a" font-size="12.5" text-anchor="middle" x="440" y="157">但没说「测量」是什么物理过程。</text>
+</g>
+</svg>
+<figcaption>缺口不在计算里——两条规则各自都算得极准，缺的是"何时切换"。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  薛定谔 1935 年那只猫<strong>不是奇观，是一次归谬</strong>：把猫的死活拴在一个原子的衰变上，正是要说明——老实对待线性，就会推出一只死活叠加的猫；既然没有这种猫，<strong>理论的叙述必定缺了一块</strong>。后来它被印成量子海报，恰好把作者的意思讲反了。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / 数学史</span>
+  "极其好用、地基却留着没定义的口子"并不罕见：
+  <ul>
+<li><strong>工程</strong>：C 语言标准里的<strong>未定义行为</strong>——规范明说某些情形"标准不管"，程序照跑，语义却是空的；</li>
+<li><strong>数学史</strong>：早期微积分的"无穷小"——算行星造机器都精准，可它到底是不是零谁也说不清，直到极限的定义补上地基。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：测量问题不是"量子太怪"，是理论里有个没定义的词。</div>
+<details class="q"><summary><b>思考：</b>如果把仪器、实验员、整栋楼都写进薛定谔方程，会得到什么？</summary><div class="qa">一个越滚越大的叠加：原子拖着指针，拖着视网膜，拖着大脑。这叫<strong>冯·诺依曼链</strong>——线性演化没有哪个位置能自己断开。要么链上某处真发生了别的事（客观坍缩），要么整条链都还在、我们只经验到一支（多世界），要么波函数本就不是实在（哥本哈根类）。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>退相干：叠加不是碎了，是泄漏了 <span class="en">Decoherence</span></h2>
+<span class="pill">Zeh 1970 · Zurek 1981 · 指针基</span>
+<div class="field"><span class="lab">直觉</span>
+  干涉有个苛刻前提：两条路径必须<strong>原则上完全无法区分</strong>。而真实物体都泡在环境里——空气分子撞它、光子照它、它自己辐射红外。只要环境里有<strong>任何一样东西</strong>跟"它走了哪条"发生关联，就等于抄走一份记录；哪怕这记录永远没人读，<strong>干涉也已经没了</strong>。叠加不是碎掉，是渗出去了。</div>
+<div class="field"><span class="lab">机制</span>
+  把状态写成 2×2 的表（密度矩阵）：<strong>对角项</strong> |<var>a</var>|²、|<var>b</var>|² 是"两支各占多少份额"，<strong>非对角项</strong> <var>a</var><var>b</var>* 才是"能不能干涉"（相干项）。与环境耦合让它指数衰减：
+  <div class="eq"><var>a</var><var>b</var>*(<var>t</var>) = <var>a</var><var>b</var>*(0) · e<sup>−<var>t</var>/<var>τ</var></sup> → <span class="zero">0</span></div>
+<div class="gloss">星号 * 是复共轭；e 是自然常数 2.718…（<strong>字母 e</strong>）；<var>τ</var>（读"tau"）是<strong>退相干时间</strong>；箭头指的 0 是<strong>数字零</strong>，指相干项被抹平（括号里的 0 是起始时刻）。要点：<strong>对角项不动，只有干涉能力消失</strong>。</div>
+  尺度大到荒谬：按 Joos 与 Zeh 的量级估算，十微米的尘埃若真被做成相隔自身尺度的叠加，常温空气里相干性约 <span class="nowrap">10<sup>−30</sup></span> 秒就没了，送进最好的实验室真空也只延到 <span class="nowrap">10<sup>−17</sup></span> 秒量级。</div>
+<figure>
+<svg aria-label="随着环境记录的路径信息增多，干涉条纹逐渐消失" role="img" viewbox="0 0 640 250">
+<defs>
+<marker id="ar2" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5">
+<path d="M0,0 L11,4.5 L0,9 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#dbe2f2" text-anchor="middle" x="105" y="26">几乎与世隔绝</text>
+<text fill="#dbe2f2" text-anchor="middle" x="320" y="26">少量分子撞过</text>
+<text fill="#dbe2f2" text-anchor="middle" x="535" y="26">无数次撞击之后</text>
+<rect fill="#0b1120" height="84" rx="5" stroke="#2b3a5e" width="170" x="20" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".85" width="17" x="30" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".85" width="17" x="72" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".85" width="17" x="114" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".85" width="17" x="156" y="38"></rect>
+<rect fill="#0b1120" height="84" rx="5" stroke="#2b3a5e" width="170" x="235" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".2" width="170" x="235" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".3" width="17" x="245" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".3" width="17" x="287" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".3" width="17" x="329" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".3" width="17" x="371" y="38"></rect>
+<rect fill="#0b1120" height="84" rx="5" stroke="#2b3a5e" width="170" x="450" y="38"></rect>
+<rect fill="#5b9bff" height="84" opacity=".28" width="170" x="450" y="38"></rect>
+<text fill="#7db0ff" text-anchor="middle" x="105" y="142">条纹清晰</text>
+<text fill="#7db0ff" text-anchor="middle" x="320" y="142">对比度下降</text>
+<text fill="#f0ad5a" text-anchor="middle" x="535" y="142">条纹全平</text>
+<line marker-end="url(#ar2)" stroke="#6a5326" stroke-width="2" x1="20" x2="614" y1="180" y2="180"></line>
+<text fill="#f0ad5a" text-anchor="middle" x="320" y="170">环境记录的「走了哪条路」信息越来越多</text>
+<text fill="#c3cbe0" font-family="Georgia,'Noto Serif SC',serif" font-size="14" text-anchor="middle" x="320" y="208">非对角项 ∝ e<tspan dy="-5" font-size="10.5">−t/τ</tspan></text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="320" y="230">各支的份额没变，变没的只有干涉能力</text>
+</g>
+</svg>
+<figcaption>条纹消失的速度可以精确计算，也已被实验一格格验证。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  退相干<strong>解决了</strong>三件事：宏观物体为何看起来经典；为何"经典"的那组状态偏偏在位置附近（环境抄的是位置记录，于是挑出<strong>指针基</strong>）；干涉多快消失——把 C₆₀ 加热到近三千度让分子自己辐射红外，条纹就没了。<br/>
+  但它<strong>没解决</strong>最要紧的那件：<strong>为什么最后只发生一件事</strong>。那份"长得像经典概率"的混合里两支<strong>依然都在</strong>，方程从没划掉任何一支。"退相干解决了测量问题"是流传最广的误说：砍掉一半，剩下一半一动没动。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 信息 / 工程 / AI</span>
+  退相干说到底是<strong>信息被复制成许多份，于是变得客观</strong>（Zurek 称之为量子达尔文主义：环境里散着无数份冗余记录，谁截一撮都读到同一件事）：
+  <ul>
+<li><strong>信息物理</strong>：擦一个比特要付能量，因为记录抄进环境就不再可逆（见<a href="information-physics-day9.html">信息的物理</a>）；</li>
+<li><strong>工程</strong>：记录复制到多台机器才算"已提交"——事实性来自冗余，不来自权威；</li>
+<li><strong>AI</strong>：同一提示采样多次、多数一致才算稳定输出，只冒一次的没人敢用。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：退相干解释了我们为什么看不见叠加，没解释为什么只发生一件事。</div>
+<details class="q"><summary><b>思考：</b>既然相干性在 10⁻³⁰ 秒就没了，说测量问题"仍未解决"是不是吹毛求疵？</summary><div class="qa">不是。退相干的终点是"两支互不干涉地并存"，经验给的却是"只有一支"；这一步没有方程负责。贝尔把拿退相干直接当答案的做法讥为 FAPP（for all practical purposes，实用上够了）：够用，不是解释。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>诠释菜单：各家在补哪一块 <span class="en">The Menu of Interpretations</span></h2>
+<span class="pill">哥本哈根 · 多世界 · 玻姆 · GRW</span>
+<div class="field"><span class="lab">直觉</span>
+  最容易被误会的一点：<strong>这些诠释绝大多数给出完全相同的实验预言</strong>。它们不是互相竞争的理论，是同一套计算配的不同世界图景；选择暂时不靠实验，靠<strong>你愿意付哪种代价</strong>。</div>
+<div class="field"><span class="lab">机制 · 五家各一句</span>
+  <strong>① 哥本哈根 / 正统</strong>：波函数不是一个东西，是对未来测量的<strong>记账</strong>，坍缩即更新账本。<br/>
+  <strong>② 多世界（Everett 1957）</strong>：只有手册 A，分支全都真实，我们是其中一支里的副本。麻烦在概率：每支都发生了，|<var>a</var>|² 还在说什么？<br/>
+  <strong>③ 德布罗意-玻姆导波</strong>：粒子始终有确定位置，波函数是推着它走的导波，"坍缩"只是我们不知道初始位置；代价是明写非定域，与<a href="entanglement-nonlocality-day21.html">纠缠与非定域</a>那道判决相符。<br/>
+  <strong>④ 客观坍缩（GRW / Penrose）</strong>：给方程<strong>加一个极微弱的随机非线性项</strong>，单粒子察觉不到，10²³ 个粒子绑在一起时叠加瞬间塌掉；改了方程，因此<strong>可证伪</strong>。<br/>
+  <strong>⑤ QBism / 关系性</strong>：波函数是主体的信念，或只相对某个参照系统成立。</div>
+<figure>
+<svg aria-label="按波函数是否实在、是否有真坍缩两个维度排布的诠释分布" role="img" viewbox="0 0 640 336">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect fill="#0b1120" height="240" rx="8" stroke="#26314c" width="520" x="80" y="40"></rect>
+<line stroke="#3a4666" stroke-dasharray="5 5" stroke-width="1.4" x1="340" x2="340" y1="40" y2="280"></line>
+<line stroke="#3a4666" stroke-dasharray="5 5" stroke-width="1.4" x1="80" x2="600" y1="160" y2="160"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="72" y="66">有真坍缩</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="72" y="266">从不坍缩</text>
+<rect fill="#2a2214" height="46" rx="6" stroke="#6a5326" width="188" x="104" y="62"></rect>
+<text fill="#f0ad5a" font-size="13.5" font-weight="700" x="116" y="82">哥本哈根 / 正统</text>
+<text fill="#96a0ba" font-size="11" x="116" y="99">代价：仪器不被分析</text>
+<rect fill="#2a2214" height="46" rx="6" stroke="#6a5326" width="188" x="364" y="62"></rect>
+<text fill="#f0ad5a" font-size="13.5" font-weight="700" x="376" y="82">客观坍缩 GRW</text>
+<text fill="#96a0ba" font-size="11" x="376" y="99">代价：改了方程（可证伪）</text>
+<rect fill="#172038" height="46" rx="6" stroke="#2b3a5e" width="188" x="104" y="196"></rect>
+<text fill="#7db0ff" font-size="13.5" font-weight="700" x="116" y="216">QBism / 关系性</text>
+<text fill="#96a0ba" font-size="11" x="116" y="233">代价：没有共享的事实</text>
+<rect fill="#172038" height="42" rx="6" stroke="#2b3a5e" width="188" x="364" y="176"></rect>
+<text fill="#7db0ff" font-size="13.5" font-weight="700" x="376" y="194">多世界</text>
+<text fill="#96a0ba" font-size="11" x="376" y="211">代价：概率需重新论证</text>
+<rect fill="#172038" height="42" rx="6" stroke="#2b3a5e" width="188" x="364" y="230"></rect>
+<text fill="#7db0ff" font-size="13.5" font-weight="700" x="376" y="248">德布罗意-玻姆</text>
+<text fill="#96a0ba" font-size="11" x="376" y="265">代价：明写非定域</text>
+<text fill="#96a0ba" font-size="11.5" x="84" y="302">← 波函数＝知识 / 记账</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="596" y="302">波函数＝真实存在的东西 →</text>
+</g>
+</svg>
+<figcaption>两个维度：波函数是不是实在的东西；有没有真实发生的坍缩。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  科学里罕见的处境：同一套预言、多套世界图景，实验暂时判不了（哲学上叫<strong>经验等价</strong>，或理论被证据<strong>欠定</strong>）。但别滑到"随你信什么"——分界线是<strong>可证伪性</strong>，而它正在移动：客观坍缩改了方程就必然预言一点点额外的自发辐射，地下低本底实验已削掉它一大块参数空间。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 统计 / AI / 生物</span>
+  "同一批数据，多套讲得通的解释"是实证学科的常态，办法一样——不比谁的故事美，比谁给出不同的可检验预言：
+  <ul>
+<li><strong>统计</strong>：同一份相关数据能配出方向相反的多个因果图，只有介入实验砍得掉；</li>
+<li><strong>AI</strong>：显著图、概念向量、电路分析各讲一套"它为什么这么答"，都拟合已有行为——判据是哪套能预言没见过的失败；</li>
+<li><strong>生物</strong>：基因的功能常有几种叙述，敲除实验才把"参与"和"必需"分开。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：诠释不是"信仰"，是明码标价的代价清单。</div>
+<details class="q"><summary><b>思考：</b>如果两套诠释永远给出相同预言，它们还是两个不同的理论吗？</summary><div class="qa">科学哲学里最锋利的一刀。说不是的人认为：不做不同预言的差别只是修辞。说是的人指出：不同图景带来不同的研究纲领——多世界逼人去问概率从哪来，玻姆和 GRW 逼出具体实验方案。看一套诠释是否空转，看它有没有生出可做的实验。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>"意识使波函数坍缩"错在哪 <span class="en">No, Consciousness Does Not Do It</span></h2>
+<span class="pill">维格纳之友 · 诚实辨析</span>
+<div class="field"><span class="lab">直觉</span>
+  这句话流行有原因：教科书写"观测导致坍缩"，而"观测"天然被读成"<strong>有人看见</strong>"。但物理里的"测量"从不需要人。盖革管接上记录仪、锁进无人的地下室跑一整年，事后再读数据——该没有的干涉一样没有，该有的统计一样有。<strong>宇宙不等谁去看。</strong></div>
+<div class="field"><span class="lab">机制 · 三条硬证据</span>
+  <strong>① 旋钮是物理的。</strong>干涉可见度由气压、温度、辐射<strong>连续可调</strong>：往干涉仪腔里放点气体，条纹逐格变淡。整条曲线跟屋里有没有人无关。<br/>
+  <strong>② 意念改不了统计。</strong>无信号定理是硬定理：局域操作改不了远处的边缘统计。若"意念影响结果"为真就等于握有一条可用信道，而实验上限极苛刻。<br/>
+  <strong>③ 主张者自己撤了。</strong>"冯·诺依曼链必须终止于意识"确有过严肃版本，维格纳一度支持。可退相干出来后这个位置<strong>不再必要</strong>——空气分子就足以终结链条上可干涉的部分——他晚年放弃了。</div>
+<div class="field"><span class="lab">诚实的边界在哪</span>
+  也别说过头。<strong>测量问题本身是真问题</strong>，"为何只发生一件事"至今无解。偷换在下一步：<strong>把"未解"当成"填什么都行"</strong>。意识坍缩说除了不必要，还得回答一串答不上的问题：门槛画在哪？猫算吗？摄像机算吗？有意识生物出现之前的一百三十亿年，宇宙靠什么坍缩？<strong>一个解释若在任何位置都能被随意安放，就没在解释任何事。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 传播 / AI / 统计 / 社会</span>
+  误传的机制是同一个：<strong>技术术语被日常义偷偷替换，技术缺口就成了玄学入口</strong>。
+  <ul>
+<li><strong>量子</strong>："观测"（任何足以留下记录的物理相互作用）被读成"有人看见"；</li>
+<li><strong>AI</strong>："理解""知道"本是行为指标，滑成心智断言，"答对了"变成"懂了"；</li>
+<li><strong>统计</strong>："显著"本指"不太可能纯属偶然"，被读成"重要"，微小效应上了头条。</li>
+</ul>
+  防身只有一条：<strong>遇到关键词，先问它的操作定义。</strong></div>
+<div class="punch">
+<div class="one">一句话：缺口是真的，但缺口不是许愿池。</div>
+<details class="q"><summary><b>思考：</b>如果真有人主张意识导致坍缩，要什么样的实验才能算数？</summary><div class="qa">得给出一个<strong>物理版本的差别</strong>：相同物理条件下只改"有无意识观察者"这一项，可见度或统计出现可复现的偏移。这要求先把"意识"写成可控变量——正是这步至今没人做到，所以它还没进入可检验的范围；主张弱得多的客观坍缩反而已经拿到了实验约束。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>多世界如果对，"概率"还剩什么意思？每支都发生了，那 |a|² 在说什么？</summary>
+<div class="body">多世界最硬的一关：既然分支全都实现了，"这支的概率是 |<var>a</var>|²"表面上没有对象。两条补救路线：<strong>决策论推导</strong>（Deutsch-Wallace）——假定理性主体在分支前下注要守几条自洽性公理，证明唯一自洽的赌注权重就是 |<var>a</var>|²；<strong>自定位不确定性</strong>（Sebens-Carroll）——分支已发生，但"我是哪一支里的我"还不知道，概率讲的是这种无知。两条路都有反对者，质疑在于是否偷偷把玻恩规则塞进了前提。<strong>它究竟是导出的还是补进去的，至今没有共识。</strong></div></details>
+<details><summary>有没有可能哪天实验真的判出结果？</summary>
+<div class="body">部分能。凡是<strong>改了方程</strong>的都在射程内：客观坍缩必然带来一点点自发的能量涨落和辐射，地下低本底实验正一年年往下压它的参数，最朴素的引力致坍缩版本已出局。另一条路是把宏观叠加做得越来越大——大分子干涉、悬浮纳米颗粒、低温机械振子，每上一个量级都在压缩"坍缩必须发生在某尺度"的空间。而<strong>不改方程</strong>的几家预言完全一致，分不开。更可能的结局是选项被逐个删掉，剩下的仍并列。</div></details>
+<details><summary>"维格纳的朋友"类新实验在说什么？</summary>
+<div class="body">朋友在密闭实验室里做完测量、看到一个确定结果，屋外的维格纳把整间屋子（连人）当成量子系统处理——两人的描述会打架。2018 年 Frauchiger 与 Renner 把它做成严格的<strong>不可能性定理</strong>：几条看似温和的假定——量子力学普遍适用、不同主体的推理可互相引用、结果唯一——不能同时成立。2020 年 Bong 等人把它改写成可实测的不等式并用光子做了出来。这些实验不判定哪家对，却拿掉了"随便挑一家反正都一样"的懒惰：<strong>你至少得说清放弃的是哪条。</strong></div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Schrödinger 1935 年提出猫的论文——<a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat">Wikipedia: Schrödinger's cat</a>，脉络完整，看清原意是归谬</li>
+<li>von Neumann，<em>Mathematical Foundations of Quantum Mechanics</em>（1932）——投影公设与冯·诺依曼链的出处</li>
+<li>Everett，<em>"Relative State" Formulation of Quantum Mechanics</em>，Rev. Mod. Phys. 29, 454 (1957)——<a href="https://doi.org/10.1103/RevModPhys.29.454">原文</a></li>
+<li>Bohm，Phys. Rev. 85, 166 &amp; 180 (1952)——<a href="https://doi.org/10.1103/PhysRev.85.166">导波理论的两篇</a></li>
+<li>Ghirardi、Rimini、Weber，Phys. Rev. D 34, 470 (1986)——<a href="https://doi.org/10.1103/PhysRevD.34.470">GRW 客观坍缩模型</a></li>
+<li>Zurek，Rev. Mod. Phys. 75, 715 (2003)——<a href="https://arxiv.org/abs/quant-ph/0105127">退相干最权威的综述</a>；量子达尔文主义见 Nature Physics 5, 181 (2009)</li>
+<li>Joos &amp; Zeh，Z. Phys. B 59, 223 (1985)——退相干时间那张量级表</li>
+<li>Bell，<em>Against "measurement"</em>，Physics World 3(8), 33 (1990)——FAPP 的出处，尖锐好读</li>
+<li>Arndt 等 <a href="https://www.nature.com/articles/44348">Nature 401, 680 (1999)</a>：C₆₀ 干涉；Hackermüller 等 <a href="https://www.nature.com/articles/nature02276">Nature 427, 711 (2004)</a>：加热让条纹消失；Fein 等 <a href="https://www.nature.com/articles/s41567-019-0663-9">Nature Physics 15, 1242 (2019)</a>：叠加推过两万五千原子质量单位</li>
+<li>Donadi 等，Nature Physics 17, 74 (2021)——<a href="https://www.nature.com/articles/s41567-020-1008-4">地下实验排除引力致坍缩的最朴素版本</a></li>
+<li>Frauchiger &amp; Renner，<a href="https://www.nature.com/articles/s41467-018-05739-8">Nat. Commun. 9, 3711 (2018)</a>；Bong 等 <a href="https://www.nature.com/articles/s41567-020-0990-x">Nature Physics 16, 1199 (2020)</a> 的实测版</li>
+<li><a href="https://plato.stanford.edu/entries/qm-decoherence/">SEP: The Role of Decoherence</a> / <a href="https://plato.stanford.edu/entries/qm-everett/">Everett</a> / <a href="https://plato.stanford.edu/entries/qm-bohm/">Bohmian Mechanics</a> / <a href="https://plato.stanford.edu/entries/qm-collapse/">Collapse Theories</a>——四份立场公允的长文</li>
+<li>Sean Carroll，<em>Something Deeply Hidden</em>——写得极好，但作者是明确的多世界支持者，当"一家之言的最佳版本"读</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
