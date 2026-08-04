@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Intro to Quantum Field Theory · Day 23</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Intro to Quantum Field Theory</h1>
+<div class="meta">Day 23 · 2026 · Phase E Quantum Mechanics</div>
+<div class="tagline">"Particle" is not one of nature's basic words. What is basic is the <strong>field</strong> — a layer of stuff spread across the whole universe; the thing you call an electron is one indivisible quiver in it.</div>
+</header>
+<div class="intro">
+The Schrödinger equation has an unspoken premise: <b>how many particles there are is fixed in advance</b>. Yet two protons collide head-on in an accelerator and a hundred new particles fly out; an electron meets a positron and both vanish, leaving two flashes of light. Particles are born and destroyed, and the equations of quantum mechanics simply cannot write that down. The theory that supplies the missing step is <b>quantum field theory</b>: it demotes "how many particles" from a premise to a property of the field. The price is a rewritten ontology — the field is the protagonist, particles are merely its excitations. The payoff is the most precise prediction in the history of science, the inevitability of antimatter, and an answer to "why is every electron exactly alike".
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Particles Are Excitations of a Field <span class="en">Field Quanta</span></h2>
+<span class="pill">field quantization · 1927</span>
+<div class="field"><span class="lab">Intuition</span>
+  Picture a trampoline stretched across the entire universe: a spring at every point, each tugging on its neighbours. Left alone it lies flat; tap it and a ripple runs off. Here quantum mechanics puts in a word: <strong>the energy of one spring cannot take any value it likes — it can only be added in whole portions</strong>. So the strength of a ripple comes in portions too. One portion is one particle.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The energy of a single quantum oscillator is
+  <div class="eq"><var>E</var><sub><var>n</var></sub> = ( <var>n</var> + <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> ) <var>ħ</var><var>ω</var></div>
+<div class="gloss"><var>ħ</var> is read "h-bar", the reduced Planck constant (Planck's constant divided by 2π); <var>ω</var> is the Greek letter <strong>omega</strong>, this mode's angular frequency — how fast it quivers; <var>n</var> can only be <strong>0 (the digit zero)</strong>, 1, 2, … Read <var>n</var> as "which energy level" and you are doing quantum mechanics. Read it as "<strong>there are <var>n</var> particles here</strong>" and you are doing quantum field theory. Same formula, new reading, and particles appear.</div>
+  A field is infinitely many such oscillators (one per wavelength), equipped with a pair of operators: one raises <var>n</var> by one (creates a particle), the other lowers it (destroys one). Creation and destruction stop being miracles; they are a step up or down the ladder.</div>
+<figure>
+<svg aria-label="Ripples in a field matched to rungs on an energy ladder" role="img" viewbox="0 0 640 250">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text fill="#96a0ba" x="24" y="20">The field</text>
+<text fill="#96a0ba" x="392" y="20">Energy levels</text>
+<!-- field snapshots -->
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1" x1="30" x2="300" y1="60" y2="60"></line>
+<path d="M30,60 L300,60" fill="none" stroke="#5b9bff" stroke-width="2.5"></path>
+<text fill="#dbe2f2" x="30" y="86">Vacuum: the field lies flat</text>
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1" x1="30" x2="300" y1="128" y2="128"></line>
+<path d="M30,128 L120,128 q30,-34 60,0 q30,34 60,0 L300,128" fill="none" stroke="#5b9bff" stroke-width="2.5"></path>
+<text fill="#dbe2f2" x="30" y="154">One ripple = one particle</text>
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1" x1="30" x2="300" y1="196" y2="196"></line>
+<path d="M30,196 L60,196 q20,-26 40,0 q20,26 40,0 L140,196 q20,-26 40,0 q20,26 40,0 L300,196" fill="none" stroke="#5b9bff" stroke-width="2.5"></path>
+<text fill="#dbe2f2" x="30" y="222">Two ripples = two particles</text>
+<!-- ladder -->
+<line stroke="#56607e" stroke-width="1.5" x1="380" x2="380" y1="220" y2="34"></line>
+<polygon fill="#56607e" points="380,24 375,38 385,38"></polygon>
+<text fill="#96a0ba" font-size="11.5" transform="rotate(-90 362 130)" x="362" y="130">Energy</text>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="392" x2="512" y1="196" y2="196"></line>
+<text fill="#f0ad5a" x="522" y="201">n = 0 (none)</text>
+<line stroke="#7db0ff" stroke-width="2.5" x1="392" x2="512" y1="146" y2="146"></line>
+<text fill="#9dc2ff" x="522" y="151">n = 1</text>
+<line stroke="#7db0ff" stroke-width="2.5" x1="392" x2="512" y1="96" y2="96"></line>
+<text fill="#9dc2ff" x="522" y="101">n = 2</text>
+<line stroke="#7db0ff" stroke-width="2.5" x1="392" x2="512" y1="46" y2="46"></line>
+<text fill="#9dc2ff" x="522" y="51">n = 3</text>
+<line stroke="#cdd6ea" stroke-width="1.4" x1="440" x2="440" y1="192" y2="150"></line>
+<polygon fill="#cdd6ea" points="440,144 435,158 445,158"></polygon>
+<polygon fill="#cdd6ea" points="440,198 435,184 445,184"></polygon>
+<text fill="#cdd6ea" font-size="12.5" x="448" y="176">ħω</text>
+</g>
+</svg>
+<figcaption>Left, the field. Right, the same thing as an energy ledger: each rung up is one more particle — and the bottom rung does not sit at zero.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  An electron is not "a tiny bit of stuff". There is exactly <strong>one</strong> electron field in the universe, and every electron in your body is one quiver in it. The word "particle" survives only because those quivers come whole, can be localized, and can be counted — it <strong>behaves</strong> like a grain, with no grain underneath.</div>
+<div class="field xref"><span class="lab">Cross-read · condensed matter / engineering</span>
+  <ul>
+<li><strong>Condensed matter</strong>: quantize the collective vibration of atoms in a crystal and you get a <strong>phonon</strong> — it carries energy and momentum, it scatters, it decides how fast a material conducts heat. It behaves like a particle in every respect, and nobody would call it a lump of matter. This is "particle = excitation" you can see with your own eyes.</li>
+<li><strong>Engineering</strong>: any linear system decomposes into independent modes that ignore each other — the overtones of a string, the handful of light patterns an optical fibre will carry. Fourier analysis is already this language; field theory just adds "and the energy comes in portions" to each mode.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the field is the noun, the particle is its verb.</div>
+<details class="q"><summary><b>Think:</b> If a particle is an excitation of a field, does "where the electron is" still mean anything?</summary><div class="qa">Only approximately. An excitation can be built into a localized wave packet, so it has a rough position — but the field fills all space and a packet always has width. Position degrades from "a property the particle owns" to "where the excitation is most concentrated", and the finer you push the question the worse it holds up.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Vacuum Is Not Empty <span class="en">Zero-Point Energy</span></h2>
+<span class="pill">zero-point energy · Casimir 1948</span>
+<div class="field"><span class="lab">Intuition</span>
+  Look back at the ladder: the bottom rung is not zero, it is <span class="nowrap">½<var>ħ</var><var>ω</var></span>. That is not a slip in the arithmetic, it is forced by the uncertainty principle — an oscillator that came to a complete stop would have a definite position and a definite momentum at once, which quantum mechanics forbids. So <strong>an empty field still quivers</strong>: the vacuum is the field's lowest-energy state, not "nothing at all".</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Those quivers have consequences you can weigh. The prettiest is the <strong>Casimir effect</strong>: put two parallel metal plates in vacuum and only the few wavelengths that fit will live <em>between</em> them, while <em>outside</em> any wavelength goes. Outside is more crowded than inside, and the plates get pushed together:
+  <div class="eq"><span class="frac"><span class="fnum"><var>F</var></span><span class="fden"><var>A</var></span></span> = <span class="frac"><span class="fnum">π<sup>2</sup> <var>ħ</var><var>c</var></span><span class="fden">240 <var>d</var><sup>4</sup></span></span></div>
+<div class="gloss"><var>F</var> is force and <var>A</var> (capital letter A) is the plate area, so the ratio is force per square metre; <var>c</var> is the speed of light; <var>d</var> (the <strong>letter</strong> d, not a digit) is the gap between plates. What matters is the <strong>fourth power</strong>: halve the distance and the force grows sixteenfold — which is why it only shows up below a micrometre. In 1997 Lamoreaux measured it with a torsion pendulum to within 5% of theory.</div>
+  The same fluctuations shift the energy levels of hydrogen (the <strong>Lamb shift</strong>, measured at about 1057 megahertz in 1947) and make the electron's magnetism about 0.12% stronger than the naive prediction — a discrepancy computed and measured to more than ten decimal places, still in agreement.</div>
+<figure>
+<svg aria-label="Casimir effect: fewer modes between the plates than outside" role="img" viewbox="0 0 620 230">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<rect fill="#2a2214" height="150" stroke="#f0ad5a" stroke-width="2" width="10" x="240" y="40"></rect>
+<rect fill="#2a2214" height="150" stroke="#f0ad5a" stroke-width="2" width="10" x="370" y="40"></rect>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="245" y="208">plate</text>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="375" y="208">plate</text>
+<!-- inside modes -->
+<path d="M250,70 q30,-22 60,0 q30,22 60,0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<path d="M250,115 q15,-18 30,0 q15,18 30,0 q15,-18 30,0 q15,18 30,0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<path d="M250,160 q10,-14 20,0 q10,14 20,0 q10,-14 20,0 q10,14 20,0 q10,-14 20,0 q10,14 20,0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<text fill="#9dc2ff" font-size="12" text-anchor="middle" x="310" y="30">only 3 modes fit</text>
+<!-- outside modes left -->
+<path d="M40,58 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,86 q22,-18 44,0 q22,18 44,0 q22,-18 44,0 q22,18 44,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,114 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,142 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,170 q30,-20 60,0 q30,20 60,0 q30,-20 60,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="130" y="30">any wavelength</text>
+<!-- outside modes right -->
+<path d="M390,58 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,86 q22,-18 44,0 q22,18 44,0 q22,-18 44,0 q22,18 44,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,114 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,142 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,170 q30,-20 60,0 q30,20 60,0 q30,-20 60,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="500" y="30">any wavelength</text>
+<!-- push arrows -->
+<line stroke="#f0ad5a" stroke-width="2.4" x1="196" x2="228" y1="115" y2="115"></line>
+<polygon fill="#f0ad5a" points="238,115 224,109 224,121"></polygon>
+<line stroke="#f0ad5a" stroke-width="2.4" x1="424" x2="392" y1="115" y2="115"></line>
+<polygon fill="#f0ad5a" points="382,115 396,109 396,121"></polygon>
+</g>
+</svg>
+<figcaption>More vacuum modes outside than between, and the pressure difference pushes the plates together — the quivering of the vacuum can be weighed directly.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part: virtual particles are not particles</span>
+  The most popular story says the vacuum is forever borrowing energy to pop particle pairs into being and paying it straight back. That is <strong>a metaphor for Feynman diagrams, not a fact</strong>. A virtual particle is a bookkeeping term in a perturbative calculation (an internal line in the diagram); it does not obey the energy-momentum relation a real particle must obey, and you will never detect one. Calculate a different way — on a lattice, say — and it never appears at all. Vacuum fluctuations are real; the swarm of blinking little balls is the illustration.</div>
+<div class="field xref"><span class="lab">Cross-read · engineering / AI</span>
+  <ul>
+<li><strong>Engineering</strong>: the Casimir force is a genuine nuisance in micromechanics (MEMS) — a micrometre-scale cantilever can be pressed onto its substrate by the vacuum and stick there for good, so designers have to budget for it. A force that comes out of "nothing" has made it into the engineering handbooks.</li>
+<li><strong>AI</strong>: a noise floor above zero is a feature, not a defect — simulated annealing uses temperature to climb out of local pits, and diffusion models build generation itself as step-by-step denoising from pure noise. Nature wrote the same rule into its foundations: absolute stillness is forbidden.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the vacuum is the quietest state, not an empty one.</div>
+<details class="q"><summary><b>Think:</b> If vacuum energy is real, why can't you build a machine that draws power from it?</summary><div class="qa">Extracting energy requires a lower state to fall into. The vacuum is by definition the lowest rung. What the Casimir effect offers is the one-off drop from far-apart plates to close-together plates; once they have moved, it is spent. That is a potential energy you cash once, not an inexhaustible source.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Where Antimatter Comes From <span class="en">Dirac's Two Roots</span></h2>
+<span class="pill">Dirac 1928 · positron 1932</span>
+<div class="field"><span class="lab">Intuition</span>
+  In 1928 Dirac set out to make the electron's equation obey special relativity. The relativistic energy relation carries a square, and taking the root gives <strong>two solutions, one positive and one negative</strong>. The negative-energy solution cannot be thrown out mathematically and is absurd physically — wouldn't an electron just keep falling forever? His patch: the negative-energy states of the vacuum are <strong>already full</strong>, and scooping one out leaves a hole that looks exactly like a positively charged particle of positive energy. In 1932 Anderson photographed it in a cloud chamber of cosmic rays.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Modern field theory says it far more cleanly, and needs no filled sea: <strong>a charged field comes with two kinds of excitation from birth</strong>, same mass, opposite charge — one called the particle, one the antiparticle. Nor is it optional. If you insist on both relativity (no signal outruns light) and quantum mechanics, antiparticles are mandatory: without them the causal contradictions between two distant events fail to cancel. On a Feynman diagram the antiparticle is simply drawn as the same line with its arrow running against time.</div>
+<figure>
+<svg aria-label="Feynman diagram of an electron and positron annihilating into two photons" role="img" viewbox="0 0 620 300">
+<defs>
+<marker id="ar" markerheight="8" markerunits="userSpaceOnUse" markerwidth="11" orient="auto" refx="9" refy="4">
+<path d="M0,0 L11,4 L0,8 z" fill="#7db0ff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.5" x1="40" x2="40" y1="272" y2="42"></line>
+<polygon fill="#56607e" points="40,32 35,46 45,46"></polygon>
+<text fill="#96a0ba" font-size="11.5" transform="rotate(-90 24 155)" x="24" y="155">time</text>
+<!-- incoming electron: bottom-left to vertex A -->
+<line marker-end="url(#ar)" stroke="#7db0ff" stroke-width="2.2" x1="110" x2="286" y1="266" y2="192"></line>
+<text fill="#9dc2ff" x="86" y="286">electron e⁻</text>
+<!-- positron: arrow points DOWN in time, drawn from vertex B outward -->
+<line marker-end="url(#ar)" stroke="#7db0ff" stroke-width="2.2" x1="294" x2="452" y1="112" y2="266"></line>
+<text fill="#9dc2ff" x="410" y="286">positron e⁺</text>
+<!-- internal line A -> B -->
+<line marker-end="url(#ar)" stroke="#7db0ff" stroke-width="2.2" x1="290" x2="290" y1="188" y2="118"></line>
+<text fill="#8fa0c4" font-size="11" text-anchor="end" x="281" y="136">virtual e⁻</text>
+<!-- photons -->
+<g fill="none" stroke="#f0ad5a" stroke-width="2">
+<path d="M0,0 q7,-8 14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0" transform="translate(286,190) rotate(-155)"></path>
+<path d="M0,0 q7,-8 14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0" transform="translate(294,110) rotate(-25)"></path>
+</g>
+<text fill="#f0ad5a" x="130" y="118">photon γ</text>
+<text fill="#f0ad5a" x="440" y="86">photon γ</text>
+<circle cx="288" cy="190" fill="#f0f3fb" r="4"></circle>
+<circle cx="292" cy="110" fill="#f0f3fb" r="4"></circle>
+</g>
+</svg>
+<figcaption>Time runs upward. The electron's arrow runs with time and the positron's against it — on the diagram they are two stretches of one line. The segment between the vertices is a virtual electron: a middle term in the arithmetic, not something anyone can see.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Antimatter is not exotic; hospitals use it daily. A PET tracer emits positrons, each of which travels less than a millimetre before annihilating with an electron in the tissue into two photons of 511 keV each, flying off in exactly opposite directions — catch that back-to-back pair and you can work out where the annihilation happened. The real mystery is at the other end: the Big Bang should have made <strong>equal</strong> amounts of matter and antimatter, which should have annihilated into nothing but light. And yet here we are. That asymmetry is still unsolved, and it is one of the holes the issue on the Big Bang has to face.</div>
+<div class="field xref"><span class="lab">Cross-read · medicine / materials</span>
+  <ul>
+<li><strong>Medicine</strong>: PET has a hard floor on spatial resolution set by that fraction of a millimetre the positron travels before annihilating — a fact about ontology that directly caps how fine a clinical image can be.</li>
+<li><strong>Materials</strong>: positron annihilation spectroscopy is a standard way to survey microscopic voids inside metals. Positrons prefer to settle into sites where an atom is missing (fewer electrons there), so their lifetime lengthens — measure the lifetime and you have counted the defects.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: antimatter is not a science-fiction prop, it is the change relativity hands back to quantum mechanics.</div>
+<details class="q"><summary><b>Think:</b> If an antiparticle is "a particle running backwards in time", why can't we signal into the past with one?</summary><div class="qa">Because that is a bookkeeping direction on the diagram, not something actually travelling backwards. In any real process the observable particles stay inside the light cone and move forward in time; once all the diagrams are summed, the faster-than-light pieces cancel exactly — and antiparticles exist precisely to make that cancellation work. They guard causality rather than breach it.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Why Every Electron Is Identical <span class="en">Spin &amp; Statistics</span></h2>
+<span class="pill">spin-statistics theorem · Pauli 1940</span>
+<div class="field"><span class="lab">Intuition</span>
+  Two electrons are not merely "very similar", they are <strong>indistinguishable in principle</strong> — no serial number, no wear, no manufacturing batch. Human factories cannot turn out two truly identical screws, while nature casually made 10<sup>80</sup> perfectly identical electrons. Field theory's answer is nearly a tautology: they were not manufactured in many copies, they are <strong>many quivers of one field</strong>. Sharing a single source leaves no room for anything to tell them apart.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  If they cannot be told apart, swapping two of them must leave every observable untouched, so the wavefunction can differ by at most a sign:
+  <div class="eq">ψ(1,2) = ± ψ(2,1)</div>
+<div class="gloss">ψ is the Greek letter <strong>psi</strong>, the wavefunction; the 1 and 2 in brackets are the states of the two particles. Take <strong>+</strong> and you have a <strong>boson</strong> (photons and such); take <strong>−</strong> and you have a <strong>fermion</strong> (electrons and such). The <strong>spin-statistics theorem</strong> says integer spin must take +, half-integer spin must take − — a rule that non-relativistic quantum mechanics can only insert by hand, and that relativistic field theory can prove.</div>
+  The minus sign immediately yields the <strong>Pauli exclusion principle</strong>: if two fermions were in exactly the same state, swapping them would change nothing, so <span class="nowrap">ψ = −ψ</span>, which forces <span class="nowrap">ψ = <span class="zero">0</span> (the digit zero)</span> — probability zero, it cannot happen.</div>
+<figure>
+<svg aria-label="Bosons piling into one level versus fermions filling levels in turn" role="img" viewbox="0 0 620 220">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text fill="#9dc2ff" font-weight="700" text-anchor="middle" x="150" y="22">Bosons (+)</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="460" y="22">Fermions (−)</text>
+<g stroke="#3a4667" stroke-width="2">
+<line x1="60" x2="240" y1="180" y2="180"></line>
+<line x1="60" x2="240" y1="142" y2="142"></line>
+<line x1="60" x2="240" y1="104" y2="104"></line>
+<line x1="60" x2="240" y1="66" y2="66"></line>
+<line x1="370" x2="550" y1="180" y2="180"></line>
+<line x1="370" x2="550" y1="142" y2="142"></line>
+<line x1="370" x2="550" y1="104" y2="104"></line>
+<line x1="370" x2="550" y1="66" y2="66"></line>
+</g>
+<g fill="#5b9bff">
+<circle cx="105" cy="172" r="7"></circle>
+<circle cx="127" cy="172" r="7"></circle>
+<circle cx="149" cy="172" r="7"></circle>
+<circle cx="171" cy="172" r="7"></circle>
+<circle cx="193" cy="172" r="7"></circle>
+<circle cx="127" cy="156" r="7"></circle>
+<circle cx="149" cy="156" r="7"></circle>
+<circle cx="171" cy="156" r="7"></circle>
+</g>
+<g fill="#f0ad5a">
+<circle cx="430" cy="172" r="7"></circle>
+<circle cx="490" cy="172" r="7"></circle>
+<circle cx="430" cy="134" r="7"></circle>
+<circle cx="490" cy="134" r="7"></circle>
+<circle cx="430" cy="96" r="7"></circle>
+<circle cx="490" cy="96" r="7"></circle>
+<circle cx="430" cy="58" r="7"></circle>
+<circle cx="490" cy="58" r="7"></circle>
+</g>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="150" y="205">all in the lowest level → lasers</text>
+<text fill="#c9a06a" font-size="12" text-anchor="middle" x="460" y="205">two per level → the periodic table</text>
+</g>
+</svg>
+<figcaption>One sign apart, and the universe splits into its two kinds of inhabitant: one that loves a crowd, one that will not share.</figcaption>
+</figure>
+<div class="field"><span class="lab">Why it matters</span>
+  That sign holds up every structure you have ever seen. If electrons could all crowd into the lowest shell, every element would have the same chemistry and there would be no periodic table. You are not sinking through the floor mainly because of electrostatic repulsion either, but because of the <strong>degeneracy pressure</strong> that arises when fermions refuse to share a state — in 1967 Dyson and Lenard proved rigorously that the stability of matter follows from this prohibition. The same prohibition holds a white dwarf up against collapse, until its mass passes about 1.4 suns.</div>
+<div class="field xref"><span class="lab">Cross-read · AI / engineering</span>
+  <ul>
+<li><strong>AI</strong>: a convolutional network applies <strong>the same</strong> kernel at every position, so the feature detectors everywhere are exactly identical — not separately trained into a coincidental match, but sharing one set of parameters. "Exactly identical" comes from sharing a single underlying object, which is precisely field theory's answer to why electrons are alike.</li>
+<li><strong>Engineering</strong>: this is the single-source-of-truth principle — write the configuration once, reference it everywhere, and no two copies can quietly drift apart. Nature enforces it to the limit: the universe holds exactly one definition of an electron.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: electrons are identical because they were always one and the same thing, quivering at different places.</div>
+<details class="q"><summary><b>Think:</b> If someone measured a minute difference between two electrons, which part of physics would collapse?</summary><div class="qa">The premise that they belong to one field — and with it the spin-statistics theorem and Pauli exclusion would have to be rewritten, implying a deeper layer of structure (an internal make-up for the electron, say). Which is why people keep hunting for atomic transitions that violate Pauli exclusion; so far every result is null.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Deeper questions</h2>
+<details><summary>How can one theory nail the electron's magnetism and miss the vacuum energy so catastrophically?</summary>
+<div class="body">Quantities like the electron's magnetic moment are <strong>differences</strong>, and the absolute vacuum energy cancels out of them automatically; it never enters a particle-physics observable at all. Gravity does not play along: it responds to the <strong>absolute</strong> value of energy, and vacuum energy acts directly as a cosmological constant. Add up the zero-point energies of the known fields naively and you overshoot the observed dark energy by something like 10<sup>120</sup>. So this is not "the calculation is wrong" — it is <strong>the tear along the seam with gravity</strong>: the term particle physics may legitimately ignore is exactly the term that matters most in cosmology (the issue on dark matter and dark energy takes it head-on).</div></details>
+<details><summary>Is renormalization just sweeping infinities under the rug?</summary>
+<div class="body">Early on it did look like cheating, and Dirac refused to accept it to the end of his life. Wilson gave the convincing account in the 1970s: those infinities come from an assumption smuggled in without warrant — that the theory holds at <strong>arbitrarily small scales</strong>. Take the effective-theory view instead: admit you are only valid below some energy, pack the unknown high-energy contributions into a few parameters fixed by experiment (the electron's mass and charge), and no infinity appears. Renormalization turns from a cover-up into honest bookkeeping: it states plainly which few numbers must be measured, and everything else is prediction.</div></details>
+<details><summary>When does the phrase "one particle" stop making sense?</summary>
+<div class="body">When spacetime is curved, or the observer accelerates. The <strong>Unruh effect</strong> says a uniformly accelerating observer will find a warm thermal bath in the very vacuum an inertial observer sees as empty — particle number depends on how you move. Hawking radiation outside a black-hole horizon is the gravitational version of the same statement. So <strong>a particle is not an absolute concept</strong>: defining "lowest-energy state" requires agreeing on a direction of time first. Fields and interactions are the more basic things.</div></details>
+<details><summary>Is the field a real thing, or one more layer of mathematics?</summary>
+<div class="body">Sturdier than "the particle is real", but don't treat it as the end. Two reasons. First, the same physics can be written with different field variables, and changing variables changes no physics — so the specific form of the field carries a conventional element. Second, gauge fields are openly redundant: one physical state corresponds to infinitely many ways of writing the field. What does not depend on the writing is the observables — scattering probabilities and correlation functions. In recent years people have bypassed fields to compute scattering amplitudes directly, and found structures the field language had been hiding. The safe statement: the field is the most useful middle layer we have, not the bottom one.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>David Tong, <a href="https://www.damtp.cam.ac.uk/user/tong/qft.html">Lectures on Quantum Field Theory</a> — free notes, widely held to be among the best entry points</li>
+<li>Feynman, <em>QED: The Strange Theory of Light and Matter</em> — Feynman diagrams explained without a single equation, still unmatched</li>
+<li>Dirac, <a href="https://doi.org/10.1098/rspa.1928.0023">Proc. R. Soc. A 117, 610 (1928)</a> — the relativistic electron equation</li>
+<li>Anderson, <a href="https://doi.org/10.1103/PhysRev.43.491">Phys. Rev. 43, 491 (1933)</a>, "The Positive Electron" — the discovery of the positron</li>
+<li>Pauli, <a href="https://doi.org/10.1103/PhysRev.58.716">Phys. Rev. 58, 716 (1940)</a> — the spin-statistics theorem</li>
+<li>Lamoreaux, <a href="https://doi.org/10.1103/PhysRevLett.78.5">Phys. Rev. Lett. 78, 5 (1997)</a> — the modern measurement of the Casimir force</li>
+<li>Fan et al., <a href="https://doi.org/10.1103/PhysRevLett.130.071801">Phys. Rev. Lett. 130, 071801 (2023)</a> — the latest measurement of the electron magnetic moment</li>
+<li>Dyson &amp; Lenard, <a href="https://doi.org/10.1063/1.1705209">J. Math. Phys. 8, 423 (1967)</a> — the stability of matter follows from Pauli exclusion</li>
+<li>Wilson, <a href="https://doi.org/10.1103/RevModPhys.55.583">Rev. Mod. Phys. 55, 583 (1983)</a> — the Nobel lecture on the renormalization group</li>
+<li>Matt Strassler, <a href="https://profmattstrassler.com/articles-and-posts/particle-physics-basics/virtual-particles-what-are-they/">"Virtual Particles: What Are They?"</a> — the cleanest dismantling of the usual misconception</li>
+<li><a href="https://plato.stanford.edu/entries/quantum-field-theory/">SEP: Quantum Field Theory</a> — an even-handed survey of the ontological disputes</li>
+<li>Sean Carroll, <em>The Biggest Ideas in the Universe: Quanta and Fields</em> (2024) — field-theory intuition for general readers, with real equations</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

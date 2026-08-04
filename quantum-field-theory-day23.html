@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：量子场论入门 · Day 23</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>量子场论入门</h1>
+<div class="meta">Day 23 · 2026 · Phase E 量子力学</div>
+<div class="tagline">「粒子」不是自然的基本词。基本的是<strong>场</strong>——铺满整个宇宙的一层东西；你叫做电子的，是它身上一个不能再小的抖动。</div>
+</header>
+<div class="intro">
+薛定谔方程有个说不出口的前提：<b>粒子有几个是事先定好的</b>。可对撞机里两个质子迎面一撞，飞出上百个新粒子；正负电子相遇，双双消失只剩两道光。粒子会生会灭，这件事量子力学的方程根本写不下。补上这一步的理论叫<b>量子场论</b>：把"有几个粒子"从前提降格成场的一个属性。代价是重写本体论——场是主角，粒子只是它的激发；回报是史上最精密的预言、反物质的必然性，以及"电子为什么完全一样"的答案。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>粒子是场的激发 <span class="en">Particles as Field Excitations</span></h2>
+<span class="pill">场的量子化 · 1927</span>
+<div class="field"><span class="lab">直觉</span>
+  想象一张铺满全宇宙的弹簧床：每一点插一根弹簧，相邻的互相拉扯。安静时它是平的，敲一下就有涟漪跑开。量子力学此时插一句话进来：<strong>一根弹簧的能量不能连续取值，只能一份一份地加</strong>。于是涟漪的强度也是一份一份的——一份，就是一个粒子。</div>
+<div class="field"><span class="lab">机制</span>
+  单个量子振子的能量是
+  <div class="eq"><var>E</var><sub><var>n</var></sub> = ( <var>n</var> + <span class="frac"><span class="fnum">1</span><span class="fden">2</span></span> ) <var>ħ</var><var>ω</var></div>
+<div class="gloss"><var>ħ</var> 读作「h 拔」，是约化普朗克常数（普朗克常数除以 2π）；<var>ω</var> 是希腊字母 <strong>omega</strong>，这个模式的角频率，管它"抖得多快"；<var>n</var> 只能取 <strong>0（数字零）</strong>、1、2… 这些非负整数。把 <var>n</var> 读成"第几个能级"是量子力学；读成"<strong>这儿有 <var>n</var> 个粒子</strong>"就是量子场论。同一个公式换个读法，粒子就出现了。</div>
+  场就是无穷多个这样的振子（每个波长一个），配一对算符：一个把 <var>n</var> 加一（造出一个粒子），一个减一（毁掉一个）。粒子生灭不再是奇事，只是能级上下挪一格。</div>
+<figure>
+<svg aria-label="场的涟漪与能级阶梯的对应" role="img" viewbox="0 0 640 250">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<text fill="#96a0ba" x="24" y="20">场的状态</text>
+<text fill="#96a0ba" x="392" y="20">能级</text>
+<!-- field snapshots -->
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1" x1="30" x2="300" y1="60" y2="60"></line>
+<path d="M30,60 L300,60" fill="none" stroke="#5b9bff" stroke-width="2.5"></path>
+<text fill="#dbe2f2" x="30" y="86">真空：场是平的</text>
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1" x1="30" x2="300" y1="128" y2="128"></line>
+<path d="M30,128 L120,128 q30,-34 60,0 q30,34 60,0 L300,128" fill="none" stroke="#5b9bff" stroke-width="2.5"></path>
+<text fill="#dbe2f2" x="30" y="154">一个涟漪 = 一个粒子</text>
+<line stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1" x1="30" x2="300" y1="196" y2="196"></line>
+<path d="M30,196 L60,196 q20,-26 40,0 q20,26 40,0 L140,196 q20,-26 40,0 q20,26 40,0 L300,196" fill="none" stroke="#5b9bff" stroke-width="2.5"></path>
+<text fill="#dbe2f2" x="30" y="222">两个涟漪 = 两个粒子</text>
+<!-- ladder -->
+<line stroke="#56607e" stroke-width="1.5" x1="380" x2="380" y1="220" y2="34"></line>
+<polygon fill="#56607e" points="380,24 375,38 385,38"></polygon>
+<text fill="#96a0ba" font-size="11.5" transform="rotate(-90 362 130)" x="362" y="130">能量</text>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="392" x2="512" y1="196" y2="196"></line>
+<text fill="#f0ad5a" x="522" y="201">n = 0（零个）</text>
+<line stroke="#7db0ff" stroke-width="2.5" x1="392" x2="512" y1="146" y2="146"></line>
+<text fill="#9dc2ff" x="522" y="151">n = 1</text>
+<line stroke="#7db0ff" stroke-width="2.5" x1="392" x2="512" y1="96" y2="96"></line>
+<text fill="#9dc2ff" x="522" y="101">n = 2</text>
+<line stroke="#7db0ff" stroke-width="2.5" x1="392" x2="512" y1="46" y2="46"></line>
+<text fill="#9dc2ff" x="522" y="51">n = 3</text>
+<line stroke="#cdd6ea" stroke-width="1.4" x1="440" x2="440" y1="192" y2="150"></line>
+<polygon fill="#cdd6ea" points="440,144 435,158 445,158"></polygon>
+<polygon fill="#cdd6ea" points="440,198 435,184 445,184"></polygon>
+<text fill="#cdd6ea" font-size="12.5" x="448" y="176">ħω</text>
+</g>
+</svg>
+<figcaption>左边是场，右边是同一件事的能量账本：每上一格就多一个粒子——而最低那格并不在零上。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  电子不是"一小颗东西"。全宇宙只有<strong>一个</strong>电子场，你身上的每个电子都是它上面的一次抖动。"粒子"这词留下来，只因为抖动是整份的、能定域、能数数——它<strong>像</strong>颗粒，底下却没有颗粒。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 凝聚态 / 工程</span>
+  <ul>
+<li><strong>凝聚态</strong>：晶体里原子的集体振动量子化后叫<strong>声子</strong>，有能量、有动量、会散射、决定材料导热快慢——处处像粒子，可谁也不会说它是"一小块物质"。这是"粒子即激发"最眼见为实的版本。</li>
+<li><strong>工程</strong>：任何线性系统都能拆成互不干扰的独立模式——琴弦的泛音、光纤里能跑的几种光型。傅里叶分解本就是这套语言，场论只是给每个模式再加一句"能量一份一份来"。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：场是名词，粒子是它的动词。</div>
+<details class="q"><summary><b>思考：</b>如果粒子是场的激发，那"一个电子在哪里"这句话还成立吗？</summary><div class="qa">只在近似意义上成立。激发能做成局域的波包，于是有个大致位置——但场铺满全空间，波包也总有宽度。位置从"粒子固有的属性"退化成"激发在哪儿最集中"，谈得越精细越站不住。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>真空不空 <span class="en">The Vacuum Is Not Empty</span></h2>
+<span class="pill">零点能 · 卡西米尔 1948</span>
+<div class="field"><span class="lab">直觉</span>
+  看回那把梯子：最低一格的能量不是零，是 <span class="nowrap">½<var>ħ</var><var>ω</var></span>。这不是算漏了，是不确定性原理逼出来的——振子要彻底静止，位置和动量就得同时确定，量子力学不允许。所以<strong>空的场也在抖</strong>：真空是场的最低能状态，不是"什么都没有"。</div>
+<div class="field"><span class="lab">机制</span>
+  这抖动有能称量的后果。最漂亮的是<strong>卡西米尔效应</strong>：真空里放两块平行金属板，板<em>间</em>只装得下波长合拍的几种模式，板<em>外</em>什么波长都行——外面比里面"挤"，把两块板压到一起：
+  <div class="eq"><span class="frac"><span class="fnum"><var>F</var></span><span class="fden"><var>A</var></span></span> = <span class="frac"><span class="fnum">π<sup>2</sup> <var>ħ</var><var>c</var></span><span class="fden">240 <var>d</var><sup>4</sup></span></span></div>
+<div class="gloss"><var>F</var> 是力、<var>A</var>（大写字母 A）是板的面积，相除就是"每平方米受多大力"；<var>c</var> 是光速；<var>d</var>（<strong>字母 d</strong>，不是数字）是两板间距。要紧的是那个<strong>四次方</strong>：距离减半，力涨十六倍——所以它只在微米以下显形，1997 年 Lamoreaux 用扭秤量到与理论相差 5% 以内。</div>
+  同一批涨落还挪动了氢原子的能级（<strong>兰姆位移</strong>，1947 年测到约 1057 兆赫），也让电子的磁性比朴素预言大了千分之一点二——这个偏差算到、测到小数点后十几位仍然对得上。</div>
+<figure>
+<svg aria-label="卡西米尔效应：板间模式少于板外" role="img" viewbox="0 0 620 230">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<rect fill="#2a2214" height="150" stroke="#f0ad5a" stroke-width="2" width="10" x="240" y="40"></rect>
+<rect fill="#2a2214" height="150" stroke="#f0ad5a" stroke-width="2" width="10" x="370" y="40"></rect>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="245" y="208">金属板</text>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="375" y="208">金属板</text>
+<!-- inside modes -->
+<path d="M250,70 q30,-22 60,0 q30,22 60,0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<path d="M250,115 q15,-18 30,0 q15,18 30,0 q15,-18 30,0 q15,18 30,0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<path d="M250,160 q10,-14 20,0 q10,14 20,0 q10,-14 20,0 q10,14 20,0 q10,-14 20,0 q10,14 20,0" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<text fill="#9dc2ff" font-size="12" text-anchor="middle" x="310" y="30">只有 3 种合拍</text>
+<!-- outside modes left -->
+<path d="M40,58 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,86 q22,-18 44,0 q22,18 44,0 q22,-18 44,0 q22,18 44,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,114 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,142 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M40,170 q30,-20 60,0 q30,20 60,0 q30,-20 60,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="130" y="30">什么波长都行</text>
+<!-- outside modes right -->
+<path d="M390,58 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0 q12,-16 24,0 q12,16 24,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,86 q22,-18 44,0 q22,18 44,0 q22,-18 44,0 q22,18 44,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,114 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0 q8,-12 16,0 q8,12 16,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,142 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0 q16,-15 32,0 q16,15 32,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<path d="M390,170 q30,-20 60,0 q30,20 60,0 q30,-20 60,0" fill="none" stroke="#4a6fae" stroke-width="1.6"></path>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="500" y="30">什么波长都行</text>
+<!-- push arrows -->
+<line stroke="#f0ad5a" stroke-width="2.4" x1="196" x2="228" y1="115" y2="115"></line>
+<polygon fill="#f0ad5a" points="238,115 224,109 224,121"></polygon>
+<line stroke="#f0ad5a" stroke-width="2.4" x1="424" x2="392" y1="115" y2="115"></line>
+<polygon fill="#f0ad5a" points="382,115 396,109 396,121"></polygon>
+</g>
+</svg>
+<figcaption>板外的真空模式比板间多，压力差把两块板推到一起——真空的抖动可以直接称重。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点：虚粒子不是粒子</span>
+  流传最广的说法是"真空里不断有粒子对借点能量蹦出来、赶紧还回去"。这是<strong>费曼图的比喻，不是事实</strong>。虚粒子是微扰计算里的记账项（图上的内线），不满足真粒子必须满足的能量-动量关系，你永远探测不到一个；换一种算法（比如格点计算）它压根不出现。真空涨落是真的，把它想成一群闪现的小球则是插图。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / AI</span>
+  <ul>
+<li><strong>工程</strong>：卡西米尔力是纳米机械（MEMS）的真麻烦——微米级悬臂梁会被真空压得贴上基板粘死，设计时必须算进去。这条来自"真空"的力已经进了工程手册。</li>
+<li><strong>AI</strong>：底噪不为零反而是本事——模拟退火靠温度跳出局部坑，扩散模型干脆把生成建成"从纯噪声一步步去噪"。自然把同一条写进了基本设定：绝对静止被禁止。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：真空是最安静的状态，不是空无一物的状态。</div>
+<details class="q"><summary><b>思考：</b>既然真空能是真的，为什么不能造一台"从真空取能"的机器？</summary><div class="qa">取能的前提是有更低的能态可掉。真空按定义就是最低那格；卡西米尔效应能取的只是把板从远处挪近这一次落差，挪完就没了——一次性的势能，不是取之不尽的源。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>反物质从何而来 <span class="en">Where Antimatter Comes From</span></h2>
+<span class="pill">狄拉克 1928 · 正电子 1932</span>
+<div class="field"><span class="lab">直觉</span>
+  1928 年狄拉克想把电子的方程改造得符合狭义相对论。相对论给的能量关系里带一个平方，开根号就有<strong>正负两个解</strong>。负能解数学上扔不掉，物理上又荒唐——电子岂不是要一路往下掉个没完？他的补丁是：真空里负能状态<strong>已被填满</strong>，挖走一个，那个洞看起来就像一个正电、正能量的粒子。1932 年 Anderson 在宇宙线云室里真拍到了它。</div>
+<div class="field"><span class="lab">机制</span>
+  现代场论的说法干净得多，也不再需要那片"海"：<strong>一个带电的场天生就有两种激发</strong>，质量一样、电荷相反，一个叫粒子、一个叫反粒子。而且这不是可选项——想同时要相对论（信号不能超光速）和量子力学，反粒子是必需品：缺了它，两个远处事件之间的因果矛盾无法互相抵消。费曼图上，反粒子干脆画成箭头逆着时间的同一条线。</div>
+<figure>
+<svg aria-label="正负电子湮灭成两个光子的费曼图" role="img" viewbox="0 0 620 300">
+<defs>
+<marker id="ar" markerheight="8" markerunits="userSpaceOnUse" markerwidth="11" orient="auto" refx="9" refy="4">
+<path d="M0,0 L11,4 L0,8 z" fill="#7db0ff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.5" x1="40" x2="40" y1="272" y2="42"></line>
+<polygon fill="#56607e" points="40,32 35,46 45,46"></polygon>
+<text fill="#96a0ba" font-size="11.5" transform="rotate(-90 24 155)" x="24" y="155">时间</text>
+<!-- incoming electron: bottom-left to vertex A -->
+<line marker-end="url(#ar)" stroke="#7db0ff" stroke-width="2.2" x1="110" x2="286" y1="266" y2="192"></line>
+<text fill="#9dc2ff" x="86" y="286">电子 e⁻</text>
+<!-- positron: arrow points DOWN in time, drawn from vertex B outward -->
+<line marker-end="url(#ar)" stroke="#7db0ff" stroke-width="2.2" x1="294" x2="452" y1="112" y2="266"></line>
+<text fill="#9dc2ff" x="416" y="286">正电子 e⁺</text>
+<!-- internal line A -> B -->
+<line marker-end="url(#ar)" stroke="#7db0ff" stroke-width="2.2" x1="290" x2="290" y1="188" y2="118"></line>
+<text fill="#8fa0c4" font-size="11.5" text-anchor="end" x="281" y="136">虚电子</text>
+<!-- photons -->
+<g fill="none" stroke="#f0ad5a" stroke-width="2">
+<path d="M0,0 q7,-8 14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0" transform="translate(286,190) rotate(-155)"></path>
+<path d="M0,0 q7,-8 14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0 t14,0" transform="translate(294,110) rotate(-25)"></path>
+</g>
+<text fill="#f0ad5a" x="140" y="118">光子 γ</text>
+<text fill="#f0ad5a" x="446" y="88">光子 γ</text>
+<circle cx="288" cy="190" fill="#f0f3fb" r="4"></circle>
+<circle cx="292" cy="110" fill="#f0f3fb" r="4"></circle>
+</g>
+</svg>
+
+<figcaption>时间向上。电子的箭头顺着时间走，正电子的逆着走——图上它们是同一条线的两段。两顶点之间那截是虚电子：算式里的中间项，不是能被看到的东西。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  反物质一点也不玄，医院天天在用：PET 扫描的示踪剂会放出正电子，它跑不了一毫米就和组织里的电子湮灭，变成两个能量各 511 千电子伏、朝正相反方向飞出的光子——探测器抓这对反向光子，就能反推湮灭点在哪。真正的谜在另一头：大爆炸该产出<strong>等量</strong>的物质与反物质，早该湮灭干净只剩一片光。可我们在这里。这个不对称至今无解，是「大爆炸」一期要面对的窟窿。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 医学 / 材料</span>
+  <ul>
+<li><strong>医学</strong>：PET 的分辨率有个物理下限，就来自正电子湮灭前还要跑那零点几毫米——一条本体论层面的性质，直接卡住了临床影像能看多细。</li>
+<li><strong>材料</strong>：正电子湮灭谱学是查金属内部微缺陷的常规手段。正电子爱钻进缺了原子的空洞（那儿电子少），湮灭寿命随之变长，测寿命就能数出缺陷密度。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：反物质不是科幻设定，是相对论加量子力学的找零。</div>
+<details class="q"><summary><b>思考：</b>如果反粒子是"逆着时间跑的粒子"，为什么我们不能靠它往过去发信号？</summary><div class="qa">那只是图上的记账方向，不是真有东西倒着走。任何实际过程里可观测的粒子都在光锥内顺时间走；把所有图加起来，超光速部分正好抵消——反粒子的存在正是为了保证这一抵消，它是因果律的守卫，不是漏洞。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>全同粒子为何完全相同 <span class="en">Why All Electrons Are Identical</span></h2>
+<span class="pill">自旋统计定理 · 泡利 1940</span>
+<div class="field"><span class="lab">直觉</span>
+  两个电子不是"很像"，是<strong>原则上无法区分</strong>——没有编号、没有磨损、没有出厂批次。人类的工厂做不出两个完全相同的螺丝，自然却轻松造了 10<sup>80</sup> 个完全相同的电子。场论的回答几乎是同义反复：它们不是"造了很多份"，而是<strong>同一个场的很多次抖动</strong>，共享一个源头，没有可供区分的余地。</div>
+<div class="field"><span class="lab">机制</span>
+  既然无法区分，交换两个粒子就不该改变任何可观测量，波函数最多差一个符号：
+  <div class="eq">ψ(1,2) = ± ψ(2,1)</div>
+<div class="gloss">ψ 是希腊字母 <strong>psi</strong>，即波函数；括号里的 1、2 指两个粒子各自的状态。取 <strong>+</strong> 的叫<strong>玻色子</strong>（光子等），取 <strong>−</strong> 的叫<strong>费米子</strong>（电子等）。<strong>自旋统计定理</strong>说：整数自旋必取 +，半整数自旋必取 −——非相对论量子力学里这只能当经验规则塞进去，相对论量子场论里它是能证明的。</div>
+  取 − 号立刻推出<strong>泡利不相容</strong>：两个费米子若处于完全相同的状态，交换前后是同一件事，于是 <span class="nowrap">ψ = −ψ</span>，只能 <span class="nowrap">ψ = <span class="zero">0</span>（数字零）</span>——概率为零，做不到。</div>
+<figure>
+<svg aria-label="玻色子堆积与费米子逐层填充的对比" role="img" viewbox="0 0 620 220">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<text fill="#9dc2ff" font-weight="700" text-anchor="middle" x="150" y="22">玻色子（+）</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="460" y="22">费米子（−）</text>
+<g stroke="#3a4667" stroke-width="2">
+<line x1="60" x2="240" y1="180" y2="180"></line>
+<line x1="60" x2="240" y1="142" y2="142"></line>
+<line x1="60" x2="240" y1="104" y2="104"></line>
+<line x1="60" x2="240" y1="66" y2="66"></line>
+<line x1="370" x2="550" y1="180" y2="180"></line>
+<line x1="370" x2="550" y1="142" y2="142"></line>
+<line x1="370" x2="550" y1="104" y2="104"></line>
+<line x1="370" x2="550" y1="66" y2="66"></line>
+</g>
+<g fill="#5b9bff">
+<circle cx="105" cy="172" r="7"></circle>
+<circle cx="127" cy="172" r="7"></circle>
+<circle cx="149" cy="172" r="7"></circle>
+<circle cx="171" cy="172" r="7"></circle>
+<circle cx="193" cy="172" r="7"></circle>
+<circle cx="127" cy="156" r="7"></circle>
+<circle cx="149" cy="156" r="7"></circle>
+<circle cx="171" cy="156" r="7"></circle>
+</g>
+<g fill="#f0ad5a">
+<circle cx="430" cy="172" r="7"></circle>
+<circle cx="490" cy="172" r="7"></circle>
+<circle cx="430" cy="134" r="7"></circle>
+<circle cx="490" cy="134" r="7"></circle>
+<circle cx="430" cy="96" r="7"></circle>
+<circle cx="490" cy="96" r="7"></circle>
+<circle cx="430" cy="58" r="7"></circle>
+<circle cx="490" cy="58" r="7"></circle>
+</g>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="150" y="205">全挤最低格 → 激光、超流</text>
+<text fill="#c9a06a" font-size="12" text-anchor="middle" x="460" y="205">每格限两个 → 元素周期表</text>
+</g>
+</svg>
+<figcaption>一个符号之差，分出宇宙的两大类居民：一类爱扎堆，一类互不相让。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  这个符号撑起了你所见的一切结构。电子若能全挤进最低壳层，所有元素的化学性质就都一样，周期表不存在。你没有陷进地板，主要也不是靠静电排斥，而是靠费米子不肯同态产生的<strong>简并压</strong>——1967 年 Dyson 与 Lenard 严格证明了"物质之所以稳定"正出自这条禁令。它还撑着白矮星不塌缩，直到质量超过约 1.4 个太阳。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 工程</span>
+  <ul>
+<li><strong>AI</strong>：卷积网络在每个位置用<strong>同一组</strong>卷积核，各处的特征检测器因此完全相同——不是分别训练出来碰巧一样，而是共享同一份参数。"完全相同"的来源是共享一个底层对象，正是场论对"电子为什么一样"的回答。</li>
+<li><strong>工程</strong>：这也是"单一真相源"的原理——配置写在一处、各处引用，就不会有两份拷贝悄悄漂移。自然把这条执行到了极致：全宇宙的电子只有一份定义。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：电子完全相同，因为它们本来就是同一样东西的不同次抖动。</div>
+<details class="q"><summary><b>思考：</b>如果哪天测到两个电子有极微小的差别，物理会塌掉哪一块？</summary>  <div class="qa">塌掉的是"它们同属一个场"这个前提，自旋统计定理与泡利不相容都要跟着重写——那意味着更深一层结构（比如电子有内部构造）。所以一直有人在找违反泡利原理的原子跃迁，至今全是零结果。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>同一套理论，为什么算电子磁矩神准、算真空能却错得离谱？</summary>
+<div class="body">电子磁矩这类量算的都是<strong>差值</strong>，绝对的真空能在其中自动抵消，从不进入粒子物理的可观测量。可引力不管这些：它对能量的<strong>绝对值</strong>敏感，真空能会直接充当宇宙学常数。把已知场的零点能朴素加总，比观测到的暗能量大约 10<sup>120</sup> 倍。所以这不是"算错了"，而是<strong>它与引力接缝处的裂口</strong>：粒子物理里可以合法忽略的那一项，正是宇宙学里最要命的那一项（「暗物质与暗能量」一期会正面碰它）。</div></details>
+<details><summary>重整化是不是把无穷大扫到地毯底下？</summary>
+<div class="body">早期它确实像作弊，狄拉克到晚年都拒绝接受。Wilson 在 1970 年代给出了让人服气的解释：无穷大来自一个偷偷做出的假设——理论在<strong>任意小的尺度上都成立</strong>，而没人有理由这么假设。改用有效理论的眼光：承认自己只在某个能量以下有效，把未知的高能贡献打包进几个由实验定值的参数（电子质量、电荷），无穷大就不出现了。重整化于是从遮丑变成诚实记账：明说"这几个数得去量"，其余全是预言。</div></details>
+<details><summary>"一个粒子"这句话，在什么时候会失效？</summary>
+<div class="body">在时空不平直、或观察者加速的时候。<strong>Unruh 效应</strong>说：一个匀加速的观察者，在惯性观察者眼里空无一物的真空中会测到一片有温度的热浴——粒子数依赖于你怎么运动。黑洞视界外的霍金辐射是同一件事的引力版。<strong>粒子于是不是绝对概念</strong>：定义"最低能态"先要约定一个时间方向。场和相互作用才更基本。</div></details>
+<details><summary>场是真实存在的东西，还是又一层数学工具？</summary>
+<div class="body">比"粒子是实在"稳，但别当终点。其一，同一套物理可以用不同的场变量写出来，换个变量物理不变，说明场的具体形式带着约定成分；其二，规范场里明摆着有冗余——同一个物理状态对应无穷多种写法。真正不依赖写法的是可观测量：散射概率、关联函数。近年有人干脆绕开场直接算散射振幅，发现许多结构在场的语言里反被藏住了。稳妥的说法：场是目前最好用的中间层，不是最后一层。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>David Tong，<a href="https://www.damtp.cam.ac.uk/user/tong/qft.html">Lectures on Quantum Field Theory</a>——免费讲义，公认最好的入门之一</li>
+<li>Feynman，<em>QED: The Strange Theory of Light and Matter</em>——不用一个公式讲清费曼图，至今无人超越</li>
+<li>Dirac，<a href="https://doi.org/10.1098/rspa.1928.0023">Proc. R. Soc. A 117, 610 (1928)</a>——相对论性电子方程的原文</li>
+<li>Anderson，<a href="https://doi.org/10.1103/PhysRev.43.491">Phys. Rev. 43, 491 (1933)</a>，"The Positive Electron"——正电子的发现</li>
+<li>Pauli，<a href="https://doi.org/10.1103/PhysRev.58.716">Phys. Rev. 58, 716 (1940)</a>——自旋统计定理</li>
+<li>Lamoreaux，<a href="https://doi.org/10.1103/PhysRevLett.78.5">Phys. Rev. Lett. 78, 5 (1997)</a>——卡西米尔力的现代测量</li>
+<li>Fan 等，<a href="https://doi.org/10.1103/PhysRevLett.130.071801">Phys. Rev. Lett. 130, 071801 (2023)</a>——电子磁矩的最新测量</li>
+<li>Dyson &amp; Lenard，<a href="https://doi.org/10.1063/1.1705209">J. Math. Phys. 8, 423 (1967)</a>——物质的稳定性来自泡利不相容</li>
+<li>Wilson，<a href="https://doi.org/10.1103/RevModPhys.55.583">Rev. Mod. Phys. 55, 583 (1983)</a>——重整化群的诺奖讲演</li>
+<li>Matt Strassler，<a href="https://profmattstrassler.com/articles-and-posts/particle-physics-basics/virtual-particles-what-are-they/">"Virtual Particles: What Are They?"</a>——把虚粒子的误解拆得最干净的一篇</li>
+<li><a href="https://plato.stanford.edu/entries/quantum-field-theory/">SEP: Quantum Field Theory</a>——本体论争议的公允综述</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Quanta and Fields</em>（2024）——面向读者的场论直觉，带真公式</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
