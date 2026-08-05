@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Quantum Technology · Day 24</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Quantum Technology</h1>
+<div class="meta">Day 24 · 2026 · Phase E Quantum Mechanics</div>
+<div class="tagline">A quantum computer is not a massively parallel machine that tries every answer at once. Its one real trick is making the wrong answers cancel themselves out — and the environment is working around the clock to spoil it.</div>
+</header>
+<div class="intro">
+Superposition, entanglement, no-cloning: properties once used to argue about ontology are now being called on as <b>engineering resources</b>. The catch is that they are exquisitely delicate — isolating a quantum state from the world is far harder than creating one. So the real progress bar does not run on "how many qubits", it runs on <b>how long coherence lasts and how low the error rate goes</b>. Keep an eye on that line and you can sort the promises that are physics from the ones that are fundraising.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>What a Qubit Actually Buys You <span class="en">Amplitudes, Not Storage</span></h2>
+<span class="pill">superposition &amp; interference · Deutsch 1985</span>
+<div class="field"><span class="lab">Intuition</span>
+  A classical bit is a switch with two positions. A qubit is a <strong>direction</strong> on a sphere: the north pole is 0, the south pole is 1, and every other point is a blend of the two. That sounds like room for enormous amounts of information — but the moment you read it, it snaps back to one pole or the other, and <strong>what comes out is still a single classical bit</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  A qubit is written
+  <div class="eq">|ψ⟩ = <var>α</var> |0⟩ + <var>β</var> |1⟩,　|<var>α</var>|<sup>2</sup> + |<var>β</var>|<sup>2</sup> = 1</div>
+<div class="gloss">ψ is the Greek letter <strong>psi</strong>; the bar-and-bracket <span class="nowrap">| ⟩</span> is just notation for "a state", and the <strong>0 (the digit zero)</strong> and <strong>1 (the digit one)</strong> inside are two possible readouts, not magnitudes. <var>α</var> (alpha) and <var>β</var> (beta) are <strong>complex probability amplitudes</strong> — square their moduli to get probabilities, which is why the two sum to 1. That is the whole point: probabilities are never negative and only ever flatten out, while <strong>amplitudes can be positive or negative, carry a phase, and cancel</strong>.</div>
+  Describing <var>n</var> qubits takes 2<sup><var>n</var></sup> complex numbers; at three hundred qubits that is more amplitudes than there are atoms in the visible universe. But this pile is not there for you to read, it is there for you to <strong>steer</strong>: the entire craft of a quantum algorithm is arranging for amplitudes leading to wrong answers to cancel in pairs while the right answer adds up.</div>
+<figure>
+<svg aria-label="Two positions of a classical bit versus the Bloch sphere of a qubit" role="img" viewBox="0 0 640 280">
+<defs>
+<marker id="av" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="12" orient="auto" refX="10" refY="4.5">
+<path d="M0,0 L12,4.5 L0,9 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text fill="#9dc2ff" font-weight="700" text-anchor="middle" x="140" y="26">Classical bit</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="440" y="26">Qubit</text>
+<!-- classical bit: two dots -->
+<line stroke="#2b3a5e" stroke-dasharray="5 5" stroke-width="1.5" x1="140" x2="140" y1="70" y2="210"></line>
+<circle cx="140" cy="70" fill="#5b9bff" r="9"></circle>
+<circle cx="140" cy="210" fill="#5b9bff" r="9"></circle>
+<text fill="#dbe2f2" text-anchor="middle" x="140" y="56">0 (the digit zero)</text>
+<text fill="#dbe2f2" text-anchor="middle" x="140" y="232">1 (the digit one)</text>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="140" y="262">two positions, that's all</text>
+<!-- Bloch sphere -->
+<circle cx="440" cy="140" fill="none" r="70" stroke="#3a4667" stroke-width="1.6"></circle>
+<ellipse cx="440" cy="140" fill="none" rx="70" ry="22" stroke="#2b3a5e" stroke-dasharray="4 4" stroke-width="1.2"></ellipse>
+<line stroke="#3a4667" stroke-width="1.2" x1="440" x2="440" y1="212" y2="68"></line>
+<circle cx="440" cy="70" fill="#5b9bff" r="5"></circle>
+<circle cx="440" cy="210" fill="#5b9bff" r="5"></circle>
+<text fill="#dbe2f2" text-anchor="middle" x="440" y="56">|0⟩</text>
+<text fill="#dbe2f2" text-anchor="middle" x="440" y="232">|1⟩</text>
+<!-- state vector -->
+<line marker-end="url(#av)" stroke="#f0ad5a" stroke-width="2.4" x1="440" x2="493" y1="140" y2="96"></line>
+<line stroke="#6a5326" stroke-dasharray="3 3" stroke-width="1.2" x1="497" x2="497" y1="92" y2="126"></line>
+<text fill="#f0ad5a" x="504" y="88">α|0⟩ + β|1⟩</text>
+<text fill="#8fa0c4" font-size="12" text-anchor="middle" x="440" y="262">any direction · still reads out 0 or 1</text>
+</g>
+</svg>
+<figcaption>The extra freedom on the right is real, but it exists only <strong>during the computation</strong>; at readout the two output formats are identical.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  "A quantum computer tries every possibility at once" is the most stubborn misconception in the field. If that were true it would have crushed every search problem long ago. The branches do evolve together — but you get to carry away exactly <strong>one</strong> result, and you don't get to choose it. The answer has to be hidden inside an interference pattern, and that is brutally hard to design: forty years on, the algorithms with a proven exponential speedup can be counted on your fingers.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Computer science / AI</span>
+<ul>
+<li><strong>Computer science</strong>: the problems a quantum computer can solve form the complexity class <strong>BQP</strong>, which is <em>not</em> believed to contain the NP-complete problems — travelling salesman, SAT and friends still have no evidence of exponential quantum speedup. What gets prised open is problems with <strong>hidden periodic structure</strong>, factoring being the flagship.</li>
+<li><strong>AI</strong>: Monte Carlo sampling also "explores many branches at once", but what it adds are probabilities — never negative, so they only ever smear the distribution out; quantum adds amplitudes that can cancel. That is exactly the line between a randomized algorithm and a quantum one.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: a qubit's resource is not "storing more", it is "being able to cancel".</div>
+<details class="q"><summary><b>Think it through:</b> if the readout is a single classical bit, what are all those extra amplitudes good for?</summary><div class="qa">They act before the readout. Interference lets you sculpt the probability distribution over outcomes, piling most of the weight onto the right answer. They are not information you extract; they are the lever that shapes what you extract.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Decoherence, the Real Enemy <span class="en">Why Isolation Is the Hard Part</span></h2>
+<span class="pill">error correction &amp; the threshold theorem · 1995–1997</span>
+<div class="field"><span class="lab">Intuition</span>
+  Superposition is fragile not because it "turns into some other state" but because <strong>phase leaks away</strong>. One stray photon, one flicker of magnetic field, and the environment is entangled with your qubit — it has effectively <em>recorded</em> whether that qubit leans 0 or 1, and the interference pattern collapses into ordinary randomness. This is the mechanism from the issue on measurement and interpretation showing up as an engineering problem: <strong>nobody has to be watching; the environment is the observer</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Engineers track two times: <var>T</var><sub>1</sub>, how long the energy takes to drain away, and <var>T</var><sub>2</sub>, how long the phase stays in step — the second is shorter and the one that hurts. Superconducting qubits have <var>T</var><sub>2</sub> in the tens-to-hundreds of microseconds, gates take tens of nanoseconds, so the natural budget is a few thousand operations: nowhere near enough for a useful algorithm.
+  <div class="eq">coherence surviving ≈ e<sup>−<var>t</var>／<var>T</var><sub>2</sub></sup></div>
+<div class="gloss">e is the natural constant (about 2.718), and the minus sign in the exponent means <strong>exponential decay</strong>: after each <var>T</var><sub>2</sub> only about 37% of the coherence is left. <var>t</var> (<strong>the letter t</strong>) is elapsed time. Note that the <strong>1</strong> and <strong>2</strong> in the subscripts are labels, not powers.</div>
+  The way out is error correction — but you cannot store three copies and take a vote, because copying an unknown state is forbidden outright. Instead a single <strong>logical qubit</strong> is smeared across a patch of entangled physical qubits, and you only measure the <strong>syndrome</strong>: whether neighbouring qubits agree. The syndrome says nothing about the state itself, yet it pinpoints where an error struck. The <strong>threshold theorem</strong> then supplies a guarantee: as long as the physical error rate sits below a threshold (about 1% for the surface code), the bigger you make the patch, the faster the logical error rate falls.</div>
+<figure>
+<svg aria-label="Exponential decay of coherent oscillation, and logical error rate falling with code distance" role="img" viewBox="0 0 640 250">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text fill="#9dc2ff" font-weight="700" x="34" y="22">How coherence dies</text>
+<line stroke="#2b3a5e" stroke-dasharray="5 5" stroke-width="1.2" x1="60" x2="300" y1="120" y2="120"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="58" x2="58" y1="200" y2="50"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="58" x2="308" y1="200" y2="200"></line>
+<polygon fill="#56607e" points="316,200 302,195 302,205"></polygon>
+<text fill="#96a0ba" font-size="11.5" x="270" y="220">time</text>
+<polyline fill="none" points="60,62 63,64 66,67 69,69 72,71 75,73 78,75 81,77 84,79 87,81 90,82 93,84 96,85 99,87 102,88 105,90 108,91 111,92 114,93 117,94 120,95 123,96 126,97 129,98 132,99 135,100 138,101 141,102 144,103 147,103 150,104 153,105 156,105 159,106 162,106 165,107 168,108 171,108 174,109 177,109 180,110 183,110 186,110 189,111 192,111 195,112 198,112 201,112 204,113 207,113 210,113 213,113 216,114 219,114 222,114 225,115 228,115 231,115 234,115 237,115 240,116 243,116 246,116 249,116 252,116 255,116 258,117 261,117 264,117 267,117 270,117 273,117 276,117 279,117 282,118 285,118 288,118 291,118 294,118 297,118 300,118" stroke="#6a5326" stroke-dasharray="4 4" stroke-width="1.4"></polyline>
+<polyline fill="none" points="60,62 63,66 66,73 69,82 72,92 75,103 78,114 81,125 84,134 87,142 90,148 93,152 96,153 99,153 102,151 105,147 108,142 111,137 114,130 117,124 120,118 123,112 126,108 129,104 132,102 135,101 138,101 141,102 144,104 147,107 150,110 153,114 156,117 159,121 162,124 165,127 168,129 171,130 174,131 177,131 180,130 183,129 186,128 189,126 192,124 195,122 198,120 201,118 204,116 207,115 210,114 213,114 216,114 219,114 222,115 225,116 228,117 231,118 234,119 237,120 240,121 243,122 246,123 249,123 252,124 255,124 258,123 261,123 264,123 267,122 270,121 273,121 276,120 279,119 282,119 285,118 288,118 291,118 294,118 297,118 300,118" stroke="#5b9bff" stroke-width="2.2"></polyline>
+<text fill="#c9a06a" font-size="11.5" x="168" y="76">envelope ~ e to the −t/T₂</text>
+<text fill="#8fa0c4" font-size="11.5" x="140" y="146">interference washes out</text>
+<!-- right: code distance -->
+<text fill="#f0ad5a" font-weight="700" x="372" y="22">How correction fights back</text>
+<line stroke="#56607e" stroke-width="1.5" x1="392" x2="392" y1="200" y2="50"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="392" x2="606" y1="200" y2="200"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" transform="rotate(-90 370 125)" x="370" y="125">logical error rate</text>
+<rect fill="#3d6bb5" height="130" width="42" x="416" y="70"></rect>
+<rect fill="#4a86dd" height="88" width="42" x="486" y="112"></rect>
+<rect fill="#7db0ff" height="46" width="42" x="556" y="154"></rect>
+<text fill="#9dc2ff" font-size="12" text-anchor="middle" x="437" y="218">distance 3</text>
+<text fill="#9dc2ff" font-size="12" text-anchor="middle" x="507" y="218">distance 5</text>
+<text fill="#9dc2ff" font-size="12" text-anchor="middle" x="577" y="218">distance 7</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="472" y="60">+2 in distance → ÷ 2.14</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="577" y="146">0.143%</text>
+<text fill="#8fa0c4" font-size="11.5" text-anchor="middle" x="490" y="240">more qubits → lower logical error (2024)</text>
+</g>
+</svg>
+<figcaption>Left: coherence dies exponentially, the blue curve flattening into pure classical randomness. Right: every two steps of code distance cut the logical error rate to about 1/2.14 — error correction actually paying off.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Crossing the threshold is not a manifesto; it was measured at the end of 2024. On one superconducting chip, 101 physical qubits were encoded into a single distance-7 logical qubit with a logical error rate of 0.143% per correction cycle, living 2.4 times longer than the <strong>best single physical qubit</strong> on the same chip — the first time more correction made things better instead of worse. But read the other half of the ledger: that bought <strong>one</strong> logical qubit, and factoring-scale tasks want thousands.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Communications engineering / Biology</span>
+<ul>
+<li><strong>Communications engineering</strong>: classical error correction has always located errors by adding redundancy (Hamming codes; the LDPC codes in deep-space links and hard drives). The quantum version has to route around copying and check without reading — the same idea, forced into an entirely new form by a single prohibition.</li>
+<li><strong>Biology</strong>: photosynthesis is often said to owe its efficiency to quantum coherence. The honest state of play: the coherent signals seen in experiments last a few hundred femtoseconds and have since largely been attributed to molecular vibrations, with no settled efficiency advantage. A warm wet cell is a paradise for decoherence — which is also why quantum chips sit in refrigerators near absolute zero.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the hard part is not creating a superposition, it is keeping the world from finding out about it.</div>
+<details class="q"><summary><b>Think it through:</b> error correction has to measure the qubits, and measurement destroys superposition. Isn't that a contradiction?</summary><div class="qa">No, because what gets measured is not the qubit itself. The syndrome asks "do these two qubits agree?", which is independent of the superposition each one is in, so the superposition survives. The price is that you learn where the error is, not what the state was — and that is exactly enough to undo it.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Communication and Sensing: the Part Already in Use <span class="en">Shipping Today</span></h2>
+<span class="pill">no-cloning 1982 · BB84 1984</span>
+<div class="field"><span class="lab">Intuition</span>
+  The first quantum technologies out of the lab were not computers but sensors and links: they never need hundreds of qubits held in entanglement, only <strong>a few quantum states kept quiet enough</strong>. And the fragility is the selling point — something exquisitely sensitive to its surroundings makes a superb probe.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Communication rests on one prohibition: the <strong>no-cloning theorem</strong>. Quantum evolution is linear, "copy an arbitrary unknown state" is not, so that photocopier cannot be built. Eavesdropping therefore has to disturb the signal, and comparing the error rate on a sacrificed slice of key reveals whether anyone was listening.<br/>
+  Sensing rests on how violently phase responds to an external field. With <var>N</var> independent particles the phase precision is
+  <div class="eq">Δ<var>φ</var> ~ <span class="frac"><span class="fnum">1</span><span class="fden">√<var>N</var></span></span>　(classical limit),　Δ<var>φ</var> ~ <span class="frac"><span class="fnum">1</span><span class="fden"><var>N</var></span></span>　(reachable with entanglement)</div>
+<div class="gloss">Δ is the Greek letter <strong>delta</strong>, "how big the error is"; <var>φ</var> is <strong>phi</strong>, the phase being measured; <var>N</var> (<strong>capital N</strong>) is the number of particles taking part. Swapping √<var>N</var> for <var>N</var> in the denominator means the same number of atoms buys a quadratic gain in precision — entanglement here is not mysticism, it is signal-to-noise.</div>
+  The examples that have landed are concrete: optical lattice clocks stable at the 10<sup>−18</sup> level (less than a second of drift over the age of the universe); gravitational-wave detectors injecting squeezed light to push quantum noise down and see further; and in 2017 the Micius satellite distributed entangled photon pairs to two ground stations 1200 km apart.</div>
+<figure>
+<svg aria-label="Basis matching in BB84 key distribution and the trace left by an eavesdropper" role="img" viewBox="0 0 640 250">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text fill="#9dc2ff" font-weight="700" x="30" y="24">Sender picks a basis</text>
+<text fill="#f0ad5a" font-weight="700" x="330" y="24">Receiver picks a basis</text>
+<rect fill="#0f1626" height="150" rx="8" stroke="#26314c" width="130" x="30" y="40"></rect>
+<rect fill="#0f1626" height="150" rx="8" stroke="#26314c" width="270" x="330" y="40"></rect>
+<g fill="#dbe2f2" font-size="14">
+<text x="52" y="72">＋ ／ 1</text>
+<text x="52" y="106">✕ ／ 0</text>
+<text x="52" y="140">＋ ／ 0</text>
+<text x="52" y="174">✕ ／ 1</text>
+<text x="352" y="72">＋</text>
+<text x="352" y="106">＋</text>
+<text x="352" y="140">＋</text>
+<text x="352" y="174">✕</text>
+</g>
+<g stroke="#5b9bff" stroke-width="1.8">
+<line x1="172" x2="324" y1="67" y2="67"></line>
+<line x1="172" x2="324" y1="101" y2="101"></line>
+<line x1="172" x2="324" y1="135" y2="135"></line>
+<line x1="172" x2="324" y1="169" y2="169"></line>
+</g>
+<g font-size="13">
+<text fill="#7ddc9a" x="386" y="72">same basis → keep</text>
+<text fill="#e0757a" x="386" y="106">different basis → discard</text>
+<text fill="#7ddc9a" x="386" y="140">same basis → keep</text>
+<text fill="#7ddc9a" x="386" y="174">same basis → keep</text>
+</g>
+<circle cx="248" cy="101" fill="#f0ad5a" r="9"></circle>
+<text fill="#f0ad5a" font-size="12" text-anchor="middle" x="300" y="212">one measurement by an eavesdropper seeds errors in the kept batch</text>
+<text fill="#8fa0c4" font-size="11.5" x="30" y="240">＋ and ✕ are incompatible measurements: the wrong one returns pure noise</text>
+</g>
+</svg>
+<figcaption>The security does not come from a hard algorithm but from physics: looking leaves a mark, and the mark shows up in the error statistics.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  "Quantum encryption is absolutely secure" needs discounting. What is proven is that the <strong>protocol</strong> is secure with ideal hardware, and real attacks never go after protocols — they go after devices: early on, people blinded detectors with bright light so they would report whatever the eavesdropper wanted. Add that it only solves key distribution and needs dedicated fibre or satellites, and you can see why national cryptography agencies push <strong>post-quantum cryptography</strong> instead — maths that classical machines can run and quantum machines still cannot break, deployable as a software update.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Earth science / Medicine</span>
+<ul>
+<li><strong>Earth science</strong>: atom-interferometer gravimeters amount to imaging the ground with gravity — finding ore bodies, watching a volcano's magma chamber fill, mapping buried utilities before anyone digs. In 2022 a British team used one to spot a tunnel beneath a city street.</li>
+<li><strong>Medicine</strong>: magnetoencephalography used to require helium-cooled SQUIDs; optically pumped magnetometers now work at room temperature and can be worn on the head, making recordings from children and from moving subjects possible for the first time.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the quantum technology already in service wins on precision, not on speed.</div>
+<details class="q"><summary><b>Think it through:</b> if eavesdropping always leaves a trace, why do cryptographers still prefer post-quantum cryptography?</summary><div class="qa">The trace guarantees that you'll notice you were watched — but only if the hardware matches the theoretical model, and in practice side channels abound. Post-quantum cryptography just swaps the algorithm in software and covers the whole internet. The two aren't in conflict; the second is simply far cheaper per unit of security.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Where the Hype Ends <span class="en">A Three-Question Filter</span></h2>
+<span class="pill">the NISQ era · Preskill 2018</span>
+<div class="field"><span class="lab">Intuition</span>
+  Three questions will screen out most quantum promises: <strong>is there a proven speedup? how does the data get in? how many logical qubits does it need, and how many orders of magnitude away are we?</strong> The list of applications that clear all three is short.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  <strong>Only two families have solid evidence of exponential speedup</strong>. One is simulating quantum systems themselves — molecular electronic structure, strongly correlated materials; Feynman's 1982 reasoning was plain enough: use quantum things to compute quantum things and the cost stops exploding. The other is problems with hidden periodic structure, factoring being the emblem.
+  <strong>Quadratic speedups</strong> come from search: finding one item among <var>N</var> unsorted takes <var>N</var> classical steps and √<var>N</var> quantum ones. That margin is easily eaten by error-correction overhead.
+  <strong>The most over-sold category is "quantum machine learning"</strong>: many claimed exponential speedups turn out to be matched by classical algorithms under the same data-access assumptions. And loading <var>N</var> classical numbers into a quantum state costs about <var>N</var> steps by itself, which vaporizes an exponential advantage on the spot.</div>
+<figure>
+<svg aria-label="Filtering from all computational problems down to genuinely feasible quantum applications" role="img" viewBox="0 0 620 270">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13" text-anchor="middle">
+<polygon fill="#1b2740" points="60,26 560,26 500,86 120,86" stroke="#3a4667"></polygon>
+<polygon fill="#1d3054" points="120,90 500,90 452,150 168,150" stroke="#3a4667"></polygon>
+<polygon fill="#22406f" points="168,154 452,154 412,214 208,214" stroke="#4a6fae"></polygon>
+<polygon fill="#4a3a1c" points="208,218 412,218 386,262 234,262" stroke="#6a5326"></polygon>
+<text fill="#c3cbe0" x="310" y="62">all computational problems</text>
+<text fill="#c3cbe0" x="310" y="126">known quantum speedup (a thin slice)</text>
+<text fill="#dbe2f2" x="310" y="190">speedup big enough, data loadable</text>
+<text fill="#f0ad5a" x="310" y="246">runs on today's hardware</text>
+</g>
+</svg>
+<figcaption>Every layer down costs something real, and the bottom layer is still narrow — that gap is the whole distance between "has a quantum speedup" and "is a quantum product".</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>A "quantum supremacy" demo is not the same as being useful.</strong> The famous 2019 demonstration ran random circuit sampling — a task chosen precisely because it is hard for classical computers and has no known use; classical algorithms have been narrowing the gap ever since. The criterion worth watching is: <strong>beating the best classical method, reproducibly, on something people already wanted done.</strong> That day has not arrived.<br/>
+  But don't overcorrect either. The physical qubits estimated to break 2048-bit RSA fell from twenty million in 2019 to under a million in 2025; error correction has just crossed threshold; sensing and timekeeping are in service. This is not a bubble — it is a field moving on a decade clock, packaged by a narrative running on a quarterly one.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · History of technology / AI</span>
+<ul>
+<li><strong>History of technology</strong>: the lesson of fusion being "thirty years away, forever" is not that it is a scam, but that an entire industry sits between physically possible and industrially possible. The judgement call is telling which step is stuck on principle and which is stuck on yield and cost — the latter usually gets solved, just slowly. Quantum computing is stuck on the latter.</li>
+<li><strong>AI</strong>: deep learning was written off as a dead end before 2012, and the people who stuck with it through the winter collected a Turing Award. "Can't do it now" is not evidence of "never" — nor is it a reason to assume money will fix it. A concrete companion lesson: in 2018 a nineteen-year-old undergraduate "dequantized" the quantum recommendation algorithm, carrying its claimed exponential speedup straight back to classical hardware. Speedup claims live or die on their data-access assumptions.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: a quantum computer is not a faster computer, it is a special-purpose machine that cheats at a handful of problems.</div>
+<details class="q"><summary><b>Think it through:</b> why is "number of qubits" such a misleading metric?</summary><div class="qa">Uncorrected physical qubits fail faster the more you pile up. A thousand noisy ones may do less than ten good ones. The meaningful numbers are logical qubits, and how far the physical error rate sits below threshold.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Deeper questions</h2>
+<details><summary>Can a quantum computer solve NP-complete problems?</summary>
+<div class="body">There is no evidence that it can. NP-complete problems (travelling salesman, SAT and so on) are defined by answers that are easy to check and hard to find, while quantum speedups rely on <strong>structure</strong> that interference can exploit — exactly what this class lacks. Search algorithms compress <var>N</var> attempts to √<var>N</var>, but for exponentially large <var>N</var>, the square root of an exponential is still an exponential; and in the black-box query model the quadratic gain has been proven optimal.</div></details>
+<details><summary>Has decoherence solved the measurement problem?</summary>
+<div class="body">Half of it, and the less philosophical half. Decoherence explains beautifully why interference patterns vanish so fast at macroscopic scale, and why certain states (position, pointer orientation) are more stable than others — the environment monitors those quantities relentlessly and thereby selects a preferred basis. What it does <strong>not</strong> explain is why only one outcome ever appears: "why this one" still has to be handed to interpretation. Engineering doesn't care about the distinction; ontology is nothing but that distinction.</div></details>
+<details><summary>If a universal quantum computer is never built, was all this wasted?</summary>
+<div class="body">No — though the line shouldn't be used to gloss over the bubble either. Things developed for quantum computing have already paid off elsewhere: cryogenic electronics, superconducting fabrication yield, single-photon detection, the whole craft of isolating a system from its environment — atomic clocks, magnetometers and gravimeters all live off that dividend. The spillover in underlying capability is real and "we'll transform drug discovery within three years" is false, both at the same time.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Nielsen &amp; Chuang, <em>Quantum Computation and Quantum Information</em> — the standard textbook</li>
+<li>Preskill, <a href="https://doi.org/10.22331/q-2018-08-06-79">Quantum 2, 79 (2018)</a>, "Quantum Computing in the NISQ Era and Beyond"</li>
+<li>Feynman, <a href="https://doi.org/10.1007/BF02650179">Int. J. Theor. Phys. 21, 467 (1982)</a>, "Simulating Physics with Computers"</li>
+<li>Shor, <a href="https://doi.org/10.1137/S0097539795293172">SIAM J. Comput. 26, 1484 (1997)</a> — the factoring algorithm</li>
+<li>Grover, <a href="https://arxiv.org/abs/quant-ph/9605043">arXiv:quant-ph/9605043 (1996)</a> — the quadratic speedup for search</li>
+<li>Wootters &amp; Zurek, <a href="https://doi.org/10.1038/299802a0">Nature 299, 802 (1982)</a> — the no-cloning theorem</li>
+<li>Bennett &amp; Brassard, <a href="https://doi.org/10.1016/j.tcs.2014.05.025">Theor. Comput. Sci. 560, 7 (2014)</a> — the BB84 paper, reprinted</li>
+<li>Google Quantum AI, <a href="https://arxiv.org/abs/2408.13687">arXiv:2408.13687</a> (Nature, 2024) — the surface code first crossing threshold</li>
+<li>Gidney &amp; Ekerå, <a href="https://doi.org/10.22331/q-2021-04-15-433">Quantum 5, 433 (2021)</a> and Gidney, <a href="https://arxiv.org/abs/2505.15917">arXiv:2505.15917 (2025)</a> — resource estimates for breaking RSA, down twentyfold in six years</li>
+<li>Babbush et al., <a href="https://doi.org/10.1103/PRXQuantum.2.010103">PRX Quantum 2, 010103 (2021)</a> — why quadratic speedups probably aren't enough</li>
+<li>Tang, <a href="https://arxiv.org/abs/1807.04271">arXiv:1807.04271 (2018)</a> — dequantizing the quantum recommendation algorithm</li>
+<li>Degen, Reinhard &amp; Cappellaro, <a href="https://doi.org/10.1103/RevModPhys.89.035002">Rev. Mod. Phys. 89, 035002 (2017)</a> — a review of quantum sensing</li>
+<li>Yin et al., <a href="https://doi.org/10.1126/science.aan3211">Science 356, 1140 (2017)</a> — entanglement distribution over 1200 km</li>
+<li><a href="https://csrc.nist.gov/projects/post-quantum-cryptography">NIST Post-Quantum Cryptography project</a> — standards and migration guidance</li>
+<li>Scott Aaronson, <a href="https://scottaaronson.blog/">Shtetl-Optimized</a> — the least forgiving running record of overclaiming</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
