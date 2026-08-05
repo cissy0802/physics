@@ -86,7 +86,7 @@
 <div class="wrap">
 <header>
 <div class="kicker">物理 · Physics</div>
-<h1>量子技术</h1>
+<h1 data-tts="f65464c5b399f669">量子技术</h1>
 <div class="meta">Day 24 · 2026 · Phase E 量子力学</div>
 <div class="tagline">量子计算机不是"同时试遍所有答案"的超级并行机。它唯一的本事，是让错的答案自己抵消掉——而环境每时每刻都在拆这个台。</div>
 </header>
@@ -94,7 +94,7 @@
 叠加、纠缠、不可克隆，这些原本用来吵本体论的性质，如今被当作<b>工程资源</b>调用。麻烦在于它们极其娇气——把一个量子态和世界隔开，比把它做出来难得多。所以真实的进度条不长在"有多少个量子比特"上，而长在<b>相干维持多久、错误压到多低</b>。看清这条线，就能分辨哪些承诺是物理、哪些是话术。
 </div>
 <!-- Card 1 -->
-<div class="card">
+<div class="card" data-tts="8cb265264ab3ec39">
 <h2>量子比特凭什么 <span class="en">What a Qubit Actually Buys You</span></h2>
 <span class="pill">叠加与干涉 · Deutsch 1985</span>
 <div class="field"><span class="lab">直觉</span>
@@ -103,11 +103,11 @@
   一个量子比特写成
   <div class="eq">|ψ⟩ = <var>α</var> |0⟩ + <var>β</var> |1⟩，　|<var>α</var>|<sup>2</sup> + |<var>β</var>|<sup>2</sup> = 1</div>
 <div class="gloss">ψ 是希腊字母 <strong>psi</strong>；竖线加尖括号 <span class="nowrap">| ⟩</span> 只是"一个状态"的记号，里面的 <strong>0（数字零）</strong>和 <strong>1（数字一）</strong>是两个可能的读数，不是数值大小。<var>α</var>（alpha）、<var>β</var>（beta）是<strong>复数概率幅</strong>——取模平方才是概率，两者之和为 1。关键在于：概率永远非负，只会越加越平；<strong>概率幅可正可负、还带相位，能互相抵消</strong>。</div>
-  <var>n</var> 个量子比特要 2<sup><var>n</var></sup> 个复数才描述得完，三百个比特的振幅个数就超过可见宇宙的原子数。但这堆振幅不是给你读的，是给你<strong>操纵</strong>的：算法的全部技巧，是让通向错误答案的振幅两两相消、正确答案的相长叠加。</div>
+<var>n</var> 个量子比特要 2<sup><var>n</var></sup> 个复数才描述得完，三百个比特的振幅个数就超过可见宇宙的原子数。但这堆振幅不是给你读的，是给你<strong>操纵</strong>的：算法的全部技巧，是让通向错误答案的振幅两两相消、正确答案的相长叠加。</div>
 <figure>
-<svg aria-label="经典比特的两个位置与量子比特的布洛赫球" role="img" viewBox="0 0 640 280">
+<svg aria-label="经典比特的两个位置与量子比特的布洛赫球" role="img" viewbox="0 0 640 280">
 <defs>
-<marker id="av" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="12" orient="auto" refX="10" refY="4.5">
+<marker id="av" markerheight="9" markerunits="userSpaceOnUse" markerwidth="12" orient="auto" refx="10" refy="4.5">
 <path d="M0,0 L12,4.5 L0,9 z" fill="#f0ad5a"></path>
 </marker>
 </defs>
@@ -151,7 +151,7 @@
 </div>
 </div>
 <!-- Card 2 -->
-<div class="card">
+<div class="card" data-tts="032b08f352370e1a">
 <h2>退相干是头号敌人 <span class="en">Decoherence, the Real Enemy</span></h2>
 <span class="pill">纠错与阈值定理 · 1995–1997</span>
 <div class="field"><span class="lab">直觉</span>
@@ -162,7 +162,7 @@
 <div class="gloss">e 是自然常数（约 2.718），指数上的负号意味着<strong>指数衰减</strong>：每过一个 <var>T</var><sub>2</sub>，剩下的相干只有约 37%。<var>t</var>（<strong>字母 t</strong>）是流逝的时间。注意下标里的 <strong>1</strong> 和 <strong>2</strong> 是编号，不是次方。</div>
   出路是纠错，但量子不能像经典那样存三份投票——复制未知状态本身被禁止。办法是把一个<strong>逻辑比特</strong>摊进一大片物理比特的纠缠里，只测"<strong>症状</strong>"：相邻比特之间是否一致。症状不透露状态本身，却能指出哪儿出了错。<strong>阈值定理</strong>再给一个保证：只要物理错误率低于某个门槛（表面码约 1%），码片摊得越大，逻辑错误率掉得越快。</div>
 <figure>
-<svg aria-label="相干振荡的指数衰减与码距增大时逻辑错误率的下降" role="img" viewBox="0 0 640 250">
+<svg aria-label="相干振荡的指数衰减与码距增大时逻辑错误率的下降" role="img" viewbox="0 0 640 250">
 <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
 <text fill="#9dc2ff" font-weight="700" x="34" y="22">相干如何消失</text>
 <line stroke="#2b3a5e" stroke-dasharray="5 5" stroke-width="1.2" x1="60" x2="300" y1="120" y2="120"></line>
@@ -205,7 +205,7 @@
 </div>
 </div>
 <!-- Card 3 -->
-<div class="card">
+<div class="card" data-tts="ca866037ee783af0">
 <h2>通信与传感：已经在用的那部分 <span class="en">Communication and Sensing</span></h2>
 <span class="pill">不可克隆 1982 · BB84 1984</span>
 <div class="field"><span class="lab">直觉</span>
@@ -217,7 +217,7 @@
 <div class="gloss">Δ 是希腊字母 <strong>delta</strong>，"误差有多大"；<var>φ</var> 读作 <strong>phi</strong>，是被测的相位；<var>N</var>（<strong>大写字母 N</strong>）是参与测量的粒子数。分母从 √<var>N</var> 换成 <var>N</var>：同样多的原子换来平方级的精度提升——纠缠在这里不是玄学，是实打实的信噪比。</div>
   已落地的例子：光晶格原子钟稳定到 10<sup>−18</sup> 量级（跑满宇宙年龄误差不到一秒）；引力波探测器往光路注入压缩光，压低量子噪声换更远的观测距离；2017 年"墨子号"卫星把纠缠光子对分发到了相距 1200 公里的两个地面站。</div>
 <figure>
-<svg aria-label="BB84 密钥分发中基矢匹配与窃听留痕" role="img" viewBox="0 0 640 250">
+<svg aria-label="BB84 密钥分发中基矢匹配与窃听留痕" role="img" viewbox="0 0 640 250">
 <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
 <text fill="#9dc2ff" font-weight="700" x="30" y="24">发送方随机选基矢</text>
 <text fill="#f0ad5a" font-weight="700" x="330" y="24">接收方随机选基矢</text>
@@ -265,17 +265,17 @@
 </div>
 </div>
 <!-- Card 4 -->
-<div class="card">
+<div class="card" data-tts="c3f6280226e944e0">
 <h2>炒作与现实的边界 <span class="en">Where the Hype Ends</span></h2>
 <span class="pill">NISQ 时代 · Preskill 2018</span>
 <div class="field"><span class="lab">直觉</span>
   听到一条量子承诺，问三个问题就能筛掉大半：<strong>有没有被证明的加速？数据怎么进去？需要多少逻辑比特，今天差几个数量级？</strong>三关都过的应用是很短的一张名单。</div>
 <div class="field"><span class="lab">机制</span>
-  <strong>指数加速证据扎实的只有两类</strong>：一是模拟量子系统自身——分子的电子结构、材料里的强关联行为；费曼 1982 年的理由很朴素：用量子的东西算量子的东西，代价才不会指数爆炸。二是有隐藏周期结构的数学问题，代表是分解大数。
+<strong>指数加速证据扎实的只有两类</strong>：一是模拟量子系统自身——分子的电子结构、材料里的强关联行为；费曼 1982 年的理由很朴素：用量子的东西算量子的东西，代价才不会指数爆炸。二是有隐藏周期结构的数学问题，代表是分解大数。
   <strong>平方根加速</strong>来自搜索：<var>N</var> 个无序条目里找一个，经典要 <var>N</var> 次，量子要 √<var>N</var> 次。但这点差距容易被纠错开销吃光。
   <strong>最常被高估的是"量子机器学习"</strong>：不少宣称的指数加速，被证明经典算法在同样的数据访问假设下也做得到。何况把 <var>N</var> 个经典数据装进量子态就要约 <var>N</var> 步，指数加速当场蒸发。</div>
 <figure>
-<svg aria-label="从所有计算问题层层筛到真正可行的量子应用" role="img" viewBox="0 0 620 270">
+<svg aria-label="从所有计算问题层层筛到真正可行的量子应用" role="img" viewbox="0 0 620 270">
 <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13" text-anchor="middle">
 <polygon fill="#1b2740" points="60,26 560,26 500,86 120,86" stroke="#3a4667"></polygon>
 <polygon fill="#1d3054" points="120,90 500,90 452,150 168,150" stroke="#3a4667"></polygon>
@@ -290,7 +290,7 @@
 <figcaption>每往下一层都要付出真实代价，而最后一层今天还很窄——这就是"有量子加速"与"有量子产品"之间的全部距离。</figcaption>
 </figure>
 <div class="field"><span class="lab">反直觉的重点</span>
-  <strong>"量子优越性"演示不等于有用。</strong>2019 年那次著名演示跑的是随机线路采样——专门挑来难倒经典计算机、本身没有已知用途的任务；此后经典算法一再改进，把差距反复缩小。该盯的判据是：<strong>在一件人们本来就想做的事上，可复现地赢过最好的经典方法。</strong>这一天还没到。<br/>
+<strong>"量子优越性"演示不等于有用。</strong>2019 年那次著名演示跑的是随机线路采样——专门挑来难倒经典计算机、本身没有已知用途的任务；此后经典算法一再改进，把差距反复缩小。该盯的判据是：<strong>在一件人们本来就想做的事上，可复现地赢过最好的经典方法。</strong>这一天还没到。<br/>
   但也别滑到另一个极端。破解 2048 位 RSA 所需的物理比特，从 2019 年估的两千万降到 2025 年的不到一百万；纠错刚跨过阈值；传感和授时已在服役。这不是泡沫，是一个以十年计的领域，被按季度计的叙事包装成了下个月就兑现。</div>
 <div class="field xref"><span class="lab">跨学科对读 · 技术史 / AI</span>
 <ul>
@@ -304,7 +304,7 @@
 </div>
 <!-- Deep think -->
 <div class="deep">
-<h2>深入思考</h2>
+<h2 data-tts="ce2f388c728660ec">深入思考</h2>
 <details><summary>量子计算机能不能解 NP 完全问题？</summary>
 <div class="body">目前没有任何证据说它能。NP 完全问题（旅行商、SAT 等）的特点是"答案好验证、求解难"，而量子加速依赖问题里有可供干涉利用的<strong>结构</strong>——恰恰是这类问题最缺的。搜索算法能把 <var>N</var> 次尝试压到 √<var>N</var> 次，但对指数大的 <var>N</var>，指数开平方仍是指数；而且已证明在"黑箱查询"模型下平方根就是极限。</div></details>
 <details><summary>退相干是不是已经解决了测量问题？</summary>
@@ -314,7 +314,7 @@
 </div>
 <!-- Reading -->
 <div class="read">
-<h2>延伸阅读</h2>
+<h2 data-tts="515bf14e4badb201">延伸阅读</h2>
 <ul>
 <li>Nielsen &amp; Chuang，<em>Quantum Computation and Quantum Information</em>——标准教科书</li>
 <li>Preskill，<a href="https://doi.org/10.22331/q-2018-08-06-79">Quantum 2, 79 (2018)</a>，"Quantum Computing in the NISQ Era and Beyond"</li>
@@ -334,10 +334,10 @@
 </ul>
 </div>
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
 </body>
 </html>
