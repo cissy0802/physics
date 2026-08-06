@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: The Standard Model · Day 25</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.8; overflow-wrap:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>The Standard Model</h1>
+<div class="meta">Day 25 · 2026 · Phase F Particles &amp; the Standard Model</div>
+<div class="tagline">A table that fits on a T-shirt lists every ingredient in your body. It is absurdly precise and visibly incomplete — both at once.</div>
+</header>
+<div class="intro">
+Take matter apart layer by layer: molecules, atoms, nuclei, protons and neutrons, quarks. There the trail ends — look closer and all you find is a point with no structure. What's left is a dozen particles and four forces, three of which fit into one framework while the fourth (gravity) still waits outside. This table predicts the electron's magnetism to twelve decimal places, yet cannot say <b>why there are exactly three generations</b>, or <b>why the masses span twelve orders of magnitude</b>. The most successful theory in history is also the one that makes physicists most uncomfortable.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>The Inventory of Matter</h2>
+<span class="pill">Fermions · 1897–2000</span>
+<div class="field"><span class="lab">Intuition</span>
+  The periodic table has 118 elements, which sounds like a lot of variety. Building every one of them takes just three particles: <strong>the up quark, the down quark, and the electron</strong>. A proton is two ups and a down, a neutron is two downs and an up, electrons queue up outside, and that's all of chemistry. Add the electron neutrino, which barely interacts with anything, and your world is complete — four particles.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Matter particles are called <strong>fermions</strong>, in two families: <strong>quarks</strong> feel the strong force and are locked inside protons and neutrons; <strong>leptons</strong> (the electron and neutrino family) don't feel it and travel alone. Each "generation" is two quarks plus two leptons — three generations, twelve particles, twenty-four counting antiparticles.
+  Every fermion obeys the <strong>Pauli exclusion principle</strong>: two identical fermions cannot occupy the same state. That single rule is why you don't sink into your chair and why white dwarfs don't collapse.</div>
+<figure>
+<svg role="img" aria-label="The Standard Model table: three generations of fermions, gauge bosons and the Higgs" viewBox="0 0 520 430">
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<text x="69" y="50" fill="#9dc2ff" font-size="12" font-weight="700" text-anchor="middle">Gen 1</text>
+<text x="145" y="50" fill="#9dc2ff" font-size="12" font-weight="700" text-anchor="middle">Gen 2</text>
+<text x="221" y="50" fill="#9dc2ff" font-size="12" font-weight="700" text-anchor="middle">Gen 3</text>
+<text x="311" y="50" fill="#f0ad5a" font-size="12" font-weight="700" text-anchor="middle">Force carriers</text>
+<text x="395" y="50" fill="#f0ad5a" font-size="12" font-weight="700" text-anchor="middle">Gives mass</text>
+<text x="479" y="50" fill="#7d879f" font-size="12" font-weight="700" text-anchor="middle">Missing</text>
+<text x="18" y="129" fill="#9dc2ff" font-size="12.5" font-weight="700" text-anchor="middle" transform="rotate(-90 18 129)">Quarks</text>
+<text x="18" y="265" fill="#9dc2ff" font-size="12.5" font-weight="700" text-anchor="middle" transform="rotate(-90 18 265)">Leptons</text>
+<line x1="266" x2="266" y1="56" y2="336" stroke="#3a4667" stroke-dasharray="5 5" stroke-width="1.4"></line>
+<!-- quarks -->
+<g fill="#1f3a63" stroke="#4a6fae" stroke-width="1.2">
+<rect x="34" y="64" width="70" height="62" rx="7"></rect>
+<rect x="110" y="64" width="70" height="62" rx="7"></rect>
+<rect x="186" y="64" width="70" height="62" rx="7"></rect>
+<rect x="34" y="132" width="70" height="62" rx="7"></rect>
+<rect x="110" y="132" width="70" height="62" rx="7"></rect>
+<rect x="186" y="132" width="70" height="62" rx="7"></rect>
+</g>
+<!-- leptons -->
+<g fill="#182a49" stroke="#3a4667" stroke-width="1.2">
+<rect x="34" y="200" width="70" height="62" rx="7"></rect>
+<rect x="110" y="200" width="70" height="62" rx="7"></rect>
+<rect x="186" y="200" width="70" height="62" rx="7"></rect>
+<rect x="34" y="268" width="70" height="62" rx="7"></rect>
+<rect x="110" y="268" width="70" height="62" rx="7"></rect>
+<rect x="186" y="268" width="70" height="62" rx="7"></rect>
+</g>
+<!-- bosons -->
+<g fill="#4a3a1c" stroke="#6a5326" stroke-width="1.2">
+<rect x="276" y="64" width="70" height="62" rx="7"></rect>
+<rect x="276" y="132" width="70" height="62" rx="7"></rect>
+<rect x="276" y="200" width="70" height="62" rx="7"></rect>
+<rect x="276" y="268" width="70" height="62" rx="7"></rect>
+</g>
+<rect x="360" y="132" width="70" height="62" rx="7" fill="#5c4520" stroke="#c9a06a" stroke-width="1.4"></rect>
+<rect x="444" y="64" width="70" height="130" rx="7" fill="none" stroke="#3a4667" stroke-dasharray="6 5" stroke-width="1.4"></rect>
+<!-- symbols -->
+<g fill="#dbe2f2" font-size="19" font-weight="700" text-anchor="middle">
+<text x="69" y="91">u</text><text x="145" y="91">c</text><text x="221" y="91">t</text>
+<text x="69" y="159">d</text><text x="145" y="159">s</text><text x="221" y="159">b</text>
+<text x="69" y="227">e</text><text x="145" y="227">μ</text><text x="221" y="227">τ</text>
+<text x="69" y="295">ν<tspan font-size="12" dy="4">e</tspan></text>
+<text x="145" y="295">ν<tspan font-size="12" dy="4">μ</tspan></text>
+<text x="221" y="295">ν<tspan font-size="12" dy="4">τ</tspan></text>
+</g>
+<g fill="#f0ad5a" font-size="19" font-weight="700" text-anchor="middle">
+<text x="311" y="91">g</text><text x="311" y="159">γ</text>
+<text x="311" y="227">W</text><text x="311" y="295">Z</text>
+<text x="395" y="159">H</text>
+</g>
+<!-- names -->
+<g fill="#9dc2ff" font-size="10.5" text-anchor="middle">
+<text x="69" y="108">up</text><text x="145" y="108">charm</text><text x="221" y="108">top</text>
+<text x="69" y="176">down</text><text x="145" y="176">strange</text><text x="221" y="176">bottom</text>
+<text x="69" y="244">electron</text><text x="145" y="244">muon</text><text x="221" y="244">tau</text>
+<text x="69" y="312">e neutrino</text><text x="145" y="312">μ neutrino</text><text x="221" y="312">τ neutrino</text>
+</g>
+<g fill="#c9a06a" font-size="10.5" text-anchor="middle">
+<text x="311" y="108">gluon · strong</text><text x="311" y="176">photon · EM</text>
+<text x="311" y="244">W · weak</text><text x="311" y="312">Z · weak</text>
+<text x="395" y="176">Higgs</text>
+</g>
+<!-- masses -->
+<g fill="#8fa0c4" font-size="9.5" text-anchor="middle">
+<text x="69" y="120">2.2 MeV</text><text x="145" y="120">1.27 GeV</text><text x="221" y="120">173 GeV</text>
+<text x="69" y="188">4.7 MeV</text><text x="145" y="188">93 MeV</text><text x="221" y="188">4.18 GeV</text>
+<text x="69" y="256">0.511 MeV</text><text x="145" y="256">105.7 MeV</text><text x="221" y="256">1.777 GeV</text>
+<text x="69" y="324">under 1 eV</text><text x="145" y="324">under 1 eV</text><text x="221" y="324">under 1 eV</text>
+<text x="311" y="120">mass 0</text><text x="311" y="188">mass 0</text>
+<text x="311" y="256">80.4 GeV</text><text x="311" y="324">91.2 GeV</text>
+<text x="395" y="188">125 GeV</text>
+</g>
+<text x="479" y="118" fill="#7d879f" font-size="14" font-weight="700" text-anchor="middle">Gravity</text>
+<text x="479" y="140" fill="#6b7590" font-size="10.5" text-anchor="middle">this table</text>
+<text x="479" y="155" fill="#6b7590" font-size="10.5" text-anchor="middle">can't hold it</text>
+<!-- legend -->
+<rect x="34" y="352" width="13" height="13" fill="#1f3a63" stroke="#4a6fae"></rect>
+<text x="54" y="363" fill="#9dc2ff" font-size="11">Quarks · feel the strong force</text>
+<rect x="222" y="352" width="13" height="13" fill="#182a49" stroke="#3a4667"></rect>
+<text x="242" y="363" fill="#9dc2ff" font-size="11">Leptons · don't</text>
+<rect x="346" y="352" width="13" height="13" fill="#4a3a1c" stroke="#6a5326"></rect>
+<text x="366" y="363" fill="#c9a06a" font-size="11">Bosons · carry forces</text>
+<text x="34" y="390" fill="#8fa0c4" font-size="11.5">Everyday matter uses only the left column: up, down, electron, electron neutrino</text>
+<text x="34" y="410" fill="#8fa0c4" font-size="11.5">Masses run from under 1 eV to 173 GeV — twelve orders of magnitude, unexplained</text>
+</g>
+</svg>
+<figcaption>The three columns are copies of each other: identical properties, just heavier and shorter-lived as you move right.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>"Only three generations" was counted, not derived.</strong> The more things a Z boson can decay into, the faster it dies and the wider its resonance peak. Measure that peak shape precisely and you can read off how many invisible exits it has — including neutrinos nobody can see. LEP counted <strong>2.984 ± 0.008</strong>, pinning it cleanly at 3. Theory offers no account of that 3 whatsoever: it reads like a note copied down from the experiment.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Chemistry / Archaeology / Medicine</span>
+<ul>
+<li><strong>Chemistry</strong>: the entire periodic table is one generation of particles rearranged. Mendeleev's periodicity was once the deepest empirical law in nature; today it is a corollary of "three particles plus Pauli exclusion" — a top-level law demoted to a mid-level consequence, which in science is usually what progress looks like.</li>
+<li><strong>Archaeology</strong>: second-generation muons rain down on your head from cosmic rays every minute. In 2017 an international team put muon detectors inside the Great Pyramid and, by comparing how many muons arrived from each direction, imaged a thirty-metre void through a hundred metres of stone.</li>
+<li><strong>Medicine</strong>: a PET tracer emits positrons, which annihilate with electrons in your body into two photons flying back to back; the scanner locates the source along that line. Antimatter is hospital equipment booked by the hour, not a science-fiction prop.</li>
+</ul></div>
+<div class="punch">
+<div class="one">One line: all the matter in your body uses only the leftmost column, and nobody knows why the other two exist.</div>
+<details class="q"><summary><b>Think:</b> Second- and third-generation particles live less than a microsecond. On what grounds do we say they "exist"?</summary><div class="qa">They are made over and over in colliders, with masses, lifetimes and decay channels measured to high precision; and leave them out and many precision low-energy calculations stop matching. In physics the criterion for existence is a reproducible causal effect, not whether you can hold it.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Forces Are Exchanges</h2>
+<span class="pill">Gauge bosons · Yukawa 1935</span>
+<div class="field"><span class="lab">Intuition</span>
+  Two people on ice throwing a ball back and forth drift apart — a force isn't an invisible hand reaching across a gap, it's something being swapped. The particles that do the swapping are <strong>bosons</strong>, and their temperament is the opposite of a fermion's: they are happy to pile into the same state (a laser is a mob of photons marching in step). Photons carry electromagnetism, gluons the strong force, W and Z the weak force.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  How far a force reaches is written in its carrier's mass. Conjuring a carrier of mass <var>m</var> costs <var>m</var><var>c</var><sup>2</sup> of energy, the uncertainty relation only lets it live for a moment, and the farthest it gets is
+  <div class="eq"><var>R</var> ≈ <span class="frac"><span class="fnum">ħ</span><span class="fden"><var>m</var><var>c</var></span></span></div>
+<div class="gloss"><var>R</var> is the range, "how far this force reaches"; ħ is read <strong>h-bar</strong>, Planck's constant divided by 2π, the conversion unit of the quantum world; <var>m</var> (<strong>letter m</strong>) is the carrier's mass; <var>c</var> is the speed of light. <strong>m sits in the denominator</strong>: heavier carrier, shorter reach. If the carrier's mass is <span class="nowrap"><b style="color:#5b9bff">0</b> (the digit zero)</span>, the denominator vanishes and the range is infinite.</div>
+  The photon is massless, so electromagnetism falls off as 1/<var>r</var><sup>2</sup> all the way to the horizon — which is why starlight can travel for billions of years into your eye. The W boson weighs 80.4 GeV, giving about 2.5×10<sup>−18</sup> metres, a thousand times smaller than a proton. Much of what we call the "weakness" of the weak force is simply that it <strong>can't reach you</strong>. The gluon is massless too and ought to reach forever, but gets cut off at nuclear scale for a different reason.</div>
+<figure>
+<svg role="img" aria-label="Exchanging a boson produces a force, and the ranges of the three forces compared" viewBox="0 0 640 270">
+<defs>
+<marker id="fa" markerWidth="11" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto" refX="9.5" refY="4">
+<path d="M0,0 L11,4 L0,8 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text x="24" y="24" fill="#9dc2ff" font-weight="700">Swap a boson = feel a force</text>
+<line x1="50" x2="120" y1="232" y2="164" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#fa)"></line>
+<line x1="120" x2="50" y1="160" y2="92" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#fa)"></line>
+<line x1="290" x2="222" y1="232" y2="164" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#fa)"></line>
+<line x1="222" x2="290" y1="160" y2="92" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#fa)"></line>
+<path d="M124,162 q11,-13 22,0 q11,13 22,0 q11,-13 22,0 q11,13 22,0" fill="none" stroke="#f0ad5a" stroke-width="2.2"></path>
+<circle cx="122" cy="162" r="4" fill="#dbe2f2"></circle>
+<circle cx="220" cy="162" r="4" fill="#dbe2f2"></circle>
+<text x="171" y="142" fill="#f0ad5a" font-size="12" text-anchor="middle">boson</text>
+<text x="40" y="250" fill="#8fa0c4" font-size="11.5">fermion</text>
+<text x="258" y="250" fill="#8fa0c4" font-size="11.5">fermion</text>
+<text x="24" y="70" fill="#8fa0c4" font-size="11.5">time runs upward · both ends recoil</text>
+<line x1="316" x2="316" y1="34" y2="250" stroke="#26314c" stroke-dasharray="5 5" stroke-width="1.3"></line>
+<text x="342" y="24" fill="#f0ad5a" font-weight="700">Range is written in the carrier's mass</text>
+<text x="342" y="62" fill="#dbe2f2" font-size="12.5">Electromagnetic · photon, mass 0</text>
+<rect x="342" y="70" width="252" height="14" fill="#4a86dd" rx="3"></rect>
+<line x1="594" x2="618" y1="77" y2="77" stroke="#4a86dd" stroke-width="2.4" marker-end="url(#fa)"></line>
+<text x="342" y="100" fill="#8fa0c4" font-size="11">Infinite — starlight crosses galaxies to your eye</text>
+<text x="342" y="132" fill="#dbe2f2" font-size="12.5">Strong (residual, in nuclei) · gluons</text>
+<rect x="342" y="140" width="126" height="14" fill="#7db0ff" rx="3"></rect>
+<text x="342" y="170" fill="#8fa0c4" font-size="11">About 10⁻¹⁵ m — precisely one nucleus</text>
+<text x="342" y="202" fill="#dbe2f2" font-size="12.5">Weak · W and Z, a hefty 80–91 GeV</text>
+<rect x="342" y="210" width="16" height="14" fill="#f0ad5a" rx="3"></rect>
+<text x="342" y="240" fill="#8fa0c4" font-size="11">About 10⁻¹⁸ m — a thousandth of a proton</text>
+<text x="342" y="258" fill="#6b7590" font-size="10.5">(bar lengths are schematic and logarithmic)</text>
+</g>
+</svg>
+<figcaption>Left: two fermions swap a boson and thereby feel a force. Right: the heavier the carrier, the shorter the reach.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>The "weakness" of the weak force is an artefact of scale.</strong> Push above 100 GeV and the weak and electromagnetic forces become comparable in strength — they were one force to begin with (the electroweak interaction), split into two faces by the Higgs field in today's cold, low-energy universe: one face with a massless photon reaching to infinity, the other dragging heavy W and Z bosons and stuck inside nucleons. We call it weak only because we live in the cold.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Chemistry / Computer science</span>
+<ul>
+<li><strong>Chemistry</strong>: neutral molecules still attract one another (van der Waals forces) because fluctuations in their charge distributions leak a little residual electromagnetism. The nuclear force gluing protons and neutrons together works the same way — a leftover of the colour force between quarks. A gecko on a ceiling and a nucleus that doesn't fly apart are the same "residual force" trick played at two scales.</li>
+<li><strong>Computer science</strong>: in a graph neural network no node acts at a distance; influence travels along edges as messages, and the number of rounds sets the "range" (the receptive field). Gauge theory is the physical version of the same statement: an interaction is not a formula written between two particles, it is a field that must be handed along point by point.</li>
+</ul></div>
+<div class="punch">
+<div class="one">One line: how strong a force is and how far it reaches are both encoded in the mass of its messenger.</div>
+<details class="q"><summary><b>Think:</b> If virtual particles "borrow" energy, is conservation of energy violated?</summary><div class="qa">No. A virtual particle isn't a real particle that briefly exists; it's an internal line in a perturbative calculation, a bookkeeping term. Energy is exactly conserved from initial to final state — only that internal line is exempt from the free-particle relation between energy and momentum. "Borrowing energy" is a figure of speech, not live commentary.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Why No One Ever Holds a Quark</h2>
+<span class="pill">Quantum chromodynamics · asymptotic freedom 1973</span>
+<div class="field"><span class="lab">Intuition</span>
+  Familiar forces weaken with distance: gravity and electromagnetism both fall off as 1/<var>r</var><sup>2</sup>. The colour force does the opposite — <strong>the further you pull, the harder it gets</strong>. Separating a pair of quarks is like stretching a rubber band; at some length the energy you have poured in is enough to create a fresh pair of quarks, and the band snaps. A new quark appears at each broken end, you are left holding two particles, and still not one free quark.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Quarks carry something called <strong>colour charge</strong>, in three varieties conventionally labelled red, green and blue — pure labels, nothing to do with visible colour. Here is the decisive difference: <strong>photons carry no electric charge, but gluons do carry colour charge</strong>. Charged messengers tangle with each other, so the field lines stop spreading out and get squeezed into a narrow tube. The tube's energy grows linearly with length, at a tension of roughly 1 GeV per femtometre. Run it the other way and the coupling weakens at very short distances, leaving quarks nearly free — <strong>asymptotic freedom</strong> (Nobel Prize 2004).</div>
+<figure>
+<svg role="img" aria-label="Pulling a quark pair stretches the colour flux tube until it snaps into a new pair" viewBox="0 0 640 235">
+<defs>
+<marker id="qp" markerWidth="11" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto" refX="9.5" refY="4">
+<path d="M0,0 L11,4 L0,8 z" fill="#7db0ff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text x="20" y="24" fill="#9dc2ff" font-weight="700">Pull harder and you only make more particles</text>
+<circle cx="452" cy="20" r="6" fill="#5b9bff"></circle>
+<text x="464" y="25" fill="#8fa0c4" font-size="11.5">quark</text>
+<circle cx="524" cy="20" r="6" fill="#f0ad5a"></circle>
+<text x="536" y="25" fill="#8fa0c4" font-size="11.5">antiquark</text>
+<line x1="205" x2="205" y1="46" y2="200" stroke="#26314c" stroke-dasharray="5 5" stroke-width="1.3"></line>
+<line x1="432" x2="432" y1="46" y2="200" stroke="#26314c" stroke-dasharray="5 5" stroke-width="1.3"></line>
+<!-- stage 1 -->
+<line x1="78" x2="132" y1="110" y2="110" stroke="#c9a06a" stroke-width="7"></line>
+<circle cx="78" cy="110" r="11" fill="#5b9bff"></circle>
+<circle cx="132" cy="110" r="11" fill="#f0ad5a"></circle>
+<text x="105" y="160" fill="#c3cbe0" font-size="11.5" text-anchor="middle">① Bound together</text>
+<text x="105" y="178" fill="#8fa0c4" font-size="11" text-anchor="middle">a colour flux tube between them</text>
+<!-- stage 2 -->
+<line x1="248" x2="392" y1="110" y2="110" stroke="#c9a06a" stroke-width="7"></line>
+<circle cx="248" cy="110" r="11" fill="#5b9bff"></circle>
+<circle cx="392" cy="110" r="11" fill="#f0ad5a"></circle>
+<line x1="236" x2="216" y1="86" y2="86" stroke="#7db0ff" stroke-width="2" marker-end="url(#qp)"></line>
+<line x1="404" x2="424" y1="86" y2="86" stroke="#7db0ff" stroke-width="2" marker-end="url(#qp)"></line>
+<text x="320" y="160" fill="#c3cbe0" font-size="11.5" text-anchor="middle">② Pull: the energy climbs linearly</text>
+<text x="320" y="178" fill="#8fa0c4" font-size="11" text-anchor="middle">about 1 GeV per femtometre stretched</text>
+<!-- stage 3 -->
+<line x1="466" x2="510" y1="110" y2="110" stroke="#c9a06a" stroke-width="7"></line>
+<line x1="556" x2="600" y1="110" y2="110" stroke="#c9a06a" stroke-width="7"></line>
+<circle cx="466" cy="110" r="11" fill="#5b9bff"></circle>
+<circle cx="510" cy="110" r="11" fill="#f0ad5a"></circle>
+<circle cx="556" cy="110" r="11" fill="#5b9bff"></circle>
+<circle cx="600" cy="110" r="11" fill="#f0ad5a"></circle>
+<text x="533" y="86" fill="#f0ad5a" font-size="11.5" text-anchor="middle">a new pair pops out at the break</text>
+<text x="533" y="160" fill="#c3cbe0" font-size="11.5" text-anchor="middle">③ The tube snaps</text>
+<text x="533" y="178" fill="#8fa0c4" font-size="11" text-anchor="middle">two bound states, still no free quark</text>
+<text x="20" y="212" fill="#8fa0c4" font-size="11.5">The energy you invest turns into new particles rather than releasing the quark — that is confinement</text>
+</g>
+</svg>
+<figcaption>The tube's tension doesn't fade with distance, so there is always enough energy to make particles before there is enough to break free.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>The Higgs accounts for under 1% of your body weight.</strong> A proton weighs 938 MeV, while the three quarks inside it add up to about 9 MeV. The other 99% is the energy of the gluon field plus the kinetic energy of quarks rattling around — confined to a box a femtometre across, they move ferociously fast. <var>E</var> = <var>m</var><var>c</var><sup>2</sup> here is not a metaphor for bombs, it is a literal translation: most of what the bathroom scale reads is not "amount of stuff" but imprisoned energy.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Complex systems / Computational science</span>
+<ul>
+<li><strong>Complex systems</strong>: "the whole is more than the sum of its parts" becomes a weighable number here — proton 938, parts 9. The excess is the interaction itself. The thread running through "More Is Different" is usually only discussable in qualitative terms; here it has a precise instance.</li>
+<li><strong>Computational science</strong>: the colour force is so strong that perturbative expansion fails outright, leaving no option but to chop spacetime into a four-dimensional lattice and integrate by Monte Carlo on a supercomputer. In 2008 one collaboration computed the masses of the proton, the neutron and their relatives from first principles this way, matching experiment to a few percent — a literal calculation of your body weight from the ground up.</li>
+</ul></div>
+<div class="punch">
+<div class="one">One line: most of your weight isn't matter, it's imprisoned energy.</div>
+<details class="q"><summary><b>Think:</b> If quarks can never get out, how do we know they're in there?</summary><div class="qa">Fire high-energy electrons at a proton and the angular distribution of the scattering shows they are hitting three point-like hard cores, not a uniform smear. Colliders also show "jets" — a struck quark shatters into a tight cone of hadrons whose direction and energy faithfully record the momentum of the original quark.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Quirks of the Weak Force, and the Edges of the Table</h2>
+<span class="pill">Parity violation 1957 · 19 free parameters</span>
+<div class="field"><span class="lab">Intuition</span>
+  Gravity, electromagnetism and the strong force all play fair with mirrors: the mirror-image process is equally legal in reality. The weak force is not. In 1956 Chien-Shiung Wu cooled cobalt-60 to near absolute zero, lined up the nuclear spins with a magnetic field, and counted which way the emitted electrons flew — they clearly favoured one side. The mirrored version is something nature never performs. <strong>At the most basic level, the universe can tell left from right.</strong></div>
+<figure>
+<svg role="img" aria-label="Electron emission in cobalt-60 decay contradicts its mirror image" viewBox="0 0 620 245">
+<defs>
+<marker id="pa" markerWidth="10" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto" refX="8.5" refY="4">
+<path d="M0,0 L10,4 L0,8 z" fill="#5b9bff"></path>
+</marker>
+<marker id="pf" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#3f4c6b"></path>
+</marker>
+<marker id="ps" markerWidth="10" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto" refX="8.5" refY="4">
+<path d="M0,0 L10,4 L0,8 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<text x="165" y="24" fill="#9dc2ff" font-weight="700" text-anchor="middle">Real experiment</text>
+<text x="465" y="24" fill="#f0ad5a" font-weight="700" text-anchor="middle">Mirror world</text>
+<text x="310" y="20" fill="#8fa0c4" font-size="11.5" text-anchor="middle">mirror</text>
+<line x1="310" x2="310" y1="32" y2="228" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.4"></line>
+<!-- left panel -->
+<path d="M123,120 A 42,42 0 1 1 191,146" fill="none" stroke="#f0ad5a" stroke-width="2" marker-end="url(#ps)"></path>
+<text x="76" y="112" fill="#f0ad5a" font-size="11.5" text-anchor="middle">nuclear spin</text>
+<circle cx="165" cy="120" r="24" fill="#1f3a63" stroke="#4a6fae" stroke-width="1.4"></circle>
+<text x="165" y="125" fill="#dbe2f2" font-size="12.5" text-anchor="middle">Co-60</text>
+<line x1="143" x2="143" y1="170" y2="200" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#pa)"></line>
+<line x1="165" x2="165" y1="170" y2="200" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#pa)"></line>
+<line x1="187" x2="187" y1="170" y2="200" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#pa)"></line>
+<line x1="143" x2="143" y1="70" y2="52" stroke="#3f4c6b" stroke-width="1.6" marker-end="url(#pf)"></line>
+<line x1="187" x2="187" y1="70" y2="52" stroke="#3f4c6b" stroke-width="1.6" marker-end="url(#pf)"></line>
+<text x="165" y="222" fill="#c3cbe0" font-size="11.5" text-anchor="middle">Electrons mostly fly against the spin</text>
+<!-- right panel -->
+<path d="M423,120 A 42,42 0 1 1 491,146" fill="none" stroke="#f0ad5a" stroke-width="2" marker-end="url(#ps)"></path>
+<text x="376" y="112" fill="#f0ad5a" font-size="11.5" text-anchor="middle">spin unchanged</text>
+<circle cx="465" cy="120" r="24" fill="#1f3a63" stroke="#4a6fae" stroke-width="1.4"></circle>
+<text x="465" y="125" fill="#dbe2f2" font-size="12.5" text-anchor="middle">Co-60</text>
+<line x1="443" x2="443" y1="70" y2="40" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#pa)"></line>
+<line x1="465" x2="465" y1="70" y2="40" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#pa)"></line>
+<line x1="487" x2="487" y1="70" y2="40" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#pa)"></line>
+<line x1="443" x2="443" y1="170" y2="188" stroke="#3f4c6b" stroke-width="1.6" marker-end="url(#pf)"></line>
+<line x1="487" x2="487" y1="170" y2="188" stroke="#3f4c6b" stroke-width="1.6" marker-end="url(#pf)"></line>
+<text x="465" y="222" fill="#c3cbe0" font-size="11.5" text-anchor="middle">Mirror prediction: mostly along the spin</text>
+<text x="465" y="240" fill="#e0757a" font-size="11.5" text-anchor="middle">Nature has never done this</text>
+</g>
+</svg>
+<figcaption>A mirror flips momentum but not spin, so the two pictures make distinguishable predictions — and the experiment sides with the left one.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  The weak force is also the only one that can change "flavour": only it can turn an up quark into a down quark, or a muon into an electron. The first step of sunlight is exactly this — two protons collide and one becomes a neutron. Nothing but the weak force can do it, and it is absurdly slow, which is why the sun smoulders for ten billion years instead of detonating.
+  The price is that the table is not self-contained: the Standard Model has <strong>19 numbers that can only be filled in by measurement</strong> (nine fermion masses, three coupling constants, four quark-mixing parameters, two Higgs parameters and one strong-CP angle). Add the neutrino masses and mixings discovered later and the count rises to around twenty-six.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>Neutrino mass has, strictly speaking, already falsified a small piece of the original Standard Model</strong>, which explicitly assumed neutrinos were massless. In 1998 Super-Kamiokande saw atmospheric neutrinos change flavour in flight, forcing masses to be non-zero (Nobel Prize 2015). Patching mass in is easy; the trouble is that the patch isn't unique — add right-handed neutrinos, or let the neutrino be its own antiparticle? The choice bears directly on why the universe has more matter than antimatter. This crack opened from the experimental side.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Biology / AI</span>
+<ul>
+<li><strong>Biology</strong>: life on Earth uses almost exclusively left-handed amino acids and right-handed sugars. Since the weak force distinguishes left from right by nature, many have guessed that's where handedness came from. The honest state of play: the energy difference the weak force imposes on a pair of mirror molecules is around 10<sup>−17</sup> in relative terms, has never been measured directly, and mainstream accounts still credit random symmetry breaking plus autocatalytic amplification. An asymmetry at the bottom does not make it the cause of yours.</li>
+<li><strong>AI</strong>: a rough gauge of a theory's "unexplained fraction" is how many of its parameters can only be fitted. All 19 Standard Model numbers are read in from experiment and none can be derived — which makes it look more like an extremely well-fitted model than a principle anyone has understood.</li>
+</ul></div>
+<div class="punch">
+<div class="one">One line: the Standard Model isn't a theory of everything, it's an outrageously precise inventory with its own boundary written on the label.</div>
+<details class="q"><summary><b>Think:</b> Missing gravity, stuffed with free parameters — on what grounds is it called "successful"?</summary><div class="qa">Because inside its jurisdiction it has never been wrong. Theory and experiment for the electron's magnetic moment agree to one part in 10¹², the most precise comparison in all of science; and the particles it predicted before they were found line up in a row: W, Z, top quark, Higgs. Success here means "never lost where it had authority", not "explained everything".</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>Why exactly three generations?</summary>
+<div class="body">There is no answer, only constraints. The Z width at LEP rules out a fourth light neutrino, and Higgs production rates make a fourth generation very unlikely. One tantalising clue: for the quark mixing matrix to accommodate a complex phase — and thus for matter and antimatter to behave differently — <strong>at least three generations are required</strong>. That is how Kobayashi and Maskawa inferred a third generation back in 1973, when the second wasn't even complete. But it only shows three are necessary, not why there aren't more.</div></details>
+<details><summary>What actually is a "particle" in this table?</summary>
+<div class="body">Not a tiny ball — an excitation of a field, which is the whole point of quantum field theory. Each row corresponds to a field filling the entire universe, and a particle is one indivisible quantum of vibration in it. Identity falls out for free: all electrons are exactly alike because they are the same excitation of the same field. Read each cell as "the universe contains this field".</div></details>
+<details><summary>Is the muon g−2 "anomaly" still a hint of new physics?</summary>
+<div class="body">It was once the hottest candidate; today it needs a heavy discount. Fermilab pushed the measurement to the parts-per-billion level, but the theory side moved further still: the hadronic contribution from lattice QCD disagreed with the older data-driven method, and adopting the former brings prediction and measurement into broad agreement. The concrete lesson: in a claimed gap between experiment and theory, sometimes the theoretical uncertainty is the main character.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://pdg.lbl.gov/">Particle Data Group</a> — the authoritative compilation of particle properties, updated biennially</li>
+<li><a href="https://home.cern/science/physics/standard-model">CERN: The Standard Model</a> — the official public tour</li>
+<li>Weinberg, <a href="https://doi.org/10.1103/PhysRevLett.19.1264">Phys. Rev. Lett. 19, 1264 (1967)</a>, "A Model of Leptons" — electroweak unification in three pages</li>
+<li>Gross &amp; Wilczek, <a href="https://doi.org/10.1103/PhysRevLett.30.1343">PRL 30, 1343 (1973)</a> and Politzer, <a href="https://doi.org/10.1103/PhysRevLett.30.1346">PRL 30, 1346 (1973)</a> — asymptotic freedom</li>
+<li>Wu et al., <a href="https://doi.org/10.1103/PhysRev.105.1413">Phys. Rev. 105, 1413 (1957)</a> — the cobalt-60 experiment and parity violation</li>
+<li>Kobayashi &amp; Maskawa, <a href="https://doi.org/10.1143/PTP.49.652">Prog. Theor. Phys. 49, 652 (1973)</a> — a third generation predicted from CP violation</li>
+<li>ALEPH/DELPHI/L3/OPAL, <a href="https://doi.org/10.1016/j.physrep.2005.12.006">Phys. Rept. 427, 257 (2006)</a> — counting neutrino species from the Z lineshape</li>
+<li>Super-Kamiokande, <a href="https://doi.org/10.1103/PhysRevLett.81.1562">PRL 81, 1562 (1998)</a> — atmospheric neutrino oscillation</li>
+<li>ATLAS, <a href="https://doi.org/10.1016/j.physletb.2012.08.020">Phys. Lett. B 716, 1 (2012)</a> and CMS, <a href="https://doi.org/10.1016/j.physletb.2012.08.021">Phys. Lett. B 716, 30 (2012)</a> — discovery of the Higgs boson</li>
+<li>Dürr et al., <a href="https://doi.org/10.1126/science.1163233">Science 322, 1224 (2008)</a> — hadron masses from lattice QCD, ab initio</li>
+<li>Morishima et al., <a href="https://doi.org/10.1038/nature24647">Nature 552, 386 (2017)</a> — muon imaging reveals a large void in Khufu's Pyramid</li>
+<li>Sean Carroll, <em>The Particle at the End of the Universe</em> — the Higgs and the Standard Model for general readers</li>
+<li>Frank Wilczek, <em>The Lightness of Being</em> — where mass comes from, by one of the discoverers of asymptotic freedom</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
