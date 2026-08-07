@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：对称性与质量的起源 · Day 26</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>对称性与质量的起源</h1>
+<div class="meta">Day 26 · 2026 · Phase F 粒子与标准模型</div>
+<div class="tagline">同一条原理既生出了力，又禁止一切质量。W 玻色子偏偏有八十个质子那么重——出路不是放弃对称，是把它藏进真空里。</div>
+</header>
+<div class="intro">
+「对称」听着像审美词汇：雪花、蝴蝶、建筑立面。在物理里它是硬通货：一条对称性换一条守恒律，一条<b>局域</b>对称性更狠，直接逼出一整种力。可这条规则附带一个副作用——它要求所有力的载体质量为零。光子确实是零，W 玻色子却重达 80 GeV。1964 年的解法近乎狡猾：方程一字不改，让真空自己去破坏对称。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>力是被自由逼出来的 <span class="en">Freedom Forces a Field</span></h2>
+<span class="pill">规范原理 · 杨-米尔斯 1954</span>
+<div class="field"><span class="lab">直觉</span>
+  海拔的零点可以任选：从海平面算还是从地心算，山有多高不变——全局对称，全世界一起换零点。现在放肆些：允许每地各用各的零点。那么"从上海到成都升了多少"就不能直接相减，除非另发一张表，记下任意两地的零点差。<strong>那张逐点的换算表，就是场。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  波函数带一个相位，像每点插着一根指针。整体转动全部指针，观测量不变，Noether 定理把它兑换成电荷守恒（<a href="physical-laws-day1.html">物理定律是什么</a>拆过这台机器）。苛刻的要求是<strong>局域</strong>：每点各转各的，物理仍须不变。裸方程做不到——求导会把"隔壁多转了一点"误记成真实变化。补救只有一条：引入一个场，随指针转动同步平移，抵消掉假变化。</div>
+<div class="eq"><var>ψ</var> → e<sup>i<var>θ</var>(<var>x</var>)</sup><var>ψ</var> ，&nbsp; <var>A</var><sub>μ</sub> → <var>A</var><sub>μ</sub> − ∂<sub>μ</sub><var>θ</var></div>
+<div class="gloss"><var>ψ</var> 读作 <strong>psi</strong>，是波函数；<var>θ</var> 读作 <strong>theta</strong>，是指针转过的角度，<var>θ</var>(<var>x</var>) 里的 (<var>x</var>) 是全部关键——每点可以转不同的角度；e 是自然对数的底，i 是虚数单位；∂ 读作"偏"，指"沿某方向的微小变化率"；<var>A</var>（<strong>字母 A</strong>）是补偿场，下标 μ 读作 <strong>mu</strong>，标记时空的四个方向。<strong>两行必须成对发生。</strong></div>
+<div class="field">
+  <var>A</var> 正是电磁场，量子就是光子（<a href="electromagnetism-day12.html">电磁的统一</a>）。换更大的对称群，故事重演：<strong>载体个数 = 对称群的生成元个数</strong>——八个胶子不是数出来的，是算出来的。</div>
+<figure>
+<svg role="img" aria-label="全局相位对称与局域相位对称的对比，局域情形需要一个补偿场" viewBox="0 0 640 222">
+<defs>
+<marker id="ptr" markerHeight="6" markerUnits="userSpaceOnUse" markerWidth="7" orient="auto" refX="6" refY="3">
+<path d="M0,0 L7,3 L0,6 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="150" y="26" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">全局：所有指针一起转</text>
+<text x="475" y="26" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">局域：每点各转各的</text>
+<line x1="318" x2="318" y1="38" y2="190" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<g fill="#182a49" stroke="#3a4667" stroke-width="1.3">
+<circle cx="55" cy="88" r="18"></circle><circle cx="100" cy="88" r="18"></circle>
+<circle cx="145" cy="88" r="18"></circle><circle cx="190" cy="88" r="18"></circle>
+<circle cx="235" cy="88" r="18"></circle>
+</g>
+<g stroke="#5b9bff" stroke-width="2.2" marker-end="url(#ptr)">
+<line x1="55" x2="62.5" y1="88" y2="75"></line>
+<line x1="100" x2="107.5" y1="88" y2="75"></line>
+<line x1="145" x2="152.5" y1="88" y2="75"></line>
+<line x1="190" x2="197.5" y1="88" y2="75"></line>
+<line x1="235" x2="242.5" y1="88" y2="75"></line>
+</g>
+<text x="150" y="152" fill="#c3cbe0" font-size="11.5" text-anchor="middle">整体转动，观测量不变</text>
+<text x="150" y="172" fill="#8fa0c4" font-size="11" text-anchor="middle">Noether 把它兑换成电荷守恒</text>
+<g fill="#182a49" stroke="#3a4667" stroke-width="1.3">
+<circle cx="355" cy="88" r="18"></circle><circle cx="415" cy="88" r="18"></circle>
+<circle cx="475" cy="88" r="18"></circle><circle cx="535" cy="88" r="18"></circle>
+<circle cx="595" cy="88" r="18"></circle>
+</g>
+<g stroke="#5b9bff" stroke-width="2.2" marker-end="url(#ptr)">
+<line x1="355" x2="369.1" y1="88" y2="82.9"></line>
+<line x1="415" x2="409.9" y1="88" y2="73.9"></line>
+<line x1="475" x2="461.4" y1="88" y2="94.3"></line>
+<line x1="535" x2="542.5" y1="88" y2="101"></line>
+<line x1="595" x2="598.9" y1="88" y2="73.5"></line>
+</g>
+<g fill="none" stroke="#c9a06a" stroke-width="2">
+<path d="M362,104 Q385,136 408,104"></path>
+<path d="M422,104 Q445,136 468,104"></path>
+<path d="M482,104 Q505,136 528,104"></path>
+<path d="M542,104 Q565,136 588,104"></path>
+</g>
+<text x="475" y="152" fill="#f0ad5a" font-size="11.5" text-anchor="middle">补偿场 A：逐点抵消掉相位差</text>
+<text x="475" y="172" fill="#8fa0c4" font-size="11" text-anchor="middle">这个场就是电磁场，它的量子是光子</text>
+<text x="20" y="208" fill="#8fa0c4" font-size="11.5">给描述的自由越放肆，理论被约束得越死——相互作用的形式几乎没有选择余地</text>
+</g>
+</svg>
+<figcaption>左边只允许整体转动，右边允许逐点乱转；差别是右边必须补一个场进来。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <strong>规范对称不是自然界的性质，是我们描述方式里的冗余</strong>：同一个物理态有无穷多种写法。可正是"让这份冗余无害"钉死了力的形式——只有一种相互作用扛得住逐点乱转。杨振宁和米尔斯 1954 年推广它时被泡利当场追问载体的质量，那个洞二十年后才补上。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 数学 / AI</span>
+<ul>
+<li><strong>数学</strong>：这套结构在微分几何里早有名字——纤维丛上的联络。补偿场就是联络，"绕一圈回来指针差多少"就是曲率。物理学家摸索几十年，才发现自己重造了数学家的轮子。</li>
+<li><strong>AI</strong>：等变神经网络把对称性写进架构，而不指望模型从数据里学出来，卷积网络对平移等变即是一例。规范原理是这条路走到极致的版本。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：力不是加进理论的，是"允许每点各自选零点"这份自由逼出来的。</div>
+<details class="q"><summary><b>思考：</b>既然规范自由度只是冗余，为什么不挑一种写法固定下来？</summary><div class="qa">可以，这叫"固定规范"，实际计算天天这么干。代价是必须挑一种：有的规范算着简便，却看不出各种可能性的概率加起来正好是 1；有的反过来。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>对称仍在，基态选了边 <span class="en">The Law Stays Symmetric, the Ground State Doesn't</span></h2>
+<span class="pill">自发对称破缺 · 南部 1960</span>
+<div class="field"><span class="lab">直觉</span>
+  一屋子人围着圆桌，每人左右各摆一只水杯——完全左右对称。第一个人随手拿了左边那只，整桌人只好都拿左手边：规则依旧对称，<strong>结果不再对称</strong>。铅笔尖朝下立着也一样：方程对所有方向一视同仁，铅笔却必须倒向某一边。对称性没被打破，只是<strong>基态没守住它</strong>。</div>
+<div class="field"><span class="lab">机制</span>
+  希格斯场的势能长成一顶墨西哥帽，或者说一个酒瓶底：</div>
+<div class="eq"><var>V</var>(<var>φ</var>) = −<var>μ</var><sup>2</sup>|<var>φ</var>|<sup>2</sup> + <var>λ</var>|<var>φ</var>|<sup>4</sup></div>
+<div class="gloss"><var>V</var> 是势能，"场取某个值要付多少能量"；<var>φ</var> 读作 <strong>phi</strong>，是希格斯场的取值，|<var>φ</var>| 是它的大小；<var>μ</var> 读作 <strong>mu</strong>、<var>λ</var> 读作 <strong>lambda</strong>，是两个常数。<strong>全部戏剧藏在第一项前面那个减号里</strong>——它把原点从谷底翻成了山顶。</div>
+<div class="field">
+  <var>φ</var> = <span class="nowrap"><b style="color:#5b9bff">0</b>（数字零）</span>本该是"什么都没有"的真空，此刻却成了不稳的山顶；真正的谷底落在一圈半径 <var>v</var> ≈ 246 GeV 的圆环上。宇宙初生时够热，场被摇在帽顶附近，对称完好；冷到某个温度以下它必须滚下去，停在圈上某一点——<strong>滚到哪儿都一样，但必须选一个</strong>。</div>
+<figure>
+<svg role="img" aria-label="希格斯势的墨西哥帽截面，与铁磁体在居里点上下的对比" viewBox="0 0 640 232">
+<defs>
+<marker id="mh" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#c9a06a"></path>
+</marker>
+<marker id="mb" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="150" y="26" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">希格斯势的截面：墨西哥帽</text>
+<text x="475" y="26" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">同一件事：一块铁磁体</text>
+<line x1="318" x2="318" y1="38" y2="228" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<polyline points="36,73 45.5,110 55,133 64.5,145 74,148 83.5,145 93,139 102.5,130 112,121 121.5,113 131,106 140.5,101 150,100 159.5,101 169,106 178.5,113 188,121 197.5,130 207,139 216.5,145 226,148 235.5,145 245,133 254.5,110 264,73" fill="none" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<path d="M158,95 Q192,104 217,133" fill="none" stroke="#c9a06a" stroke-width="1.8" marker-end="url(#mh)"></path>
+<circle cx="150" cy="92" r="7" fill="#f0ad5a"></circle>
+<circle cx="226" cy="140" r="7" fill="#f0ad5a"></circle>
+<text x="150" y="60" fill="#c3cbe0" font-size="11.5" text-anchor="middle">φ = 0 成了山顶，不是谷底</text>
+<text x="290" y="168" fill="#f0ad5a" font-size="11.5" text-anchor="end">真空落在 |φ| = v ≈ 246 GeV</text>
+<text x="150" y="194" fill="#c3cbe0" font-size="11.5" text-anchor="middle">谷底连成一整圈，选哪点都等价</text>
+<text x="150" y="214" fill="#8fa0c4" font-size="11" text-anchor="middle">冷却时被迫挑一个 = 自发破缺</text>
+<rect x="390" y="48" width="170" height="64" rx="7" fill="#0f1626" stroke="#3a4667" stroke-width="1.3"></rect>
+<g stroke="#5b9bff" stroke-width="2" marker-end="url(#mb)">
+<line x1="406.3" x2="423.7" y1="73" y2="63"></line>
+<line x1="457.7" x2="442.3" y1="74.4" y2="61.6"></line>
+<line x1="488.4" x2="481.6" y1="58.6" y2="77.4"></line>
+<line x1="518.3" x2="521.7" y1="77.9" y2="58.2"></line>
+<line x1="424.9" x2="405.2" y1="92.3" y2="95.7"></line>
+<line x1="442.3" x2="457.7" y1="87.6" y2="100.4"></line>
+<line x1="486.7" x2="483.3" y1="103.9" y2="84.2"></line>
+<line x1="510.3" x2="529.7" y1="96.6" y2="91.4"></line>
+</g>
+<text x="475" y="128" fill="#c3cbe0" font-size="11.5" text-anchor="middle">居里点以上：整体各向同性</text>
+<rect x="390" y="142" width="170" height="64" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<g stroke="#5b9bff" stroke-width="2" marker-end="url(#mb)">
+<line x1="415" x2="415" y1="172" y2="152"></line>
+<line x1="450" x2="450" y1="172" y2="152"></line>
+<line x1="485" x2="485" y1="172" y2="152"></line>
+<line x1="520" x2="520" y1="172" y2="152"></line>
+<line x1="415" x2="415" y1="198" y2="178"></line>
+<line x1="450" x2="450" y1="198" y2="178"></line>
+<line x1="485" x2="485" y1="198" y2="178"></line>
+<line x1="520" x2="520" y1="198" y2="178"></line>
+</g>
+<text x="475" y="222" fill="#c3cbe0" font-size="11.5" text-anchor="middle">冷却后：自发排齐，方向不写在方程里</text>
+</g>
+</svg>
+<figcaption>势能本身完全对称，最低点却不止一个；系统必须挑一个住下来，对称就此从解里消失。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <strong>"对称性破缺"这说法容易骗人：没有任何东西被打破。</strong>方程一个字母没改，破缺的只是解。铁磁体早演过一遍：居里点以上磁矩各指各的、整体各向同性；温度一降它们自发排齐指向某方向——那个方向不写在任何方程里，是这块铁自己挑的。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 凝聚态 / 生物 / AI</span>
+<ul>
+<li><strong>凝聚态</strong>：原型来自超导。Anderson 1963 年指出，超导体内部的光子获得有效质量，磁场只能渗进去几十纳米——这就是迈斯纳效应。</li>
+<li><strong>生物</strong>：受精卵近乎球对称，长成的身体却有确定的前后左右。体轴不写在某个基因里，是微小涨落经正反馈放大定下来的。</li>
+<li><strong>AI</strong>：神经网络若把同一层权重全初始化成同一个值，这些神经元将永远一致、学不出不同特征。随机初始化的唯一作用就是<strong>打破对称</strong>。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：对称的规则完全可以有不对称的结果——不对称不必写进定律，冷却一下就够了。</div>
+<details class="q"><summary><b>思考：</b>既然圆环上每点等价，宇宙不同区域会不会各选了不同方向？</summary><div class="qa">原则上会，交界处将留下畴壁、宇宙弦这类拓扑缺陷。观测至今没看到它们，这反过来成了暴胀理论的一条论据：暴胀把一小块已经均匀的区域吹成整个可观测宇宙，缺陷被稀释到看不见。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>质量是吃出来的 <span class="en">Mass Is Something You Swallow</span></h2>
+<span class="pill">希格斯机制 · 1964 · 2012 证实</span>
+<div class="field"><span class="lab">直觉</span>
+  常听到的比喻是"希格斯场像糖浆，粒子在里面走得费劲"——<strong>这个比喻是错的</strong>：糖浆有摩擦，会让粒子慢下来直到停住，质量不会。更接近实况的是：无质量的粒子只能以光速一路向前，而希格斯凝聚体不断把它的"左手态"和"右手态"来回转换，前进的路于是折成之字形，净速度小于光速。<strong>"有质量"的字面意思，就是"走不到光速"。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  沿帽底那一圈跑不花能量（每点等高），对应一个无质量的模式，叫<strong>戈德斯通模</strong>；沿半径往外爬要花能量，对应一个有质量的粒子——<strong>希格斯玻色子</strong>，125 GeV，2012 年被两个实验组同时看到。
+  希格斯场有四个实分量，三个是戈德斯通模。妙处在于：无质量的力载体只有两种偏振，有质量的却有三种。第三种从哪来？<strong>正是那三个戈德斯通模，被 W⁺、W⁻、Z 一人一个吃掉，变成自己的纵向偏振。</strong>自由度严格守恒：3×2 + 3 = 3×3。光子什么也没吃到，于是保持零质量。</div>
+<figure>
+<svg role="img" aria-label="戈德斯通模被规范玻色子吸收的自由度记账，以及光子直行与电子走之字形的对比" viewBox="0 0 640 250">
+<defs>
+<marker id="da" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+<marker id="db" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="160" y="26" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">自由度不会凭空冒出来</text>
+<text x="475" y="26" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">「有质量」= 走不到光速</text>
+<line x1="308" x2="308" y1="38" y2="212" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<rect x="32" y="48" width="112" height="56" rx="7" fill="#0f1626" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="88" y="72" fill="#dbe2f2" font-size="12" text-anchor="middle">无质量的 W</text>
+<text x="88" y="92" fill="#8fa0c4" font-size="11" text-anchor="middle">2 种偏振</text>
+<text x="160" y="83" fill="#f0ad5a" font-size="19" font-weight="700" text-anchor="middle">+</text>
+<rect x="176" y="48" width="112" height="56" rx="7" fill="#2a2114" stroke="#6a5326" stroke-width="1.3"></rect>
+<text x="232" y="72" fill="#f0ad5a" font-size="12" text-anchor="middle">1 个戈德斯通模</text>
+<text x="232" y="92" fill="#c9a06a" font-size="11" text-anchor="middle">沿帽底圈跑</text>
+<line x1="160" x2="160" y1="112" y2="140" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#da)"></line>
+<rect x="54" y="146" width="212" height="52" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="160" y="170" fill="#dbe2f2" font-size="12.5" text-anchor="middle">有质量的 W：3 种偏振</text>
+<text x="160" y="190" fill="#8fa0c4" font-size="11" text-anchor="middle">多出的纵向就是被吃掉的那个</text>
+<text x="330" y="58" fill="#c3cbe0" font-size="11.5">光子：不理会希格斯凝聚体</text>
+<line x1="330" x2="608" y1="76" y2="76" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#da)"></line>
+<text x="330" y="98" fill="#8fa0c4" font-size="11">一路直行，净速度 = c</text>
+<text x="330" y="128" fill="#c3cbe0" font-size="11.5">电子：被凝聚体反复转换手性</text>
+<polyline points="330,168 345,152 360,184 375,152 390,184 405,152 420,184 435,152 450,184 465,152 480,184 495,152 510,184 525,152 540,168" fill="none" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<line x1="540" x2="566" y1="168" y2="168" stroke="#f0ad5a" stroke-width="2.4" marker-end="url(#db)"></line>
+<text x="330" y="206" fill="#8fa0c4" font-size="11">路折成之字形，净速度 &lt; c</text>
+<text x="20" y="236" fill="#8fa0c4" font-size="11.5">质量不是「物质的多少」，是粒子与真空里那片场耦合得有多紧</text>
+</g>
+</svg>
+<figcaption>左：三个吃掉的自由度对上三个新的纵向偏振，账面分毫不差。右：直行与折线的差别，就是零质量与有质量的差别。</figcaption>
+</figure>
+<div class="field">
+  费米子的质量走另一条路——汤川耦合：</div>
+<div class="eq"><var>m</var><sub>f</sub> = <var>y</var><sub>f</sub> · <span class="frac"><span class="fnum"><var>v</var></span><span class="fden">√2</span></span></div>
+<div class="gloss"><var>m</var><sub>f</sub> 是某种费米子的质量（下标 f 指 fermion，费米子）；<var>y</var><sub>f</sub> 读作 <strong>y-f</strong>，是它与希格斯场耦合的强度；<var>v</var> 是希格斯场在真空里取的那个值，246 GeV；√2 是根号 2。<var>v</var> 对所有粒子是同一个数，差别全压在 <var>y</var> 上：顶夸克的 <var>y</var> 接近 1，电子的约为 3×10<sup>−6</sup>。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <strong>希格斯机制解释了质量的来源，却完全没解释质量的数值。</strong>每个 <var>y</var> 都从实验读进去，理论一个也算不出来；电子为什么比顶夸克轻三十多万倍，标准模型只能回答"测出来就这样"。另外，即便没有希格斯你的体重也几乎不变（<a href="standard-model-day25.html">标准模型</a>算过这笔账）。但那零头要命：电子若无质量便以光速飞行，原子无从形成。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 凝聚态 / 材料</span>
+<ul>
+<li><strong>凝聚态</strong>：超导体里的光子获得有效质量，磁场的穿透深度就是它的力程——几十纳米，可以直接量出来。</li>
+<li><strong>材料</strong>：半导体里电子的"有效质量"可以是自由电子的百分之几，也可以是好几倍，全看晶格能带的形状。载流子没真的变轻变重，只是它在周期性背景中的响应变了。<strong>质量描述的是粒子与背景的关系，不是自带的一块料。</strong></li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：质量不是"物质的多少"，是一个粒子跟真空里那片场耦合得有多紧。</div>
+<details class="q"><summary><b>思考：</b>希格斯玻色子和希格斯场是一回事吗？</summary><div class="qa">不是。场是铺满全宇宙、在真空里取非零值的那个背景，负责给出质量；玻色子是这个场沿半径方向的一份振动，寿命约 10⁻²² 秒，一造出来就衰变。找玻色子是为了证明场真在那儿——好比拍到浪花证明有水。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>没结清的账 <span class="en">The Bill That Didn't Balance</span></h2>
+<span class="pill">等级问题 · 强 CP · 自然性</span>
+<div class="field"><span class="lab">直觉</span>
+  125 GeV 这个数字本身就是一桩悬案。量子修正会把希格斯质量往上推，推多少取决于理论在多高的能标上失效；若它一路有效到引力必须登场的普朗克能标（10<sup>19</sup> GeV），那些贡献的量级也在那一端。要让它们加起来只剩 125，得有几十位有效数字的相互抵消。</div>
+<figure>
+<svg role="img" aria-label="从 1 MeV 到普朗克能标的对数刻度尺，标出希格斯质量与量子修正的方向" viewBox="0 0 640 205">
+<defs>
+<marker id="ax" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+<marker id="ay" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="20" y="26" fill="#9dc2ff" font-size="13" font-weight="700">一把跨越 22 个数量级的尺子</text>
+<line x1="180" x2="575" y1="88" y2="88" stroke="#f0ad5a" stroke-width="2" marker-end="url(#ay)"></line>
+<text x="378" y="74" fill="#f0ad5a" font-size="11.5" text-anchor="middle">量子修正天然把希格斯质量推向这一端</text>
+<line x1="50" x2="612" y1="120" y2="120" stroke="#4a6fae" stroke-width="1.8" marker-end="url(#ax)"></line>
+<g stroke="#4a6fae" stroke-width="1.5">
+<line x1="50" x2="50" y1="112" y2="128"></line>
+<line x1="124" x2="124" y1="112" y2="128"></line>
+<line x1="175" x2="175" y1="112" y2="128"></line>
+<line x1="222" x2="222" y1="112" y2="128"></line>
+<line x1="516" x2="516" y1="112" y2="128"></line>
+<line x1="590" x2="590" y1="112" y2="128"></line>
+</g>
+<g fill="#8fa0c4" font-size="11" text-anchor="middle">
+<text x="50" y="145">1 MeV</text>
+<text x="124" y="145">1 GeV 质子</text>
+<text x="222" y="145">10⁴ LHC 上限</text>
+<text x="590" y="145">10¹⁹ 普朗克</text>
+<text x="516" y="167">10¹⁶ 大统一？</text>
+</g>
+<text x="175" y="167" fill="#f0ad5a" font-size="11" text-anchor="middle">125 GeV ← 希格斯</text>
+<text x="20" y="192" fill="#8fa0c4" font-size="11.5">要让 10¹⁹ 量级的贡献相加后只剩 125，需要三十多位有效数字的抵消</text>
+</g>
+</svg>
+<figcaption>刻度是对数的：每一格是一个数量级。希格斯挤在最左端，理论的自然落点在最右端。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  这叫<strong>等级问题</strong>：弱作用的能标比引力的小十七个数量级，量子修正为什么没把这条鸿沟抹平。超对称曾是最受青睐的解药——给每个粒子配一个伙伴，两者的修正符号相反、自动对消；可对撞机找了十几年，一个超伙伴也没露面。类似的账还有一笔<strong>强 CP 问题</strong>：量子色动力学原则上允许一个破坏时间反演对称的角度，实验却把它压到 10<sup>−10</sup> 以下；猜想中的解药是一种叫轴子的新粒子。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <strong>"自然性"是一条审美原则，不是物理定律。</strong>它说的是：无量纲参数不该极端接近 <span class="nowrap"><b style="color:#5b9bff">0</b>（数字零）</span>或 1，除非有对称性护着。这条直觉赢过几次，却不是定理。对撞机的结果出来之后，越来越多人认真对待另一种可能：数值就是这样，没有更深的理由。把审美偏好当成预言，本就是要准备认账的赌注。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 科学方法</span>
+<ul>
+<li><strong>AI</strong>：期待参数"自然"是一种先验。先验能加速搜索，也能把搜索引到错误的区域——超对称在对撞机开机前几乎是共识。</li>
+<li><strong>科学方法</strong>：一个理论有多少参数只能靠测量填进去，是"还剩多少没懂"的粗略指标。规范原理解释掉了力的形式，希格斯解释掉了质量的来源，数值本身仍是抄来的。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：规范对称解释了力从哪来，希格斯解释了质量从哪来，谁都没解释那些数字为什么偏偏是这些数字。</div>
+<details class="q"><summary><b>思考：</b>超对称既然没被找到，为什么还有人研究它？</summary><div class="qa">它不是单靠自然性支撑的——还能让三种力的强度在极高能标附近汇聚、给暗物质提供候选粒子，并且是弦论的必要成分。落空的是"超伙伴该在 TeV 尺度露面"这个更强的版本，不是整个框架。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>既然规范对称只是冗余，"自发破缺规范对称"这句话严格吗？</summary>
+<div class="body">不严格。真正的规范对称不可能被自发破缺——Elitzur 1975 年证明：局域对称下，任何不规范不变的量，平均值必定为零。破缺的是伴随它的那部分全局对称。更干净的说法是系统进入了"希格斯相"：真空取了非零值，力的载体获得质量，规范冗余本身依然完好。"破缺"是历史沿用的叫法，不必被这个词绊住。</div></details>
+<details><summary>为什么光子没获得质量，Z 却获得了？</summary>
+<div class="body">因为希格斯场挑的那个真空方向，恰好让某一个特定的组合保持不动。电弱理论里有四个规范场，其中三个组合"感觉到"了凝聚体，变成 W⁺、W⁻、Z；第四个与凝聚体正交，什么也没感觉到，那就是光子。电磁力能伸向无穷远，是这个几何巧合的直接后果。</div></details>
+<details><summary>中微子的质量也来自希格斯吗？</summary>
+<div class="body">至少不完全是。给中微子写标准的汤川耦合需要右手中微子，而它从未被观测到；就算引入，耦合强度也要小到 10⁻¹² 量级，比电子还离谱。另一条路是中微子本身就是自己的反粒子，质量由别的机制给出，来源便落在标准模型之外。判决要靠无中微子双贝塔衰变的实验。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Yang &amp; Mills，<a href="https://doi.org/10.1103/PhysRev.96.191">Phys. Rev. 96, 191 (1954)</a>——规范原理的原始论文</li>
+<li>Nambu，<a href="https://doi.org/10.1103/PhysRev.117.648">Phys. Rev. 117, 648 (1960)</a>——把超导里的自发破缺搬进粒子物理</li>
+<li>Anderson，<a href="https://doi.org/10.1103/PhysRev.130.439">Phys. Rev. 130, 439 (1963)</a>——超导体里的光子如何获得质量</li>
+<li>Englert &amp; Brout，<a href="https://doi.org/10.1103/PhysRevLett.13.321">PRL 13, 321 (1964)</a>；Higgs，<a href="https://doi.org/10.1103/PhysRevLett.13.508">PRL 13, 508 (1964)</a>；Guralnik, Hagen &amp; Kibble，<a href="https://doi.org/10.1103/PhysRevLett.13.585">PRL 13, 585 (1964)</a>——三组人同一年各自写下同一个机制</li>
+<li>Weinberg，<a href="https://doi.org/10.1103/PhysRevLett.19.1264">PRL 19, 1264 (1967)</a>——把机制装进电弱理论</li>
+<li>ATLAS，<a href="https://doi.org/10.1016/j.physletb.2012.08.020">Phys. Lett. B 716, 1 (2012)</a>；CMS，<a href="https://doi.org/10.1016/j.physletb.2012.08.021">Phys. Lett. B 716, 30 (2012)</a>——希格斯玻色子的发现</li>
+<li>Peccei &amp; Quinn，<a href="https://doi.org/10.1103/PhysRevLett.38.1440">PRL 38, 1440 (1977)</a>——强 CP 问题与轴子的起点</li>
+<li>Degrassi 等，<a href="https://doi.org/10.1007/JHEP08(2012)098">JHEP 08 (2012) 098</a>——真空稳定性的定量分析</li>
+<li><a href="https://pdg.lbl.gov/">Particle Data Group</a>——希格斯与电弱参数的权威数值</li>
+<li>Frank Close，<em>The Infinity Puzzle</em>——从重整化到希格斯的完整历史</li>
+<li>Sean Carroll，<em>The Particle at the End of the Universe</em>——希格斯的通俗全景</li>
+<li>Sabine Hossenfelder，<em>Lost in Math</em>——对"自然性"这类美学判据的质疑</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

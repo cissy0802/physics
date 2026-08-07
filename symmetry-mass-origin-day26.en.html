@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Symmetry and the Origin of Mass · Day 26</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Symmetry and the Origin of Mass</h1>
+<div class="meta">Day 26 · 2026 · Phase F Particles &amp; the Standard Model</div>
+<div class="tagline">One principle both generates the forces and forbids every mass. The W boson happens to weigh as much as eighty protons — the way out is not to abandon symmetry, but to hide it in the vacuum.</div>
+</header>
+<div class="intro">
+"Symmetry" sounds like an aesthetic word: snowflakes, butterflies, building façades. In physics it is hard currency. One symmetry buys you one conservation law; a <b>local</b> symmetry goes further and forces an entire force into existence. The catch is a side effect of the very same rule — it demands that every force carrier be massless. The photon obliges; the W boson weighs 80 GeV. The 1964 solution is very nearly a sleight of hand: change not one letter of the equations, and let the vacuum do the breaking.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>A Force Squeezed Out of Freedom</h2>
+<span class="pill">Gauge principle · Yang–Mills 1954</span>
+<div class="field"><span class="lab">Intuition</span>
+  You can put the zero of altitude wherever you like: measure from sea level or from the centre of the Earth, and a mountain's height is unchanged — a global symmetry, everyone switching zeros together. Now get reckless: let every place pick its own zero. "How much do you climb going from Shanghai to Chengdu?" can no longer be a subtraction, unless someone issues a second table recording the offset between any two places. <strong>That point-by-point conversion table is a field.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  A wavefunction carries a phase — picture a little pointer stuck at every point of space. Rotate all the pointers together and nothing observable changes; Noether's theorem cashes that in as conservation of charge (that machine was taken apart in <a href="physical-laws-day1.en.html">What Are the Laws of Physics</a>). The demanding version is <strong>local</strong>: each point turns by its own angle and the physics must still hold. The bare equations can't manage it — differentiation reads "the neighbour turned a bit more" as a real change. There is exactly one repair: introduce a field that shifts in step with the rotating pointers and cancels the spurious change.</div>
+<div class="eq"><var>ψ</var> → e<sup>i<var>θ</var>(<var>x</var>)</sup><var>ψ</var> ,&nbsp; <var>A</var><sub>μ</sub> → <var>A</var><sub>μ</sub> − ∂<sub>μ</sub><var>θ</var></div>
+<div class="gloss"><var>ψ</var> is read <strong>psi</strong>, the wavefunction; <var>θ</var> is read <strong>theta</strong>, the angle the pointer turns through, and the (<var>x</var>) in <var>θ</var>(<var>x</var>) is the whole point — every point of spacetime may turn by a different angle; e is the base of natural logarithms, i the imaginary unit; ∂ is read "partial," a rate of change along one direction; <var>A</var> (<strong>the letter A</strong>) is the compensating field, and the subscript μ, read <strong>mu</strong>, labels the four directions of spacetime. <strong>The two lines must happen as a pair.</strong></div>
+<div class="field">
+  <var>A</var> is precisely the electromagnetic field, and its quantum is the photon (<a href="electromagnetism-day12.en.html">The Unification of Electromagnetism</a>). Swap in a larger symmetry group and the story repeats: <strong>the number of carriers equals the number of generators of the group</strong> — the eight gluons were not counted, they were calculated.</div>
+<figure>
+<svg role="img" aria-label="Global versus local phase symmetry; the local case requires a compensating field" viewBox="0 0 640 222">
+<defs>
+<marker id="ptr" markerHeight="6" markerUnits="userSpaceOnUse" markerWidth="7" orient="auto" refX="6" refY="3">
+<path d="M0,0 L7,3 L0,6 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<text x="150" y="26" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">Global: all pointers turn together</text>
+<text x="475" y="26" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">Local: each point turns on its own</text>
+<line x1="318" x2="318" y1="38" y2="190" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<g fill="#182a49" stroke="#3a4667" stroke-width="1.3">
+<circle cx="55" cy="88" r="18"></circle><circle cx="100" cy="88" r="18"></circle>
+<circle cx="145" cy="88" r="18"></circle><circle cx="190" cy="88" r="18"></circle>
+<circle cx="235" cy="88" r="18"></circle>
+</g>
+<g stroke="#5b9bff" stroke-width="2.2" marker-end="url(#ptr)">
+<line x1="55" x2="62.5" y1="88" y2="75"></line>
+<line x1="100" x2="107.5" y1="88" y2="75"></line>
+<line x1="145" x2="152.5" y1="88" y2="75"></line>
+<line x1="190" x2="197.5" y1="88" y2="75"></line>
+<line x1="235" x2="242.5" y1="88" y2="75"></line>
+</g>
+<text x="150" y="152" fill="#c3cbe0" font-size="11.5" text-anchor="middle">Nothing observable changes</text>
+<text x="150" y="172" fill="#8fa0c4" font-size="11" text-anchor="middle">Noether cashes it in as charge conservation</text>
+<g fill="#182a49" stroke="#3a4667" stroke-width="1.3">
+<circle cx="355" cy="88" r="18"></circle><circle cx="415" cy="88" r="18"></circle>
+<circle cx="475" cy="88" r="18"></circle><circle cx="535" cy="88" r="18"></circle>
+<circle cx="595" cy="88" r="18"></circle>
+</g>
+<g stroke="#5b9bff" stroke-width="2.2" marker-end="url(#ptr)">
+<line x1="355" x2="369.1" y1="88" y2="82.9"></line>
+<line x1="415" x2="409.9" y1="88" y2="73.9"></line>
+<line x1="475" x2="461.4" y1="88" y2="94.3"></line>
+<line x1="535" x2="542.5" y1="88" y2="101"></line>
+<line x1="595" x2="598.9" y1="88" y2="73.5"></line>
+</g>
+<g fill="none" stroke="#c9a06a" stroke-width="2">
+<path d="M362,104 Q385,136 408,104"></path>
+<path d="M422,104 Q445,136 468,104"></path>
+<path d="M482,104 Q505,136 528,104"></path>
+<path d="M542,104 Q565,136 588,104"></path>
+</g>
+<text x="475" y="152" fill="#f0ad5a" font-size="11.5" text-anchor="middle">Compensating field A cancels the mismatch</text>
+<text x="475" y="172" fill="#8fa0c4" font-size="11" text-anchor="middle">That field is electromagnetism; its quantum is the photon</text>
+<text x="20" y="208" fill="#8fa0c4" font-size="11.5">The wilder the freedom granted to the description, the tighter the theory is pinned down</text>
+</g>
+</svg>
+<figcaption>On the left only a rigid rotation is allowed; on the right every point turns freely — and a field has to be added to pay for it.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>Gauge symmetry is not a property of nature; it is redundancy in the way we describe nature</strong> — one physical state has infinitely many descriptions. That sounds like mere bookkeeping, yet it is exactly the requirement "this redundancy must do no harm" that pins the forces down: only one interaction survives arbitrary point-by-point twisting. When Yang and Mills generalised it in 1954, Pauli pressed them on the spot about the mass of the carriers, and that hole took twenty years to fill.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Mathematics / AI</span>
+<ul>
+<li><strong>Mathematics</strong>: the structure already had a name in differential geometry — a connection on a fibre bundle. The compensating field is the connection, and "how far the pointer is off after a round trip" is the curvature. Physicists spent decades rebuilding a wheel the mathematicians had already made.</li>
+<li><strong>AI</strong>: equivariant neural networks write the symmetry into the architecture rather than hoping the model learns it from data — convolutional networks and translation equivariance being the plain example. The gauge principle is that approach taken to its limit.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: a force isn't added to the theory — it is squeezed out by the freedom to let every point choose its own zero.</div>
+<details class="q"><summary><b>Think:</b> if gauge freedom is only redundancy, why not just fix one description and be done?</summary><div class="qa">You can, and calculations do it daily — it's called fixing a gauge. The price is that you must pick one: some gauges compute easily but obscure the fact that all the probabilities add to 1; others make that obvious and compute badly.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Law Stays Symmetric, the Ground State Doesn't</h2>
+<span class="pill">Spontaneous symmetry breaking · Nambu 1960</span>
+<div class="field"><span class="lab">Intuition</span>
+  A round table of diners, a water glass on each side of every place setting — perfectly left–right symmetric. The first person reaches left, and now everyone must take the glass on their left: the rule is still symmetric, <strong>the outcome no longer is</strong>. A pencil balanced on its tip is the same story: the equations treat every direction alike, but the pencil must fall one way. The symmetry isn't broken; the <strong>ground state simply fails to keep it</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The Higgs field's potential energy is shaped like a Mexican hat, or the punt at the bottom of a wine bottle:</div>
+<div class="eq"><var>V</var>(<var>φ</var>) = −<var>μ</var><sup>2</sup>|<var>φ</var>|<sup>2</sup> + <var>λ</var>|<var>φ</var>|<sup>4</sup></div>
+<div class="gloss"><var>V</var> is potential energy — "what it costs for the field to take a given value"; <var>φ</var> is read <strong>phi</strong>, the value of the Higgs field, and |<var>φ</var>| its magnitude; <var>μ</var> is read <strong>mu</strong> and <var>λ</var> is read <strong>lambda</strong>, two constants. <strong>All of the drama hides in the minus sign on the first term</strong> — it flips the origin from valley to hilltop.</div>
+<div class="field">
+  <var>φ</var> = <span class="nowrap"><b style="color:#5b9bff">0</b> (the digit zero)</span> ought to be the "nothing here" vacuum; instead it is an unstable summit, and the true minimum lies on a ring of radius <var>v</var> ≈ 246 GeV. The newborn universe was hot enough to keep the field shaking around the crown of the hat, symmetry intact; below some temperature it must roll down and settle somewhere on the ring — <strong>anywhere will do, but it has to pick one</strong>.</div>
+<figure>
+<svg role="img" aria-label="Cross-section of the Higgs potential, compared with a ferromagnet above and below the Curie point" viewBox="0 0 640 232">
+<defs>
+<marker id="mh" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#c9a06a"></path>
+</marker>
+<marker id="mb" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<text x="150" y="26" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">Higgs potential, in cross-section</text>
+<text x="475" y="26" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">Same story: a ferromagnet</text>
+<line x1="318" x2="318" y1="38" y2="228" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<polyline points="36,73 45.5,110 55,133 64.5,145 74,148 83.5,145 93,139 102.5,130 112,121 121.5,113 131,106 140.5,101 150,100 159.5,101 169,106 178.5,113 188,121 197.5,130 207,139 216.5,145 226,148 235.5,145 245,133 254.5,110 264,73" fill="none" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<path d="M158,95 Q192,104 217,133" fill="none" stroke="#c9a06a" stroke-width="1.8" marker-end="url(#mh)"></path>
+<circle cx="150" cy="92" r="7" fill="#f0ad5a"></circle>
+<circle cx="226" cy="140" r="7" fill="#f0ad5a"></circle>
+<text x="150" y="60" fill="#c3cbe0" font-size="11.5" text-anchor="middle">φ = 0 is a hilltop, not a valley</text>
+<text x="290" y="168" fill="#f0ad5a" font-size="11.5" text-anchor="end">vacuum sits at |φ| = v ≈ 246 GeV</text>
+<text x="150" y="194" fill="#c3cbe0" font-size="11.5" text-anchor="middle">The minima form a ring; all points equivalent</text>
+<text x="150" y="214" fill="#8fa0c4" font-size="11" text-anchor="middle">Cooling forces a choice = spontaneous breaking</text>
+<rect x="390" y="48" width="170" height="64" rx="7" fill="#0f1626" stroke="#3a4667" stroke-width="1.3"></rect>
+<g stroke="#5b9bff" stroke-width="2" marker-end="url(#mb)">
+<line x1="406.3" x2="423.7" y1="73" y2="63"></line>
+<line x1="457.7" x2="442.3" y1="74.4" y2="61.6"></line>
+<line x1="488.4" x2="481.6" y1="58.6" y2="77.4"></line>
+<line x1="518.3" x2="521.7" y1="77.9" y2="58.2"></line>
+<line x1="424.9" x2="405.2" y1="92.3" y2="95.7"></line>
+<line x1="442.3" x2="457.7" y1="87.6" y2="100.4"></line>
+<line x1="486.7" x2="483.3" y1="103.9" y2="84.2"></line>
+<line x1="510.3" x2="529.7" y1="96.6" y2="91.4"></line>
+</g>
+<text x="475" y="128" fill="#c3cbe0" font-size="11.5" text-anchor="middle">Above the Curie point: isotropic overall</text>
+<rect x="390" y="142" width="170" height="64" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<g stroke="#5b9bff" stroke-width="2" marker-end="url(#mb)">
+<line x1="415" x2="415" y1="172" y2="152"></line>
+<line x1="450" x2="450" y1="172" y2="152"></line>
+<line x1="485" x2="485" y1="172" y2="152"></line>
+<line x1="520" x2="520" y1="172" y2="152"></line>
+<line x1="415" x2="415" y1="198" y2="178"></line>
+<line x1="450" x2="450" y1="198" y2="178"></line>
+<line x1="485" x2="485" y1="198" y2="178"></line>
+<line x1="520" x2="520" y1="198" y2="178"></line>
+</g>
+<text x="475" y="222" fill="#c3cbe0" font-size="11.5" text-anchor="middle">After cooling: aligned, along no direction any equation names</text>
+</g>
+</svg>
+<figcaption>The potential itself is perfectly symmetric, yet its lowest points are many; the system must move into one of them, and the symmetry leaves the solution.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>"Symmetry breaking" is a misleading phrase: nothing is broken.</strong> Not one letter of the equations changes; what breaks is the solution. A ferromagnet had already played the scene: above the Curie point the atomic moments point every which way and the whole is isotropic; drop the temperature and they line up along some direction — a direction written in no equation, chosen by that particular lump of iron.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Condensed matter / Biology / AI</span>
+<ul>
+<li><strong>Condensed matter</strong>: the prototype came from superconductivity. Anderson pointed out in 1963 that photons inside a superconductor acquire an effective mass, so a magnetic field can only seep in a few tens of nanometres — the Meissner effect.</li>
+<li><strong>Biology</strong>: a fertilised egg is nearly spherically symmetric, yet the body it becomes has a definite front, back, left and right. The body axis is not an absolute instruction in some gene; it is a small fluctuation amplified by positive feedback.</li>
+<li><strong>AI</strong>: initialise every weight in a layer to the same value and those neurons stay identical forever, learning no distinct features. The sole job of random initialisation is to <strong>break the symmetry</strong>.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: symmetric rules are perfectly capable of asymmetric outcomes — the asymmetry needn't be written into the law, just cool the system down.</div>
+<details class="q"><summary><b>Think:</b> if every point on the ring is equivalent, might different regions of the universe have chosen differently?</summary><div class="qa">In principle yes, and the boundaries would leave topological defects — domain walls, cosmic strings. None have ever been observed, which became an argument for inflation: inflation blows one already-uniform patch up into the entire observable universe, diluting the defects out of sight.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Mass Is Something You Swallow</h2>
+<span class="pill">Higgs mechanism · 1964 · confirmed 2012</span>
+<div class="field"><span class="lab">Intuition</span>
+  The metaphor you usually hear is "the Higgs field is like syrup, and particles wade through it" — <strong>that metaphor is wrong</strong>: syrup has friction, it slows a particle until it stops, and mass does not. Closer to the truth: a massless particle can only run straight ahead at light speed, while the Higgs condensate keeps converting its "left-handed" and "right-handed" states into each other, so the path folds into a zig-zag and the net speed drops below c. <strong>"Having mass" literally means "unable to reach light speed."</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  Running around the brim of the hat costs no energy (every point is at the same height) and corresponds to a massless mode, called a <strong>Goldstone mode</strong>; climbing outward along the radius does cost energy and corresponds to a massive particle — the <strong>Higgs boson</strong>, 125 GeV, seen by two experiments simultaneously in 2012.
+  The Higgs field has four real components, three of them Goldstone modes. Here is the elegant part: a massless force carrier has only two polarisations, a massive one has three. Where does the third come from? <strong>From exactly those three Goldstone modes, swallowed one apiece by W⁺, W⁻ and Z and turned into their longitudinal polarisation.</strong> Degrees of freedom are strictly conserved: 3×2 + 3 = 3×3. The photon swallowed nothing, so it stays massless.</div>
+<figure>
+<svg role="img" aria-label="Bookkeeping of Goldstone modes absorbed by gauge bosons, and a photon travelling straight versus an electron zig-zagging" viewBox="0 0 640 250">
+<defs>
+<marker id="da" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+<marker id="db" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<text x="160" y="26" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">Degrees of freedom are conserved</text>
+<text x="475" y="26" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">"Massive" = can't reach light speed</text>
+<line x1="308" x2="308" y1="38" y2="212" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<rect x="32" y="48" width="112" height="56" rx="7" fill="#0f1626" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="88" y="72" fill="#dbe2f2" font-size="12" text-anchor="middle">Massless W</text>
+<text x="88" y="92" fill="#8fa0c4" font-size="11" text-anchor="middle">2 polarisations</text>
+<text x="160" y="83" fill="#f0ad5a" font-size="19" font-weight="700" text-anchor="middle">+</text>
+<rect x="176" y="48" width="112" height="56" rx="7" fill="#2a2114" stroke="#6a5326" stroke-width="1.3"></rect>
+<text x="232" y="72" fill="#f0ad5a" font-size="12" text-anchor="middle">1 Goldstone mode</text>
+<text x="232" y="92" fill="#c9a06a" font-size="11" text-anchor="middle">around the hat brim</text>
+<line x1="160" x2="160" y1="112" y2="140" stroke="#5b9bff" stroke-width="2.2" marker-end="url(#da)"></line>
+<rect x="54" y="146" width="212" height="52" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="160" y="170" fill="#dbe2f2" font-size="12.5" text-anchor="middle">Massive W: 3 polarisations</text>
+<text x="160" y="190" fill="#8fa0c4" font-size="11" text-anchor="middle">the extra one is the mode it swallowed</text>
+<text x="330" y="58" fill="#c3cbe0" font-size="11.5">Photon: ignores the Higgs condensate</text>
+<line x1="330" x2="608" y1="76" y2="76" stroke="#5b9bff" stroke-width="2.6" marker-end="url(#da)"></line>
+<text x="330" y="98" fill="#8fa0c4" font-size="11">straight through, net speed = c</text>
+<text x="330" y="128" fill="#c3cbe0" font-size="11.5">Electron: the condensate flips its handedness</text>
+<polyline points="330,168 345,152 360,184 375,152 390,184 405,152 420,184 435,152 450,184 465,152 480,184 495,152 510,184 525,152 540,168" fill="none" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<line x1="540" x2="566" y1="168" y2="168" stroke="#f0ad5a" stroke-width="2.4" marker-end="url(#db)"></line>
+<text x="330" y="206" fill="#8fa0c4" font-size="11">the path zig-zags, net speed &lt; c</text>
+<text x="20" y="236" fill="#8fa0c4" font-size="11.5">Mass isn't "how much stuff" — it is how tightly a particle couples to the field in the vacuum</text>
+</g>
+</svg>
+<figcaption>Left: three swallowed degrees of freedom against three new longitudinal polarisations — the books balance exactly. Right: straight line versus zig-zag is the whole difference between massless and massive.</figcaption>
+</figure>
+<div class="field">
+  Fermions get their mass a different way — the Yukawa coupling:</div>
+<div class="eq"><var>m</var><sub>f</sub> = <var>y</var><sub>f</sub> · <span class="frac"><span class="fnum"><var>v</var></span><span class="fden">√2</span></span></div>
+<div class="gloss"><var>m</var><sub>f</sub> is the mass of some fermion (the subscript f stands for fermion); <var>y</var><sub>f</sub>, read <strong>y-f</strong>, is how strongly it couples to the Higgs field; <var>v</var> is the value the Higgs field takes in the vacuum, 246 GeV; √2 is the square root of 2. <var>v</var> is the same number for every particle, so all the difference sits in <var>y</var>: the top quark's is close to 1, the electron's about 3×10<sup>−6</sup>.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>The Higgs mechanism explains where mass comes from and explains none of its values.</strong> Every <var>y</var> is read in from experiment; the theory computes not one of them. Why is the electron three hundred thousand times lighter than the top quark? The Standard Model can only answer "that's what we measured." Note too that without the Higgs your body weight would barely change — <a href="standard-model-day25.en.html">The Standard Model</a> did that arithmetic. But the small remainder is the lethal part: a massless electron would fly at light speed, and no atom could form.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Condensed matter / Materials</span>
+<ul>
+<li><strong>Condensed matter</strong>: photons in a superconductor acquire an effective mass, and the field's penetration depth is exactly the resulting range — a few tens of nanometres, directly measurable.</li>
+<li><strong>Materials</strong>: an electron's "effective mass" in a semiconductor can be a few percent of the free-electron value or several times larger, entirely set by the shape of the band structure. The carrier did not really get lighter or heavier; what changed is how it responds inside a periodic background. <strong>Mass describes a particle's relationship to its background, not a lump of substance it carries around.</strong></li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: mass isn't "how much stuff" — it is how tightly a particle couples to the field that fills the vacuum.</div>
+<details class="q"><summary><b>Think:</b> are the Higgs boson and the Higgs field the same thing?</summary><div class="qa">No. The field is the background that fills the universe and takes a non-zero value in the vacuum; that is what supplies mass. The boson is one quantum of vibration along the radial direction, lifetime about 10⁻²² seconds — created and gone. Finding the boson was how you prove the field is really there, like photographing spray to prove there is water.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>The Bill That Didn't Balance</h2>
+<span class="pill">Hierarchy problem · Strong CP · Naturalness</span>
+<div class="field"><span class="lab">Intuition</span>
+  The number 125 GeV is itself an open case. Quantum corrections push the Higgs mass upward, by an amount set by the scale at which the theory stops working; if it keeps working all the way up to the Planck scale where gravity must enter (10<sup>19</sup> GeV), those contributions are of that size too. To have them add up to just 125, you need cancellation to dozens of significant figures.</div>
+<figure>
+<svg role="img" aria-label="Logarithmic ruler from 1 MeV to the Planck scale, marking the Higgs mass and the direction of quantum corrections" viewBox="0 0 640 205">
+<defs>
+<marker id="ax" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+<marker id="ay" markerHeight="7" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="7.5" refY="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<text x="20" y="26" fill="#9dc2ff" font-size="13" font-weight="700">A ruler spanning 22 orders of magnitude</text>
+<line x1="180" x2="575" y1="88" y2="88" stroke="#f0ad5a" stroke-width="2" marker-end="url(#ay)"></line>
+<text x="378" y="74" fill="#f0ad5a" font-size="11.5" text-anchor="middle">Quantum corrections push the Higgs mass toward this end</text>
+<line x1="50" x2="612" y1="120" y2="120" stroke="#4a6fae" stroke-width="1.8" marker-end="url(#ax)"></line>
+<g stroke="#4a6fae" stroke-width="1.5">
+<line x1="50" x2="50" y1="112" y2="128"></line>
+<line x1="124" x2="124" y1="112" y2="128"></line>
+<line x1="175" x2="175" y1="112" y2="128"></line>
+<line x1="222" x2="222" y1="112" y2="128"></line>
+<line x1="516" x2="516" y1="112" y2="128"></line>
+<line x1="590" x2="590" y1="112" y2="128"></line>
+</g>
+<g fill="#8fa0c4" font-size="11" text-anchor="middle">
+<text x="50" y="145">1 MeV</text>
+<text x="124" y="145">1 GeV proton</text>
+<text x="222" y="145">10⁴ LHC reach</text>
+<text x="590" y="145">10¹⁹ Planck</text>
+<text x="516" y="167">10¹⁶ unification?</text>
+</g>
+<text x="175" y="167" fill="#f0ad5a" font-size="11" text-anchor="middle">125 GeV ← Higgs</text>
+<text x="20" y="192" fill="#8fa0c4" font-size="11.5">Getting 125 out of contributions of order 10¹⁹ takes cancellation to dozens of digits</text>
+</g>
+</svg>
+<figcaption>The scale is logarithmic: each tick is one order of magnitude. The Higgs sits at the far left; the theory's natural landing spot is at the far right.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  This is the <strong>hierarchy problem</strong>: the weak scale is seventeen orders of magnitude below the gravitational one, and quantum corrections somehow failed to erase the gap. Supersymmetry was long the favoured cure — give every particle a partner whose corrections come with the opposite sign and cancel automatically; yet after more than a decade of collider searching, not one superpartner has appeared. A related unpaid bill is the <strong>strong CP problem</strong>: quantum chromodynamics in principle permits an angle that violates time-reversal symmetry, and experiment has pushed it below 10<sup>−10</sup>; the conjectured cure is a new particle called the axion.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>"Naturalness" is an aesthetic principle, not a law of physics.</strong> It says that dimensionless parameters shouldn't sit absurdly close to <span class="nowrap"><b style="color:#5b9bff">0</b> (the digit zero)</span> or 1 unless a symmetry protects them. The intuition has won a few times, but it is not a theorem. Since the collider results came in, more people take the other possibility seriously: the numbers are simply what they are, with no deeper reason. Treating an aesthetic preference as a prediction was always a bet you had to be ready to settle.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI / Scientific method</span>
+<ul>
+<li><strong>AI</strong>: expecting parameters to be "natural" is a prior. Priors accelerate search enormously and can also steer the whole search into the wrong region — supersymmetry was near-consensus before the collider turned on.</li>
+<li><strong>Scientific method</strong>: how many of a theory's parameters can only be filled in by measurement is a rough index of how much remains un-understood. The gauge principle explained away the form of the forces, the Higgs mechanism explained away the origin of mass, and the numbers themselves are still copied in.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: gauge symmetry explains where forces come from, the Higgs explains where mass comes from, and nothing explains why the numbers are these numbers.</div>
+<details class="q"><summary><b>Think:</b> if supersymmetry hasn't been found, why does anyone still work on it?</summary><div class="qa">It never rested on naturalness alone — it also makes the three force strengths converge near a very high scale, supplies a dark matter candidate, and is a necessary ingredient of string theory. What failed is the stronger claim that superpartners should show up at the TeV scale, not the framework.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>If gauge symmetry is only redundancy, is "spontaneously broken gauge symmetry" a rigorous phrase?</summary>
+<div class="body">No. A genuine gauge symmetry cannot be spontaneously broken — Elitzur proved it in 1975: under a local symmetry, the average of any non-gauge-invariant quantity must vanish. What breaks is the global part that rides along with it. The cleaner statement is that the system enters the "Higgs phase": the vacuum takes a non-zero value, the force carriers become massive, and the gauge redundancy itself remains perfectly intact. "Breaking" is inherited terminology; don't let the word trip you up.</div></details>
+<details><summary>Why did the photon stay massless while the Z did not?</summary>
+<div class="body">Because the vacuum direction the Higgs field picked happens to leave one particular combination untouched. Electroweak theory has four gauge fields; three combinations "feel" the condensate and become W⁺, W⁻ and Z, while the fourth is orthogonal to it and feels nothing at all — that one is the photon. Electromagnetism reaching out to infinity is a direct consequence of this geometric coincidence.</div></details>
+<details><summary>Does neutrino mass also come from the Higgs?</summary>
+<div class="body">Not entirely, at least. Writing a standard Yukawa coupling for neutrinos requires right-handed neutrinos, which have never been observed; and even if you introduce them, the coupling would have to be as small as 10⁻¹², more absurd than the electron's. The alternative is that the neutrino is its own antiparticle, with mass supplied by a different mechanism — putting the source outside the Standard Model. The verdict rests on searches for neutrinoless double beta decay.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Yang &amp; Mills, <a href="https://doi.org/10.1103/PhysRev.96.191">Phys. Rev. 96, 191 (1954)</a> — the original paper on the gauge principle</li>
+<li>Nambu, <a href="https://doi.org/10.1103/PhysRev.117.648">Phys. Rev. 117, 648 (1960)</a> — spontaneous breaking carried from superconductivity into particle physics</li>
+<li>Anderson, <a href="https://doi.org/10.1103/PhysRev.130.439">Phys. Rev. 130, 439 (1963)</a> — how photons acquire mass inside a superconductor</li>
+<li>Englert &amp; Brout, <a href="https://doi.org/10.1103/PhysRevLett.13.321">PRL 13, 321 (1964)</a>; Higgs, <a href="https://doi.org/10.1103/PhysRevLett.13.508">PRL 13, 508 (1964)</a>; Guralnik, Hagen &amp; Kibble, <a href="https://doi.org/10.1103/PhysRevLett.13.585">PRL 13, 585 (1964)</a> — three groups writing down the same mechanism in one year</li>
+<li>Weinberg, <a href="https://doi.org/10.1103/PhysRevLett.19.1264">PRL 19, 1264 (1967)</a> — the mechanism installed in electroweak theory</li>
+<li>ATLAS, <a href="https://doi.org/10.1016/j.physletb.2012.08.020">Phys. Lett. B 716, 1 (2012)</a>; CMS, <a href="https://doi.org/10.1016/j.physletb.2012.08.021">Phys. Lett. B 716, 30 (2012)</a> — discovery of the Higgs boson</li>
+<li>Peccei &amp; Quinn, <a href="https://doi.org/10.1103/PhysRevLett.38.1440">PRL 38, 1440 (1977)</a> — where the strong CP problem and the axion begin</li>
+<li>Degrassi et al., <a href="https://doi.org/10.1007/JHEP08(2012)098">JHEP 08 (2012) 098</a> — quantitative analysis of vacuum stability</li>
+<li><a href="https://pdg.lbl.gov/">Particle Data Group</a> — authoritative values for the Higgs and electroweak parameters</li>
+<li>Frank Close, <em>The Infinity Puzzle</em> — the full history from renormalisation to the Higgs</li>
+<li>Sean Carroll, <em>The Particle at the End of the Universe</em> — the Higgs for general readers</li>
+<li>Sabine Hossenfelder, <em>Lost in Math</em> — a sustained challenge to aesthetic criteria like "naturalness"</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
