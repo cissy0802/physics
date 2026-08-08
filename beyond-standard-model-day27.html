@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：超越标准模型 · Day 27</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>超越标准模型</h1>
+<div class="meta">Day 27 · 2026 · Phase F 粒子与标准模型</div>
+<div class="tagline">一个能算到小数点后第十位的理论，却连自己脚下的地板都没列进名单。线索不在它算错的地方，在它根本没有条目的地方。</div>
+</header>
+<div class="intro">
+标准模型把电子的磁矩算到小数点后第十位，和实验对得上。可它有几处不是「算得不够准」，是<b>根本没有那一栏</b>：引力不在名单上；宇宙里九成半的成分不在名单上；中微子明明有质量，这理论却写不出来。而四十年来回答「下一个新粒子在哪」的所有方案，对撞机一个也没兑现。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>唯一确凿的破绽 <span class="en">The One Crack You Can Hold in Your Hand</span></h2>
+<span class="pill">中微子振荡 · 1998 · 2015 诺奖</span>
+<div class="field"><span class="lab">直觉</span>
+  一束中微子出发时全是同一种「味」，飞几百公里再测，一部分成了另一种，再飞一段又变回来。周期性换身份只有一个前提：它身上得有一只走动的钟。而以光速飞行的东西，自己的钟是停的。<strong>会变味，就等于跑得比光慢，就等于有质量。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  中微子有两套错开的身份。出生和被探测时露出的是「味」——跟它一起出现的是电子、μ 子还是 τ 子；飞行途中按固定节奏演化的却是「质量态」。一个味是几个质量态的叠加，质量不同则相位快慢不同，累积的差让叠加不停重组。</div>
+<div class="eq"><var>P</var> = sin<sup>2</sup>2<var>θ</var> · sin<sup>2</sup>(1.27 · Δ<var>m</var><sup>2</sup><var>L</var> / <var>E</var>)</div>
+<div class="gloss"><var>P</var> 是变成另一种味的概率；<var>θ</var> 读作 <strong>theta</strong>，混合角，决定摆动幅度；Δ 读作 <strong>delta</strong>，意思是「两者之差」，Δ<var>m</var><sup>2</sup> 是两个质量态的质量平方之差；<var>L</var> 是飞行距离，<var>E</var> 是能量；1.27 只是凑单位的换算系数。留意式中只出现质量的<strong>差</strong>——振荡测不出质量本身有多大。</div>
+<figure>
+<svg role="img" aria-label="中微子味的振荡曲线，以及电子与中微子的左右手质量项对比" viewBox="0 0 640 230">
+<defs>
+<marker id="n1" markerWidth="8" markerHeight="6.5" markerUnits="userSpaceOnUse" refX="7" refY="3.25" orient="auto">
+<path d="M0,0 L8,3.25 L0,6.5 z" fill="#4a6fae"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="167" y="24" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">同一束中微子，飞着飞着换了身份</text>
+<line x1="320" x2="320" y1="38" y2="222" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<line x1="34" x2="34" y1="164" y2="48" stroke="#4a6fae" stroke-width="1.5" marker-end="url(#n1)"></line>
+<line x1="34" x2="304" y1="164" y2="164" stroke="#4a6fae" stroke-width="1.5" marker-end="url(#n1)"></line>
+<text x="28" y="60" fill="#8fa0c4" font-size="11" text-anchor="end">1</text>
+<text x="28" y="150" fill="#8fa0c4" font-size="11" text-anchor="end">0</text>
+<polyline fill="none" stroke="#5b9bff" stroke-width="2.4" points="40,56.0 46,58.0 52,63.8 58,72.9 64,84.6 70,97.6 76,111.0 82,123.5 88,134.0 94,141.5 100,145.5 106,145.5 112,141.5 118,134.0 124,123.5 130,111.0 136,97.6 142,84.6 148,72.9 154,63.8 160,58.0 166,56.0 172,58.0 178,63.8 184,72.9 190,84.6 196,97.6 202,111.0 208,123.5 214,134.0 220,141.5 226,145.5 232,145.5 238,141.5 244,134.0 250,123.5 256,111.0 262,97.6 268,84.6 274,72.9 280,63.8 286,58.0 292,56.0"></polyline>
+<polyline fill="none" stroke="#f0ad5a" stroke-width="2.4" points="40,146.0 46,144.0 52,138.2 58,129.1 64,117.4 70,104.4 76,91.0 82,78.5 88,68.0 94,60.5 100,56.5 106,56.5 112,60.5 118,68.0 124,78.5 130,91.0 136,104.4 142,117.4 148,129.1 154,138.2 160,144.0 166,146.0 172,144.0 178,138.2 184,129.1 190,117.4 196,104.4 202,91.0 208,78.5 214,68.0 220,60.5 226,56.5 232,56.5 238,60.5 244,68.0 250,78.5 256,91.0 262,104.4 268,117.4 274,129.1 280,138.2 286,144.0 292,146.0"></polyline>
+<text x="168" y="182" fill="#8fa0c4" font-size="11" text-anchor="middle">飞行距离 ÷ 中微子能量 →</text>
+<line x1="40" x2="62" y1="198" y2="198" stroke="#5b9bff" stroke-width="2.4"></line>
+<text x="68" y="202" fill="#c3cbe0" font-size="11">仍是出发时那一味</text>
+<line x1="40" x2="62" y1="214" y2="214" stroke="#f0ad5a" stroke-width="2.4"></line>
+<text x="68" y="218" fill="#c3cbe0" font-size="11">已经变成另一味</text>
+<text x="480" y="24" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">质量项要把左手和右手缝在一起</text>
+<rect x="344" y="54" width="92" height="36" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="390" y="77" fill="#dbe2f2" font-size="12" text-anchor="middle">电子 左手</text>
+<line x1="436" x2="524" y1="72" y2="72" stroke="#c9a06a" stroke-width="2"></line>
+<rect x="524" y="54" width="92" height="36" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="570" y="77" fill="#dbe2f2" font-size="12" text-anchor="middle">电子 右手</text>
+<circle cx="480" cy="72" r="13" fill="#2a2114" stroke="#6a5326" stroke-width="1.3"></circle>
+<text x="480" y="77" fill="#f0ad5a" font-size="12" font-weight="700" text-anchor="middle">H</text>
+<text x="480" y="110" fill="#8fa0c4" font-size="11.5" text-anchor="middle">缝得起来 → 有质量</text>
+<rect x="344" y="138" width="92" height="36" rx="7" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<text x="390" y="161" fill="#dbe2f2" font-size="12" text-anchor="middle">中微子 左手</text>
+<line x1="436" x2="524" y1="156" y2="156" stroke="#6a5326" stroke-dasharray="5 4" stroke-width="1.6"></line>
+<rect x="524" y="138" width="92" height="36" rx="7" fill="none" stroke="#4a5678" stroke-dasharray="5 4" stroke-width="1.3"></rect>
+<text x="570" y="161" fill="#6d7899" font-size="12" text-anchor="middle">右手？没见过</text>
+<circle cx="480" cy="156" r="13" fill="#1a1710" stroke="#6a5326" stroke-dasharray="3 3" stroke-width="1.3"></circle>
+<text x="480" y="161" fill="#c9a06a" font-size="12" font-weight="700" text-anchor="middle">H</text>
+<text x="480" y="194" fill="#c9a06a" font-size="11.5" text-anchor="middle">缝不起来 → 标准模型里只能是零</text>
+<text x="480" y="216" fill="#8fa0c4" font-size="11" text-anchor="middle">实验说它不是零，缺的那一块在模型之外</text>
+</g>
+</svg>
+<figcaption>左：概率随距离来回摆，摆动本身就要求质量。右：给费米子质量的那套办法，对中微子少了一半原料。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+<strong>标准模型不是「忘了」给中微子质量，是结构上给不了。</strong>给费米子质量要把左手和右手缝起来（<a href="symmetry-mass-origin-day26.html">对称性与质量的起源</a>拆过这台机器），而右手中微子从未被观测到——质量只能严格等于 <span class="nowrap"><b style="color:#5b9bff">0</b>（数字零）</span>。1998 年超级神冈看到大气中微子随穿地距离变少，2001 年 SNO 证明太阳中微子只是换了味，这个零被推翻了。<strong>这是迄今唯一一处在实验室里、不靠天文观测就确凿越出标准模型的地方。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / AI</span>
+<ul>
+<li><strong>工程</strong>：反应堆的中微子穿透整座建筑，在外面探测它们就能读出堆芯里燃料的成分，且无法伪造——这已被认真研究为核查核材料的手段。</li>
+<li><strong>AI</strong>：同一个东西在一组基底里「标签清晰」（味），在另一组里「演化简单」（质量），两组互相旋转。傅里叶那类变换做的正是这件事。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：中微子会换身份，换身份需要一只走动的钟，那只钟就是质量。</div>
+<details class="q"><summary><b>思考：</b>既然振荡只测得出质量之差，怎么知道中微子到底有多重？</summary><div class="qa">两条路。一是直接称：看氚衰变末端的电子能谱被中微子质量削掉的那一点点，上限约 0.8 电子伏，比电子轻六十多万倍。二是看宇宙：中微子太重会抹平星系团那级的结构，这条更严，但依赖宇宙学模型。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>我们存在，这件事就是反例 <span class="en">Our Existence Is the Counterexample</span></h2>
+<span class="pill">重子不对称 · 萨哈罗夫 1967</span>
+<div class="field"><span class="lab">直觉</span>
+  大爆炸最早的高温里，粒子和反粒子成对生、成对灭，规则对双方一视同仁。照这剧本走完，宇宙冷下来只该剩一片光子，一个原子都不剩。可是有原子，有你。所以剧本某处偏了心：每十亿对里物质多出那么一个，剩下的零头就是今天所有的星系。</div>
+<div class="field"><span class="lab">机制</span>
+  这份偏心可以量出来，是个极小的数：</div>
+<div class="eq"><var>η</var> = <span class="frac"><span class="fnum"><var>n</var><sub>B</sub> − <var>n</var><sub>B̄</sub></span><span class="fden"><var>n</var><sub>γ</sub></span></span> ≈ 6 × 10<sup>−10</sup></div>
+<div class="gloss"><var>η</var> 读作 <strong>eta</strong>；<var>n</var> 是数密度，「每单位体积有几个」；下标 B 指重子（质子中子这一类），B 上加一横指反重子，γ 读作 <strong>gamma</strong> 指光子。分子是物质比反物质多出的量，分母大致就是「湮灭出的光」。这个数由微波背景的斑纹和轻元素丰度两条互不相干的路量出，彼此吻合。</div>
+<div class="field">
+  萨哈罗夫 1967 年指出，要从对称的初态跑出这个数，三件事必须同时成立：重子数得能被改变；C 与 CP 对称都得破缺（否则每条造物质的路都配一条同样快的造反物质的路）；还得偏离热平衡（平衡态里正反两向速率相等，净差会被抹平——<a href="entropy-arrow-day7.html">熵与时间之箭</a>讲过这台机器）。标准模型三条都沾边，三条都不够。</div>
+<figure>
+<svg role="img" aria-label="物质与反物质数量的对比，以及萨哈罗夫三条件在标准模型里的完成度" viewBox="0 0 640 236">
+<defs>
+<marker id="b1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#5b9bff"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="160" y="24" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">几乎完美的对消</text>
+<line x1="310" x2="310" y1="38" y2="228" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<rect x="62" y="58" width="48" height="112" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></rect>
+<rect x="62" y="53" width="48" height="6" fill="#f0ad5a"></rect>
+<rect x="136" y="58" width="48" height="112" fill="#0f1626" stroke="#3a4667" stroke-width="1.3"></rect>
+<text x="86" y="186" fill="#c3cbe0" font-size="11" text-anchor="middle">物质 10⁹+1</text>
+<text x="160" y="186" fill="#8fa0c4" font-size="11" text-anchor="middle">反物质 10⁹</text>
+<line x1="198" x2="238" y1="114" y2="114" stroke="#5b9bff" stroke-width="2" marker-end="url(#b1)"></line>
+<rect x="250" y="158" width="16" height="12" fill="#f0ad5a"></rect>
+<text x="258" y="186" fill="#f0ad5a" font-size="11" text-anchor="middle">剩 1</text>
+<text x="160" y="208" fill="#c3cbe0" font-size="11.5" text-anchor="middle">十亿对湮灭掉，只多剩下一个</text>
+<text x="160" y="226" fill="#8fa0c4" font-size="11" text-anchor="middle">恒星、行星和你，都是这个零头</text>
+<text x="477" y="24" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">萨哈罗夫的三个条件</text>
+<rect x="330" y="40" width="294" height="46" rx="7" fill="#0f1626" stroke="#3a4667" stroke-width="1.3"></rect>
+<text x="344" y="60" fill="#dbe2f2" font-size="12">① 重子的数目必须能被改变</text>
+<text x="344" y="78" fill="#8fa0c4" font-size="11">有这条路，但只在极高温下开启</text>
+<rect x="330" y="96" width="294" height="46" rx="7" fill="#0f1626" stroke="#3a4667" stroke-width="1.3"></rect>
+<text x="344" y="116" fill="#dbe2f2" font-size="12">② C 与 CP 对称必须破缺</text>
+<text x="344" y="134" fill="#c9a06a" font-size="11">有，但比需要的小约十个数量级</text>
+<rect x="330" y="152" width="294" height="46" rx="7" fill="#0f1626" stroke="#3a4667" stroke-width="1.3"></rect>
+<text x="344" y="172" fill="#dbe2f2" font-size="12">③ 必须偏离热平衡</text>
+<text x="344" y="190" fill="#c9a06a" font-size="11">需要剧烈的相变，实际却是平滑过渡</text>
+<text x="477" y="220" fill="#8fa0c4" font-size="11" text-anchor="middle">三条都要，标准模型三条都只沾了个边</text>
+</g>
+</svg>
+<figcaption>左边两根柱子高度差只有十亿分之一，肉眼画不出来——右边那一小格就是差额的全部。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+<strong>这不是算得更细就能补上的差额。</strong>十个数量级的缺口意味着必须有新的 CP 破坏源。最受关注的候选恰好接上中微子那条线索：若存在很重的右手中微子，它衰变时的不对称先造出轻子数的不平衡，再由高温下的量子效应转成重子数的不平衡——<strong>给中微子质量的机制，可能顺手解释了宇宙里为什么有东西。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 化学 / 宇宙学</span>
+<ul>
+<li><strong>化学</strong>：地球生命用的氨基酸几乎全是左旋，糖几乎全是右旋。基础化学对两种手性一视同仁，实际却压倒性偏向一边——同样是「极小的偏差被正反馈放大成绝对多数」，换了台放大器而已。</li>
+<li><strong>宇宙学</strong>：若某处真藏着一整片反物质区域，交界面的湮灭会发出特征伽马射线。太空探测器找了很久，没有——不对称是全局的。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：物质与反物质在账面上几乎完全对消，看得见的一切都是那十亿分之一的舍入误差。</div>
+<details class="q"><summary><b>思考：</b>为什么不能干脆假设宇宙一开始物质就比反物质多一点？</summary><div class="qa">可以写进初始条件，但暴胀会把原有的净重子数稀释到可忽略。要在暴胀之后重新造出这个数，还是得回到萨哈罗夫那三条——塞进初始条件等于放弃解释。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>大统一之梦，和杀死它的那个预言 <span class="en">Grand Unification, and the Prediction That Killed It</span></h2>
+<span class="pill">大统一 · 1974 · 质子衰变</span>
+<div class="field"><span class="lab">直觉</span>
+  力的「强度」不是常数，它随你用多高的能量去看而变。电磁力在高能下变强，因为真空里成对冒出的虚粒子对电荷的屏蔽被穿透了；强力反过来，越近越弱。把三种力沿能量轴外推十几个数量级，它们竟朝同一个位置靠拢。若真交于一点，就意味着三种力本是一种，只在低能处裂成三份。</div>
+<div class="field"><span class="lab">机制</span></div>
+<div class="eq">1/<var>α</var><sub>i</sub>(<var>μ</var>) = 1/<var>α</var><sub>i</sub>(<var>M</var><sub>Z</sub>) − <span class="frac"><span class="fnum"><var>b</var><sub>i</sub></span><span class="fden">2π</span></span> ln(<var>μ</var> / <var>M</var><sub>Z</sub>)</div>
+<div class="gloss"><var>α</var> 读作 <strong>alpha</strong>，是耦合强度；这里写成 1/<var>α</var>，<strong>数值越大表示力越弱</strong>。下标 i（<strong>字母 i</strong>）给三种力编号；<var>μ</var> 读作 <strong>mu</strong>，是观察时用的能量；<var>M</var><sub>Z</sub> 是 Z 玻色子的质量，当参照点用；<var>b</var><sub>i</sub> 由理论里有哪些粒子决定，<strong>正负决定线往上还是往下走</strong>；ln 是自然对数——能量每翻一个数量级，强度只挪固定的一小步。</div>
+<figure>
+<svg role="img" aria-label="三种力的耦合强度随能量的跑动曲线，在极高能处两两相交却不交于一点" viewBox="0 0 640 238">
+<defs>
+<marker id="g1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#4a6fae"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="20" y="22" fill="#9dc2ff" font-size="13" font-weight="700">三种力的强度随能量漂移</text>
+<text x="20" y="40" fill="#8fa0c4" font-size="11">纵轴：1/耦合（越高＝这种力越弱）　横轴：能量，每格一个数量级</text>
+<line x1="50" x2="50" y1="196" y2="50" stroke="#4a6fae" stroke-width="1.5" marker-end="url(#g1)"></line>
+<line x1="50" x2="628" y1="196" y2="196" stroke="#4a6fae" stroke-width="1.5" marker-end="url(#g1)"></line>
+<line x1="60" x2="590" y1="52.3" y2="108.7" stroke="#5b9bff" stroke-width="2.4"></line>
+<line x1="60" x2="590" y1="121" y2="77.5" stroke="#f0ad5a" stroke-width="2.4"></line>
+<line x1="60" x2="590" y1="170.2" y2="74" stroke="#6fd3a8" stroke-width="2.4"></line>
+<text x="205" y="61" fill="#5b9bff" font-size="11">1/α₁　电弱超荷</text>
+<text x="205" y="94" fill="#f0ad5a" font-size="11">1/α₂　弱力</text>
+<text x="205" y="163" fill="#6fd3a8" font-size="11">1/α₃　强力</text>
+<ellipse cx="490" cy="89" rx="80" ry="26" fill="none" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.4"></ellipse>
+<line x1="490" x2="490" y1="116" y2="130" stroke="#6a5326" stroke-width="1.2"></line>
+<text x="490" y="144" fill="#f0ad5a" font-size="11.5" text-anchor="middle">两两相交，却不交于一点</text>
+<g stroke="#4a6fae" stroke-width="1.4">
+<line x1="60" x2="60" y1="190" y2="202"></line>
+<line x1="192" x2="192" y1="190" y2="202"></line>
+<line x1="323" x2="323" y1="190" y2="202"></line>
+<line x1="455" x2="455" y1="190" y2="202"></line>
+<line x1="587" x2="587" y1="190" y2="202"></line>
+</g>
+<g fill="#8fa0c4" font-size="11" text-anchor="middle">
+<text x="60" y="216">10² 弱作用</text>
+<text x="192" y="216">10⁶</text>
+<text x="323" y="216">10¹⁰</text>
+<text x="455" y="216">10¹⁴</text>
+<text x="587" y="216">10¹⁸ GeV</text>
+</g>
+<text x="20" y="234" fill="#8fa0c4" font-size="11">添上超对称粒子后三条线几乎交于一点，这是它最有力的间接论据</text>
+<text x="628" y="234" fill="#8fa0c4" font-size="11" text-anchor="end">引力登场在 10¹⁹</text>
+</g>
+</svg>
+<figcaption>刻度是对数的。用标准模型现有的粒子去外推，三条线两两相交于三个不同的位置，围出一个小三角。</figcaption>
+</figure>
+<div class="field">
+  1974 年 Georgi 和 Glashow 把三种力的对称群一起塞进更大的 SU(5)。这一步顺手解释了一件长期没有理由的事：<strong>为什么电子和质子的电荷大小分毫不差</strong>。在标准模型里这是几个独立的数恰好凑齐；在大统一里夸克和轻子同处一个多重态，电荷必成整数比。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  同一个结构也意味着夸克能变成轻子——<strong>质子会衰变</strong>。这是大统一最干净、最可证伪的预言。最简版本给出的寿命约 10<sup>30</sup> 到 10<sup>31</sup> 年，几百吨水盯几年就该撞见一次。超级神冈用五万吨水盯了几十年，一次也没有，下限被推到 10<sup>34</sup> 年以上。<strong>最漂亮的那个预言，恰恰是被实验杀掉的那个。</strong>剩下的是更复杂的版本，和一个尴尬事实：三条线并不真的交于一点。「差一点就统一」是深刻线索还是数值巧合，至今无解。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 数学 / 工程</span>
+<ul>
+<li><strong>数学</strong>：把三个群嵌进一个大群，可选的方式并不多，群论几乎能把候选名单列完——SU(5)、SO(10)、E₆ 就是主要的几个。又一次「约束多到几乎没有自由」。</li>
+<li><strong>工程</strong>：为找质子衰变而建的巨型水箱没找到质子衰变，却成了中微子物理最重要的探测器——1987 年那颗超新星的中微子、大气中微子的振荡都出自它。设备的价值常不在它被设计去做的事上。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：三种力看起来快要在极高能处汇合，而「快要」算不算数，取决于一个找了几十年也没出现的信号。</div>
+<details class="q"><summary><b>思考：</b>质子衰变一直找不到，是不是就等于大统一被证伪了？</summary><div class="qa">被证伪的是最简单的版本。换更大的群、把统一能标推高一点，寿命预言就能躲到现有灵敏度之外。代价是自由度变多、预言力变弱——这正是「加参数逃避证伪」那类争议的典型现场。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>空手而归也是结果 <span class="en">Coming Back Empty-Handed Is Also a Result</span></h2>
+<span class="pill">实验前沿 · 能标 / 精度 / 宇宙</span>
+<div class="field"><span class="lab">直觉</span>
+  找新物理只有三条路：往高能撞，直接把新粒子造出来；把已知的量算准、量准，看第十位小数对不对得上；或者让宇宙当加速器，等暗物质撞进探测器。三条路都在推进，都没带回一个新粒子。</div>
+<div class="field"><span class="lab">机制</span>
+  精度这条路有个残酷的算术：</div>
+<div class="eq">统计误差 ∝ 1 / √<var>N</var></div>
+<div class="gloss"><var>N</var>（<strong>大写字母 N</strong>）是收集到的事例数，√ 是平方根，∝ 读作「正比于」。要把不确定度压小 10 倍，数据量得多 100 倍。这就是为什么每挪一小步都要以年计。</div>
+<div class="field">
+  实际战果长这样：μ 子的反常磁矩曾有过四到五个标准差的偏离，一度是最被寄望的裂缝；随着强子那部分贡献改用格点计算，理论值向实验值靠拢，张力已大幅收窄。B 介子衰变到电子与到 μ 子的比例曾暗示轻子普适性破缺，数据翻倍后也回归了标准模型。</div>
+<figure>
+<svg role="img" aria-label="暗物质直接探测的排除曲线逐年下移，逼近中微子迷雾" viewBox="0 0 640 236">
+<defs>
+<marker id="x1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#4a6fae"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="20" y="20" fill="#9dc2ff" font-size="13" font-weight="700">十几年一无所获，换来的是这张图</text>
+<text x="20" y="38" fill="#8fa0c4" font-size="11">每条线以下的区域已被排除；横轴是假想粒子的质量，纵轴越低＝限制越严</text>
+<line x1="62" x2="84" y1="54" y2="54" stroke="#4a6fae" stroke-width="2.4"></line>
+<text x="88" y="58" fill="#8fa0c4" font-size="11">2012</text>
+<line x1="140" x2="162" y1="54" y2="54" stroke="#5b9bff" stroke-width="2.4"></line>
+<text x="166" y="58" fill="#8fa0c4" font-size="11">2018</text>
+<line x1="218" x2="240" y1="54" y2="54" stroke="#f0ad5a" stroke-width="2.4"></line>
+<text x="244" y="58" fill="#8fa0c4" font-size="11">2024</text>
+<line x1="55" x2="55" y1="196" y2="66" stroke="#4a6fae" stroke-width="1.5" marker-end="url(#x1)"></line>
+<line x1="50" x2="628" y1="196" y2="196" stroke="#4a6fae" stroke-width="1.5" marker-end="url(#x1)"></line>
+<polyline fill="none" stroke="#4a6fae" stroke-width="2.2" points="119,76 168,92 233,100 282,97 361,90 445,81 610,62"></polyline>
+<polyline fill="none" stroke="#5b9bff" stroke-width="2.2" points="70,70 119,96 168,112 233,120 282,117 361,110 445,101 610,82"></polyline>
+<polyline fill="none" stroke="#f0ad5a" stroke-width="2.6" points="70,104 119,130 168,146 233,154 282,151 361,144 445,135 610,116"></polyline>
+<rect x="58" y="168" width="562" height="22" rx="4" fill="rgba(240,173,90,.10)" stroke="#6a5326" stroke-dasharray="5 4" stroke-width="1.2"></rect>
+<text x="339" y="183" fill="#c9a06a" font-size="11" text-anchor="middle">中微子迷雾：太阳与大气的中微子开始冒充信号</text>
+<g stroke="#4a6fae" stroke-width="1.4">
+<line x1="119" x2="119" y1="192" y2="202"></line>
+<line x1="282" x2="282" y1="192" y2="202"></line>
+<line x1="445" x2="445" y1="192" y2="202"></line>
+<line x1="610" x2="610" y1="192" y2="202"></line>
+</g>
+<g fill="#8fa0c4" font-size="11" text-anchor="middle">
+<text x="119" y="216">10 GeV</text>
+<text x="282" y="216">100</text>
+<text x="445" y="216">1000</text>
+<text x="610" y="216">10⁴ GeV</text>
+</g>
+<text x="20" y="232" fill="#8fa0c4" font-size="11">没找到 ≠ 没有结果：可能性的空间被压掉了三个数量级</text>
+</g>
+</svg>
+<figcaption>三条线是三代探测器的上限。它们之间的空白，是十几年里被彻底排除掉的东西。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+<strong>把这些叫「失败」是记错了账。</strong>被排除的参数空间是实打实的知识；不少「三个标准差的暗示」最终消失，恰恰说明这套流程在正常工作。真正被动摇的是一种预期：「新粒子该在 TeV 附近露面」的信心来自自然性这条审美原则，不来自实验。现在得认真对待的可能是：新物理存在，却在这代人够不着的能标上；或者有些数值就是这样，没有更深的理由。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 科学方法</span>
+<ul>
+<li><strong>AI</strong>：大规模搜索里，负结果的价值取决于它砍掉多少空间。逐点试参数几乎不产生知识，能一次排除一整块区域的实验才值钱——这和主动学习里「挑最能区分假设的样本」是同一个道理。</li>
+<li><strong>科学方法</strong>：盲分析在粒子物理已是标配——流程先定死、真实数值最后才解盲，防的正是「盯着数据调筛选条件直到冒出三个标准差」。别的领域在可重复性危机后才补的规矩，这里早付过学费。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：这些年最重要的实验结果是一长串「没有」——它砍掉了大半可能性，也砍掉了物理学界对自己直觉的信心。</div>
+<details class="q"><summary><b>思考：</b>如果新物理的能标高到永远造不出来，物理学是不是就到头了？</summary><div class="qa">不至于。重活会落到精度和宇宙这两条路上：高能处的新物理会在低能留下微小残迹，比如稀有衰变的比例、粒子的电偶极矩；而早期宇宙本身就是一台谁也买不起的加速器，遗迹写在中微子、引力波和微波背景里。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>标准模型会被「推翻」吗？</summary>
+<div class="body">几乎肯定不会，它会被「包住」。旧理论成为新理论在某个尺度下的极限是常态：牛顿力学没被相对论作废，只是被划出了适用范围。标准模型今天就当有效理论用——某个能标以下它对，之上换别的写法。真问题不是它对不对，是它到哪儿失效。</div></details>
+<details><summary>引力为什么算「标准模型没解释」，而不是「另一个理论管的事」？</summary>
+<div class="body">因为把广义相对论按老办法量子化会得到一个高能下失控的理论：每算深一阶就冒出新的、只能由实验去填的参数，最后需要无穷多个，预言能力也就没了。日常尺度下它仍好用，问题出在普朗克能标附近；这道鸿沟在<strong>物理学的未解之谜</strong>里专门处理。</div></details>
+<details><summary>「标准模型有十九个自由参数」算缺点吗？</summary>
+<div class="body">算不满，不算矛盾。参数必须靠测量填进去，说明理论没解释它们从哪来；但用有限个输入换来海量精确预言，本身就是极大的压缩。真正让人不安的是这些数值分布极不均匀——顶夸克与电子跟希格斯场的耦合差三十多万倍（<a href="standard-model-day25.html">标准模型</a>列过这张表），像是有结构没被读出来。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Super-Kamiokande，<a href="https://doi.org/10.1103/PhysRevLett.81.1562">PRL 81, 1562 (1998)</a>——大气中微子振荡的发现</li>
+<li>SNO，<a href="https://doi.org/10.1103/PhysRevLett.89.011301">PRL 89, 011301 (2002)</a>——太阳中微子没有消失，只是换了味</li>
+<li>KATRIN，<a href="https://doi.org/10.1038/s41567-021-01463-1">Nature Physics 18, 160 (2022)</a>——直接称中微子质量的上限</li>
+<li>Sakharov，<a href="https://doi.org/10.1070/PU1991v034n05ABEH002497">Sov. Phys. Usp. 34, 392 (1991)</a>——1967 年三条件原文的英译重印</li>
+<li>Georgi &amp; Glashow，<a href="https://doi.org/10.1103/PhysRevLett.32.438">PRL 32, 438 (1974)</a>——大统一的第一篇</li>
+<li>Super-Kamiokande，<a href="https://doi.org/10.1103/PhysRevD.102.112011">PRD 102, 112011 (2020)</a>——质子衰变的最新下限</li>
+<li>Muon g−2 Collaboration，<a href="https://doi.org/10.1103/PhysRevLett.131.161802">PRL 131, 161802 (2023)</a>——μ 子反常磁矩的测量</li>
+<li>Planck 2018 results VI，<a href="https://doi.org/10.1051/0004-6361/201833910">A&amp;A 641, A6 (2020)</a>——重子密度与中微子质量的宇宙学约束</li>
+<li><a href="https://pdg.lbl.gov/">Particle Data Group</a>——所有限制与参数的权威数值</li>
+<li><a href="https://en.wikipedia.org/wiki/Physics_beyond_the_Standard_Model">Physics beyond the Standard Model</a>——各条路线的总览与词表</li>
+<li>Sean Carroll，<em>The Biggest Ideas in the Universe: Quanta and Fields</em>——量子场论到标准模型的通俗深讲</li>
+<li>Sabine Hossenfelder，<em>Lost in Math</em>——对「自然性」这类美学判据的系统质疑</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
