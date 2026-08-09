@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: The Big Bang · Day 28</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>The Big Bang</h1>
+<div class="meta">Day 28 · 2026 · Phase G Cosmology</div>
+<div class="tagline">It isn't an explosion, it has no centre, and it makes no claim about second zero. It is a cooling history with physical evidence starting at second one.</div>
+</header>
+<div class="intro">
+Nearly every distant galaxy is receding from us, and the farther one is, the faster it goes. Run that rule backwards and everything was once packed into an extremely hot, extremely dense soup. What holds the claim up isn't imagination but two pieces of <b>physical evidence still lying around</b>: the afterglow that leaked out as the soup cooled still blankets the sky, at microwave-oven wavelengths and a temperature of 2.7 degrees; and the helium forged in the first three minutes still makes up a quarter of ordinary matter by mass. Meanwhile the name "Big Bang" has misled a great many people — it is neither a bang nor centred anywhere.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Not an Explosion, a Stretch</h2>
+<span class="pill">Hubble–Lemaître law · 1927 / 1929</span>
+<div class="field"><span class="lab">Intuition</span>
+  An explosion has a centre, and debris flies outward into empty space. Cosmic expansion is another thing entirely: raisin dough rises in the oven and every raisin sees all the others moving away, the far ones faster, with no raisin standing at the centre. <strong>Galaxies aren't running through space; the space between them is becoming more.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  Recession speed is proportional to distance, and that proportionality is itself the mathematical signature of having no centre:</div>
+<div class="eq"><var>v</var> = <var>H</var><sub>0</sub> <var>d</var></div>
+<div class="gloss"><var>v</var> is recession speed and <var>d</var> is distance; <var>H</var><sub>0</sub> is read <strong>H-naught</strong>, the subscript being the <strong>digit 0</strong>, marking "the value right now." It is the current expansion rate: roughly, for every 3.26 million light years farther out, recession speed increases by 70 kilometres per second. The point is that the formula holds a single multiplier and no origin: <strong>pick any galaxy as the origin and you measure the same straight line.</strong></div>
+<figure>
+<svg role="img" aria-label="Left: recession speed grows linearly with distance. Right: take any galaxy as the origin and the same proportionality holds" viewBox="0 0 640 235">
+<defs>
+<marker id="h1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#4a6fae"></path>
+</marker>
+<marker id="h2" markerWidth="8" markerHeight="6" markerUnits="userSpaceOnUse" refX="7" refY="3" orient="auto">
+<path d="M0,0 L8,3 L0,6 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="20" y="22" fill="#9dc2ff" font-size="13" font-weight="700">The farther the galaxy, the faster it recedes</text>
+<line x1="328" x2="328" y1="34" y2="226" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<line marker-end="url(#h1)" x1="58" x2="58" y1="190" y2="46" stroke="#4a6fae" stroke-width="1.5"></line>
+<line marker-end="url(#h1)" x1="58" x2="304" y1="190" y2="190" stroke="#4a6fae" stroke-width="1.5"></line>
+<text x="44" y="42" fill="#8fa0c4" font-size="11" text-anchor="start">recession speed</text>
+<text x="182" y="208" fill="#8fa0c4" font-size="11" text-anchor="middle">distance →</text>
+<line x1="62" x2="292" y1="181" y2="57" stroke="#5b9bff" stroke-width="2.2"></line>
+<g fill="#f0ad5a">
+<circle cx="80" cy="168" r="3.6"></circle>
+<circle cx="105" cy="161" r="3.6"></circle>
+<circle cx="128" cy="142" r="3.6"></circle>
+<circle cx="150" cy="136" r="3.6"></circle>
+<circle cx="175" cy="116" r="3.6"></circle>
+<circle cx="200" cy="110" r="3.6"></circle>
+<circle cx="225" cy="90" r="3.6"></circle>
+<circle cx="250" cy="83" r="3.6"></circle>
+<circle cx="272" cy="64" r="3.6"></circle>
+</g>
+<text x="72" y="72" fill="#f0ad5a" font-size="11.5">slope = H₀</text>
+<text x="480" y="22" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">Any origin gives the same law</text>
+<text x="480" y="66" fill="#8fa0c4" font-size="11" text-anchor="middle">origin = leftmost galaxy</text>
+<g stroke="#5b9bff" stroke-width="1.8">
+<line marker-end="url(#h1)" x1="405" x2="413" y1="86" y2="86"></line>
+<line marker-end="url(#h1)" x1="455" x2="473" y1="86" y2="86"></line>
+<line marker-end="url(#h1)" x1="505" x2="533" y1="86" y2="86"></line>
+<line marker-end="url(#h1)" x1="555" x2="593" y1="86" y2="86"></line>
+</g>
+<g fill="#dbe2f2">
+<circle cx="355" cy="112" r="6"></circle>
+<circle cx="405" cy="112" r="6"></circle>
+<circle cx="505" cy="112" r="6"></circle>
+<circle cx="555" cy="112" r="6"></circle>
+</g>
+<circle cx="455" cy="112" r="6" fill="#f0ad5a"></circle>
+<g stroke="#f0ad5a" stroke-width="1.8">
+<line marker-end="url(#h2)" x1="355" x2="337" y1="140" y2="140"></line>
+<line marker-end="url(#h2)" x1="405" x2="397" y1="140" y2="140"></line>
+<line marker-end="url(#h2)" x1="505" x2="513" y1="140" y2="140"></line>
+<line marker-end="url(#h2)" x1="555" x2="573" y1="140" y2="140"></line>
+</g>
+<text x="480" y="164" fill="#8fa0c4" font-size="11" text-anchor="middle">origin = the middle one (amber)</text>
+<text x="480" y="192" fill="#c3cbe0" font-size="11.5" text-anchor="middle">arrow length still tracks distance</text>
+<text x="480" y="214" fill="#8fa0c4" font-size="11" text-anchor="middle">everyone sees themselves at rest</text>
+</g>
+</svg>
+<figcaption>The five dots on the right are the same galaxies with a different reference point. Both rows obey speed ∝ distance — the fingerprint of uniform stretching.</figcaption>
+</figure>
+<div class="field">
+  So a galaxy's spectrum shifting toward long wavelengths (redshift) shouldn't be pictured as a Doppler effect: light doesn't lengthen because the source is running, it is stretched by space en route. The stretch factor 1+<var>z</var> equals "today's cosmic scale ÷ the scale when the light set out," where <var>z</var> is the redshift.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Two consequences that get misread. First, <strong>galaxies far enough away can recede faster than light</strong> — relativity governs two things passing each other locally, and puts no constraint on "more space appearing" far away. Second, <strong>expansion will not stretch you</strong>: anything held together by gravity or electromagnetism has its size set by that force balance, and expansion only shows up on scales that aren't bound.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Metrology / Data science</span>
+<ul>
+<li><strong>Metrology</strong>: <var>H</var><sub>0</sub> is measured through a "distance ladder" calibrated rung by rung — parallax fixes nearby stars, Cepheid variables carry the scale to neighbouring galaxies, Type Ia supernovae carry it out farther. A small bias on any rung tilts the whole far end.</li>
+<li><strong>Data science</strong>: two independent routes keep disagreeing — the microwave background gives about 67, the distance ladder about 73, a five-sigma gap that fails to converge as data accumulate. <strong>That is the shape of a systematic error or of new physics, not the shape of statistical noise</strong>: noise shrinks with sample size, bias does not.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: galaxies aren't flying apart through space — space itself is becoming more, so there is neither a centre nor an "outside."</div>
+<details class="q"><summary><b>Think:</b> If space is expanding, why don't rulers, atoms and the Milky Way stretch along with it?</summary><div class="qa">Because their sizes are set by a force balance, not by the cosmological solution: an atom's size comes from electromagnetism and quantum mechanics, a galaxy's from its own gravity. Expansion produces no net pull inside such systems — pull them apart slightly and they are pulled back. Only scales that long ago stopped being gravitationally bound ride along.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Baby Picture</h2>
+<span class="pill">Microwave background · 1965 · Nobel 1978</span>
+<div class="field"><span class="lab">Intuition</span>
+  Looking far away is looking into the past, because light needs time to travel. Keep looking and you hit a wall: before the universe was 380,000 years old it was a hot plasma, and free electrons knocked photons about so violently that light went nowhere — like headlights in dense fog, bright but illuminating nothing. At roughly 3000 degrees electrons merged into neutral hydrogen, the fog cleared, and <strong>the light of that moment has travelled essentially undisturbed ever since.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  That light has been stretched by a factor of about 1100 on the way. Wavelength scales with the size of space, which is equivalent to temperature falling inversely with scale:</div>
+<div class="eq"><var>T</var><sub>today</sub> = <span class="frac"><span class="fnum"><var>T</var><sub>then</sub></span><span class="fden">1 + <var>z</var></span></span> ≈ <span class="frac"><span class="fnum">3000 K</span><span class="fden">1100</span></span> ≈ 2.7 K</div>
+<div class="gloss"><var>T</var> is temperature and K is kelvin (counted from absolute zero; the <span class="nowrap"><b style="color:#5b9bff">0</b> (the digit zero)</span> of 0 K is about −273 °C); 1+<var>z</var> is the factor by which wavelength was stretched, and the measured value today is 2.7255 K. The point: <strong>this is not "the fireball still glowing," it is the leftover warmth of the same old photons, stretched out.</strong></div>
+<figure>
+<svg role="img" aria-label="Photons scatter repeatedly in the plasma before recombination, then travel freely to us" viewBox="0 0 640 250">
+<defs>
+<marker id="c1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#f0ad5a"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect x="60" y="88" width="240" height="112" fill="rgba(91,155,255,.10)" stroke="#2b3a5e" stroke-width="1.2" rx="6"></rect>
+<g fill="#4a6fae">
+<circle cx="86" cy="106" r="2.4"></circle>
+<circle cx="130" cy="122" r="2.4"></circle>
+<circle cx="168" cy="100" r="2.4"></circle>
+<circle cx="204" cy="128" r="2.4"></circle>
+<circle cx="242" cy="104" r="2.4"></circle>
+<circle cx="276" cy="126" r="2.4"></circle>
+<circle cx="100" cy="176" r="2.4"></circle>
+<circle cx="146" cy="188" r="2.4"></circle>
+<circle cx="190" cy="172" r="2.4"></circle>
+<circle cx="232" cy="190" r="2.4"></circle>
+<circle cx="270" cy="172" r="2.4"></circle>
+</g>
+<text x="176" y="64" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">Opaque: free electrons block light</text>
+<text x="176" y="82" fill="#8fa0c4" font-size="11" text-anchor="middle">above about 3000 K</text>
+<polyline fill="none" points="72,144 96,120 118,166 144,124 166,170 190,128 214,168 238,126 262,160 286,138 300,146" stroke="#f0ad5a" stroke-width="2"></polyline>
+<line x1="300" x2="300" y1="44" y2="216" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="1.5"></line>
+<text x="300" y="32" fill="#f0ad5a" font-size="12" font-weight="700" text-anchor="middle">last scattering surface · 380,000 yr</text>
+<line marker-end="url(#c1)" x1="300" x2="576" y1="146" y2="146" stroke="#f0ad5a" stroke-width="2"></line>
+<circle cx="600" cy="146" r="13" fill="#16233d" stroke="#4a6fae" stroke-width="1.3"></circle>
+<circle cx="600" cy="146" r="4.5" fill="#5b9bff"></circle>
+<text x="452" y="128" fill="#c3cbe0" font-size="11.5" text-anchor="middle">13.8 billion years of free flight</text>
+<text x="452" y="172" fill="#8fa0c4" font-size="11" text-anchor="middle">wavelength stretched 1100×</text>
+<text x="452" y="64" fill="#9dc2ff" font-size="13" font-weight="700" text-anchor="middle">Transparent: neutral hydrogen</text>
+<text x="600" y="176" fill="#8fa0c4" font-size="11" text-anchor="middle">detector</text>
+<line x1="60" x2="616" y1="216" y2="216" stroke="#26314c" stroke-width="1.2"></line>
+<g fill="#8fa0c4" font-size="11">
+<text x="60" y="234" text-anchor="start">t = 0</text>
+<text x="300" y="234" text-anchor="middle">3000 K</text>
+<text x="616" y="234" text-anchor="end">today · 2.7255 K</text>
+</g>
+<text x="176" y="234" fill="#6d7899" font-size="11" text-anchor="middle">this stretch is invisible to us</text>
+</g>
+</svg>
+<figcaption>What we see is not "the scene of the bang" but the layer where the fog cleared — a surface wrapped around us, not a blob off in some direction.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Two properties make this wall the bedrock of cosmology. First, <strong>its spectrum is the most perfect blackbody known</strong>, with departures below a few parts in 100,000; only something long soaked in thermal equilibrium has such a spectrum, and cold dust or a pile-up of starlight cannot fake it. Second, it isn't the same everywhere: subtract the overall offset caused by our own motion and temperature mottling at the level of one part in 100,000 remains. <strong>The mottling is a freeze-frame of sound waves</strong> — before the fog cleared, photons and ordinary matter were compressed and sprang back inside gravitational wells, forming standing waves (the machine described in <a href="oscillation-waves-day10.en.html">Oscillation &amp; Waves</a>); the instant the fog lifted, the pattern mid-vibration was printed on the sky for good, and the distribution of its angular sizes measures directly that space is flat.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Engineering / AI</span>
+<ul>
+<li><strong>Engineering</strong>: Penzias and Wilson were debugging noise in a horn antenna. They evicted the nesting pigeons, scraped out the droppings, checked every joint — the noise stayed, and it didn't change with where the antenna pointed. The "fault" they hunted for a year was the universe.</li>
+<li><strong>AI</strong>: extracting the mottling means first subtracting Galactic dust emission and synchrotron radiation, both far brighter than the signal. The method is to observe many frequency bands at once and separate the components by their different spectral shapes — the same mathematics as blind source separation.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: a 2.7 K afterglow covers the whole sky, a photograph frozen at the moment the universe turned transparent.</div>
+<details class="q"><summary><b>Think:</b> The microwave background arrives uniformly from all directions — doesn't that put us at the centre of the universe?</summary><div class="qa">No. Every observer is enclosed by their own "last scattering surface," which is not a physical shell but "the earliest moment your line of sight can reach, in any direction." Move ten billion light years away and you again see a uniform glow from all sides, just falling on you from different matter.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>The Elements Forged in Three Minutes</h2>
+<span class="pill">Primordial nucleosynthesis · 1948</span>
+<div class="field"><span class="lab">Intuition</span>
+  Fusion needs a temperature window that is just right: too hot and a freshly assembled nucleus is blown apart by photons, too cold and nothing collides hard enough. But the early universe was cooling and thinning fast, so the window stayed open for only a few minutes. <strong>What could be made was whatever those few minutes had time for.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  A neutron is slightly heavier than a proton (by 1.29 MeV, the energy unit particle physics uses). At high temperature the two convert into each other, the heavier one slightly disfavoured, and the ratio obeys:</div>
+<div class="eq"><var>n</var> / <var>p</var> ≈ <var>e</var><sup>−Δ<var>mc</var><sup>2</sup> / <var>kT</var></sup></div>
+<div class="gloss"><var>n</var> and <var>p</var> are the numbers of neutrons and protons; <var>e</var> (<strong>the letter e</strong>, about 2.718) is the natural constant; Δ is read <strong>delta</strong> and means "the difference between two things," so Δ<var>mc</var><sup>2</sup> is the neutron–proton mass difference expressed as energy; <var>k</var> is Boltzmann's constant, which translates temperature into energy; <var>T</var> is temperature. At high temperature the exponent is near <span class="nowrap"><b style="color:#5b9bff">0</b> (the digit zero)</span> and the ratio is near 1; as it cools, neutrons lose out fast.</div>
+<div class="field">
+  By about one second, at an energy of 0.8 MeV, the conversions can no longer keep up with the expansion and the ratio is <strong>frozen</strong> at roughly 1:6. After that neutrons only decay (half-life about ten minutes), so by the time it is cool enough that deuterium — one proton plus one neutron — survives, the ratio is down to about 1:7. Once the window opens, nearly every remaining neutron is swept into the most stable product, helium-4:</div>
+<div class="eq"><var>Y</var> ≈ <span class="frac"><span class="fnum">2 (<var>n</var>/<var>p</var>)</span><span class="fden">1 + <var>n</var>/<var>p</var></span></span> ≈ <span class="frac"><span class="fnum">2 / 7</span><span class="fden">8 / 7</span></span> = 0.25</div>
+<div class="gloss"><var>Y</var> is helium's share of ordinary matter by <strong>mass</strong>. Each neutron drags one proton into a helium nucleus (two neutrons, two protons), so the mass locked up is twice the neutron count. The result is 0.25 — and the observed cosmic helium abundance is about 0.245. <strong>An estimate fed by two or three numbers hits a measurement made on the scale of the universe.</strong></div>
+<figure>
+<svg role="img" aria-label="Left: the neutron-to-proton ratio freezes at one second. Right: no stable nuclei at mass numbers 5 and 8, so the chain breaks" viewBox="0 0 640 240">
+<defs>
+<marker id="b2" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#4a6fae"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text x="20" y="22" fill="#9dc2ff" font-size="13" font-weight="700">The neutron/proton ratio freezes here</text>
+<line x1="322" x2="322" y1="34" y2="232" stroke="#26314c" stroke-dasharray="6 5" stroke-width="1.3"></line>
+<line marker-end="url(#b2)" x1="58" x2="58" y1="186" y2="44" stroke="#4a6fae" stroke-width="1.5"></line>
+<line marker-end="url(#b2)" x1="58" x2="300" y1="186" y2="186" stroke="#4a6fae" stroke-width="1.5"></line>
+<polyline fill="none" points="62,56 78,58 94,64 110,76 126,94 140,112 152,124 164,130 180,133 200,135 220,137 240,139 260,141 280,143 292,144" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<text x="66" y="46" fill="#8fa0c4" font-size="11">1 : 1</text>
+<line x1="155" x2="155" y1="129" y2="160" stroke="#6a5326" stroke-width="1.1"></line>
+<text x="161" y="156" fill="#f0ad5a" font-size="11">frozen ≈ 1 : 6</text>
+<text x="188" y="124" fill="#8fa0c4" font-size="11">decay → 1 : 7</text>
+<g stroke="#4a6fae" stroke-width="1.3">
+<line x1="155" x2="155" y1="182" y2="192"></line>
+<line x1="245" x2="245" y1="182" y2="192"></line>
+</g>
+<g fill="#8fa0c4" font-size="11" text-anchor="middle">
+<text x="155" y="206">1 sec</text>
+<text x="245" y="206">3 min</text>
+</g>
+<text x="180" y="228" fill="#8fa0c4" font-size="11" text-anchor="middle">x: time    •    y: neutrons per proton</text>
+<text x="480" y="22" fill="#f0ad5a" font-size="13" font-weight="700" text-anchor="middle">The chain breaks at mass 5 and 8</text>
+<g>
+<rect x="342" y="56" width="30" height="30" rx="5" fill="#16233d" stroke="#4a6fae" stroke-width="1.2"></rect>
+<rect x="378" y="56" width="30" height="30" rx="5" fill="#16233d" stroke="#4a6fae" stroke-width="1.2"></rect>
+<rect x="414" y="56" width="30" height="30" rx="5" fill="#16233d" stroke="#4a6fae" stroke-width="1.2"></rect>
+<rect x="450" y="56" width="30" height="30" rx="5" fill="#1e3050" stroke="#5b9bff" stroke-width="1.6"></rect>
+<rect x="486" y="56" width="30" height="30" rx="5" fill="none" stroke="#7a4a3a" stroke-dasharray="4 3" stroke-width="1.3"></rect>
+<rect x="522" y="56" width="30" height="30" rx="5" fill="#16233d" stroke="#4a6fae" stroke-width="1.2"></rect>
+<rect x="558" y="56" width="30" height="30" rx="5" fill="#16233d" stroke="#4a6fae" stroke-width="1.2"></rect>
+<rect x="594" y="56" width="30" height="30" rx="5" fill="none" stroke="#7a4a3a" stroke-dasharray="4 3" stroke-width="1.3"></rect>
+</g>
+<g fill="#dbe2f2" font-size="11.5" text-anchor="middle">
+<text x="357" y="76">H</text>
+<text x="393" y="76">D</text>
+<text x="429" y="76">He3</text>
+<text x="465" y="76">He4</text>
+<text x="537" y="76">Li6</text>
+<text x="573" y="76">Li7</text>
+</g>
+<g fill="#c96f52" font-size="15" font-weight="700" text-anchor="middle">
+<text x="501" y="77">✕</text>
+<text x="609" y="77">✕</text>
+</g>
+<g fill="#8fa0c4" font-size="10.5" text-anchor="middle">
+<text x="357" y="102">1</text>
+<text x="393" y="102">2</text>
+<text x="429" y="102">3</text>
+<text x="465" y="102">4</text>
+<text x="501" y="102">5</text>
+<text x="537" y="102">6</text>
+<text x="573" y="102">7</text>
+<text x="609" y="102">8</text>
+</g>
+<text x="480" y="120" fill="#8fa0c4" font-size="11" text-anchor="middle">mass number (protons + neutrons in a nucleus)</text>
+<text x="480" y="146" fill="#c96f52" font-size="11.5" text-anchor="middle">no stable nucleus on these two squares</text>
+<text x="480" y="170" fill="#c3cbe0" font-size="11.5" text-anchor="middle">output: 75% hydrogen, 25% helium, traces of D and Li</text>
+<text x="480" y="196" fill="#8fa0c4" font-size="11" text-anchor="middle">stars pass it via three helium nuclei colliding at once</text>
+<text x="480" y="216" fill="#8fa0c4" font-size="11" text-anchor="middle">the early universe had neither the density nor the time</text>
+</g>
+</svg>
+<figcaption>Left: the second in which the ratio froze fixed how much helium exists today. Right: the chain snaps on two empty squares, so heavier elements must wait for stars.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+<strong>The universe ran as a nuclear reactor for three minutes and then shut down for good.</strong> There is no stable nucleus at mass number 5 or 8 — add a proton to helium-4, or add another helium-4, and the product falls apart instantly. Stars get around this with high density and long timescales, letting three helium nuclei collide almost simultaneously; the early universe could not wait that long. So <strong>not one atom of the carbon, oxygen or iron in your body came from the Big Bang</strong>. One honest footnote: the calculation matches helium and deuterium to a few percent, but predicts about three times more lithium-7 than is observed, and nobody has an accepted explanation.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Metrology / Complex systems</span>
+<ul>
+<li><strong>Metrology</strong>: deuterium is exquisitely sensitive to the density of ordinary matter — a little more density and it is almost entirely burned away — which makes it a "baryometer." The number it yields agrees to a few percent with the number read off the relative heights of the microwave background peaks: <strong>two routes sharing no assumptions measuring the same quantity</strong>.</li>
+<li><strong>Complex systems</strong>: freeze-out is everywhere — when a rate can no longer track a changing environment, a ratio gets locked in. Quenching metal locks in lattice defects, glass locks in the disorder of a liquid, and representations formed early in training a neural network are hard to shift later. Same sentence each time: <strong>fall behind and you set.</strong></li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: three minutes turned a quarter of ordinary matter into helium, and then two empty squares in the periodic table forced the shutdown.</div>
+<details class="q"><summary><b>Think:</b> Stars make helium too — how do we know that 25% is primordial rather than stellar?</summary><div class="qa">Look at ancient gas clouds with extremely low metal content, which show almost no sign of stellar processing: their helium fraction is still around 0.245, and extrapolating to zero metallicity doesn't bring it down. Stars that make helium must also make carbon and oxygen, and those clouds have none — so the floor value can only predate the first stars.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>"Beginning" Is a Misused Word Here</h2>
+<span class="pill">Singularity · the edge of extrapolation</span>
+<div class="field"><span class="lab">Intuition</span>
+  Run the expansion backwards and density and temperature climb without limit; the equations return infinity at <var>t</var> = 0, the so-called singularity. But when equations return infinity, that usually isn't the discovery of something infinite, <strong>it is the equations no longer applying here</strong> — much as pushing the continuum equations for water flow down to molecular scales returns nonsense, which says nothing about water and everything about the equations being out of bounds.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The line between evidence and extrapolation is clear. Back to about one second, the helium and deuterium abundances of primordial nucleosynthesis stand as witnesses; at 380,000 years the microwave background is seen directly. Earlier than that, the energies exceed anything accelerators have verified and the theory walks on alone; and at <var>t</var> = 0 gravity is strong enough that <a href="general-relativity-day16.en.html">general relativity</a> and quantum mechanics must both apply at once, <strong>and a theory combining the two is exactly what we don't have</strong>.</div>
+<figure>
+<svg role="img" aria-label="A timeline of cosmic temperature separating the observationally supported interval from pure extrapolation" viewBox="0 0 640 235">
+<defs>
+<marker id="t1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#4a6fae"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect x="50" y="50" width="140" height="140" rx="6" fill="rgba(240,173,90,.07)" stroke="#6a5326" stroke-dasharray="5 4" stroke-width="1.3"></rect>
+<rect x="190" y="50" width="430" height="140" rx="6" fill="#0f1626" stroke="#3a4667" stroke-width="1.2"></rect>
+<line x1="300" x2="300" y1="50" y2="190" stroke="#26314c" stroke-dasharray="4 4" stroke-width="1.1"></line>
+<line x1="430" x2="430" y1="50" y2="190" stroke="#26314c" stroke-dasharray="4 4" stroke-width="1.1"></line>
+<text x="120" y="42" fill="#f0ad5a" font-size="12" font-weight="700" text-anchor="middle">extrapolation · no direct evidence</text>
+<text x="405" y="42" fill="#9dc2ff" font-size="12" font-weight="700" text-anchor="middle">the observationally supported interval</text>
+<polyline fill="none" points="58,58 90,68 120,78 150,88 180,96 215,105 250,113 285,121 320,129 360,138 400,146 450,155 500,164 560,175 616,185" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<text x="62" y="112" fill="#c9a06a" font-size="11">infinity here means</text>
+<text x="62" y="130" fill="#c9a06a" font-size="11">the equations failed</text>
+<line marker-end="url(#t1)" x1="50" x2="628" y1="196" y2="196" stroke="#4a6fae" stroke-width="1.5"></line>
+<g fill="#8fa0c4" font-size="11" text-anchor="middle">
+<text x="120" y="212">t = 0 to 10⁻¹⁰ s</text>
+<text x="245" y="212">1 s: fusion starts</text>
+<text x="365" y="212">3 min: helium set</text>
+<text x="525" y="212">380,000 yr onward</text>
+</g>
+<text x="335" y="230" fill="#8fa0c4" font-size="11" text-anchor="middle">The blue line is temperature (log scale). The block on the left is where no experiment has been.</text>
+</g>
+</svg>
+<figcaption>Extrapolating this curve all the way to the left edge is a legal mathematical move — but wherever you extrapolate to, you should label it.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+<strong>What the theory actually claims is: the universe was once hot and dense, and has been expanding and cooling ever since.</strong> "Exploded out of a point" and "sprang from nothing at some moment" are additions made in popular retelling. And the expansion history itself still carries two embarrassments: two patches of sky that on its own accounting never had a chance to exchange signals nonetheless match in temperature to one part in 100,000 (the horizon problem); and space is implausibly flat, requiring an exquisitely tuned early density (the flatness problem). Neither has been answered so much as identified as "the initial conditions were too convenient" — <strong>inflation</strong> is the patch proposed for them, handled in the piece on the history and fate of the universe.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Scientific method / AI</span>
+<ul>
+<li><strong>Scientific method</strong>: a theory's most valuable part is often its ability to mark where it fails — thermodynamics can say it doesn't apply to a handful of molecules, Newtonian mechanics can say it doesn't apply near light speed. A theory that can't do this usually can't because it explains everything.</li>
+<li><strong>AI</strong>: using a scaling law measured on small models to predict performance orders of magnitude larger is the same move. However beautiful a curve is inside the range you measured, it is not evidence outside that range; the difference isn't whether you extrapolate, it's whether you label the extrapolated region.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the Big Bang is an expansion history with physical evidence from second one, not a statement about second zero.</div>
+<details class="q"><summary><b>Think:</b> If the universe had a beginning, what was there "before"?</summary><div class="qa">Within classical general relativity time itself starts at that point, and asking about "before" is like asking what lies north of the North Pole — the question has no direction. But that answer relies on pushing the equations into the region where they have already failed, so the more honest reply is: we don't know, and current theory isn't entitled to answer.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>The universe is expanding — what is it expanding <em>into</em>?</summary>
+<div class="body">Nothing needs to be outside. Expansion is described by a metric, which specifies how the distance between any two internal points changes with time; all the information is internal and no external space is referenced. Picturing a two-dimensional sphere as embedded in three dimensions borrows a shell for the sake of drawing, and mathematically it is entirely unnecessary. The question is stubborn only because in daily life everything that grows sits inside something bigger.</div></details>
+<details><summary>If the early universe was a near-equilibrium uniform hot soup, why call it low entropy?</summary>
+<div class="body">Because you can't leave gravity out of the entropy count. For a gas, uniform is the highest-entropy state; for a lump of self-gravitating matter, uniform is an extremely low-entropy state — it can raise its entropy by many orders of magnitude by clumping, collapsing and ultimately forming black holes. The early universe being uniform to one part in 100,000 means its gravitational degrees of freedom were almost entirely unspent. That is the source of the thread in <a href="entropy-arrow-day7.en.html">Entropy &amp; the Arrow of Time</a>: the arrow needs a low-entropy initial state, and cosmology is what hands thermodynamics that state.</div></details>
+<details><summary>If a galaxy recedes faster than light, how can we still see it?</summary>
+<div class="body">What matters isn't how fast that place was receding when the photon left, but how the expansion rate underfoot changes along its journey. During matter domination the expansion was decelerating and the boundary of the observable region grew outward faster than galaxies receded, so photons that "couldn't keep up" were caught by us after all. Plenty of the high-redshift galaxies we see today were already receding superluminally when they emitted. As dark energy takes over and expansion accelerates, that channel is closing.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>Lemaître 1927, <a href="https://doi.org/10.1093/mnras/91.5.483">MNRAS 91, 483 (1931)</a> — the earliest derivation of an expanding universe and the velocity–distance relation (English reprint)</li>
+<li>Hubble 1929, <a href="https://doi.org/10.1073/pnas.15.3.168">PNAS 15, 168</a> — the observation that recession speed is proportional to distance</li>
+<li>Penzias &amp; Wilson 1965, <a href="https://doi.org/10.1086/148307">ApJ 142, 419</a> — "excess antenna temperature," barely more than half a page</li>
+<li>Dicke, Peebles, Roll &amp; Wilkinson 1965, <a href="https://doi.org/10.1086/148306">ApJ 142, 414</a> — the companion paper explaining that it is the afterglow of the universe</li>
+<li>Alpher, Bethe &amp; Gamow 1948, <a href="https://doi.org/10.1103/PhysRev.73.803">Phys. Rev. 73, 803</a> — the founding paper of primordial nucleosynthesis</li>
+<li>Fixsen 2009, <a href="https://doi.org/10.1088/0004-637X/707/2/916">ApJ 707, 916</a> — pinning the background temperature at 2.7255 K</li>
+<li>Planck 2018 results VI, <a href="https://doi.org/10.1051/0004-6361/201833910">A&amp;A 641, A6 (2020)</a> — the authoritative compilation of cosmological parameters</li>
+<li>Riess et al. 2022, <a href="https://doi.org/10.3847/2041-8213/ac5c5b">ApJL 934, L7</a> — the distance-ladder H₀, and the tension with the entry above</li>
+<li>Cyburt, Fields, Olive &amp; Yeh 2016, <a href="https://doi.org/10.1103/RevModPhys.88.015004">Rev. Mod. Phys. 88, 015004</a> — review of primordial nucleosynthesis, lithium problem included</li>
+<li>Steven Weinberg, <em>The First Three Minutes</em> — the classic that turns those minutes into narrative</li>
+<li>Sean Carroll, <em>From Eternity to Here</em> — why the low entropy of the early universe is a genuine problem</li>
+<li><a href="https://en.wikipedia.org/wiki/Cosmic_microwave_background">Cosmic microwave background</a> / <a href="https://en.wikipedia.org/wiki/Big_Bang_nucleosynthesis">Big Bang nucleosynthesis</a> — overview and vocabulary</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
