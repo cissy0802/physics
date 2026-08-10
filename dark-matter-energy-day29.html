@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：暗物质与暗能量 · Day 29</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>暗物质与暗能量</h1>
+<div class="meta">Day 29 · 2026 · Phase G 宇宙学</div>
+<div class="tagline">两个名字听着像一伙的，其实毫无关系：一个让星系不散架，一个让宇宙撑得越来越快。共同点只有一条——我们只见过它们的引力。</div>
+</header>
+<div class="intro">
+星系转得太快，快到按看得见的质量算，早该把自己甩散；而膨胀本该被引力拖慢，实测却在加速。两笔账凑起来占了今天宇宙能量预算的 <b>95%</b>。最容易被误传的是：<b>「暗」不等于「神秘」</b>，字面意思只是<b>不发光、也不挡光</b>。证据链已强到无法回避，而我们至今没在引力之外摸到过它们一次。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>转不下来的星系 <span class="en">Rotation Curves That Refuse to Fall</span></h2>
+<span class="pill">星系动力学 · 1933 / 1970</span>
+<div class="field"><span class="lab">直觉</span>
+  太阳系里越外围的行星绕得越慢：地球每秒 30 公里，海王星只剩 5.4 公里——质量几乎全堆在中心的太阳里。星系的光同样集中在中心，外围恒星理应照样慢下来。<strong>实测是：它们根本不慢。</strong>量到发光盘之外好几倍远的稀薄氢气那里，曲线还平得像尺子。</div>
+<div class="field"><span class="lab">机制</span>
+  一颗星走圆轨道，速度由它<strong>轨道以内</strong>的总质量决定：</div>
+<div class="eq"><var>v</var><sup>2</sup> = <span class="frac"><span class="fnum"><var>G</var> <var>M</var>(&lt;<var>r</var>)</span><span class="fden"><var>r</var></span></span></div>
+<div class="gloss"><var>v</var> 是绕转速度，<var>r</var> 是到星系中心的距离，<var>G</var> 是万有引力常数（引力强弱的那个固定数）。<span class="nowrap"><var>M</var>(&lt;<var>r</var>)</span> 读作「半径 <var>r</var> 以内的总质量」，尖括号就是「小于」——要点全在这里：<strong>比你更外面的物质，引力互相抵消，对你不起作用。</strong>质量若真像光那样集中在中心，跑到外面 <span class="nowrap"><var>M</var>(&lt;<var>r</var>)</span> 不再增加，速度就得按 <span class="nowrap"><var>v</var> ∝ 1/√<var>r</var></span> 掉下去。</div>
+<div class="field">反过来读：实测 <var>v</var> 不掉，就只能是 <span class="nowrap"><var>M</var>(&lt;<var>r</var>)</span> 还在跟着 <var>r</var> 长——即使那里已看不到东西发光。补齐缺口，需要一个远大于发光盘的球状「晕」，质量是恒星加气体的<strong>五倍上下</strong>。</div>
+<figure>
+<svg aria-label="星系旋转曲线：若只有看得见的物质，速度应随距离下降；实测曲线却保持平坦，两者之间的差额就是缺失的引力质量" role="img" viewbox="0 0 640 262">
+<defs>
+<marker id="ax1" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#56607e"></path>
+</marker>
+<marker id="gapA" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="8" refy="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#8f9bbd"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<line marker-end="url(#ax1)" stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="222" y2="34"></line>
+<line marker-end="url(#ax1)" stroke="#56607e" stroke-width="1.5" x1="70" x2="616" y1="222" y2="222"></line>
+<text fill="#8fa0c4" font-size="11.5" x="46" y="28">绕转速度</text>
+<text fill="#8fa0c4" font-size="11.5" text-anchor="end" x="612" y="242">离星系中心的距离 →</text>
+<line stroke="#26314c" stroke-dasharray="5 5" stroke-width="1.2" x1="258" x2="258" y1="86" y2="222"></line>
+<text fill="#6f7b9c" font-size="10.5" x="264" y="214">发光圆盘到此为止</text>
+<polyline fill="none" points="78,217 96,158 114,116 134,92 156,80 186,74 220,72 260,73 300,72 346,73 396,72 450,73 506,72 560,73" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<polyline fill="none" points="78,217 96,160 114,120 134,96 156,86 186,96 216,109 250,122 288,135 330,147 378,157 430,167 490,176 560,184" stroke="#7f8db0" stroke-dasharray="7 5" stroke-width="2"></polyline>
+<g fill="#f0ad5a">
+<circle cx="186" cy="74" r="3.4"></circle>
+<circle cx="238" cy="72" r="3.4"></circle>
+<circle cx="290" cy="73" r="3.4"></circle>
+<circle cx="344" cy="71" r="3.4"></circle>
+<circle cx="398" cy="73" r="3.4"></circle>
+<circle cx="452" cy="72" r="3.4"></circle>
+<circle cx="512" cy="73" r="3.4"></circle>
+</g>
+<text fill="#f0ad5a" font-size="12.5" font-weight="700" x="330" y="60">实测：平的</text>
+<text fill="#98a5c6" font-size="12.5" x="392" y="200">若只有看得见的物质</text>
+<line marker-end="url(#gapA)" stroke="#8f9bbd" stroke-width="1.4" x1="536" x2="536" y1="118" y2="80"></line>
+<line marker-end="url(#gapA)" stroke="#8f9bbd" stroke-width="1.4" x1="536" x2="536" y1="140" y2="178"></line>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="536" y="134">缺口</text>
+</g>
+</svg>
+<figcaption>差额不是「边缘有点偏」，而是多出几倍的引力质量。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  缺口最早不是在星系里发现的：1933 年 Fritz Zwicky 量后发星系团的速度弥散，就算出绑住它们所需的质量远超可见部分，他管那份叫「暗物质」，随后被搁置近四十年。让它无法回避的，是 1970 年代 Vera Rubin 与 Kent Ford 一条条量出的平坦曲线——<strong>一个反常可以是误差，几十个星系的同一种反常就是结构性的。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 科学方法 / 统计 / AI</span>
+  数据和模型对不上时永远有两条路：<strong>加一个没观测到的东西</strong>，还是<strong>承认模型本身错了</strong>。
+  <ul>
+<li><strong>天文</strong>：勒维耶靠天王星的轨道反常算出未知行星的位置，1846 年海王星在预言点被找到（加隐变量，赢）；同一招用在水星近日点上却预言出并不存在的「火神星」——真相是引力定律要改，即<a href="general-relativity-day16.html">广义相对论</a>（改模型，赢）；</li>
+<li><strong>统计 / AI</strong>：残差出现系统性结构，可能是漏了混杂变量，也可能是函数形式设定错了，补救方向完全相反；模型系统性偏错时，加容量总能把训练损失压下去——这正是它危险的地方。</li>
+</ul>
+  暗物质 vs 修改引力，是这条百年岔路的现代版。</div>
+<div class="punch">
+<div class="one">一句话：星系外围的速度不肯掉，等于宇宙在说——那里还有质量，只是不发光。</div>
+<details class="q"><summary><b>思考：</b>「比你更外面的质量对你不起作用」，这条听着太方便了？</summary><div class="qa">球对称下这是严格结论（牛顿壳层定理）：均匀球壳内部各方向的引力精确抵消，净力为数字 0（零）。星系晕近似球对称，这条用得上；扁平圆盘要修正，但不改变量级。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>把质量和光掰开的那次碰撞 <span class="en">The Collision That Pried Mass Apart from Light</span></h2>
+<span class="pill">引力透镜 · 子弹星系团 2006</span>
+<div class="field"><span class="lab">直觉</span>
+  旋转曲线天生有两种读法：要么真有看不见的质量，要么在极弱的引力场里引力定律偏离了牛顿——后者叫 <strong>MOND</strong>（修正牛顿动力学，1983 年 Milgrom 提出），只用一个新常数就把大量星系的曲线拟合得漂亮得惊人。两种读法在星系里几乎给出一样的预言。要判决，得找一个把「质量在哪」和「发光物质在哪」<strong>在空间上真正掰开</strong>的现场。</div>
+<div class="field"><span class="lab">机制</span>
+  两把独立的尺子。<strong>引力透镜</strong>：质量弯曲时空，背景星系的像被拉长扭曲，反演这些扭曲就画得出质量分布图——它不问质量发不发光。<strong>X 射线</strong>：星系团里普通物质的大头不是恒星，是几千万度的弥漫热气体，在 X 射线波段亮得刺眼。<br/>
+  子弹星系团（1E 0657-56）是两个星系团对穿的现场：星系之间空得离谱，几乎撞不上，直接穿了过去；<strong>气体不然</strong>——它会摩擦、被冲压剥离，撞停在中间。碰撞天然做了一次分离。<strong>然后去问透镜：质量峰在哪？</strong></div>
+<figure>
+<svg aria-label="子弹星系团示意：两个星系团对穿后，X 射线看到的热气体被撞停在中间，而引力透镜测出的质量峰跟着星系跑到了两侧" role="img" viewbox="0 0 640 256">
+<defs>
+<marker id="mv" markerheight="8" markerunits="userSpaceOnUse" markerwidth="10" orient="auto" refx="8.5" refy="4">
+<path d="M0,0 L10,4 L0,8 z" fill="#8fa0c4"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<g fill="none" stroke="#5b9bff">
+<ellipse cx="140" cy="118" rx="86" ry="70" stroke-opacity=".30" stroke-width="1.6"></ellipse>
+<ellipse cx="140" cy="118" rx="62" ry="50" stroke-opacity=".50" stroke-width="1.6"></ellipse>
+<ellipse cx="140" cy="118" rx="38" ry="31" stroke-opacity=".75" stroke-width="1.8"></ellipse>
+<ellipse cx="140" cy="118" rx="17" ry="14" stroke-width="2"></ellipse>
+<ellipse cx="502" cy="118" rx="70" ry="58" stroke-opacity=".30" stroke-width="1.6"></ellipse>
+<ellipse cx="502" cy="118" rx="49" ry="41" stroke-opacity=".50" stroke-width="1.6"></ellipse>
+<ellipse cx="502" cy="118" rx="29" ry="24" stroke-opacity=".75" stroke-width="1.8"></ellipse>
+<ellipse cx="502" cy="118" rx="13" ry="11" stroke-width="2"></ellipse>
+</g>
+<g fill="#d4627f" fill-opacity=".34">
+<ellipse cx="272" cy="120" rx="52" ry="58"></ellipse>
+<ellipse cx="272" cy="120" fill-opacity=".5" rx="33" ry="38"></ellipse>
+</g>
+<path d="M356,120 C356,92 372,74 392,74 C382,90 380,104 380,120 C380,136 382,150 392,166 C372,166 356,148 356,120 z" fill="#d4627f" fill-opacity=".40"></path>
+<path d="M404,66 C428,86 428,154 404,174" fill="none" stroke="#e08aa0" stroke-dasharray="4 4" stroke-width="1.6"></path>
+<text fill="#e08aa0" font-size="10.5" x="410" y="184">弓形激波</text>
+<g fill="#f0ad5a">
+<circle cx="118" cy="96" r="3"></circle>
+<circle cx="152" cy="112" r="3"></circle>
+<circle cx="132" cy="140" r="3"></circle>
+<circle cx="168" cy="86" r="2.6"></circle>
+<circle cx="98" cy="132" r="2.6"></circle>
+<circle cx="160" cy="146" r="2.6"></circle>
+<circle cx="188" cy="122" r="2.4"></circle>
+<circle cx="490" cy="104" r="3"></circle>
+<circle cx="514" cy="124" r="3"></circle>
+<circle cx="496" cy="136" r="2.6"></circle>
+<circle cx="526" cy="98" r="2.6"></circle>
+<circle cx="466" cy="122" r="2.4"></circle>
+</g>
+<line marker-end="url(#mv)" stroke="#8fa0c4" stroke-width="1.4" x1="196" x2="150" y1="30" y2="30"></line>
+<line marker-end="url(#mv)" stroke="#8fa0c4" stroke-width="1.4" x1="450" x2="496" y1="30" y2="30"></line>
+<text fill="#8fa0c4" font-size="11" text-anchor="middle" x="322" y="34">对穿之后，各自继续往外走</text>
+<text fill="#5b9bff" font-size="11.5" font-weight="700" text-anchor="middle" x="140" y="212">质量峰在这里</text>
+<text fill="#5b9bff" font-size="11.5" font-weight="700" text-anchor="middle" x="502" y="212">质量峰在这里</text>
+<text fill="#d4627f" font-size="11.5" font-weight="700" text-anchor="middle" x="322" y="212">普通物质卡在这里</text>
+<g font-size="11">
+<rect fill="none" height="13" stroke="#5b9bff" width="13" x="70" y="232"></rect>
+<text fill="#a9b6d4" x="90" y="243">引力透镜测出的质量</text>
+<rect fill="#d4627f" fill-opacity=".45" height="13" width="13" x="256" y="232"></rect>
+<text fill="#a9b6d4" x="276" y="243">X 射线里的热气体</text>
+<circle cx="452" cy="238" fill="#f0ad5a" r="5"></circle>
+<text fill="#a9b6d4" x="466" y="243">星系</text>
+</g>
+</g>
+</svg>
+<figcaption>热气体是普通物质的大头，被撞停在中间；质量却跟着星系跑到了两侧。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  透镜给出的两个质量峰压在两侧的星系上，不在中间的气体上。这说了两件事：主要质量<strong>不是</strong>普通物质，且它<strong>几乎不和自己碰撞</strong>。只改引力的方案都得解释：引力峰为何离开了唯一的物质源头。<a href="big-bang-day28.html">大爆炸</a>留下的微波背景又独立要求一份不参与电磁作用的物质。<br/>
+  诚实的另一半：<strong>「它是什么」至今零个非引力证据。</strong>深地探测器把最被看好的候选 WIMP 压到逼近中微子本底，仍一无所获。<strong>「存在一种冷的、不发光、几乎无碰撞的物质」证据极强，而它的身份一无所知——这两句必须一起说。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 流行病学 / 统计</span>
+  MOND 是个极好的标本：<strong>在一个分布上拟合极好，不等于抓住了机制。</strong>
+  <ul>
+<li><strong>天体物理</strong>：MOND 用一个常数复现成百上千条星系旋转曲线，跨到星系团与微波背景声学峰立刻崩掉；</li>
+<li><strong>机器学习</strong>：靠草地背景识别「牛」的分类器在牧场上准确率极高，把牛放到沙滩上全错——学到的是相关性，不是目标；</li>
+<li><strong>流行病学</strong>：喝咖啡与肺癌的相关一度很强，真凶是吸烟。</li>
+</ul>
+  解药也一样：<strong>找一个能把两者拆开的场景</strong>——子弹星系团、随机干预、分布外测试集。</div>
+<div class="punch">
+<div class="one">一句话：引力峰跑到了发光物质外面，「只是引力算错了」这条路就被现场堵死了。</div>
+<details class="q"><summary><b>思考：</b>冷气体、暗弱恒星、黑洞这些看不见的普通物质攒一攒，够不够顶上暗物质？</summary><div class="qa">不够，而且缺口是锁死的。原初核合成算出的轻元素丰度与微波背景声学峰的形状，都直接给出宇宙里<strong>普通物质（质子中子那类）的总量</strong>，与它藏成什么形态无关——只有总质量的五分之一左右。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>该减速的，却在加速 <span class="en">It Should Be Slowing Down. It Isn't.</span></h2>
+<span class="pill">Ia 型超新星 · 1998</span>
+<div class="field"><span class="lab">直觉</span>
+  往上扔球，引力让它减速。宇宙里所有物质彼此吸引，膨胀理应被一路拖慢，1990 年代的问题只是「减得多快」。两个竞争团队用 Ia 型超新星量远处的膨胀史，得到同一个谁都不想要的答案：<strong>远处的超新星比减速宇宙里应有的更暗、也就是更远。</strong>膨胀约六十亿年前转成了加速。</div>
+<div class="field"><span class="lab">机制</span>
+  在广义相对论里，产生引力的不只是密度，<strong>压强也参与</strong>。膨胀的加速度由这条式子定：</div>
+<div class="eq"><span class="frac"><span class="fnum"><var>ä</var></span><span class="fden"><var>a</var></span></span> = − <span class="frac"><span class="fnum">4π<var>G</var></span><span class="fden">3</span></span> <span class="nowrap">( <var>ρ</var> + <span class="frac"><span class="fnum">3<var>p</var></span><span class="fden"><var>c</var><sup>2</sup></span></span> )</span></div>
+<div class="gloss"><var>a</var> 是<strong>尺度因子</strong>，即「宇宙这把尺子今天有多长」，今天定为 1（数字一）；头上两点的 <var>ä</var> 表示对时间求了<strong>两次</strong>变化率，即加速度。<var>ρ</var> 读作「柔」（希腊字母 rho）是能量密度，<var>p</var> 是压强，<var>c</var> 是光速。<strong>括号里为正，加速度就为负（减速）</strong>：普通物质压强 <var>p</var> ≈ <span class="zero">0</span>（数字零），括号必正。但只要压强负到 <span class="nowrap"><var>p</var> &lt; −<var>ρ</var><var>c</var><sup>2</sup>/3</span>，括号翻负，<strong>加速度转正：膨胀开始加快。</strong></div>
+<div class="field">最简单的候选是爱因斯坦当年塞进方程、后来又撤掉的<strong>宇宙学常数 Λ</strong>（读作「拉姆达」，大写希腊字母 lambda）：空间本身每单位体积自带一份固定能量。它的状态方程恰好是</div>
+<div class="eq"><var>w</var> = <span class="frac"><span class="fnum"><var>p</var></span><span class="fden"><var>ρ</var><var>c</var><sup>2</sup></span></span> = −1</div>
+<div class="gloss"><var>w</var> 是压强与能量密度之比；−1（负一）即「压强等于能量密度的相反数」，正好越过 −1/3 那道门槛。观测把 <var>w</var> 钉在 −1 附近百分之几内。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  「加速」听着像有东西在<strong>推</strong>，其实没有：<strong>负压强本身就产生排斥性的引力</strong>，这是广义相对论独有的效应，牛顿引力里连表述都表述不出来。另一点：物质密度随空间涨大按 <span class="nowrap">1/<var>a</var><sup>3</sup></span> 稀释，而<strong>空间自带的能量密度不稀释</strong>；于是早期物质占优、膨胀减速，宇宙撑大后暗能量反超。<strong>今天恰好是两者势均力敌的时刻，本身就是个待解释的巧合。</strong></div>
+<figure>
+<svg aria-label="左：宇宙尺度因子随时间先减速后加速，拐点在约六十亿年前；右：物质密度随宇宙膨胀稀释，而暗能量密度不变，两者在拐点附近交叉" role="img" viewbox="0 0 640 250">
+<defs>
+<marker id="ax3" markerheight="7" markerunits="userSpaceOnUse" markerwidth="9" orient="auto" refx="7.5" refy="3.5">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#56607e"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="56" x2="56" y1="200" y2="36"></line>
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="56" x2="302" y1="200" y2="200"></line>
+<text fill="#8fa0c4" font-size="11" x="34" y="30">宇宙尺寸 <tspan font-style="italic">a</tspan></text>
+<text fill="#8fa0c4" font-size="11" text-anchor="end" x="300" y="220">时间 →</text>
+<polyline fill="none" points="58,198 80,172 105,152 132,136 160,123 188,110 215,95 240,78 262,60 280,44" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<polyline fill="none" points="174,116 205,107 240,100 275,95 298,92" stroke="#6f7b9c" stroke-dasharray="6 5" stroke-width="1.8"></polyline>
+<text fill="#8290b4" font-size="10.5" x="208" y="122">若只有物质</text>
+<circle cx="174" cy="116" fill="#f0ad5a" r="4.2"></circle>
+<line stroke="#f0ad5a" stroke-dasharray="3 3" stroke-width="1" x1="152" x2="171" y1="92" y2="112"></line>
+<text fill="#f0ad5a" font-size="10.5" x="80" y="86">拐点：约 60 亿年前</text>
+<text fill="#96a0ba" font-size="10.5" x="96" y="196">减速</text>
+<text fill="#96a0ba" font-size="10.5" x="204" y="52">加速</text>
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="368" x2="368" y1="200" y2="36"></line>
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="368" x2="614" y1="200" y2="200"></line>
+<text fill="#8fa0c4" font-size="11" x="346" y="30">密度</text>
+<text fill="#8fa0c4" font-size="11" text-anchor="end" x="612" y="220">宇宙尺寸 <tspan font-style="italic">a</tspan> →</text>
+<line stroke="#5b9bff" stroke-width="2.4" x1="372" x2="600" y1="50" y2="188"></line>
+<line stroke="#c08ae0" stroke-width="2.4" x1="372" x2="600" y1="140" y2="140"></line>
+<line stroke="#26314c" stroke-dasharray="4 4" stroke-width="1.2" x1="518" x2="518" y1="90" y2="200"></line>
+<circle cx="518" cy="140" fill="#f0ad5a" r="4.2"></circle>
+<text fill="#5b9bff" font-size="10.5" x="376" y="44">物质：越摊越稀 ∝ 1/<tspan font-style="italic">a</tspan>³</text>
+<text fill="#c08ae0" font-size="10.5" x="376" y="128">暗能量：完全不稀释</text>
+<text fill="#f0ad5a" font-size="10.5" text-anchor="middle" x="530" y="80">暗能量反超</text>
+<text fill="#96a0ba" font-size="10.5" x="376" y="180">早期</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="604" y="170">今天</text>
+</g>
+</svg>
+<figcaption>同一个交叉点的两种画法：左边是膨胀曲线掰弯的时刻，右边是它掰弯的原因。</figcaption>
+</figure>
+<div class="field xref"><span class="lab">跨学科对读 · 测量 / 数据科学</span>
+  这结论押在一件事上：<strong>Ia 型超新星必须是可靠的尺子</strong>——可它们亮度并不齐。靠的是 Phillips 关系：<strong>亮的那些衰减得慢</strong>，于是拿「光变曲线的宽度」当代理量，把参差的个体校准到同一把尺子上。同一手艺处处可见：
+  <ul>
+<li><strong>心理与教育测量</strong>：项目反应理论用题目难度参数，把做了不同卷子的人放到同一条能力尺度上；</li>
+<li><strong>AI 评测</strong>：不同基准靠共同的锚题对齐难度，否则「哪个模型更强」比的其实是卷子。</li>
+</ul>
+  <strong>校准让不可比的东西变得可比，也把结论押在了代理量的稳定性上。</strong></div>
+<div class="punch">
+<div class="one">一句话：宇宙不是被什么推开的，是负压强在广义相对论里本来就产生斥力。</div>
+<details class="q"><summary><b>思考：</b>压强怎么会「产生引力」？它不是往外推的吗？</summary><div class="qa">要分两件事。压强的<strong>梯度</strong>（各处不一样）才产生力，能把气球撑起来；均匀宇宙里没有梯度，压强不推任何东西。但弯曲时空的源不只是质量密度，而是能量–动量张量，压强就是它的分量之一，直接参与引力——这正是牛顿框架里不存在的那一项。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>95% 的账本，和它诚实的边界 <span class="en">The 95% Ledger, and Its Honest Edges</span></h2>
+<span class="pill">宇宙学参数 · Planck 2018</span>
+<div class="field"><span class="lab">直觉</span>
+  把今天的能量预算摊开：暗能量约 69%，暗物质约 26%，我们和一切星辰所属的普通物质只有约 5%。而那 5% 里会发光的恒星不到十分之一，其余是星系之间看不见的热气体。</div>
+<figure>
+<svg aria-label="今日宇宙能量预算：暗能量约 69%、暗物质约 26%、普通物质约 5%，而普通物质中会发光的恒星只占极小一部分" role="img" viewbox="0 0 640 196">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect fill="#f0ad5a" height="16" width="21" x="40" y="30"></rect>
+<rect fill="#3d4a6b" height="16" width="189" x="61" y="30"></rect>
+<line stroke="#4d5877" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="40" y1="46" y2="86"></line>
+<line stroke="#4d5877" stroke-dasharray="3 3" stroke-width="1" x1="68" x2="250" y1="86" y2="46"></line>
+<text fill="#a9b6d4" font-size="10.5" x="258" y="42">放大那 5%：发光的恒星只占其中一小条</text>
+<rect fill="#f0ad5a" height="34" width="28" x="40" y="86"></rect>
+<rect fill="#5b9bff" height="34" width="147" x="68" y="86"></rect>
+<rect fill="#8f7ad6" height="34" width="385" x="215" y="86"></rect>
+<text fill="#0a0e1a" font-size="12" font-weight="700" text-anchor="middle" x="141" y="108">暗物质 ≈ 26%</text>
+<text fill="#0a0e1a" font-size="12" font-weight="700" text-anchor="middle" x="407" y="108">暗能量 ≈ 69%</text>
+<line stroke="#f0ad5a" stroke-width="1" x1="54" x2="54" y1="120" y2="140"></line>
+<text fill="#f0ad5a" font-size="11.5" x="46" y="156">普通物质 ≈ 5%</text>
+<text fill="#8fa0c4" font-size="10.5" x="46" y="174">（其中恒星等发光物质约 0.5%）</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="600" y="174">数值取自 Planck 2018 与巡天的联合拟合</text>
+</g>
+</svg>
+<figcaption>整条元素周期表只占最左边那一小格；会发光的部分，还只是那一格的一角。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  这几个数字不是拼凑的：同一套 ΛCDM 模型只用六个自由参数，就要同时对上微波背景声学峰、重子声学振荡、超新星距离、弱引力透镜、轻元素丰度。<strong>它们探测的是不同时代、不同过程，却收敛到同一组参数上</strong>——这种交叉一致性才是账本的分量所在。</div>
+<div class="field"><span class="lab">反直觉的重点 · 三条裂缝</span>
+  ① <strong>宇宙学常数问题</strong>：量子场论说真空里各种场都有零点能，把截断放在普朗克尺度估一估，算出的真空能密度比实测的 Λ 大约 <strong>120 个数量级</strong>——史上最惨烈的量级失配。<br/>
+  ② <strong>哈勃张力</strong>：早期宇宙推出的今日膨胀率约 67.4，本地距离阶梯量出的约 73，差约 5 个标准差，十几年没消掉。<br/>
+  ③ <strong>Λ 可能不是常数</strong>：重子声学振荡巡天（DESI）联合超新星与微波背景，给出 <var>w</var> 随时间变化的迹象，约 3–4 个标准差，<strong>还不到发现门槛</strong>——但这是「暗能量是个常数」第一次被真正摇了一下。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 命名与认知 · 医学 / 生物 / AI</span>
+  「暗物质」「暗能量」是<strong>记账用的占位符</strong>，不是解释。给未知起个名词，风险是名字一有、追问就停：
+  <ul>
+<li><strong>医学 / 生物</strong>：「特发性（idiopathic）」的字面意思就是「原因不明」，写在诊断书上却像已经查清了什么；非编码区被叫「垃圾 DNA」，这名字让一代人低估了它，直到大量调控元件被找出来；</li>
+<li><strong>AI</strong>：把说不清的模型行为叫「涌现能力」，标签一贴就容易停止追问机制。</li>
+</ul>
+  <strong>「暗物质」这名字的全部功劳，在于精确标出了「这里欠着五倍质量」，且不假装知道欠的是什么。</strong></div>
+<div class="punch">
+<div class="one">一句话：95% 量的不是我们的无知有多深，而是我们把无知<strong>记账记得有多准</strong>。</div>
+<details class="q"><summary><b>思考：</b>一个模型有 95% 的内容是「不知道是什么」，凭什么还算好模型？</summary><div class="qa">因为它做了大量可被证伪的定量预言并都对上了：微波背景第三声学峰的高度、重子声学振荡的尺子长度、结构成长的速率、轻元素丰度。它没说暗物质是什么粒子，却精确说了有多少、多冷、怎么分布。好模型的标准是<strong>预言力</strong>。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>中微子有质量、不发光、数量还极多，为什么它不是暗物质？</summary>
+<div class="body">两条都过不去。一是量太少：中微子质量上限极低，全宇宙的中微子加起来只占能量预算的零点几个百分点。二是它太快：中微子以接近光速自由飞行，会把小尺度上刚聚起来的密度起伏抹平（自由流动）。若暗物质这么「热」，宇宙会先形成巨大结构再碎成星系，而观测到的顺序恰恰相反——小的先形成，再并合成大的。所以暗物质必须是<strong>冷</strong>的。</div></details>
+<details><summary>「真空有能量」听起来很玄，除了宇宙学之外它有实验证据吗？</summary>
+<div class="body">有，而且很硬：卡西米尔效应（两块靠得极近的中性金属板之间出现可测的吸引力）与兰姆位移都证实真空涨落真实存在。但这些实验测的是真空能的<strong>差值</strong>，而引力只对<strong>绝对值</strong>敏感——所有能量都参与弯曲时空，没有「零点随便挪」这回事。宇宙学常数问题的难，正难在这道缝上。</div></details>
+<details><summary>暗能量密度不稀释，那宇宙的未来会是什么样？</summary>
+<div class="body">若 <var>w</var> 严格等于 −1，膨胀最终进入指数式加速，尺度每隔一段固定时间翻一倍。后果相当苍凉：远方星系陆续退出我们的视界，未来某个时代的观测者抬头只看到一座孤岛，膨胀的证据都已稀释到测不出来，他们会「合理地」得出静态永恒宇宙的结论。若 <var>w</var> 比 −1 还负，暗能量密度反随时间增长，结局是连束缚结构都被撕开的大撕裂。岔口就在 <var>w</var> 那一位小数上，细讲归「宇宙的历史与命运」。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Zwicky 1933，后发星系团的质量缺口——<a href="https://doi.org/10.1007/s10714-008-0707-4">英译重印，Gen. Relativ. Gravit. 41, 207 (2009)</a></li>
+<li>Rubin &amp; Ford 1970，<a href="https://doi.org/10.1086/150317">ApJ 159, 379</a>——仙女座星系的转动，平坦曲线的起点</li>
+<li>Rubin, Ford &amp; Thonnard 1980，<a href="https://doi.org/10.1086/158003">ApJ 238, 471</a>——21 个星系，把个例变成规律</li>
+<li>Clowe et al. 2006，<a href="https://doi.org/10.1086/508162">ApJL 648, L109</a>——子弹星系团：质量与发光物质分离</li>
+<li>Milgrom 1983，<a href="https://doi.org/10.1086/161130">ApJ 270, 365</a>——MOND 原始论文，读对手的最强版本</li>
+<li>Riess et al. 1998，<a href="https://doi.org/10.1086/300499">AJ 116, 1009</a> 与 Perlmutter et al. 1999，<a href="https://doi.org/10.1086/307221">ApJ 517, 565</a>——加速膨胀的两篇独立发现</li>
+<li>Weinberg 1989，<a href="https://doi.org/10.1103/RevModPhys.61.1">Rev. Mod. Phys. 61, 1</a>——《宇宙学常数问题》的标准入口</li>
+<li>Planck 2018 results VI，<a href="https://doi.org/10.1051/0004-6361/201833910">A&amp;A 641, A6 (2020)</a>——宇宙学参数的权威汇总</li>
+<li>Riess et al. 2022，<a href="https://doi.org/10.3847/2041-8213/ac5c5b">ApJL 934, L7</a>——哈勃张力的另一端</li>
+<li>Bertone &amp; Hooper 2018，<a href="https://doi.org/10.1103/RevModPhys.90.045002">Rev. Mod. Phys. 90, 045002</a>——《暗物质史》</li>
+<li><a href="https://pdg.lbl.gov/">Particle Data Group</a> 的 Dark Matter 与 Dark Energy 评论——实验限制现状</li>
+<li><a href="https://en.wikipedia.org/wiki/Galaxy_rotation_curve">Galaxy rotation curve</a>／<a href="https://en.wikipedia.org/wiki/Dark_energy">Dark energy</a>／<a href="https://en.wikipedia.org/wiki/Dark_Energy_Spectroscopic_Instrument">DESI</a>——总览与词表</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

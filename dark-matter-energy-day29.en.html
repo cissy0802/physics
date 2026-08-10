@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Dark Matter &amp; Dark Energy · Day 29</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Dark Matter &amp; Dark Energy</h1>
+<div class="meta">Day 29 · 2026 · Phase G Cosmology</div>
+<div class="tagline">The two names sound like a matched pair. They have nothing to do with each other: one keeps galaxies from flying apart, the other makes the universe expand faster and faster. Their only shared trait is that we have never seen either of them except through gravity.</div>
+</header>
+<div class="intro">
+Galaxies spin too fast — fast enough that, counting only the matter we can see, they should long since have thrown themselves apart. And the expansion, which gravity ought to be steadily slowing, is instead speeding up. The two shortfalls together account for <b>95%</b> of today's cosmic energy budget. The most-mangled point: <b>"dark" does not mean "mysterious."</b> It literally means <b>neither emitting light nor blocking it</b>. The evidence is far too strong to wave off, and we have still never touched either one by any means but gravity.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Rotation Curves That Refuse to Fall</h2>
+<span class="pill">galactic dynamics · 1933 / 1970</span>
+<div class="field"><span class="lab">Intuition</span>
+  In the solar system the outer planets orbit more slowly: Earth at 30 km/s, Neptune down at 5.4 km/s — because nearly all the mass sits in the Sun at the centre. A galaxy's light is just as concentrated toward its centre, so its outer stars should slow down the same way. <strong>They don't.</strong> Measure out to the thin hydrogen several times beyond the luminous disc and the curve is still as flat as a ruler.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  For a star on a circular orbit, the speed is set by the total mass <strong>interior to that orbit</strong>:</div>
+<div class="eq"><var>v</var><sup>2</sup> = <span class="frac"><span class="fnum"><var>G</var> <var>M</var>(&lt;<var>r</var>)</span><span class="fden"><var>r</var></span></span></div>
+<div class="gloss"><var>v</var> is the orbital speed, <var>r</var> the distance from the galactic centre, <var>G</var> the gravitational constant (the fixed number setting how strong gravity is). <span class="nowrap"><var>M</var>(&lt;<var>r</var>)</span> reads "the total mass within radius <var>r</var>," the angle bracket being the "less than" sign — and that bracket is the whole point: <strong>matter farther out than you pulls in all directions at once and cancels, so it does nothing to you.</strong> If mass really were concentrated at the centre the way light is, then out beyond it <span class="nowrap"><var>M</var>(&lt;<var>r</var>)</span> stops growing and the speed has to fall off as <span class="nowrap"><var>v</var> ∝ 1/√<var>r</var></span>.</div>
+<div class="field">Read it backwards: the measured <var>v</var> does not fall, so <span class="nowrap"><var>M</var>(&lt;<var>r</var>)</span> must still be growing with <var>r</var> — even where nothing at all is shining. Filling the shortfall takes a roughly spherical "halo" far larger than the luminous disc, carrying <strong>about five times</strong> the mass of every star and gas cloud combined.</div>
+<figure>
+<svg role="img" aria-label="Galaxy rotation curve: with visible matter alone the orbital speed should fall off with distance, but the measured curve stays flat, and the difference is the missing gravitating mass" viewBox="0 0 640 262">
+<defs>
+<marker id="ax1" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#56607e"></path>
+</marker>
+<marker id="gapA" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="8" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#8f9bbd"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<line marker-end="url(#ax1)" stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="222" y2="34"></line>
+<line marker-end="url(#ax1)" stroke="#56607e" stroke-width="1.5" x1="70" x2="616" y1="222" y2="222"></line>
+<text fill="#8fa0c4" font-size="11.5" x="40" y="28">orbital speed</text>
+<text fill="#8fa0c4" font-size="11.5" text-anchor="end" x="612" y="242">distance from galactic centre →</text>
+<line stroke="#26314c" stroke-dasharray="5 5" stroke-width="1.2" x1="258" x2="258" y1="86" y2="222"></line>
+<text fill="#6f7b9c" font-size="10.5" x="264" y="214">edge of the luminous disc</text>
+<polyline fill="none" points="78,217 96,158 114,116 134,92 156,80 186,74 220,72 260,73 300,72 346,73 396,72 450,73 506,72 560,73" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<polyline fill="none" points="78,217 96,160 114,120 134,96 156,86 186,96 216,109 250,122 288,135 330,147 378,157 430,167 490,176 560,184" stroke="#7f8db0" stroke-dasharray="7 5" stroke-width="2"></polyline>
+<g fill="#f0ad5a">
+<circle cx="186" cy="74" r="3.4"></circle>
+<circle cx="238" cy="72" r="3.4"></circle>
+<circle cx="290" cy="73" r="3.4"></circle>
+<circle cx="344" cy="71" r="3.4"></circle>
+<circle cx="398" cy="73" r="3.4"></circle>
+<circle cx="452" cy="72" r="3.4"></circle>
+<circle cx="512" cy="73" r="3.4"></circle>
+</g>
+<text fill="#f0ad5a" font-size="12.5" font-weight="700" x="322" y="58">measured: flat</text>
+<text fill="#98a5c6" font-size="12.5" x="368" y="200">visible matter only</text>
+<line marker-end="url(#gapA)" stroke="#8f9bbd" stroke-width="1.4" x1="536" x2="536" y1="118" y2="80"></line>
+<line marker-end="url(#gapA)" stroke="#8f9bbd" stroke-width="1.4" x1="536" x2="536" y1="140" y2="178"></line>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="536" y="134">gap</text>
+</g>
+</svg>
+<figcaption>The shortfall isn't "the edge is a little off" — it is several times more gravitating mass than is visible.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The shortfall wasn't first spotted in galaxies at all. In 1933 Fritz Zwicky measured the velocity spread of galaxies in the Coma cluster and found that holding them together took far more mass than was visible; he called the missing part "dark matter" — and the result sat ignored for nearly forty years. What made it unavoidable were the flat curves Vera Rubin and Kent Ford measured one galaxy at a time through the 1970s: <strong>one anomaly can be an error; the same anomaly in dozens of galaxies is structural.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · scientific method / statistics / AI</span>
+  When data and model disagree there are always two roads: <strong>add something unobserved</strong>, or <strong>admit the model itself is wrong</strong>.
+  <ul>
+<li><strong>Astronomy</strong>: Le Verrier used anomalies in Uranus's orbit to compute the position of an unknown planet, and in 1846 Neptune was found right where he pointed (add a latent variable — win); the same trick applied to Mercury's perihelion predicted "Vulcan," a planet that does not exist — the truth was that the law of gravity needed changing, which is <a href="general-relativity-day16.en.html">general relativity</a> (change the model — win);</li>
+<li><strong>Statistics / AI</strong>: systematic structure in the residuals may mean an omitted confounder or a misspecified functional form, and the two fixes point in opposite directions; when a model is systematically wrong, adding capacity will always push the training loss down — which is exactly what makes it dangerous.</li>
+</ul>
+  Dark matter versus modified gravity is the modern instance of that century-old fork.</div>
+<div class="punch">
+<div class="one">In one line: outer stars refusing to slow down is the universe telling you there is more mass out there, and it isn't shining.</div>
+<details class="q"><summary><b>Think:</b> "Mass farther out than you does nothing to you" sounds far too convenient.</summary><div class="qa">Under spherical symmetry it is exact (Newton's shell theorem): inside a uniform spherical shell the pulls from every direction cancel precisely, leaving a net force of the digit 0 (zero). A dark halo is roughly spherical, so the result applies; a flattened disc needs corrections, but not ones that change the order of magnitude.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Collision That Pried Mass Apart from Light</h2>
+<span class="pill">gravitational lensing · the Bullet Cluster, 2006</span>
+<div class="field"><span class="lab">Intuition</span>
+  Rotation curves admit two readings from birth: either there really is unseen mass, or in very weak gravitational fields the law of gravity departs from Newton's. The second is <strong>MOND</strong> (Modified Newtonian Dynamics, proposed by Milgrom in 1983), which with a single new constant fits huge numbers of galaxy curves startlingly well. Inside galaxies the two readings predict nearly the same thing. To settle it you need a scene that physically pries apart "where the mass is" from "where the luminous matter is."</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Two independent rulers. <strong>Gravitational lensing</strong>: mass bends spacetime, background galaxies get stretched and sheared, and inverting that shear maps out the mass — with no question asked about whether the mass shines. <strong>X-rays</strong>: most of the ordinary matter in a cluster isn't stars at all but diffuse gas at tens of millions of degrees, blazing in X-rays.<br/>
+  The Bullet Cluster (1E 0657-56) is two clusters caught mid-collision. Galaxies are so absurdly far apart that they essentially never hit anything and sailed straight through; <strong>gas is different</strong> — it rubs, gets ram-pressure stripped, and was brought to a halt in the middle. The collision performed a separation for free. <strong>Now ask the lensing: where are the mass peaks?</strong></div>
+<figure>
+<svg role="img" aria-label="Schematic of the Bullet Cluster: after two clusters passed through each other, the hot gas seen in X-rays was stopped in the middle while the lensing mass peaks moved out with the galaxies on either side" viewBox="0 0 640 256">
+<defs>
+<marker id="mv" markerWidth="10" markerHeight="8" markerUnits="userSpaceOnUse" refX="8.5" refY="4" orient="auto">
+<path d="M0,0 L10,4 L0,8 z" fill="#8fa0c4"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<g fill="none" stroke="#5b9bff">
+<ellipse cx="140" cy="118" rx="86" ry="70" stroke-opacity=".30" stroke-width="1.6"></ellipse>
+<ellipse cx="140" cy="118" rx="62" ry="50" stroke-opacity=".50" stroke-width="1.6"></ellipse>
+<ellipse cx="140" cy="118" rx="38" ry="31" stroke-opacity=".75" stroke-width="1.8"></ellipse>
+<ellipse cx="140" cy="118" rx="17" ry="14" stroke-width="2"></ellipse>
+<ellipse cx="502" cy="118" rx="70" ry="58" stroke-opacity=".30" stroke-width="1.6"></ellipse>
+<ellipse cx="502" cy="118" rx="49" ry="41" stroke-opacity=".50" stroke-width="1.6"></ellipse>
+<ellipse cx="502" cy="118" rx="29" ry="24" stroke-opacity=".75" stroke-width="1.8"></ellipse>
+<ellipse cx="502" cy="118" rx="13" ry="11" stroke-width="2"></ellipse>
+</g>
+<g fill="#d4627f" fill-opacity=".34">
+<ellipse cx="272" cy="120" rx="52" ry="58"></ellipse>
+<ellipse cx="272" cy="120" fill-opacity=".5" rx="33" ry="38"></ellipse>
+</g>
+<path d="M356,120 C356,92 372,74 392,74 C382,90 380,104 380,120 C380,136 382,150 392,166 C372,166 356,148 356,120 z" fill="#d4627f" fill-opacity=".40"></path>
+<path d="M404,66 C428,86 428,154 404,174" fill="none" stroke="#e08aa0" stroke-dasharray="4 4" stroke-width="1.6"></path>
+<text fill="#e08aa0" font-size="10.5" x="410" y="184">bow shock</text>
+<g fill="#f0ad5a">
+<circle cx="118" cy="96" r="3"></circle>
+<circle cx="152" cy="112" r="3"></circle>
+<circle cx="132" cy="140" r="3"></circle>
+<circle cx="168" cy="86" r="2.6"></circle>
+<circle cx="98" cy="132" r="2.6"></circle>
+<circle cx="160" cy="146" r="2.6"></circle>
+<circle cx="188" cy="122" r="2.4"></circle>
+<circle cx="490" cy="104" r="3"></circle>
+<circle cx="514" cy="124" r="3"></circle>
+<circle cx="496" cy="136" r="2.6"></circle>
+<circle cx="526" cy="98" r="2.6"></circle>
+<circle cx="466" cy="122" r="2.4"></circle>
+</g>
+<line marker-end="url(#mv)" stroke="#8fa0c4" stroke-width="1.4" x1="196" x2="150" y1="30" y2="30"></line>
+<line marker-end="url(#mv)" stroke="#8fa0c4" stroke-width="1.4" x1="450" x2="496" y1="30" y2="30"></line>
+<text fill="#8fa0c4" font-size="11" text-anchor="middle" x="322" y="34">each side keeps moving outward</text>
+<text fill="#5b9bff" font-size="11.5" font-weight="700" text-anchor="middle" x="140" y="212">mass peak here</text>
+<text fill="#5b9bff" font-size="11.5" font-weight="700" text-anchor="middle" x="502" y="212">mass peak here</text>
+<text fill="#d4627f" font-size="11.5" font-weight="700" text-anchor="middle" x="322" y="212">ordinary matter stuck here</text>
+<g font-size="11">
+<rect fill="none" height="13" stroke="#5b9bff" width="13" x="70" y="232"></rect>
+<text fill="#a9b6d4" x="90" y="243">mass from lensing</text>
+<rect fill="#d4627f" fill-opacity=".45" height="13" width="13" x="256" y="232"></rect>
+<text fill="#a9b6d4" x="276" y="243">hot gas in X-rays</text>
+<circle cx="452" cy="238" fill="#f0ad5a" r="5"></circle>
+<text fill="#a9b6d4" x="466" y="243">galaxies</text>
+</g>
+</g>
+</svg>
+<figcaption>The hot gas is the bulk of the ordinary matter and was stopped in the middle; the mass went out to the sides with the galaxies.</figcaption>
+</figure>
+<div class="field"><span class="lab">Why it matters</span>
+  The two lensing peaks sit on the galaxies out at the sides, not on the gas in the middle. That says two things: the dominant mass is <strong>not</strong> ordinary matter, and it <strong>barely collides with itself</strong>. Any scheme that only modifies gravity has to explain why the gravity peaks walked away from their sole source of matter. The microwave background left over from the <a href="big-bang-day28.en.html">Big Bang</a> independently demands a component that takes no part in electromagnetism.<br/>
+  The other half of the honesty: <strong>on "what it is," there is still not one piece of non-gravitational evidence.</strong> Deep-underground detectors have squeezed the front-running candidate, the WIMP, down to the neutrino background and come up empty. <strong>The evidence for "a cold, non-luminous, essentially collisionless substance" is overwhelming, and its identity is completely unknown — those two sentences have to be said together.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI / epidemiology / statistics</span>
+  MOND is a superb specimen of a general lesson: <strong>fitting one distribution beautifully is not the same as having the mechanism.</strong>
+  <ul>
+<li><strong>Astrophysics</strong>: MOND reproduces hundreds of galaxy rotation curves with a single constant, then collapses at cluster scales and on the microwave background's acoustic peaks;</li>
+<li><strong>Machine learning</strong>: a classifier that recognises "cow" from the grass behind it scores superbly on pasture photos and fails completely on a beach — it learned the correlation, not the target;</li>
+<li><strong>Epidemiology</strong>: coffee once correlated strongly with lung cancer; the real culprit was smoking.</li>
+</ul>
+  The remedy is identical in all three: <strong>find a setting that pries the two entangled factors apart</strong> — the Bullet Cluster, a randomised intervention, an out-of-distribution test set.</div>
+<div class="punch">
+<div class="one">In one line: once the gravity peak walks away from the luminous matter, "we just got gravity wrong" is closed off by direct evidence.</div>
+<details class="q"><summary><b>Think:</b> could cold gas, faint stars and black holes — ordinary matter we simply can't see — add up to the dark matter?</summary><div class="qa">No, and the shortfall is locked rather than merely unsearched. Both the light-element abundances from Big Bang nucleosynthesis and the shape of the microwave background's acoustic peaks give the <strong>total amount of ordinary matter</strong> (the protons-and-neutrons kind) directly, regardless of what form it hides in — and that total is only about a fifth of the mass.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>It Should Be Slowing Down. It Isn't.</h2>
+<span class="pill">type Ia supernovae · 1998</span>
+<div class="field"><span class="lab">Intuition</span>
+  Throw a ball up and gravity slows it. Every bit of matter in the universe attracts every other bit, so the expansion ought to be dragged down throughout, and the 1990s question was merely "by how much." Two competing teams used type Ia supernovae to measure the expansion history far away, and got the same answer neither wanted: <strong>distant supernovae are fainter — hence farther — than a decelerating universe allows.</strong> The expansion turned to acceleration about six billion years ago.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  In general relativity, gravity is sourced not only by density but by <strong>pressure</strong>. The acceleration of the expansion obeys:</div>
+<div class="eq"><span class="frac"><span class="fnum"><var>ä</var></span><span class="fden"><var>a</var></span></span> = − <span class="frac"><span class="fnum">4π<var>G</var></span><span class="fden">3</span></span> <span class="nowrap">( <var>ρ</var> + <span class="frac"><span class="fnum">3<var>p</var></span><span class="fden"><var>c</var><sup>2</sup></span></span> )</span></div>
+<div class="gloss"><var>a</var> is the <strong>scale factor</strong> — "how long the universe's ruler is" — set to 1 (the digit one) today; the two dots in <var>ä</var> mean the rate of change taken <strong>twice</strong> with respect to time, i.e. an acceleration. <var>ρ</var> (the Greek letter rho) is energy density, <var>p</var> is pressure, <var>c</var> the speed of light. <strong>Anything positive in the bracket makes the acceleration negative — deceleration</strong>: ordinary matter has pressure <var>p</var> ≈ <span class="zero">0</span> (the digit zero), so the bracket is positive. But let the pressure go negative enough — <span class="nowrap"><var>p</var> &lt; −<var>ρ</var><var>c</var><sup>2</sup>/3</span> — and the bracket flips sign, so <strong>the acceleration turns positive: the expansion speeds up.</strong></div>
+<div class="field">The simplest candidate is the <strong>cosmological constant Λ</strong> (capital Greek lambda), the term Einstein put into his equations to keep the universe static and then withdrew: a fixed amount of energy carried by every unit volume of space itself. Its equation of state is exactly</div>
+<div class="eq"><var>w</var> = <span class="frac"><span class="fnum"><var>p</var></span><span class="fden"><var>ρ</var><var>c</var><sup>2</sup></span></span> = −1</div>
+<div class="gloss"><var>w</var> is the ratio of pressure to energy density; −1 (negative one) means "pressure equal to minus the energy density," which clears the −1/3 threshold above. Observations currently pin <var>w</var> to within a few percent of −1.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  "Acceleration" sounds like something <strong>pushing</strong>, and nothing is: <strong>negative pressure itself gravitates repulsively</strong>. That effect belongs to general relativity alone — in Newtonian gravity pressure doesn't even enter, so the statement can't be formulated. One more key property: matter density dilutes as <span class="nowrap">1/<var>a</var><sup>3</sup></span> as space grows, while <strong>the energy density carried by space itself doesn't dilute at all</strong>; so matter dominated early and the expansion slowed, and once the universe had grown large enough dark energy took over. <strong>That we live right at the moment the two are comparable is itself something to explain.</strong></div>
+<figure>
+<svg role="img" aria-label="Left: the cosmic scale factor decelerates and then accelerates, with the turning point about six billion years ago. Right: matter density dilutes as the universe expands while dark energy density stays constant, the two crossing near that turning point" viewBox="0 0 640 250">
+<defs>
+<marker id="ax3" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#56607e"></path>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="56" x2="56" y1="200" y2="36"></line>
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="56" x2="302" y1="200" y2="200"></line>
+<text fill="#8fa0c4" font-size="11" x="30" y="30">scale factor <tspan font-style="italic">a</tspan></text>
+<text fill="#8fa0c4" font-size="11" text-anchor="end" x="300" y="220">time →</text>
+<polyline fill="none" points="58,198 80,172 105,152 132,136 160,123 188,110 215,95 240,78 262,60 280,44" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<polyline fill="none" points="174,116 205,107 240,100 275,95 298,92" stroke="#6f7b9c" stroke-dasharray="6 5" stroke-width="1.8"></polyline>
+<text fill="#8290b4" font-size="10.5" x="208" y="124">matter only</text>
+<circle cx="174" cy="116" fill="#f0ad5a" r="4.2"></circle>
+<line stroke="#f0ad5a" stroke-dasharray="3 3" stroke-width="1" x1="152" x2="171" y1="92" y2="112"></line>
+<text fill="#f0ad5a" font-size="10.5" x="52" y="84">turning point ≈ 6 Gyr ago</text>
+<text fill="#96a0ba" font-size="10.5" x="96" y="196">decelerating</text>
+<text fill="#96a0ba" font-size="10.5" x="190" y="52">accelerating</text>
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="368" x2="368" y1="200" y2="36"></line>
+<line marker-end="url(#ax3)" stroke="#56607e" stroke-width="1.4" x1="368" x2="614" y1="200" y2="200"></line>
+<text fill="#8fa0c4" font-size="11" x="346" y="30">density</text>
+<text fill="#8fa0c4" font-size="11" text-anchor="end" x="612" y="220">scale factor <tspan font-style="italic">a</tspan> →</text>
+<line stroke="#5b9bff" stroke-width="2.4" x1="372" x2="600" y1="50" y2="188"></line>
+<line stroke="#c08ae0" stroke-width="2.4" x1="372" x2="600" y1="140" y2="140"></line>
+<line stroke="#26314c" stroke-dasharray="4 4" stroke-width="1.2" x1="518" x2="518" y1="90" y2="200"></line>
+<circle cx="518" cy="140" fill="#f0ad5a" r="4.2"></circle>
+<text fill="#5b9bff" font-size="10.5" x="376" y="44">matter: dilutes as 1/<tspan font-style="italic">a</tspan>³</text>
+<text fill="#c08ae0" font-size="10.5" x="376" y="128">dark energy: never dilutes</text>
+<text fill="#f0ad5a" font-size="10.5" text-anchor="middle" x="530" y="80">dark energy takes over</text>
+<text fill="#96a0ba" font-size="10.5" x="376" y="180">early</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="604" y="170">today</text>
+</g>
+</svg>
+<figcaption>One crossover drawn two ways: on the left the moment the expansion curve bends, on the right the reason it bends.</figcaption>
+</figure>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · measurement / data science</span>
+  The whole conclusion rests on one thing: <strong>type Ia supernovae have to be reliable rulers</strong> — and their brightnesses are not uniform. What makes them usable is the Phillips relation: <strong>the brighter ones fade more slowly</strong>, so the width of the light curve serves as an observable proxy that calibrates a ragged population onto a single scale. The same craft is everywhere:
+  <ul>
+<li><strong>Psychometrics and educational testing</strong>: item response theory uses item-difficulty parameters to place people who sat different exams on one ability scale;</li>
+<li><strong>AI evaluation</strong>: benchmarks are aligned through shared anchor items, or "which model is stronger" is really a comparison of exam papers.</li>
+</ul>
+  <strong>Calibration makes incomparable things comparable — and stakes the whole conclusion on the stability of the proxy.</strong></div>
+<div class="punch">
+<div class="one">In one line: nothing is pushing the universe apart; negative pressure gravitates repulsively all by itself.</div>
+<details class="q"><summary><b>Think:</b> how can pressure "produce gravity"? Isn't pressure a thing that pushes outward?</summary><div class="qa">Two separate matters. A <strong>gradient</strong> of pressure produces force — that's what inflates a balloon; a uniform universe has no gradient, so its pressure pushes on nothing. But what curves spacetime isn't mass density alone, it's the energy–momentum tensor, and pressure is one of its components, gravitating directly. That term simply doesn't exist in the Newtonian framework.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>The 95% Ledger, and Its Honest Edges</h2>
+<span class="pill">cosmological parameters · Planck 2018</span>
+<div class="field"><span class="lab">Intuition</span>
+  Lay out today's energy budget: dark energy about 69%, dark matter about 26%, and the ordinary matter that we and every star are made of about 5%. Within that 5%, luminous stars are under a tenth; the rest is unseen hot gas between the galaxies.</div>
+<figure>
+<svg role="img" aria-label="Today's cosmic energy budget: about 69% dark energy, 26% dark matter and 5% ordinary matter, of which the luminous stars are only a small sliver" viewBox="0 0 640 196">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<rect fill="#f0ad5a" height="16" width="21" x="40" y="30"></rect>
+<rect fill="#3d4a6b" height="16" width="189" x="61" y="30"></rect>
+<line stroke="#4d5877" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="40" y1="46" y2="86"></line>
+<line stroke="#4d5877" stroke-dasharray="3 3" stroke-width="1" x1="68" x2="250" y1="86" y2="46"></line>
+<text fill="#a9b6d4" font-size="10.5" x="258" y="42">the 5%, magnified: stars are just the sliver</text>
+<rect fill="#f0ad5a" height="34" width="28" x="40" y="86"></rect>
+<rect fill="#5b9bff" height="34" width="147" x="68" y="86"></rect>
+<rect fill="#8f7ad6" height="34" width="385" x="215" y="86"></rect>
+<text fill="#0a0e1a" font-size="12" font-weight="700" text-anchor="middle" x="141" y="108">dark matter ≈ 26%</text>
+<text fill="#0a0e1a" font-size="12" font-weight="700" text-anchor="middle" x="407" y="108">dark energy ≈ 69%</text>
+<line stroke="#f0ad5a" stroke-width="1" x1="54" x2="54" y1="120" y2="140"></line>
+<text fill="#f0ad5a" font-size="11.5" x="46" y="156">ordinary matter ≈ 5%</text>
+<text fill="#8fa0c4" font-size="10.5" x="46" y="174">(luminous matter within it ≈ 0.5%)</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="end" x="600" y="174">values from the Planck 2018 + survey joint fit</text>
+</g>
+</svg>
+<figcaption>The entire periodic table is that small block on the left; the part that shines is only a corner of it.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  These numbers aren't cobbled together: one ΛCDM model with six free parameters has to match, all at once, the microwave background's acoustic peaks, baryon acoustic oscillations in the galaxy distribution, supernova distances, weak lensing and the light-element abundances. <strong>They probe different epochs and different processes, and they converge on the same parameters</strong> — that cross-consistency is where the ledger's weight comes from.</div>
+<div class="field"><span class="lab">The counterintuitive part · three cracks</span>
+  ① <strong>The cosmological constant problem</strong>: quantum field theory says every field has zero-point energy; cut it off at the Planck scale and the vacuum energy density you compute exceeds the measured Λ by roughly <strong>120 orders of magnitude</strong> — the most spectacular mismatch in the history of physics.<br/>
+  ② <strong>The Hubble tension</strong>: the present expansion rate inferred from the early universe is about 67.4, the one measured directly up the local distance ladder about 73 — some 5 standard deviations apart, and unresolved for over a decade.<br/>
+  ③ <strong>Λ may not be constant</strong>: large baryon-acoustic-oscillation surveys (DESI), combined with supernovae and the microwave background, show hints of <var>w</var> varying with time at roughly 3–4 standard deviations — <strong>short of the discovery threshold</strong>, but the first real shake to "dark energy is a constant."</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · naming and cognition · medicine / biology / AI</span>
+  "Dark matter" and "dark energy" are <strong>placeholders in a ledger</strong>, not explanations. The risk in naming an unknown is that once it has a name, the questioning stops:
+  <ul>
+<li><strong>Medicine / biology</strong>: "idiopathic" literally means "cause unknown," yet on a chart it reads as though something has been established; non-coding regions were labelled "junk DNA," and the name led a generation to underrate them until the regulatory elements turned up;</li>
+<li><strong>AI</strong>: calling inexplicable model behaviour an "emergent ability" makes it easy to stop asking about mechanism.</li>
+</ul>
+  <strong>The entire merit of the name "dark matter" is that it marks precisely where five times the mass is owed — without pretending to know what is owed.</strong></div>
+<div class="punch">
+<div class="one">In one line: the 95% measures not how deep our ignorance runs but <strong>how precisely we have booked it</strong>.</div>
+<details class="q"><summary><b>Think:</b> if 95% of a model's content is "we don't know what this is," on what grounds is it a good model?</summary><div class="qa">Because it makes many falsifiable quantitative predictions and they have all come in: the height of the third acoustic peak, the length of the baryon-acoustic ruler, the growth rate of structure, the light-element abundances. It doesn't say which particle dark matter is, but it says exactly how much there is, how cold, and how distributed. The standard for a good model is <strong>predictive power</strong>.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>Neutrinos have mass, emit no light and are everywhere — why aren't they the dark matter?</summary>
+<div class="body">Two things rule them out. First, there aren't enough: the upper limits on neutrino mass are so low that all the neutrinos in the universe come to a fraction of a percent of the energy budget. Second, and worse, they are too fast: neutrinos stream freely at near light speed and wash out the small-scale density ripples that were just starting to gather. If dark matter were that "hot," the universe would have formed enormous structures first and fragmented them into galaxies — the opposite of what we see, where small structures form first and merge upward. So dark matter has to be <strong>cold</strong>.</div></details>
+<details><summary>"The vacuum has energy" sounds like mysticism. Is there any evidence for it outside cosmology?</summary>
+<div class="body">Yes, and it's hard evidence: the Casimir effect (a measurable attraction between two very closely spaced neutral metal plates) and the Lamb shift both confirm that vacuum fluctuations are real. But those experiments measure <strong>differences</strong> in vacuum energy, whereas gravity responds only to the <strong>absolute value</strong> — all energy curves spacetime, and there is no freedom to slide the zero point. That gap is exactly where the cosmological constant problem lives.</div></details>
+<details><summary>If dark energy's density never dilutes, what does the future of the universe look like?</summary>
+<div class="body">If <var>w</var> is exactly −1, the expansion settles into exponential acceleration, with the scale doubling every fixed interval. The consequence is bleak: distant galaxies drop out of our horizon one by one, until observers in some later age look up and see only a single island — with the evidence of expansion, receding galaxies and the microwave background alike, diluted past detection. They will "reasonably" conclude that the universe is static and eternal. If <var>w</var> is more negative than −1, dark energy's density grows with time instead, and the ending is a Big Rip that tears even bound structures apart. The fork sits in one decimal place of <var>w</var>; the branches belong to "the history and fate of the universe."</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>Zwicky 1933, the Coma cluster's missing mass — <a href="https://doi.org/10.1007/s10714-008-0707-4">English reprint, Gen. Relativ. Gravit. 41, 207 (2009)</a></li>
+<li>Rubin &amp; Ford 1970, <a href="https://doi.org/10.1086/150317">ApJ 159, 379</a> — rotation of Andromeda, where the flat curves begin</li>
+<li>Rubin, Ford &amp; Thonnard 1980, <a href="https://doi.org/10.1086/158003">ApJ 238, 471</a> — 21 galaxies, turning a case into a rule</li>
+<li>Clowe et al. 2006, <a href="https://doi.org/10.1086/508162">ApJL 648, L109</a> — the Bullet Cluster: mass separated from luminous matter</li>
+<li>Milgrom 1983, <a href="https://doi.org/10.1086/161130">ApJ 270, 365</a> — the original MOND paper; read the opposition at its strongest</li>
+<li>Riess et al. 1998, <a href="https://doi.org/10.1086/300499">AJ 116, 1009</a> and Perlmutter et al. 1999, <a href="https://doi.org/10.1086/307221">ApJ 517, 565</a> — the two independent discoveries of acceleration</li>
+<li>Weinberg 1989, <a href="https://doi.org/10.1103/RevModPhys.61.1">Rev. Mod. Phys. 61, 1</a> — "The Cosmological Constant Problem," still the standard way in</li>
+<li>Planck 2018 results VI, <a href="https://doi.org/10.1051/0004-6361/201833910">A&amp;A 641, A6 (2020)</a> — the authoritative parameter compilation</li>
+<li>Riess et al. 2022, <a href="https://doi.org/10.3847/2041-8213/ac5c5b">ApJL 934, L7</a> — the other end of the Hubble tension</li>
+<li>Bertone &amp; Hooper 2018, <a href="https://doi.org/10.1103/RevModPhys.90.045002">Rev. Mod. Phys. 90, 045002</a> — "History of Dark Matter"</li>
+<li>The <a href="https://pdg.lbl.gov/">Particle Data Group</a> reviews of Dark Matter and Dark Energy — current experimental limits</li>
+<li><a href="https://en.wikipedia.org/wiki/Galaxy_rotation_curve">Galaxy rotation curve</a> / <a href="https://en.wikipedia.org/wiki/Dark_energy">Dark energy</a> / <a href="https://en.wikipedia.org/wiki/Dark_Energy_Spectroscopic_Instrument">DESI</a> — overviews and glossary</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
