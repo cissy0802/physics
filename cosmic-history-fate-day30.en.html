@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: The History &amp; Fate of the Universe · Day 30</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>The History &amp; Fate of the Universe</h1>
+<div class="meta">Day 30 · 2026 · Phase G Cosmology</div>
+<div class="tagline">Galaxies, stars, every atom in your body — all of it grew out of a quantum tremor in the earliest instants. And on a logarithmic scale of time, the bright part of the story is only the opening bar.</div>
+</header>
+<div class="intro">
+The sky looks too much like itself in every direction — the two most widely separated patches never exchanged a signal, yet their temperatures agree to one part in 100,000. And it is precisely that one part in 100,000 of disagreement that grew into every galaxy there is. <b>Too uniform</b> and <b>just barely non-uniform</b> have to be explained by one and the same mechanism. Follow that same line forward and you hit a question more uncomfortable than "how old is the universe": <b>how long the universe has left depends on a number we have pinned down to two decimal places.</b>
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Why the Sky Is Too Uniform</h2>
+<span class="pill">inflation · 1980 / 1981</span>
+<div class="field"><span class="lab">Intuition</span>
+  The microwave background is a snapshot of the universe at 380,000 years old. Measure its temperature to the south, then to the north: the two differ by less than one part in 100,000. But light had travelled at most 380,000 light years by then, and those two patches were far further apart than that — <strong>nothing had ever passed between them.</strong> When two people who have never communicated hand in identical answers, there are only two explanations: an enormous coincidence, or they used to be the same person.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Alan Guth's 1980 answer was the second one: a very brief episode of <strong>exponential expansion</strong> in which the scale went as</div>
+<div class="eq"><var>a</var>(<var>t</var>) ∝ <var>e</var><sup><var>Ht</var></sup></div>
+<div class="gloss"><var>a</var> is the scale factor ("how long the universe's ruler is"), <var>t</var> is time, <var>e</var> is the natural constant 2.718…, and <var>H</var> is the expansion rate at the time. Exponential means <strong>doubling every fixed interval</strong> — not somewhat faster, but doubling and doubling with nothing to stop it. It takes at least 60 <var>e</var>-foldings (<span class="nowrap"><var>e</var><sup>60</sup> ≈ 10<sup>26</sup></span>), all of it between roughly 10<sup>−36</sup> and 10<sup>−32</sup> seconds.</div>
+<div class="field">A single patch small enough that <strong>light had crossed it, and which had therefore genuinely equalised its temperature</strong>, was blown up into the entire observable universe. It looks too alike because it was one family to begin with. That settled a second account too: blow the balloon up far enough and the patch under your feet looks flat, so any primordial curvature was stretched away.</div>
+<figure>
+<svg role="img" aria-label="Inflation schematic: quantum ripples inside a small causally connected patch are stretched by more than a factor of ten to the twenty-sixth into the hot and cold patches of today's observable universe" viewBox="0 0 640 240">
+<defs>
+<marker id="arrI" markerWidth="11" markerHeight="9" markerUnits="userSpaceOnUse" refX="9.5" refY="4.5" orient="auto">
+<path d="M0,0 L11,4.5 L0,9 z" fill="#8fa0c4"/>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<circle cx="92" cy="116" r="34" fill="#0f1626" stroke="#5b9bff" stroke-width="1.6" stroke-dasharray="5 4"/>
+<path d="M68,116 q6,-11 12,0 t12,0 t12,0" fill="none" stroke="#f0ad5a" stroke-width="1.8"/>
+<text x="92" y="172" fill="#a9b6d4" font-size="11.5" text-anchor="middle">one causally connected patch</text>
+<text x="92" y="189" fill="#6f7b9c" font-size="10.5" text-anchor="middle">light had time to cross it</text>
+<circle cx="452" cy="116" r="90" fill="#0f1626" stroke="#5b9bff" stroke-width="1.6"/>
+<g stroke="none">
+<ellipse cx="410" cy="78" rx="40" ry="30" fill="#f0ad5a" fill-opacity=".17"/>
+<ellipse cx="497" cy="102" rx="45" ry="34" fill="#5b9bff" fill-opacity=".20"/>
+<ellipse cx="416" cy="158" rx="42" ry="28" fill="#5b9bff" fill-opacity=".14"/>
+<ellipse cx="500" cy="170" rx="30" ry="22" fill="#f0ad5a" fill-opacity=".13"/>
+</g>
+<path d="M372,116 q24,-34 48,0 t48,0 t48,0" fill="none" stroke="#f0ad5a" stroke-width="2.2"/>
+<text x="452" y="26" fill="#f0ad5a" font-size="11.5" text-anchor="middle">one ripple, stretched across a whole sky</text>
+<text x="452" y="228" fill="#a9b6d4" font-size="11.5" text-anchor="middle">all of today's observable universe</text>
+<line x1="134" y1="116" x2="352" y2="116" stroke="#8fa0c4" stroke-width="1.5" marker-end="url(#arrI)"/>
+<text x="243" y="102" fill="#c3cbe0" font-size="11.5" text-anchor="middle">inflation: ~10⁻³⁶ to 10⁻³² s</text>
+<text x="243" y="136" fill="#8fa0c4" font-size="11" text-anchor="middle">linear size ×10²⁶ or more</text>
+</g>
+</svg>
+<figcaption>Not "two places that happen to match," but "one place torn into two places."</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The loveliest thing about inflation is its <strong>by-product</strong>. The uncertainty principle forbids the vacuum from ever being perfectly still; exponential expansion dragged those quantum fluctuations out past the horizon and froze them into density ripples that could never be smoothed away again. <strong>Where a galaxy cluster hangs today is the fossil of one quantum tremor in the first instants.</strong> Even the shape of the spectrum matches: Planck measures <span class="nowrap"><var>n</var><sub>s</sub> ≈ 0.965</span>, exactly the predicted "nearly scale-invariant, slightly red."<br/>
+  The honest other half: <strong>there is still no direct evidence</strong> — inflation's hardest independent prediction is the B-mode pattern that primordial gravitational waves would leave in the microwave background's polarisation, and BICEP/Keck has pushed it to <span class="nowrap"><var>r</var> &lt; 0.036</span> with nothing in sight.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · developmental biology / AI &amp; control</span>
+  What inflation really does is trade <strong>"the initial conditions happened to be like this" for "any initial conditions get washed into this"</strong> — the most powerful move available for explaining away fine-tuning:
+  <ul>
+<li><strong>Developmental biology</strong>: Waddington's canalisation — embryos vary quite a lot in cell number, temperature and nutrition, and still grow into nearly the same body, because the developmental trajectory is itself a converging groove;</li>
+<li><strong>AI and control</strong>: run the same network from dozens of random initialisations and the trained performance is nearly identical; a thermostat needs no idea what the room temperature was at power-on. The explanatory work is done by the dynamics, not by the starting point.</li>
+</ul>
+  The price is the same in every case: <strong>the stronger the attractor, the less initial information you can read back off the final state</strong> — inflation erased everything that came before it.</div>
+<div class="punch">
+<div class="one">The universe is not uniform by luck. For a moment it expanded so fast that the uniformity of one small patch was spread over the whole sky.</div>
+<details class="q"><summary><b>Think about it:</b> during inflation two points separate far faster than light. Doesn't that break relativity?</summary><div class="qa">It doesn't. Relativity limits how fast anything can <strong>travel through</strong> space, and no two points ever raced past each other faster than light; expansion is space itself getting larger, and the newly added distance isn't bound by that rule. Galaxies are receding faster than light today, too, and we still see the light they emitted earlier.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>From One Part in 100,000 to the Cosmic Web</h2>
+<span class="pill">gravitational instability · structure formation</span>
+<div class="field"><span class="lab">Intuition</span>
+  A perfectly uniform universe grows nothing at all: gravity pulls equally everywhere, so nothing falls anywhere. <strong>Structure requires non-uniformity first</strong>, even at one part in 100,000 — after that gravity handles it alone. A slightly denser spot pulls slightly harder, gathers more, and gets denser still.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Track it with the density "contrast":</div>
+<div class="eq"><var>δ</var> = <span class="frac"><span class="fnum"><var>ρ</var> − <var>ρ̄</var></span><span class="fden"><var>ρ̄</var></span></span></div>
+<div class="gloss"><var>δ</var> is the Greek letter delta, <var>ρ</var> (rho) is the density somewhere, and the bar over <var>ρ̄</var> means the average over the whole universe. <span class="nowrap"><var>δ</var> = <span class="zero">0</span></span> (the digit zero) is perfect uniformity; <span class="nowrap"><var>δ</var> = 1</span> means twice the average density here. During the matter-dominated era <span class="nowrap"><var>δ</var> ∝ <var>a</var></span> — ripples grow only <strong>linearly</strong> with the size of the universe, which is surprisingly slow; not until <span class="nowrap"><var>δ</var> ≈ 1</span> does a region run away, collapse, and drop out of the expansion on its own.</div>
+<div class="field">That slow growth carries a hard constraint: ordinary matter is held fast by photons until recombination and simply cannot collapse, so starting from one part in 100,000 it reaches only about one part in 100 by today — <strong>nowhere near enough to build a galaxy</strong>. It was the matter that ignores electromagnetism which got a head start and dug the potential wells first — which is <a href="dark-matter-energy-day29.en.html">dark matter</a>'s independent evidence from well beyond galactic scales.</div>
+<figure>
+<svg role="img" aria-label="Three stages of structure formation: matter is nearly uniform at 380,000 years, a filamentary skeleton emerges by 500 million years, and today it forms a cosmic web of filaments, nodes and huge voids" viewBox="0 0 640 214">
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<rect x="24" y="46" width="168" height="128" fill="#0f1626" stroke="#26314c" stroke-width="1"/>
+<rect x="220" y="46" width="168" height="128" fill="#0f1626" stroke="#26314c" stroke-width="1"/>
+<rect x="416" y="46" width="168" height="128" fill="#0f1626" stroke="#26314c" stroke-width="1"/>
+<path d="M28 57h0M31 58h0M34 73h0M33 94h0M28 103h0M28 113h0M28 119h0M31 137h0M36 137h0M35 151h0M28 163h0M34 50h0M34 67h0M32 79h0M41 85h0M47 100h0M49 101h0M33 119h0M34 134h0M38 140h0M35 148h0M48 170h0M50 50h0M51 66h0M54 69h0M45 88h0M53 102h0M47 105h0M57 114h0M47 141h0M60 151h0M51 148h0M56 170h0M64 50h0M55 66h0M66 68h0M66 79h0M59 107h0M57 103h0M64 125h0M64 127h0M65 143h0M72 157h0M56 160h0M69 59h0M68 64h0M76 82h0M76 87h0M66 92h0M81 116h0M75 125h0M81 141h0M77 138h0M77 148h0M73 160h0M77 54h0M80 58h0M81 76h0M88 87h0M80 93h0M85 115h0M94 130h0M81 135h0M80 137h0M91 151h0M79 166h0M106 50h0M90 64h0M103 74h0M104 84h0M101 97h0M96 103h0M91 119h0M97 127h0M92 151h0M100 153h0M91 168h0M109 54h0M101 71h0M101 75h0M117 79h0M99 103h0M115 101h0M115 127h0M100 126h0M113 151h0M101 150h0M104 168h0M122 56h0M121 64h0M118 68h0M128 88h0M111 104h0M111 106h0M125 125h0M119 129h0M115 150h0M113 151h0M119 169h0M134 59h0M136 62h0M129 74h0M136 89h0M124 90h0M134 107h0M124 120h0M132 133h0M132 140h0M131 152h0M135 170h0M139 57h0M142 63h0M138 72h0M143 78h0M136 101h0M150 104h0M142 121h0M143 134h0M138 148h0M145 154h0M141 163h0M153 52h0M148 63h0M147 78h0M145 87h0M146 90h0M161 104h0M152 118h0M150 139h0M157 140h0M155 161h0M150 165h0M161 50h0M167 60h0M166 77h0M169 80h0M167 94h0M167 118h0M160 116h0M163 137h0M167 138h0M161 159h0M159 167h0M175 50h0M178 55h0M182 70h0M181 86h0M178 91h0M176 105h0M179 127h0M168 128h0M172 143h0M167 156h0M182 170h0M188 50h0M178 60h0M184 80h0M179 79h0M178 100h0M182 110h0M186 130h0M188 133h0M185 138h0M188 158h0M188 159h0" stroke="#9fb4e8" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.4"/>
+<path d="M226 63h0M228 64h0M231 89h0M230 95h0M232 122h0M228 126h0M228 141h0M226 156h0M232 58h0M246 96h0M248 95h0M233 124h0M233 137h0M242 163h0M241 58h0M245 71h0M248 72h0M255 97h0M250 99h0M257 118h0M254 147h0M243 145h0M247 162h0M252 58h0M249 70h0M258 75h0M259 81h0M259 110h0M255 99h0M255 140h0M277 154h0M246 152h0M261 66h0M261 71h0M269 86h0M281 140h0M278 137h0M282 145h0M279 158h0M266 64h0M271 67h0M275 84h0M282 133h0M282 135h0M317 51h0M281 75h0M301 82h0M300 92h0M318 53h0M297 80h0M299 83h0M314 83h0M303 129h0M324 56h0M325 62h0M319 75h0M319 115h0M308 131h0M335 58h0M337 61h0M326 79h0M330 103h0M316 112h0M326 144h0M326 146h0M332 167h0M339 71h0M333 95h0M349 101h0M348 115h0M336 144h0M333 154h0M352 111h0M346 148h0M355 150h0M352 52h0M355 62h0M358 114h0M363 131h0M368 134h0M361 51h0M361 58h0M367 75h0M368 92h0M367 96h0M367 124h0M369 52h0M361 63h0M370 85h0M368 83h0M372 103h0M379 125h0M381 127h0M381 133h0" stroke="#9fb4e8" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.4"/>
+<path d="M230 72h0M235 141h0M233 148h0M230 67h0M232 77h0M239 84h0M233 143h0M231 145h0M241 87h0M243 141h0M259 123h0M261 127h0M270 92h0M262 92h0M271 124h0M290 129h0M290 125h0M308 101h0M295 126h0M327 91h0M304 100h0M306 102h0M314 166h0M332 90h0M320 90h0M325 155h0M337 57h0M341 62h0M343 157h0M338 163h0M348 56h0M344 66h0M358 101h0M352 162h0M349 164h0M361 96h0M367 114h0M372 105h0M375 124h0M377 113h0" stroke="#9fb4e8" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.72"/>
+<path d="M277 115h0M283 93h0M275 96h0M283 113h0M289 152h0M285 162h0M295 97h0M291 105h0M284 117h0M292 150h0M295 156h0M292 164h0M292 103h0M306 152h0M297 151h0M300 162h0M312 152h0M307 155h0M344 78h0M343 79h0M342 88h0M343 90h0M358 80h0M358 84h0M360 159h0M357 166h0M367 150h0M365 159h0M373 168h0M379 161h0M377 160h0" stroke="#9fb4e8" stroke-width="3.4" stroke-linecap="round" stroke-opacity="0.95"/>
+<path d="M425 69h0M426 71h0M430 84h0M432 85h0M437 131h0M429 134h0M425 145h0M424 149h0M430 66h0M445 92h0M448 88h0M433 128h0M433 140h0M436 154h0M433 67h0M439 76h0M442 76h0M457 92h0M453 93h0M457 122h0M447 142h0M435 142h0M439 154h0M439 67h0M443 74h0M450 82h0M452 82h0M459 113h0M454 95h0M446 136h0M434 144h0M451 74h0M454 79h0M462 91h0M481 140h0M478 136h0M488 143h0M454 75h0M462 78h0M483 130h0M484 133h0M531 54h0M472 87h0M499 91h0M496 99h0M528 54h0M493 89h0M495 92h0M512 88h0M491 132h0M527 57h0M530 60h0M520 83h0M511 105h0M497 132h0M535 59h0M537 59h0M524 83h0M527 99h0M507 103h0M519 156h0M518 152h0M528 164h0M539 70h0M553 107h0M530 155h0M527 161h0M552 103h0M544 157h0M542 54h0M542 65h0M556 112h0M564 124h0M569 128h0M547 54h0M543 63h0M554 97h0M556 100h0M566 119h0M549 56h0M544 68h0M566 105h0M571 119h0M574 120h0M577 128h0" stroke="#9fb4e8" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.4"/>
+<path d="M426 71h0M435 146h0M432 144h0M426 67h0M432 74h0M437 83h0M429 146h0M426 142h0M438 86h0M439 142h0M454 121h0M459 126h0M464 98h0M458 93h0M466 123h0M486 127h0M484 123h0M500 100h0M491 126h0M526 94h0M498 96h0M501 99h0M508 164h0M529 92h0M517 89h0M518 157h0M534 56h0M539 61h0M541 160h0M534 164h0M542 61h0M539 69h0M555 99h0M547 162h0M554 98h0M567 111h0M567 105h0M571 121h0M573 117h0" stroke="#9fb4e8" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.72"/>
+<path d="M483 152h0M473 114h0M485 156h0M470 93h0M478 98h0M471 98h0M481 112h0M487 153h0M492 157h0M489 97h0M486 106h0M478 115h0M492 150h0M491 158h0M492 161h0M485 103h0M500 153h0M493 152h0M496 157h0M508 154h0M500 158h0M545 78h0M530 89h0M548 98h0M538 80h0M539 89h0M539 89h0M554 161h0M550 164h0M550 83h0M548 87h0M559 159h0M555 164h0M551 80h0M563 156h0M562 162h0M565 165h0M554 89h0M556 86h0M571 164h0M566 161h0" stroke="#9fb4e8" stroke-width="3.4" stroke-linecap="round" stroke-opacity="0.95"/>
+<text x="108" y="34" fill="#5b9bff" font-size="12" text-anchor="middle">380,000 years</text>
+<text x="304" y="34" fill="#5b9bff" font-size="12" text-anchor="middle">~500 million years</text>
+<text x="500" y="34" fill="#5b9bff" font-size="12" text-anchor="middle">today</text>
+<text x="108" y="194" fill="#96a0ba" font-size="11" text-anchor="middle">ripples ~1 part in 100,000</text>
+<text x="304" y="194" fill="#96a0ba" font-size="11" text-anchor="middle">a filamentary skeleton</text>
+<text x="500" y="194" fill="#96a0ba" font-size="11" text-anchor="middle">filaments, nodes, voids</text>
+<text x="108" y="210" fill="#6f7b9c" font-size="10" text-anchor="middle">no visible difference</text>
+<text x="304" y="210" fill="#6f7b9c" font-size="10" text-anchor="middle">the empty places empty out</text>
+<text x="500" y="210" fill="#6f7b9c" font-size="10" text-anchor="middle">growth has nearly stopped</text>
+</g>
+</svg>
+<figcaption>Same matter, same gravity; the only difference is time. Voids were not hollowed out — they gave their contents to the filaments.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Assembly runs <strong>bottom-up</strong>: small dark matter haloes collapse first, then merge layer by layer into galaxies and clusters. If that matter moved fast ("hot"), small-scale ripples would have been erased and the big things would have formed first and fragmented afterwards — the observed order is exactly the reverse.<br/>
+  The colder point: <strong>this growth is nearly over.</strong> Once dark energy took over and the expansion accelerated, matter became harder and harder to drag together, and the growth of ripples has essentially frozen. Today's cosmic web is not a construction site; it is a building that has just been topped out.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · network science / AI</span>
+  "Instability plus positive feedback equals structure" is a general recipe, and it needs both ingredients:
+  <ul>
+<li><strong>Network science</strong>: preferential attachment — new nodes prefer to link to already popular ones, and the same rich-get-richer loop yields a power-law degree distribution; the Matthew effect in capital accumulation is the same machine;</li>
+<li><strong>AI</strong>: a network with every weight initialised to the digit 0 (zero) can never learn anything — every neuron receives an identical gradient and stays identical forever, so <strong>a random seed must break the symmetry first</strong>. It is the same fact as a uniform universe growing no galaxies.</li>
+</ul>
+  But gravity's version has no screening and no equilibrium endpoint: charge comes in two signs and cancels, gravity only attracts, and the tighter it gathers the more it runs away — which is why entropy intuitions invert for gravitating systems, and clumping together is itself an <a href="entropy-arrow-day7.en.html">increase in entropy</a>.</div>
+<div class="punch">
+<div class="one">Nobody drew the cosmic web. It is one part in 100,000 compounding under gravity for 13.8 billion years.</div>
+<details class="q"><summary><b>Think about it:</b> if the seeds really were quantum fluctuations, is the Milky Way's location random?</summary><div class="qa">The specific location is random; the statistics are not. Theory predicts only the <strong>power spectrum</strong> — how strong the ripples should be on each scale — and the value at any one place is a draw from that distribution. Predicting the distribution exactly while never being able to predict a single draw is a rare situation in physics.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>151 Orders of Magnitude on One Axis</h2>
+<span class="pill">deep time · logarithmic scale</span>
+<div class="field"><span class="lab">Intuition</span>
+  "13.8 billion years" is already past imagining, but the other end is further: the largest black holes will not finish evaporating until 10<sup>100</sup> years. From the Planck time to that moment is about <strong>151 orders of magnitude</strong>. A linear scale cannot draw it — render the whole future one metre long and everything from the Big Bang to today falls within less than an atom's width of the left edge. <strong>Only a logarithmic scale makes it visible.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  Equal steps on a log axis are not equal numbers of years but equal <strong>factors</strong>: one notch right multiplies by 10. Flattened out that way, one thing becomes glaring.</div>
+<figure>
+<svg role="img" aria-label="Logarithmic timeline of the universe from the Planck time at ten to the minus fifty-one years to the largest black holes evaporating at ten to the hundredth years, with today sitting about a third of the way along; the linear scale below shows all of history to date compressed at the far left" viewBox="0 0 640 250">
+<defs>
+<marker id="axT" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#56607e"/>
+</marker>
+<marker id="pinT" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="8" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#f0ad5a"/>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<line x1="52" y1="96" x2="624" y2="96" stroke="#56607e" stroke-width="1.5" marker-end="url(#axT)"/>
+<g stroke="#3a4463" stroke-width="1">
+<line x1="52" y1="92" x2="52" y2="100"/><line x1="88.6" y1="92" x2="88.6" y2="100"/>
+<line x1="125.1" y1="92" x2="125.1" y2="100"/><line x1="161.7" y1="92" x2="161.7" y2="100"/>
+<line x1="198.2" y1="92" x2="198.2" y2="100"/><line x1="234.8" y1="92" x2="234.8" y2="100"/>
+<line x1="271.4" y1="92" x2="271.4" y2="100"/><line x1="307.9" y1="92" x2="307.9" y2="100"/>
+<line x1="344.5" y1="92" x2="344.5" y2="100"/><line x1="381" y1="92" x2="381" y2="100"/>
+<line x1="417.6" y1="92" x2="417.6" y2="100"/><line x1="454.2" y1="92" x2="454.2" y2="100"/>
+<line x1="490.7" y1="92" x2="490.7" y2="100"/><line x1="527.3" y1="92" x2="527.3" y2="100"/>
+<line x1="563.8" y1="92" x2="563.8" y2="100"/><line x1="600.4" y1="92" x2="600.4" y2="100"/>
+</g>
+<text x="52" y="118" fill="#6f7b9c" font-size="9.5" text-anchor="middle">each notch ×10¹⁰</text>
+<line x1="52" y1="96" x2="52" y2="72" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="52" y="64" fill="#8fa0c4" font-size="10.5" text-anchor="start">Planck time, 10⁻⁴³ s</text>
+<line x1="94" y1="96" x2="94" y2="136" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="94" y="150" fill="#8fa0c4" font-size="10.5" text-anchor="middle">inflation ends</text>
+<line x1="219" y1="96" x2="219" y2="50" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="246" y="43" fill="#8fa0c4" font-size="10.5" text-anchor="end">nucleosynthesis · 3 min</text>
+<line x1="259" y1="96" x2="259" y2="136" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="283" y="150" fill="#8fa0c4" font-size="10.5" text-anchor="end">recombination, 380 kyr</text>
+<line x1="276" y1="96" x2="276" y2="68" stroke="#f0ad5a" stroke-width="1.6" marker-end="url(#pinT)"/>
+<text x="284" y="64" fill="#f0ad5a" font-size="11.5" font-weight="700" text-anchor="start">today · 13.8 Gyr</text>
+<line x1="290" y1="96" x2="290" y2="166" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="300" y="180" fill="#8fa0c4" font-size="10.5" text-anchor="middle">stelliferous era ends, 10¹⁴</text>
+<line x1="363" y1="96" x2="363" y2="136" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="390" y="150" fill="#8fa0c4" font-size="10.5" text-anchor="middle">if protons decay, &gt;10³⁴</text>
+<line x1="484" y1="96" x2="484" y2="72" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="490" y="64" fill="#8fa0c4" font-size="10.5" text-anchor="middle">stellar-mass holes gone, 10⁶⁷</text>
+<line x1="604" y1="96" x2="604" y2="136" stroke="#5b9bff" stroke-width="1.2"/>
+<text x="612" y="150" fill="#8fa0c4" font-size="10.5" text-anchor="end">largest holes gone, 10¹⁰⁰</text>
+<rect x="52" y="204" width="552" height="14" fill="#1b2340" stroke="#3a4463" stroke-width="1"/>
+<rect x="52" y="204" width="1.2" height="14" fill="#f0ad5a"/>
+<line x1="120" y1="228" x2="58" y2="219" stroke="#f0ad5a" stroke-width="1.3" marker-end="url(#pinT)"/>
+<text x="126" y="232" fill="#f0ad5a" font-size="10.5" text-anchor="start">on a linear scale, all of history from the Big Bang to today sits inside this hairline</text>
+<text x="52" y="198" fill="#8fa0c4" font-size="10.5" text-anchor="start">linear scale: 0 → 10¹⁰⁰ yr</text>
+</g>
+</svg>
+<figcaption>On that upper axis, one notch is ten billion times; everything humans care about is squeezed into a short stretch left of centre.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>We do not live at a typical cosmic moment.</strong> The era with stars burning in it (out to about 10<sup>14</sup> years) occupies a tenth of that axis; the other nine tenths are dark, thin and almost eventless, and a finger dropped at random onto the axis lands in that darkness nearly every time. We get to discuss it now only because discussing it takes stars and heavy elements — and those exist only in the opening stretch.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · perception / data science</span>
+  Change the ruler and the conclusion changes shape:
+  <ul>
+<li><strong>Perception</strong>: loudness and brightness are themselves sensed roughly logarithmically (Weber–Fechner), so "an order of magnitude bigger" only feels "a bit bigger" — the blindness to scale is built in. The same defect flattens the 3-billion-plus years before the Cambrian into a thin sliver, though they are eight tenths of the history of life;</li>
+<li><strong>Data science / AI</strong>: quantities spanning orders of magnitude lie to you on linear axes — the relation between loss and model size only shows itself as a power law on log-log axes. Changing the axis isn't cosmetics, it's what makes the regularity appear.</li>
+</ul>
+  <strong>A log axis does not shrink big numbers; it turns "how many times" into a visible distance.</strong></div>
+<div class="punch">
+<div class="one">The universe is not old. It is very young — it simply intends to live a very long time.</div>
+<details class="q"><summary><b>Think about it:</b> isn't "we live in a rare bright era" circular reasoning?</summary><div class="qa">It's an observer selection effect, and used properly it isn't circular: observers capable of asking need stars and heavy elements, which exist only in the opening stretch, so the era we measure must be an early one. But it only explains why we aren't in the dark era; stretched to explain everything it slides into unfalsifiability.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>The Fork Sits in One Decimal Place</h2>
+<span class="pill">the end of the universe · the equation of state w</span>
+<div class="field"><span class="lab">Intuition</span>
+  The switch that picks the road is absurdly small: dark energy's equation of state <var>w</var>, the ratio of its pressure to its energy density. Hold <span class="nowrap"><var>w</var> = −1</span> and the expansion accelerates exponentially forever, toward a cold, empty <strong>heat death</strong>. Make <var>w</var> more negative than −1 and dark energy's density grows with time, prying galaxies, then stars, then atoms apart at a finite moment — the <strong>Big Rip</strong>. Let it flip sign into attraction and the expansion reverses into a <strong>Big Crunch</strong>. Observation pins <var>w</var> to within a few percent of −1 — <strong>the boundary between the three endings hides inside those few percent.</strong></div>
+<figure>
+<svg role="img" aria-label="Three branches for the fate of the universe starting from today: at w equal to minus one the expansion accelerates exponentially toward heat death, at w below minus one the scale diverges at a finite time in a Big Rip, and if dark energy flips sign the universe recollapses in a Big Crunch" viewBox="0 0 640 246">
+<defs>
+<marker id="axF" markerWidth="9" markerHeight="7" markerUnits="userSpaceOnUse" refX="7.5" refY="3.5" orient="auto">
+<path d="M0,0 L9,3.5 L0,7 z" fill="#56607e"/>
+</marker>
+</defs>
+<g font-family="-apple-system,'Segoe UI',sans-serif">
+<line x1="60" y1="212" x2="60" y2="30" stroke="#56607e" stroke-width="1.4" marker-end="url(#axF)"/>
+<line x1="60" y1="212" x2="620" y2="212" stroke="#56607e" stroke-width="1.4" marker-end="url(#axF)"/>
+<text x="38" y="24" fill="#8fa0c4" font-size="11">size of the universe <tspan font-style="italic">a</tspan></text>
+<text x="616" y="232" fill="#8fa0c4" font-size="11" text-anchor="end">time →</text>
+<polyline points="64,206 96,192 128,180 160,170 192,160 210,152" fill="none" stroke="#7f8db0" stroke-width="2.4"/>
+<line x1="210" y1="212" x2="210" y2="152" stroke="#26314c" stroke-dasharray="4 4" stroke-width="1.1"/>
+<circle cx="210" cy="152" r="4.6" fill="#f0ad5a"/>
+<text x="210" y="228" fill="#f0ad5a" font-size="11.5" font-weight="700" text-anchor="middle">today</text>
+<text x="120" y="228" fill="#8290b4" font-size="10.5" text-anchor="middle">the 13.8 Gyr already run</text>
+<path d="M210,152 C244,140 268,112 286,74 C296,52 302,42 306,34" fill="none" stroke="#e0788f" stroke-width="2.4"/>
+<line x1="312" y1="196" x2="312" y2="30" stroke="#e0788f" stroke-dasharray="5 5" stroke-width="1.2"/>
+<text x="320" y="46" fill="#e0788f" font-size="11.5" font-weight="700">Big Rip</text>
+<text x="320" y="62" fill="#c98a99" font-size="10.5">w &lt; −1: diverges at a finite time</text>
+<path d="M210,152 C300,146 400,128 480,100 C540,80 580,64 606,52" fill="none" stroke="#5b9bff" stroke-width="2.6"/>
+<text x="614" y="116" fill="#5b9bff" font-size="11.5" font-weight="700" text-anchor="end">heat death</text>
+<text x="614" y="132" fill="#8fb4e8" font-size="10.5" text-anchor="end">w = −1: forever accelerating</text>
+<path d="M210,152 C252,143 288,143 318,154 C356,168 392,188 418,202" fill="none" stroke="#c08ae0" stroke-width="2.4"/>
+<text x="430" y="188" fill="#c08ae0" font-size="11.5" font-weight="700">Big Crunch</text>
+<text x="430" y="204" fill="#b09ac8" font-size="10.5">if dark energy flips sign</text>
+<text x="72" y="52" fill="#96a0ba" font-size="10.5">measured: w = −1.0 ± 0.03</text>
+</g>
+</svg>
+<figcaption>All three curves still coincide at "today" — which is the entire observational difficulty.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  Follow the best-supported branch (<span class="nowrap"><var>w</var> = −1</span>): distant galaxies drop out of the horizon one by one, until in roughly 150 billion years the sky holds nothing but the Local Group, a single island; gas runs out and even the most frugal red dwarfs gutter out around 10<sup>14</sup> years; and if protons decay (experiment gives only a lower bound: a lifetime beyond 10<sup>34</sup> years), even white dwarfs and neutron stars dissolve into radiation. What is left is black holes, boiling away through Hawking radiation:</div>
+<div class="eq"><var>t</var><sub>evap</sub> ≈ 10<sup>67</sup> yr × <span class="nowrap">(<var>M</var>/<var>M</var><sub>☉</sub>)<sup>3</sup></span></div>
+<div class="gloss"><var>M</var> is the hole's mass and <span class="nowrap"><var>M</var><sub>☉</sub></span> is the Sun's (the circle-with-a-dot is astronomy's symbol for the Sun). The cube means <strong>bigger holes die more slowly</strong>: a solar-mass hole takes 10<sup>67</sup> years, while the hundred-billion-solar-mass kind at galactic centres takes 10<sup>100</sup>.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  "Heat death" is most often misread as <strong>running out of energy</strong>. It is the opposite: energy is conserved, not one joule goes missing. What runs out is energy's <strong>availability</strong> — doing work requires a gradient, and rising entropy is exactly those gradients being levelled. Heat death is a universe with plenty of energy, all of it the same everywhere, and therefore able to drive nothing.<br/>
+  And this whole future history extrapolates present physics across 90 orders of magnitude: <strong>we do not know whether protons decay, and we do not know whether <var>w</var> is constant</strong> — baryon acoustic oscillation surveys combined with supernovae now hint at a <var>w</var> that drifts with time, at roughly 3–4 standard deviations. That is short of a discovery, but enough that heat death is no longer the default answer.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · biology / computation</span>
+  "Having enough energy is not the same as being able to do anything with it" is one sentence in two fields:
+  <ul>
+<li><strong>Biology and engineering</strong>: life does not "eat energy" — the energy you take in and put out is very nearly equal, and what you actually consume is <strong>low entropy</strong>: ordered molecules in, disordered heat out. A heat engine is the same story; Carnot's efficiency limit depends only on the temperature difference, and a boiler that is equally hot at both ends does no work no matter how much energy it holds;</li>
+<li><strong>Computation</strong>: Landauer showed erasing one bit costs at least <var>kT</var> ln2, so the colder you are the cheaper it gets — from which Dyson argued that a civilisation could compute ever slower and ever colder, stretching a finite energy supply into infinite thought.</li>
+</ul>
+  <strong>But accelerated expansion kills that plan</strong>: a <var>w</var> = −1 universe has a horizon temperature that never falls to zero, so you cannot get cold enough, and the stretch is not infinite. <strong>The fork in the ending also decides how long thinking can go on.</strong></div>
+<div class="punch">
+<div class="one">Heat death isn't running out of energy, it's running out of gradients — the universe never loses power, it just becomes the same everywhere.</div>
+<details class="q"><summary><b>Think about it:</b> given infinite time, does everything possible eventually happen?</summary><div class="qa">This is precisely the Boltzmann brain problem: an eternal de Sitter universe will randomly fluctuate isolated minds complete with false memories, at a probability that is tiny but nonzero — and over infinite time they overwhelmingly outnumber observers who evolved normally. Most physicists treat it not as a prediction but as <strong>an alarm that the theory is sick</strong>: a model implying "you are almost certainly a random fluctuation" has probably got a premise wrong.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>If inflation has no direct evidence, what makes it mainstream?</summary>
+<div class="body">It committed itself before it could be tested: space should be very nearly flat, the fluctuation spectrum nearly scale-invariant and slightly red, and the ripples in the different components in step with one another. None of the three had been measured at the time, and COBE, WMAP and Planck went on to confirm them one by one, flatness to two parts in a thousand. But "the prediction came true" is not "the mechanism was seen" — more than one model gives the same spectrum. <strong>Its standing today is the most successful framework, not confirmed history.</strong></div></details>
+<details><summary>Galaxies are all receding — so are the Milky Way, the solar system and you expanding too?</summary>
+<div class="body">No. Expansion only shows up on scales <strong>not held together by some other force</strong>: the Milky Way is bound by its own gravity and you are bound electromagnetically, so their sizes are set by internal balance and they left the expansion long ago. The wrong picture is "space is stretching everything"; the right one is "the distances between clusters grow, the insides don't." The Big Rip is frightening precisely because it is the one ending that breaks that boundary — the repulsion strengthens with time until it overpowers gravity and electromagnetism, prying clusters and then atoms apart layer by layer.</div></details>
+<details><summary>What does it mean to say the vacuum might not be stable?</summary>
+<div class="body">The vacuum the Higgs field currently sits in need not be the lowest one; it may be a metastable shallow dip — the measured Higgs and top quark masses fall suspiciously close to the critical line, so it cannot be ruled out. If somewhere tunnelled to a deeper vacuum, a bubble would expand outward at nearly the speed of light with all the constants of particle physics rewritten inside, and it would give <strong>no warning at all</strong>: the bubble wall and the bad news arrive together. But estimated waiting times run far beyond 10<sup>100</sup> years — a theoretical possibility, not an item on the calendar.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>Guth 1981, <a href="https://doi.org/10.1103/PhysRevD.23.347">Phys. Rev. D 23, 347</a> — the original inflation paper, where the horizon and flatness problems are posed</li>
+<li>Linde 1982, <a href="https://doi.org/10.1016/0370-2693(82)91219-9">Phys. Lett. B 108, 389</a> and Albrecht &amp; Steinhardt 1982, <a href="https://doi.org/10.1103/PhysRevLett.48.1220">PRL 48, 1220</a> — "new inflation," which repaired the mechanism</li>
+<li>Planck 2018 results X, <a href="https://doi.org/10.1051/0004-6361/201833887">A&amp;A 641, A10 (2020)</a> — the authoritative compilation of inflation parameters</li>
+<li>BICEP/Keck 2021, <a href="https://doi.org/10.1103/PhysRevLett.127.151301">PRL 127, 151301</a> — the tightest limit on primordial gravitational waves</li>
+<li>Ijjas, Steinhardt &amp; Loeb 2013, <a href="https://doi.org/10.1016/j.physletb.2013.05.023">Phys. Lett. B 723, 261</a> and Guth, Kaiser &amp; Nomura 2014, <a href="https://doi.org/10.1016/j.physletb.2014.03.020">Phys. Lett. B 733, 112</a> — the case against inflation and the reply; read both</li>
+<li>Springel et al. 2005, <a href="https://doi.org/10.1038/nature03597">Nature 435, 629</a> — the Millennium simulation: how the cosmic web grows out of ripples</li>
+<li>Adams &amp; Laughlin 1997, <a href="https://doi.org/10.1103/RevModPhys.69.337">Rev. Mod. Phys. 69, 337</a> — "A Dying Universe," the standard reference on the far future</li>
+<li>Dyson 1979, <a href="https://doi.org/10.1103/RevModPhys.51.447">Rev. Mod. Phys. 51, 447</a> — "Time Without End," on sustaining thought inside a heat death</li>
+<li>Caldwell, Kamionkowski &amp; Weinberg 2003, <a href="https://doi.org/10.1103/PhysRevLett.91.071301">PRL 91, 071301</a> — the original Big Rip paper</li>
+<li>Krauss &amp; Scherrer 2007, <a href="https://doi.org/10.1007/s10714-007-0472-9">Gen. Relativ. Gravit. 39, 1545</a> — future observers will see a static universe, the evidence having been diluted away</li>
+<li><a href="https://en.wikipedia.org/wiki/Inflation_(cosmology)">Inflation (cosmology)</a> / <a href="https://en.wikipedia.org/wiki/Structure_formation">Structure formation</a> / <a href="https://en.wikipedia.org/wiki/Ultimate_fate_of_the_universe">Ultimate fate of the universe</a> / <a href="https://en.wikipedia.org/wiki/Timeline_of_the_far_future">Timeline of the far future</a> — overviews and glossary</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
