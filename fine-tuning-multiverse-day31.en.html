@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Fine-Tuning &amp; the Multiverse · Day 31</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Fine-Tuning &amp; the Multiverse</h1>
+<div class="meta">Day 31 · 2026 · Phase G Cosmology</div>
+<div class="tagline">Nudge a few constants by a few percent and there are no stars, no carbon, nobody to read this sentence. It sounds like a miracle — but "miracle" is not a word physics can use directly: first you have to say what the probability is being computed over.</div>
+</header>
+<div class="intro">
+Make the vacuum energy a thousand times larger and galaxies never form; shift the light quark masses by a few percent and carbon never gets made. The list is long, and it is easy to read as a hint. <b>But "such a small probability can't be an accident" is missing the one thing that matters most: a probability is always computed over an ensemble</b> — roll a die ten thousand times and you can talk about probability, but there is only one universe, and that probability is undefined. Which leaves two ways out: the constants aren't really free, and some deeper theory pins them down; or they really do have an ensemble, and we can only ever turn up in the members that allow us. <b>Neither is easy to settle with a single experiment.</b>
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>What "Just Right" Actually Claims</h2>
+<span class="pill">fine-tuning · naturalness</span>
+<div class="field"><span class="lab">Intuition</span>
+  An instrument where every knob has to be set to several decimal places before an image appears. The first reaction shouldn't be "how lucky this machine is," but <strong>"there must be a linkage between the knobs that I don't know about."</strong> When the window on a constant turns out to be narrow, physicists think the same thing: narrow isn't a miracle, it's a missing constraint.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Three examples get put on the table most often. The first is also the most uncomfortable — the vacuum energy:</div>
+<div class="eq"><span class="frac"><span class="fnum"><var>ρ</var><sub>Λ</sub> (observed)</span><span class="fden"><var>ρ</var><sub>Planck</sub></span></span> ≈ 10<sup>−122</sup></div>
+<div class="gloss"><var>ρ</var> is read "rho" and is an energy density; <var>Λ</var> is read "Lambda" and denotes the <a href="dark-matter-energy-day29.en.html">dark energy</a> share; the denominator is the density you get when the quantum-gravity scale is used as the natural unit. 10<sup>−122</sup> means the decimal point is followed by 121 digit 0s (zeros) before the first nonzero digit. The point: the most naive quantum-field-theory estimate misses the observed value by more than a hundred orders of magnitude — and <strong>a thousand times larger would already have smoothed matter out before it could gather into galaxies.</strong></div>
+<div class="field">The second is the amplitude of the primordial ripples, <var>Q</var> ≈ 10<sup>−5</sup> (the one-part-in-100,000 hot-and-cold pattern on the microwave background): ten times smaller and gas never reaches ignition density; ten times larger and the lumps collapse straight into black holes. The third sits in nuclear physics — three helium nuclei can only stick together into carbon because carbon-12 happens to have a resonance at 7.65 MeV, and the tolerance there is <strong>a few percent in the light quark masses</strong>.</div>
+<figure>
+<svg aria-label="The tolerated window for three parameters on one logarithmic axis: the vacuum energy may be smaller without limit but no more than about a hundred times larger; the primordial ripple amplitude allows about a factor of ten either way; the light quark mass window is only a few percent, too narrow to draw" role="img" viewbox="0 0 640 254">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="330" y="18">One ruler: the axis is "how many times off the observed value"</text>
+<line stroke="#f0ad5a" stroke-dasharray="4 4" stroke-width="1.2" x1="370" x2="370" y1="46" y2="228"></line>
+<text fill="#f0ad5a" font-size="11" font-weight="700" text-anchor="middle" x="370" y="38">observed</text>
+<g>
+<text fill="#dbe1f0" font-size="11.5" x="20" y="76">Vacuum energy Λ</text>
+<text fill="#6f7b9c" font-size="10" x="20" y="92">dark energy density</text>
+<line stroke="#3a4463" stroke-width="1" x1="140" x2="600" y1="80" y2="80"></line>
+<rect fill="#5b9bff" fill-opacity=".18" height="22" stroke="#5b9bff" stroke-opacity=".5" stroke-width="1" width="307" x="140" y="69"></rect>
+<text fill="#8fa0c4" font-size="10.5" x="140" y="60">smaller is fine; ≳ ×100 and no galaxies</text>
+</g>
+<g>
+<text fill="#dbe1f0" font-size="11.5" x="20" y="146">Ripple amplitude Q</text>
+<text fill="#6f7b9c" font-size="10" x="20" y="162">≈ 10⁻⁵</text>
+<line stroke="#3a4463" stroke-width="1" x1="140" x2="600" y1="150" y2="150"></line>
+<rect fill="#5b9bff" fill-opacity=".18" height="22" stroke="#5b9bff" stroke-opacity=".5" stroke-width="1" width="77" x="332" y="139"></rect>
+<text fill="#8fa0c4" font-size="10.5" x="140" y="130">±1 decade; else no structure or black holes</text>
+</g>
+<g>
+<text fill="#dbe1f0" font-size="11.5" x="20" y="212">Light quark mass</text>
+<text fill="#6f7b9c" font-size="10" x="20" y="228">sets the nuclear force</text>
+<line stroke="#3a4463" stroke-width="1" x1="140" x2="600" y1="216" y2="216"></line>
+<rect fill="#f0ad5a" fill-opacity=".55" height="22" stroke="#f0ad5a" stroke-width="1" width="5" x="368" y="205"></rect>
+<text fill="#8fa0c4" font-size="10.5" x="140" y="196">a few percent — too narrow to draw: no carbon</text>
+</g>
+<g stroke="#3a4463" stroke-width="1">
+<line x1="140" x2="140" y1="216" y2="222"></line><line x1="217" x2="217" y1="216" y2="222"></line>
+<line x1="293" x2="293" y1="216" y2="222"></line><line x1="447" x2="447" y1="216" y2="222"></line>
+<line x1="523" x2="523" y1="216" y2="222"></line><line x1="600" x2="600" y1="216" y2="222"></line>
+</g>
+<g fill="#6f7b9c" font-size="9.5" text-anchor="middle">
+<text x="140" y="246">×10⁻⁶</text><text x="217" y="246">×10⁻⁴</text><text x="293" y="246">×10⁻²</text>
+<text x="447" y="246">×10²</text><text x="523" y="246">×10⁴</text><text x="600" y="246">×10⁶</text>
+</g>
+</g>
+</svg>
+<figcaption>The three windows differ wildly in width — and every width was computed on the assumption that none of the other knobs move.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Fine-tuning <strong>is not an observation; it is a statement about a model</strong>, and it comes with two premises you can lean on. First, <strong>only one knob moves</strong>: let several parameters vary together and the window often widens noticeably. Second, <strong>the prior measure is undefined</strong> — saying "Λ is uniform between 0 and the Planck density, so this is wildly improbable" quietly picks a distribution; make it uniform in the order of magnitude instead and the same number stops being remarkable. History leans this way too: the carbon window was once quoted as 0.4%, and has been widened since.<br/>
+  But even after all the discounts, <strong>the vacuum energy still stings</strong>: it assumes nothing about life, only that galaxies exist, and the theory is off by more than a hundred orders of magnitude.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · engineering / AI / statistics</span>
+  "It only works if you tune it precisely" is bad news in any trade — it signals <strong>a missing layer of negative feedback</strong>:
+  <ul>
+<li><strong>Engineering</strong>: an op-amp is built with enormous open-loop gain and then fed back, so the final gain depends only on the <em>ratio</em> of two resistors — sensitivity is eaten by the feedback, not by precise components;</li>
+<li><strong>AI</strong>: early networks were violently sensitive to learning rate and initialisation; normalisation and adaptive optimisers didn't make models luckier, they digested that sensitivity;</li>
+<li><strong>Statistical modelling</strong>: nobody trusts a model whose conclusion flips when you change the prior.</li>
+</ul>
+<strong>High sensitivity usually means a missing mechanism, not a jackpot.</strong></div>
+<div class="punch">
+<div class="one">In one line: a narrow window on a constant is first of all our theory raising an alarm, not the universe announcing good news.</div>
+<details class="q"><summary><b>Think about it:</b> is "what if the speed of light were a bit larger" a good question?</summary><div class="qa">No. Its numerical value depends on whether you measure in metres or something else, so changing it just swaps rulers and the physics is unchanged. Only <strong>dimensionless ratios</strong> mean anything — the proton-to-electron mass ratio, α ≈ 1/137.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Can a Selection Effect Count as an Explanation</h2>
+<span class="pill">anthropic principle · 1974 / 1987</span>
+<div class="field"><span class="lab">Intuition</span>
+  Pick spots at random in a pond to measure its depth and you never measure anywhere deep — you have to be able to stand there. The observer is itself a sieve. <strong>The weak anthropic principle says only this: the conditions we measure must fall in the range that permits observers</strong> — it is a conditioning on an existing ensemble, not a new kind of force. Whereas "the universe must permit observers" yields nothing measurable.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  In 1987 Weinberg turned that sieve into something computable:</div>
+<div class="eq"><var>P</var><sub>seen</sub>(<var>Λ</var>) ∝ <var>P</var><sub>prior</sub>(<var>Λ</var>) × <var>N</var><sub>observers</sub>(<var>Λ</var>)</div>
+<div class="gloss">∝ reads "is proportional to"; <var>P</var><sub>prior</sub> is how often this value of <var>Λ</var> occurs in the ensemble, and <var>N</var><sub>observers</sub> is how many galaxies — and hence observers — that value can grow. The key is that the right-hand factor <strong>goes to zero</strong>: past some threshold in <var>Λ</var>, galaxies never form, <span class="nowrap"><var>N</var> = <span class="zero">0</span></span> (the digit zero) — not a small probability, but nobody there to do the counting.</div>
+<figure>
+<svg aria-label="The three steps of Weinberg's weighting argument: the prior weight rises with vacuum energy, the galaxy-formation efficiency drops to zero at a threshold, and their product gives an observer distribution peaking just below the threshold, with the observed value near the peak" role="img" viewbox="0 0 640 228">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<g fill="#5b9bff" font-size="11.5" text-anchor="middle">
+<text x="108" y="38">① prior weight</text><text x="320" y="38">② galaxy formation</text><text x="532" y="38">③ product = observers</text>
+</g>
+<rect fill="#0f1626" height="124" stroke="#26314c" stroke-width="1" width="168" x="24" y="52"></rect>
+<rect fill="#0f1626" height="124" stroke="#26314c" stroke-width="1" width="168" x="236" y="52"></rect>
+<rect fill="#0f1626" height="124" stroke="#26314c" stroke-width="1" width="168" x="448" y="52"></rect>
+<polyline fill="none" points="36,164 180,72" stroke="#7f8db0" stroke-width="2.4"></polyline>
+<polyline fill="none" points="248,74 332,74 348,86 362,150 370,166 392,166" stroke="#7f8db0" stroke-width="2.4"></polyline>
+<polyline fill="none" points="460,162 518,142 548,98 562,72 570,120 578,166 604,166" stroke="#5b9bff" stroke-width="2.6"></polyline>
+<line stroke="#f0ad5a" stroke-dasharray="4 4" stroke-width="1.2" x1="548" x2="548" y1="166" y2="60"></line>
+<circle cx="548" cy="98" fill="#f0ad5a" r="4.2"></circle>
+<text fill="#f0ad5a" font-size="10.5" font-weight="700" text-anchor="end" x="542" y="78">observed</text>
+<text fill="#56607e" font-size="17" text-anchor="middle" x="214" y="122">×</text>
+<text fill="#56607e" font-size="17" text-anchor="middle" x="426" y="122">=</text>
+<g fill="#6f7b9c" font-size="10" text-anchor="middle">
+<text x="108" y="190">Λ (log scale) →</text><text x="320" y="190">Λ (log scale) →</text><text x="532" y="190">Λ (log scale) →</text>
+</g>
+<g fill="#96a0ba" font-size="10" text-anchor="middle">
+<text x="108" y="206">treat Λ as a free parameter:</text><text x="108" y="220">each decade right holds 10× more</text>
+<text x="320" y="206">past some Λ, expansion wins</text><text x="320" y="220">and galaxies never assemble</text>
+<text x="532" y="206">the peak hugs the threshold</text><text x="532" y="220">from below — and there we are</text>
+</g>
+</g>
+</svg>
+<figcaption>Two unremarkable curves multiplied together force out a sharp peak: not near zero, but at the edge of "galaxies still possible".</figcaption>
+</figure>
+<div class="field">The inconspicuous key is here: <strong>a prior that is uniform in Λ becomes a rising line on a logarithmic axis</strong> — larger decades hold more values. So the peak does not sit at Λ = 0 (the digit zero) but hugs the threshold from below. Weinberg concluded that Λ should be <strong>nonzero and not far below the threshold</strong>; the value measured in 1998 does land inside his window.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The controversy is usually located in the wrong place. <strong>Selection effects are hard science</strong>; astronomy corrects for them quantitatively every day. The soft spot is that the multiplication needs two things: <strong>an ensemble that actually exists</strong> and <strong>a prior you can write down</strong>. Without the ensemble, conditioning spins in place. Weinberg's case rested on assumptions too: <strong>a real prediction, not decisive evidence.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · statistics / astronomy / AI</span>
+  "The sample was sieved" is a lesson every field has learned the hard way:
+  <ul>
+<li><strong>Statistics</strong>: Wald looked at where returning aircraft had bullet holes and concluded you should armour the parts <em>without</em> holes — planes hit there didn't come back;</li>
+<li><strong>Astronomy</strong>: Malmquist bias — further away, only the brightest stars are visible, so the sample's mean brightness is pushed up and catalogues must be corrected item by item;</li>
+<li><strong>AI</strong>: a detector trained only on fair-weather photos fails at night in the rain — what it learned was the sieve that collected the data.</li>
+</ul>
+  The watershed is clear: <strong>write down the "sieve function" and a selection effect becomes a quantitative correction</strong>; for the anthropic argument, nobody can yet write that function down.</div>
+<div class="punch">
+<div class="one">In one line: that the observer is a sieve is beyond doubt; the hard part is that we know neither how large the ensemble is nor what shape the holes are.</div>
+<details class="q"><summary><b>Think about it:</b> "only a universe that permits us gets seen by us" — isn't that a tautology?</summary><div class="qa">On its own, yes; paired with an ensemble that has a distribution, no: "Λ should be nonzero and close to the threshold" is a statement that can be overturned — had Λ measured exactly zero, or a million times below the threshold, the argument would be dead.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>The Multiverse Wasn't Invented for This</h2>
+<span class="pill">eternal inflation · the string landscape</span>
+<div class="field"><span class="lab">Intuition</span>
+  Water about to boil throws bubbles everywhere; the bubbles grow, and the water keeps boiling — as long as new bubbles don't appear fast enough, there is never a moment when the whole pot turns to steam at once. <a href="cosmic-history-fate-day30.en.html">Inflation</a> is exactly like this: <strong>it ends locally and cannot stop globally.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  Write <var>V</var> for the volume of space still inflating:</div>
+<div class="eq"><var>V</var>(<var>t</var>) ∝ <var>e</var><sup>(3<var>H</var> − <var>Γ</var>)<var>t</var></sup></div>
+<div class="gloss"><var>e</var> is the constant 2.718…, <var>t</var> is time, <var>H</var> is the expansion rate during inflation, and the 3 comes from space being three-dimensional (volume grows as the cube of a length); <var>Γ</var> is read "Gamma" and is the chance of one bubble nucleating per unit volume per unit time. As long as <span class="nowrap"><var>Γ</var> &lt; 3<var>H</var></span> the exponent is positive and <strong>the still-inflating volume grows faster than it decays</strong>. That is the whole content of "eternal": not that it never ends, but that some part of it has always not yet ended.</div>
+<div class="field">Each bubble's interior is a self-contained universe and we live in one of them; the space between bubbles expands faster than the bubbles grow, so <strong>two bubbles generally never meet</strong>. The second clue comes independently from string theory: there are enormously many ways to compactify the extra dimensions, each giving a different vacuum — the figure usually quoted is of order 10<sup>500</sup>. <strong>Different bubbles land in different vacua, so their constants differ</strong> — that is where the ensemble comes from.</div>
+<figure>
+<svg aria-label="Eternal inflation: bubble universes keep nucleating inside a false vacuum that is still inflating exponentially, each landing in a different vacuum with different constants, one of them ours; the space between bubbles expands faster, so bubbles generally never meet" role="img" viewbox="0 0 640 252">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text fill="#8fa0c4" font-size="10.5" text-anchor="end" x="620" y="28">each bubble lands in a different vacuum of the landscape</text>
+<rect fill="#0f1626" height="182" rx="14" stroke="#5b9bff" stroke-dasharray="6 5" stroke-opacity=".7" stroke-width="1.4" width="600" x="20" y="38"></rect>
+<text fill="#5b9bff" font-size="11" x="32" y="58">false vacuum: still inflating, volume doubling and doubling</text>
+<circle cx="110" cy="152" fill="#141b2e" r="42" stroke="#7f8db0" stroke-width="1.8"></circle>
+<text fill="#c3cbe0" font-size="11" text-anchor="middle" x="110" y="150">set A</text>
+<text fill="#8290b4" font-size="10" text-anchor="middle" x="110" y="166">no stars</text>
+<circle cx="252" cy="118" fill="#141b2e" r="31" stroke="#c08ae0" stroke-width="1.8"></circle>
+<text fill="#c3cbe0" font-size="11" text-anchor="middle" x="252" y="116">set B</text>
+<text fill="#8290b4" font-size="10" text-anchor="middle" x="252" y="132">black holes</text>
+<circle cx="392" cy="152" fill="#141b2e" r="48" stroke="#f0ad5a" stroke-width="2.2"></circle>
+<text fill="#f0ad5a" font-size="11.5" font-weight="700" text-anchor="middle" x="392" y="146">our bubble</text>
+<text fill="#c9a878" font-size="10" text-anchor="middle" x="392" y="164">Λ is tiny</text>
+<circle cx="524" cy="110" fill="#141b2e" r="26" stroke="#7f8db0" stroke-width="1.8"></circle>
+<text fill="#c3cbe0" font-size="10.5" text-anchor="middle" x="524" y="114">set C</text>
+<circle cx="574" cy="182" fill="#141b2e" r="11" stroke="#7f8db0" stroke-width="1.5"></circle>
+<text fill="#8290b4" font-size="10" text-anchor="middle" x="574" y="208">just nucleated</text>
+<text fill="#c3cbe0" font-size="11" text-anchor="middle" x="320" y="240">the space between bubbles grows faster than the bubbles do → they generally never meet</text>
+</g>
+</svg>
+<figcaption>Nobody wanted an ensemble and then built a machine to make one; the machine was forced out by two independent lines of argument, and the ensemble is its by-product.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The easiest thing to get wrong: <strong>none of this was added in order to explain fine-tuning</strong>. Eternal inflation came out of "how does inflation end," the landscape out of "how do the extra dimensions fold" — neither was aiming at fine-tuning.<br/>
+  The price is real: outside our bubble is unobservable in principle. The one genuine way in is the circular imprint <strong>left by a neighbouring bubble that once collided with ours</strong>, which would show up as a temperature anomaly of a particular shape in the microwave background. It has been looked for. <strong>Nothing.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · evolution / AI / pharma</span>
+  "Generate a lot, select afterwards" turns "looks designed" into "needs no designer":
+  <ul>
+<li><strong>Evolutionary biology</strong>: an eye looks as intricate as anything designed, yet the mechanism is only vast variation plus differential survival — Darwin spent his whole effort showing "generator + sieve" suffices;</li>
+<li><strong>AI</strong>: architecture search runs hundreds of seeds and structures and keeps whichever survives, and <strong>the failures never make it into the paper</strong>;</li>
+<li><strong>Pharma</strong>: high-throughput screening runs hundreds of thousands of compounds; the hit is what was left over.</li>
+</ul>
+  And the cost is the same in all three: <strong>the explanation moved up one level, it didn't disappear</strong> — the question becomes "why is there a machine that generates assorted constants?"</div>
+<div class="punch">
+<div class="one">In one line: the multiverse isn't an answer prepared for fine-tuning; it is a by-product of theories built for other reasons — one that happens to supply the missing ensemble.</div>
+<details class="q"><summary><b>Think about it:</b> if outside the bubble is forever invisible, is there any difference between many bubbles and one?</summary><div class="qa">None for direct observation, but the two demand different things of <strong>the physics inside our own bubble</strong>: eternal inflation requires a particular shape of potential, which feeds through into the fluctuation spectrum and spatial curvature. The difference isn't whether you can see a bubble, but <strong>whether indirect consequences inside ours can narrow it down</strong>.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Where Speculation Stops Being Physics</h2>
+<span class="pill">falsifiability · the measure problem</span>
+<div class="field"><span class="lab">Intuition</span>
+  "Unobservable" is not a dirty word in physics. A single quark has never been caught on its own, nobody has been down to the Earth's core, and both are hard science — because <strong>their consequences have been pinned down one at a time</strong>. The trouble with the multiverse isn't that bubbles can't be seen; it is something more technical: <strong>at present the probabilities can't even be computed.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  This is the <strong>measure problem</strong>. Eternal inflation makes infinitely many bubbles, so asking "what fraction of observers see a given Λ" requires a way of counting an infinite set — and that depends on how you slice time. Different slicings give fractions that differ arbitrarily, and no choice is agreed on. <strong>No measure, no prediction.</strong> Put in the language of inference:</div>
+<div class="eq"><span class="frac"><span class="fnum"><var>P</var>(A|<var>D</var>)</span><span class="fden"><var>P</var>(B|<var>D</var>)</span></span> = <span class="frac"><span class="fnum"><var>P</var>(A)</span><span class="fden"><var>P</var>(B)</span></span> × <span class="frac"><span class="fnum"><var>P</var>(<var>D</var>|A)</span><span class="fden"><var>P</var>(<var>D</var>|B)</span></span></div>
+<div class="gloss">The bar | reads "given": <var>P</var>(A|<var>D</var>) is how credible theory A is once data <var>D</var> is in. The left side is the ratio of credences after the data, the first term on the right is the ratio before, and the second is the likelihood ratio — every bit of the data's leverage sits there. The crux: <strong>if a theory gives the same <var>P</var>(<var>D</var>|A) whatever <var>D</var> turns out to be, the likelihood ratio is stuck at the digit 1</strong>, and multiplying by it changes nothing. That is the quantitative version of "untestable".</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Both sides of the argument are more restrained than the retellings. One (Ellis and Silk's 2014 appeal in <em>Nature</em>) worries about <strong>the floor</strong>: if "not measurable yet but the theory is beautiful" becomes a pass, the wall comes down. The other (Carroll) argues the criterion was never a single verdict but <strong>whether evidence can move your confidence</strong>.<br/>
+  The workable middle ground is <strong>separate books</strong>: the fluctuation spectrum, spatial flatness and collision imprints are measurable; the distribution of constants outside our bubble is not. <strong>Reporting both in one column is the real problem.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · medicine / earth science / AI</span>
+  "Not directly observable" and "not constrained by evidence" are two different things:
+  <ul>
+<li><strong>Medicine</strong>: you cannot run a randomised controlled trial of smoking on humans; the case rests on dose–response, temporal order, animal work and mechanistic coherence converging — and it holds up;</li>
+<li><strong>Earth science</strong>: nobody has sampled the core, yet seismic velocities, high-pressure experiments and meteorite compositions bracket it narrowly;</li>
+<li><strong>AI</strong>: what a model is "thinking" can't be read off, so behavioural probes and ablations narrow it down piece by piece.</li>
+</ul>
+  None of the three is a single verdict, but <strong>every piece of evidence narrows something</strong>. That is the dividing line: can <em>any</em> observation narrow your framework at all? If yes, it is still in science; if no, it is already somewhere else — even if it happens to be true.</div>
+<div class="punch">
+<div class="one">In one line: the boundary of science isn't "can't be seen", it's "won't change its story whatever gets seen".</div>
+<details class="q"><summary><b>Think about it:</b> why not just shave an untestable theory off with Occam's razor?</summary><div class="qa">Because "simple" depends on what you count. A multiverse has an enormous number of universes but <strong>can have fewer equations</strong> — no separate law needed for each constant. The razor compares assumptions, not entities (otherwise atomism would have been shaved off early); it is a preference under weak evidence, not a verdict.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>How many knobs are actually adjustable?</summary>
+<div class="body">The Standard Model has 19 free parameters (masses, mixing angles, coupling strengths), and adding the dark energy density, the primordial ripple amplitude and a few other cosmological quantities brings it to twenty or thirty. But <strong>only dimensionless combinations count as physics</strong>: α ≈ 1/137, the proton-to-electron mass ratio ≈ 1836 — changing those is a real change. Worse, nobody knows whether they are independent; if three of them turn out to be locked together by a deeper relation, a "triple coincidence" collapses into one. <strong>The number of knobs is itself unknown.</strong></div></details>
+<details><summary>What if someone one day computes the value of Λ?</summary>
+<div class="body">Kepler once used the five Platonic solids to explain why the six planets sat at "just those" orbital radii. After Newton the question vanished — not answered but dissolved: an orbital radius is not a constant of nature, it is an accident of how the solar system formed. Some of today's "constants" may well be that sort of thing. If Λ really gets computed, the multiverse isn't falsified (it has other motivations), but <strong>its fine-tuning motivation is pulled out from under it</strong>. Most "why just so" questions in physics have exited this way.</div></details>
+<details><summary>Does fine-tuning count as evidence that the universe was designed?</summary>
+<div class="body">It is neither evidence nor counter-evidence. To claim "a probability this small can't be an accident" you first need a probability distribution, and that is precisely what is missing; and the design side likewise offers no prediction that observation could narrow — it is equally comfortable with any measurement, its likelihood ratio stuck at 1. Physics can do two things: get the sensitivity of each item on the list right, and test the mechanisms that could actually generate an ensemble. <strong>Past those two, both sides are doing metaphysics.</strong> The same goes for "we are only dust" at the other end — that is a mood, not an inference.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>Weinberg 1987, <a href="https://doi.org/10.1103/PhysRevLett.59.2607">PRL 59, 2607</a> — the anthropic bound on the vacuum energy, where that prediction was made</li>
+<li>Weinberg 1989, <a href="https://doi.org/10.1103/RevModPhys.61.1">Rev. Mod. Phys. 61, 1</a> — the standard review of the cosmological constant problem</li>
+<li>Hoyle 1954, <a href="https://doi.org/10.1086/190005">ApJS 1, 121</a> — inferring the carbon-12 resonance from the fact that carbon exists</li>
+<li>Livio et al. 1989, <a href="https://doi.org/10.1038/340281a0">Nature 340, 281</a> and Epelbaum et al. 2013, <a href="https://doi.org/10.1103/PhysRevLett.110.112502">PRL 110, 112502</a> — the two papers that widened the carbon window</li>
+<li>Tegmark &amp; Rees 1998, <a href="https://doi.org/10.1086/305673">ApJ 499, 526</a> — why the ripple amplitude is 10⁻⁵</li>
+<li>Barnes 2012, <a href="https://doi.org/10.1071/AS12015">PASA 29, 529</a> — the most careful item-by-item audit of the fine-tuning list (the author argues for it)</li>
+<li>Vilenkin 1983, <a href="https://doi.org/10.1103/PhysRevD.27.2848">Phys. Rev. D 27, 2848</a> and Linde 1986, <a href="https://doi.org/10.1016/0370-2693(86)90611-8">Phys. Lett. B 175, 395</a> — the two sources of eternal inflation</li>
+<li>Guth 2007, <a href="https://doi.org/10.1088/1751-8113/40/25/S25">J. Phys. A 40, 6811</a> — eternal inflation and its implications, including the measure problem</li>
+<li>Bousso &amp; Polchinski 2000, <a href="https://doi.org/10.1088/1126-6708/2000/06/006">JHEP 06, 006</a> and Susskind 2003, <a href="https://arxiv.org/abs/hep-th/0302219">hep-th/0302219</a> — the landscape proposed</li>
+<li>Feeney et al. 2011, <a href="https://doi.org/10.1103/PhysRevLett.107.071301">PRL 107, 071301</a> — searching for bubble-collision imprints; no significant evidence</li>
+<li>Ellis &amp; Silk 2014, <a href="https://doi.org/10.1038/516321a">Nature 516, 321</a> and Carroll 2018, <a href="https://arxiv.org/abs/1801.05016">arXiv:1801.05016</a> — both sides of the falsifiability dispute</li>
+<li><a href="https://en.wikipedia.org/wiki/Fine-tuned_universe">Fine-tuned universe</a> / <a href="https://en.wikipedia.org/wiki/Anthropic_principle">Anthropic principle</a> / <a href="https://en.wikipedia.org/wiki/Cosmological_constant_problem">Cosmological constant problem</a> / <a href="https://en.wikipedia.org/wiki/String_theory_landscape">String theory landscape</a> — overview and glossary</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

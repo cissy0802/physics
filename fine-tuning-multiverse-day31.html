@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：精细调节与多重宇宙 · Day 31</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>精细调节与多重宇宙</h1>
+<div class="meta">Day 31 · 2026 · Phase G 宇宙学</div>
+<div class="tagline">把几个常数挪动百分之几，宇宙里就没有恒星、没有碳、没有能读这句话的人。听着像奇迹——可"奇迹"在物理里不能直接用：得先说清概率是对什么算的。</div>
+</header>
+<div class="intro">
+真空能再大一千倍，星系来不及长；轻夸克质量差百分之几，碳合成不出来。这类清单很长，容易读成某种暗示。<b>但"概率这么小不可能是偶然"缺了最要紧的一环：概率总要对一个总体算</b>——骰子扔一万次才谈得上概率，宇宙只有一个，那个概率没有定义。于是只剩两条出路：常数其实不自由，有更深的理论定死它们；或者它们真有一个总体，而我们只能出现在允许我们出现的那些里。<b>两条都难被一次实验判决。</b>
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>「恰好」到底是什么意思 <span class="en">What "Just Right" Actually Claims</span></h2>
+<span class="pill">精细调节 · 自然性</span>
+<div class="field"><span class="lab">直觉</span>
+  一台仪器，每个旋钮都得拧准到小数点后好几位才出图像。第一反应不该是"这机器真幸运"，而是<strong>"旋钮之间一定有我不知道的联动"</strong>。常数的窗口很窄，物理学家想的也是这个：窄不是奇迹，是缺了一条约束。</div>
+<div class="field"><span class="lab">机制</span>
+  最常被摆上台面的三条，第一条也最难受——真空能：</div>
+<div class="eq"><span class="frac"><span class="fnum"><var>ρ</var><sub>Λ</sub>（观测）</span><span class="fden"><var>ρ</var><sub>普朗克</sub></span></span> ≈ 10<sup>−122</sup></div>
+<div class="gloss"><var>ρ</var> 读作「柔」（rho）是能量密度，<var>Λ</var> 读作「拉姆达」（Lambda）指<a href="dark-matter-energy-day29.html">暗能量</a>那一份，分母是把量子引力尺度当自然单位时的密度。10<sup>−122</sup> 是小数点后先写 121 个数字 0（零）才轮到第一个非零位。要点：量子场论最朴素的估计与观测差了一百多个数量级；而<strong>再大一千倍，加速就会在物质聚成星系前把它摊平。</strong></div>
+<div class="field">第二条是原初起伏幅度 <var>Q</var> ≈ 10<sup>−5</sup>（微波背景上那十万分之一的冷热差）：小十倍，气体聚不到能点火的密度；大十倍，团块直接塌成黑洞。第三条在核物理——三个氦核要接成碳，全靠碳-12 在 7.65 兆电子伏处恰好有个共振态，容差是<strong>轻夸克质量百分之几</strong>。</div>
+<figure>
+<svg aria-label="三个参数的可容忍窗口放在同一条对数横轴上：真空能允许更小、上限约为观测值的一百倍；原初起伏幅度允许上下各约十倍；轻夸克质量的窗口只有百分之几，窄到几乎画不出来" role="img" viewbox="0 0 640 254">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="330" y="18">同一把尺子：横轴是「相对观测值差多少倍」</text>
+<line stroke="#f0ad5a" stroke-dasharray="4 4" stroke-width="1.2" x1="370" x2="370" y1="46" y2="228"></line>
+<text fill="#f0ad5a" font-size="11" font-weight="700" text-anchor="middle" x="370" y="38">观测值</text>
+<g>
+<text fill="#dbe1f0" font-size="11.5" x="20" y="76">真空能 Λ</text>
+<text fill="#6f7b9c" font-size="10" x="20" y="92">暗能量密度</text>
+<line stroke="#3a4463" stroke-width="1" x1="140" x2="600" y1="80" y2="80"></line>
+<rect fill="#5b9bff" fill-opacity=".18" height="22" stroke="#5b9bff" stroke-opacity=".5" stroke-width="1" width="307" x="140" y="69"></rect>
+<text fill="#8fa0c4" font-size="10.5" x="140" y="60">更小都无妨；大到 ×100 以上就没有星系</text>
+</g>
+<g>
+<text fill="#dbe1f0" font-size="11.5" x="20" y="146">原初起伏 Q</text>
+<text fill="#6f7b9c" font-size="10" x="20" y="162">≈ 10⁻⁵</text>
+<line stroke="#3a4463" stroke-width="1" x1="140" x2="600" y1="150" y2="150"></line>
+<rect fill="#5b9bff" fill-opacity=".18" height="22" stroke="#5b9bff" stroke-opacity=".5" stroke-width="1" width="77" x="332" y="139"></rect>
+<text fill="#8fa0c4" font-size="10.5" x="140" y="130">上下各约十倍；过小无结构，过大全成黑洞</text>
+</g>
+<g>
+<text fill="#dbe1f0" font-size="11.5" x="20" y="212">轻夸克质量</text>
+<text fill="#6f7b9c" font-size="10" x="20" y="228">决定核力强弱</text>
+<line stroke="#3a4463" stroke-width="1" x1="140" x2="600" y1="216" y2="216"></line>
+<rect fill="#f0ad5a" fill-opacity=".55" height="22" stroke="#f0ad5a" stroke-width="1" width="5" x="368" y="205"></rect>
+<text fill="#8fa0c4" font-size="10.5" x="140" y="196">只有百分之几，窄到画不出来：碳合不成</text>
+</g>
+<g stroke="#3a4463" stroke-width="1">
+<line x1="140" x2="140" y1="216" y2="222"></line><line x1="217" x2="217" y1="216" y2="222"></line>
+<line x1="293" x2="293" y1="216" y2="222"></line><line x1="447" x2="447" y1="216" y2="222"></line>
+<line x1="523" x2="523" y1="216" y2="222"></line><line x1="600" x2="600" y1="216" y2="222"></line>
+</g>
+<g fill="#6f7b9c" font-size="9.5" text-anchor="middle">
+<text x="140" y="246">×10⁻⁶</text><text x="217" y="246">×10⁻⁴</text><text x="293" y="246">×10⁻²</text>
+<text x="447" y="246">×10²</text><text x="523" y="246">×10⁴</text><text x="600" y="246">×10⁶</text>
+</g>
+</g>
+</svg>
+<figcaption>三个窗口宽得很不一样——而每一条的宽度，都是在「其余旋钮全不动」的前提下算出来的。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  精细调节<strong>不是观测量，而是关于模型的陈述</strong>，它自带两个可撬动的前提。一是<strong>只动一个旋钮</strong>：允许几个参数一起变，窗口常明显变宽。二是<strong>先验测度没有定义</strong>——说"Λ 在 0 到普朗克密度之间均匀所以极不可能"，是偷偷选了一种分布，换成对量级均匀就不再稀奇。碳那条窗口早年被讲成千分之四，后来一路修宽。<br/>
+  但折扣打完，<strong>真空能那条仍然刺眼</strong>：它只要求星系存在，理论却错了一百多个数量级。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 工程 / AI / 统计</span>
+  "必须精调才能工作"在任何行当里都是<strong>缺一层负反馈</strong>的信号：
+  <ul>
+<li><strong>工程</strong>：运放把开环增益做到极大再引回反馈，增益只由两个电阻的<em>比值</em>决定——靠反馈吃掉灵敏度，不靠元件精确；</li>
+<li><strong>AI</strong>：早期网络对学习率与初始化极敏感，归一化与自适应优化器不是让模型更幸运，是消化掉了这份敏感度；</li>
+<li><strong>统计建模</strong>：换个先验就翻结论的模型没人敢用。</li>
+</ul>
+<strong>灵敏度高通常说明缺一层机制，不是中了大奖。</strong></div>
+<div class="punch">
+<div class="one">一句话：常数的窗口窄，首先是我们的理论在报警，不是宇宙在报喜。</div>
+<details class="q"><summary><b>思考：</b>「如果光速大一点会怎样」是个好问题吗？</summary><div class="qa">不是。光速的数值取决于用米还是别的单位，改它等于换尺子，物理不变。只有<strong>无量纲比值</strong>才有意义——质子与电子的质量比、α ≈ 1/137。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>选择效应能不能算解释 <span class="en">Can a Selection Effect Count as an Explanation</span></h2>
+<span class="pill">人择原理 · 1974 / 1987</span>
+<div class="field"><span class="lab">直觉</span>
+  在池塘里随便挑地方量水深，你量到的永远不深——你得站得住才量得成。观测者本身就是筛子。<strong>弱人择原理只说这一句：我们测到的条件必然落在允许观测者存在的那一段里</strong>——是对已有总体的条件化，不是一种新的力。而"宇宙必须允许观察者"不导出任何可测的东西。</div>
+<div class="field"><span class="lab">机制</span>
+  Weinberg 1987 年把这条筛子做成了可算的：</div>
+<div class="eq"><var>P</var><sub>看到</sub>(<var>Λ</var>) ∝ <var>P</var><sub>先验</sub>(<var>Λ</var>) × <var>N</var><sub>观察者</sub>(<var>Λ</var>)</div>
+<div class="gloss">∝ 读作"正比于"；<var>P</var><sub>先验</sub> 是这个 <var>Λ</var> 值在总体里出现得有多频繁，<var>N</var><sub>观察者</sub> 是该值下能长出多少星系、因而有多少观察者。关键是右边这项<strong>会归零</strong>：<var>Λ</var> 大过某个阈值，星系就来不及形成，<span class="nowrap"><var>N</var> = <span class="zero">0</span></span>（数字零）——不是概率小，是没人在那里数。</div>
+<figure>
+<svg aria-label="Weinberg 加权论证的三步：先验权重随真空能上升，星系形成效率在阈值处骤降到零，两者相乘得到的观察者分布在阈值下方形成尖峰，观测值就落在峰附近" role="img" viewbox="0 0 640 228">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<g fill="#5b9bff" font-size="11.5" text-anchor="middle">
+<text x="108" y="38">① 先验权重</text><text x="320" y="38">② 星系形成效率</text><text x="532" y="38">③ 相乘＝观察者分布</text>
+</g>
+<rect fill="#0f1626" height="124" stroke="#26314c" stroke-width="1" width="168" x="24" y="52"></rect>
+<rect fill="#0f1626" height="124" stroke="#26314c" stroke-width="1" width="168" x="236" y="52"></rect>
+<rect fill="#0f1626" height="124" stroke="#26314c" stroke-width="1" width="168" x="448" y="52"></rect>
+<polyline fill="none" points="36,164 180,72" stroke="#7f8db0" stroke-width="2.4"></polyline>
+<polyline fill="none" points="248,74 332,74 348,86 362,150 370,166 392,166" stroke="#7f8db0" stroke-width="2.4"></polyline>
+<polyline fill="none" points="460,162 518,142 548,98 562,72 570,120 578,166 604,166" stroke="#5b9bff" stroke-width="2.6"></polyline>
+<line stroke="#f0ad5a" stroke-dasharray="4 4" stroke-width="1.2" x1="548" x2="548" y1="166" y2="60"></line>
+<circle cx="548" cy="98" fill="#f0ad5a" r="4.2"></circle>
+<text fill="#f0ad5a" font-size="10.5" font-weight="700" text-anchor="end" x="542" y="78">观测值</text>
+<text fill="#56607e" font-size="17" text-anchor="middle" x="214" y="122">×</text>
+<text fill="#56607e" font-size="17" text-anchor="middle" x="426" y="122">＝</text>
+<g fill="#6f7b9c" font-size="10" text-anchor="middle">
+<text x="108" y="190">Λ（对数刻度）→</text><text x="320" y="190">Λ（对数刻度）→</text><text x="532" y="190">Λ（对数刻度）→</text>
+</g>
+<g fill="#96a0ba" font-size="10" text-anchor="middle">
+<text x="108" y="206">把 Λ 当自由参数，</text><text x="108" y="220">每往右一格取值多 10 倍</text>
+<text x="320" y="206">超过某个 Λ，</text><text x="320" y="220">膨胀太快，星系来不及长</text>
+<text x="532" y="206">峰值紧贴阈值下方，</text><text x="532" y="220">观测值就落在这一带</text>
+</g>
+</g>
+</svg>
+<figcaption>两条平淡的曲线相乘，逼出一个尖峰：不在零附近，而在"还能有星系"的边缘上。</figcaption>
+</figure>
+<div class="field">不显眼的关键在这里：<strong>先验若在 Λ 上均匀，画到对数轴上就是往右上升的</strong>——越大的量级里塞得下越多取值。于是峰不落在 Λ = 0（数字零），而紧贴阈值下方。Weinberg 由此推断 Λ 应当<strong>不为零、且不远小于阈值</strong>；1998 年测出的值确实落在他的窗口里。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  争议的位置常被放错。<strong>选择效应本身是硬科学</strong>，天文学每天都在定量改正它。软肋在于那个乘法要两样东西：<strong>真实存在的总体</strong>与<strong>写得下来的先验</strong>。没有总体，条件化就是空转。Weinberg 那次也靠假设撑着：<strong>是一次真预言，不是判决性证据。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 统计 / 医学 / 天文 / AI</span>
+  "样本是被筛过的"，每个学科都栽过跟头：
+  <ul>
+<li><strong>统计</strong>：Wald 看返航飞机的弹孔分布，结论是该加固<em>没有</em>弹孔的部位——被打中那儿的飞机没回来；</li>
+<li><strong>天文</strong>：Malmquist 偏倚——越远只看得见越亮的星，样本平均亮度被抬高，星表必须逐条改正；</li>
+<li><strong>AI</strong>：只在晴天照片上训练的检测器雨夜失灵——它学到的是采集数据的筛子。</li>
+</ul>
+  分水岭很清楚：<strong>写得出"筛子函数"，选择效应就能定量改正</strong>；人择论至今写不出那个函数。</div>
+<div class="punch">
+<div class="one">一句话：观测者是筛子毫无疑问；难的是既不知道总体有多大，也不知道筛孔什么形状。</div>
+<details class="q"><summary><b>思考：</b>「只有允许我们存在的宇宙才被我们看到」——这不是废话吗？</summary><div class="qa">单说这句是废话，配上一个有分布的总体就不是："Λ 应当非零且接近阈值"就是能被推翻的话——若测到的 Λ 精确为零、或比阈值小上百万倍，论证就死了。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>多重宇宙不是为解释精调才发明的 <span class="en">The Multiverse Wasn't Invented for This</span></h2>
+<span class="pill">永恒暴胀 · 弦景观</span>
+<div class="field"><span class="lab">直觉</span>
+  水快烧开时锅里到处冒泡，泡在长大，水还在沸——只要新泡冒得不够快，就没有"全锅同时变成蒸汽"的那一刻。<a href="cosmic-history-fate-day30.html">暴胀</a>正是这样：<strong>它在局部结束，在整体上停不下来。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  把还在暴胀的那部分空间体积记作 <var>V</var>：</div>
+<div class="eq"><var>V</var>(<var>t</var>) ∝ <var>e</var><sup>(3<var>H</var> − <var>Γ</var>)<var>t</var></sup></div>
+<div class="gloss"><var>e</var> 是自然常数 2.718…，<var>t</var> 是时间，<var>H</var> 是暴胀期的膨胀率，3 来自三维空间（体积按线度的三次方长）；<var>Γ</var> 读作「伽马」（Gamma），是单位体积单位时间冒出一个泡的概率。只要 <span class="nowrap"><var>Γ</var> &lt; 3<var>H</var></span>，指数为正，<strong>还在暴胀的体积越衰变越多</strong>。这就是"永恒"的全部含义：不是永远不结束，是永远还有没结束的部分。</div>
+<div class="field">每个泡内部是一个自足的宇宙，我们住在其中一个里；泡间的空间膨胀得比泡长大更快，<strong>两个泡一般永不相遇</strong>。第二条线索独立地来自弦论：紧化额外维的方式极多，每种给出一个不同的真空，常被引的量级是 10<sup>500</sup>。<strong>不同的泡落在不同真空里，常数因而不同</strong>——总体是这么来的。</div>
+<figure>
+<svg aria-label="永恒暴胀示意：仍在指数膨胀的假真空背景里不断成核出泡泡宇宙，每个泡落在不同真空、常数各异，其中一个是我们的宇宙；泡间空间膨胀更快，泡泡一般永不相遇" role="img" viewbox="0 0 640 252">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif">
+<text fill="#8fa0c4" font-size="10.5" text-anchor="end" x="620" y="28">每个泡落在弦景观的不同真空里，常数各不相同</text>
+<rect fill="#0f1626" height="182" rx="14" stroke="#5b9bff" stroke-dasharray="6 5" stroke-opacity=".7" stroke-width="1.4" width="600" x="20" y="38"></rect>
+<text fill="#5b9bff" font-size="11" x="32" y="58">假真空：仍在指数膨胀，体积不断翻倍</text>
+<circle cx="110" cy="152" fill="#141b2e" r="42" stroke="#7f8db0" stroke-width="1.8"></circle>
+<text fill="#c3cbe0" font-size="11" text-anchor="middle" x="110" y="150">组合 A</text>
+<text fill="#8290b4" font-size="10" text-anchor="middle" x="110" y="166">没有恒星</text>
+<circle cx="252" cy="118" fill="#141b2e" r="31" stroke="#c08ae0" stroke-width="1.8"></circle>
+<text fill="#c3cbe0" font-size="11" text-anchor="middle" x="252" y="116">组合 B</text>
+<text fill="#8290b4" font-size="10" text-anchor="middle" x="252" y="132">全是黑洞</text>
+<circle cx="392" cy="152" fill="#141b2e" r="48" stroke="#f0ad5a" stroke-width="2.2"></circle>
+<text fill="#f0ad5a" font-size="11.5" font-weight="700" text-anchor="middle" x="392" y="146">我们这个泡</text>
+<text fill="#c9a878" font-size="10" text-anchor="middle" x="392" y="164">Λ 恰好极小</text>
+<circle cx="524" cy="110" fill="#141b2e" r="26" stroke="#7f8db0" stroke-width="1.8"></circle>
+<text fill="#c3cbe0" font-size="10.5" text-anchor="middle" x="524" y="114">组合 C</text>
+<circle cx="574" cy="182" fill="#141b2e" r="11" stroke="#7f8db0" stroke-width="1.5"></circle>
+<text fill="#8290b4" font-size="10" text-anchor="middle" x="574" y="208">刚成核</text>
+<text fill="#c3cbe0" font-size="11" text-anchor="middle" x="320" y="240">泡之间的空间膨胀得比泡长大更快 → 两个泡一般永不相遇，谁也观测不到谁</text>
+</g>
+</svg>
+<figcaption>不是先要一个总体、再去造一个机制；是机制先被两条独立的线索推出来，总体是它的副产品。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  最容易误解的一点：<strong>这不是为解释精调而加设的</strong>。永恒暴胀出自"暴胀怎么收场"，弦景观出自"额外维怎么卷"，都不冲着精调去。<br/>
+  代价也硬：泡外原则上观测不到。唯一实打实的入口是<strong>邻泡曾与我们碰撞</strong>留下的圆形印记，它会在微波背景上表现为特定的温度异常。找过了，<strong>没有</strong>。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 进化 / AI / 制药</span>
+  "大量生成 + 事后筛选"能把"看起来像被设计的"变成"不需要设计者"：
+  <ul>
+<li><strong>进化生物学</strong>：眼睛精巧得像被设计，机制却只是海量变异加差别存活——达尔文全部力气都花在证明"生成器 + 筛子"够用；</li>
+<li><strong>AI</strong>：神经架构搜索跑几百个种子与结构，只留活下来那个，<strong>失败样本不进论文</strong>；</li>
+<li><strong>制药</strong>：高通量筛选一次过几十万个化合物，命中那个是被剩下来的。</li>
+</ul>
+  代价三处相同：<strong>解释往上挪了一层，没有消失</strong>——问题变成"为什么有一台会生成各种常数的机器"。</div>
+<div class="punch">
+<div class="one">一句话：多重宇宙不是为精调准备的答案，是别处理论的副产品——它顺手提供了那个缺失的总体。</div>
+<details class="q"><summary><b>思考：</b>泡外永远看不到，那"很多泡"和"只有一个泡"有区别吗？</summary><div class="qa">对直接观测没区别，但两者对<strong>本泡内的物理</strong>要求不同：永恒暴胀需要特定形状的势能，会连带影响涨落谱与空间曲率。区别不在能否看见泡，而在<strong>能否被泡内的后果收窄</strong>。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>哪里是思辨的边界 <span class="en">Where Speculation Stops Being Physics</span></h2>
+<span class="pill">可证伪性 · 测度问题</span>
+<div class="field"><span class="lab">直觉</span>
+  "看不见"在物理里不是脏词。单个夸克从没被单独抓到过，地核没人下去看过，它们照样是硬科学——因为<strong>后果被一条条卡住了</strong>。多重宇宙的麻烦不是"看不见泡"，而是更技术性的一层：<strong>连概率都算不出来。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  这叫<strong>测度问题</strong>。永恒暴胀里泡的数量无限，要问"多大比例的观察者看到某个 Λ 值"，就得给无限集合定个数法——而这依赖你怎么切时间片，不同切法的比例差距可以任意大，至今没有公认选法。<strong>没有测度，就没有预言。</strong>写成推断的语言：</div>
+<div class="eq"><span class="frac"><span class="fnum"><var>P</var>(A|<var>D</var>)</span><span class="fden"><var>P</var>(B|<var>D</var>)</span></span> = <span class="frac"><span class="fnum"><var>P</var>(A)</span><span class="fden"><var>P</var>(B)</span></span> × <span class="frac"><span class="fnum"><var>P</var>(<var>D</var>|A)</span><span class="fden"><var>P</var>(<var>D</var>|B)</span></span></div>
+<div class="gloss">竖线 | 读作"在……条件下"：<var>P</var>(A|<var>D</var>) 是看到数据 <var>D</var> 后理论 A 的可信度。左边是看完数据后两个理论的可信度之比，右边第一项是看之前的，第二项叫似然比——数据全部的作用力都在这一项。要害是：<strong>若一个理论无论 <var>D</var> 是什么都给出同样的 <var>P</var>(<var>D</var>|A)，似然比恒为数字 1（一）</strong>，乘上去什么也没变。这就是"不可检验"的定量版本。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  争论双方都比转述中更克制。一边（Ellis 与 Silk 2014 年在《自然》上的呼吁）担心<strong>底线</strong>：若"暂时测不到但理论很美"能当通行证，界墙就塌了。另一边（Carroll）主张判据不该是单次判决，而是<strong>能否被证据改变置信度</strong>。<br/>
+  中间地带是<strong>分开记账</strong>：涨落谱、空间平坦度、碰撞印记可测；泡外的常数分布不可测。<strong>把两笔账混着报，才是真正的问题。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 医学 / 地球科学 / AI</span>
+  "无法直接观测"与"无法被证据约束"是两件事：
+  <ul>
+<li><strong>医学</strong>：吸烟致癌不可能做人体随机对照试验，靠剂量—反应关系、时序、动物实验、机制一致性收敛，结论照样牢固；</li>
+<li><strong>地球科学</strong>：地核成分没人取样过，靠地震波速、高压实验、陨石成分合围到很窄的范围；</li>
+<li><strong>AI</strong>：模型内部"想什么"读不出来，靠行为探针与消融实验收窄。</li>
+</ul>
+  三例都不是单次判决，但<strong>每条证据都在收窄</strong>。分界线就在这里：你的框架能不能被<em>任何</em>观测收窄一点。能，它还在科学里；不能，它已在别处——哪怕它是对的。</div>
+<div class="punch">
+<div class="one">一句话：科学的边界不在"看不见"，而在"无论看到什么都不改口"。</div>
+<details class="q"><summary><b>思考：</b>测不出来的理论，为什么不干脆用奥卡姆剃刀剃掉？</summary><div class="qa">因为"简单"要看数的是什么。多重宇宙的宇宙数量极多，但<strong>方程可以更少</strong>——不必为每个常数补一条定律。剃刀比的是假设条数，不是实体个数（否则原子论早该被剃掉），它只是证据不足时的偏好。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>到底有几个旋钮真的可调？</summary>
+<div class="body">标准模型有 19 个自由参数（质量、混合角、耦合强度等），加上暗能量密度、原初起伏幅度等几个宇宙学量，量级是二三十个。但<strong>只有无量纲的组合才算物理</strong>：α ≈ 1/137、质子与电子质量比 ≈ 1836，改这些才是真改。更麻烦的是没人知道它们是否独立——若发现三个参数被一条更深的关系锁在一起，"三重巧合"当场缩成一个。<strong>旋钮的数目本身就是未知量。</strong></div></details>
+<details><summary>如果哪天有人算出了 Λ 的值呢？</summary>
+<div class="body">开普勒曾用五种柏拉图立体解释六颗行星轨道半径为何"恰好"如此。牛顿之后这问题消失了——不是被解答，是被解散：轨道半径不是自然常数，是太阳系形成史的偶然。今天的"常数"里很可能也混着这类东西。真算出了 Λ，多重宇宙不会被证伪（它另有动机），但<strong>解释精调的那份动机会被抽掉</strong>。物理史上大多数"为什么恰好"都是这么退场的。</div></details>
+<details><summary>精细调节算「宇宙被设计」的证据吗？</summary>
+<div class="body">既不算证据，也不算反证。要主张"概率这么小不可能是偶然"，先得有概率分布，而这正是缺的那一环；"设计"那一侧同样没给出能被观测收窄的预言——它对任何测量结果都一样自在，似然比恒为 1。物理能做的有两件：把每条的敏感度算准，以及检验真能生成总体的机制。<strong>超出这两件的，两边都在做形而上学。</strong>另一头的"我们只是尘埃"也一样，那是情绪，不是推论。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>Weinberg 1987，<a href="https://doi.org/10.1103/PhysRevLett.59.2607">PRL 59, 2607</a>——真空能的人择上限，那次预言的出处</li>
+<li>Weinberg 1989，<a href="https://doi.org/10.1103/RevModPhys.61.1">Rev. Mod. Phys. 61, 1</a>——《宇宙学常数问题》的标准综述</li>
+<li>Hoyle 1954，<a href="https://doi.org/10.1086/190005">ApJS 1, 121</a>——从"宇宙里有碳"逆推碳-12 的共振态</li>
+<li>Livio et al. 1989，<a href="https://doi.org/10.1038/340281a0">Nature 340, 281</a> 与 Epelbaum et al. 2013，<a href="https://doi.org/10.1103/PhysRevLett.110.112502">PRL 110, 112502</a>——把碳那条窗口算宽的两次工作</li>
+<li>Tegmark &amp; Rees 1998，<a href="https://doi.org/10.1086/305673">ApJ 499, 526</a>——原初起伏幅度为何是 10⁻⁵</li>
+<li>Barnes 2012，<a href="https://doi.org/10.1071/AS12015">PASA 29, 529</a>——精调清单最细致的逐条盘点（作者持支持立场）</li>
+<li>Vilenkin 1983，<a href="https://doi.org/10.1103/PhysRevD.27.2848">Phys. Rev. D 27, 2848</a> 与 Linde 1986，<a href="https://doi.org/10.1016/0370-2693(86)90611-8">Phys. Lett. B 175, 395</a>——永恒暴胀的两篇源头</li>
+<li>Guth 2007，<a href="https://doi.org/10.1088/1751-8113/40/25/S25">J. Phys. A 40, 6811</a>——永恒暴胀及其后果，含测度问题</li>
+<li>Bousso &amp; Polchinski 2000，<a href="https://doi.org/10.1088/1126-6708/2000/06/006">JHEP 06, 006</a> 与 Susskind 2003，<a href="https://arxiv.org/abs/hep-th/0302219">hep-th/0302219</a>——弦景观的提出</li>
+<li>Feeney et al. 2011，<a href="https://doi.org/10.1103/PhysRevLett.107.071301">PRL 107, 071301</a>——搜索泡泡碰撞印记，未发现显著证据</li>
+<li>Ellis &amp; Silk 2014，<a href="https://doi.org/10.1038/516321a">Nature 516, 321</a> 与 Carroll 2018，<a href="https://arxiv.org/abs/1801.05016">arXiv:1801.05016</a>——可证伪性之争的正反两方</li>
+<li><a href="https://en.wikipedia.org/wiki/Fine-tuned_universe">Fine-tuned universe</a>／<a href="https://en.wikipedia.org/wiki/Anthropic_principle">Anthropic principle</a>／<a href="https://en.wikipedia.org/wiki/Cosmological_constant_problem">Cosmological constant problem</a>／<a href="https://en.wikipedia.org/wiki/String_theory_landscape">String theory landscape</a>——总览与词表</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
