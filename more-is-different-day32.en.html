@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: More Is Different · Day 32</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>More Is Different</h1>
+<div class="meta">Day 32 · 2026 · Phase H Condensed Matter &amp; Emergence</div>
+<div class="tagline">Push reductionism all the way down and you get a complete parts list — and a world you cannot read off it.</div>
+</header>
+<div class="intro">
+Everything so far has been digging downward: matter into atoms, atoms into quarks, spacetime into geometry. This one turns around. The four words P. W. Anderson published in 1972 — <b>More is Different</b> — get quoted as a slogan, but they are a hard technical claim: <b>levels are not related as "simple" to "complicated"; each level has laws of its own that cannot be derived from the level beneath it</b>. Harder still, "more" really does manufacture something new in the mathematics — a phase transition, strictly speaking, <b>exists only in an infinite system</b>.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Taking Apart Is Not Putting Back Together <span class="en">Reduction Works, Construction Fails</span></h2>
+<span class="pill">Anderson · 1972</span>
+<div class="field"><span class="lab">Intuition</span>
+  Disassemble a piano down to the last screw and the inventory is complete, not one part missing. From that inventory you still cannot derive Chopin. Physics has long carried an implicit ranking: particle physics is the "fundamental" one, condensed matter is its application, biology further down the ladder. Anderson's paper was aimed squarely at that ranking.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  He split the question into two arrows. The <strong>reduction arrow (downward)</strong>: anything can in principle be taken apart into more basic constituents — this one he accepts without reservation. The <strong>construction arrow (upward)</strong>: starting from those constituents and their laws, rebuild the phenomena of the level above — this one keeps breaking. It breaks not because the computation is too big (that would be mere engineering) but because a <strong>new organizing principle</strong> has appeared upstairs: the microscopic laws contain no notion of "which direction," every direction being equivalent, yet a magnet picks one. The act of choosing simply has no entry in the vocabulary below.</div>
+<figure>
+<svg aria-label="Ladder of levels: the reduction arrow holds, the construction arrow breaks" role="img" viewBox="0 0 660 300">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="11.5">
+<text fill="#96a0ba" x="184" y="20">Level</text>
+<text fill="#96a0ba" x="345" y="20">Concepts born at this level</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="320" x="170" y="30"></rect>
+<text fill="#dbe2f2" x="184" y="50">Particles · fields</text>
+<text fill="#7db0ff" x="345" y="50">charge, spin</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="320" x="170" y="70"></rect>
+<text fill="#dbe2f2" x="184" y="90">Atoms · molecules</text>
+<text fill="#7db0ff" x="345" y="90">bond, valence</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="320" x="170" y="110"></rect>
+<text fill="#dbe2f2" x="184" y="130">Many bodies · solids</text>
+<text fill="#7db0ff" x="345" y="130">temperature, phase</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="320" x="170" y="150"></rect>
+<text fill="#dbe2f2" x="184" y="170">Cells · molecular biology</text>
+<text fill="#7db0ff" x="345" y="170">metabolism, heredity</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="320" x="170" y="190"></rect>
+<text fill="#dbe2f2" x="184" y="210">Nervous systems</text>
+<text fill="#7db0ff" x="345" y="210">perception, memory</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="320" x="170" y="230"></rect>
+<text fill="#dbe2f2" x="184" y="250">Societies · economies</text>
+<text fill="#7db0ff" x="345" y="250">price, norm</text>
+<line stroke="#5b9bff" stroke-width="2" x1="112" x2="112" y1="30" y2="252"></line>
+<polygon fill="#5b9bff" points="106,252 118,252 112,266"></polygon>
+<text fill="#7db0ff" text-anchor="middle" transform="rotate(-90 90 145)" x="90" y="145">reduction: takes apart ✓</text>
+<line stroke="#f0ad5a" stroke-dasharray="6 5" stroke-width="2" x1="548" x2="548" y1="260" y2="48"></line>
+<polygon fill="#f0ad5a" points="542,48 554,48 548,34"></polygon>
+<text fill="#f0ad5a" text-anchor="middle" transform="rotate(90 576 145)" x="576" y="145">construction: fails ✗</text>
+</g>
+</svg>
+<figcaption>Every level up brings concepts the level below has no words for.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Anderson is not an anti-reductionist — he is prying apart "<strong>fundamental</strong>" and "<strong>deep</strong>." Particle physics hunts for the bottom-level alphabet, which is fundamental; but at every level up, an old symmetry breaks and new laws take the stage, and those laws are not corollaries of the old ones. His much-quoted line: <strong>many-body physics is not applied particle physics, any more than particle physics is applied mathematics.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Engineering / Biology / AI</span>
+  The broken upward arrow plays out identically elsewhere:
+  <ul>
+<li><strong>Engineering</strong>: hand someone the truth tables of every logic gate in a CPU and they still cannot derive "deadlock" — nothing at the transistor level is called "waiting on each other";</li>
+<li><strong>Biology</strong>: hand them an organism's complete base-pair sequence and they cannot read off whether it fears snakes — fear lives in how the neural circuit is wired;</li>
+<li><strong>AI</strong>: hand them every weight in a model and they cannot read off whether it can add three-digit numbers. Mechanistic interpretability exists precisely because this upward arrow is broken, leaving us to dig back down like archaeologists.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: reduction holds, construction fails — emergence lives in that gap.</div>
+<details class="q"><summary><b>Think:</b> If the broken upward arrow were merely "not enough compute" rather than a matter of principle, what would be left of More Is Different?</summary><div class="qa">Plenty. Even if you could compute it, what you get is <strong>the answer for one particular system</strong>, not a transferable law. And some behavior is <strong>incompressible</strong>: there is no shortcut past stepping through the evolution — in which case "simulating" and "understanding" are not the same thing.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Kink Only Infinity Can Make <span class="en">Sharpness Lives Only in the Limit</span></h2>
+<span class="pill">Thermodynamic limit · Yang–Lee 1952</span>
+<div class="field"><span class="lab">Intuition</span>
+  Water boiling at 100 ℃ looks like a crisp, decisive "suddenly." Run the same experiment on twenty water molecules and there is no suddenness anywhere: heat them and they simply get livelier, with no point at which something changes in kind. Where did the kink go? The answer is slightly unnerving — <strong>it exists strictly only when the number of molecules goes to infinity</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  In statistical mechanics every macroscopic quantity comes out of the <strong>partition function</strong> <var>Z</var>, and the bridge is the free energy:
+  <div class="eq"><var>F</var> = − <var>k</var><var>T</var> ln <var>Z</var></div>
+<div class="gloss"><var>F</var> is the <strong>free energy</strong> (the quantity a system "wants" to slide downhill in); <var>k</var> is the <strong>Boltzmann constant</strong>, the exchange rate converting temperature into energy; <var>T</var> is absolute temperature; <strong>ln</strong> is the natural logarithm (lowercase letter l plus n, not the digit 1); <var>Z</var> sums every possible microscopic state, weighted by its energy.</div>
+  Everything hinges on the structure of <var>Z</var>: for a finite particle number <var>N</var> there are only <strong>finitely many</strong> microstates, so <var>Z</var> is a sum of finitely many exponentials — each smooth, the sum still smooth, and always positive, so its logarithm is smooth too. Hence <strong>the free energy of a finite system is smooth everywhere and cannot have a kink</strong>; yet a phase transition is <em>defined</em> as some derivative of the free energy going <strong>non-smooth</strong> (jumping or diverging). So finite <var>N</var> → mathematically no phase transition; only <var>N</var> → ∞ (the <strong>thermodynamic limit</strong>; ∞ is the infinity sign, not a toppled 8) permits a singularity. Yang and Lee sharpened this in 1952: the zeros of the partition function hide off in the complex plane, and only in the infinite limit do they crowd onto the real axis and pinch out that kink.</div>
+<figure>
+<svg aria-label="Magnetization curves for finite particle number versus the infinite limit" role="img" viewBox="0 0 660 252">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#56607e" stroke-width="1.5" x1="80" x2="80" y1="210" y2="32"></line>
+<polygon fill="#56607e" points="74,34 86,34 80,22"></polygon>
+<line stroke="#56607e" stroke-width="1.5" x1="80" x2="568" y1="210" y2="210"></line>
+<polygon fill="#56607e" points="568,204 568,216 582,210"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" transform="rotate(-90 34 118)" x="34" y="118">magnetization M</text>
+<text fill="#96a0ba" font-size="11.5" x="170" y="232">temperature T</text>
+<line stroke="#6a5326" stroke-dasharray="4 4" stroke-width="1.2" x1="400" x2="400" y1="44" y2="210"></line>
+<text fill="#c99a4e" font-size="11.5" text-anchor="middle" x="432" y="232">critical temperature</text>
+<path d="M 95,76 C 200,96 292,126 352,152 C 404,174 462,186 560,191" fill="none" stroke="#96a0ba" stroke-width="2"></path>
+<path d="M 95,64 C 190,72 300,96 352,128 C 382,154 404,182 432,192 C 472,197 515,198 560,198" fill="none" stroke="#5b9bff" stroke-width="2"></path>
+<path d="M 95,56 C 190,62 300,82 350,114 C 375,138 388,172 400,204 L 560,204" fill="none" stroke="#f0ad5a" stroke-width="2.6"></path>
+<line stroke="#f0ad5a" stroke-width="2.6" x1="420" x2="452" y1="46" y2="46"></line>
+<text fill="#f0ad5a" x="460" y="50">N → ∞ (a true kink)</text>
+<line stroke="#5b9bff" stroke-width="2" x1="420" x2="452" y1="70" y2="70"></line>
+<text fill="#7db0ff" x="460" y="74">large N (steeper)</text>
+<line stroke="#96a0ba" stroke-width="2" x1="420" x2="452" y1="94" y2="94"></line>
+<text fill="#96a0ba" x="460" y="98">small N (smooth throughout)</text>
+</g>
+</svg>
+<figcaption>More particles, steeper curve — but "steep" is never "kinked." The corner is born only in the limit.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  This is the hardest version of More Is Different: not rhetoric, mathematics. <strong>The new property does not "show up" at some sufficiently large <var>N</var> — it shows up in the limit.</strong> No real system is truly infinite; 10²³ is merely "close enough to infinity," so an actual phase transition is an extremely steep but still smooth curve. The honest statement: the emergent property leans on an <strong>idealization</strong> — and the idealization cannot be dropped, because dropping it deletes the entire vocabulary of phase, critical point and order parameter.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI / Materials / Society</span>
+  The same ruler, applied elsewhere:
+  <ul>
+<li><strong>AI</strong>: the argument over "emergent abilities" in large models is exactly what this ruler is for. Many so-called emergent abilities turn back into gradual improvement once the metric is made continuous and smooth — the jump came from all-or-nothing scoring (Schaeffer et al., 2023, the "Mirage" paper). Physics supplies the criterion: real emergence should stay sharp <strong>under a change of metric</strong>;</li>
+<li><strong>Materials</strong>: the melting point of a nanoparticle drifts with its radius, and down at a few hundred atoms the very concept of "melting" starts to blur;</li>
+<li><strong>Society</strong>: three people have opinions, not "public opinion"; only at scale does something measurable appear that has a tipping point and can flip as a whole.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the kink is a gift from infinity, and the finite world has only borrowed an excellent approximation of it.</div>
+<details class="q"><summary><b>Think:</b> Since every real system is finite, isn't "phase transitions strictly don't exist" just pedantry?</summary><div class="qa">No — it makes the provenance of the approximation explicit. Once you accept that the kink comes from the limit, you know <strong>when the approximation fails</strong>: in small systems, thin films and short experiments the transition gets rounded off and measured critical exponents drift. That is exactly what finite-size scaling analysis does for a living.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Effective Degrees of Freedom: From 10²³ Numbers to a Handful <span class="en">What Survives Coarse-Graining</span></h2>
+<span class="pill">Order parameter · quasiparticles</span>
+<div class="field"><span class="lab">Intuition</span>
+  To describe how a glass of water flows you do not need 10²³ molecular positions and velocities — density, a velocity field and pressure will do. This is not laziness: the vast majority of those 10²³ numbers have <strong>no bearing whatsoever</strong> on the question you asked. They cancel, they average out, they leave no trace.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Higher-level theories can stand on their own because almost all microscopic degrees of freedom get smoothed away, leaving a handful of quantities that are <strong>slow, long-ranged, and protected by symmetry</strong> — the <strong>effective degrees of freedom</strong>. Three typical kinds: ① the <strong>order parameter</strong> (magnetization, density difference), which answers "which state did the system settle into"; ② <strong>quasiparticles</strong> — a phonon is the quantum of a lattice's collective vibration, a hole is the "gap" left by a missing electron; they are not elementary particles yet they carry energy, momentum and a lifetime, and they collide and scatter; ③ <strong>effective parameters</strong>, such as an electron's effective mass <var>m</var>* in a lattice (that is an asterisk, not a multiplication sign), packing a mass of microscopic entanglement into a single number. As for <em>why</em> the details can be safely discarded, there is a precise answer — the issue on phase transitions and criticality gets there through the renormalization group.</div>
+<figure>
+<svg aria-label="Microscopic degrees of freedom compressed by coarse-graining into a few effective ones" role="img" viewBox="0 0 660 212">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" text-anchor="middle" x="135" y="28">microscopic degrees of freedom</text>
+<rect fill="#172038" height="130" rx="8" stroke="#2b3a5e" width="230" x="20" y="38"></rect>
+<g fill="#5b9bff" opacity=".55">
+<circle cx="44" cy="62" r="3.5"></circle><circle cx="70" cy="62" r="3.5"></circle><circle cx="96" cy="62" r="3.5"></circle><circle cx="122" cy="62" r="3.5"></circle><circle cx="148" cy="62" r="3.5"></circle><circle cx="174" cy="62" r="3.5"></circle><circle cx="200" cy="62" r="3.5"></circle><circle cx="226" cy="62" r="3.5"></circle>
+<circle cx="44" cy="86" r="3.5"></circle><circle cx="70" cy="86" r="3.5"></circle><circle cx="96" cy="86" r="3.5"></circle><circle cx="122" cy="86" r="3.5"></circle><circle cx="148" cy="86" r="3.5"></circle><circle cx="174" cy="86" r="3.5"></circle><circle cx="200" cy="86" r="3.5"></circle><circle cx="226" cy="86" r="3.5"></circle>
+<circle cx="44" cy="110" r="3.5"></circle><circle cx="70" cy="110" r="3.5"></circle><circle cx="96" cy="110" r="3.5"></circle><circle cx="122" cy="110" r="3.5"></circle><circle cx="148" cy="110" r="3.5"></circle><circle cx="174" cy="110" r="3.5"></circle><circle cx="200" cy="110" r="3.5"></circle><circle cx="226" cy="110" r="3.5"></circle>
+<circle cx="44" cy="134" r="3.5"></circle><circle cx="70" cy="134" r="3.5"></circle><circle cx="96" cy="134" r="3.5"></circle><circle cx="122" cy="134" r="3.5"></circle><circle cx="148" cy="134" r="3.5"></circle><circle cx="174" cy="134" r="3.5"></circle><circle cx="200" cy="134" r="3.5"></circle><circle cx="226" cy="134" r="3.5"></circle>
+</g>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="135" y="158">~10<tspan dy="-5" font-size="9">23</tspan><tspan dy="5"> positions and velocities</tspan></text>
+<line stroke="#5b9bff" stroke-width="2" x1="262" x2="352" y1="103" y2="103"></line>
+<polygon fill="#5b9bff" points="352,97 352,109 368,103"></polygon>
+<text fill="#7db0ff" text-anchor="middle" x="312" y="90">coarse-grain</text>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="312" y="126">average out detail</text>
+<text fill="#c99a4e" text-anchor="middle" x="515" y="28">effective degrees of freedom</text>
+<rect fill="#2a2214" height="130" rx="8" stroke="#6a5326" width="250" x="390" y="38"></rect>
+<text fill="#f0ad5a" x="408" y="68">order parameter M (which state)</text>
+<text fill="#f0ad5a" x="408" y="96">temperature T, pressure p</text>
+<text fill="#f0ad5a" x="408" y="124">phonons (collective vibration)</text>
+<text fill="#f0ad5a" x="408" y="152">effective mass m*</text>
+</g>
+</svg>
+<figcaption>10²³ numbers squeezed into four or five — and the laws of the emergent level are written on those.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Is a phonon "real"? In condensed matter it is as real as an electron: it scatters, it carries heat and momentum, it can be detected one at a time. <strong>The intuition that only elementary particles are real and quasiparticles are a convenient fiction does not survive contact with the lab</strong> — reality is not the exclusive property of the bottom level, it is the credential earned by being stable, measurable and predictive at your own level. The sharpest example is the fractional quantum Hall state, where quasiparticles of charge <var>e</var>/3 appear even though the electron itself cannot be split.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Neuroscience / AI / Economics</span>
+  Finding the effective degrees of freedom is a portable craft:
+  <ul>
+<li><strong>Neuroscience</strong>: the spike timing of a single neuron is largely irreproducible, yet the activity of tens of thousands of neurons, projected onto a <strong>low-dimensional manifold</strong> of a few principal components, is stable enough to decode intended movement from;</li>
+<li><strong>AI</strong>: a model with hundreds of billions of parameters often has its overall behavior predicted well by three macroscopic numbers (parameters, data, compute); and the "feature directions" and "circuits" that interpretability hunts for are precisely the model's quasiparticles — not single weights, yet nameable and interveneable like real entities;</li>
+<li><strong>Economics</strong>: no individual person is "inflation," but the inflation rate is stable, measurable, and can be levered by interest rates — it is the economy's order parameter.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: emergence does not add anything; once the details are safely thrown away, the few surviving quantities take the lead.</div>
+<details class="q"><summary><b>Think:</b> Are effective degrees of freedom objectively there, or an artifact of how we ask questions?</summary><div class="qa">Both, in parts. Which quantities are slow, long-ranged and symmetry-protected is settled by the system, not by you; but which scale is worth looking at does depend on your question — asking about conductivity and asking about melting pick out different variables. The reliable test: swap the observer and the instrument, and see whether the same set survives.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Don't Mistake "Emergence" for an Explanation <span class="en">Weak vs Strong Emergence</span></h2>
+<span class="pill">strong vs weak emergence</span>
+<div class="field"><span class="lab">Intuition</span>
+  "Consciousness is an emergent property of the brain" sounds like it explains something, and explains nothing at all; it restates "we don't know how you get from neurons to experience." The word is so useful that it keeps getting used as a full stop, when it should be a question mark.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The standard split is twofold. <strong>Weak emergence</strong>: the higher-level property is fully fixed by the microscopic one, but <strong>you can only get it by stepping through the evolution or simulation</strong>, with no shortcut (Bedau's definition; "computational irreducibility" is the algorithmic phrasing of the same thing). <strong>Strong emergence</strong>: the higher-level property cannot <strong>in principle</strong> be derived from the micro level, and needs extra fundamental laws. Emergence in physics is almost uniformly weak — superconductivity, phase transitions, turbulence are all fixed by microscopic law; we simply cannot push the derivation through, or cannot push it cleverly. Strong emergence has <strong>no accepted example in physics</strong>; it lives mainly in arguments about consciousness, and the price is steep: if the higher level really could rewrite microscopic evolution, then microscopic law is not closed — an extremely strong empirical claim with no evidence behind it.</div>
+<figure>
+<svg aria-label="Weak emergence contrasted with strong emergence" role="img" viewBox="0 0 660 236">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-weight="700" x="20" y="26">Weak emergence</text>
+<rect fill="#172038" height="42" rx="7" stroke="#2b3a5e" width="130" x="20" y="44"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="85" y="70">micro laws</text>
+<line stroke="#5b9bff" stroke-width="2" x1="160" x2="288" y1="65" y2="65"></line>
+<polygon fill="#5b9bff" points="288,59 288,71 304,65"></polygon>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="228" y="38">derivable in principle</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="middle" x="224" y="84">step by step only, no shortcut</text>
+<rect fill="#172038" height="42" rx="7" stroke="#2b3a5e" width="310" x="316" y="44"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="471" y="70">superconductivity · phases · turbulence</text>
+<text fill="#f0ad5a" font-weight="700" x="20" y="150">Strong emergence</text>
+<rect fill="#2a2214" height="42" rx="7" stroke="#6a5326" width="130" x="20" y="166"></rect>
+<text fill="#f0ad5a" text-anchor="middle" x="85" y="192">micro laws</text>
+<line stroke="#f0ad5a" stroke-width="2" x1="160" x2="212" y1="187" y2="187"></line>
+<line stroke="#f0ad5a" stroke-width="2" x1="256" x2="288" y1="187" y2="187"></line>
+<polygon fill="#f0ad5a" points="288,181 288,193 304,187"></polygon>
+<text fill="#e2705a" font-size="17" font-weight="700" text-anchor="middle" x="234" y="193">✗</text>
+<text fill="#c99a4e" font-size="11.5" text-anchor="middle" x="234" y="160">not derivable; needs new law</text>
+<rect fill="#2a2214" height="42" rx="7" stroke="#6a5326" width="310" x="316" y="166"></rect>
+<text fill="#f0ad5a" text-anchor="middle" x="471" y="192">no accepted example in physics</text>
+</g>
+</svg>
+<figcaption>Essentially all emergence in physics sits on the top row: derivable, but only by running it honestly.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Keeping the two apart immediately defuses two rhetorical moves. One is <strong>mystification</strong>: using "emergent" to hint at some force beyond physics ("quantum consciousness" usually takes this route), which quietly asserts strong emergence while refusing the burden of proof. The other is <strong>eliminativism</strong>: since it is derivable in principle, higher-level laws are "just approximations" — but derivable does not mean disposable. The second law of thermodynamics is in principle fixed by molecular motion, and nobody stops using it on that account. The honest position is in between: <strong>emergence is real and explanatory, but it is the thing to be explained, not the explanation.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Neuroscience / AI / Biology / Philosophy</span>
+  One discipline, four scenes:
+  <ul>
+<li><strong>Neuroscience</strong>: "consciousness emerges from neural activity" is not an explanation; what explains are specific mechanistic proposals — global workspace, integrated information — because experiments can tell them apart;</li>
+<li><strong>AI</strong>: "reasoning emerges from scale" explains nothing either; what explains is a testable, falsifiable mechanism such as "chain of thought spreads the computation over more tokens";</li>
+<li><strong>Biology</strong>: the emergence of life has content — autocatalytic chemical loops, a copyable carrier of heredity, a membrane that maintains gradients — not "complicated enough and it lives";</li>
+<li><strong>Philosophy</strong>: the test is plain — can your emergence claim yield one prediction that <strong>could be wrong</strong>? If not, it is still only a name.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: "emergence" is the name of the problem, not the answer to it.</div>
+<details class="q"><summary><b>Think:</b> How do you tell quickly whether an "emergence" claim is empty?</summary><div class="qa">Ask three things. Does it name <strong>which two levels</strong> it relates? Does it specify <strong>a mechanism</strong> that organizes the lower into the higher? Can it yield a prediction observation could overturn? Three blanks and the sentence is just ignorance in new packaging.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>If a big enough computer simulated the microscopic evolution all the way, would higher-level laws still be worth anything?</summary>
+<div class="body">Yes. <strong>Predictable is not the same as understood</strong> — a simulation hands you a string of numbers without telling you which link in the chain is doing the work. The value of a high-level law is <strong>universality</strong>: one set of fluid equations covers water, air and the plasma inside a star, while each simulation covers one particular system. And the cost of simulating is often the same order as the thing simulated: predict the universe with a model as big as the universe and you have a replica, not a theory. Compression is what a theory is for.</div></details>
+<details><summary>Does downward causation hold — can the higher level "govern" the lower?</summary>
+<div class="body">It depends which reading, and mixing them keeps the argument going forever. The <strong>strong reading</strong>: higher-level states rewrite microscopic law itself — no evidence, and it collides with microscopic closure. The <strong>weak reading</strong>: higher-level structure supplies <strong>constraints and boundary conditions</strong> that select which microscopic paths are taken — a piston bearing on a gas, a regulatory network constraining molecular collisions, an institution constraining individual choices. The weak reading is entirely compatible with physics, and it is what we actually mean when we say "the heart's pumping causes blood pressure."</div></details>
+<details><summary>Is emergence ontological (the world really has levels) or epistemic (only our access is limited)?</summary>
+<div class="body">The argument continues, but <strong>multiple realizability</strong> gives the ontological side real weight: the same hydrodynamic law is realized by water molecules, by air molecules and by a plasma, so the law at the level of "vortices" is not attached to any particular microscopic carrier. A middle position — Sean Carroll calls it poetic naturalism — is that there is one world but several descriptions that are <strong>all true</strong>, each valid in its own domain and none replacing the others.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>P. W. Anderson, <a href="https://www.science.org/doi/10.1126/science.177.4047.393"><em>"More Is Different,"</em> <em>Science</em> 177 (1972) 393–396</a> — two and a half pages, worth reading paragraph by paragraph</li>
+<li><a href="https://en.wikipedia.org/wiki/More_Is_Different">Wikipedia: More Is Different</a> — the argument and the debate it set off</li>
+<li>R. B. Laughlin &amp; D. Pines, <a href="https://www.pnas.org/doi/10.1073/pnas.97.1.28"><em>"The Theory of Everything,"</em> <em>PNAS</em> 97 (2000) 28–31</a> — the condensed-matter reply to a theory of everything</li>
+<li><a href="https://plato.stanford.edu/entries/properties-emergent/">Stanford Encyclopedia of Philosophy: Emergent Properties</a> — strong vs weak emergence, downward causation</li>
+<li><a href="https://en.wikipedia.org/wiki/Lee%E2%80%93Yang_theorem">Wikipedia: Lee–Yang theorem</a> — why a phase transition has to wait for the thermodynamic limit</li>
+<li>Schaeffer, Miranda &amp; Koyejo, <a href="https://arxiv.org/abs/2304.15004"><em>"Are Emergent Abilities of Large Language Models a Mirage?"</em> arXiv:2304.15004</a></li>
+<li>Sean Carroll, <a href="https://www.preposterousuniverse.com/bigpicture/"><em>The Big Picture</em></a> — poetic naturalism: one world, many true descriptions</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
