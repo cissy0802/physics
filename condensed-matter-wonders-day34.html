@@ -87,7 +87,7 @@
 <div class="wrap">
 <header>
 <div class="kicker">物理 · Physics</div>
-<h1>凝聚态的奇迹</h1>
+<h1 data-tts="b66efd9c7e7e4199">凝聚态的奇迹</h1>
 <div class="meta">Day 34 · 2026 · Phase H 凝聚态与涌现</div>
 <div class="tagline">把一堆平平无奇的原子降到足够冷，它们会集体做出单个原子绝对做不到的事。</div>
 </header>
@@ -95,7 +95,7 @@
 「更多即不同」说层级为什么不能被还原掉，「相变与临界」说折点本身长什么样；<b>折点另一侧究竟冒出什么东西</b>，才是凝聚态物理真正的战场。答案相当离谱：铝、氦、砷化镓都是再普通不过的材料，降到足够冷之后，电流能绕着环流上一年而测不出衰减；液体会自己爬过杯壁跑出来；一块材料的电阻精确到小数点后九位，换个样品还是同一个数。这些不是精密工程堆出来的，是原子自己组织出来的。
 </div>
 <!-- Card 1 -->
-<div class="card">
+<div class="card" data-tts="4fc8ec04f3c63d6f">
 <h2>换一套主角 <span class="en">Collective Excitations &amp; Quasiparticles</span></h2>
 <span class="pill">声子 · 空穴 · 有效质量</span>
 <div class="field"><span class="lab">直觉</span>
@@ -149,7 +149,6 @@
   「换一套有效自由度」是一门到处能用的手艺——
   <ul>
 <li><strong>芯片</strong>：半导体工业的工作语言是电子与空穴，没有一份器件设计从 10<sup>23</sup> 个粒子出发；空穴是彻头彻尾的准粒子，场效应管却全建立在它身上；</li>
-
 <li><strong>热管理</strong>：热电材料的主流思路叫「声子玻璃、电子晶体」——掺进只散射声子、不挡电子的结构，热导降下去而电导保住；</li>
 <li><strong>AI</strong>：网络里起作用的常常不是单个神经元，而是跨神经元的某个方向。<strong>诚实的说法</strong>：这是思路同构而非同一套数学——准粒子有能量、动量、寿命这些可测量，网络里的「方向」没有。</li>
 </ul></div>
@@ -159,14 +158,13 @@
 </div>
 </div>
 <!-- Card 2 -->
-<div class="card">
+<div class="card" data-tts="50387c407e581c0c">
 <h2>配成对，然后一起凝聚 <span class="en">Superconductivity &amp; Superfluidity</span></h2>
 <span class="pill">Onnes 1911 · BCS 1957 · 氦的 λ 点</span>
 <div class="field"><span class="lab">直觉</span>
   1911 年，昂内斯把水银降到 4.2 K，电阻不是慢慢变小，而是<strong>直接掉进了测不出来的深渊</strong>：在超导环里激发一圈电流、切断电源、年复一年守着看，磁场没有可测的衰减。液氦在 2.17 K 以下也换了性情：它能<strong>毫无阻力地从极细的缝里漏过去</strong>，还会顺着杯壁爬出来把杯子倒空。「阻力很小」和「阻力是零」不是程度差别，是种类差别。</div>
 <div class="field"><span class="lab">机制</span>
   1957 年巴丁、库珀、施里弗（BCS）给出了答案，核心是一件听着不可能的事：<strong>两个电子必须互相吸引</strong>。它们明明同号相斥，媒人是晶格。第一个电子掠过时把附近的正离子往自己这边拽了一点，离子重、动得慢，等它挪到位电子早跑远了，身后留下一小片<strong>暂时的正电荷富集</strong>；第二个电子被它吸过来。两个电子隔着晶格完成一次延时的「握手」——这就是<strong>库珀对</strong>。配成对后总自旋为整数，能像玻色子那样全体挤进同一个量子态，整块超导体由<strong>同一个宏观波函数</strong>描述。要破坏它就得拆散一对，而拆对要付能量：</div>
-
 <figure>
 <svg aria-label="左：电子经由晶格畸变间接吸引成库珀对；右：正常金属与超导体的能量菜单对比，超导体有能隙" role="img" viewbox="0 0 660 320">
 <g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
@@ -214,7 +212,7 @@
 <figcaption>右图那道空带不是画错：低于 2Δ 的激发在超导体里根本不存在，能量不够的扰动连一个电子都踢不动，散射因此无处可去。</figcaption>
 </figure>
 <div class="field"><span class="lab">机制 · 续</span>
-  <div class="eq">2<var>Δ</var> ≈ 3.5 <var>k</var><sub>B</sub><var>T</var><sub>c</sub></div>
+<div class="eq">2<var>Δ</var> ≈ 3.5 <var>k</var><sub>B</sub><var>T</var><sub>c</sub></div>
 <div class="gloss"><var>Δ</var> 是希腊字母 delta（读「德尔塔」），叫<strong>能隙</strong>，拆散一对要 2<var>Δ</var>；<var>k</var><sub>B</sub> 是玻尔兹曼常数，把温度换算成能量（下标 B 是玻尔兹曼的首字母）；<var>T</var><sub>c</sub> 是<strong>临界温度</strong>（下标是字母 c，取自 critical）。低于 <var>T</var><sub>c</sub> 时热扰动翻不过这道隙，电子对无从被打散，电流也就无处损耗。</div>
   最漂亮的实证在<strong>磁通量子</strong>上：超导环里穿过的磁通只能是 <var>Φ</var><sub>0</sub> = <var>h</var>/2<var>e</var> ≈ 2.07 × 10<sup>−15</sup> 韦伯的整数倍（<var>Φ</var> 读「斐」，<var>e</var> 是一个电子的电荷量）。分母上那个 <strong>2</strong> 是致命证据——载流子的电荷是 2<var>e</var>，正是一对电子，1961 年两组实验各自量到了它。另一个招牌是<strong>迈斯纳效应</strong>（1933）：超导体还会主动把磁场挤出体外——磁铁悬浮在超导块上方靠的就是这一手。</div>
 <div class="field"><span class="lab">机制 · 另一面</span>
@@ -225,7 +223,7 @@
 <div class="field"><span class="lab">反直觉的重点</span>
   这类现象常被说成「量子效应放大到了肉眼尺度」，话没错，但极容易读歪成「一杯液氦成了一只薛定谔的猫」。真正发生的是亿万个粒子占据了<strong>同一个</strong>量子态，那个态的相位于是从微观量变成整块材料共有的宏观变量——被放大的是<strong>相干</strong>，不是<strong>叠加</strong>。至于室温超导：常压纪录仍由铜氧化物保持在 130 K 出头；<strong>近年最轰动的几则「室温超导」宣告，包括发表在顶刊上的两篇，都已被撤稿</strong>，2023 年的 LK-99 也被多个独立小组判定为杂质造成的假象。对每次宣告都该先问：抗磁性、零电阻、比热跳变，三样齐了吗。</div>
 <div class="field xref"><span class="lab">跨学科对读 · 医疗 / 计算 / 天体</span>
-  <ul>
+<ul>
 <li><strong>医疗</strong>：核磁共振成像仪那几特斯拉的强磁场来自超导线圈——常规铜线要产生同样的场，发热量足以烧毁自己；全世界数万台 MRI 是超导迄今最大的民用市场；</li>
 <li><strong>计算</strong>：主流的一类量子比特就是超导环加约瑟夫森结，靠的正是宏观相位可被当成量子态操控，细节在<a href="quantum-technology-day24.html">「量子技术」</a>里；</li>
 <li><strong>天体</strong>：中子星内部被认为存在中子超流，脉冲星偶尔突然加速一丁点（「自转突变」），主流解释是内部超流涡旋成批脱钉、把角动量一次交给外壳——毫开尔文实验室里的物理，用来解释一颗坍缩恒星。</li>
@@ -236,7 +234,7 @@
 </div>
 </div>
 <!-- Card 3 -->
-<div class="card">
+<div class="card" data-tts="30fb6451cb0f620e">
 <h2>精确到十亿分之一 <span class="en">Topological Phases</span></h2>
 <span class="pill">量子霍尔 1980 · 陈数 · 2016 诺奖</span>
 <div class="field"><span class="lab">直觉</span>
@@ -275,7 +273,7 @@
 <div class="field"><span class="lab">反直觉的重点</span>
   这里出现了物理学里罕见的局面：一个<strong>又脏又乱的多体系统，交出了一个比大多数精密测量还准的数</strong>——国际电阻标准一度就直接定义在量子霍尔平台上（<var>R</var><sub>K</sub> = <var>h</var>/<var>e</var><sup>2</sup> ≈ 25812.807 欧姆）。往强磁场深处走还会冒出 <var>ν</var> = 1/3 这样的<strong>分数</strong>平台（1998 年诺奖），那里的准粒子携带 <strong>1/3 个电子电荷</strong>，1997 年被噪声实验直接量到。电子不可分，它们的集体激发却可以带分数电荷——「涌现的自由度不必长得像组成部分」，这是最硬的一个例子。</div>
 <div class="field xref"><span class="lab">跨学科对读 · 计量 / 数学 / 容错计算</span>
-  <ul>
+<ul>
 <li><strong>计量</strong>：一块材料能当基准，靠的不是被造得多完美，而是输出值由拓扑锁死——「精度」从工艺问题变成了原理问题；</li>
 <li><strong>数学</strong>：陈数、亏格、绕数原本是纯数学对象，如今成了实验室里能直接读出数字的可观测量；</li>
 <li><strong>容错计算</strong>：把量子信息编码在拓扑自由度里，局部噪声原则上改不动它，这是拓扑量子计算的全部指望。<strong>诚实的说法</strong>：作为方案骨架的马约拉纳准粒子，实验证据一路争议不断——2018 年一篇标志性论文已于 2021 年撤稿，此后几次高调宣告也遭同行质疑判据。拓扑保护的<strong>数学</strong>可靠，难的是证明手上那块材料真的处在那个相里。</li>
@@ -287,7 +285,7 @@
 </div>
 <!-- Deep think -->
 <div class="deep">
-<h2>深入思考</h2>
+<h2 data-tts="5460845b87756e37">深入思考</h2>
 <details><summary>高温超导发现快四十年了，为什么还没被解决？</summary>
 <div class="body">1986 年铜氧化物打破了人们以为的温度上限（Bednorz 与 Müller，次年即获诺奖），可配对的「胶水」是什么至今无定论。BCS 算得动，是因为电子间的相互作用弱到可以当微扰处理；铜氧化物里的排斥强到与动能同量级，<strong>没有小参数可以展开</strong>。已确定的是配对确实存在、对的电荷是 2e、配对波函数是 d 波对称——没定的恰恰是最关键那一环。</div></details>
 <details><summary>拓扑物态和相变里的「普适类」，是同一种「细节无关」吗？</summary>
@@ -297,7 +295,7 @@
 </div>
 <!-- Reading -->
 <div class="read">
-<h2>延伸阅读</h2>
+<h2 data-tts="3ea30a70c29c34f3">延伸阅读</h2>
 <ul>
 <li>J. Bardeen, L. N. Cooper &amp; J. R. Schrieffer，<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.108.1175"><em>"Theory of Superconductivity"</em>，<em>Phys. Rev.</em> 108 (1957) 1175</a>——BCS 原始论文</li>
 <li>J. Bardeen，<a href="https://www.nobelprize.org/prizes/physics/1972/bardeen/lecture/">1972 年诺贝尔奖演讲</a>——配对机制的作者自述</li>
@@ -310,10 +308,10 @@
 </ul>
 </div>
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
 </body>
 </html>
