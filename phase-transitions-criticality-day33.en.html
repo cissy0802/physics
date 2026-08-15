@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Phase Transitions &amp; Criticality · Day 33</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Phase Transitions and Criticality</h1>
+<div class="meta">Day 33 · 2026 · Phase H Condensed Matter &amp; Emergence</div>
+<div class="tagline">Boiling water and a magnet losing its magnetism share not a single ingredient — except at the critical point, where they obey the same set of numbers.</div>
+</header>
+<div class="intro">
+"More is different" leaves behind a hard claim: a strict kink is born only in an infinite system. This one walks inside the kink. A phase transition is the cleanest specimen of emergence there is — not one word of the microscopic rules changes, the temperature moves a little, and the whole system flips over. Stranger still is what waits at the critical point: measure water's liquid–gas critical point and a ferromagnet's Curie point, and two experiments with nothing in common hand back <b>the same numbers</b>. Why the details can be erased completely is one of the most beautiful answers physics produced in the second half of the twentieth century.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Two Temperaments of Abruptness <span class="en">First-Order vs Continuous</span></h2>
+<span class="pill">order parameter · phase diagram</span>
+<div class="field"><span class="lab">Intuition</span>
+  Boil a kettle and the temperature climbs to 100 ℃ and sticks: keep heating and the reading does not budge, because every joule is going into turning water into steam. That plateau — heat in, no rise — is the fingerprint of a <strong>first-order transition</strong>. A ferromagnet crossing its Curie point (770 ℃ for iron) has an entirely different temperament: no plateau, no stall, the magnetism simply weakens continuously until at one point it is exactly zero.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Telling them apart takes an <strong>order parameter</strong>: a quantity that is nonzero in the ordered phase and zero in the disordered one, answering "which state did the system pick?" For a magnet it is the magnetisation; for liquid–gas it is the density difference between the two phases. How it reaches zero splits transitions in two. <strong>First-order</strong>: the order parameter <strong>jumps</strong> at the transition, the two phases can coexist, and <strong>latent heat</strong> is absorbed or released — that temperature plateau is latent heat being swallowed. <strong>Continuous</strong>: the order parameter slides to zero smoothly, no latent heat, but its derivatives (specific heat, susceptibility) <strong>diverge</strong> at that point. In free-energy language: first order means the first derivative of the free energy is discontinuous, continuous means the first derivative is fine and the second one blows up — which is where the word "order" in "second-order" comes from.</div>
+<figure>
+<svg aria-label="Pressure-temperature phase diagram of water: triple point, critical point, and a path around the critical point" role="img" viewBox="0 0 660 310">
+<defs>
+<marker id="a1" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5">
+<polygon fill="#f0ad5a" points="0,0 11,4.5 0,9"></polygon>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<line stroke="#56607e" stroke-width="1.5" x1="80" x2="80" y1="255" y2="34"></line>
+<polygon fill="#56607e" points="74,36 86,36 80,22"></polygon>
+<line stroke="#56607e" stroke-width="1.5" x1="80" x2="612" y1="255" y2="255"></line>
+<polygon fill="#56607e" points="612,249 612,261 626,255"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="600" y="276">Temperature T →</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" transform="rotate(-90 46 140)" x="46" y="140">Pressure p</text>
+<path d="M 195,195 C 190,140 186,90 180,40" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<path d="M 195,195 C 280,175 380,130 470,78" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<path d="M 195,195 C 165,215 130,235 95,250" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<circle cx="195" cy="195" fill="#dbe2f2" r="4.5"></circle>
+<line stroke="#56607e" stroke-width="1.2" x1="155" x2="190" y1="188" y2="193"></line>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="152" y="191">triple point</text>
+<circle cx="470" cy="78" fill="#f0ad5a" r="6"></circle>
+<text fill="#f0ad5a" font-size="11.5" x="484" y="82">critical point</text>
+<text fill="#dbe2f2" font-size="15" font-weight="700" x="104" y="112">Solid</text>
+<text fill="#dbe2f2" font-size="15" font-weight="700" x="236" y="86">Liquid</text>
+<text fill="#dbe2f2" font-size="15" font-weight="700" x="420" y="212">Gas</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="end" x="172" y="52">melting line (never ends)</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="300" y="206">vaporization line</text>
+<line stroke="#56607e" stroke-width="1.2" x1="172" x2="212" y1="229" y2="239"></line>
+<text fill="#7db0ff" font-size="11.5" x="216" y="243">sublimation line</text>
+<path d="M 300,122 C 350,52 430,32 520,46 C 572,58 586,130 558,190" fill="none" marker-end="url(#a1)" stroke="#f0ad5a" stroke-dasharray="6 5" stroke-width="2"></path>
+<line stroke="#f0ad5a" stroke-dasharray="6 5" stroke-width="2" x1="100" x2="132" y1="292" y2="292"></line>
+<text fill="#c99a4e" font-size="11.5" x="140" y="296">detour around the critical point: liquid → gas, no phase transition anywhere</text>
+</g>
+</svg>
+<figcaption>The vaporization line is decapitated; the solid–liquid line is not. That difference is not sloppy drawing — symmetry demands it.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  The vaporization line <strong>stops dead</strong> at the critical point (374 ℃ and 218 atmospheres for water). So you can start as a liquid, take a loop around that point, and arrive as a gas with <strong>no moment along the way at which you could point and say "it boiled here"</strong> — liquid and gas are not different in kind, only in degree (Thomas Andrews saw this first in carbon dioxide in 1869). The solid–liquid line, by contrast, never ends: a crystal breaks the translational and rotational symmetry of space, and a symmetry is either broken or not — <strong>there is no "half broken"</strong>, so there is nothing to walk around.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Traffic / Networks / Society</span>
+  The order-parameter ruler works just as well elsewhere —
+  <ul>
+<li><strong>Traffic</strong>: past a certain car density, free flow flips into stop-and-go congestion; the order parameter can be taken as the fraction of cars stuck in a jam, and lowering the density again does not dissolve the jam at the same point (<strong>hysteresis</strong>) — the signature of a first-order transition;</li>
+<li><strong>Networks</strong>: in a random graph, once the average number of links per node crosses 1, a <strong>giant connected component</strong> covering a finite fraction of the graph appears abruptly — a rigorously proven phase transition whose order parameter is the relative size of that component;</li>
+<li><strong>Society</strong>: the fraction of a population holding a given view serves as an order parameter, and it too shows a jump plus hysteresis rather than tracking external conditions smoothly — which is why talking someone back is so much harder than bringing them across.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: what sorts a transition is not how violent it is, but whether the order parameter jumps or slides.</div>
+<details class="q"><summary><b>Think:</b> If liquid and gas can be joined continuously, why does everyday boiling feel so absolute?</summary><div class="qa">Because at ordinary pressure we take the path that cuts straight through the vaporization line, and on that line there really is a first-order transition: latent heat, two phases coexisting. Taking the detour requires pushing past 218 atmospheres, which daily life never does. What is absolute is the route, not the difference between liquid and gas.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>At the Critical Point Every Scale Speaks at Once <span class="en">Where the Ruler Disappears</span></h2>
+<span class="pill">correlation length · critical opalescence</span>
+<div class="field"><span class="lab">Intuition</span>
+  Seal carbon dioxide in a pressure-rated glass tube and warm it slowly: approaching the critical point, the transparent fluid abruptly turns milky and nearly opaque, then clears again once past it. This is <strong>critical opalescence</strong>. Cloudiness means something is scattering visible light hard — density blobs of <strong>a few hundred nanometres</strong> have appeared inside the fluid, a thousand times bigger than a molecule. Nothing was added; a temperature was merely approached.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  The measure of "how big the blobs are" is the <strong>correlation length</strong> <var>ξ</var> (the Greek letter xi): two places within <var>ξ</var> of each other tend to be in the same state, beyond it they are essentially independent. Distance from the critical point is measured by the <strong>reduced temperature</strong> <var>t</var>:
+  <div class="eq"><var>t</var> = <span class="frac"><span class="fnum"><var>T</var> − <var>T</var><sub>c</sub></span><span class="fden"><var>T</var><sub>c</sub></span></span> ,　<var>ξ</var> ∼ |<var>t</var>|<sup>−<var>ν</var></sup></div>
+<div class="gloss"><var>T</var> is temperature and <var>T</var><sub>c</sub> the critical temperature (the subscript is the letter c, for critical); <var>t</var> is simply "how many percent away from the critical point," and it equals <strong>the number 0 (zero)</strong> right at it. <strong>∼</strong> reads "scales as" — only the shape of the dependence on <var>t</var> matters, never the constant in front. <var>ν</var> is the Greek letter nu (not the letter v), called the <strong>correlation-length exponent</strong>; the minus sign in the exponent says that as <var>t</var> goes to 0, <var>ξ</var> <strong>diverges</strong> — it grows without bound.</div>
+  "Diverges" carries real weight: at the critical point <var>ξ</var> outgrows the sample itself, and the system contains <strong>no characteristic scale at all</strong>. Once there is no characteristic scale, only one functional form survives — a <strong>power law</strong>, the only function whose shape is unchanged when you re-mark the ruler. The pattern is therefore necessarily <strong>self-similar</strong>.</div>
+<figure>
+<svg aria-label="Cluster sizes in a spin pattern at three temperatures" role="img" viewBox="0 0 660 250">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12">
+<rect fill="#22345f" height="170" rx="6" width="180" x="20" y="34"></rect>
+<g fill="#6d5324">
+<rect height="14" width="14" x="52" y="66"></rect><rect height="10" width="10" x="128" y="58"></rect><rect height="12" width="12" x="90" y="128"></rect><rect height="9" width="9" x="152" y="150"></rect><rect height="8" width="8" x="44" y="168"></rect><rect height="11" width="11" x="146" y="96"></rect>
+</g>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="110" y="222">T ≪ T<tspan baseline-shift="sub" font-size="9">c</tspan>: nearly all one colour</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="110" y="26">clusters are small</text>
+<rect fill="#22345f" height="170" rx="6" width="180" x="240" y="34"></rect>
+<g fill="#6d5324">
+<rect height="74" rx="4" width="86" x="252" y="46"></rect><rect height="46" rx="4" width="52" x="352" y="126"></rect><rect height="30" rx="3" width="34" x="256" y="140"></rect><rect height="22" rx="3" width="24" x="356" y="60"></rect><rect height="16" rx="2" width="16" x="310" y="140"></rect><rect height="13" rx="2" width="13" x="300" y="172"></rect><rect height="10" rx="2" width="10" x="252" y="182"></rect><rect height="9" width="9" x="392" y="42"></rect><rect height="8" width="8" x="340" y="184"></rect><rect height="7" width="7" x="404" y="182"></rect><rect height="6" width="6" x="330" y="106"></rect>
+</g>
+<g fill="#22345f">
+<rect height="26" rx="3" width="30" x="272" y="66"></rect><rect height="12" rx="2" width="14" x="292" y="100"></rect><rect height="7" width="7" x="268" y="100"></rect><rect height="14" rx="2" width="16" x="368" y="140"></rect><rect height="6" width="6" x="380" y="164"></rect>
+</g>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="330" y="222">T = T<tspan baseline-shift="sub" font-size="9">c</tspan>: every size at once</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="330" y="26">zoom in on any patch — it looks the same</text>
+<rect fill="#22345f" height="170" rx="6" width="180" x="460" y="34"></rect>
+<g fill="#6d5324">
+<rect height="7" width="7" x="474" y="48"></rect><rect height="7" width="7" x="500" y="60"></rect><rect height="7" width="7" x="530" y="46"></rect><rect height="7" width="7" x="556" y="66"></rect><rect height="7" width="7" x="586" y="50"></rect><rect height="7" width="7" x="612" y="70"></rect><rect height="7" width="7" x="480" y="82"></rect><rect height="7" width="7" x="512" y="94"></rect><rect height="7" width="7" x="544" y="86"></rect><rect height="7" width="7" x="576" y="98"></rect><rect height="7" width="7" x="606" y="88"></rect><rect height="7" width="7" x="470" y="112"></rect><rect height="7" width="7" x="498" y="124"></rect><rect height="7" width="7" x="528" y="114"></rect><rect height="7" width="7" x="560" y="126"></rect><rect height="7" width="7" x="590" y="118"></rect><rect height="7" width="7" x="618" y="130"></rect><rect height="7" width="7" x="482" y="146"></rect><rect height="7" width="7" x="514" y="156"></rect><rect height="7" width="7" x="546" y="148"></rect><rect height="7" width="7" x="578" y="160"></rect><rect height="7" width="7" x="608" y="150"></rect><rect height="7" width="7" x="472" y="178"></rect><rect height="7" width="7" x="504" y="188"></rect><rect height="7" width="7" x="536" y="178"></rect><rect height="7" width="7" x="568" y="190"></rect><rect height="7" width="7" x="600" y="180"></rect>
+</g>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="550" y="222">T ≫ T<tspan baseline-shift="sub" font-size="9">c</tspan>: only fine speckle</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="550" y="26">clusters are small again</text>
+</g>
+</svg>
+<figcaption>Both outer panels have a definite "typical cluster size." The middle one has none — that is what a diverging correlation length looks like.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  At the critical point there is no such thing as a typical blob. Away from it you can say "about 3 atoms across" or "about 100 atoms across"; at it, from the atomic scale all the way up to the size of the sample, <strong>every size is present, with the share of each scale laid out as a power law</strong>. That is both why phase transitions can be captured mathematically — fluctuations grow so large that microscopic detail is drowned out and only geometry remains — and why they are hard to compute: every scale is coupled to every other, and no single layer can be dealt with on its own.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Earth / Neuroscience / Finance</span>
+  "No characteristic scale" is a testable fingerprint, and it turns up everywhere —
+  <ul>
+<li><strong>Earth</strong>: earthquake magnitude–frequency follows the Gutenberg–Richter power law; a quake ten times more energetic is just a fixed factor rarer, and there is no such thing as a typical earthquake. Bak and colleagues proposed <strong>self-organized criticality</strong> in 1987 on this basis — some systems drive themselves to the critical point and stay there;</li>
+<li><strong>Neuroscience</strong>: bursts of spontaneous cortical firing ("neuronal avalanches") have a near power-law size distribution (Beggs &amp; Plenz 2003), which some read as the brain operating near criticality. <strong>Be honest</strong>: sampling and thresholding can both manufacture power laws, so brain criticality is a strong hypothesis, not a settled result;</li>
+<li><strong>Finance</strong>: the tails of daily stock returns are far fatter than a normal distribution, and the "once in a century" drop shows up every few years — the fat tail is a solid empirical fact, while blaming criticality for it is only one candidate explanation.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the critical point is the moment a system loses its ruler.</div>
+<details class="q"><summary><b>Think:</b> If power laws are so easy to misdiagnose, why do physicists trust the ones at a critical point?</summary><div class="qa">Because in physics they never come alone: they arrive as a <strong>set that constrains itself</strong>. The exponents of the various quantities satisfy equalities derived from the scaling hypothesis (for instance <var>α</var> + 2<var>β</var> + <var>γ</var> = 2), and they can be reproduced independently by completely different systems. One power law can be a coincidence; a mutually consistent set of exponents rarely is.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Universality and the Renormalization Group <span class="en">Why the Details Can Be Thrown Away</span></h2>
+<span class="pill">critical exponents · Wilson · Nobel 1982</span>
+<div class="field"><span class="lab">Intuition</span>
+  Measure how the density difference of water vanishes near its liquid–gas critical point and you get an exponent. Measure how the magnetisation of a uniaxial ferromagnet vanishes near its Curie point and you get an exponent. The two experiments have not one ingredient in common, yet the numbers agree <strong>within experimental error</strong>. To see how that can be, first play a game: take a photograph of a spin lattice, merge every 2×2 block into one cell by majority vote, and repeat. Far from the critical point the picture quickly washes out into flat colour or pure snow; at the critical point, <strong>every wash leaves it looking exactly like the previous one</strong>.</div>
+<div class="field"><span class="lab">Mechanism · the phenomenon</span>
+  Near the critical point every quantity approaches its limit as a power law, each with its own <strong>critical exponent</strong>: the order parameter ∼ |<var>t</var>|<sup><var>β</var></sup> (<var>β</var> is beta), the correlation length ∼ |<var>t</var>|<sup>−<var>ν</var></sup>, the susceptibility ∼ |<var>t</var>|<sup>−<var>γ</var></sup> (<var>γ</var> is gamma) — what each one measures is in the table below. These numbers depend on only three things: the <strong>spatial dimension</strong> <var>d</var>, the <strong>number of components of the order parameter</strong> <var>n</var> (up-or-down only → <var>n</var>=1; free to rotate in a plane → <var>n</var>=2), and whether the interaction is short-ranged. Systems matching on all three fall into the same <strong>universality class</strong>: water's liquid–gas critical point and a uniaxial ferromagnet are both <var>d</var>=3, <var>n</var>=1, the <strong>3D Ising class</strong>; the superfluid λ point of liquid helium is the <var>n</var>=2 XY class, with different exponents (<var>ν</var> ≈ 0.672).</div>
+<figure>
+<svg aria-label="Critical exponents compared across mean field, 2D Ising and 3D Ising" role="img" viewBox="0 0 660 218">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" font-size="11.5" x="20" y="20">One set of exponents, fixed only by the dimension d and the number of order-parameter components n</text>
+<rect fill="#0f1626" height="30" rx="5" stroke="#2b3a5e" width="620" x="20" y="30"></rect>
+<text fill="#cdd6ea" font-weight="700" x="34" y="50">Exponent</text>
+<text fill="#cdd6ea" font-weight="700" x="132" y="50">Measures</text>
+<text fill="#cdd6ea" font-weight="700" text-anchor="middle" x="375" y="50">Mean field (d ≥ 4)</text>
+<text fill="#cdd6ea" font-weight="700" text-anchor="middle" x="495" y="50">2D Ising (exact)</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="600" y="50">3D Ising</text>
+<rect fill="#172038" height="34" rx="5" stroke="#2b3a5e" width="620" x="20" y="66"></rect>
+<text fill="#dbe2f2" font-family="Georgia, serif" font-size="15" font-style="italic" x="34" y="88">β</text>
+<text fill="#96a0ba" font-size="11.5" x="132" y="88">how order grows</text>
+<text fill="#96a0ba" text-anchor="middle" x="375" y="88">0.5</text>
+<text fill="#96a0ba" text-anchor="middle" x="495" y="88">0.125</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="600" y="88">0.326</text>
+<rect fill="#172038" height="34" rx="5" stroke="#2b3a5e" width="620" x="20" y="106"></rect>
+<text fill="#dbe2f2" font-family="Georgia, serif" font-size="15" font-style="italic" x="34" y="128">ν</text>
+<text fill="#96a0ba" font-size="11.5" x="132" y="128">how ξ diverges</text>
+<text fill="#96a0ba" text-anchor="middle" x="375" y="128">0.5</text>
+<text fill="#96a0ba" text-anchor="middle" x="495" y="128">1</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="600" y="128">0.630</text>
+<rect fill="#172038" height="34" rx="5" stroke="#2b3a5e" width="620" x="20" y="146"></rect>
+<text fill="#dbe2f2" font-family="Georgia, serif" font-size="15" font-style="italic" x="34" y="168">γ</text>
+<text fill="#96a0ba" font-size="11.5" x="132" y="168">field sensitivity</text>
+<text fill="#96a0ba" text-anchor="middle" x="375" y="168">1</text>
+<text fill="#96a0ba" text-anchor="middle" x="495" y="168">1.75</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="600" y="168">1.237</text>
+<text fill="#c99a4e" font-size="11.5" x="20" y="200">Water's liquid–gas critical point and a uniaxial ferromagnet each measure out the right-hand column (d=3, n=1)</text>
+</g>
+</svg>
+<figcaption>Mean field gives tidy fractions, experiment gives ugly decimals — the gap is not about precision, it is about dimension.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · the explanation</span>
+  That photo-washing game is exactly a <strong>renormalization group</strong> (RG) transformation, and it comes in two halves: ① <strong>coarse-graining</strong>, averaging out the small-scale degrees of freedom; ② <strong>rescaling</strong>, shrinking the lattice spacing back so the result can be compared with the original. One transformation maps the set of parameters describing the system (temperature, various couplings…) onto a new set; iterate, and the parameters trace out a <strong>flow</strong> through <strong>parameter space</strong>. Where the flow comes to rest is a <strong>fixed point</strong>, representing a scale-invariant state — the critical point itself. Start anywhere on the same <strong>critical surface</strong> and you are pulled into the same fixed point: <strong>that is universality</strong>. The exponents belong to the fixed point, while the microscopic detail lives in the starting point. Linearising the flow near the fixed point gives a set of eigenvalues: the expanding directions are called <strong>relevant</strong> and correspond to the knobs you must tune to hit criticality (temperature, applied field), usually only one or two; the contracting directions are <strong>irrelevant</strong> and hold every other detail, which decays to zero as you iterate. Detail is not approximated away — it is <strong>washed away</strong> by the flow.</div>
+<figure>
+<svg aria-label="Renormalization group flow in parameter space: critical surface, fixed point, relevant and irrelevant directions" role="img" viewBox="0 0 660 318">
+<defs>
+<marker id="a2" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5">
+<polygon fill="#7db0ff" points="0,0 11,4.5 0,9"></polygon>
+</marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" font-size="11.5" x="20" y="20">Parameter space: each point = one set of microscopic parameters</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="200" x="227" y="40"></rect>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="327" y="60">Disordered fixed point</text>
+<line stroke="#f0ad5a" stroke-width="2" x1="327" x2="327" y1="164" y2="88"></line>
+<polygon fill="#f0ad5a" points="321,88 333,88 327,74"></polygon>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="200" x="227" y="252"></rect>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="327" y="272">Ordered fixed point</text>
+<line stroke="#f0ad5a" stroke-width="2" x1="327" x2="327" y1="188" y2="238"></line>
+<polygon fill="#f0ad5a" points="321,238 333,238 327,252"></polygon>
+<text fill="#f0ad5a" font-size="11.5" x="344" y="112">relevant direction: temperature</text>
+<path d="M 90,158 C 230,182 420,182 575,155" fill="none" stroke="#5b9bff" stroke-width="2.2"></path>
+<line marker-end="url(#a2)" stroke="#7db0ff" stroke-width="2" x1="182" x2="224" y1="170" y2="173"></line>
+<line marker-end="url(#a2)" stroke="#7db0ff" stroke-width="2" x1="474" x2="432" y1="169" y2="172"></line>
+<text fill="#7db0ff" font-size="11.5" x="108" y="126">irrelevant: microscopic detail</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="end" x="592" y="136">critical surface</text>
+<circle cx="143" cy="166" fill="#dbe2f2" r="4"></circle>
+<circle cx="252" cy="174" fill="#dbe2f2" r="4"></circle>
+<circle cx="503" cy="165" fill="#dbe2f2" r="4"></circle>
+<text fill="#dbe2f2" font-size="11.5" text-anchor="middle" x="143" y="152">①</text>
+<text fill="#dbe2f2" font-size="11.5" text-anchor="middle" x="252" y="160">②</text>
+<text fill="#dbe2f2" font-size="11.5" text-anchor="middle" x="503" y="151">③</text>
+<circle cx="327" cy="176" fill="#f0ad5a" r="7"></circle>
+<circle cx="327" cy="176" fill="none" opacity=".6" r="12.5" stroke="#f0ad5a" stroke-width="1.2"></circle>
+<text fill="#f0ad5a" font-size="11.5" x="346" y="206">fixed point: it sets the exponents</text>
+<text fill="#96a0ba" font-size="11" x="20" y="306">① water's liquid–gas critical point　② uniaxial ferromagnet　③ binary-alloy ordering — different starts, one fixed point</text>
+</g>
+</svg>
+<figcaption>Flow along the critical surface washes the details away; flow perpendicular to it pushes you off criticality — universality is the geometry of this picture.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  At the critical point the influence of microscopic detail vanishes <strong>exactly</strong>, not merely approximately: molecular shape, atomic spacing, the precise form of the potential — none of it enters the exponents. Wilson's achievement was to turn "why can the details be ignored?" from a methodological slogan into <strong>a computable geometric fact</strong>. Before that, mean-field theory gave <var>β</var> = 1/2 against an experimental 0.326, wildly off with no account of why: mean field assumes each spin feels only an averaged environment, and at the critical point fluctuations are precisely the thing that cannot be averaged. RG eats the fluctuations one layer at a time, and explains along the way why mean field only becomes correct <strong>above four dimensions</strong> — with enough neighbours, fluctuations are diluted. We unluckily live in <var>d</var>=3.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Particle physics / Materials / AI</span>
+  <ul>
+<li><strong>Particle physics</strong>: the same RG language explains why low-energy experiments cannot see the detail of far higher energy scales — couplings "run" with the energy scale and high-energy detail becomes an irrelevant term down below. This is the technical version of why effective theories work at all;</li>
+<li><strong>Materials</strong>: hunting for a new superconductor does not start from scratch for each compound; establish which symmetry class it belongs to and you can predict what collective excitations and defects (vortices, domain walls) it will have;</li>
+<li><strong>AI</strong>: a deep network dropping detail layer by layer while keeping the features that survive across layers looks a lot like an RG flow, and Mehta &amp; Schwab even constructed an explicit correspondence with RG for restricted Boltzmann machines in 2014. <strong>The honest version</strong>: the analogy is suggestive but does not hold in general — a network's "coarse-graining" is set by the task rather than by scale, and the fixed points do not line up. By the same standard, calling any steep stretch of a training curve a "phase transition" is rhetoric: the physical test is hard-edged — an order parameter, a diverging correlation length, reproducible exponents.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: universality is not a coincidence, it is the geometry of a flow — different starting points, one fixed point pulling them all in.</div>
+<details class="q"><summary><b>Think:</b> If a system's measured exponents do not match the fixed point theory predicts, what should you suspect first?</summary><div class="qa">That it was never in the universality class you assumed. Long-range interactions, quenched disorder, or a finite sample size will each swap the fixed point or squeeze the usable scaling window out of existence. Real exponents only show themselves in the window where the correlation length is far larger than the microscopic scale and far smaller than the sample.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>Why does mean-field theory become correct once the dimension is high enough?</summary>
+<div class="body">The higher the dimension, the more neighbours a spin has, and the more readily those neighbours' fluctuations cancel one another — which makes "replace the environment by its average" a better and better approximation. RG supplies the exact threshold: the <strong>upper critical dimension is 4</strong>. For <var>d</var> &gt; 4 the mean-field exponents (1/2, 1/2, 1) are simply right; for <var>d</var> &lt; 4 fluctuations rewrite them. The same logic explains why two dimensions deviates (1/8) so much further than three (0.326): the further below the threshold, the fiercer the fluctuations.</div></details>
+<details><summary>Do first-order transitions have critical phenomena? And why can very clean water be cooled below zero without freezing?</summary>
+<div class="body">A first-order transition has no diverging correlation length, hence no critical exponents and no universality — but it has a mechanism of its own: <strong>nucleation</strong>. Past the transition point the system does not convert immediately; it waits for a large enough seed of the new phase to appear by chance. Small seeds pay a surface penalty and shrink back; only those above a critical radius grow. That is why, with no impurity to serve as a seed, water can be taken tens of degrees below zero and stay liquid (<strong>supercooling</strong>). Hysteresis, metastability and the avalanche-like completion once it starts all come from this waiting game. Incidentally, a first-order line can terminate at a <strong>critical end point</strong>, where it turns into a continuous transition — which is exactly where the liquid–gas critical point comes from.</div></details>
+<details><summary>Is "operating at the critical point is optimal" being overused?</summary>
+<div class="body">Yes, and it is worth resisting. Criticality does have tempting properties: the longest correlations, the greatest sensitivity to perturbation, the widest dynamic range — hence the popularity of "brains / ecosystems / organisations should run at the critical point." But <strong>sensitivity</strong> is a virtue when information has to travel far and a disaster when the thing has to stay put: sitting exactly at criticality, a little noise flips the whole system. The likelier arrangement is <strong>near but not at</strong> the critical point, trading a little distance for stability. Using "critical" as a term of praise quietly converts a descriptive concept into a normative recommendation.</div></details>
+<details><summary>Are first-order and continuous the only kinds of transition?</summary>
+<div class="body">No. There are also <strong>topological transitions</strong>. In the two-dimensional XY model the order parameter can rotate freely in a plane, and the Mermin–Wagner theorem forbids long-range order in the usual sense — yet the system still has a sharp transition: at low temperature vortices are bound in pairs, at high temperature the pairs unbind and wander off. This is the <strong>Kosterlitz–Thouless transition</strong> (Nobel Prize in Physics 2016). It has no order parameter and no symmetry breaking; what changes is <strong>the behaviour of defects</strong>. That thread eventually pushed the classification of matter toward topological phases, which the piece on the wonders of condensed matter will pick up.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>K. G. Wilson, <a href="https://www.nobelprize.org/prizes/physics/1982/wilson/lecture/">Nobel Lecture 1982, "The Renormalization Group and Critical Phenomena"</a> — the man explaining how he got there</li>
+<li>L. P. Kadanoff, <a href="https://journals.aps.org/ppf/abstract/10.1103/PhysicsPhysiqueFizika.2.263"><em>"Scaling laws for Ising models near T<sub>c</sub>,"</em> 1966</a> — the original block-spin idea</li>
+<li><a href="https://en.wikipedia.org/wiki/Renormalization_group">Wikipedia: Renormalization group</a> / <a href="https://en.wikipedia.org/wiki/Universality_class">Universality class</a> / <a href="https://en.wikipedia.org/wiki/Critical_exponent">Critical exponent</a> — concepts and numbers</li>
+<li>N. Goldenfeld, <a href="https://www.taylorfrancis.com/books/mono/10.1201/9780429493492/lectures-phase-transitions-renormalization-group-nigel-goldenfeld"><em>Lectures on Phase Transitions and the Renormalization Group</em></a> — the standard text, unusually readable</li>
+<li>P. Bak, C. Tang &amp; K. Wiesenfeld, <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.59.381"><em>"Self-organized criticality,"</em> <em>PRL</em> 59 (1987) 381</a> — sandpiles and power laws</li>
+<li>J. Beggs &amp; D. Plenz, <a href="https://www.jneurosci.org/content/23/35/11167"><em>"Neuronal Avalanches in Neocortical Circuits,"</em> <em>J. Neurosci.</em> 2003</a> — where brain-criticality began</li>
+<li><a href="https://en.wikipedia.org/wiki/Critical_opalescence">Wikipedia: Critical opalescence</a> — that tube of carbon dioxide going cloudy</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
