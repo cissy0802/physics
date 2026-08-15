@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: The Wonders of Condensed Matter · Day 34</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>The Wonders of Condensed Matter</h1>
+<div class="meta">Day 34 · 2026 · Phase H Condensed Matter &amp; Emergence</div>
+<div class="tagline">Cool a pile of thoroughly ordinary atoms far enough and they will collectively do things no single atom can do.</div>
+</header>
+<div class="intro">
+"More is different" is about why a level cannot be reduced away; "Phase transitions and criticality" is about what the kink itself looks like. <b>What actually comes out on the far side of the kink</b> is where condensed matter physics really lives. The answer is absurd: aluminium, helium, gallium arsenide — utterly ordinary materials — get cold enough and a current will circle a ring for a year with no measurable decay; a liquid will climb the walls of its own cup and empty it; a slab of material will report a resistance good to nine decimal places, and a different sample will report the same number. None of this is precision engineering. The atoms organise it themselves.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>A New Cast of Characters <span class="en">Collective Excitations &amp; Quasiparticles</span></h2>
+<span class="pill">phonons · holes · effective mass</span>
+<div class="field"><span class="lab">Intuition</span>
+  A cubic centimetre of copper holds some 10<sup>23</sup> electrons, every one of them interacting with every other electron and every ion at once. Solving for them one by one is hopeless — not because the computer is too slow, but because the equations cannot even be written down. And yet copper behaves absurdly simply: its resistance rises dutifully and linearly with temperature. Where does the simplicity come from? From not watching the individual electrons. <strong>What is genuinely simple is what they do together.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  Strike a crystal and the atoms do not each vibrate on their own; the whole lattice vibrates together, in modes with definite wavelengths and frequencies. Quantum mechanics then adds its rule: the energy of each mode can only be added or removed one portion at a time,
+  <div class="eq"><var>E</var> = <var>ℏ</var><var>ω</var></div>
+<div class="gloss"><var>ℏ</var> is read "h-bar", Planck's constant divided by 2π — the exchange rate for "one portion" in the quantum world; <var>ω</var> is the Greek letter omega, how fast the mode oscillates — <strong>the faster it oscillates, the bigger each portion of energy</strong>.</div>
+  That portion behaves exactly like a particle: it carries energy and momentum, it scatters off impurities, it collides with its own kind. So it gets called a <strong>phonon</strong> — one motion of an entire lattice, packaged as a particle. The line from <a href="quantum-field-theory-day23.en.html">"Quantum field theory"</a> — particles are excitations of a field — replays here, except this time the "field" is a solid you can hold. The same trick mints other characters: in a semiconductor, the vacancy left where an electron is missing behaves exactly like a positively charged particle (a <strong>hole</strong>); an electron dragging along the lattice distortion it creates gains inertia, and one number — an <strong>effective mass</strong> <var>m</var>* — captures the whole business. Collectively: <strong>quasiparticles</strong>.</div>
+<figure>
+<svg aria-label="Left: collective lattice vibration quantised into a phonon. Right: an electron dressed by lattice distortion forms a quasiparticle." role="img" viewbox="0 0 660 268">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="20" y="20">① A collective mode: the whole lattice moves at once</text>
+<line stroke="#3b4664" stroke-dasharray="5 5" stroke-width="1" x1="36" x2="304" y1="120" y2="120"></line>
+<path d="M 36,125.4 L 40,120.0 L 44,114.6 L 48,109.4 L 52,104.7 L 56,100.4 L 60,97.0 L 64,94.3 L 68,92.7 L 72,92.0 L 76,92.4 L 80,93.8 L 84,96.2 L 88,99.5 L 92,103.5 L 96,108.2 L 100,113.3 L 104,118.6 L 108,124.0 L 112,129.3 L 116,134.2 L 120,138.6 L 124,142.2 L 128,145.1 L 132,147.0 L 136,147.9 L 140,147.8 L 144,146.6 L 148,144.5 L 152,141.4 L 156,137.5 L 160,133.0 L 164,128.0 L 168,122.7 L 172,117.3 L 176,112.0 L 180,107.0 L 184,102.5 L 188,98.6 L 192,95.5 L 196,93.4 L 200,92.2 L 204,92.1 L 208,93.0 L 212,94.9 L 216,97.8 L 220,101.4 L 224,105.8 L 228,110.7 L 232,116.0 L 236,121.4 L 240,126.7 L 244,131.8 L 248,136.5 L 252,140.5 L 256,143.8 L 260,146.2 L 264,147.6 L 268,148.0 L 272,147.3 L 276,145.7 L 280,143.0 L 284,139.6 L 288,135.3 L 292,130.6 L 296,125.4 L 300,120.0 L 304,114.6" fill="none" stroke="#5b9bff" stroke-linejoin="round" stroke-width="2.2"></path>
+<g fill="#dbe2f2">
+<circle cx="40" cy="120" r="5"></circle><circle cx="66" cy="93" r="5"></circle><circle cx="92" cy="104" r="5"></circle><circle cx="118" cy="137" r="5"></circle><circle cx="144" cy="147" r="5"></circle><circle cx="170" cy="120" r="5"></circle><circle cx="196" cy="93" r="5"></circle><circle cx="222" cy="104" r="5"></circle><circle cx="248" cy="137" r="5"></circle><circle cx="274" cy="147" r="5"></circle><circle cx="300" cy="120" r="5"></circle>
+</g>
+<line stroke="#96a0ba" stroke-dasharray="3 3" stroke-width="1" x1="66" x2="66" y1="76" y2="88"></line>
+<line stroke="#96a0ba" stroke-dasharray="3 3" stroke-width="1" x1="196" x2="196" y1="76" y2="88"></line>
+<line stroke="#96a0ba" stroke-width="1.4" x1="78" x2="184" y1="70" y2="70"></line>
+<polygon fill="#96a0ba" points="66,70 78,64 78,76"></polygon>
+<polygon fill="#96a0ba" points="196,70 184,64 184,76"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="131" y="58">one wavelength</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="170" y="192">the mode's energy comes in portions</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="170" y="212">one portion = one phonon</text>
+<text fill="#dbe2f2" font-family="Georgia, serif" font-size="17" font-style="italic" text-anchor="middle" x="170" y="242">E = ℏω</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="326" x2="326" y1="36" y2="244"></line>
+<text fill="#f0ad5a" font-size="11.5" x="348" y="20">② An electron in its coat: a quasiparticle</text>
+<g fill="none" stroke="#3b4664" stroke-dasharray="2 3" stroke-width="1">
+<circle cx="460" cy="96" r="6.5"></circle><circle cx="502" cy="96" r="6.5"></circle><circle cx="544" cy="96" r="6.5"></circle><circle cx="460" cy="164" r="6.5"></circle><circle cx="502" cy="164" r="6.5"></circle><circle cx="544" cy="164" r="6.5"></circle>
+</g>
+<ellipse cx="502" cy="130" fill="none" opacity=".8" rx="64" ry="46" stroke="#f0ad5a" stroke-dasharray="6 5" stroke-width="1.4"></ellipse>
+<g fill="#39496f" stroke="#5a6b96" stroke-width="1">
+<circle cx="376" cy="96" r="6.5"></circle><circle cx="418" cy="96" r="6.5"></circle><circle cx="468" cy="110" r="6.5"></circle><circle cx="502" cy="110" r="6.5"></circle><circle cx="536" cy="110" r="6.5"></circle><circle cx="586" cy="96" r="6.5"></circle><circle cx="628" cy="96" r="6.5"></circle>
+<circle cx="376" cy="164" r="6.5"></circle><circle cx="418" cy="164" r="6.5"></circle><circle cx="468" cy="150" r="6.5"></circle><circle cx="502" cy="150" r="6.5"></circle><circle cx="536" cy="150" r="6.5"></circle><circle cx="586" cy="164" r="6.5"></circle><circle cx="628" cy="164" r="6.5"></circle>
+</g>
+<circle cx="502" cy="130" fill="#5b9bff" r="8"></circle>
+<text fill="#0a0e1a" font-size="13" font-weight="700" text-anchor="middle" x="502" y="135">−</text>
+<line stroke="#5a6b96" stroke-width="1" x1="440" x2="464" y1="72" y2="100"></line>
+<text fill="#96a0ba" font-size="11" x="348" y="62">ions pulled in (dashed = original site)</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="500" y="212">electron + the distortion it makes = a new particle</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="500" y="240">the price is weight: effective mass m*</text>
+</g>
+</svg>
+<figcaption>Neither the "portion" on the left nor the fat electron on the right is any particular atom — yet in the cold, low-energy world they are the elementary particles.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  A quasiparticle is not something as flimsy as an "approximation": within the cold, low-energy regime <strong>they are what this system's elementary particles actually are</strong> — mass, lifetime and scattering cross-section are all measurable, and no operational test distinguishes them from "real" particles. The only difference is that they depend on the level beneath them: smash the copper and the phonons go with it, while the electrons remain. <strong>"Elementary" is always relative to a level.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Chips / Heat / AI</span>
+  Swapping in a new set of effective degrees of freedom is a portable craft —
+  <ul>
+<li><strong>Chips</strong>: the working language of the semiconductor industry is electrons and holes; not one device design starts from 10<sup>23</sup> particles. The hole is a quasiparticle through and through, and the entire field-effect transistor is built on it;</li>
+<li><strong>Heat</strong>: the leading strategy in thermoelectrics is "phonon glass, electron crystal" — build in structure that scatters phonons but not electrons, and thermal conductivity falls while electrical conductivity survives;</li>
+<li><strong>AI</strong>: what does the work inside a trained network is often not a single neuron but a direction across neurons. <strong>Honestly</strong>: that is an analogy of approach, not the same mathematics — quasiparticles have measurable energy, momentum and lifetime; a direction in a network has none of those.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: the way around 10<sup>23</sup> particles is to recast the play with only a few characters.</div>
+<details class="q"><summary><b>Think:</b> If a phonon is only "a motion of the lattice", in what sense can it scatter off an impurity?</summary><div class="qa">Because an impurity breaks the lattice's periodicity, and periodicity is exactly what defines the phonon. Hitting one, a clean mode gets broken up into several other modes — which, in the bookkeeping of energy and momentum, is exactly equivalent to a particle striking a target and changing direction.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Pair Up, Then Condense Together <span class="en">Superconductivity &amp; Superfluidity</span></h2>
+<span class="pill">Onnes 1911 · BCS 1957 · the helium λ point</span>
+<div class="field"><span class="lab">Intuition</span>
+  In 1911 Kamerlingh Onnes cooled mercury to 4.2 K and the resistance did not shrink gradually — it <strong>fell straight into the unmeasurable</strong>: start a current going around a superconducting ring, cut the power, watch year after year, and the magnetic field shows no measurable decay. Liquid helium below 2.17 K changes character too: it slips <strong>frictionlessly through cracks barely wider than an atom</strong>, and it will climb the wall of its container and empty it. "Almost no resistance" and "zero resistance" are not a difference of degree but of kind.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Bardeen, Cooper and Schrieffer (BCS) answered this in 1957, and the core of it sounds impossible: <strong>two electrons must attract each other</strong>. They obviously repel — the matchmaker is the lattice. The first electron sweeping past tugs the nearby positive ions a little towards itself; the ions are heavy and slow, so by the time they have shifted the electron is long gone, leaving behind a small patch of <strong>momentarily concentrated positive charge</strong>. A second electron is drawn to that patch. Two electrons have shaken hands through the lattice, on a delay — that is a <strong>Cooper pair</strong>. Paired up, their total spin is an integer, so like bosons they can all crowd into the same quantum state, and the whole superconductor is described by <strong>one macroscopic wavefunction</strong>. Breaking it means tearing a pair apart, and tearing costs energy:</div>
+<figure>
+<svg aria-label="Left: electrons attract indirectly via lattice distortion to form a Cooper pair. Right: energy menus of a normal metal and a superconductor, the latter with a gap." role="img" viewbox="0 0 660 320">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" font-size="11.5" x="20" y="20">a handshake through the lattice, on a delay</text>
+<g fill="#39496f" stroke="#5a6b96" stroke-width="1">
+<circle cx="42" cy="92" r="6.5"></circle><circle cx="84" cy="92" r="6.5"></circle><circle cx="126" cy="110" r="6.5"></circle><circle cx="168" cy="110" r="6.5"></circle><circle cx="210" cy="110" r="6.5"></circle><circle cx="252" cy="92" r="6.5"></circle><circle cx="294" cy="92" r="6.5"></circle><circle cx="336" cy="92" r="6.5"></circle>
+<circle cx="42" cy="192" r="6.5"></circle><circle cx="84" cy="192" r="6.5"></circle><circle cx="126" cy="174" r="6.5"></circle><circle cx="168" cy="174" r="6.5"></circle><circle cx="210" cy="174" r="6.5"></circle><circle cx="252" cy="192" r="6.5"></circle><circle cx="294" cy="192" r="6.5"></circle><circle cx="336" cy="192" r="6.5"></circle>
+</g>
+<ellipse cx="168" cy="142" fill="#f0ad5a" opacity=".13" rx="48" ry="42"></ellipse>
+<text fill="#c99a4e" font-size="11" text-anchor="middle" x="168" y="146">positive</text>
+<text fill="#c99a4e" font-size="11" text-anchor="middle" x="168" y="162">for a moment</text>
+<circle cx="120" cy="142" fill="#5b9bff" r="8"></circle>
+<text fill="#0a0e1a" font-size="13" font-weight="700" text-anchor="middle" x="120" y="147">−</text>
+<line stroke="#5b9bff" stroke-width="1.8" x1="98" x2="72" y1="142" y2="142"></line>
+<polygon fill="#5b9bff" points="60,142 74,136 74,148"></polygon>
+<text fill="#7db0ff" font-size="11" text-anchor="middle" x="86" y="126">goes first</text>
+<circle cx="290" cy="142" fill="#5b9bff" r="8"></circle>
+<text fill="#0a0e1a" font-size="13" font-weight="700" text-anchor="middle" x="290" y="147">−</text>
+<line stroke="#5b9bff" stroke-width="1.8" x1="276" x2="246" y1="142" y2="142"></line>
+<polygon fill="#5b9bff" points="234,142 248,136 248,148"></polygon>
+<text fill="#7db0ff" font-size="11" text-anchor="middle" x="302" y="126">drawn in</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="180" y="248">the electron tugs the ions, leaving positive charge behind</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="180" y="268">a second electron is drawn to it — the two are a Cooper pair</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="388" x2="388" y1="36" y2="280"></line>
+<text fill="#96a0ba" font-size="11.5" x="408" y="20">the electron's energy menu</text>
+<line stroke="#56607e" stroke-width="1.4" x1="420" x2="420" y1="254" y2="52"></line>
+<polygon fill="#56607e" points="414,54 426,54 420,40"></polygon>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" transform="rotate(-90 404 152)" x="404" y="152">energy</text>
+<rect fill="#16203a" height="90" stroke="#2b3a5e" width="58" x="436" y="60"></rect>
+<rect fill="#2c4373" height="104" stroke="#2b3a5e" width="58" x="436" y="150"></rect>
+<line stroke="#96a0ba" stroke-dasharray="4 4" stroke-width="1" x1="430" x2="510" y1="150" y2="150"></line>
+<rect fill="#16203a" height="76" stroke="#2b3a5e" width="58" x="546" y="60"></rect>
+<rect fill="#0a0e1a" height="40" stroke="#6a5326" stroke-dasharray="4 4" width="58" x="546" y="136"></rect>
+<rect fill="#2c4373" height="78" stroke="#2b3a5e" width="58" x="546" y="176"></rect>
+<line stroke="#f0ad5a" stroke-width="1.6" x1="618" x2="618" y1="142" y2="170"></line>
+<polygon fill="#f0ad5a" points="612,142 624,142 618,132"></polygon>
+<polygon fill="#f0ad5a" points="612,170 624,170 618,180"></polygon>
+<text fill="#f0ad5a" font-family="Georgia, serif" font-size="14" x="628" y="161">2Δ</text>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="465" y="272">normal metal</text>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="575" y="272">superconductor</text>
+<text fill="#7db0ff" font-size="11" text-anchor="middle" x="465" y="290">a slot right above</text>
+<text fill="#f0ad5a" font-size="11" text-anchor="middle" x="575" y="290">a band with nothing in it</text>
+</g>
+</svg>
+<figcaption>That empty band on the right is not a drawing error: excitations below 2Δ simply do not exist in a superconductor, a disturbance without that much energy cannot budge a single electron, and so scattering has nowhere to go.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · continued</span>
+  <div class="eq">2<var>Δ</var> ≈ 3.5 <var>k</var><sub>B</sub><var>T</var><sub>c</sub></div>
+<div class="gloss"><var>Δ</var> is the Greek letter delta, called the <strong>energy gap</strong>; splitting a pair costs 2<var>Δ</var>. <var>k</var><sub>B</sub> is Boltzmann's constant, which converts a temperature into an energy (subscript B for Boltzmann); <var>T</var><sub>c</sub> is the <strong>critical temperature</strong> (subscript is the letter c, from "critical"). Below <var>T</var><sub>c</sub> thermal jostling cannot clear the gap, pairs cannot be broken up, and the current has nowhere to lose energy.</div>
+  The prettiest evidence is the <strong>flux quantum</strong>: the magnetic flux threading a superconducting ring can only be an integer multiple of <var>Φ</var><sub>0</sub> = <var>h</var>/2<var>e</var> ≈ 2.07 × 10<sup>−15</sup> weber (<var>Φ</var> is the Greek letter phi, <var>e</var> is the charge of one electron). The <strong>2</strong> in that denominator is the smoking gun — the carriers have charge 2<var>e</var>, exactly one pair of electrons — and two independent experiments measured it in 1961. The other signature is the <strong>Meissner effect</strong> (1933): a superconductor also actively expels magnetic field from its interior — which is what holds a magnet levitating above a superconducting block.</div>
+<div class="field"><span class="lab">Mechanism · the other side</span>
+  Run the same script on uncharged particles and you get <strong>superfluidity</strong>. A helium-4 atom has integer total spin, so it is already a <strong>boson</strong> and even the pairing step is unnecessary — bosons may occupy the same quantum state in any number, and once it is cold enough a macroscopic count of atoms drops together into the lowest state (<strong>Bose–Einstein condensation</strong>, Nobel 2001). Making the condensate lose energy means changing the whole thing at once, and a gentle disturbance at low speed cannot afford it, so the viscosity goes exactly to zero. That "whole thing" has hard evidence: superfluid <strong>circulation is quantised</strong> —
+  <div class="eq"><var>κ</var> = <var>n</var> <span class="frac"><span class="fnum"><var>h</var></span><span class="fden"><var>m</var></span></span> ,　<var>n</var> = 0, 1, 2, …</div>
+<div class="gloss"><var>κ</var> is the Greek letter kappa, the <strong>circulation</strong> around a loop; <var>h</var> is Planck's constant and <var>m</var> the mass of one helium atom; <var>n</var> may only be an <strong>integer</strong>, including the <span class="nowrap">number 0 (zero)</span>. Spin a bucket of superfluid helium and it does not rotate as a body: either it sits perfectly still, or one, then two <strong>thin vortices each carrying one unit of circulation</strong> abruptly appear — the vortex count can only jump. Those vortices have been photographed directly.</div>
+  Helium-3 is a fermion, so it has to pair up two by two before it can condense, at the price of a temperature down near 2 millikelvin. <strong>Pair up, then condense together</strong> — the only difference is that in a superconductor the flowing pairs are charged.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  These phenomena get described as "quantum effects blown up to visible scale", which is true but very easy to misread as "a cup of liquid helium has become Schrödinger's cat". What actually happens is that untold numbers of particles occupy <strong>the same</strong> quantum state, so that state's phase stops being a microscopic quantity and becomes a macroscopic variable shared by the whole slab — what has been magnified is <strong>coherence</strong>, not <strong>superposition</strong>. As for room-temperature superconductivity: the ambient-pressure record still belongs to the cuprates, a little above 130 K; <strong>the most sensational recent claims of room-temperature superconductivity, including two published in top journals, have been retracted</strong>, and 2023's LK-99 was judged by multiple independent groups to be an artefact of impurities. Every announcement deserves the same first question: diamagnetism, zero resistance, a jump in specific heat — are all three there?</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Medicine / Computing / Astrophysics</span>
+  <ul>
+<li><strong>Medicine</strong>: the several-tesla field inside an MRI scanner comes from superconducting coils — ordinary copper windings producing the same field would generate enough heat to destroy themselves. The tens of thousands of MRI machines worldwide are still superconductivity's largest civilian market;</li>
+<li><strong>Computing</strong>: one of the leading qubit designs is a superconducting loop with a Josephson junction, working precisely because that macroscopic phase can be manipulated as a quantum state — details in <a href="quantum-technology-day24.en.html">"Quantum technology"</a>;</li>
+<li><strong>Astrophysics</strong>: neutron stars are thought to contain neutron superfluid. Pulsars occasionally speed up by a hair (a "glitch"), and the leading explanation is superfluid vortices inside unpinning in batches and handing their angular momentum to the crust — millikelvin laboratory physics used to explain a collapsed star.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: pair up, then condense together — one script shared by zero resistance and zero viscosity.</div>
+<details class="q"><summary><b>Think:</b> If superconductivity relies on the lattice as matchmaker, does making a material "cleaner" make it superconduct more easily?</summary><div class="qa">Usually the opposite. Copper, silver and gold are the best ordinary conductors and superconduct at no temperature at all, precisely because their electrons couple too weakly to the lattice — the matchmaker is useless. Lead and mercury, which have poor room-temperature conductivity, superconduct readily.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Accurate to One Part in a Billion <span class="en">Topological Phases</span></h2>
+<span class="pill">quantum Hall 1980 · Chern number · Nobel 2016</span>
+<div class="field"><span class="lab">Intuition</span>
+  In 1980 Klaus von Klitzing put a two-dimensional electron gas trapped at a semiconductor interface into a strong magnetic field, cooled it to liquid-helium temperatures and measured its Hall resistance. Classically that should be a straight line; what he measured was a series of <strong>plateaus</strong>: the field would change by a large amount with the reading dead still, then jump abruptly to the next step. Worse, the value on a plateau <strong>does not depend on whether the sample is silicon or gallium arsenide, how dirty or clean it is, or whether it is square or round</strong>, and it reproduces to about one part in a billion.</div>
+<figure>
+<svg aria-label="Hall conductance versus magnetic field, showing integer plateaus as a staircase" role="img" viewbox="0 0 660 300">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" font-size="11.5" x="20" y="20">Hall conductance (in units of e²/h) against magnetic field: not a ramp, a staircase</text>
+<g stroke="#26314c" stroke-dasharray="4 6" stroke-width="1">
+<line x1="100" x2="620" y1="60" y2="60"></line><line x1="100" x2="620" y1="105" y2="105"></line><line x1="100" x2="620" y1="150" y2="150"></line><line x1="100" x2="620" y1="195" y2="195"></line>
+</g>
+<line stroke="#56607e" stroke-width="1.5" x1="100" x2="100" y1="240" y2="52"></line>
+<polygon fill="#56607e" points="94,54 106,54 100,40"></polygon>
+<line stroke="#56607e" stroke-width="1.5" x1="100" x2="620" y1="240" y2="240"></line>
+<polygon fill="#56607e" points="620,234 620,246 634,240"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="612" y="260">magnetic field B →</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="64">4</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="109">3</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="154">2</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="199">1</text>
+<path d="M 120,60 L 210,60 C 228,60 237,105 255,105 L 345,105 C 363,105 372,150 390,150 L 490,150 C 508,150 512,195 530,195 L 612,195" fill="none" stroke="#5b9bff" stroke-width="2.6"></path>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="165" y="50">ν = 4</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="300" y="95">ν = 3</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="440" y="140">ν = 2</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="571" y="185">ν = 1</text>
+<text fill="#c99a4e" font-size="11.5" x="20" y="282">ν on a plateau is exactly an integer: change the material, the shape, the dirt — the same number comes back</text>
+</g>
+</svg>
+<figcaption>On the treads of the staircase the longitudinal resistance simultaneously drops to zero — on a plateau the electrons are not scattering at all.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism</span>
+  The Hall conductance on a plateau is exactly
+  <div class="eq"><var>σ</var><sub>xy</sub> = <var>ν</var> <span class="frac"><span class="fnum"><var>e</var><sup>2</sup></span><span class="fden"><var>h</var></span></span></div>
+<div class="gloss"><var>σ</var> is the Greek letter sigma, the conductance; the subscript xy means "current along x, voltage measured along y". <var>e</var><sup>2</sup>/<var>h</var> is a unit of conductance built purely from constants of nature (<var>e</var> the electron charge, <var>h</var> Planck's constant). Everything hinges on <var>ν</var> (the Greek letter nu — not the letter v): it can only be an <strong>integer</strong>.</div>
+  Why an integer? Thouless and colleagues answered that in 1982: <var>ν</var> is not a tunable physical parameter but the number of times the electron wavefunction winds as it goes once around momentum space — mathematically a <strong>Chern number</strong>, a <strong>topological invariant</strong>. Topological quantities have a particular temperament: <strong>short of tearing the system open, you can deform it however you like and the number will not budge</strong>, in the way a doughnut has one hole or two but never 1.3. Impurities, deformation and a change of material are all "deforming", and none of them can move an integer — dirtiness is simply not in this ledger. The same idea later grew into an entire field: a <strong>topological insulator</strong> is insulating inside yet necessarily carries conducting channels on its boundary, and those edge states are topologically protected against scattering by ordinary impurities (observed in mercury telluride quantum wells in 2007). The 2016 Nobel Prize in Physics went to this line of work.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  What appears here is rare in physics: a <strong>filthy, disordered many-body system handing back a number more accurate than most precision measurements</strong> — the international resistance standard was for a time defined directly on a quantum Hall plateau (<var>R</var><sub>K</sub> = <var>h</var>/<var>e</var><sup>2</sup> ≈ 25812.807 ohms). Push deeper into strong field and <strong>fractional</strong> plateaus such as <var>ν</var> = 1/3 appear (Nobel 1998), where the quasiparticles carry <strong>one third of an electron charge</strong> — measured directly in noise experiments in 1997. An electron cannot be divided; its collective excitations can carry a fractional charge anyway. As demonstrations that an emergent degree of freedom need not resemble its constituents, this is the hardest one there is.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Metrology / Mathematics / Fault tolerance</span>
+  <ul>
+<li><strong>Metrology</strong>: a material can serve as a standard not because it was fabricated perfectly but because its output is locked by topology — "accuracy" stops being a manufacturing problem and becomes a matter of principle;</li>
+<li><strong>Mathematics</strong>: Chern numbers, genus and winding numbers began as pure mathematical objects and are now observables you read off a number from in a laboratory;</li>
+<li><strong>Fault tolerance</strong>: encode quantum information in topological degrees of freedom and local noise cannot in principle touch it — the entire hope of topological quantum computing. <strong>Honestly</strong>: the Majorana quasiparticle that frames the scheme has had a contested experimental record — a landmark 2018 paper was retracted in 2021, and several high-profile announcements since have drawn public criticism of their criteria. The <strong>mathematics</strong> of topological protection is sound; the hard part is proving that the material in your hand is really in that phase.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: topological phases are exact because their number is not measured but counted.</div>
+<details class="q"><summary><b>Think:</b> If topological protection is so robust, why does the quantum Hall effect still demand strong fields and very low temperatures?</summary><div class="qa">Because protection presupposes that the system sits inside a gap: the strong field opens the gap, and low temperature keeps thermal jostling below it. Once the temperature is high enough to excite electrons across the gap, the premise is gone.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>High-temperature superconductivity is nearly forty years old. Why is it still unsolved?</summary>
+<div class="body">In 1986 the cuprates broke the temperature ceiling everyone assumed (Bednorz and Müller, awarded the Nobel the following year), yet what the pairing "glue" is remains undecided. BCS is calculable because the interaction between electrons is weak enough to treat as a perturbation; in the cuprates the repulsion is comparable to the kinetic energy, so <strong>there is no small parameter to expand in</strong>. What is settled is that pairing exists, that a pair carries charge 2e, and that the pair wavefunction has d-wave symmetry — what is unsettled is precisely the crucial link.</div></details>
+<details><summary>Is the "detail-independence" of topological phases the same as universality at a critical point?</summary>
+<div class="body">No — the sources differ. In <a href="phase-transitions-criticality-day33.en.html">"Phase transitions and criticality"</a> the detail-independence is <strong>dynamical</strong>: the renormalization flow washes irrelevant directions away, and it holds only near the critical point. Topological detail-independence is <strong>geometric</strong>: the invariant is an integer, continuous deformation simply cannot change it, and it holds throughout the phase. One is "washed away", the other is "unchangeable in the first place".</div></details>
+<details><summary>Why do these wonders only show up at extreme cold? Is there no collective spectacle at room temperature?</summary>
+<div class="body">Cold is there to keep the typical thermal energy below the protecting gap, so the threshold temperature really comes down to how big the gap is. But "must be extremely cold" is not a general law: a ferromagnet has long-range order at hundreds of kelvin, and the magnet in your hand is a room-temperature product of collective quantum behaviour. What is genuinely hard to sustain at room temperature is the <strong>phase-coherent</strong> family — it needs a large gap, which is exactly why room-temperature superconductivity is difficult.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>J. Bardeen, L. N. Cooper &amp; J. R. Schrieffer, <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.108.1175"><em>"Theory of Superconductivity"</em>, <em>Phys. Rev.</em> 108 (1957) 1175</a> — the original BCS paper</li>
+<li>J. Bardeen, <a href="https://www.nobelprize.org/prizes/physics/1972/bardeen/lecture/">Nobel lecture, 1972</a> — the pairing mechanism in its author's words</li>
+<li>K. von Klitzing, G. Dorda &amp; M. Pepper, <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.45.494"><em>"New Method for High-Accuracy Determination of the Fine-Structure Constant…"</em>, <em>PRL</em> 45 (1980) 494</a> — the discovery of the quantum Hall effect</li>
+<li>D. J. Thouless, M. Kohmoto, M. P. Nightingale &amp; M. den Nijs, <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.49.405"><em>"Quantized Hall Conductance in a Two-Dimensional Periodic Potential"</em>, <em>PRL</em> 49 (1982) 405</a> — why the plateaus are integers</li>
+<li>D. C. Tsui, H. L. Störmer &amp; A. C. Gossard, <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.48.1559"><em>"Two-Dimensional Magnetotransport in the Extreme Quantum Limit"</em>, <em>PRL</em> 48 (1982) 1559</a> — the fractional plateaus</li>
+<li>J. G. Bednorz &amp; K. A. Müller, <a href="https://link.springer.com/article/10.1007/BF01303701"><em>"Possible high T<sub>c</sub> superconductivity in the Ba−La−Cu−O system"</em>, 1986</a> — where high-T<sub>c</sub> begins</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2016/popular-information/">Nobel Prize in Physics 2016, popular information</a> — topological phases explained with a doughnut</li>
+<li><a href="https://en.wikipedia.org/wiki/Superfluid_helium-4">Wikipedia: Superfluid helium-4</a> / <a href="https://en.wikipedia.org/wiki/Quasiparticle">Quasiparticle</a> / <a href="https://en.wikipedia.org/wiki/Room-temperature_superconductor">Room-temperature superconductor</a> — the concepts, and the controversies</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

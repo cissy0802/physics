@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：凝聚态的奇迹 · Day 34</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue); text-decoration:none; border-bottom:1px solid #2b3a5e}
+  .read a:hover{color:var(--amber); border-bottom-color:#6a5326}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>凝聚态的奇迹</h1>
+<div class="meta">Day 34 · 2026 · Phase H 凝聚态与涌现</div>
+<div class="tagline">把一堆平平无奇的原子降到足够冷，它们会集体做出单个原子绝对做不到的事。</div>
+</header>
+<div class="intro">
+「更多即不同」说层级为什么不能被还原掉，「相变与临界」说折点本身长什么样；<b>折点另一侧究竟冒出什么东西</b>，才是凝聚态物理真正的战场。答案相当离谱：铝、氦、砷化镓都是再普通不过的材料，降到足够冷之后，电流能绕着环流上一年而测不出衰减；液体会自己爬过杯壁跑出来；一块材料的电阻精确到小数点后九位，换个样品还是同一个数。这些不是精密工程堆出来的，是原子自己组织出来的。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>换一套主角 <span class="en">Collective Excitations &amp; Quasiparticles</span></h2>
+<span class="pill">声子 · 空穴 · 有效质量</span>
+<div class="field"><span class="lab">直觉</span>
+  一立方厘米的铜里有约 10<sup>23</sup> 个电子，每个都同时和其余所有电子、所有离子相互作用，逐个求解彻底没希望——不是算力不够，是方程连写都写不完。可铜的性质偏偏简单得离谱：电阻随温度老老实实地线性变化。简单从哪来的？因为不该盯着单个电子看，<strong>真正简单的是它们的集体动作</strong>。</div>
+<div class="field"><span class="lab">机制</span>
+  敲一下晶体，原子不会各振各的，而是整片一起振，形成一个个有确定波长和频率的<strong>振动模式</strong>。量子力学接着说：每个模式的能量只能一份一份地加减，
+  <div class="eq"><var>E</var> = <var>ℏ</var><var>ω</var></div>
+<div class="gloss"><var>ℏ</var> 读「h 拔」，是普朗克常数除以 2π，量子世界里「一份」的换算率；<var>ω</var> 是希腊字母 omega（读「欧米伽」），指这个模式振得多快——<strong>振得越快，每一份能量就越大</strong>。</div>
+  这「一份」的行为跟粒子一模一样：有能量、有动量、会被杂质散射、会互相碰撞，于是干脆叫它<strong>声子</strong>——整片晶格的一个动作被打包成了粒子，<a href="quantum-field-theory-day23.html">「量子场论入门」</a>里「粒子是场的激发」那句话在这里重演，只不过这次的「场」是一块摸得着的固体。同一招还能造别的角色：半导体里少掉一个电子的空位，行为完全像一个带正电的粒子（<strong>空穴</strong>）；电子拖着自己造成的晶格畸变走，惯性变大，用一个<strong>有效质量</strong> <var>m</var>* 描述就够。统称<strong>准粒子</strong>。</div>
+<figure>
+<svg aria-label="左：晶格集体振动被量子化成声子；右：电子拖着晶格畸变构成准粒子" role="img" viewbox="0 0 660 268">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="20" y="20">① 集体模式：整片晶格一起动</text>
+<line stroke="#3b4664" stroke-dasharray="5 5" stroke-width="1" x1="36" x2="304" y1="120" y2="120"></line>
+<path d="M 36,125.4 L 40,120.0 L 44,114.6 L 48,109.4 L 52,104.7 L 56,100.4 L 60,97.0 L 64,94.3 L 68,92.7 L 72,92.0 L 76,92.4 L 80,93.8 L 84,96.2 L 88,99.5 L 92,103.5 L 96,108.2 L 100,113.3 L 104,118.6 L 108,124.0 L 112,129.3 L 116,134.2 L 120,138.6 L 124,142.2 L 128,145.1 L 132,147.0 L 136,147.9 L 140,147.8 L 144,146.6 L 148,144.5 L 152,141.4 L 156,137.5 L 160,133.0 L 164,128.0 L 168,122.7 L 172,117.3 L 176,112.0 L 180,107.0 L 184,102.5 L 188,98.6 L 192,95.5 L 196,93.4 L 200,92.2 L 204,92.1 L 208,93.0 L 212,94.9 L 216,97.8 L 220,101.4 L 224,105.8 L 228,110.7 L 232,116.0 L 236,121.4 L 240,126.7 L 244,131.8 L 248,136.5 L 252,140.5 L 256,143.8 L 260,146.2 L 264,147.6 L 268,148.0 L 272,147.3 L 276,145.7 L 280,143.0 L 284,139.6 L 288,135.3 L 292,130.6 L 296,125.4 L 300,120.0 L 304,114.6" fill="none" stroke="#5b9bff" stroke-linejoin="round" stroke-width="2.2"></path>
+<g fill="#dbe2f2">
+<circle cx="40" cy="120" r="5"></circle><circle cx="66" cy="93" r="5"></circle><circle cx="92" cy="104" r="5"></circle><circle cx="118" cy="137" r="5"></circle><circle cx="144" cy="147" r="5"></circle><circle cx="170" cy="120" r="5"></circle><circle cx="196" cy="93" r="5"></circle><circle cx="222" cy="104" r="5"></circle><circle cx="248" cy="137" r="5"></circle><circle cx="274" cy="147" r="5"></circle><circle cx="300" cy="120" r="5"></circle>
+</g>
+<line stroke="#96a0ba" stroke-dasharray="3 3" stroke-width="1" x1="66" x2="66" y1="76" y2="88"></line>
+<line stroke="#96a0ba" stroke-dasharray="3 3" stroke-width="1" x1="196" x2="196" y1="76" y2="88"></line>
+<line stroke="#96a0ba" stroke-width="1.4" x1="78" x2="184" y1="70" y2="70"></line>
+<polygon fill="#96a0ba" points="66,70 78,64 78,76"></polygon>
+<polygon fill="#96a0ba" points="196,70 184,64 184,76"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="131" y="58">一个波长</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="170" y="192">整个模式的能量只能一份一份地加减</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="170" y="212">那「一份」就是一个声子</text>
+<text fill="#dbe2f2" font-family="Georgia, serif" font-size="17" font-style="italic" text-anchor="middle" x="170" y="242">E = ℏω</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="326" x2="326" y1="36" y2="244"></line>
+<text fill="#f0ad5a" font-size="11.5" x="348" y="20">② 穿了衣服的电子：准粒子</text>
+<g fill="none" stroke="#3b4664" stroke-dasharray="2 3" stroke-width="1">
+<circle cx="460" cy="96" r="6.5"></circle><circle cx="502" cy="96" r="6.5"></circle><circle cx="544" cy="96" r="6.5"></circle><circle cx="460" cy="164" r="6.5"></circle><circle cx="502" cy="164" r="6.5"></circle><circle cx="544" cy="164" r="6.5"></circle>
+</g>
+<ellipse cx="502" cy="130" fill="none" opacity=".8" rx="64" ry="46" stroke="#f0ad5a" stroke-dasharray="6 5" stroke-width="1.4"></ellipse>
+<g fill="#39496f" stroke="#5a6b96" stroke-width="1">
+<circle cx="376" cy="96" r="6.5"></circle><circle cx="418" cy="96" r="6.5"></circle><circle cx="468" cy="110" r="6.5"></circle><circle cx="502" cy="110" r="6.5"></circle><circle cx="536" cy="110" r="6.5"></circle><circle cx="586" cy="96" r="6.5"></circle><circle cx="628" cy="96" r="6.5"></circle>
+<circle cx="376" cy="164" r="6.5"></circle><circle cx="418" cy="164" r="6.5"></circle><circle cx="468" cy="150" r="6.5"></circle><circle cx="502" cy="150" r="6.5"></circle><circle cx="536" cy="150" r="6.5"></circle><circle cx="586" cy="164" r="6.5"></circle><circle cx="628" cy="164" r="6.5"></circle>
+</g>
+<circle cx="502" cy="130" fill="#5b9bff" r="8"></circle>
+<text fill="#0a0e1a" font-size="13" font-weight="700" text-anchor="middle" x="502" y="135">−</text>
+<line stroke="#5a6b96" stroke-width="1" x1="440" x2="464" y1="72" y2="100"></line>
+<text fill="#96a0ba" font-size="11" x="348" y="62">正离子被拉过来（虚线是原位）</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="500" y="212">电子 + 它自己造成的畸变 = 一个新粒子</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="500" y="240">代价是变重：有效质量 m*</text>
+</g>
+</svg>
+<figcaption>左边那「一份」和右边那个「胖电子」都不是任何一个原子——但在低温低能的世界里，它们才是基本粒子。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  准粒子不是「近似」这么轻飘的东西：在低温低能的范围里，<strong>它们就是这个系统真正的基本粒子</strong>——质量、寿命、散射截面都能测，和「真」粒子毫无操作性区别。区别只在于它们依赖脚下的层级：把铜块砸碎，声子随之消失，电子还在。<strong>「基本」是相对某个层级说的</strong>。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 芯片 / 热管理 / AI</span>
+  「换一套有效自由度」是一门到处能用的手艺——
+  <ul>
+<li><strong>芯片</strong>：半导体工业的工作语言是电子与空穴，没有一份器件设计从 10<sup>23</sup> 个粒子出发；空穴是彻头彻尾的准粒子，场效应管却全建立在它身上；</li>
+
+<li><strong>热管理</strong>：热电材料的主流思路叫「声子玻璃、电子晶体」——掺进只散射声子、不挡电子的结构，热导降下去而电导保住；</li>
+<li><strong>AI</strong>：网络里起作用的常常不是单个神经元，而是跨神经元的某个方向。<strong>诚实的说法</strong>：这是思路同构而非同一套数学——准粒子有能量、动量、寿命这些可测量，网络里的「方向」没有。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：解不开 10<sup>23</sup> 个粒子的办法，是换一套只有几种角色的新主角。</div>
+<details class="q"><summary><b>思考：</b>既然声子只是「晶格的一种动作」，为什么可以说它被杂质散射？</summary><div class="qa">因为杂质破坏了晶格的周期性，而声子的定义正依赖这份周期性。碰上杂质，干净的模式会被打散成好几个别的模式——这在能量与动量的账本上，和一个粒子撞靶后改变方向完全等价。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>配成对，然后一起凝聚 <span class="en">Superconductivity &amp; Superfluidity</span></h2>
+<span class="pill">Onnes 1911 · BCS 1957 · 氦的 λ 点</span>
+<div class="field"><span class="lab">直觉</span>
+  1911 年，昂内斯把水银降到 4.2 K，电阻不是慢慢变小，而是<strong>直接掉进了测不出来的深渊</strong>：在超导环里激发一圈电流、切断电源、年复一年守着看，磁场没有可测的衰减。液氦在 2.17 K 以下也换了性情：它能<strong>毫无阻力地从极细的缝里漏过去</strong>，还会顺着杯壁爬出来把杯子倒空。「阻力很小」和「阻力是零」不是程度差别，是种类差别。</div>
+<div class="field"><span class="lab">机制</span>
+  1957 年巴丁、库珀、施里弗（BCS）给出了答案，核心是一件听着不可能的事：<strong>两个电子必须互相吸引</strong>。它们明明同号相斥，媒人是晶格。第一个电子掠过时把附近的正离子往自己这边拽了一点，离子重、动得慢，等它挪到位电子早跑远了，身后留下一小片<strong>暂时的正电荷富集</strong>；第二个电子被它吸过来。两个电子隔着晶格完成一次延时的「握手」——这就是<strong>库珀对</strong>。配成对后总自旋为整数，能像玻色子那样全体挤进同一个量子态，整块超导体由<strong>同一个宏观波函数</strong>描述。要破坏它就得拆散一对，而拆对要付能量：</div>
+
+<figure>
+<svg aria-label="左：电子经由晶格畸变间接吸引成库珀对；右：正常金属与超导体的能量菜单对比，超导体有能隙" role="img" viewbox="0 0 660 320">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" font-size="11.5" x="20" y="20">隔着晶格的一次延时握手</text>
+<g fill="#39496f" stroke="#5a6b96" stroke-width="1">
+<circle cx="42" cy="92" r="6.5"></circle><circle cx="84" cy="92" r="6.5"></circle><circle cx="126" cy="110" r="6.5"></circle><circle cx="168" cy="110" r="6.5"></circle><circle cx="210" cy="110" r="6.5"></circle><circle cx="252" cy="92" r="6.5"></circle><circle cx="294" cy="92" r="6.5"></circle><circle cx="336" cy="92" r="6.5"></circle>
+<circle cx="42" cy="192" r="6.5"></circle><circle cx="84" cy="192" r="6.5"></circle><circle cx="126" cy="174" r="6.5"></circle><circle cx="168" cy="174" r="6.5"></circle><circle cx="210" cy="174" r="6.5"></circle><circle cx="252" cy="192" r="6.5"></circle><circle cx="294" cy="192" r="6.5"></circle><circle cx="336" cy="192" r="6.5"></circle>
+</g>
+<ellipse cx="168" cy="142" fill="#f0ad5a" opacity=".13" rx="48" ry="42"></ellipse>
+<text fill="#c99a4e" font-size="11" text-anchor="middle" x="168" y="146">正电荷</text>
+<text fill="#c99a4e" font-size="11" text-anchor="middle" x="168" y="162">暂时富集</text>
+<circle cx="120" cy="142" fill="#5b9bff" r="8"></circle>
+<text fill="#0a0e1a" font-size="13" font-weight="700" text-anchor="middle" x="120" y="147">−</text>
+<line stroke="#5b9bff" stroke-width="1.8" x1="98" x2="72" y1="142" y2="142"></line>
+<polygon fill="#5b9bff" points="60,142 74,136 74,148"></polygon>
+<text fill="#7db0ff" font-size="11" text-anchor="middle" x="86" y="126">先走</text>
+<circle cx="290" cy="142" fill="#5b9bff" r="8"></circle>
+<text fill="#0a0e1a" font-size="13" font-weight="700" text-anchor="middle" x="290" y="147">−</text>
+<line stroke="#5b9bff" stroke-width="1.8" x1="276" x2="246" y1="142" y2="142"></line>
+<polygon fill="#5b9bff" points="234,142 248,136 248,148"></polygon>
+<text fill="#7db0ff" font-size="11" text-anchor="middle" x="300" y="126">被吸来</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="180" y="248">电子拉动正离子，身后留下一片正电荷</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="180" y="268">第二个电子被它吸引 —— 两者成为库珀对</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="388" x2="388" y1="36" y2="280"></line>
+<text fill="#96a0ba" font-size="11.5" x="408" y="20">电子的「能量菜单」</text>
+<line stroke="#56607e" stroke-width="1.4" x1="420" x2="420" y1="254" y2="52"></line>
+<polygon fill="#56607e" points="414,54 426,54 420,40"></polygon>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" transform="rotate(-90 404 152)" x="404" y="152">能量</text>
+<rect fill="#16203a" height="90" stroke="#2b3a5e" width="58" x="436" y="60"></rect>
+<rect fill="#2c4373" height="104" stroke="#2b3a5e" width="58" x="436" y="150"></rect>
+<line stroke="#96a0ba" stroke-dasharray="4 4" stroke-width="1" x1="430" x2="510" y1="150" y2="150"></line>
+<rect fill="#16203a" height="76" stroke="#2b3a5e" width="58" x="546" y="60"></rect>
+<rect fill="#0a0e1a" height="40" stroke="#6a5326" stroke-dasharray="4 4" width="58" x="546" y="136"></rect>
+<rect fill="#2c4373" height="78" stroke="#2b3a5e" width="58" x="546" y="176"></rect>
+<line stroke="#f0ad5a" stroke-width="1.6" x1="618" x2="618" y1="142" y2="170"></line>
+<polygon fill="#f0ad5a" points="612,142 624,142 618,132"></polygon>
+<polygon fill="#f0ad5a" points="612,170 624,170 618,180"></polygon>
+<text fill="#f0ad5a" font-family="Georgia, serif" font-size="14" x="628" y="161">2Δ</text>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="465" y="272">正常金属</text>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="575" y="272">超导体</text>
+<text fill="#7db0ff" font-size="11" text-anchor="middle" x="465" y="290">紧挨着就有空位</text>
+<text fill="#f0ad5a" font-size="11" text-anchor="middle" x="575" y="290">下面一段是空的</text>
+</g>
+</svg>
+<figcaption>右图那道空带不是画错：低于 2Δ 的激发在超导体里根本不存在，能量不够的扰动连一个电子都踢不动，散射因此无处可去。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 续</span>
+  <div class="eq">2<var>Δ</var> ≈ 3.5 <var>k</var><sub>B</sub><var>T</var><sub>c</sub></div>
+<div class="gloss"><var>Δ</var> 是希腊字母 delta（读「德尔塔」），叫<strong>能隙</strong>，拆散一对要 2<var>Δ</var>；<var>k</var><sub>B</sub> 是玻尔兹曼常数，把温度换算成能量（下标 B 是玻尔兹曼的首字母）；<var>T</var><sub>c</sub> 是<strong>临界温度</strong>（下标是字母 c，取自 critical）。低于 <var>T</var><sub>c</sub> 时热扰动翻不过这道隙，电子对无从被打散，电流也就无处损耗。</div>
+  最漂亮的实证在<strong>磁通量子</strong>上：超导环里穿过的磁通只能是 <var>Φ</var><sub>0</sub> = <var>h</var>/2<var>e</var> ≈ 2.07 × 10<sup>−15</sup> 韦伯的整数倍（<var>Φ</var> 读「斐」，<var>e</var> 是一个电子的电荷量）。分母上那个 <strong>2</strong> 是致命证据——载流子的电荷是 2<var>e</var>，正是一对电子，1961 年两组实验各自量到了它。另一个招牌是<strong>迈斯纳效应</strong>（1933）：超导体还会主动把磁场挤出体外——磁铁悬浮在超导块上方靠的就是这一手。</div>
+<div class="field"><span class="lab">机制 · 另一面</span>
+  同一个剧本在不带电的粒子上演一遍就是<strong>超流</strong>。氦-4 原子的总自旋为整数，本身就是<strong>玻色子</strong>，连配对这步都省了——玻色子允许任意多个占据同一个量子态，温度够低时宏观数量的原子一齐掉进最低能态（<strong>玻色-爱因斯坦凝聚</strong>，2001 年诺奖）。要让凝聚体损耗能量就得整体改变状态，低速下的小扰动没这个本钱，黏性于是精确归零。<strong>环流量子化</strong>是「整体」的硬证据——
+  <div class="eq"><var>κ</var> = <var>n</var> <span class="frac"><span class="fnum"><var>h</var></span><span class="fden"><var>m</var></span></span> ，　<var>n</var> = 0, 1, 2, …</div>
+<div class="gloss"><var>κ</var> 是希腊字母 kappa（读「卡帕」），指绕一圈的<strong>环流</strong>；<var>h</var> 是普朗克常数，<var>m</var> 是一个氦原子的质量；<var>n</var> 只能取<strong>整数</strong>，包括数字 <span class="nowrap">0（零）</span>。转动一桶超流氦，它不会整体跟着转，而是要么纹丝不动，要么突然长出一根、两根<strong>各带一份环流的细涡旋</strong>——涡旋数只能跳着增加，这些涡旋已被直接拍成照片。</div>
+  氦-3 是费米子，就得先两两配对才能凝聚，代价是温度压到约 2 毫开。<strong>配对，然后一起凝聚</strong>——区别只在于超导里流动的对带电。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  这类现象常被说成「量子效应放大到了肉眼尺度」，话没错，但极容易读歪成「一杯液氦成了一只薛定谔的猫」。真正发生的是亿万个粒子占据了<strong>同一个</strong>量子态，那个态的相位于是从微观量变成整块材料共有的宏观变量——被放大的是<strong>相干</strong>，不是<strong>叠加</strong>。至于室温超导：常压纪录仍由铜氧化物保持在 130 K 出头；<strong>近年最轰动的几则「室温超导」宣告，包括发表在顶刊上的两篇，都已被撤稿</strong>，2023 年的 LK-99 也被多个独立小组判定为杂质造成的假象。对每次宣告都该先问：抗磁性、零电阻、比热跳变，三样齐了吗。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 医疗 / 计算 / 天体</span>
+  <ul>
+<li><strong>医疗</strong>：核磁共振成像仪那几特斯拉的强磁场来自超导线圈——常规铜线要产生同样的场，发热量足以烧毁自己；全世界数万台 MRI 是超导迄今最大的民用市场；</li>
+<li><strong>计算</strong>：主流的一类量子比特就是超导环加约瑟夫森结，靠的正是宏观相位可被当成量子态操控，细节在<a href="quantum-technology-day24.html">「量子技术」</a>里；</li>
+<li><strong>天体</strong>：中子星内部被认为存在中子超流，脉冲星偶尔突然加速一丁点（「自转突变」），主流解释是内部超流涡旋成批脱钉、把角动量一次交给外壳——毫开尔文实验室里的物理，用来解释一颗坍缩恒星。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：先配成对、再一起凝聚，是零电阻与零黏性共用的同一套剧本。</div>
+<details class="q"><summary><b>思考：</b>如果超导靠晶格当媒人，那把材料做得更「干净」是不是就更容易超导？</summary><div class="qa">常常相反。铜、银、金是最好的常规导体，却在任何温度下都不超导，正因为它们的电子与晶格耦合太弱，媒人不给力。铅、汞这些常温下电阻偏大的金属反倒超导得干脆。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>精确到十亿分之一 <span class="en">Topological Phases</span></h2>
+<span class="pill">量子霍尔 1980 · 陈数 · 2016 诺奖</span>
+<div class="field"><span class="lab">直觉</span>
+  1980 年，冯·克利青把夹在半导体界面上的一层二维电子气放进强磁场、降到液氦温度测霍尔电阻。按经典理论那该是一条直线，他量到的却是一段段<strong>平台</strong>：磁场变了一大截读数纹丝不动，然后突然跳到下一级。更离谱的是平台上的数值<strong>不依赖样品是硅还是砷化镓、多脏多干净、形状是方是圆</strong>，重复性好到十亿分之一。</div>
+<figure>
+<svg aria-label="霍尔电导随磁场变化呈现整数平台的阶梯曲线" role="img" viewbox="0 0 660 300">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#96a0ba" font-size="11.5" x="20" y="20">霍尔电导（单位 e²/h）随磁场变化：不是斜坡，是楼梯</text>
+<g stroke="#26314c" stroke-dasharray="4 6" stroke-width="1">
+<line x1="100" x2="620" y1="60" y2="60"></line><line x1="100" x2="620" y1="105" y2="105"></line><line x1="100" x2="620" y1="150" y2="150"></line><line x1="100" x2="620" y1="195" y2="195"></line>
+</g>
+<line stroke="#56607e" stroke-width="1.5" x1="100" x2="100" y1="240" y2="52"></line>
+<polygon fill="#56607e" points="94,54 106,54 100,40"></polygon>
+<line stroke="#56607e" stroke-width="1.5" x1="100" x2="620" y1="240" y2="240"></line>
+<polygon fill="#56607e" points="620,234 620,246 634,240"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="end" x="612" y="260">磁场 B →</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="64">4</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="109">3</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="154">2</text>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="92" y="199">1</text>
+<path d="M 120,60 L 210,60 C 228,60 237,105 255,105 L 345,105 C 363,105 372,150 390,150 L 490,150 C 508,150 512,195 530,195 L 612,195" fill="none" stroke="#5b9bff" stroke-width="2.6"></path>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="165" y="50">ν = 4</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="300" y="95">ν = 3</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="440" y="140">ν = 2</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="571" y="185">ν = 1</text>
+<text fill="#c99a4e" font-size="11.5" x="20" y="282">平台上的 ν 精确取整数：换材料、换形状、换脏净程度，量出来还是同一个数</text>
+</g>
+</svg>
+<figcaption>楼梯的踏面上，纵向电阻同时掉到零——电子在平台上根本不散射。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制</span>
+  平台上的霍尔电导严格等于
+  <div class="eq"><var>σ</var><sub>xy</sub> = <var>ν</var> <span class="frac"><span class="fnum"><var>e</var><sup>2</sup></span><span class="fden"><var>h</var></span></span></div>
+<div class="gloss"><var>σ</var> 是希腊字母 sigma（读「西格玛」），指电导；下标 xy 表示「电流朝 x 走、电压量 y 方向」。<var>e</var><sup>2</sup>/<var>h</var> 是纯由自然常数搭出来的电导单位（<var>e</var> 是电子电荷，<var>h</var> 是普朗克常数）。关键在 <var>ν</var>（希腊字母 nu，读「纽」，别看成字母 v）：它只能取<strong>整数</strong>。</div>
+  为什么是整数？1982 年 Thouless 等人给出了答案：<var>ν</var> 不是可以微调的物理参数，而是电子波函数在动量空间里绕一整圈时缠绕的圈数，数学上叫<strong>陈数</strong>——一个<strong>拓扑不变量</strong>。拓扑量的脾气是：<strong>只要不把系统撕开，连续地怎么揉都不会变</strong>，就像甜甜圈上的洞只能是 1 个或 2 个，不可能是 1.3 个。杂质、形变、材料换代全属于「揉」，动不了整数——脏不脏不在这本账上。同一条思路后来长成一整个门类：<strong>拓扑绝缘体</strong>内部绝缘，边界上却必然有导电通道，且这些边界态被拓扑保护、无法被普通杂质散射（2007 年在碲化汞量子阱上观测到）。2016 年的诺贝尔物理学奖给了这条线。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  这里出现了物理学里罕见的局面：一个<strong>又脏又乱的多体系统，交出了一个比大多数精密测量还准的数</strong>——国际电阻标准一度就直接定义在量子霍尔平台上（<var>R</var><sub>K</sub> = <var>h</var>/<var>e</var><sup>2</sup> ≈ 25812.807 欧姆）。往强磁场深处走还会冒出 <var>ν</var> = 1/3 这样的<strong>分数</strong>平台（1998 年诺奖），那里的准粒子携带 <strong>1/3 个电子电荷</strong>，1997 年被噪声实验直接量到。电子不可分，它们的集体激发却可以带分数电荷——「涌现的自由度不必长得像组成部分」，这是最硬的一个例子。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 计量 / 数学 / 容错计算</span>
+  <ul>
+<li><strong>计量</strong>：一块材料能当基准，靠的不是被造得多完美，而是输出值由拓扑锁死——「精度」从工艺问题变成了原理问题；</li>
+<li><strong>数学</strong>：陈数、亏格、绕数原本是纯数学对象，如今成了实验室里能直接读出数字的可观测量；</li>
+<li><strong>容错计算</strong>：把量子信息编码在拓扑自由度里，局部噪声原则上改不动它，这是拓扑量子计算的全部指望。<strong>诚实的说法</strong>：作为方案骨架的马约拉纳准粒子，实验证据一路争议不断——2018 年一篇标志性论文已于 2021 年撤稿，此后几次高调宣告也遭同行质疑判据。拓扑保护的<strong>数学</strong>可靠，难的是证明手上那块材料真的处在那个相里。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：拓扑物态之所以精确，是因为它的数不是量出来的，是数出来的。</div>
+<details class="q"><summary><b>思考：</b>既然拓扑保护这么强，为什么量子霍尔效应还非要强磁场和极低温？</summary><div class="qa">因为拓扑保护的前提是系统待在能隙里：强磁场把能隙撑开，低温让热扰动小于这道隙。温度一高到能把电子激发过隙，前提就没了。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>高温超导发现快四十年了，为什么还没被解决？</summary>
+<div class="body">1986 年铜氧化物打破了人们以为的温度上限（Bednorz 与 Müller，次年即获诺奖），可配对的「胶水」是什么至今无定论。BCS 算得动，是因为电子间的相互作用弱到可以当微扰处理；铜氧化物里的排斥强到与动能同量级，<strong>没有小参数可以展开</strong>。已确定的是配对确实存在、对的电荷是 2e、配对波函数是 d 波对称——没定的恰恰是最关键那一环。</div></details>
+<details><summary>拓扑物态和相变里的「普适类」，是同一种「细节无关」吗？</summary>
+<div class="body">不是，来源不同。<a href="phase-transitions-criticality-day33.html">「相变与临界」</a>里的细节无关是<strong>动力学</strong>的：重整化流把无关方向冲掉，只在临界点附近成立。拓扑的细节无关是<strong>几何</strong>的：不变量是整数，连续形变根本改不了它，在整个相里都成立。一个是「被冲走」，一个是「压根改不动」。</div></details>
+<details><summary>这些奇迹为什么都只在极低温出现？室温下的凝聚态就没有集体奇观了吗？</summary>
+<div class="body">低温的作用是让热扰动的典型能量小于保护性的能隙，门槛温度取决于隙有多大。但「必须极低温」并非普遍规律：铁磁体在几百开尔文下就有长程有序，手里那块磁铁就是常温集体量子效应的产物。真正难在室温维持的是<strong>相位相干</strong>那一类——它需要一个大能隙，这正是室温超导困难的原因。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>J. Bardeen, L. N. Cooper &amp; J. R. Schrieffer，<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.108.1175"><em>"Theory of Superconductivity"</em>，<em>Phys. Rev.</em> 108 (1957) 1175</a>——BCS 原始论文</li>
+<li>J. Bardeen，<a href="https://www.nobelprize.org/prizes/physics/1972/bardeen/lecture/">1972 年诺贝尔奖演讲</a>——配对机制的作者自述</li>
+<li>K. von Klitzing, G. Dorda &amp; M. Pepper，<a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.45.494"><em>"New Method for High-Accuracy Determination of the Fine-Structure Constant…"</em>，<em>PRL</em> 45 (1980) 494</a>——量子霍尔效应的发现</li>
+<li>D. J. Thouless, M. Kohmoto, M. P. Nightingale &amp; M. den Nijs，<a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.49.405"><em>"Quantized Hall Conductance in a Two-Dimensional Periodic Potential"</em>，<em>PRL</em> 49 (1982) 405</a>——平台为什么是整数</li>
+<li>D. C. Tsui, H. L. Störmer &amp; A. C. Gossard，<a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.48.1559"><em>"Two-Dimensional Magnetotransport in the Extreme Quantum Limit"</em>，<em>PRL</em> 48 (1982) 1559</a>——分数平台的发现</li>
+<li>J. G. Bednorz &amp; K. A. Müller，<a href="https://link.springer.com/article/10.1007/BF01303701"><em>"Possible high T<sub>c</sub> superconductivity in the Ba−La−Cu−O system"</em>，1986</a>——高温超导的起点</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2016/popular-information/">2016 年诺贝尔物理学奖科普说明</a>——用甜甜圈讲清拓扑物态</li>
+<li><a href="https://en.wikipedia.org/wiki/Superfluid_helium-4">Wikipedia: Superfluid helium-4</a> / <a href="https://en.wikipedia.org/wiki/Quasiparticle">Quasiparticle</a> / <a href="https://en.wikipedia.org/wiki/Room-temperature_superconductor">Room-temperature superconductor</a>——概念与争议的入口</li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
