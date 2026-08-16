@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：对称性破缺与秩序 · Day 35</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>对称性破缺与秩序</h1>
+<div class="meta">Day 35 · 2026 · Phase H 凝聚态与涌现</div>
+<div class="tagline">铅笔立在笔尖上的时候，所有方向完全平等；它倒下之后指着某一个方向——而支配它的方程从头到尾一个字没改。</div>
+</header>
+<div class="intro">
+一块铁、一片雪花、一杯超流氦、以及宇宙诞生后万亿分之一秒里的真空，做的是同一个动作：<b>定律对所有选项一视同仁，系统却必须挑一个</b>。挑完的那一刻秩序就凭空出现了。这个动作还会留下两样赖不掉的东西：<b>一种波长越长越不花钱的波</b>，和<b>一些原则上抹不平的疙瘩</b>。你能听见声音、金属能被敲弯，账都记在这里。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>定律对称，答案不必对称 <span class="en">Spontaneous Symmetry Breaking</span></h2>
+<span class="pill">自发破缺 · 序参量</span>
+<div class="field"><span class="lab">直觉</span>
+  笔尖朝下立住的一支笔，方程对东南西北一视同仁，可它必须倒，而且必须倒向<strong>某一个</strong>方向。倒下的瞬间「所有方向平等」就失效了，方程里却一个字没变。铁也一样：居里点 1043 K 以上磁矩乱指，整块铁没有方向；降到以下，磁矩几乎全部自己排到同一个方向。为什么是那个？没有理由。</div>
+<div class="field"><span class="lab">机制</span>
+  方程本身就偏心（外加磁场逼着磁矩指北）叫<strong>明显破缺</strong>；方程照旧完全对称、只是<strong>能量最低的状态不对称</strong>，才叫<strong>自发破缺</strong>——后者有<strong>一大堆等价答案</strong>，系统随便挑走一个。刻画它的量叫<strong>序参量</strong>：对称相里等于数字 0（零），破缺相里不等于 0。最简单的势能长这样：
+  <div class="eq"><var>V</var>(<var>φ</var>) = −<var>a</var><var>φ</var><sup>2</sup> + <var>b</var><var>φ</var><sup>4</sup></div>
+<div class="gloss"><var>φ</var> 是希腊字母 phi（读「fai」），就是序参量；<var>a</var>、<var>b</var> 是正数。戏剧全藏在那个<strong>负号</strong>里：它让 <var>φ</var> 离开正中间反而更省能量，于是<span class="nowrap"><var>φ</var> = <strong>0</strong>（数字 0）</span>成了山顶而非谷底，最低点在 <span class="nowrap"><var>φ</var> = ±√(<var>a</var>/2<var>b</var>)</span>——<strong>两个</strong>，能量一模一样。</div>
+  换成复数序参量（超流、超导那类），最低点不是两个点，而是<strong>一整圈</strong>，形状像一顶墨西哥草帽。</div>
+<figure>
+<svg aria-label="左：势能曲线的最低点不在正中；右：一整圈简并的基态与两种运动方向" role="img" viewbox="0 0 660 250">
+<defs>
+<marker id="a35-b" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5"><path d="M0,0 L11,4.5 L0,9 z" fill="#5b9bff"></path></marker>
+<marker id="a35-a" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5"><path d="M0,0 L11,4.5 L0,9 z" fill="#f0ad5a"></path></marker>
+<marker id="a35-g" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="10" orient="auto" refX="9" refY="4"><path d="M0,0 L10,4 L0,8 z" fill="#96a0ba"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="24" y="18">① 能量最低的位置不在正中间</text>
+<line stroke="#56607e" stroke-width="1.4" x1="24" x2="24" y1="212" y2="66"></line>
+<polygon fill="#56607e" points="24,56 19,70 29,70"></polygon>
+<text fill="#96a0ba" font-size="11" x="32" y="62">能量 V</text>
+<line stroke="#56607e" stroke-width="1.4" x1="24" x2="308" y1="212" y2="212"></line>
+<polygon fill="#56607e" points="318,212 304,207 304,217"></polygon>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="308" y="228">序参量 φ</text>
+<path d="M 40,91.4 L 48,128.2 L 56,154.9 L 64,173.0 L 72,184.0 L 80,189.2 L 88,189.7 L 96,186.8 L 104,181.3 L 112,174.3 L 120,166.5 L 128,158.6 L 136,151.2 L 144,144.8 L 152,139.8 L 160,136.5 L 168,135.1 L 176,135.5 L 184,137.9 L 192,142.1 L 200,147.8 L 208,154.8 L 216,162.5 L 224,170.4 L 232,178.0 L 240,184.3 L 248,188.6 L 256,190.0 L 264,187.3 L 272,179.4 L 280,165.0 L 288,142.7 L 296,111.1 L 300,91.4" fill="none" stroke="#5b9bff" stroke-linejoin="round" stroke-width="2.2"></path>
+<circle cx="170" cy="127" fill="#8c96b0" r="8"></circle>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="170" y="108">φ = 0：对称，但站不住</text>
+<path d="M 181,124 Q 224,122 248,176" fill="none" marker-end="url(#a35-g)" stroke="#96a0ba" stroke-dasharray="4 4" stroke-width="1.5"></path>
+<circle cx="255" cy="182" fill="#f0ad5a" r="8"></circle>
+<circle cx="85" cy="182" fill="#f0ad5a" r="8"></circle>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="170" y="244">两个谷底能量完全相同，系统必须挑一个</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="336" x2="336" y1="14" y2="236"></line>
+<text fill="#f0ad5a" font-size="11.5" x="360" y="18">② 复数序参量：一整圈都是基态</text>
+<circle cx="500" cy="132" fill="none" r="66" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="2"></circle>
+<circle cx="500" cy="132" fill="#8c96b0" r="4.5"></circle>
+<text fill="#96a0ba" font-size="10.5" text-anchor="middle" x="500" y="150">山顶：最对称</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="middle" x="500" y="166">也最不稳</text>
+<circle cx="557.2" cy="165" fill="#f0ad5a" r="7"></circle>
+<path d="M 550.6,174.4 A 66,66 0 0 0 563.8,114.9" fill="none" marker-end="url(#a35-b)" stroke="#5b9bff" stroke-width="2.2"></path>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="470" y="46">沿圈走：换一个基态，不花能量</text>
+<line marker-end="url(#a35-a)" stroke="#f0ad5a" stroke-width="2" x1="563" x2="592" y1="168" y2="185"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="end" x="654" y="212">往外爬：要花能量</text>
+</g>
+</svg>
+<figcaption>山顶最对称却站不住；谷底不对称却稳。破缺之后，对称性以「一整圈基态彼此等价」的形式继续活着。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 同一个动作，别处的名字</span>
+  <strong>晶体与雪花</strong>的序参量是密度的周期起伏：连续的「挪到哪、朝哪转都一样」降级成只剩离散的格点与转角；<strong>超流与超导</strong>是一个复数，破掉相位的任意性；<strong>宇宙</strong>是希格斯场的真空取值，细节在<a href="symmetry-mass-origin-day26.html">「对称性与质量的起源」</a>。序参量从 0 长起来的快慢，归<a href="phase-transitions-criticality-day33.html">「相变与临界」</a>管。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  「对称性破缺」这个名字骗人：对称性<strong>根本没坏</strong>，只是从「每个状态都对称」变成了「状态们<strong>互相之间</strong>对称」。指北和指南能量严格相等，把整个宇宙转一下，一个就变成另一个。这份<strong>简并</strong>正是对称性还活着的证据。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 发育 / 深度学习</span>
+<ul>
+<li><strong>发育生物学</strong>：受精卵接近球对称，你却有头有尾、有左有右。脊椎动物的左右之分由胚胎结点上一簇纤毛的<strong>定向旋转</strong>推出的液流决定：一个微观手性被放大成「心脏偏左」。</li>
+<li><strong>深度学习</strong>：同一层权重若初始化成同一个数，它们收到的梯度完全相同，于是永远学同一件事。破解办法就叫 <em>symmetry breaking</em>：随机初始化，人为破掉对称。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：秩序不是定律里写好的，是系统从一堆等价选项里挑出来的。</div>
+<details class="q"><summary><b>思考：</b>如果一块铁在不同区域「挑」了不同方向，会发生什么？</summary><div class="qa">会分成一块块方向各异的<strong>磁畴</strong>，宏观上互相抵消——普通铁块不吸铁就是这个原因。交界处那层扭曲叫畴壁。加外磁场让某方向的畴长大、吞掉别的畴，铁就被磁化了。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>破缺的账单：一种不要钱的波 <span class="en">Goldstone Modes</span></h2>
+<span class="pill">Nambu 1960 · Goldstone 1961</span>
+<div class="field"><span class="lab">直觉</span>
+  一整圈基态全都等价，有个跑不掉的后果。一排士兵全体朝北站好（一个基态），<strong>整队</strong>转向东北仍是基态，一分钱不花。现在只让朝向<strong>沿队列缓慢地扭一点点</strong>：左端朝北、右端朝东北——这要花能量，但队列越长、扭得越缓，相邻两人的夹角越小，代价越低。<strong>波长趋于无穷时，代价趋于零。</strong></div>
+<div class="field"><span class="lab">机制</span>
+  这就是 <strong>Goldstone 定理</strong>（Nambu 1960、Goldstone 1961；南部阳一郎凭这套想法获 2008 年诺贝尔物理学奖）：<strong>每破缺一个连续对称性，就必然出现一个无能隙的集体模式</strong>——激发它所需的最小能量可以任意小。两类模式一眼可辨：
+  <div class="eq"><var>ω</var> = <var>c</var><var>k</var> &nbsp;&nbsp;对比&nbsp;&nbsp; <var>ω</var> = √(<var>Δ</var><sup>2</sup> + <var>c</var><sup>2</sup><var>k</var><sup>2</sup>)</div>
+<div class="gloss"><var>ω</var> 是希腊字母 omega（读「欧米伽」），振动快慢，正比于这份激发的能量；<var>k</var> 是波数，等于 2π 除以波长——<strong>波长越长，<var>k</var> 越小</strong>；<var>c</var> 是一个速度。左边是 Goldstone 模：<var>k</var> → 0 时 <var>ω</var> 也 → 0，白送。右边多的 <var>Δ</var>（delta）叫<strong>能隙</strong>：波长再长，<var>ω</var> 也只降到 <var>Δ</var>，起步价永远在。</div>
+</div>
+<figure>
+<svg aria-label="左：整队一致与长波扭转两种排布；右：无能隙模式与有能隙模式的能量-波数关系" role="img" viewbox="0 0 660 252">
+<defs>
+<marker id="b35-b" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#5b9bff"></path></marker>
+<marker id="b35-a" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="24" y="18">① 从一个基态慢慢走到隔壁那个</text>
+<text fill="#96a0ba" font-size="11.5" x="24" y="60">全体一致 = 基态，能量为零</text>
+<g marker-end="url(#b35-b)" stroke="#5b9bff" stroke-width="2">
+<line x1="44" x2="44" y1="100" y2="76"></line> <line x1="68" x2="68" y1="100" y2="76"></line> <line x1="92" x2="92" y1="100" y2="76"></line> <line x1="116" x2="116" y1="100" y2="76"></line> <line x1="140" x2="140" y1="100" y2="76"></line> <line x1="164" x2="164" y1="100" y2="76"></line> <line x1="188" x2="188" y1="100" y2="76"></line> <line x1="212" x2="212" y1="100" y2="76"></line> <line x1="236" x2="236" y1="100" y2="76"></line> <line x1="260" x2="260" y1="100" y2="76"></line> <line x1="284" x2="284" y1="100" y2="76"></line>
+</g>
+<text fill="#96a0ba" font-size="11.5" x="24" y="146">沿队列缓慢扭转 = 几乎不花能量</text>
+<g marker-end="url(#b35-a)" stroke="#f0ad5a" stroke-width="2">
+<line x1="44" x2="44.0" y1="190" y2="166.0"></line> <line x1="68" x2="79.8" y1="190" y2="169.1"></line> <line x1="92" x2="109.7" y1="190" y2="173.8"></line> <line x1="116" x2="133.7" y1="190" y2="173.8"></line> <line x1="140" x2="151.8" y1="190" y2="169.1"></line> <line x1="164" x2="164.0" y1="190" y2="166.0"></line> <line x1="188" x2="176.2" y1="190" y2="169.1"></line> <line x1="212" x2="194.3" y1="190" y2="173.8"></line> <line x1="236" x2="218.3" y1="190" y2="173.8"></line> <line x1="260" x2="248.2" y1="190" y2="169.1"></line> <line x1="284" x2="284.0" y1="190" y2="166.0"></line>
+</g>
+<text fill="#c3cbe0" font-size="11.5" x="24" y="222">波长越长，相邻两支夹角越小 → 代价 → 0</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="340" x2="340" y1="14" y2="238"></line>
+<text fill="#f0ad5a" font-size="11.5" x="368" y="18">② 两种模式的能量-波数关系</text>
+<line stroke="#56607e" stroke-width="1.4" x1="380" x2="380" y1="214" y2="52"></line>
+<polygon fill="#56607e" points="380,42 375,56 385,56"></polygon>
+<text fill="#96a0ba" font-size="11" x="388" y="48">能量 ω</text>
+<line stroke="#56607e" stroke-width="1.4" x1="380" x2="630" y1="214" y2="214"></line>
+<polygon fill="#56607e" points="640,214 626,209 626,219"></polygon>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="510" y="236">波数 k（波长越长，k 越靠近 0）</text>
+<path d="M 380,214 L 416,195.4 L 452,176.8 L 488,158.3 L 524,139.7 L 560,121.1 L 596,102.5 L 620,90.1" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<path d="M 380,136.6 L 416,134.4 L 452,128.1 L 488,118.6 L 524,106.7 L 560,93.1 L 596,78.3 L 620,67.9" fill="none" stroke="#f0ad5a" stroke-width="2.4"></path>
+<line stroke="#f0ad5a" stroke-dasharray="3 3" stroke-width="1.2" x1="398" x2="398" y1="214" y2="136.6"></line>
+<polygon fill="#f0ad5a" points="398,138 393,150 403,150"></polygon>
+<polygon fill="#f0ad5a" points="398,213 393,201 403,201"></polygon>
+<text fill="#f0ad5a" font-size="11.5" x="406" y="170">能隙 Δ</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="end" x="636" y="48">有能隙：波长再长也要花钱</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="end" x="636" y="196">Goldstone：k → 0 时 ω → 0</text>
+</g>
+</svg>
+<figcaption>整队转向不花钱，于是「缓慢扭一点点」也几乎不花钱——这条几乎白送的曲线是破缺留下的必然账单。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 你早就见过它们</span>
+  晶体破掉连续平移对称，留下的 Goldstone 模就是<strong>声学声子</strong>——<strong>固体里传的声音本身就是破缺的账单</strong>；铁磁体破掉自旋旋转对称，留下<strong>自旋波</strong>；超流氦破掉相位的任意性，留下贯穿整杯的相位波动。<a href="condensed-matter-wonders-day34.html">「凝聚态的奇迹」</a>里唱主角的准粒子，一半户口在这里。最漂亮的是那个例外：超导体里的相位模被电磁场<strong>吃掉</strong>了——换来的是磁场只能钻进表面薄薄一层（迈斯纳效应）；同一把戏搬到真空里，就是弱作用力为什么短程。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  「有序」听起来该更僵硬，实际恰恰相反：<strong>破缺让系统多出一批极软的方向</strong>，沿那圈等价基态走几乎免费。低温固体的比热、声音的存在，都是这批软模式在负责。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 深度学习 / 结构工程</span>
+<ul>
+<li><strong>深度学习</strong>：损失曲面上有大量<strong>平坦方向</strong>——在 ReLU 网络里把一层放大 <em>λ</em> 倍、下一层缩小 <em>λ</em> 倍，损失一点不变。这正是 Goldstone 方向：零代价的运动，数值上表现为实测 Hessian 谱里一大堆挤在零附近的本征值。</li>
+<li><strong>结构工程</strong>：四连杆机构能自由摆动而几乎不做功，这类「零刚度模式」和晶体的软模用同一套线性代数：找刚度矩阵的零空间。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：破掉一个连续对称，就欠下一个无能隙的模式。</div>
+<details class="q"><summary><b>思考：</b>伊辛磁体只有「上」「下」两个基态，为什么它破缺后没有 Goldstone 模？</summary><div class="qa">因为这个对称是<strong>离散</strong>的，两个基态之间没有连续通路：你不能「慢慢地」从上转到下，中间每一步都不是基态，代价不随波长趋零。离散破缺留下的不是软模，而是<strong>畴壁</strong>。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>抹不平的疙瘩 <span class="en">Topological Defects</span></h2>
+<span class="pill">涡旋 · 位错 · Kibble–Zurek</span>
+<div class="field"><span class="lab">直觉</span>
+  真实系统降温时各处是<strong>各自独立</strong>选边的：这一小片选了朝北，隔着老远那片选了朝东。冷透了互相一看，发现对不上。大部分对不上能靠慢慢调和抹平；有一些抹不平：绕着某条线走一圈回到原地，序参量的方向正好<strong>转满 360°</strong>，这时不管怎么调，圈里总留下一个方向没法定义的核心。</div>
+<div class="field"><span class="lab">机制</span>
+  能不能抹平是个纯<strong>拓扑</strong>问题：绕一圈的方向变化必须是 360° 的整数倍，这个整数叫<strong>绕数</strong>；整数只能整跳，而连续形变不许整跳。所以缺陷不是「难以消除」，是<strong>局部操作原则上消不掉</strong>——只能让一正一反两个缺陷相遇对消，或把它赶到边界上去。</div>
+<figure>
+<svg aria-label="左：可以连续梳平的方向场；右：绕核心一周转满一圈的涡旋，无法梳平" role="img" viewbox="0 0 660 296">
+<defs>
+<marker id="c35-b" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#5b9bff"></path></marker>
+<marker id="c35-a" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="24" y="20">① 能梳平：绕一圈方向转了 0°</text>
+<g marker-end="url(#c35-b)" stroke="#5b9bff" stroke-width="1.8">
+<line x1="74.8" x2="65.2" y1="65.7" y2="54.3"></line> <line x1="74.2" x2="65.8" y1="106.2" y2="93.8"></line> <line x1="73.5" x2="66.5" y1="146.6" y2="133.4"></line> <line x1="72.8" x2="67.2" y1="187.0" y2="173.0"></line> <line x1="72.1" x2="67.9" y1="227.2" y2="212.8"></line> <line x1="113.3" x2="106.7" y1="66.7" y2="53.3"></line> <line x1="112.6" x2="107.4" y1="107.0" y2="93.0"></line> <line x1="111.8" x2="108.2" y1="147.3" y2="132.7"></line> <line x1="111.0" x2="109.0" y1="187.4" y2="172.6"></line> <line x1="110.3" x2="109.7" y1="227.5" y2="212.5"></line> <line x1="151.6" x2="148.4" y1="67.3" y2="52.7"></line> <line x1="150.8" x2="149.2" y1="107.5" y2="92.5"></line> <line x1="150.0" x2="150.0" y1="147.5" y2="132.5"></line> <line x1="149.2" x2="150.8" y1="187.5" y2="172.5"></line> <line x1="148.4" x2="151.6" y1="227.3" y2="212.7"></line> <line x1="189.7" x2="190.3" y1="67.5" y2="52.5"></line> <line x1="189.0" x2="191.0" y1="107.4" y2="92.6"></line> <line x1="188.2" x2="191.8" y1="147.3" y2="132.7"></line> <line x1="187.4" x2="192.6" y1="187.0" y2="173.0"></line> <line x1="186.7" x2="193.3" y1="226.7" y2="213.3"></line> <line x1="227.9" x2="232.1" y1="67.2" y2="52.8"></line> <line x1="227.2" x2="232.8" y1="107.0" y2="93.0"></line> <line x1="226.5" x2="233.5" y1="146.6" y2="133.4"></line> <line x1="225.8" x2="234.2" y1="186.2" y2="173.8"></line> <line x1="225.2" x2="234.8" y1="225.7" y2="214.3"></line>
+</g>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="150" y="262">所有箭头能连续转到一致：</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="150" y="280">这种不齐是可以被抹掉的</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="320" x2="320" y1="14" y2="286"></line>
+<text fill="#f0ad5a" font-size="11.5" x="352" y="20">② 梳不平：绕一圈方向转满 360°</text>
+<circle cx="480" cy="140" fill="none" r="102" stroke="#6a5326" stroke-dasharray="4 6" stroke-width="1.2"></circle>
+<g marker-end="url(#c35-a)" stroke="#f0ad5a" stroke-width="1.8">
+<line x1="394.7" x2="405.3" y1="65.3" y2="54.7"></line> <line x1="396.6" x2="403.4" y1="106.7" y2="93.3"></line> <line x1="400.0" x2="400.0" y1="147.5" y2="132.5"></line> <line x1="403.4" x2="396.6" y1="186.7" y2="173.3"></line> <line x1="405.3" x2="394.7" y1="225.3" y2="214.7"></line> <line x1="433.3" x2="446.7" y1="63.4" y2="56.6"></line> <line x1="434.7" x2="445.3" y1="105.3" y2="94.7"></line> <line x1="440.0" x2="440.0" y1="147.5" y2="132.5"></line> <line x1="445.3" x2="434.7" y1="185.3" y2="174.7"></line> <line x1="446.7" x2="433.3" y1="223.4" y2="216.6"></line> <line x1="472.5" x2="487.5" y1="60.0" y2="60.0"></line> <line x1="472.5" x2="487.5" y1="100.0" y2="100.0"></line> <line x1="487.5" x2="472.5" y1="180.0" y2="180.0"></line> <line x1="487.5" x2="472.5" y1="220.0" y2="220.0"></line> <line x1="513.3" x2="526.7" y1="56.6" y2="63.4"></line> <line x1="514.7" x2="525.3" y1="94.7" y2="105.3"></line> <line x1="520.0" x2="520.0" y1="132.5" y2="147.5"></line> <line x1="525.3" x2="514.7" y1="174.7" y2="185.3"></line> <line x1="526.7" x2="513.3" y1="216.6" y2="223.4"></line> <line x1="554.7" x2="565.3" y1="54.7" y2="65.3"></line> <line x1="556.6" x2="563.4" y1="93.3" y2="106.7"></line> <line x1="560.0" x2="560.0" y1="132.5" y2="147.5"></line> <line x1="563.4" x2="556.6" y1="173.3" y2="186.7"></line> <line x1="565.3" x2="554.7" y1="214.7" y2="225.3"></line>
+</g>
+<circle cx="480" cy="140" fill="#0a0e1a" r="11" stroke="#f0f3fb" stroke-width="1.6"></circle>
+<text fill="#f0f3fb" font-size="11" text-anchor="middle" x="480" y="144">核</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="480" y="262">绕数是整数，不能连续变成 0：</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="480" y="280">核心处的方向根本无法定义</text>
+</g>
+</svg>
+<figcaption>虚线圈上走一周，箭头方向转过的总角度是 0 还是 360°——这个整数决定了这块疙瘩能不能被抹掉。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 一份缺陷清单</span>
+  同一个数学在各行各业换了名字：<strong>磁体</strong>里是畴壁；<strong>超流与超导</strong>里是量子化涡旋，环流只能取某个基本单位的整数倍；<strong>晶体</strong>里是位错——金属能被敲弯而不碎，正是靠位错线像推地毯褶子一样挪过去，所需的力比整层原子一起滑动小几个数量级；<strong>早期宇宙</strong>里，Kibble 1976 年指出真空破缺同样该留下宇宙弦或磁单极，诚实地说<strong>至今一个也没观测到</strong>。Zurek 补上了定量的一半：<strong>冷得越快，冻结下来的缺陷越密</strong>——这个为宇宙学提出的预言，后来在液晶、超流氦和冷原子里被反复测到。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  缺陷通常被当成瑕疵，实际上它们是<strong>秩序的必然副产品</strong>，而且往往才是干活的那个：金属的塑性、磁体的磁化过程、超流被搅动后的耗散，主角都是缺陷而非完美的有序区。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 冶金 / 量子计算</span>
+<ul>
+<li><strong>冶金</strong>：钢为什么比纯铁硬？因为合金元素、晶界和冷加工都在给位错<strong>设路障</strong>。整门材料强化的学问，是跟一种拓扑缺陷的运动打交道——不是消灭它，是拦住它。</li>
+<li><strong>量子计算</strong>：拓扑量子计算把信息编码进「任何局部操作都改不了」的整体性质里，纠错能力正是这份「抹不平」——把最顽固的东西反过来当保险柜。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：缺陷不是瑕疵，是拓扑记的账。</div>
+<details class="q"><summary><b>思考：</b>超流体里的涡旋，环流为什么只能取整数份？</summary><div class="qa">因为整杯超流由一个波函数描述，而波函数必须<strong>单值</strong>：绕涡旋走一圈回到原点，相位只能改变 360° 的整数倍，否则同一点会有两个值。相位的空间变化率就是流速，环流于是被这个整数锁死。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>破缺不是万能钥匙 <span class="en">Beyond the Landau Paradigm</span></h2>
+<span class="pill">朗道范式 · 它的边界</span>
+<div class="field"><span class="lab">直觉</span>
+  上面三张卡讲的是 20 世纪最成功的组织框架之一——朗道范式：<strong>每一个有序相都对应破掉了某个对称，都能写出一个序参量</strong>。它统一了磁体、晶体、超流、超导和真空，威力大到让人以为「有序」就等于「破了对称」。可它有边界。</div>
+<div class="field"><span class="lab">机制 · 三处管不着</span>
+  <strong>① 维度太低，不许破。</strong>二维、有限温度、短程相互作用的系统里，连续对称<strong>根本不可能</strong>自发破缺（Mermin–Wagner–Hohenberg 定理，1966）。理由正是上一张卡的软模：长波涨落太便宜，会不断把刚选好的方向搅乱。二维超流靠的是另一套——涡旋低温下成对束缚、升温后解绑（Kosterlitz–Thouless，2016 年诺贝尔物理学奖）。<br/>
+  <strong>② 有序，却写不出序参量。</strong>分数量子霍尔态、量子自旋液体没有破缺任何对称：两个不同的态测遍所有<strong>局域</strong>性质都一样，区别只在整体的纠缠结构里。这叫<strong>拓扑序</strong>。<br/>
+  <strong>③ 说出名字不等于给出解释。</strong>指着现象说「这是自发对称破缺」只完成了归类。真正的活儿是把清单填满：破的是哪个对称、序参量是什么、Goldstone 模在哪、缺陷长什么样。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  破缺范式太成功，反而制造了一个错觉：以为「有序 ⇔ 破了对称」。实际上 21 世纪凝聚态的大半新意，都长在「<strong>没破任何对称、却确实有序</strong>」那一侧。</div>
+<div class="punch">
+<div class="one">一句话：能写出序参量的秩序，只是秩序的一部分。</div>
+<details class="q"><summary><b>思考：</b>既然二维不许连续破缺，石墨烯这样的二维晶体算什么？</summary><div class="qa">不算反例。定理否掉的是<strong>严格的长程平移序</strong>（无限大、有限温度、短程作用）。真实二维晶体有的是「准长程序」：关联按幂律缓慢衰减而非指数衰减；加上样品有限大、有衬底支撑。石墨烯是一块足够好用的晶体，不是定理的反例。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>空间的对称能破，时间的对称能不能破？会有「时间晶体」吗？</summary>
+<div class="body">晶体在空间里自发地周期重复；时间晶体就是在时间里自发地周期重复——不受驱动却自己往复运动。Wilczek 在 2012 年正式提出后，这个版本很快被证明<strong>在平衡态里不可能</strong>（Watanabe–Oshikawa 禁戒定理）。但放到<strong>周期驱动</strong>下事情就变了：系统可以按驱动周期的两倍或整数倍响应，把驱动自带的离散时间平移对称破掉。这种「离散时间晶体」自 2016–2017 年起在离子链、金刚石色心中被观测到。平衡态不行、非平衡的离散版本可以——「哪些对称能破」是有硬约束的。</div></details>
+<details><summary>方向到底是谁「选」的？如果方程完全对称，破缺的决定从哪来？</summary>
+<div class="body">严格按量子力学算，有限大系统的真正基态是所有方向的<strong>叠加</strong>，它是对称的，磁化强度平均下来等于 0。破缺藏在两件事的合谋里。其一是<strong>涨落</strong>：热噪声、杂质、边界条件乃至一个微弱外场，都会挑出一个方向。其二是<strong>无穷大</strong>：不同方向的状态之间要「隧穿」过去，需要翻转的自旋数正比于体积，系统一大，这个时间就远超宇宙年龄。于是那个对称的叠加态数学上存在、物理上永不可及——严格意义的自发破缺只发生在<strong>热力学极限</strong>。</div></details>
+<details><summary>为什么同一个机制，从一块磁铁一路管到宇宙真空？</summary>
+<div class="body">因为它压根不依赖具体材料。破缺的全部内容只有三样：一个对称群、一个把它降级成子群的过程、一个描述降级程度的序参量。剩下的推论——基态简并、Goldstone 模、缺陷分类——只用到群和拓扑，用不到原子是什么、力有多强。这就是为什么超导体里的相位模被电磁场吃掉，和真空里的模被弱作用场吃掉，是<strong>同一个计算</strong>。所谓「深」的机制往往就是这种：假设少到近乎苛刻，适用面宽到不讲道理。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>J. Goldstone, A. Salam &amp; S. Weinberg，<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.127.965"><em>"Broken Symmetries"</em>，<em>Phys. Rev.</em> 127 (1962) 965</a>——无能隙模式定理的经典表述</li>
+<li>Y. Nambu，<a href="https://www.nobelprize.org/prizes/physics/2008/nambu/lecture/">2008 年诺贝尔奖演讲「Spontaneous Symmetry Breaking in Particle Physics」</a>——从超导跨到粒子物理的那一步，作者自述</li>
+<li>N. D. Mermin &amp; H. Wagner，<a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.17.1133"><em>PRL</em> 17 (1966) 1133</a>——二维为什么不许连续破缺</li>
+<li>T. W. B. Kibble，<a href="https://iopscience.iop.org/article/10.1088/0305-4470/9/8/029"><em>"Topology of cosmic domains and strings"</em>，<em>J. Phys. A</em> 9 (1976) 1387</a>——宇宙学缺陷的起点</li>
+<li>W. H. Zurek，<a href="https://www.nature.com/articles/317505a0"><em>"Cosmological experiments in superfluid helium?"</em>，<em>Nature</em> 317 (1985) 505</a>——把宇宙学预言搬进实验室</li>
+<li>P. W. Anderson，<a href="https://www.science.org/doi/10.1126/science.177.4047.393"><em>"More Is Different"</em>，<em>Science</em> 177 (1972) 393</a>——破缺与涌现的连接处</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2016/popular-information/">2016 年诺贝尔物理学奖科普说明</a>——涡旋成对解绑的二维故事</li>
+<li><a href="https://en.wikipedia.org/wiki/Spontaneous_symmetry_breaking">Wikipedia: Spontaneous symmetry breaking</a> / <a href="https://en.wikipedia.org/wiki/Topological_defect">Topological defect</a> / <a href="https://en.wikipedia.org/wiki/Kibble%E2%80%93Zurek_mechanism">Kibble–Zurek mechanism</a> / <a href="https://en.wikipedia.org/wiki/Time_crystal">Time crystal</a></li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

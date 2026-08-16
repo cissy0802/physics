@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Symmetry Breaking &amp; Order · Day 35</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Symmetry Breaking &amp; Order</h1>
+<div class="meta">Day 35 · 2026 · Phase H Condensed Matter &amp; Emergence</div>
+<div class="tagline">While a pencil balances on its tip every direction is exactly equal; once it falls it points one way — and the equation governing it never changed a single character.</div>
+</header>
+<div class="intro">
+A block of iron, a snowflake, a cup of superfluid helium, and the vacuum a trillionth of a second after the universe began all perform the same manoeuvre: <b>the law treats every option alike, and the system still has to pick one</b>. The instant it picks, order appears out of nothing. That manoeuvre also leaves behind two things it cannot wriggle out of: <b>a wave that gets cheaper the longer its wavelength</b>, and <b>lumps that in principle cannot be smoothed away</b>. That you can hear sound, and that metal can be hammered into shape, are both charged to this account.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>The Law Is Symmetric, the Answer Needn't Be <span class="en">Spontaneous Symmetry Breaking</span></h2>
+<span class="pill">spontaneous breaking · order parameter</span>
+<div class="field"><span class="lab">Intuition</span>
+  Balance a pencil on its point and the equation treats north, south, east and west identically — yet it must fall, and it must fall <strong>one particular way</strong>. The moment it topples, "all directions are equal" stops being true of that pencil, while not one character of the equation has changed. Iron does the same thing: above the Curie point of 1043 K the atomic moments point every which way and the block has no direction at all; below it, almost all of them line themselves up along a single direction. Why that one? No reason.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  If the equation itself is biased — an applied field forcing the moments north — that is <strong>explicit breaking</strong>. If the equation stays perfectly symmetric and only the <strong>lowest-energy state</strong> is asymmetric, that is <strong>spontaneous breaking</strong> — and then there is a <strong>whole family of equivalent answers</strong>, one of which the system simply walks off with. The quantity that captures it is the <strong>order parameter</strong>: exactly 0 (zero) in the symmetric phase, non-zero in the broken one. The simplest potential looks like this:
+  <div class="eq"><var>V</var>(<var>φ</var>) = −<var>a</var><var>φ</var><sup>2</sup> + <var>b</var><var>φ</var><sup>4</sup></div>
+<div class="gloss"><var>φ</var> is the Greek letter phi — the order parameter; <var>a</var> and <var>b</var> are positive numbers. The whole drama hides in that <strong>minus sign</strong>: it makes moving <var>φ</var> away from dead centre <em>cheaper</em>, so <span class="nowrap"><var>φ</var> = <strong>0</strong> (the digit zero)</span> becomes a hilltop rather than a valley, and the true minima sit at <span class="nowrap"><var>φ</var> = ±√(<var>a</var>/2<var>b</var>)</span> — <strong>two</strong> of them, identical in energy.</div>
+  Switch to a complex order parameter (superfluids and superconductors) and the minimum is not two points but a <strong>whole ring</strong>, shaped like a Mexican hat.</div>
+<figure>
+<svg aria-label="Left: the minimum of the potential is not at the centre. Right: a ring of degenerate ground states and the two kinds of motion" role="img" viewbox="0 0 660 250">
+<defs>
+<marker id="a35-b" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5"><path d="M0,0 L11,4.5 L0,9 z" fill="#5b9bff"></path></marker>
+<marker id="a35-a" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="11" orient="auto" refX="10" refY="4.5"><path d="M0,0 L11,4.5 L0,9 z" fill="#f0ad5a"></path></marker>
+<marker id="a35-g" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="10" orient="auto" refX="9" refY="4"><path d="M0,0 L10,4 L0,8 z" fill="#96a0ba"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="24" y="18">① The lowest energy is not at the centre</text>
+<line stroke="#56607e" stroke-width="1.4" x1="24" x2="24" y1="212" y2="66"></line>
+<polygon fill="#56607e" points="24,56 19,70 29,70"></polygon>
+<text fill="#96a0ba" font-size="11" x="32" y="62">Energy V</text>
+<line stroke="#56607e" stroke-width="1.4" x1="24" x2="308" y1="212" y2="212"></line>
+<polygon fill="#56607e" points="318,212 304,207 304,217"></polygon>
+<text fill="#96a0ba" font-size="11" text-anchor="end" x="308" y="228">order parameter φ</text>
+<path d="M 40,91.4 L 48,128.2 L 56,154.9 L 64,173.0 L 72,184.0 L 80,189.2 L 88,189.7 L 96,186.8 L 104,181.3 L 112,174.3 L 120,166.5 L 128,158.6 L 136,151.2 L 144,144.8 L 152,139.8 L 160,136.5 L 168,135.1 L 176,135.5 L 184,137.9 L 192,142.1 L 200,147.8 L 208,154.8 L 216,162.5 L 224,170.4 L 232,178.0 L 240,184.3 L 248,188.6 L 256,190.0 L 264,187.3 L 272,179.4 L 280,165.0 L 288,142.7 L 296,111.1 L 300,91.4" fill="none" stroke="#5b9bff" stroke-linejoin="round" stroke-width="2.2"></path>
+<circle cx="170" cy="127" fill="#8c96b0" r="8"></circle>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="170" y="108">φ = 0: symmetric, but unstable</text>
+<path d="M 181,124 Q 224,122 248,176" fill="none" marker-end="url(#a35-g)" stroke="#96a0ba" stroke-dasharray="4 4" stroke-width="1.5"></path>
+<circle cx="255" cy="182" fill="#f0ad5a" r="8"></circle>
+<circle cx="85" cy="182" fill="#f0ad5a" r="8"></circle>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="170" y="244">two minima of equal energy — pick one</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="336" x2="336" y1="14" y2="236"></line>
+<text fill="#f0ad5a" font-size="11.5" x="360" y="18">② A whole ring of ground states</text>
+<circle cx="500" cy="132" fill="none" r="66" stroke="#f0ad5a" stroke-dasharray="5 4" stroke-width="2"></circle>
+<circle cx="500" cy="132" fill="#8c96b0" r="4.5"></circle>
+<text fill="#96a0ba" font-size="10.5" text-anchor="middle" x="500" y="150">peak: most symmetric</text>
+<text fill="#96a0ba" font-size="10.5" text-anchor="middle" x="500" y="166">and least stable</text>
+<circle cx="557.2" cy="165" fill="#f0ad5a" r="7"></circle>
+<path d="M 550.6,174.4 A 66,66 0 0 0 563.8,114.9" fill="none" marker-end="url(#a35-b)" stroke="#5b9bff" stroke-width="2.2"></path>
+<text fill="#7db0ff" font-size="11.5" text-anchor="middle" x="470" y="46">along the ring: costs nothing</text>
+<line marker-end="url(#a35-a)" stroke="#f0ad5a" stroke-width="2" x1="563" x2="592" y1="168" y2="185"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="end" x="654" y="212">climbing out: costs energy</text>
+</g>
+</svg>
+<figcaption>The summit is the most symmetric spot and cannot be stood on; the valley is asymmetric and stable. After breaking, the symmetry lives on as "every point on the ring is equivalent".</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · the same move under other names</span>
+  For <strong>crystals and snowflakes</strong> the order parameter is the periodic ripple in density: the continuous "anywhere and any orientation is the same" is demoted to a discrete set of lattice points and rotation angles. For <strong>superfluids and superconductors</strong> it is a complex number whose phase loses its freedom. For the <strong>universe</strong> it is the vacuum value of the Higgs field — the details are in <a href="symmetry-mass-origin-day26.en.html">"Symmetry &amp; the Origin of Mass"</a>. How fast the order parameter grows away from 0 belongs to <a href="phase-transitions-criticality-day33.en.html">"Phase Transitions &amp; Criticality"</a>.</div>
+<div class="field"><span class="lab">The counterintuitive bit</span>
+  The phrase "symmetry breaking" misleads people: <strong>the symmetry is not damaged at all</strong>. It merely shifts from "every state is symmetric" to "the states are symmetric <strong>with respect to one another</strong>". North-pointing and south-pointing iron have exactly equal energy; rotate the whole universe and one becomes the other. That <strong>degeneracy</strong> is the proof that the symmetry is still alive.</div>
+<div class="field xref"><span class="lab">Cross-reading · development / deep learning</span>
+<ul>
+<li><strong>Developmental biology</strong>: a fertilised egg is nearly spherically symmetric, yet you have a head and a tail, a left and a right. In vertebrates that left–right distinction is set by the fluid flow driven by the <strong>directed rotation</strong> of a patch of cilia at the embryonic node: a microscopic handedness amplified into "the heart sits on the left".</li>
+<li><strong>Deep learning</strong>: initialise every weight in a layer to the same number and those units receive identical gradients, so they learn the same thing forever. The fix is literally called <em>symmetry breaking</em>: random initialisation, deliberately breaking the symmetry by hand.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: order is not written into the law — the system picks it out of a pile of equivalent options.</div>
+<details class="q"><summary><b>Think:</b> What happens if different regions of one iron block "pick" different directions?</summary><div class="qa">It splits into <strong>magnetic domains</strong> pointing every which way, which cancel out macroscopically — which is exactly why an ordinary lump of iron is not a magnet. The twisted layer at each boundary is a domain wall. Apply a field and the favourably oriented domains grow and swallow the rest: the iron is magnetised.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>The Bill for Breaking: a Wave That Is Almost Free <span class="en">Goldstone Modes</span></h2>
+<span class="pill">Nambu 1960 · Goldstone 1961</span>
+<div class="field"><span class="lab">Intuition</span>
+  A whole ring of equivalent ground states has an inescapable consequence. Take a row of soldiers all facing north (one ground state); turning the <strong>entire</strong> row to face north-east is still a ground state and costs nothing. Now instead let the facing <strong>twist slowly along the row</strong>: north at the left end, north-east at the right. That costs energy — but the longer the row and the gentler the twist, the smaller the angle between neighbours and the lower the price. <strong>As the wavelength goes to infinity, the cost goes to zero.</strong></div>
+<div class="field"><span class="lab">Mechanism</span>
+  This is <strong>Goldstone's theorem</strong> (Nambu 1960, Goldstone 1961; Nambu received the 2008 Nobel Prize in Physics for this line of thought): <strong>every broken continuous symmetry forces the existence of a gapless collective mode</strong> — one whose minimum excitation energy can be made arbitrarily small. The two kinds of mode are told apart at a glance:
+  <div class="eq"><var>ω</var> = <var>c</var><var>k</var> &nbsp;&nbsp;versus&nbsp;&nbsp; <var>ω</var> = √(<var>Δ</var><sup>2</sup> + <var>c</var><sup>2</sup><var>k</var><sup>2</sup>)</div>
+<div class="gloss"><var>ω</var> is the Greek letter omega — how fast the oscillation goes, proportional to the energy of the excitation; <var>k</var> is the wavenumber, 2π divided by the wavelength, so <strong>longer wavelength means smaller <var>k</var></strong>; <var>c</var> is a speed. On the left is the Goldstone mode: as <var>k</var> → 0, <var>ω</var> → 0 too — free of charge. On the right there is an extra <var>Δ</var> (delta), the <strong>energy gap</strong>: stretch the wavelength as far as you like and <var>ω</var> only falls to <var>Δ</var>. There is always a cover charge.</div>
+</div>
+<figure>
+<svg aria-label="Left: a uniform row versus a long-wavelength twist. Right: energy versus wavenumber for a gapless and a gapped mode" role="img" viewbox="0 0 660 252">
+<defs>
+<marker id="b35-b" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#5b9bff"></path></marker>
+<marker id="b35-a" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="24" y="18">① Drifting slowly to the next ground state</text>
+<text fill="#96a0ba" font-size="11.5" x="24" y="60">all aligned = ground state, zero energy</text>
+<g marker-end="url(#b35-b)" stroke="#5b9bff" stroke-width="2">
+<line x1="44" x2="44" y1="100" y2="76"></line> <line x1="68" x2="68" y1="100" y2="76"></line> <line x1="92" x2="92" y1="100" y2="76"></line> <line x1="116" x2="116" y1="100" y2="76"></line> <line x1="140" x2="140" y1="100" y2="76"></line> <line x1="164" x2="164" y1="100" y2="76"></line> <line x1="188" x2="188" y1="100" y2="76"></line> <line x1="212" x2="212" y1="100" y2="76"></line> <line x1="236" x2="236" y1="100" y2="76"></line> <line x1="260" x2="260" y1="100" y2="76"></line> <line x1="284" x2="284" y1="100" y2="76"></line>
+</g>
+<text fill="#96a0ba" font-size="11.5" x="24" y="146">slow twist along the row = almost free</text>
+<g marker-end="url(#b35-a)" stroke="#f0ad5a" stroke-width="2">
+<line x1="44" x2="44.0" y1="190" y2="166.0"></line> <line x1="68" x2="79.8" y1="190" y2="169.1"></line> <line x1="92" x2="109.7" y1="190" y2="173.8"></line> <line x1="116" x2="133.7" y1="190" y2="173.8"></line> <line x1="140" x2="151.8" y1="190" y2="169.1"></line> <line x1="164" x2="164.0" y1="190" y2="166.0"></line> <line x1="188" x2="176.2" y1="190" y2="169.1"></line> <line x1="212" x2="194.3" y1="190" y2="173.8"></line> <line x1="236" x2="218.3" y1="190" y2="173.8"></line> <line x1="260" x2="248.2" y1="190" y2="169.1"></line> <line x1="284" x2="284.0" y1="190" y2="166.0"></line>
+</g>
+<text fill="#c3cbe0" font-size="11.5" x="24" y="222">longer wavelength → smaller angle → cost → 0</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="340" x2="340" y1="14" y2="238"></line>
+<text fill="#f0ad5a" font-size="11.5" x="368" y="18">② Energy versus wavenumber</text>
+<line stroke="#56607e" stroke-width="1.4" x1="380" x2="380" y1="214" y2="52"></line>
+<polygon fill="#56607e" points="380,42 375,56 385,56"></polygon>
+<text fill="#96a0ba" font-size="11" x="388" y="48">energy ω</text>
+<line stroke="#56607e" stroke-width="1.4" x1="380" x2="630" y1="214" y2="214"></line>
+<polygon fill="#56607e" points="640,214 626,209 626,219"></polygon>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="510" y="236">wavenumber k (longer wavelength → smaller k)</text>
+<path d="M 380,214 L 416,195.4 L 452,176.8 L 488,158.3 L 524,139.7 L 560,121.1 L 596,102.5 L 620,90.1" fill="none" stroke="#5b9bff" stroke-width="2.4"></path>
+<path d="M 380,136.6 L 416,134.4 L 452,128.1 L 488,118.6 L 524,106.7 L 560,93.1 L 596,78.3 L 620,67.9" fill="none" stroke="#f0ad5a" stroke-width="2.4"></path>
+<line stroke="#f0ad5a" stroke-dasharray="3 3" stroke-width="1.2" x1="398" x2="398" y1="214" y2="136.6"></line>
+<polygon fill="#f0ad5a" points="398,138 393,150 403,150"></polygon>
+<polygon fill="#f0ad5a" points="398,213 393,201 403,201"></polygon>
+<text fill="#f0ad5a" font-size="11.5" x="406" y="170">gap Δ</text>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="end" x="636" y="48">gapped: never free</text>
+<text fill="#7db0ff" font-size="11.5" text-anchor="end" x="636" y="196">Goldstone: ω → 0 as k → 0</text>
+</g>
+</svg>
+<figcaption>Turning the whole row costs nothing, so twisting it very gently costs almost nothing — that nearly-free curve is the bill breaking always leaves behind.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · you have met them already</span>
+  A crystal breaks continuous translational symmetry, and the Goldstone mode it leaves behind is the <strong>acoustic phonon</strong> — <strong>sound travelling through a solid is itself the bill for breaking</strong>. A ferromagnet breaks the rotational symmetry of spin and leaves <strong>spin waves</strong>. Superfluid helium breaks the freedom of the phase and leaves phase ripples running through the whole cup. Half the quasiparticles that starred in <a href="condensed-matter-wonders-day34.en.html">"The Wonders of Condensed Matter"</a> are registered here. The loveliest case is the exception: in a superconductor the phase mode is <strong>eaten</strong> by the electromagnetic field — what you get in exchange is a magnetic field that can only penetrate a thin surface layer (the Meissner effect). Run the same trick in the vacuum and you get the reason the weak force is short-ranged.</div>
+<div class="field"><span class="lab">The counterintuitive bit</span>
+  "Ordered" sounds like it ought to mean stiffer; the opposite is true. <strong>Breaking hands the system a set of extremely soft directions</strong>, and moving along that ring of equivalent ground states is nearly free. The heat capacity of cold solids and the very existence of sound are the work of these soft modes.</div>
+<div class="field xref"><span class="lab">Cross-reading · deep learning / structural engineering</span>
+<ul>
+<li><strong>Deep learning</strong>: loss surfaces carry a great many <strong>flat directions</strong> — in a ReLU network, scale one layer up by <em>λ</em> and the next down by <em>λ</em> and the loss does not move at all. These are Goldstone directions: motion at zero cost. Numerically they show up as the crowd of near-zero eigenvalues in measured Hessian spectra.</li>
+<li><strong>Structural engineering</strong>: a four-bar linkage swings freely doing almost no work; such "zero-stiffness modes" and the soft modes of a crystal are found with the same linear algebra — the null space of the stiffness matrix.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: break a continuous symmetry and you owe a gapless mode.</div>
+<details class="q"><summary><b>Think:</b> An Ising magnet has only "up" and "down". Why does breaking it produce no Goldstone mode?</summary><div class="qa">Because that symmetry is <strong>discrete</strong>: there is no continuous path between the two ground states. You cannot rotate "slowly" from up to down — every intermediate step is off the ground state, so the cost does not vanish with wavelength. Discrete breaking leaves a <strong>domain wall</strong> instead of a soft mode.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Lumps That Cannot Be Smoothed Away <span class="en">Topological Defects</span></h2>
+<span class="pill">vortices · dislocations · Kibble–Zurek</span>
+<div class="field"><span class="lab">Intuition</span>
+  When a real system cools, each region picks its side <strong>independently</strong>: this patch went north, a patch far away went east. Once everything is cold they compare notes and find they disagree. Most disagreements can be ironed out by rotating gradually from one to the other. Some cannot: walk once around a certain line and the order parameter has turned through <strong>a full 360°</strong>. However you adjust things, a core is left inside the loop where no direction can be assigned at all.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Whether it can be smoothed away is pure <strong>topology</strong>: the total turning around the loop must be an integer multiple of 360°, and that integer is the <strong>winding number</strong>. Integers can only jump, and continuous deformation is not allowed to jump. So a defect is not merely "hard to remove" — <strong>no local operation can remove it</strong>. It can only be annihilated against an opposite defect, or driven out to a boundary.</div>
+<figure>
+<svg aria-label="Left: a direction field that can be combed flat. Right: a vortex that turns a full circle around its core and cannot be combed" role="img" viewbox="0 0 660 296">
+<defs>
+<marker id="c35-b" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#5b9bff"></path></marker>
+<marker id="c35-a" markerHeight="8" markerUnits="userSpaceOnUse" markerWidth="9" orient="auto" refX="8" refY="4"><path d="M0,0 L9,4 L0,8 z" fill="#f0ad5a"></path></marker>
+</defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<text fill="#7db0ff" font-size="11.5" x="24" y="20">① Combable: net turn of 0° around the loop</text>
+<g marker-end="url(#c35-b)" stroke="#5b9bff" stroke-width="1.8">
+<line x1="74.8" x2="65.2" y1="65.7" y2="54.3"></line> <line x1="74.2" x2="65.8" y1="106.2" y2="93.8"></line> <line x1="73.5" x2="66.5" y1="146.6" y2="133.4"></line> <line x1="72.8" x2="67.2" y1="187.0" y2="173.0"></line> <line x1="72.1" x2="67.9" y1="227.2" y2="212.8"></line> <line x1="113.3" x2="106.7" y1="66.7" y2="53.3"></line> <line x1="112.6" x2="107.4" y1="107.0" y2="93.0"></line> <line x1="111.8" x2="108.2" y1="147.3" y2="132.7"></line> <line x1="111.0" x2="109.0" y1="187.4" y2="172.6"></line> <line x1="110.3" x2="109.7" y1="227.5" y2="212.5"></line> <line x1="151.6" x2="148.4" y1="67.3" y2="52.7"></line> <line x1="150.8" x2="149.2" y1="107.5" y2="92.5"></line> <line x1="150.0" x2="150.0" y1="147.5" y2="132.5"></line> <line x1="149.2" x2="150.8" y1="187.5" y2="172.5"></line> <line x1="148.4" x2="151.6" y1="227.3" y2="212.7"></line> <line x1="189.7" x2="190.3" y1="67.5" y2="52.5"></line> <line x1="189.0" x2="191.0" y1="107.4" y2="92.6"></line> <line x1="188.2" x2="191.8" y1="147.3" y2="132.7"></line> <line x1="187.4" x2="192.6" y1="187.0" y2="173.0"></line> <line x1="186.7" x2="193.3" y1="226.7" y2="213.3"></line> <line x1="227.9" x2="232.1" y1="67.2" y2="52.8"></line> <line x1="227.2" x2="232.8" y1="107.0" y2="93.0"></line> <line x1="226.5" x2="233.5" y1="146.6" y2="133.4"></line> <line x1="225.8" x2="234.2" y1="186.2" y2="173.8"></line> <line x1="225.2" x2="234.8" y1="225.7" y2="214.3"></line>
+</g>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="150" y="262">every arrow can be rotated into alignment:</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="150" y="280">this mismatch can be smoothed away</text>
+<line stroke="#26314c" stroke-dasharray="4 5" stroke-width="1.2" x1="320" x2="320" y1="14" y2="286"></line>
+<text fill="#f0ad5a" font-size="11.5" x="352" y="20">② Not combable: net turn of 360°</text>
+<circle cx="480" cy="140" fill="none" r="102" stroke="#6a5326" stroke-dasharray="4 6" stroke-width="1.2"></circle>
+<g marker-end="url(#c35-a)" stroke="#f0ad5a" stroke-width="1.8">
+<line x1="394.7" x2="405.3" y1="65.3" y2="54.7"></line> <line x1="396.6" x2="403.4" y1="106.7" y2="93.3"></line> <line x1="400.0" x2="400.0" y1="147.5" y2="132.5"></line> <line x1="403.4" x2="396.6" y1="186.7" y2="173.3"></line> <line x1="405.3" x2="394.7" y1="225.3" y2="214.7"></line> <line x1="433.3" x2="446.7" y1="63.4" y2="56.6"></line> <line x1="434.7" x2="445.3" y1="105.3" y2="94.7"></line> <line x1="440.0" x2="440.0" y1="147.5" y2="132.5"></line> <line x1="445.3" x2="434.7" y1="185.3" y2="174.7"></line> <line x1="446.7" x2="433.3" y1="223.4" y2="216.6"></line> <line x1="472.5" x2="487.5" y1="60.0" y2="60.0"></line> <line x1="472.5" x2="487.5" y1="100.0" y2="100.0"></line> <line x1="487.5" x2="472.5" y1="180.0" y2="180.0"></line> <line x1="487.5" x2="472.5" y1="220.0" y2="220.0"></line> <line x1="513.3" x2="526.7" y1="56.6" y2="63.4"></line> <line x1="514.7" x2="525.3" y1="94.7" y2="105.3"></line> <line x1="520.0" x2="520.0" y1="132.5" y2="147.5"></line> <line x1="525.3" x2="514.7" y1="174.7" y2="185.3"></line> <line x1="526.7" x2="513.3" y1="216.6" y2="223.4"></line> <line x1="554.7" x2="565.3" y1="54.7" y2="65.3"></line> <line x1="556.6" x2="563.4" y1="93.3" y2="106.7"></line> <line x1="560.0" x2="560.0" y1="132.5" y2="147.5"></line> <line x1="563.4" x2="556.6" y1="173.3" y2="186.7"></line> <line x1="565.3" x2="554.7" y1="214.7" y2="225.3"></line>
+</g>
+<circle cx="480" cy="140" fill="#0a0e1a" r="12" stroke="#f0f3fb" stroke-width="1.6"></circle>
+<text fill="#f0f3fb" font-size="10" text-anchor="middle" x="480" y="143.5">core</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="480" y="262">the winding number is an integer, never 0:</text>
+<text fill="#c3cbe0" font-size="11.5" text-anchor="middle" x="480" y="280">no direction can be defined at the core</text>
+</g>
+</svg>
+<figcaption>Walk once around the dashed loop: does the arrow direction turn by 0 or by 360°? That integer decides whether the lump can be smoothed away.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · a catalogue of defects</span>
+  The same mathematics goes by different names in different trades. In <strong>magnets</strong> it is the domain wall. In <strong>superfluids and superconductors</strong> it is the quantised vortex, whose circulation only comes in integer multiples of a basic unit. In <strong>crystals</strong> it is the dislocation — metal bends instead of shattering precisely because a dislocation line is pushed along like a ruck in a carpet, needing orders of magnitude less force than sliding a whole plane of atoms at once. In the <strong>early universe</strong>, Kibble pointed out in 1976 that vacuum breaking should equally leave cosmic strings or monopoles; honestly, <strong>not one such cosmic defect has ever been observed</strong>. Zurek supplied the quantitative half: <strong>the faster you cool, the denser the defects that freeze in</strong> — a prediction made for cosmology that has since been measured over and over in liquid crystals, superfluid helium and cold atoms.</div>
+<div class="field"><span class="lab">The counterintuitive bit</span>
+  Defects are usually treated as flaws. In fact they are an <strong>unavoidable by-product of order</strong>, and they are usually the part that does the work: the plasticity of metals, the magnetisation of a magnet, the dissipation of a stirred superfluid — the protagonist in each is the defect, not the perfectly ordered region.</div>
+<div class="field xref"><span class="lab">Cross-reading · metallurgy / quantum computing</span>
+<ul>
+<li><strong>Metallurgy</strong>: why is steel harder than pure iron? Because alloying elements, grain boundaries and cold working all <strong>put obstacles in the way of dislocations</strong>. The entire discipline of strengthening materials is an argument with the motion of one kind of topological defect — not destroying it, blocking it.</li>
+<li><strong>Quantum computing</strong>: topological quantum computing encodes information in global properties that no local operation can alter, and its error resistance is exactly this refusal to be smoothed away — turning the most stubborn thing in physics into a safe.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: defects are not blemishes, they are topology's bookkeeping.</div>
+<details class="q"><summary><b>Think:</b> Why does the circulation around a superfluid vortex come only in whole units?</summary><div class="qa">Because the whole cup is described by a single wavefunction, and a wavefunction must be <strong>single-valued</strong>: go once around the vortex and the phase may only change by an integer multiple of 360°, or one point would carry two values. The spatial rate of change of the phase <em>is</em> the flow speed, so the circulation is locked to that integer.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Breaking Is Not a Master Key <span class="en">Beyond the Landau Paradigm</span></h2>
+<span class="pill">the Landau paradigm · its limits</span>
+<div class="field"><span class="lab">Intuition</span>
+  The three cards above describe one of the twentieth century's most successful organising frameworks — the Landau paradigm: <strong>every ordered phase corresponds to a broken symmetry and admits an order parameter</strong>. It unified magnets, crystals, superfluids, superconductors and the vacuum, so powerfully that people came to believe "ordered" simply means "symmetry broken". It has limits.</div>
+<div class="field"><span class="lab">Mechanism · three places it does not reach</span>
+  <strong>① Too few dimensions to break.</strong> In two dimensions, at finite temperature, with short-range interactions, a continuous symmetry <strong>cannot</strong> break spontaneously (the Mermin–Wagner–Hohenberg theorem, 1966). The reason is the soft mode of the previous card: long-wavelength fluctuations are so cheap that they keep stirring the freshly chosen direction back into disorder. Two-dimensional superfluidity runs on something else entirely — vortices bound in pairs at low temperature and unbinding as it rises (Kosterlitz–Thouless, 2016 Nobel Prize in Physics).<br/>
+  <strong>② Ordered, yet no order parameter can be written.</strong> Fractional quantum Hall states and quantum spin liquids break no symmetry at all: measure every <strong>local</strong> property of two distinct states and they agree, the difference living only in the global entanglement structure. This is <strong>topological order</strong>.<br/>
+  <strong>③ Naming is not explaining.</strong> Pointing at a phenomenon and saying "spontaneous symmetry breaking" only files it. The real work is filling in the list: which symmetry broke, what the order parameter is, where the Goldstone mode is, what the defects look like.</div>
+<div class="field"><span class="lab">The counterintuitive bit</span>
+  The paradigm was so successful that it created an illusion — that ordered ⇔ symmetry broken. In fact most of what is new in twenty-first-century condensed matter grows on the other side: <strong>no symmetry broken, and ordered all the same</strong>.</div>
+<div class="punch">
+<div class="one">In one line: the order you can write an order parameter for is only part of the order there is.</div>
+<details class="q"><summary><b>Think:</b> If two dimensions forbid continuous breaking, what is a two-dimensional crystal like graphene?</summary><div class="qa">Not a counterexample. What the theorem forbids is <strong>strict long-range translational order</strong> (infinite system, finite temperature, short-range forces). Real two-dimensional crystals have quasi-long-range order — correlations decaying as a power law rather than exponentially — plus finite sample size and a supporting substrate. Graphene is a crystal that is good enough, not a violation of the theorem.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going Deeper</h2>
+<details><summary>Space's symmetry can break — can time's? Is there such a thing as a time crystal?</summary>
+<div class="body">A crystal repeats itself spontaneously in space; a time crystal would repeat itself spontaneously in time — moving back and forth on its own with no drive. Shortly after Wilczek posed the question formally in 2012, that version was proved <strong>impossible in equilibrium</strong> (the Watanabe–Oshikawa no-go theorem). Under <strong>periodic driving</strong> the situation changes: a system can respond at twice the drive period, or an integer multiple of it, breaking the discrete time-translation symmetry the drive itself carries. Such "discrete time crystals" have been observed since 2016–2017 in ion chains and in nitrogen-vacancy centres in diamond. Equilibrium no, non-equilibrium discrete version yes — which shows that <em>which</em> symmetries can break is under hard constraints.</div></details>
+<details><summary>Who actually does the choosing? If the equation is perfectly symmetric, where does the decision come from?</summary>
+<div class="body">Computed strictly quantum-mechanically, the true ground state of a finite system is a <strong>superposition</strong> over all directions — it is symmetric, and its average magnetisation is 0. The breaking comes from a conspiracy of two things. First, <strong>fluctuations</strong>: thermal noise, impurities, boundary conditions, even a faint external field will single out a direction. Second, <strong>largeness</strong>: tunnelling between differently oriented states requires flipping a number of spins proportional to the volume, so for a macroscopic system that time vastly exceeds the age of the universe. The symmetric superposition therefore exists mathematically and is forever out of reach physically — strict spontaneous breaking only happens in the <strong>thermodynamic limit</strong>.</div></details>
+<details><summary>Why does one mechanism reach all the way from a magnet to the vacuum of the universe?</summary>
+<div class="body">Because it never depended on the material. Breaking consists of just three ingredients: a symmetry group, a process demoting it to a subgroup, and an order parameter measuring the demotion. Everything that follows — ground-state degeneracy, Goldstone modes, the classification of defects — uses only group theory and topology, never what the atoms are or how strong the forces are. That is why the phase mode being eaten by the electromagnetic field in a superconductor and the mode being eaten by the weak field in the vacuum are <strong>the same calculation</strong>. Mechanisms we call "deep" are usually like this: assumptions almost punishingly few, applicability unreasonably wide.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further Reading</h2>
+<ul>
+<li>J. Goldstone, A. Salam &amp; S. Weinberg, <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.127.965"><em>"Broken Symmetries"</em>, <em>Phys. Rev.</em> 127 (1962) 965</a> — the classic statement of the gapless-mode theorem</li>
+<li>Y. Nambu, <a href="https://www.nobelprize.org/prizes/physics/2008/nambu/lecture/">2008 Nobel Lecture, "Spontaneous Symmetry Breaking in Particle Physics"</a> — the leap from superconductivity to particle physics, in the author's own words</li>
+<li>N. D. Mermin &amp; H. Wagner, <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.17.1133"><em>PRL</em> 17 (1966) 1133</a> — why two dimensions forbid continuous breaking</li>
+<li>T. W. B. Kibble, <a href="https://iopscience.iop.org/article/10.1088/0305-4470/9/8/029"><em>"Topology of cosmic domains and strings"</em>, <em>J. Phys. A</em> 9 (1976) 1387</a> — the origin of cosmological defects</li>
+<li>W. H. Zurek, <a href="https://www.nature.com/articles/317505a0"><em>"Cosmological experiments in superfluid helium?"</em>, <em>Nature</em> 317 (1985) 505</a> — moving a cosmological prediction into the laboratory</li>
+<li>P. W. Anderson, <a href="https://www.science.org/doi/10.1126/science.177.4047.393"><em>"More Is Different"</em>, <em>Science</em> 177 (1972) 393</a> — where breaking meets emergence</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2016/popular-information/">Popular information for the 2016 Nobel Prize in Physics</a> — the two-dimensional story of unbinding vortex pairs</li>
+<li><a href="https://en.wikipedia.org/wiki/Spontaneous_symmetry_breaking">Wikipedia: Spontaneous symmetry breaking</a> / <a href="https://en.wikipedia.org/wiki/Topological_defect">Topological defect</a> / <a href="https://en.wikipedia.org/wiki/Kibble%E2%80%93Zurek_mechanism">Kibble–Zurek mechanism</a> / <a href="https://en.wikipedia.org/wiki/Time_crystal">Time crystal</a></li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
