@@ -87,7 +87,7 @@
 <div class="wrap">
 <header>
 <div class="kicker">物理 · Physics</div>
-<h1>物理学家的思维方式</h1>
+<h1 data-tts="dd9bac95154e33b0">物理学家的思维方式</h1>
 <div class="meta">Day 37 · 2026 · Phase I 收尾</div>
 <div class="tagline">这行手艺最值钱的部分不是解方程——是在动笔之前，就知道答案必须长什么样。</div>
 </header>
@@ -95,7 +95,7 @@
 物理学最容易被误解的地方，是以为它的核心技能是<b>解方程</b>。真正的分水岭在方程之前：拿到一个陌生问题，先用<b>量纲</b>把答案的形状定死，用<b>数量级</b>判断值不值得算，用<b>极限</b>和<b>对称</b>检查算得对不对，最后用<b>近似</b>决定哪些细节可以扔掉。这几把刀的作用不是算得更准，而是<b>在动笔之前淘汰掉绝大多数错误答案</b>——它们处理的其实不是物理，而是「面对一个你没完全弄懂的系统，该从哪下手」。
 </div>
 <!-- Card 1 -->
-<div class="card">
+<div class="card" data-tts="85b9ee6ccb5c61cd">
 <h2>量纲分析 <span class="en">Dimensional Analysis</span></h2>
 <span class="pill">方法论 · Buckingham 1914</span>
 <div class="field"><span class="lab">直觉</span>
@@ -142,7 +142,7 @@
 </div>
 </div>
 <!-- Card 2 -->
-<div class="card">
+<div class="card" data-tts="0ba38411449b0f09">
 <h2>费米估算 <span class="en">Fermi Estimation</span></h2>
 <span class="pill">数量级 · 餐巾纸计算</span>
 <div class="field"><span class="lab">直觉</span>
@@ -190,7 +190,7 @@
 <div class="field"><span class="lab">为什么重要</span>
   估算的目的从来不是得到那个数，而是<strong>判断值不值得认真算</strong>。差三个数量级的方案不需要精确计算就该被枪毙；只有差两倍的方案，才轮到写代码、搭实验。</div>
 <div class="field xref"><span class="lab">跨学科对读 · AI / 系统工程 / 决策</span>
-  <ul>
+<ul>
 <li><strong>AI</strong>：训练一次模型大约需要 <span class="nowrap"><var>C</var> ≈ 6<var>N</var><var>D</var></span> 次浮点运算（<var>N</var> 是参数量、<var>D</var> 是训练 token 数）。一乘就知道要多少 GPU-天、多少度电——<strong>在写第一行代码之前</strong>就能否掉一批不可行的方案；</li>
 <li><strong>系统工程</strong>：容量估算是同一件事——日活 × 人均请求 ÷ 86400 秒得到每秒请求数，再乘每请求字节得到带宽。这个乘法决定架构选型，压测只是事后确认；</li>
 <li><strong>日常决策</strong>：「这事儿靠不靠谱」本质都是先估一个数量级。差一百倍的事，讨论细节是浪费时间；差 20% 的事，直觉反而不可信、必须真算。</li>
@@ -202,7 +202,7 @@
 </div>
 </div>
 <!-- Card 3 -->
-<div class="card">
+<div class="card" data-tts="57559d87d5c16b40">
 <h2>极限检验与对称性直觉 <span class="en">Limiting Cases &amp; Symmetry</span></h2>
 <span class="pill">检验 · 三行抓错</span>
 <div class="field"><span class="lab">直觉</span>
@@ -236,9 +236,9 @@
 <figcaption>两个极限都不用算：一头必须回到牛顿，另一头必须发散——这就是理论的体检项。</figcaption>
 </figure>
 <div class="field"><span class="lab">机制 · 对称这一面</span>
-  <strong>答案必须继承问题的对称性。</strong>一个均匀带电的球壳，内部任意一点的电场是多少？不用积分：球壳完全球对称，而电场是有方向的量——若内部某点场不为零，它必须指向某个方向，可对称性没有挑出任何一个方向来。唯一自洽的答案是<strong>数字 0（零）</strong>。三行推理换掉一页积分。</div>
+<strong>答案必须继承问题的对称性。</strong>一个均匀带电的球壳，内部任意一点的电场是多少？不用积分：球壳完全球对称，而电场是有方向的量——若内部某点场不为零，它必须指向某个方向，可对称性没有挑出任何一个方向来。唯一自洽的答案是<strong>数字 0（零）</strong>。三行推理换掉一页积分。</div>
 <div class="field xref"><span class="lab">跨学科对读 · 软件 / ML / 工程</span>
-  <ul>
+<ul>
 <li><strong>软件</strong>：边界测试就是极限检验——空列表、只有一个元素、最大整数、并发数为 1。bug 最爱藏在极限处，因为写代码的人想的全是「典型情形」；</li>
 <li><strong>ML</strong>：把某一层的权重全部初始化成同一个值，这层每个神经元收到的梯度<strong>完全相同</strong>，于是永远保持相同，整层退化成一个神经元。随机初始化真正的作用不是「加点随机」，而是<strong>人为打破这个对称</strong>；</li>
 <li><strong>工程</strong>：Amdahl 定律也是一次极限检验——处理器数趋于无穷时，加速比不趋于无穷，而是趋于 1 除以串行部分占比。极限一推，「加机器总能变快」的幻觉当场破掉。</li>
@@ -250,7 +250,7 @@
 </div>
 </div>
 <!-- Card 4 -->
-<div class="card">
+<div class="card" data-tts="861969c38cbbb4bf">
 <h2>模型与近似的艺术 <span class="en">The Art of Approximation</span></h2>
 <span class="pill">近似 · 球形奶牛</span>
 <div class="field"><span class="lab">直觉</span>
@@ -277,9 +277,9 @@
 <div class="field"><span class="lab">机制 · 判据</span>
   最容易漏掉的一步：不能问「这个量小不小」，只能问<strong>「这个量比什么小」</strong>。0.1 秒算不算小？对心跳它很长，对分子碰撞它长得像永恒。所以小参数必须是<strong>无量纲</strong>的比值（又绕回量纲分析）：<span class="nowrap"><var>v</var>/<var>c</var></span>、摆角的弧度值、原子尺度比波长。</div>
 <div class="field"><span class="lab">反直觉的重点</span>
-  <strong>好模型不是最像真实的模型。</strong>把所有细节都塞进去的模型既算不动也看不懂，还会把主导因素埋进噪声里。模型的价值恰恰在它<strong>扔掉</strong>的东西——扔对了，骨架才露出来。</div>
+<strong>好模型不是最像真实的模型。</strong>把所有细节都塞进去的模型既算不动也看不懂，还会把主导因素埋进噪声里。模型的价值恰恰在它<strong>扔掉</strong>的东西——扔对了，骨架才露出来。</div>
 <div class="field xref"><span class="lab">跨学科对读 · 统计 / 工程 / AI / 生物</span>
-  <ul>
+<ul>
 <li><strong>统计</strong>：Box 那句「所有模型都是错的，但有些有用」是这条原则最正式的表述——评判标准从「对不对」换成「在你要问的问题上有没有用」；</li>
 <li><strong>工程</strong>：性能优化先 profile 再动手。花两周优化只占 2% 运行时间的函数，就是典型的没扔对；</li>
 <li><strong>AI</strong>：消融实验是「什么可以扔掉」的实验版——拿掉一个组件看指标掉多少，掉得少的就是可以扔的；</li>
@@ -293,7 +293,7 @@
 </div>
 <!-- Deep think -->
 <div class="deep">
-<h2>深入思考</h2>
+<h2 data-tts="b7eea1f85c8d0aad">深入思考</h2>
 <details><summary>量纲分析给出的关系，一定是对的吗？</summary>
 <div class="body">不一定——它给的是必要条件，不是充分条件。全部力量建立在一个前提上：你把<strong>所有相关的物理量</strong>都列进去了。漏掉一个，结论就错；经典的坑在流体——只列密度、速度、尺寸而漏了黏度，会得到一个漂亮但错误的公式。另一个限制写在 Buckingham π 定理里：当能凑出的无量纲组合不止一个时，它只能告诉你这几个无量纲数之间存在某种函数关系，函数长什么样一个字也说不出来。它是筛子，不是答案。</div></details>
 <details><summary>费米估算什么时候会系统性地失效？</summary>
@@ -305,7 +305,7 @@
 </div>
 <!-- Reading -->
 <div class="read">
-<h2>延伸阅读</h2>
+<h2 data-tts="6637af91cb0fce6e">延伸阅读</h2>
 <ul>
 <li>G. I. Taylor，<a href="https://royalsocietypublishing.org/doi/10.1098/rspa.1950.0050"><em>"The Formation of a Blast Wave by a Very Intense Explosion. II. The Atomic Explosion of 1945"</em>，<em>Proc. R. Soc. A</em> 201 (1950) 175</a>——从公开照片反推当量的原文</li>
 <li>E. Buckingham，<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.4.345"><em>"On Physically Similar Systems; Illustrations of the Use of Dimensional Equations"</em>，<em>Phys. Rev.</em> 4 (1914) 345</a>——π 定理原文</li>
@@ -319,10 +319,10 @@
 </ul>
 </div>
 </div>
-<script src="https://hub.cissychen.com/comments.js" defer></script>
-<script src="https://hub.cissychen.com/search.js" defer></script>
-<script src="https://hub.cissychen.com/index-button.js" defer></script>
-<script src="https://hub.cissychen.com/lightbox.js" defer></script>
-<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
 </body>
 </html>
