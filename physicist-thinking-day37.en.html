@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: How Physicists Think · Day 37</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  .rt{border-top:1.4px solid #f0f3fb; padding:0 4px}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>How Physicists Think</h1>
+<div class="meta">Day 37 · 2026 · Phase I Closing</div>
+<div class="tagline">The most valuable part of the craft isn't solving equations — it's knowing what the answer has to look like before you pick up the pen.</div>
+</header>
+<div class="intro">
+The easiest thing to get wrong about physics is assuming its core skill is <b>solving equations</b>. The real divide comes earlier. Handed an unfamiliar problem, you first use <b>dimensions</b> to pin down the shape of the answer, <b>orders of magnitude</b> to decide whether it's worth computing at all, <b>limits</b> and <b>symmetry</b> to check whatever you computed, and finally <b>approximation</b> to decide which details can be thrown away. None of these make the arithmetic more accurate; they <b>eliminate most of the wrong answers before the arithmetic starts</b> — which is why they travel so well. What they really handle isn't physics, it's «where do I even start with a system I don't fully understand».
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Dimensions as a Free Equation <span class="en">Dimensional Analysis</span></h2>
+<span class="pill">Method · Buckingham 1914</span>
+<div class="field"><span class="lab">Intuition</span>
+  You can't add 3 seconds to 5 kilograms. It sounds like a triviality — but used as a <strong>hard constraint</strong> it is startlingly powerful: both sides of an equation must match term by term in their «unit identity», and that nearly free requirement can often pin an answer down to within a single pure number <strong>without solving any equation at all</strong>.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Every mechanical quantity can be written as a power combination of three base dimensions: mass M, length L, time T. Velocity is L/T; energy is ML²/T². Now ask for the period of a pendulum. You have exactly three quantities: the length <var>ℓ</var> (dimension L), the bob's mass <var>m</var> (M), and gravitational acceleration <var>g</var> (L/T²). There is only one way to build something whose dimension is «time»:
+  <div class="eq"><var>T</var> ∝ <span style="font-size:1.1em">√</span><span class="rt"><span class="frac"><span class="fnum"><var>ℓ</var></span><span class="fden"><var>g</var></span></span></span></div>
+<div class="gloss">∝ reads «is proportional to». Check the dimensions: <var>ℓ</var> is a length, <var>g</var> is length ÷ time², so dividing cancels the length and leaves time²; the square root (√) turns that back into time.<br/>The interesting one is <var>m</var>. It is the <strong>only</strong> quantity carrying mass, and the left-hand side (a time) carries none — nothing else can cancel it, so its exponent can only be <strong>the digit 0 (zero)</strong>. It has to drop out.</div></div>
+<figure>
+<svg aria-label="Fixing the pendulum period by dimensional analysis" role="img" viewbox="0 0 620 232">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="14">
+<text fill="#96a0ba" font-size="12.5" x="20" y="20">What you have (and its dimension)</text>
+<text fill="#96a0ba" font-size="12.5" x="350" y="20">The only valid combination</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="250" x="20" y="34"></rect>
+<text fill="#dbe2f2" x="34" y="54">Pendulum length ℓ</text>
+<text fill="#7db0ff" x="200" y="54">= L</text>
+<rect fill="#2a2214" height="30" rx="6" stroke="#6a5326" width="250" x="20" y="76"></rect>
+<text fill="#f0ad5a" x="34" y="96">Bob mass m</text>
+<text fill="#f0ad5a" x="200" y="96">= M</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="250" x="20" y="118"></rect>
+<text fill="#dbe2f2" x="34" y="138">Gravity g</text>
+<text fill="#7db0ff" x="200" y="138">= L / T²</text>
+<line stroke="#5b9bff" stroke-width="2" x1="278" x2="312" y1="91" y2="91"></line>
+<polygon fill="#5b9bff" points="310,84 310,98 332,91"></polygon>
+<rect fill="#172038" height="46" rx="6" stroke="#2b3a5e" width="260" x="345" y="68"></rect>
+<text fill="#7db0ff" font-size="15" x="360" y="97">T = (pure number) × √( ℓ / g )</text>
+<text fill="#f0ad5a" font-size="13.5" x="20" y="180">M appears in m alone — nothing can cancel it</text>
+<text fill="#f0ad5a" font-size="13.5" x="20" y="202">→ m is forced out: the period is independent of the bob's mass</text>
+<text fill="#96a0ba" font-size="12.5" x="20" y="224">Dimensions can't supply the pure number (it is 2π) — but every dependence is fixed</text>
+</g>
+</svg>
+<figcaption>Without solving a single equation of motion, «both sides must match in units» forces out the shape of the period.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  In 1950 G. I. Taylor had nothing but the published photographs of an atomic fireball — each stamped with a time <var>t</var> and a fireball radius <var>R</var>. He wrote down <span class="nowrap"><var>R</var> ∝ (<var>E</var><var>t</var>²/<var>ρ</var>)<sup>1/5</sup></span> by dimensional analysis (<var>E</var> is the blast energy, <var>ρ</var> — «rho» — the density of air), solved back for <var>E</var>, and got roughly 20 kilotons of TNT. That number was still classified. <strong>Someone who never solved an equation read a state secret out of a few photographs.</strong></div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Fluids / AI</span>
+  What dimensional analysis really produces are <strong>dimensionless numbers</strong> — ratios with the units divided out, so the physics depends on the ratio and not on whether you measured in metres or feet:
+  <ul>
+<li><strong>Fluids and engineering</strong>: the Reynolds number <span class="nowrap">Re = <var>ρvℓ</var>/<var>η</var></span> decides whether a flow is laminar or turbulent. At equal Re, a real aircraft and a scale model in a wind tunnel have <strong>literally the same flow pattern</strong> — the entire wind-tunnel business rests on that one fact;</li>
+<li><strong>AI · hyperparameter transfer</strong>: treat network width as the «unit» and you can build hyperparameter combinations that stay invariant across widths (the μP parameterisation), so a learning rate tuned on a small model <strong>transfers to a large one and stays near-optimal</strong>. That is dimensional analysis with width playing the role of a dimension;</li>
+<li><strong>AI · ratios</strong>: the Chinchilla result — roughly 20 training tokens per parameter — is also a dimensionless number. It doesn't say how big the model should be, only what the <strong>ratio</strong> should be.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: dimensions aren't unit bookkeeping, they're a free equation.</div>
+<details class="q"><summary><b>Think:</b> If dimensional analysis is so strong, why can't it produce that 2π?</summary><div class="qa">Because a pure number carries no dimension at all, and dimensional analysis is <strong>blind</strong> to it. It can nail the scaling between physical quantities (period ∝ square root of length, independent of mass) but not the coefficient in front — that needs a real solution or an experiment. Knowing what your tool can't see matters as much as knowing what it can.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Guessing Well Enough to Decide <span class="en">Fermi Estimation</span></h2>
+<span class="pill">Orders of magnitude · napkin math</span>
+<div class="field"><span class="lab">Intuition</span>
+  How many piano tuners are there in Chicago? Nobody can look it up. But split it into five steps, guess a ratio you have some feel for at each one, and five minutes gets you to the right order of magnitude. Fermi did a harder version of this at the Trinity test in 1945: he dropped a handful of torn paper scraps and watched how far the blast wave carried them, estimating the yield on the spot at about ten kilotons — the same order as the later precise measurement.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Break an unlookupable quantity into a chain of factors <strong>each of which you can guess to within a factor of two or three</strong>:</div>
+<figure>
+<svg aria-label="Fermi estimate: piano tuners in Chicago" role="img" viewbox="0 0 620 288">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="14">
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="14"></rect>
+<text fill="#dbe2f2" x="44" y="35">Population of Chicago</text>
+<text fill="#7db0ff" x="380" y="35">≈ 3,000,000</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="46" y2="62"></line>
+<polygon fill="#56607e" points="113,60 127,60 120,74"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="66">≈ 3 people per household</text>
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="72"></rect>
+<text fill="#dbe2f2" x="44" y="93">Households</text>
+<text fill="#7db0ff" x="380" y="93">≈ 1,000,000</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="104" y2="120"></line>
+<polygon fill="#56607e" points="113,118 127,118 120,132"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="124">≈ 5% own a piano</text>
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="130"></rect>
+<text fill="#dbe2f2" x="44" y="151">Pianos</text>
+<text fill="#7db0ff" x="380" y="151">≈ 50,000</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="162" y2="178"></line>
+<polygon fill="#56607e" points="113,176 127,176 120,190"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="182">tuned about once a year</text>
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="188"></rect>
+<text fill="#dbe2f2" x="44" y="209">Tunings per year</text>
+<text fill="#7db0ff" x="380" y="209">≈ 50,000</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="220" y2="236"></line>
+<polygon fill="#56607e" points="113,234 127,234 120,248"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="240">≈ 1000 tunings per tuner-year</text>
+<rect fill="#2a2214" height="32" rx="6" stroke="#6a5326" width="330" x="30" y="246"></rect>
+<text fill="#f0ad5a" x="44" y="267">Piano tuners</text>
+<text fill="#f0ad5a" x="380" y="267">≈ 50</text>
+</g>
+</svg>
+<figcaption>Five guesses, none of them accurate, chained together — and the landing point is still the right order of magnitude. That is not luck.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · why it's safe</span>
+  Because errors don't add. Each factor's relative error is roughly <strong>independent</strong> and roughly symmetric on a <strong>logarithmic</strong> scale (you overshoot as often as you undershoot), so multiplying them makes the log-errors take a random walk:
+  <div class="eq"><var>σ</var><sub>total</sub> ≈ <span style="font-size:1.1em">√</span><span class="rt"><var>n</var></span> · <var>σ</var></div>
+<div class="gloss"><var>σ</var> («sigma») is the size of one factor's error on a log scale; <var>n</var> is the number of factors. If each factor is off by about 3× (roughly 0.5 of a decade), five factors stacked together still only give 0.5 × √5 ≈ 1.1 decades. <strong>Error grows like a square root, not like a sum</strong> — that is the mathematical reason estimation is safe to use.</div></div>
+<div class="field"><span class="lab">Why it matters</span>
+  The point of an estimate was never the number. It is <strong>deciding whether the careful calculation is worth doing</strong>. A plan that's off by three orders of magnitude should be killed without any precise computation; only a plan that's off by a factor of two earns code and apparatus.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI / Systems / Decisions</span>
+  <ul>
+<li><strong>AI</strong>: training a model takes about <span class="nowrap"><var>C</var> ≈ 6<var>N</var><var>D</var></span> floating-point operations (<var>N</var> parameters, <var>D</var> training tokens). One multiplication tells you the GPU-days and the electricity bill — enough to kill a batch of infeasible plans <strong>before the first line of code</strong>;</li>
+<li><strong>Systems engineering</strong>: capacity estimation is the same move — daily actives × requests per user ÷ 86,400 s gives requests per second, times bytes per request gives bandwidth. That multiplication picks the architecture; load testing only confirms it afterwards;</li>
+<li><strong>Everyday decisions</strong>: «is this plausible?» almost always reduces to an order-of-magnitude estimate first. When something is off by 100×, arguing about details wastes time; when it's off by 20%, intuition is worthless and you have to actually compute.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: estimate the order of magnitude first, then decide whether to compute for real.</div>
+<details class="q"><summary><b>Think:</b> Every factor might be off by 3×, so why is the product trustworthy?</summary><div class="qa">Because overestimates and underestimates cancel on a log scale, and the total error grows like √<var>n</var> rather than like <var>n</var>. The premise is that the factors' errors are <strong>independent</strong> — once they share a source (all resting on the same population density you overestimated), the cancellation stops and the estimate drifts systematically in one direction.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Catching Errors Without Computing <span class="en">Limiting Cases &amp; Symmetry</span></h2>
+<span class="pill">Checking · three lines to catch an error</span>
+<div class="field"><span class="lab">Intuition</span>
+  When a formula lands in front of you, don't start plugging in numbers. Push it to the extremes first: let the speed go to zero, let the distance go to infinity, let two particles coincide. You <strong>already know</strong> what the answer should be in those cases; if the formula can't produce it, the formula is wrong. It's the fastest way to catch an error without running an experiment.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Take the Lorentz factor of special relativity:
+  <div class="eq"><var>γ</var> = <span class="frac"><span class="fnum">1</span><span class="fden"><span style="font-size:1.1em">√</span><span class="rt">1 − <var>v</var>²/<var>c</var>²</span></span></span></div>
+<div class="gloss"><var>γ</var> («gamma») is the factor shared by time dilation and length contraction; <var>v</var> is the object's speed and <var>c</var> the speed of light. Push it both ways and it settles itself.</div></div>
+<figure>
+<svg aria-label="The two limits of the Lorentz factor" role="img" viewbox="0 0 620 268">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="26" y2="212"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="560" y1="212" y2="212"></line>
+<line stroke="#6a5326" stroke-dasharray="5 4" stroke-width="1.5" x1="520" x2="520" y1="26" y2="212"></line>
+<text fill="#f0ad5a" font-size="12.5" text-anchor="middle" transform="rotate(-90 540 118)" x="540" y="118">speed of light c</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="62" y="215">1</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="62" y="124">3</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="62" y="34">5</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" transform="rotate(-90 34 118)" x="34" y="118">Lorentz factor γ</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="70" y="230">0</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="295" y="230">0.5 c</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="520" y="230">c</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="300" y="252">speed v</text>
+<polyline fill="none" points="70,212 205,210 295,205 340,201 385,194 430,182 460,167 475,154 493,125 502,96 509,55 511,31" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-size="13" x="96" y="176">v → 0: γ → 1</text>
+<text fill="#96a0ba" font-size="12.5" x="96" y="196">everyday speeds fall back to Newton</text>
+<text fill="#f0ad5a" font-size="13" x="215" y="70">v → c: γ → ∞</text>
+<text fill="#96a0ba" font-size="12.5" x="215" y="90">reaching c would cost infinite energy</text>
+</g>
+</svg>
+<figcaption>Neither limit needs computing: one end must return to Newton, the other must diverge. Those are the theory's routine health checks.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · the symmetry side</span>
+  <strong>The answer must inherit the symmetry of the question.</strong> What is the electric field anywhere inside a uniformly charged spherical shell? No integral needed: the shell is perfectly spherically symmetric, and a field is a quantity with a direction — if the field at some interior point were non-zero it would have to point somewhere, and the symmetry singles out no direction at all. The only self-consistent answer is <strong>the digit 0 (zero)</strong>. Three lines of reasoning replace a page of integration.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Software / ML / Engineering</span>
+  <ul>
+<li><strong>Software</strong>: boundary testing is limit-checking — the empty list, the single element, the maximum integer, a concurrency of 1. Bugs love the extremes, because whoever wrote the code was picturing the typical case;</li>
+<li><strong>ML</strong>: initialise every weight in a layer to the same value and every neuron in it receives <strong>exactly the same gradient</strong>, so they stay identical forever and the whole layer collapses into one neuron. The real job of random initialisation isn't «adding noise», it's <strong>deliberately breaking that symmetry</strong>;</li>
+<li><strong>Engineering</strong>: Amdahl's law is a limit check too — send the processor count to infinity and the speed-up doesn't diverge, it approaches 1 divided by the serial fraction. One limit, and the illusion that «more machines always means faster» is gone.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: check the limits before you trust the algebra.</div>
+<details class="q"><summary><b>Think:</b> When does «the answer must inherit the symmetry» fail?</summary><div class="qa">Under spontaneous symmetry breaking: the equations are symmetric, the <strong>solution</strong> is not. Which way a pencil balanced on its tip falls is perfectly symmetric in the equations, yet in reality it must pick a side. The sharper statement is that the answer either inherits the symmetry or comes as a <strong>set</strong> of solutions related by it, with a tiny perturbation selecting one — which is exactly what <a href="symmetry-breaking-order-day35.en.html">Symmetry Breaking &amp; Order</a> is about.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Knowing What to Throw Away <span class="en">The Art of Approximation</span></h2>
+<span class="pill">Approximation · the spherical cow</span>
+<div class="field"><span class="lab">Intuition</span>
+  «Assume a spherical cow» is a joke physicists tell about themselves, but it points at a real skill. The hard part was never «how do I compute this», it's <strong>«what can I throw away»</strong>. Neglecting air resistance is clever for a cannonball and absurd for a falling feather — the same approximation flips from smart to wrong when the question changes.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Technically, approximation means finding a <strong>small parameter</strong>, expanding the answer in powers of it, and keeping only the first term or two. A pendulum is a harmonic oscillator only thanks to <span class="nowrap">sin <var>θ</var> ≈ <var>θ</var></span> (<var>θ</var>, «theta», is the swing angle in radians):</div>
+<figure>
+<svg aria-label="Where the small-angle approximation holds" role="img" viewbox="0 0 620 244">
+<g font-family="-apple-system,'Segoe UI',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="26" y2="200"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="580" y1="200" y2="200"></line>
+<line stroke="#5b9bff" stroke-width="2.2" x1="70" x2="550" y1="200" y2="32"></line>
+<polyline fill="none" points="70,200 150,172 230,146 310,121 390,100 470,82 550,70" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-size="13.5" x="225" y="80">y = θ (approximation)</text>
+<text fill="#f0ad5a" font-size="13.5" x="330" y="166">y = sin θ (true value)</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="70" y="218">0</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="270" y="218">0.5</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="470" y="218">1.0</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="300" y="238">swing angle θ (radians)</text>
+</g>
+</svg>
+<figcaption>At θ = 0.1 rad the straight line is off by 0.17%; at θ = 0.5 by about 4%; at θ = 1.0 by about 16%. An approximation isn't right or wrong — its accuracy degrades continuously with the parameter.</figcaption>
+</figure>
+<div class="field"><span class="lab">Mechanism · the test</span>
+  The step most often skipped: you can't ask «is this quantity small», only <strong>«small compared to what»</strong>. Is 0.1 seconds small? To a heartbeat it's long; to a molecular collision it's an eternity. So the small parameter has to be a <strong>dimensionless</strong> ratio (which loops straight back to dimensional analysis): <span class="nowrap"><var>v</var>/<var>c</var></span>, an angle in radians, an atomic scale over a wavelength.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  <strong>The best model is not the one that resembles reality most.</strong> A model with every detail stuffed in is both uncomputable and unreadable, and it buries the dominant effect in noise. A model's value lies precisely in what it <strong>throws away</strong> — throw away the right things and the skeleton becomes visible.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · Statistics / Engineering / AI / Biology</span>
+  <ul>
+<li><strong>Statistics</strong>: Box's «all models are wrong, but some are useful» is the formal statement of this principle — the criterion shifts from «is it correct» to «is it useful for the question you're asking»;</li>
+<li><strong>Engineering</strong>: profile before optimising. Spending two weeks on a function that takes 2% of the runtime is the classic case of throwing away the wrong thing;</li>
+<li><strong>AI</strong>: ablation studies are the experimental version of «what can be thrown away» — remove a component, see how much the metric drops, and whatever barely moves it can go;</li>
+<li><strong>Biology</strong>: fruit flies and nematodes are biology's spherical cows. They were chosen not because they resemble humans, but because for the questions being asked the discarded differences <strong>happen not to matter</strong>.</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">In one line: a model's intelligence is in what it discards, not in what it keeps.</div>
+<details class="q"><summary><b>Think:</b> How do you tell when an approximation is about to fail?</summary><div class="qa">Look at the term you dropped. Keep the first-order term and discard the second-order one, and the error is roughly the size of the small parameter itself; as that parameter approaches 1 the whole expansion becomes meaningless. Then add a limit check: push the approximation into a regime where it shouldn't hold and see whether it returns something absurd.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>Is a relation produced by dimensional analysis guaranteed to be right?</summary>
+<div class="body">No — it gives a necessary condition, not a sufficient one. Its whole power rests on one premise: that you listed <strong>every relevant physical quantity</strong>. Miss one and the conclusion is wrong; the classic trap is fluids, where listing only density, velocity and size while forgetting viscosity yields a beautiful but incorrect formula. The other limit is written into the Buckingham π theorem: when more than one dimensionless group can be formed, all it can tell you is that some function relates those groups — about the shape of that function it says nothing whatsoever. It is a sieve, not an answer.</div></details>
+<details><summary>When does Fermi estimation fail systematically?</summary>
+<div class="body">Two cases. One is <strong>correlated errors</strong>: if every factor rests on the same overestimated premise, over- and underestimates no longer cancel and the error accumulates additively rather than as a square root. The other is <strong>heavy tails</strong>: estimating «the total wealth of a city», a few extremely rich individuals contribute most of the sum, while the «typical personal wealth» in your head is closer to the median — so you undershoot systematically. In a power-law world there is no such thing as a «typical value»; when a quantity looks like income, city size or word frequency, ask whether it's heavy-tailed first.</div></details>
+<details><summary>Can physical intuition lead people astray?</summary>
+<div class="body">It can, and it has, repeatedly. The aesthetic intuition that «nature should be simple, should be beautiful» pushed enormous effort into supersymmetry and naturalness arguments over the past decades, and colliders still haven't seen the predicted new particles; Einstein's intuition about quantum randomness didn't survive either. The healthy usage keeps two things apart: intuition is a <strong>search heuristic</strong> that decides which path to try first; it is not a <strong>criterion</strong>, and the only criterion is experiment. Blur the two and «having intuition» becomes «trusting your own intuition» — there's a longer reckoning in <a href="open-problems-day36.en.html">The Open Problems of Physics</a>.</div></details>
+<details><summary>Can AI learn this way of thinking?</summary>
+<div class="body">Take it apart. The <strong>procedures</strong> of dimensional analysis and Fermi estimation are formalisable — list the quantities, form the dimensionless groups, multiply the factors — and language models already do that decently. The hard ones are the other two tools: which direction to push a limit, and which details to discard, depend on <strong>what question you're actually trying to answer</strong>, not just on the words in the problem. Harder still is where physical intuition comes from: mostly from repeated calibration against the world — estimating wrong, being corrected by an experiment, adjusting. That loop is difficult to close by reading text alone. It remains an open question.</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li>G. I. Taylor, <a href="https://royalsocietypublishing.org/doi/10.1098/rspa.1950.0050"><em>"The Formation of a Blast Wave by a Very Intense Explosion. II. The Atomic Explosion of 1945"</em>, <em>Proc. R. Soc. A</em> 201 (1950) 175</a> — the yield read off public photographs</li>
+<li>E. Buckingham, <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.4.345"><em>"On Physically Similar Systems; Illustrations of the Use of Dimensional Equations"</em>, <em>Phys. Rev.</em> 4 (1914) 345</a> — the original π theorem</li>
+<li>Sanjoy Mahajan, <a href="https://mitpress.mit.edu/9780262514293/street-fighting-mathematics/"><em>Street-Fighting Mathematics</em></a> (MIT Press, 2010) — the most systematic training manual for estimation and approximation</li>
+<li>Sanjoy Mahajan, <a href="https://mitpress.mit.edu/9780262526548/the-art-of-insight-in-science-and-engineering/"><em>The Art of Insight in Science and Engineering</em></a> (MIT Press, 2014)</li>
+<li>G. E. P. Box, <a href="https://www.tandfonline.com/doi/abs/10.1080/01621459.1976.10480949"><em>"Science and Statistics"</em>, <em>JASA</em> 71 (1976) 791</a> — where «all models are wrong» comes from</li>
+<li>G. Yang &amp; E. J. Hu et al., <a href="https://arxiv.org/abs/2203.03466"><em>"Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer"</em></a> — μP, dimensional analysis for deep learning</li>
+<li>J. Hoffmann et al., <a href="https://arxiv.org/abs/2203.15556"><em>"Training Compute-Optimal Large Language Models"</em></a> — the Chinchilla parameter/data ratio</li>
+<li>S. Hossenfelder, <a href="https://www.basicbooks.com/titles/sabine-hossenfelder/lost-in-math/9780465094257/"><em>Lost in Math: How Beauty Leads Physics Astray</em></a> (2018) — the most systematic case against aesthetic intuition</li>
+<li><a href="https://en.wikipedia.org/wiki/Fermi_problem">Wikipedia: Fermi problem</a> / <a href="https://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional analysis</a> / <a href="https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem">Buckingham π theorem</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>

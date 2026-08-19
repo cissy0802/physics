@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：物理学家的思维方式 · Day 37</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  .rt{border-top:1.4px solid #f0f3fb; padding:0 4px}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>物理学家的思维方式</h1>
+<div class="meta">Day 37 · 2026 · Phase I 收尾</div>
+<div class="tagline">这行手艺最值钱的部分不是解方程——是在动笔之前，就知道答案必须长什么样。</div>
+</header>
+<div class="intro">
+物理学最容易被误解的地方，是以为它的核心技能是<b>解方程</b>。真正的分水岭在方程之前：拿到一个陌生问题，先用<b>量纲</b>把答案的形状定死，用<b>数量级</b>判断值不值得算，用<b>极限</b>和<b>对称</b>检查算得对不对，最后用<b>近似</b>决定哪些细节可以扔掉。这几把刀的作用不是算得更准，而是<b>在动笔之前淘汰掉绝大多数错误答案</b>——它们处理的其实不是物理，而是「面对一个你没完全弄懂的系统，该从哪下手」。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>量纲分析 <span class="en">Dimensional Analysis</span></h2>
+<span class="pill">方法论 · Buckingham 1914</span>
+<div class="field"><span class="lab">直觉</span>
+  你不能把 3 秒加到 5 千克上——这话听着像废话。但把它当成一条<strong>硬约束</strong>用起来威力惊人：等式两边的「单位身份」必须逐项一致，这个几乎白送的要求，常常能在<strong>不解任何方程</strong>的情况下，把答案定死到只差一个纯数字。</div>
+<div class="field"><span class="lab">机制</span>
+  力学里每个量都能写成三个基本量纲的幂次组合：质量 M、长度 L、时间 T。速度是 L/T，能量是 ML²/T²。现在问单摆的周期，手上只有三个量：摆长 <var>ℓ</var>（量纲 L）、摆锤质量 <var>m</var>（M）、重力加速度 <var>g</var>（L/T²）。要凑出一个量纲是「时间」的组合，答案唯一：
+  <div class="eq"><var>T</var> ∝ <span style="font-size:1.1em">√</span><span class="rt"><span class="frac"><span class="fnum"><var>ℓ</var></span><span class="fden"><var>g</var></span></span></span></div>
+<div class="gloss">∝ 读作「正比于」。核对量纲：<var>ℓ</var> 是长度、<var>g</var> 是长度÷时间²，相除后长度约掉只剩时间²，开方（√ 即开平方）正好是时间。<br/>关键在 <var>m</var>：它是三个量里<strong>唯一</strong>带质量量纲的，而左边的时间不含质量，没有别的量能抵消它，所以 <var>m</var> 的幂次只能是<strong>数字 0（零）</strong>——必须掉出去。</div></div>
+<figure>
+<svg aria-label="用量纲分析定出单摆周期" role="img" viewbox="0 0 620 232">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="14">
+<text fill="#96a0ba" font-size="12.5" x="20" y="20">手上的量（和它的量纲）</text>
+<text fill="#96a0ba" font-size="12.5" x="330" y="20">唯一量纲正确的组合</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="230" x="20" y="34"></rect>
+<text fill="#dbe2f2" x="34" y="54">摆长 ℓ　　　　长度 L</text>
+<rect fill="#2a2214" height="30" rx="6" stroke="#6a5326" width="230" x="20" y="76"></rect>
+<text fill="#f0ad5a" x="34" y="96">摆锤质量 m　　质量 M</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="230" x="20" y="118"></rect>
+<text fill="#dbe2f2" x="34" y="138">重力 g　　　　L / T²</text>
+<line stroke="#5b9bff" stroke-width="2" x1="258" x2="292" y1="91" y2="91"></line>
+<polygon fill="#5b9bff" points="290,84 290,98 312,91"></polygon>
+<rect fill="#172038" height="46" rx="6" stroke="#2b3a5e" width="270" x="330" y="68"></rect>
+<text fill="#7db0ff" font-size="16" x="346" y="97">周期 T = （纯数字）× √( ℓ / g )</text>
+<text fill="#f0ad5a" font-size="13.5" x="20" y="180">质量 M 只出现在 m 一个量里，没有东西能抵消它</text>
+<text fill="#f0ad5a" font-size="13.5" x="20" y="202">→ m 被逼出局：单摆周期与摆锤多重完全无关</text>
+<text fill="#96a0ba" font-size="13" x="20" y="224">量纲管不着那个纯数字（真值是 2π），但依赖关系已经全部定死</text>
+</g>
+</svg>
+<figcaption>不解一行运动方程，只靠「两边单位必须一致」，就把周期的形状逼出来了。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  1950 年，G. I. Taylor 手上只有公开发表的原子弹火球照片——每张标着时刻 <var>t</var> 和火球半径 <var>R</var>。他用量纲分析写下 <span class="nowrap"><var>R</var> ∝ (<var>E</var><var>t</var>²/<var>ρ</var>)<sup>1/5</sup></span>（<var>E</var> 是爆炸能量，<var>ρ</var> 读「柔」，是空气密度），反解出 <var>E</var>，得到约两万吨 TNT 当量——这个数字当时还是机密。<strong>一个连方程都没解的人，从几张照片里读出了机密级的数。</strong></div>
+<div class="field xref"><span class="lab">跨学科对读 · 流体 / AI</span>
+  量纲分析真正的产物是<strong>无量纲数</strong>——把一堆量凑成没有单位的比值，物理只依赖这个比值，不依赖你用米还是英尺：
+  <ul>
+<li><strong>流体与工程</strong>：雷诺数 <span class="nowrap">Re = <var>ρvℓ</var>/<var>η</var></span> 决定流动是层流还是湍流。只要 Re 相同，真飞机和缩比风洞模型的流动图样<strong>就是同一个</strong>——风洞这门生意全靠这一条；</li>
+<li><strong>AI · 超参迁移</strong>：把网络宽度当作「单位」，能构造出跨宽度不变的超参组合（μP 参数化），于是小模型上调好的学习率<strong>直接搬到大模型仍接近最优</strong>——这是不折不扣的量纲分析，只是「量纲」换成了宽度；</li>
+<li><strong>AI · 配比</strong>：Chinchilla 那条「每个参数大约配 20 个 token」也是个无量纲数：它说的不是模型该多大，而是两者的<strong>比值</strong>该是多少。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：量纲不是记单位的琐事，是一条免费送的方程。</div>
+<details class="q"><summary><b>思考：</b>既然量纲分析这么强，它为什么算不出那个 2π？</summary><div class="qa">因为纯数字不带量纲，量纲分析对它完全<strong>盲</strong>。它能定死各物理量之间的标度关系（周期正比于摆长的平方根、与质量无关），却定不下前面的系数——后者必须真解方程或做实验。知道自己看不见什么，和知道能看见什么同样重要。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>费米估算 <span class="en">Fermi Estimation</span></h2>
+<span class="pill">数量级 · 餐巾纸计算</span>
+<div class="field"><span class="lab">直觉</span>
+  芝加哥有多少钢琴调音师？没人查得到。但拆成五步、每步猜一个心里有数的比例，五分钟就能估到正确的数量级。Fermi 在 1945 年三位一体核试验现场做过更硬的版本：撒一把碎纸片，看冲击波把它们吹出多远，当场估出当量约一万吨 TNT——与后来精密测量同一量级。</div>
+<div class="field"><span class="lab">机制</span>
+  把一个查不到的量，拆成一串<strong>每个都能猜到两三倍以内</strong>的因子：</div>
+<figure>
+<svg aria-label="费米估算：芝加哥有多少钢琴调音师" role="img" viewbox="0 0 620 288">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="14">
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="14"></rect>
+<text fill="#dbe2f2" x="44" y="35">芝加哥人口</text>
+<text fill="#7db0ff" x="386" y="35">≈ 3 000 000 人</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="46" y2="62"></line>
+<polygon fill="#56607e" points="113,60 127,60 120,74"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="66">每户约 3 人</text>
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="72"></rect>
+<text fill="#dbe2f2" x="44" y="93">家庭数</text>
+<text fill="#7db0ff" x="386" y="93">≈ 1 000 000 户</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="104" y2="120"></line>
+<polygon fill="#56607e" points="113,118 127,118 120,132"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="124">约 5% 有钢琴</text>
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="130"></rect>
+<text fill="#dbe2f2" x="44" y="151">钢琴数</text>
+<text fill="#7db0ff" x="386" y="151">≈ 50 000 架</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="162" y2="178"></line>
+<polygon fill="#56607e" points="113,176 127,176 120,190"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="182">每架每年调 1 次</text>
+<rect fill="#172038" height="32" rx="6" stroke="#2b3a5e" width="330" x="30" y="188"></rect>
+<text fill="#dbe2f2" x="44" y="209">每年调音次数</text>
+<text fill="#7db0ff" x="386" y="209">≈ 50 000 次</text>
+<line stroke="#56607e" stroke-width="1.8" x1="120" x2="120" y1="220" y2="236"></line>
+<polygon fill="#56607e" points="113,234 127,234 120,248"></polygon>
+<text fill="#96a0ba" font-size="12.5" x="136" y="240">一人每年约 1000 次</text>
+<rect fill="#2a2214" height="32" rx="6" stroke="#6a5326" width="330" x="30" y="246"></rect>
+<text fill="#f0ad5a" x="44" y="267">调音师人数</text>
+<text fill="#f0ad5a" x="386" y="267">≈ 50 人</text>
+</g>
+</svg>
+<figcaption>五个都不精确的猜测串起来，落点仍在正确的数量级上——这不是运气。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 为什么敢用</span>
+  因为误差不是累加的。每个因子的相对误差近似<strong>独立</strong>，而且在<strong>对数尺度</strong>上大致对称（你有时高估、有时低估），乘起来时对数误差做的是随机游走：
+  <div class="eq"><var>σ</var><sub>总</sub> ≈ <span style="font-size:1.1em">√</span><span class="rt"><var>n</var></span> · <var>σ</var></div>
+<div class="gloss"><var>σ</var> 读「西格玛」，指单个因子在对数尺度上的误差大小；<var>n</var> 是因子个数。若每个因子平均猜错约 3 倍（对数上约 0.5 个数量级），5 个因子叠起来也只有 0.5×√5 ≈ 1.1 个数量级。<strong>误差按开根号长，不按加法长</strong>——这就是估算敢用的数学理由。</div></div>
+<div class="field"><span class="lab">为什么重要</span>
+  估算的目的从来不是得到那个数，而是<strong>判断值不值得认真算</strong>。差三个数量级的方案不需要精确计算就该被枪毙；只有差两倍的方案，才轮到写代码、搭实验。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 系统工程 / 决策</span>
+  <ul>
+<li><strong>AI</strong>：训练一次模型大约需要 <span class="nowrap"><var>C</var> ≈ 6<var>N</var><var>D</var></span> 次浮点运算（<var>N</var> 是参数量、<var>D</var> 是训练 token 数）。一乘就知道要多少 GPU-天、多少度电——<strong>在写第一行代码之前</strong>就能否掉一批不可行的方案；</li>
+<li><strong>系统工程</strong>：容量估算是同一件事——日活 × 人均请求 ÷ 86400 秒得到每秒请求数，再乘每请求字节得到带宽。这个乘法决定架构选型，压测只是事后确认；</li>
+<li><strong>日常决策</strong>：「这事儿靠不靠谱」本质都是先估一个数量级。差一百倍的事，讨论细节是浪费时间；差 20% 的事，直觉反而不可信、必须真算。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：先估一个数量级，再决定要不要认真算。</div>
+<details class="q"><summary><b>思考：</b>每个因子都可能猜错三倍，为什么乘起来反而可信？</summary><div class="qa">因为高估和低估在对数尺度上互相抵消，总误差按 √<var>n</var> 而不是按 <var>n</var> 增长。前提是各因子的误差<strong>互相独立</strong>——一旦它们同源（比如全都建立在同一个被你高估的人口密度上），抵消就不发生，估算会朝一个方向系统性地偏。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>极限检验与对称性直觉 <span class="en">Limiting Cases &amp; Symmetry</span></h2>
+<span class="pill">检验 · 三行抓错</span>
+<div class="field"><span class="lab">直觉</span>
+  拿到一个公式，别急着代数字。先把它推到极端：让速度趋于零、让距离趋于无穷、让两个粒子重合。这些极端情形下答案该是什么，你<strong>本来就知道</strong>；公式给不出来，它就错了。这是不做实验就能抓错的最快办法。</div>
+<div class="field"><span class="lab">机制</span>
+  以洛伦兹因子为例：
+  <div class="eq"><var>γ</var> = <span class="frac"><span class="fnum">1</span><span class="fden"><span style="font-size:1.1em">√</span><span class="rt">1 − <var>v</var>²/<var>c</var>²</span></span></span></div>
+<div class="gloss"><var>γ</var> 读「伽马」，是时间膨胀、长度收缩共用的那个因子；<var>v</var> 是物体速度，<var>c</var> 是光速。两头一推就见分晓。</div></div>
+<figure>
+<svg aria-label="洛伦兹因子的两个极限" role="img" viewbox="0 0 620 268">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="26" y2="212"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="560" y1="212" y2="212"></line>
+<line stroke="#6a5326" stroke-dasharray="5 4" stroke-width="1.5" x1="520" x2="520" y1="26" y2="212"></line>
+<text fill="#f0ad5a" font-size="12.5" text-anchor="middle" transform="rotate(-90 540 118)" x="540" y="118">光速 c</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="62" y="215">1</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="62" y="124">3</text>
+<text fill="#96a0ba" font-size="12" text-anchor="end" x="62" y="34">5</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" transform="rotate(-90 34 118)" x="34" y="118">洛伦兹因子 γ</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="70" y="230">0</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="295" y="230">0.5 c</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="520" y="230">c</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="300" y="252">物体速度 v</text>
+<polyline fill="none" points="70,212 205,210 295,205 340,201 385,194 430,182 460,167 475,154 493,125 502,96 509,55 511,31" stroke="#5b9bff" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-size="13" x="96" y="176">v → 0：γ → 1</text>
+<text fill="#96a0ba" font-size="12.5" x="96" y="196">日常速度下一切退回牛顿力学</text>
+<text fill="#f0ad5a" font-size="13" x="215" y="70">v → c：γ → ∞</text>
+<text fill="#96a0ba" font-size="12.5" x="215" y="90">把有限质量加速到光速要花无穷能量</text>
+</g>
+</svg>
+<figcaption>两个极限都不用算：一头必须回到牛顿，另一头必须发散——这就是理论的体检项。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 对称这一面</span>
+  <strong>答案必须继承问题的对称性。</strong>一个均匀带电的球壳，内部任意一点的电场是多少？不用积分：球壳完全球对称，而电场是有方向的量——若内部某点场不为零，它必须指向某个方向，可对称性没有挑出任何一个方向来。唯一自洽的答案是<strong>数字 0（零）</strong>。三行推理换掉一页积分。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 软件 / ML / 工程</span>
+  <ul>
+<li><strong>软件</strong>：边界测试就是极限检验——空列表、只有一个元素、最大整数、并发数为 1。bug 最爱藏在极限处，因为写代码的人想的全是「典型情形」；</li>
+<li><strong>ML</strong>：把某一层的权重全部初始化成同一个值，这层每个神经元收到的梯度<strong>完全相同</strong>，于是永远保持相同，整层退化成一个神经元。随机初始化真正的作用不是「加点随机」，而是<strong>人为打破这个对称</strong>；</li>
+<li><strong>工程</strong>：Amdahl 定律也是一次极限检验——处理器数趋于无穷时，加速比不趋于无穷，而是趋于 1 除以串行部分占比。极限一推，「加机器总能变快」的幻觉当场破掉。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：先检查极限，再相信代数。</div>
+<details class="q"><summary><b>思考：</b>「答案必须继承问题的对称性」什么时候会失效？</summary><div class="qa">自发对称破缺的时候：方程对称，<strong>解</strong>却不对称。竖直立着的铅笔往哪边倒，在方程里完全对称，现实中它却必须选一边。更准确的说法是：答案要么继承对称，要么给出一<strong>组</strong>彼此对称的解，由微小扰动挑走其中一个——<a href="symmetry-breaking-order-day35.html">对称性破缺与秩序</a>讲的正是后者。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>模型与近似的艺术 <span class="en">The Art of Approximation</span></h2>
+<span class="pill">近似 · 球形奶牛</span>
+<div class="field"><span class="lab">直觉</span>
+  「假设奶牛是一个球」是物理学家拿自己开的玩笑，但它指向一门真手艺。难的从来不是「怎么算」，是<strong>「什么可以扔掉」</strong>。算炮弹弹道时忽略空气阻力很聪明，算羽毛下落时忽略它很荒唐——同一个近似，换个问题就从聪明变成错误。</div>
+<div class="field"><span class="lab">机制</span>
+  近似的技术内核，是找一个<strong>小参数</strong>，把答案展成它的幂级数，只留前一两项。单摆之所以是简谐振子，全靠 <span class="nowrap">sin <var>θ</var> ≈ <var>θ</var></span>（<var>θ</var> 读「西塔」，是摆角，单位取弧度）：</div>
+<figure>
+<svg aria-label="小角近似 sinθ 约等于 θ 的适用范围" role="img" viewbox="0 0 620 244">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="70" y1="26" y2="200"></line>
+<line stroke="#56607e" stroke-width="1.5" x1="70" x2="580" y1="200" y2="200"></line>
+<line stroke="#5b9bff" stroke-width="2.2" x1="70" x2="550" y1="200" y2="32"></line>
+<polyline fill="none" points="70,200 150,172 230,146 310,121 390,100 470,82 550,70" stroke="#f0ad5a" stroke-width="2.4"></polyline>
+<text fill="#7db0ff" font-size="13.5" x="238" y="86">y = θ（小角近似）</text>
+<text fill="#f0ad5a" font-size="13.5" x="330" y="166">y = sin θ（真值）</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="70" y="218">0</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="270" y="218">0.5</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="470" y="218">1.0</text>
+<text fill="#96a0ba" font-size="12.5" text-anchor="middle" x="300" y="238">摆角 θ（弧度）</text>
+</g>
+</svg>
+<figcaption>θ = 0.1 弧度时直线与真值差 0.17%，θ = 0.5 时差约 4%，θ = 1.0 时差约 16%——近似不是对错，是精度随参数变差的连续过程。</figcaption>
+</figure>
+<div class="field"><span class="lab">机制 · 判据</span>
+  最容易漏掉的一步：不能问「这个量小不小」，只能问<strong>「这个量比什么小」</strong>。0.1 秒算不算小？对心跳它很长，对分子碰撞它长得像永恒。所以小参数必须是<strong>无量纲</strong>的比值（又绕回量纲分析）：<span class="nowrap"><var>v</var>/<var>c</var></span>、摆角的弧度值、原子尺度比波长。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  <strong>好模型不是最像真实的模型。</strong>把所有细节都塞进去的模型既算不动也看不懂，还会把主导因素埋进噪声里。模型的价值恰恰在它<strong>扔掉</strong>的东西——扔对了，骨架才露出来。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 统计 / 工程 / AI / 生物</span>
+  <ul>
+<li><strong>统计</strong>：Box 那句「所有模型都是错的，但有些有用」是这条原则最正式的表述——评判标准从「对不对」换成「在你要问的问题上有没有用」；</li>
+<li><strong>工程</strong>：性能优化先 profile 再动手。花两周优化只占 2% 运行时间的函数，就是典型的没扔对；</li>
+<li><strong>AI</strong>：消融实验是「什么可以扔掉」的实验版——拿掉一个组件看指标掉多少，掉得少的就是可以扔的；</li>
+<li><strong>生物</strong>：果蝇和线虫是生物学的球形奶牛。选它们不是因为像人，而是因为对要问的那类问题来说，被扔掉的差异<strong>恰好不重要</strong>。</li>
+</ul>
+</div>
+<div class="punch">
+<div class="one">一句话：模型的智慧不在留下了什么，在扔对了什么。</div>
+<details class="q"><summary><b>思考：</b>怎么判断一个近似什么时候会失效？</summary><div class="qa">看你丢掉的下一项。保留一次项、丢掉二次项，误差大致就是小参数本身的量级；小参数逼近 1 时整个展开失去意义。再配一次极限检验：把近似推到它本不该成立的极端，看会不会给出荒谬答案。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>量纲分析给出的关系，一定是对的吗？</summary>
+<div class="body">不一定——它给的是必要条件，不是充分条件。全部力量建立在一个前提上：你把<strong>所有相关的物理量</strong>都列进去了。漏掉一个，结论就错；经典的坑在流体——只列密度、速度、尺寸而漏了黏度，会得到一个漂亮但错误的公式。另一个限制写在 Buckingham π 定理里：当能凑出的无量纲组合不止一个时，它只能告诉你这几个无量纲数之间存在某种函数关系，函数长什么样一个字也说不出来。它是筛子，不是答案。</div></details>
+<details><summary>费米估算什么时候会系统性地失效？</summary>
+<div class="body">两种情况。一是<strong>误差不独立</strong>：所有因子都建立在同一个被你高估的前提上，高低估不再互相抵消，误差按加法而非开根号累积。二是<strong>分布重尾</strong>：估「某城市的财富总量」时，少数极端富有的个体贡献了大部分总量，而你脑子里的「典型个人财富」接近中位数，于是系统性低估。幂律世界里没有「典型值」——遇到收入、城市规模、词频这类量，先问它是不是重尾。</div></details>
+<details><summary>物理直觉会不会把人带偏？</summary>
+<div class="body">会，而且反复发生过。「自然应该简洁、应该美」这条美学直觉，在过去几十年里推着大量人力投向超对称与各种自然性论证，而对撞机至今没看到预言中的新粒子；爱因斯坦对量子随机性的直觉同样没能站住。健康的用法是把两件事分开：直觉是<strong>搜索的启发式</strong>，决定先试哪条路；它不是<strong>判据</strong>，判据只能是实验。分不清这两者，就从「有直觉」滑成「迷信自己的直觉」——<a href="open-problems-day36.html">物理学的未解之谜</a>里还有更长的账。</div></details>
+<details><summary>这套思维方式，AI 学得会吗？</summary>
+<div class="body">分开看。量纲分析和费米估算的<strong>步骤</strong>是可形式化的——列量、凑无量纲组合、逐因子相乘，语言模型现在就做得不差。难的是另外两把刀：极限往哪个方向推、哪些细节可以扔，取决于<strong>你到底想回答什么问题</strong>，而不只是题面文字。更麻烦的是物理直觉的来源——它大半来自和世界反复交互后的校准：估错、被实验打脸、修正。这条路纯靠读文本很难走通，目前仍是开放问题。</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li>G. I. Taylor，<a href="https://royalsocietypublishing.org/doi/10.1098/rspa.1950.0050"><em>"The Formation of a Blast Wave by a Very Intense Explosion. II. The Atomic Explosion of 1945"</em>，<em>Proc. R. Soc. A</em> 201 (1950) 175</a>——从公开照片反推当量的原文</li>
+<li>E. Buckingham，<a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.4.345"><em>"On Physically Similar Systems; Illustrations of the Use of Dimensional Equations"</em>，<em>Phys. Rev.</em> 4 (1914) 345</a>——π 定理原文</li>
+<li>Sanjoy Mahajan，<a href="https://mitpress.mit.edu/9780262514293/street-fighting-mathematics/"><em>Street-Fighting Mathematics</em></a>（MIT Press, 2010）——估算与近似最系统的一本训练手册</li>
+<li>Sanjoy Mahajan，<a href="https://mitpress.mit.edu/9780262526548/the-art-of-insight-in-science-and-engineering/"><em>The Art of Insight in Science and Engineering</em></a>（MIT Press, 2014）</li>
+<li>G. E. P. Box，<a href="https://www.tandfonline.com/doi/abs/10.1080/01621459.1976.10480949"><em>"Science and Statistics"</em>，<em>JASA</em> 71 (1976) 791</a>——「所有模型都是错的」的出处</li>
+<li>G. Yang &amp; E. J. Hu 等，<a href="https://arxiv.org/abs/2203.03466"><em>"Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer"</em></a>——μP：深度学习里的量纲分析</li>
+<li>J. Hoffmann 等，<a href="https://arxiv.org/abs/2203.15556"><em>"Training Compute-Optimal Large Language Models"</em></a>——Chinchilla 的参数/数据无量纲配比</li>
+<li>S. Hossenfelder，<a href="https://www.basicbooks.com/titles/sabine-hossenfelder/lost-in-math/9780465094257/"><em>Lost in Math: How Beauty Leads Physics Astray</em></a>（2018）——对「美学直觉」最系统的一份反驳</li>
+<li><a href="https://en.wikipedia.org/wiki/Fermi_problem">Wikipedia: Fermi problem</a> / <a href="https://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional analysis</a> / <a href="https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem">Buckingham π theorem</a></li>
+</ul>
+</div>
+</div>
+<script src="https://hub.cissychen.com/comments.js" defer></script>
+<script src="https://hub.cissychen.com/search.js" defer></script>
+<script src="https://hub.cissychen.com/index-button.js" defer></script>
+<script src="https://hub.cissychen.com/lightbox.js" defer></script>
+<script src="https://hub.cissychen.com/i18n-tts.js" defer></script>
+</body>
+</html>
