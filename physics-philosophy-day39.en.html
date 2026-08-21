@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics: Physics &amp; Philosophy · Day 39</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .read a:hover{color:var(--amber)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>Physics &amp; Philosophy</h1>
+<div class="meta">Day 39 · 2026 · Phase I Closing</div>
+<div class="tagline">The deeper you dig, the more you run into things the equations simply do not contain — causes, the present moment, genuine chance. They aren't in the formulas, yet they're in your experience every day.</div>
+</header>
+<div class="intro">
+Physics does not need philosophy's permission to get the numbers right. But ask one more question — «<b>what are these equations saying?</b>» — and philosophy is already in the room. Are laws discovered or invented? Why is there no «cause» anywhere in the fundamental equations? Does «now» have any place in physics? And that quantum probability: is it our ignorance, or the world itself? None of these four is <b>mysticism</b> — each has experiment and mathematics biting into it, and each is still without consensus.
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>Are Laws Discovered or Invented?</h2>
+<span class="pill">Philosophy of science · What a law is</span>
+<div class="field"><span class="lab">Intuition</span>
+  You fit a pile of planetary positions to an equation. Is that equation something the universe <strong>already contained</strong>, or a product of your pen? Both extremes are uncomfortable. Call it an invention, and you have to explain why Mercury's perihelion obeys it so dutifully, including in corners nobody is watching. Call it a discovery, and you have to say in what form a law «exists», and where — presumably not floating in interstellar space waiting to be read.</div>
+<div class="field"><span class="lab">Mechanism · three routes</span>
+  ① <strong>The Humean best system</strong> (David Lewis): all there is is the distribution of particular facts, and a «law» is the summary of all those facts that is <strong>both simplest and most informative</strong> — an optimal compression code. It pushes nothing around; it just describes extremely well.<br/>
+  ② <strong>Law realism</strong> (Tim Maudlin, for one): laws are among the basic furniture of the world, and it is the law that <strong>makes</strong> the electron move that way. History is generated by laws, not summarised into them.<br/>
+  ③ <strong>Structural realism</strong> (John Worrall, 1989): look at what actually survives in the history of science. Fresnel's optical formulas were built on the «ether» — the ether was thrown out entirely, <strong>yet his equations live on untouched inside Maxwell's theory</strong>. What gets replaced is always the stuff (ether, caloric); what survives is always the <strong>mathematical structure</strong>.</div>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  This isn't word games; it decides what «the explanation is finished» means. If a law is only a summary, what makes the <strong>counterfactual</strong> «if I hadn't let go, the cup wouldn't have broken» true or false — there is no such fact in the world for you to summarise. Law realism has a much easier time here, at the price of admitting an invisible, ungraspable governing something. <strong>Every position pays tuition</strong>.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI / mathematics</span>
+  <ul>
+<li><strong>Compression is theory</strong>: <strong>minimum description length</strong> (MDL) and regularisation in machine learning are practically the algorithmic version of the best-system account — the model that best trades «fits well» against «is short to write» is declared the best regularity.</li>
+<li><strong>ML also warns you back</strong>: a model can compress its training distribution beautifully and fall apart on the next one — <strong>compressing well is not the same as catching the structure</strong>. That is exactly structural realism's complaint about pure description: however elegant the summary, ask whether it preserved the relations.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: we are probably neither inventing things nor discovering things — we are discovering relations.</div>
+<details class="q"><summary><b>Think:</b> If two completely different pieces of mathematics give exactly the same predictions, are they the same law?</summary><div class="qa">This is the problem of theoretical equivalence — Lagrangian versus Hamiltonian mechanics, or different gauges of one theory, are ready-made examples. Operationally they are fully equivalent; a realist who wants to crown one of them «the true one» can only appeal to simplicity and similar criteria that <strong>no experiment can adjudicate</strong>. That is precisely why structural realism commits to structure and not to ontology.</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>Causation Is Not in the Equations</h2>
+<span class="pill">Causation · Russell 1913</span>
+<div class="field"><span class="lab">Intuition</span>
+  You let go, the cup falls — what could be more obviously causal? Yet open any fundamental equation and there is no quantity called «cause» in it. The equation only says «given the state now, the state at another time is that», and it works just as well run backwards. Hence Russell's 1913 jab: the law of causality is «a relic of a bygone age, surviving, like the monarchy, only because it is erroneously supposed to do no harm».</div>
+<div class="field"><span class="lab">Mechanism</span>
+  First fact: the fundamental laws are essentially <strong>time-symmetric</strong>. Replace the time variable with
+  <div class="eq"><var>t</var> → −<var>t</var></div>
+<div class="gloss">Read it as «swap time <var>t</var> for negative <var>t</var>» — that is, <strong>run the film backwards</strong>. The <strong>−</strong> in front is a minus sign (not a subtraction, not a hyphen). For nearly every fundamental interaction, the reversed process is <strong>still a legal solution of the equation</strong> — microphysics has no built-in «before and after». The one known exception is a tiny time-reversal violation in the weak interaction, far too small to account for the direction of causation you experience.</div>
+  So where does the direction come from? Macroscopic «cause then effect» rides on the <strong>entropy gradient</strong> — the universe started in an extremely low-entropy state (an assumption usually called the past hypothesis), so records only point backwards and influence only pushes forwards. And where causation really lands is <strong>intervention</strong>: saying «X causes Y» means <strong>change X by hand and Y follows</strong>, not merely that the two move together.</div>
+<figure>
+<svg aria-label="Time-symmetric equations, a directed macroscopic world, and how intervention separates correlation from causation" role="img" viewBox="0 0 620 340">
+<defs><marker id="arc2" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="12" orient="auto" refX="11" refY="4.5"><path d="M0,0 L12,4.5 L0,9 Z" fill="#5b9bff"></path></marker></defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<text fill="#8fb4ff" font-weight="700" text-anchor="middle" x="155" y="24">Fundamental equations</text>
+<rect fill="#172038" height="58" rx="6" stroke="#2b3a5e" width="270" x="20" y="36"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="155" y="60">F=ma · Maxwell · Schrödinger</text>
+<line stroke="#5b9bff" stroke-width="2" x1="76" x2="234" y1="80" y2="80"></line>
+<polygon fill="#5b9bff" points="64,80 78,74 78,86"></polygon>
+<polygon fill="#5b9bff" points="246,80 232,74 232,86"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="155" y="116">both directions are legal solutions</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="465" y="24">The world we experience</text>
+<rect fill="#2a2214" height="58" rx="6" stroke="#6a5326" width="270" x="330" y="36"></rect>
+<text fill="#f2d9b0" text-anchor="middle" x="465" y="60">shattering cups · spreading ink</text>
+<line stroke="#f0ad5a" stroke-width="2" x1="392" x2="526" y1="80" y2="80"></line>
+<polygon fill="#f0ad5a" points="540,80 526,74 526,86"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="465" y="116">only one direction ever happens (entropy)</text>
+<line stroke="#26314c" stroke-dasharray="5 5" x1="20" x2="600" y1="140" y2="140"></line>
+<text fill="#8fb4ff" font-weight="700" text-anchor="middle" x="310" y="170">Correlation ≠ causation: only intervention tells them apart</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="190" x="215" y="188"></rect>
+<text fill="#dbe2f2" font-size="12.5" text-anchor="middle" x="310" y="208">temperature (common cause)</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="150" x="90" y="268"></rect>
+<text fill="#dbe2f2" font-size="12.5" text-anchor="middle" x="165" y="288">ice-cream sales</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="150" x="390" y="268"></rect>
+<text fill="#dbe2f2" font-size="12.5" text-anchor="middle" x="465" y="288">drownings</text>
+<line marker-end="url(#arc2)" stroke="#5b9bff" stroke-width="2" x1="285" x2="205" y1="221" y2="260"></line>
+<line marker-end="url(#arc2)" stroke="#5b9bff" stroke-width="2" x1="335" x2="425" y1="221" y2="260"></line>
+<line stroke="#96a0ba" stroke-dasharray="5 4" stroke-width="1.5" x1="244" x2="386" y1="283" y2="283"></line>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="315" y="276">strongly correlated</text>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="238" x2="252" y1="234" y2="248"></line>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="252" x2="238" y1="234" y2="248"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="120" y="240">do(·): cut this arrow</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="310" y="320">force ice-cream sales to change and drownings don't budge</text>
+</g>
+</svg>
+<figcaption>Microphysics has no direction; the macroscopic one comes from entropy — and «what causes what» takes a hands-on intervention to settle.</figcaption>
+</figure>
+<div class="field"><span class="lab">The counterintuitive part</span>
+  Causation isn't at the fundamental level — but that <strong>doesn't make it an illusion</strong>. Temperature isn't at the fundamental level either, and boiling water will still scald you. Causation is an <strong>effective structure</strong> that emerges robustly at the level where things are macroscopic, entropy-graded and manipulable — the same kind of real thing as temperature and pressure. Treating it as an illusion, and treating it as a basic law of the universe, are two ends of the same mistake.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI / medicine / economics</span>
+  <ul>
+<li><strong>AI</strong>: Judea Pearl's causal diagrams and do-calculus put «changing something by hand» into mathematics; a model that collapses under distribution shift has usually learned correlations rather than mechanism.</li>
+<li><strong>Medicine</strong>: a randomised controlled trial is an intervention in exactly the physical sense — randomisation <strong>severs</strong> every arrow running from constitution, income and health-seeking behaviour into «who takes the drug», so what's left may be called an effect.</li>
+<li><strong>Economics</strong>: you can't randomise policy, so you borrow an intervention — natural experiments look for precisely the variation that behaves «as if randomly nudged».</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: causation is not part of the fundamental laws; it grows on the entropy gradient.</div>
+<details class="q"><summary><b>Think:</b> Why can we remember the past but not the future?</summary><div class="qa">A record is two systems becoming correlated and staying that way. To form one, the medium must first sit in a <strong>low-entropy «ready to write» state</strong> — blank film, a clean disk, unwalked sand. Such low-entropy starting states exist in abundance only towards the past, so records can only accumulate in one direction: the direction of memory is the direction of entropy.</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>Time, and the Missing Now</h2>
+<span class="pill">Time · relativity · eternalism</span>
+<div class="field"><span class="lab">Intuition</span>
+  «Time flows» is one of the strongest intuitions a person has. But «flows» demands a rate — so <strong>how many seconds does time flow per second</strong>? The question gives the game away: flow is a borrowed metaphor that contradicts itself the moment you take it literally.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Relativity already abolished objective simultaneity (the «Special Relativity» and «Spacetime» pieces cover the mechanism): <strong>observers moving at different speeds slice four-dimensional spacetime into differently tilted «now» surfaces</strong>. Two events simultaneous for you have a definite order for someone flying past. With no unique «now», the cheapest picture is to take the universe as one whole four-dimensional block — the <strong>block universe</strong> (eternalism): past and future events exist just as this moment does, they simply aren't on your particular slice (Rietdijk and Putnam, 1960s).</div>
+<figure>
+<svg aria-label="Spacetime diagram: two observers in different states of motion cut different now-surfaces" role="img" viewBox="0 0 700 300">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<rect fill="#101728" height="205" stroke="#1f2a44" width="540" x="72" y="40"></rect>
+<line stroke="#56607e" stroke-width="1.5" x1="60" x2="60" y1="250" y2="36"></line>
+<polygon fill="#56607e" points="60,26 55,40 65,40"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="60" y="18">time</text>
+<line stroke="#56607e" stroke-width="1.5" x1="60" x2="620" y1="250" y2="250"></line>
+<polygon fill="#56607e" points="632,250 618,245 618,255"></polygon>
+<text fill="#96a0ba" font-size="11.5" x="642" y="254">space</text>
+<line stroke="#5b9bff" stroke-width="2" x1="80" x2="600" y1="150" y2="150"></line>
+<text fill="#5b9bff" x="610" y="146">A's now</text>
+<line stroke="#f0ad5a" stroke-dasharray="7 4" stroke-width="2" x1="80" x2="600" y1="196" y2="108"></line>
+<text fill="#f0ad5a" x="610" y="104">B's now</text>
+<circle cx="180" cy="179" fill="#dbe2f2" r="5"></circle>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="180" y="203">Event 1</text>
+<circle cx="480" cy="128" fill="#dbe2f2" r="5"></circle>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="480" y="108">Event 2</text>
+<text fill="#5b9bff" x="92" y="62">For A: Event 1 comes before Event 2</text>
+<text fill="#f0ad5a" x="92" y="86">For B (in motion): the two are simultaneous</text>
+<text fill="#96a0ba" font-size="11.5" x="92" y="110">Same pair of events — no slice is the «official» one</text>
+</g>
+</svg>
+<figcaption>The whole block sits there; each observer cuts their own «now», and how they cut it depends on their motion.</figcaption>
+</figure>
+<div class="field"><span class="lab">Where to be honest</span>
+  The block universe does <strong>not</strong> mean «the future is already written, so effort is pointless». Your weighing, hesitating and deciding are themselves physical processes happening in that block, not decorations it routes around — the fatalist reading swaps concepts: <strong>«already exists» is not «settled for you by something else»</strong>. And the other side deserves saying too: the block universe is the mainstream picture, not a verdict. Presentism (only this moment exists) still has serious defenders, and physicists such as Lee Smolin argue that time is the fundamental thing instead.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · neuroscience / engineering</span>
+  <ul>
+<li><strong>Neuroscience</strong>: your «now» is manufactured. Touch your nose and your toe and the signals reach your brain tens of milliseconds apart, yet you experience them as simultaneous — the brain <strong>realigns</strong> channels of differing latency into an integration window of roughly a hundred milliseconds. Subjective simultaneity was always a construction.</li>
+<li><strong>Engineering</strong>: distributed systems have no global clock, so nodes coordinate through a partial order of «what happened before what» (Lamport's happens-before). Engineers were forced by reality into the same conclusion relativity reached: <strong>there is no global «now», only causal order</strong>.</li>
+</ul></div>
+<div class="punch">
+<div class="one">In one line: physics has time, but it has no «now».</div>
+<details class="q"><summary><b>Think:</b> With no objective «now», what is that utterly certain feeling of «I am here, right now» pointing at?</summary><div class="qa">It points at «me, on this slice». «Now» is an <strong>indexical</strong>, exactly like «here»: necessarily true when uttered, yet marking no special structure of the universe. Nobody asks where the universe's «here» is; «what time is the universe's now» is the same mistake.</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>Probability: Ignorance, or the World?</h2>
+<span class="pill">Probability · Born rule 1926</span>
+<div class="field"><span class="lab">Intuition</span>
+  The «randomness» of a die roll is fake. Know the release angle, the elasticity of the table and the air currents, and the outcome is fixed — probability here is just a ledger recording <strong>how much I don't know</strong>. The real question is whether quantum probability is the same kind of ledger.</div>
+<div class="field"><span class="lab">Mechanism</span>
+  Statistical-mechanical probability comes from <strong>ignorance</strong> about microstates, with deterministic dynamics underneath. Quantum theory is different: the Born rule says the probability of measuring a given outcome is the squared modulus of the wavefunction's amplitude.
+  <div class="eq"><var>P</var>(outcome <var>k</var>) = |<var>ψ</var><sub><var>k</var></sub>|<sup>2</sup></div>
+<div class="gloss"><var>ψ</var> is pronounced «psi» and is the wavefunction — it assigns each possible outcome a complex number called the <strong>amplitude</strong>. The vertical bars <strong>|…|</strong> mean «take the modulus» (the length of a complex number); they are <strong>not the digit 1 and not the letter l</strong>. The little <strong>2</strong> up top is a square. The whole line reads: <strong>square the length of the amplitude to get the probability of that outcome</strong>.</div>
+  Can this too be read as ignorance — «it was settled all along, I just didn't know»? <strong>Bell turned that into an experimentally decidable question in 1964</strong>, and the experiments since (through the loophole-free versions of the 2010s, recognised by the 2022 Nobel Prize in Physics) return a verdict: <strong>local hidden variables are ruled out</strong>. «Local, pre-written hidden facts» will not do as an excuse.</div>
+<figure>
+<svg aria-label="Statistical-mechanical probability compared with quantum probability" role="img" viewBox="0 0 620 230">
+<defs><marker id="arc4" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="12" orient="auto" refX="11" refY="4.5"><path d="M0,0 L12,4.5 L0,9 Z" fill="#5b9bff"></path></marker><marker id="arc4a" markerHeight="9" markerUnits="userSpaceOnUse" markerWidth="12" orient="auto" refX="11" refY="4.5"><path d="M0,0 L12,4.5 L0,9 Z" fill="#f0ad5a"></path></marker></defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<text fill="#8fb4ff" font-weight="700" text-anchor="middle" x="157" y="24">Probability in statistical mechanics</text>
+<rect fill="#172038" height="54" rx="6" stroke="#2b3a5e" width="275" x="20" y="36"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="157" y="58">dice · gas molecules</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="157" y="80">determinate trajectories underneath</text>
+<line marker-end="url(#arc4)" stroke="#5b9bff" stroke-width="2" x1="157" x2="157" y1="96" y2="126"></line>
+<rect fill="#172038" height="58" rx="6" stroke="#2b3a5e" width="275" x="20" y="132"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="157" y="156">probability = my ignorance</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="157" y="178">enough information and it vanishes</text>
+<text fill="#5b9bff" font-size="12.5" text-anchor="middle" x="157" y="214">epistemic</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="462" y="24">Probability in quantum theory</text>
+<rect fill="#2a2214" height="54" rx="6" stroke="#6a5326" width="275" x="325" y="36"></rect>
+<text fill="#f2d9b0" text-anchor="middle" x="462" y="58">the Born rule gives the odds</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="462" y="80">Bell tests killed «it was set all along»</text>
+<line marker-end="url(#arc4a)" stroke="#f0ad5a" stroke-width="2" x1="462" x2="462" y1="96" y2="126"></line>
+<rect fill="#2a2214" height="58" rx="6" stroke="#6a5326" width="275" x="325" y="132"></rect>
+<text fill="#f2d9b0" text-anchor="middle" x="462" y="156">probability = the world itself?</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="462" y="178">still no consensus</text>
+<text fill="#f0ad5a" font-size="12.5" text-anchor="middle" x="462" y="214">aleatoric?</text>
+</g>
+</svg>
+<figcaption>One word, «probability» — and the two sides may not be referring to the same thing at all.</figcaption>
+</figure>
+<div class="field"><span class="lab">Why it matters</span>
+  The interpretations answer completely differently: Copenhagen says it is fundamental randomness; many-worlds says every outcome happens and probability degenerates into self-locating uncertainty about «<strong>which branch am I in</strong>»; Bohmian mechanics keeps determinism at the price of flagrant nonlocality. So «what is probability» is a <strong>live question</strong> in physics, not a settled detail that popularisations skip. Anyone who tells you it's clear, from any camp, is overselling.</div>
+<div class="field xref"><span class="lab">Cross-disciplinary reading · AI</span>
+  Machine learning has turned this distinction into standard engineering practice: <strong>aleatoric uncertainty</strong> (noise inherent in the world) versus <strong>epistemic uncertainty</strong> (the model hasn't seen this). Sensor read-out noise in a self-driving car is the former — <strong>another ten thousand kilometres of data won't remove it</strong>; «never seen roadworks in snow» is the latter, and data will. Modelling them separately is what lets you answer «is labelling another batch actually worth it» — active learning only helps with the epistemic half. A question physics has argued over for a century becomes, here, a budget decision.</div>
+<div class="punch">
+<div class="one">In one line: statistical mechanics' probability is our ignorance; quantum probability may be the world's.</div>
+<details class="q"><summary><b>Think:</b> If quantum probability turned out to come from some kind of ignorance after all, what would the physical picture have to pay?</summary><div class="qa">Nonlocality, or the experimenter's free choice. Bell tests do not rule out hidden variables as such — they rule out the package «<strong>local + measurement settings chosen independently</strong>». Bohmian mechanics saves determinism, and pays with hidden variables that must instantaneously «know» a distant setting. There is no free determinism.</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>Going deeper</h2>
+<details><summary>Where exactly is the boundary of reductionism? Has «strong emergence» ever had an empirical case?</summary>
+<div class="body"><strong>Weak emergence</strong> — high-level phenomena are in principle fixed by the low level, they just can't be computed and can't be stated without new vocabulary — has overwhelming evidence. <strong>Strong emergence</strong> — high-level regularities that in principle cannot be derived from the low level, or that reach down and govern it — has <strong>no accepted physical case</strong> to date. The «multiple realizability» often cited as evidence (one temperature realised by countless microstates) only shows that high-level concepts <strong>cannot be replaced by low-level vocabulary</strong>; it does not show the low-level dynamics being violated. So this is more an <strong>epistemic boundary</strong>: the low level isn't wrong, it just can't say what the high level needs to say.</div></details>
+<details><summary>Do physicists actually need to touch philosophy?</summary>
+<div class="body">Feynman's line was that philosophy of science is as useful to scientists as ornithology is to birds. But history offers a hard counter-chain: Einstein read Mach's critique and only then dared ask what «simultaneous» actually refers to; his argument with Bohr produced the EPR paper; EPR forced Bell's inequality; Bell's inequality became an experiment; the experiment became today's quantum technology. <strong>A string of purely conceptual objections ended up as instruments in a laboratory.</strong> The measured claim: philosophy can't do your integrals, and shouldn't be a back door for mysticism; its use is flushing out questions hidden by sloppy words.</div></details>
+<details><summary>Why does the universe have comprehensible laws rather than sheer disorder?</summary>
+<div class="body">Three candidate answers, none fully satisfying. ① <strong>Selection effect</strong>: a universe without stable regularities contains no observers to ask — not empty, but weak. ② <strong>Effective theory</strong>: whatever exists stably at large scales tends to display some low-dimensional effective regularity, and the universality discussed in «Phase Transitions and Criticality» gives that intuition some substance. ③ <strong>The definitional answer</strong>: we call the <strong>compressible</strong> part «laws» and push the incompressible part into «initial conditions», which makes the claim partly a tautology. This question may well be out of physics' range, but that doesn't make it a fake one.</div></details>
+<details><summary>Might the laws we've found be only «the ones we happened to be able to think of»?</summary>
+<div class="body">The suspicion has substance. Human mathematical tools have long favoured <strong>linear, differentiable, low-order</strong> equations — exactly the small subset solvable with a pen; turbulence, protein folding and quantum many-body systems are called «hard» partly for failing that taste. Simulation and machine learning are widening the range of tractable shapes: some systems we can now <strong>predict</strong> to high accuracy without writing a single closed-form line. If large numbers of «regularities» come to exist only as incompressible models, «understanding» will need redefining — does predicting count, or must you be able to say it out loud?</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://plato.stanford.edu/entries/laws-of-nature/">Stanford Encyclopedia of Philosophy: Laws of Nature</a> — the authoritative survey of best-system versus law realism</li>
+<li><a href="https://plato.stanford.edu/entries/structural-realism/">Stanford Encyclopedia of Philosophy: Structural Realism</a> — Worrall 1989 and the Fresnel-equations example</li>
+<li><a href="https://plato.stanford.edu/entries/causation-metaphysics/">Stanford Encyclopedia of Philosophy: Metaphysics of Causation</a> — Russell's 1913 challenge and the replies to it</li>
+<li><a href="http://bayes.cs.ucla.edu/WHY/">Judea Pearl &amp; Dana Mackenzie, <em>The Book of Why</em> (2018)</a> — an introduction to intervention and do-calculus</li>
+<li><a href="https://plato.stanford.edu/entries/spacetime-bebecome/">Stanford Encyclopedia of Philosophy: Being and Becoming in Modern Physics</a> — the block universe, Rietdijk–Putnam, and objections</li>
+<li><a href="https://www.preposterousuniverse.com/eternitytohere/">Sean Carroll, <em>From Eternity to Here</em></a> — the arrow of time and the past hypothesis, popularly and authoritatively</li>
+<li><a href="https://plato.stanford.edu/entries/probability-interpret/">Stanford Encyclopedia of Philosophy: Interpretations of Probability</a> — ignorance or propensity</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2022/summary/">Nobel Prize in Physics 2022 (Aspect / Clauser / Zeilinger)</a> — the official account of the Bell-inequality experiments</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>

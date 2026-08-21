@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>物理：物理与哲学 · Day 39</title>
+<style>
+  :root{
+    --bg:#0a0e1a; --panel:#141b2e; --panel2:#0f1626;
+    --ink:#dbe1f0; --muted:#96a0ba; --head:#f0f3fb;
+    --blue:#5b9bff; --amber:#f0ad5a; --line:#26314c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+    line-height:1.85; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:38px 22px 90px}
+  h1,h2,h3,.serif{font-family:Georgia,"Noto Serif SC",serif}
+  /* header */
+  header{border-bottom:2px solid var(--blue); padding-bottom:22px; margin-bottom:30px}
+  .kicker{font-size:.82rem; letter-spacing:.14em; color:var(--blue); font-weight:600; text-transform:uppercase}
+  h1{font-size:2rem; line-height:1.3; margin:.35em 0 .3em; color:var(--head)}
+  .meta{font-size:.86rem; color:var(--muted); margin-bottom:.9em}
+  .tagline{font-size:1.02rem; color:#c3cbe0; font-style:italic}
+  /* intro */
+  .intro{background:var(--panel2); border-left:4px solid var(--amber); padding:16px 20px; border-radius:0 8px 8px 0; margin-bottom:34px; font-size:.98rem}
+  .intro b{color:var(--head)}
+  /* cards */
+  .card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:0 10px 10px 0; padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .card h2{font-size:1.32rem; margin:0 0 2px; color:var(--head)}
+  .en{font-size:.9rem; color:var(--muted); font-weight:400}
+  .pill{display:inline-block; font-size:.72rem; background:var(--panel2); color:var(--blue); border:1px solid #2b3a5e; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:.03em}
+  .field{margin-top:15px}
+  .field .lab{font-family:Georgia,"Noto Serif SC",serif; font-weight:700; color:var(--amber); font-size:.9rem; letter-spacing:.02em; display:block; margin-bottom:3px}
+  .xref{background:rgba(240,173,90,.07); border:1px dashed #6a5326; border-radius:8px; padding:11px 15px; font-size:.93rem}
+  .xref .lab{color:var(--amber)}
+  .xref ul{margin:9px 0 6px; padding-left:20px}
+  .xref li{margin:5px 0}
+  .punch{border-top:1px dashed var(--line); margin-top:16px; padding-top:13px}
+  .punch .one{font-weight:600; color:var(--head)}
+  .punch .q{font-size:.93rem; color:var(--muted); margin-top:5px}
+  .punch .q b{color:var(--amber); font-style:normal}
+  strong{color:var(--head)}
+  /* self-contained math (no MathJax dependency for light formulas) */
+  var{font-family:Georgia,"Noto Serif SC",serif; font-style:italic; color:#eaeefb}
+  .eq{text-align:center; font-family:Georgia,"Noto Serif SC",serif; font-size:1.35rem; color:var(--head); margin:16px 0}
+  .frac{display:inline-block; vertical-align:middle; text-align:center; margin:0 .15em}
+  .frac .fnum{display:block; padding:0 7px; border-bottom:1.6px solid var(--ink); line-height:1.4}
+  .frac .fden{display:block; padding:0 7px; line-height:1.4}
+  .eq .zero{font-weight:700; color:var(--blue)}
+  .gloss{font-size:.9rem; color:#c3cbe0; background:var(--panel2); border-radius:8px; padding:10px 14px; margin:2px 0 12px}
+  .nowrap{white-space:nowrap}
+  /* figures */
+  figure{margin:16px 0 4px; text-align:center}
+  figcaption{font-size:.82rem; color:var(--muted); margin-top:7px}
+  svg{max-width:100%; height:auto}
+  /* deep think */
+  .deep{margin-top:42px}
+  .deep>h2{font-size:1.4rem; color:var(--head); border-bottom:1px solid var(--line); padding-bottom:8px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:2px 18px; margin:11px 0}
+  summary{cursor:pointer; font-weight:600; color:var(--head); padding:12px 0; list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ "; color:var(--blue)}
+  details[open] summary::before{content:"▾ "}
+  details .body{padding:2px 0 14px; font-size:.95rem; color:#c3cbe0; border-top:1px dashed var(--line)}
+  /* reading */
+  .read{margin-top:40px; background:var(--panel2); border-radius:10px; padding:20px 24px}
+  .read h2{font-size:1.15rem; margin:.2em 0 .5em; color:var(--head)}
+  .read ul{margin:0; padding-left:20px; font-size:.92rem; color:#c3cbe0}
+  .read li{margin:7px 0}
+  .read a{color:var(--blue)}
+  .read a:hover{color:var(--amber)}
+  .note{margin-top:30px; font-size:.8rem; color:#5b6480; text-align:center}
+  .punch details.q{margin-top:5px}
+  .punch details.q summary{cursor:pointer;list-style:none}
+  .punch details.q summary::-webkit-details-marker{display:none}
+  .punch details.q summary::before{content:"▸ ";color:var(--amber)}
+  .punch details.q[open] summary::before{content:"▾ "}
+  .punch details.q summary b{color:var(--amber);font-style:normal}
+  .punch .qa{color:#c3cbe0;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">物理 · Physics</div>
+<h1>物理与哲学</h1>
+<div class="meta">Day 39 · 2026 · Phase I 收尾</div>
+<div class="tagline">越往底层挖，越会撞上一批方程里根本找不到的东西——原因、现在、随机。它们不在公式里，却在你每一天的经验里。</div>
+</header>
+<div class="intro">
+物理学不需要哲学批准就能把数字算对。但只要多问一句"<b>这些方程在说什么</b>"，哲学就已经在屋里了。定律是发现还是发明？基本方程里为什么找不到"原因"？"现在"在物理学里有位置吗？量子那个概率，是我们不知道，还是世界本身就这样？这四个问题都<b>不是玄学</b>——每一个都有实验和数学咬着，也每一个都还没有共识。
+</div>
+<!-- Card 1 -->
+<div class="card">
+<h2>定律：发现还是发明 <span class="en">Are Laws Discovered or Invented?</span></h2>
+<span class="pill">科学哲学 · 定律的身份</span>
+<div class="field"><span class="lab">直觉</span>
+  你把一堆行星位置拟合成一个方程。它是宇宙里<strong>本来就有</strong>的东西，还是你这支笔的产物？两头都让人难受：说是发明，那为什么水星的近日点会乖乖听话、连没人看的角落也照办？说是发现，那定律以什么形式"存在"、又存在在哪里——总不至于飘在星际空间里等着被读取。</div>
+<div class="field"><span class="lab">机制 · 三条路</span>
+  ① <strong>休谟式最佳系统</strong>（David Lewis）：世界上只有一件件事实的分布，"定律"是对全部事实<strong>既最简洁又最能说事</strong>的那份总结——本质上是最优压缩码，它不推动任何东西，只是描述得极好。<br/>
+  ② <strong>规律实在论</strong>（如 Tim Maudlin）：定律是世界的基本零件之一，是它<strong>让</strong>电子这么走；宇宙的历史由定律生成，而非反过来被总结出来。<br/>
+  ③ <strong>结构实在论</strong>（John Worrall，1989）：看科学史上什么被留下了。菲涅耳的光学公式建立在"以太"上——以太后来被彻底抛弃，<strong>他的方程却原封不动地活在麦克斯韦理论里</strong>。被换掉的总是那些"东西"（以太、热质），保下来的总是<strong>数学结构</strong>。</div>
+<div class="field"><span class="lab">反直觉的重点</span>
+  这不是文字游戏，它决定"解释完成了"是什么意思。如果定律只是总结，那"要是我当时没松手，杯子就不会碎"这句<strong>反事实</strong>凭什么有真假——世界上并没有"没松手"这个事实供你总结。规律实在论在这里轻松得多，代价是承认一种看不见摸不着的支配性存在。<strong>每一派都得交学费</strong>。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 数学</span>
+  <ul>
+<li><strong>压缩即理论</strong>：机器学习里的<strong>最小描述长度</strong>（MDL）与正则化几乎就是"最佳系统说"的算法版——在"拟合得好"与"写得短"之间取最优的模型，被认定为最好的规律。</li>
+<li><strong>ML 也反过来给出警告</strong>：模型在训练分布里压得极好，换个分布就崩——<strong>压得好不等于抓住了结构</strong>。这正是结构实在论对纯描述派的抱怨：总结得再漂亮，也要问保下来的是不是那层关系。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：我们大概既不是在发明东西，也不是在发现东西，而是在发现关系。</div>
+<details class="q"><summary><b>思考：</b>如果两套完全不同的数学给出一模一样的全部预测，它们算同一条定律吗？</summary><div class="qa">这就是"理论等价"问题——拉格朗日力学与哈密顿力学、同一理论的不同规范都是现成例子。操作层面它们完全等价；实在论者若想挑一个"真的"，只能诉诸简洁这类<strong>实验无法裁决</strong>的判据。这正是结构实在论只承诺结构、不承诺本体的动机。</div></details>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="card">
+<h2>因果：方程里没有"原因" <span class="en">Causation Is Not in the Equations</span></h2>
+<span class="pill">因果 · Russell 1913</span>
+<div class="field"><span class="lab">直觉</span>
+  你松手，杯子掉——还有比这更明显的因果吗？可翻开任何一条基本方程，都找不到一个叫"原因"的量：方程只说"给定此刻的状态，另一时刻是那样"，而且<strong>反着算同样成立</strong>。罗素 1913 年因此挖苦道：因果律是"逝去年代的遗物，像君主制一样，只因被误以为无害才留了下来"。</div>
+<div class="field"><span class="lab">机制</span>
+  第一件事：基本定律基本上<strong>时间对称</strong>。把方程里的时间
+  <div class="eq"><var>t</var> → −<var>t</var></div>
+<div class="gloss">读作「把时间 <var>t</var> 换成负的 <var>t</var>」，也就是<strong>把录像倒着放</strong>。前面那个 <strong>−</strong> 是负号（不是减法，也不是连字符）。对绝大多数基本相互作用，倒放后的过程<strong>仍是方程的合法解</strong>——微观没有内建的"先后"。已知例外只有弱相互作用里一点极微弱的时间反演破缺，小到解释不了你经验里的因果方向。</div>
+  那方向从哪来？宏观的"先因后果"靠的是<strong>熵梯度</strong>——宇宙从一个极低熵的初态出发（这条假设常被称作"过去假设"），于是记录只指向过去、影响只推向未来。而因果真正的落脚点是<strong>干预</strong>：说"X 导致 Y"，意思是<strong>动手改变 X，Y 会跟着变</strong>，不只是两者一起动。</div>
+<figure>
+<svg aria-label="基本方程时间对称、宏观世界单向，以及干预如何把相关升级成因果" role="img" viewbox="0 0 620 340">
+<defs><marker id="arc2" markerheight="9" markerunits="userSpaceOnUse" markerwidth="12" orient="auto" refx="11" refy="4.5"><path d="M0,0 L12,4.5 L0,9 Z" fill="#5b9bff"></path></marker></defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13.5">
+<text fill="#8fb4ff" font-weight="700" text-anchor="middle" x="155" y="24">基本方程</text>
+<rect fill="#172038" height="58" rx="6" stroke="#2b3a5e" width="270" x="20" y="36"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="155" y="60">F=ma · 麦克斯韦 · 薛定谔</text>
+<line stroke="#5b9bff" stroke-width="2" x1="76" x2="234" y1="80" y2="80"></line>
+<polygon fill="#5b9bff" points="64,80 78,74 78,86"></polygon>
+<polygon fill="#5b9bff" points="246,80 232,74 232,86"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="155" y="116">正放、倒放都是合法的解</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="465" y="24">我们经历的世界</text>
+<rect fill="#2a2214" height="58" rx="6" stroke="#6a5326" width="270" x="330" y="36"></rect>
+<text fill="#f2d9b0" text-anchor="middle" x="465" y="60">杯子摔碎 · 墨水扩散</text>
+<line stroke="#f0ad5a" stroke-width="2" x1="392" x2="526" y1="80" y2="80"></line>
+<polygon fill="#f0ad5a" points="540,80 526,74 526,86"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="465" y="116">只有一个方向真的发生（熵增）</text>
+<line stroke="#26314c" stroke-dasharray="5 5" x1="20" x2="600" y1="140" y2="140"></line>
+<text fill="#8fb4ff" font-weight="700" text-anchor="middle" x="310" y="170">相关 ≠ 因果：只有干预能分辨</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="150" x="235" y="188"></rect>
+<text fill="#dbe2f2" font-size="12.5" text-anchor="middle" x="310" y="208">气温（共同原因）</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="150" x="90" y="268"></rect>
+<text fill="#dbe2f2" font-size="12.5" text-anchor="middle" x="165" y="288">冰淇淋销量</text>
+<rect fill="#172038" height="30" rx="6" stroke="#2b3a5e" width="150" x="390" y="268"></rect>
+<text fill="#dbe2f2" font-size="12.5" text-anchor="middle" x="465" y="288">溺水人数</text>
+<line marker-end="url(#arc2)" stroke="#5b9bff" stroke-width="2" x1="285" x2="205" y1="221" y2="260"></line>
+<line marker-end="url(#arc2)" stroke="#5b9bff" stroke-width="2" x1="335" x2="425" y1="221" y2="260"></line>
+<line stroke="#96a0ba" stroke-dasharray="5 4" stroke-width="1.5" x1="244" x2="386" y1="283" y2="283"></line>
+<text fill="#96a0ba" font-size="11" text-anchor="middle" x="315" y="276">看起来强相关</text>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="238" x2="252" y1="234" y2="248"></line>
+<line stroke="#f0ad5a" stroke-width="2.5" x1="252" x2="238" y1="234" y2="248"></line>
+<text fill="#f0ad5a" font-size="11.5" text-anchor="middle" x="120" y="240">do(·)：动手切断</text>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="310" y="320">强行改掉冰淇淋销量，溺水人数纹丝不动</text>
+</g>
+</svg>
+<figcaption>微观没有方向，宏观的方向来自熵；"谁导致谁"则要靠动手干预才分得出来。</figcaption>
+</figure>
+<div class="field"><span class="lab">反直觉的重点</span>
+  因果不在基本层——但这<strong>不代表因果是幻觉</strong>。温度也不在基本层，你照样会被开水烫伤。因果是"宏观 + 有熵梯度 + 能动手"这个层面上稳固涌现的<strong>有效结构</strong>，和温度、压强是同一类真东西。当它是幻觉，和当它是宇宙的基本律令，是同一个错误的两头。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI / 医学 / 经济</span>
+  <ul>
+<li><strong>AI</strong>：Judea Pearl 的因果图与 do-演算把"动手改变"写成了数学；模型一遇分布偏移就崩，常常正因为学到的是相关而不是机制。</li>
+<li><strong>医学</strong>：随机对照试验就是物理意义上的干预——随机分组<strong>剪断了</strong>体质、收入、就医意愿通往"谁吃药"的所有箭头，剩下的差异才敢叫疗效。</li>
+<li><strong>经济</strong>：政策不能随机分配，就去借一次干预——自然实验找的正是"像被随机拨动过"的那部分变异。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：因果不是基本定律的一部分，是熵梯度上长出来的有效结构。</div>
+<details class="q"><summary><b>思考：</b>为什么我们记得住过去，却记不住未来？</summary><div class="qa">记录就是两个系统建立起相关并被稳定保存。而形成记录，介质必须先处于<strong>较低熵的"待写"状态</strong>——空白胶片、干净硬盘、没被踩过的沙滩。这种低熵初态只在过去方向上大量存在，所以记录只能朝一个方向积累：记忆的方向就是熵的方向。</div></details>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="card">
+<h2>时间：块宇宙里的"现在" <span class="en">Time, and the Missing Now</span></h2>
+<span class="pill">时间 · 相对论 · 永恒论</span>
+<div class="field"><span class="lab">直觉</span>
+  "时间在流"是人最强的直觉之一。可"流"这个字要求有个速度——那么，<strong>时间每秒流过多少秒</strong>？这句问话本身就露了馅：流逝是个借来的比喻，一旦当真就自相矛盾。</div>
+<div class="field"><span class="lab">机制</span>
+  相对论已经取消了客观的"同时"（「狭义相对论」与「时空」讲过机制）：<strong>速度不同的观察者，会把四维时空切成方向不同的"现在"面</strong>。对你同时的两件事，对飞驰而过的人有先有后。既然没有唯一的"现在"，最省事的图像就是把宇宙看成一整块四维时空——<strong>块宇宙</strong>（永恒论）：过去和未来的事件与此刻同样"存在"，只是不在你这一刀上（Rietdijk 与 Putnam，1960 年代）。</div>
+<figure>
+<svg aria-label="时空图：两个运动状态不同的观察者切出方向不同的现在面" role="img" viewbox="0 0 700 300">
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="12.5">
+<rect fill="#101728" height="205" stroke="#1f2a44" width="540" x="72" y="40"></rect>
+<line stroke="#56607e" stroke-width="1.5" x1="60" x2="60" y1="250" y2="36"></line>
+<polygon fill="#56607e" points="60,26 55,40 65,40"></polygon>
+<text fill="#96a0ba" font-size="11.5" text-anchor="middle" x="60" y="18">时间</text>
+<line stroke="#56607e" stroke-width="1.5" x1="60" x2="620" y1="250" y2="250"></line>
+<polygon fill="#56607e" points="632,250 618,245 618,255"></polygon>
+<text fill="#96a0ba" font-size="11.5" x="642" y="254">空间</text>
+<line stroke="#5b9bff" stroke-width="2" x1="80" x2="600" y1="150" y2="150"></line>
+<text fill="#5b9bff" x="610" y="146">A 的现在</text>
+<line stroke="#f0ad5a" stroke-dasharray="7 4" stroke-width="2" x1="80" x2="600" y1="196" y2="108"></line>
+<text fill="#f0ad5a" x="610" y="104">B 的现在</text>
+<circle cx="180" cy="179" fill="#dbe2f2" r="5"></circle>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="180" y="203">事件 1</text>
+<circle cx="480" cy="128" fill="#dbe2f2" r="5"></circle>
+<text fill="#dbe2f2" font-size="12" text-anchor="middle" x="480" y="108">事件 2</text>
+<text fill="#5b9bff" x="92" y="62">对 A：事件 1 早于 事件 2</text>
+<text fill="#f0ad5a" x="92" y="86">对 B（在运动）：两件事同时</text>
+<text fill="#96a0ba" font-size="11.5" x="92" y="110">同一对事件，没有哪一刀是"宇宙认可"的那刀</text>
+</g>
+</svg>
+<figcaption>整块时空摆在那里，观察者各切各的"现在"——切法随运动状态而变。</figcaption>
+</figure>
+<div class="field"><span class="lab">诚实的边界</span>
+  块宇宙<strong>不等于</strong>"未来已经写好，所以努力没用"。你的权衡、犹豫、下决心，本身就是那块时空里实实在在发生的物理过程，不是被它绕过去的装饰——命定论式的读法偷换了概念：<strong>"已经存在"不等于"由别的什么替你决定"</strong>。另一头也要说清：块宇宙是主流图像但不是定论，presentism（只有此刻存在）仍有认真的辩护者，也有物理学家（如 Lee Smolin）主张时间才是根本的。</div>
+<div class="field xref"><span class="lab">跨学科对读 · 神经 / 工程</span>
+  <ul>
+<li><strong>神经</strong>：你的"现在"是大脑造出来的。摸鼻子和摸脚趾，信号到达大脑差几十毫秒，你却体验为同时——大脑把不同延迟的通道<strong>事后对齐</strong>成一个百毫秒量级的整合窗口。主观同时性本就是构造品。</li>
+<li><strong>工程</strong>：分布式系统没有全局时钟，节点只能靠"谁先发生"的偏序（Lamport 的 happens-before）协调。工程师是被现实逼着接受了和相对论一样的结论：<strong>没有全局的"现在"，只有因果次序</strong>。</li>
+</ul></div>
+<div class="punch">
+<div class="one">一句话：物理里有时间，但没有"现在"。</div>
+<details class="q"><summary><b>思考：</b>如果没有客观的"现在"，"我此刻在场"这个最确凿的感觉在指什么？</summary><div class="qa">它指的是"这一刀切面上的我"。"现在"是个<strong>指示词</strong>，和"这里"一模一样：说出它时必然为真，却不标记宇宙的任何特殊结构。没人会问"宇宙的这里在哪儿"，"宇宙的现在是几点"同样问错了。</div></details>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="card">
+<h2>概率：是无知，还是世界本身 <span class="en">Probability: Ignorance or the World?</span></h2>
+<span class="pill">概率 · 波恩规则 1926</span>
+<div class="field"><span class="lab">直觉</span>
+  掷骰子的"随机"是假的。只要掌握了出手角度、桌面弹性、空气流动，结果就定了——概率在这里只是一本账，记的是<strong>我不知道多少</strong>。真正的问题是：量子里的概率，和这本账是同一种东西吗？</div>
+<div class="field"><span class="lab">机制</span>
+  统计力学的概率来自对微观态的<strong>无知</strong>，底下压着确定的动力学。量子不一样：波恩规则说，测得某个结果的概率是波函数振幅的模方。
+  <div class="eq"><var>P</var>(结果 <var>k</var>) = |<var>ψ</var><sub><var>k</var></sub>|<sup>2</sup></div>
+<div class="gloss"><var>ψ</var> 读作「psi（普赛）」，是波函数——它给每个可能结果分配一个叫<strong>振幅</strong>的复数。两侧竖线 <strong>|…|</strong> 是"取模"（复数的长度），<strong>不是数字 1、也不是字母 l</strong>；右上角的小 <strong>2</strong> 是平方。整句就是：<strong>把振幅的长度平方，得到这个结果出现的概率</strong>。</div>
+  能不能也解释成无知——"其实早定好了，只是我不知道"？<strong>贝尔 1964 年把它变成了可做实验的判决题</strong>，此后的实验（一路做到 2010 年代的无漏洞版本，2022 年诺贝尔物理学奖）判决是：<strong>局域隐变量被排除</strong>。那种"局域的、早已写定的隐藏事实"搪塞不过去。</div>
+<figure>
+<svg aria-label="统计力学的概率与量子概率的对比" role="img" viewbox="0 0 620 230">
+<defs><marker id="arc4" markerheight="9" markerunits="userSpaceOnUse" markerwidth="12" orient="auto" refx="11" refy="4.5"><path d="M0,0 L12,4.5 L0,9 Z" fill="#5b9bff"></path></marker><marker id="arc4a" markerheight="9" markerunits="userSpaceOnUse" markerwidth="12" orient="auto" refx="11" refy="4.5"><path d="M0,0 L12,4.5 L0,9 Z" fill="#f0ad5a"></path></marker></defs>
+<g font-family="-apple-system,'Noto Sans SC',sans-serif" font-size="13">
+<text fill="#8fb4ff" font-weight="700" text-anchor="middle" x="157" y="24">统计力学的概率</text>
+<rect fill="#172038" height="54" rx="6" stroke="#2b3a5e" width="275" x="20" y="36"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="157" y="58">骰子 · 气体分子</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="157" y="80">底下是确定的轨迹</text>
+<line marker-end="url(#arc4)" stroke="#5b9bff" stroke-width="2" x1="157" x2="157" y1="96" y2="126"></line>
+<rect fill="#172038" height="58" rx="6" stroke="#2b3a5e" width="275" x="20" y="132"></rect>
+<text fill="#dbe2f2" text-anchor="middle" x="157" y="156">概率 = 我不知道</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="157" y="178">信息够了，概率就消失</text>
+<text fill="#5b9bff" font-size="12.5" text-anchor="middle" x="157" y="214">认知的（epistemic）</text>
+<text fill="#f0ad5a" font-weight="700" text-anchor="middle" x="462" y="24">量子的概率</text>
+<rect fill="#2a2214" height="54" rx="6" stroke="#6a5326" width="275" x="325" y="36"></rect>
+<text fill="#f2d9b0" text-anchor="middle" x="462" y="58">波恩规则给出概率</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="462" y="80">贝尔实验封死了"其实早定好"</text>
+<line marker-end="url(#arc4a)" stroke="#f0ad5a" stroke-width="2" x1="462" x2="462" y1="96" y2="126"></line>
+<rect fill="#2a2214" height="58" rx="6" stroke="#6a5326" width="275" x="325" y="132"></rect>
+<text fill="#f2d9b0" text-anchor="middle" x="462" y="156">概率 = 世界本身？</text>
+<text fill="#96a0ba" font-size="12" text-anchor="middle" x="462" y="178">至今没有共识</text>
+<text fill="#f0ad5a" font-size="12.5" text-anchor="middle" x="462" y="214">偶然的（aleatoric）？</text>
+</g>
+</svg>
+<figcaption>同一个词"概率"，两边指的可能根本不是一回事。</figcaption>
+</figure>
+<div class="field"><span class="lab">为什么重要</span>
+  各家诠释的答案完全不同：哥本哈根说就是基本随机；多世界说所有结果都发生，概率退化成"<strong>我是哪一支里的我</strong>"这种自我定位的不确定；玻姆力学说仍是决定论，代价是明目张胆的非定域。"概率是什么"因此<strong>是个活着的问题</strong>，不是已解决而被科普省略的细节。谁说这事清楚了，都说得太满。</div>
+<div class="field xref"><span class="lab">跨学科对读 · AI</span>
+  机器学习把这条区分做成了工程标配：<strong>偶然不确定性</strong>（aleatoric，世界固有的噪声）与<strong>认知不确定性</strong>（epistemic，模型没见过）。自动驾驶里传感器的读数噪声属于前者，<strong>再采一万公里数据也消不掉</strong>；"没见过雪天施工路段"属于后者，采数据就能消。两者分开建模，才答得出"多标一批数据有没有用"——主动学习只对认知那一半有效。物理学争了一百年的问题，在这里成了预算决策。</div>
+<div class="punch">
+<div class="one">一句话：统计力学的概率是我们的无知，量子的概率也许是世界的。</div>
+<details class="q"><summary><b>思考：</b>如果哪天证明量子概率也来自某种"无知"，物理图像要付什么代价？</summary><div class="qa">得付非定域或者放弃实验者的自由选择。贝尔实验排除的不是隐变量本身，而是"<strong>局域 + 测量设置可独立选择</strong>"这一整套前提；玻姆力学保住了决定论，代价是隐变量必须瞬时地"知道"远处的设置。天下没有免费的决定论。</div></details>
+</div>
+</div>
+<!-- Deep think -->
+<div class="deep">
+<h2>深入思考</h2>
+<details><summary>还原论的边界到底在哪？"强涌现"有过实证案例吗？</summary>
+<div class="body"><strong>弱涌现</strong>（高层原则上由底层决定，只是算不动，且非用新语言不能说清）证据铺天盖地；<strong>强涌现</strong>（高层规律原则上无法由底层推出、甚至反过来支配底层）至今<strong>没有公认的物理案例</strong>。常被当证据的"多重可实现性"——同一个温度可由无数种微观构型实现——只说明高层概念<strong>不能被底层词汇替换</strong>，不说明底层动力学被违反。所以这更像<strong>认识论的边界</strong>：底层没错，只是说不出高层要说的话。</div></details>
+<details><summary>物理学家真有必要碰哲学吗？</summary>
+<div class="body">费曼有句名言：科学哲学之于科学家，如同鸟类学之于鸟。但历史给了一条硬邦邦的反例链：爱因斯坦读了马赫的批判，才敢质问"同时"到底指什么；他与玻尔的争论生出 EPR 论文，EPR 逼出贝尔不等式，贝尔不等式变成实验，实验变成今天的量子技术。<strong>一串纯概念的诘问，最后变成了实验室里的仪器。</strong>分寸在于：哲学不能替你算积分，也不该给玄学开后门；它的用处是揪出被含混用词掩盖的问题。</div></details>
+<details><summary>为什么宇宙有可理解的定律，而不是一团无规？</summary>
+<div class="body">三个候选回答都不完全令人满意。① <strong>选择效应</strong>：没有稳定规律的宇宙里不会有能提问的观察者——解释力很弱。② <strong>有效理论</strong>：大尺度上稳定存在的东西倾向于呈现某种低维度的有效规律，「相变与临界」讲的普适性给了这直觉一点实质。③ <strong>定义式回答</strong>：我们把<strong>可压缩</strong>的那部分叫"定律"，压不动的推给"初始条件"，于是这话部分地成了同义反复。这问题很可能超出物理学的射程，但不因此就是假问题。</div></details>
+<details><summary>我们找到的定律，会不会只是"我们碰巧想得出来的那些"？</summary>
+<div class="body">这个怀疑有实质内容。人类的数学工具长期偏爱<strong>线性、可微、低阶</strong>的方程——恰好是能用笔解出来的那一小撮；湍流、蛋白质折叠、多体量子系统被称作"难"，部分原因就是不合这个胃口。数值模拟与机器学习正在扩大可处理的形状：有些系统已能高精度<strong>预测</strong>，却写不出一行封闭公式。若大量"规律"只以不可压缩的模型形式存在，"理解了"就得重新定义——能预测算懂，还是必须讲得出来才算懂？</div></details>
+</div>
+<!-- Reading -->
+<div class="read">
+<h2>延伸阅读</h2>
+<ul>
+<li><a href="https://plato.stanford.edu/entries/laws-of-nature/">斯坦福哲学百科：Laws of Nature</a>——休谟式最佳系统与规律实在论之争的权威综述</li>
+<li><a href="https://plato.stanford.edu/entries/structural-realism/">斯坦福哲学百科：Structural Realism</a>——Worrall 1989 与菲涅耳方程那个经典例子</li>
+<li><a href="https://plato.stanford.edu/entries/causation-metaphysics/">斯坦福哲学百科：Metaphysics of Causation</a>——罗素 1913 对因果的挑战与后续回应</li>
+<li><a href="http://bayes.cs.ucla.edu/WHY/">Judea Pearl &amp; Dana Mackenzie，<em>The Book of Why</em>（2018）</a>——干预与 do-演算的入门</li>
+<li><a href="https://plato.stanford.edu/entries/spacetime-bebecome/">斯坦福哲学百科：Being and Becoming in Modern Physics</a>——块宇宙、Rietdijk–Putnam 论证与反对意见</li>
+<li><a href="https://www.preposterousuniverse.com/eternitytohere/">Sean Carroll，<em>From Eternity to Here</em></a>——时间之箭与"过去假设"的通俗权威讲法</li>
+<li><a href="https://plato.stanford.edu/entries/probability-interpret/">斯坦福哲学百科：Interpretations of Probability</a>——概率是无知还是倾向</li>
+<li><a href="https://www.nobelprize.org/prizes/physics/2022/summary/">2022 年诺贝尔物理学奖（Aspect / Clauser / Zeilinger）</a>——贝尔不等式实验的官方说明</li>
+</ul>
+</div>
+</div>
+<script defer="" src="https://hub.cissychen.com/comments.js"></script>
+<script defer="" src="https://hub.cissychen.com/search.js"></script>
+<script defer="" src="https://hub.cissychen.com/index-button.js"></script>
+<script defer="" src="https://hub.cissychen.com/lightbox.js"></script>
+<script defer="" src="https://hub.cissychen.com/i18n-tts.js"></script>
+</body>
+</html>
